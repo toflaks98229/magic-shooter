@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>2.5D 레트로 FPS (로그라이크 버전)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        body {
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'VT323', monospace;
+        }
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            max-width: 100vw;
+            max-height: 100vh;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: #111;
+            cursor: crosshair;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+        #hud {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            padding: 0 20px;
+            box-sizing: border-box;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAQSURBVBhXY2BgYGD4//8/AymsAAP58/v3AAAAAElFTkSuQmCC') repeat-x bottom;
+            background-color: #1c1c1c;
+            border-top: 4px solid #5a5a5a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 32px;
+            color: #ff0000;
+        }
+        .hud-panel {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 33%;
+        }
+        .hud-panel.right {
+            justify-content: flex-end;
+        }
+        .hud-panel.center {
+            justify-content: center;
+        }
+        
+        #status-face {
+            width: 60px;
+            height: 68px;
+            background-color: #000;
+            border: 3px solid #555;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            image-rendering: pixelated;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+        #status-face-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+       
+        #weapon-view {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 240px;
+            pointer-events: none;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        #weapon-sprite {
+            position: relative;
+            width: 200px;
+            height: auto;
+            image-rendering: pixelated;
+            transition: transform 0.05s ease-out, bottom 0.05s ease-out;
+            transform-origin: bottom center;
+        }
+        #weapon-sprite.attacking {
+            transform: translateX(10px) translateY(-10px) scale(1.05);
+        }
+        #weapon-sprite.swapping-out {
+             animation: swap-out 0.15s forwards ease-in;
+        }
+        #weapon-sprite.swapping-in {
+             animation: swap-in 0.15s forwards ease-out;
+        }
+        @keyframes swap-out {
+            from { bottom: 0; }
+            to { bottom: -250px; }
+        }
+        @keyframes swap-in {
+            from { bottom: -250px; }
+            to { bottom: 0; }
+        }
+
+        #mobile-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: calc(100% - 40px);
+            height: 150px;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        #move-stick-zone {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        #move-stick {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            top: 40px;
+            left: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        #action-buttons {
+            display: flex;
+            gap: 20px;
+        }
+        .action-btn {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 0, 0, 0.4);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .action-btn svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
+        }
+        #look-zone {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: calc(100vh - 200px);
+            display: none;
+        }
+        .muzzle-flash {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, rgba(255,255,150,0.8) 0%, rgba(255,165,0,0) 60%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.05s ease-out;
+        }
+        .blood-splatter {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: radial-gradient(circle at 20% 20%, rgba(255,0,0,0.5) 0%, transparent 30%),
+                              radial-gradient(circle at 80% 70%, rgba(255,0,0,0.4) 0%, transparent 25%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease-out;
+        }
+        #game-over-screen, #start-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 100;
+        }
+        #game-over-screen h1, #start-screen h1 {
+            font-size: 80px;
+            color: #ff0000;
+            margin: 0;
+        }
+        #game-over-screen p, #start-screen p {
+            font-size: 30px;
+            margin: 20px 0;
+        }
+        .start-btn {
+            font-family: 'VT323', monospace;
+            font-size: 40px;
+            padding: 10px 30px;
+            background: #ff0000;
+            border: none;
+            color: white;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .start-btn:disabled {
+            background: #880000;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="hud">
+             <div class="hud-panel left">
+                <div>AMMO: <span id="player-ammo">50</span></div>
+            </div>
+            <div class="hud-panel center">
+                <div id="status-face">
+                    <img id="status-face-img" src="" alt="status"/>
+                </div>
+            </div>
+            <div class="hud-panel right">
+                <div>HP: <span id="player-hp">100</span></div>
+                <div>FLOOR: <span id="floor-count">1</span></div>
+                <div>ENEMIES: <span id="enemy-count">0</span></div>
+            </div>
+        </div>
+        <!-- <div class="muzzle-flash"></div> 이 줄을 삭제합니다. -->
+        <div class="blood-splatter"></div>
+        <div id="weapon-view">
+            <img id="weapon-sprite" src="" alt="weapon"/>
+        </div>
+        
+        <div id="look-zone"></div>
+        <div id="mobile-controls">
+            <div id="move-stick-zone">
+                <div id="move-stick"></div>
+            </div>
+            <div id="action-buttons">
+                <div id="shoot-btn" class="action-btn">
+                    <svg viewBox="0 0 24 24"><path d="M19.1,6.29,17.71,4.9,12,10.59,6.29,4.9,4.9,6.29,10.59,12,4.9,17.71,6.29,19.1,12,13.41,17.71,19.1,19.1,17.71,13.41,12Z"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="start-screen">
+            <h1>CYBER-HELL</h1>
+            <p>WASD + Mouse | Touch Controls</p>
+            <button class="start-btn" id="start-game-btn">START</button>
+        </div>
+        <div id="game-over-screen" style="display: none;">
+            <h1>GAME OVER</h1>
+            <p>You reached floor <span id="final-floor">0</span>.</p>
+            <button class="start-btn" id="restart-game-btn">RESTART</button>
+        </div>
+    </div>
+    <script type="module" src="Script/main.js"></script>
+</body>
+</html>
+

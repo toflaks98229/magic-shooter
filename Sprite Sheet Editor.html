@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>향상된 스프라이트 시트 편집기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --tw-bg-opacity: 1;
+            background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+        }
+        #sprite-canvas-container {
+            background-image:
+                linear-gradient(45deg, #ddd 25%, transparent 25%),
+                linear-gradient(-45deg, #ddd 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #ddd 75%),
+                linear-gradient(-45deg, transparent 75%, #ddd 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+        #preview-canvas {
+             background-image:
+                linear-gradient(45deg, #eee 25%, transparent 25%),
+                linear-gradient(-45deg, #eee 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #eee 75%),
+                linear-gradient(-45deg, transparent 75%, #eee 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            image-rendering: pixelated; /* Makes scaled sprites look crisp */
+        }
+        .sprite-item:hover {
+            background-color: #f0f0f0;
+        }
+        .sprite-item.selected {
+            background-color: #dbeafe; /* a light blue color */
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .tab {
+            transition: background-color 0.2s;
+        }
+        .tab-close-btn {
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+        .tab:hover .tab-close-btn {
+            opacity: 1;
+        }
+        #drag-overlay {
+            transition: opacity 0.2s;
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="text-gray-800 h-screen flex flex-col">
+    <div class="container mx-auto p-4 lg:p-6 flex flex-col flex-grow min-h-0">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-grow min-h-0">
+            <!-- Left Panel: Controls -->
+            <div class="lg:col-span-1 bg-white p-4 rounded-lg shadow-lg flex flex-col space-y-4 overflow-y-auto">
+                
+                <div>
+                    <h3 class="block text-sm font-bold text-gray-700 mb-2">1. 파일 열기</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                             <label for="image-loader" class="w-full text-center cursor-pointer rounded-md border-0 text-sm font-semibold bg-blue-50 text-blue-700 hover:bg-blue-100 py-2 px-4 block">
+                                이미지 열기
+                            </label>
+                            <input type="file" id="image-loader" accept="image/*" class="hidden" title="이미지 파일 열기">
+                        </div>
+                        <div>
+                             <label for="json-loader" class="w-full text-center cursor-pointer rounded-md border-0 text-sm font-semibold bg-green-50 text-green-700 hover:bg-green-100 py-2 px-4 block">
+                                JSON 열기
+                            </label>
+                            <input type="file" id="json-loader" accept=".json,application/json" class="hidden" title="JSON 파일 열기">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t pt-4">
+                    <h3 class="text-lg font-semibold mb-3">2. 뷰 컨트롤 & 미리보기</h3>
+                    <p class="text-sm font-medium text-gray-700 mb-2">미리보기 :</p>
+                    <div class="w-full h-40 bg-white border rounded-md flex items-center justify-center">
+                        <canvas id="preview-canvas" width="160" height="160"></canvas>
+                    </div>
+                </div>
+
+                <div class="border-t pt-4">
+                     <h3 class="text-lg font-semibold mb-2">3. 스프라이트 수동 정의</h3>
+                     <div class="space-y-2">
+                         <div>
+                             <label for="sprite-name" class="block text-sm font-medium">스프라이트 이름:</label>
+                             <input type="text" id="sprite-name" placeholder="예: player_idle_1" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm shadow-sm" disabled>
+                         </div>
+                         <div class="grid grid-cols-2 gap-2">
+                             <input type="number" id="sprite-x" placeholder="X" class="mt-1 block w-full px-3 py-2 bg-white border rounded-md text-sm" min="0" disabled>
+                             <input type="number" id="sprite-y" placeholder="Y" class="mt-1 block w-full px-3 py-2 bg-white border rounded-md text-sm" min="0" disabled>
+                             <input type="number" id="sprite-w" placeholder="W" class="mt-1 block w-full px-3 py-2 bg-white border rounded-md text-sm" min="0" disabled>
+                             <input type="number" id="sprite-h" placeholder="H" class="mt-1 block w-full px-3 py-2 bg-white border rounded-md text-sm" min="0" disabled>
+                         </div>
+                          <button id="add-sprite" class="w-full mt-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition-colors shadow-sm" disabled>스프라이트 추가/업데이트</button>
+                     </div>
+                </div>
+
+                <div class="border-t pt-4">
+                    <button id="accordion-toggle" class="w-full text-left font-semibold text-lg flex justify-between items-center">
+                        4. 스프라이트 자동 분할
+                        <svg class="w-5 h-5 transition-transform transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div id="accordion-content" class="accordion-content mt-3 space-y-2">
+                        <div class="p-3 bg-gray-50 rounded-md border">
+                            <h4 class="font-semibold text-sm mb-2">셀 크기로 분할</h4>
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <input type="number" id="slice-w" placeholder="너비(W)" class="px-2 py-1 border rounded-md">
+                                <input type="number" id="slice-h" placeholder="높이(H)" class="px-2 py-1 border rounded-md">
+                                <input type="number" id="slice-offx" placeholder="시작 X" value="0" class="px-2 py-1 border rounded-md">
+                                <input type="number" id="slice-offy" placeholder="시작 Y" value="0" class="px-2 py-1 border rounded-md">
+                                <input type="number" id="slice-padx" placeholder="간격 X" value="0" class="px-2 py-1 border rounded-md">
+                                <input type="number" id="slice-pady" placeholder="간격 Y" value="0" class="px-2 py-1 border rounded-md">
+                            </div>
+                            <button id="slice-by-size-btn" class="w-full mt-2 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-bold py-2 px-3 rounded-md transition-colors">생성</button>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-md border">
+                            <h4 class="font-semibold text-sm mb-2">칸 수로 분할</h4>
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <input type="number" id="slice-cols" placeholder="열 (Columns)" class="px-2 py-1 border rounded-md">
+                                <input type="number" id="slice-rows" placeholder="행 (Rows)" class="px-2 py-1 border rounded-md">
+                            </div>
+                            <button id="slice-by-grid-btn" class="w-full mt-2 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-bold py-2 px-3 rounded-md transition-colors">생성</button>
+                        </div>
+                         <!-- NEW: Smart Slice Section -->
+                        <div class="p-3 bg-gray-50 rounded-md border">
+                            <h4 class="font-semibold text-sm mb-2">스마트 분할 (알파값 기반)</h4>
+                            <div class="text-sm">
+                                 <label for="alpha-threshold" class="block text-xs font-medium text-gray-600">알파 임계값 (0-255):</label>
+                                 <input type="number" id="alpha-threshold" value="10" min="0" max="255" class="w-full px-2 py-1 border rounded-md mt-1">
+                            </div>
+                            <button id="slice-by-smart-btn" class="w-full mt-2 bg-teal-500 hover:bg-teal-600 text-white text-sm font-bold py-2 px-3 rounded-md transition-colors">지능형 생성</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t pt-4 flex-grow flex flex-col">
+                     <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-lg font-semibold">5. 정의된 스프라이트 목록</h3>
+                        <button id="show-all-sprites-btn" class="text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-3 rounded-md transition-colors" disabled>전체 보기</button>
+                   </div>
+                     <div id="sprite-list" class="flex-grow h-48 overflow-y-auto bg-gray-50 p-2 rounded-md border">
+                        <p class="text-sm text-gray-500 text-center py-4">이미지를 불러오세요.</p>
+                     </div>
+                </div>
+            </div>
+
+            <!-- Center Panel: Canvas -->
+            <div class="lg:col-span-2 bg-white p-4 rounded-lg shadow-lg flex flex-col">
+                 <div id="tab-bar" class="flex-shrink-0 flex border-b -mt-4 -mx-4 px-2 pt-2 items-center">
+                    <!-- Tabs will be dynamically inserted here -->
+                    <button id="add-tab-btn" class="ml-2 mb-px text-gray-500 hover:bg-gray-200 rounded-full w-6 h-6 flex items-center justify-center text-xl font-bold transition-colors">+</button>
+                 </div>
+                 <h3 id="canvas-title" class="text-lg font-semibold my-3 text-center flex-shrink-0">이미지 뷰어</h3>
+                 <div id="sprite-canvas-container" class="border rounded-md flex-grow relative overflow-hidden">
+                    <canvas id="sprite-canvas" class="absolute top-0 left-0"></canvas>
+                    <div id="canvas-placeholder" class="absolute inset-0 flex items-center justify-center text-gray-500 pointer-events-none">
+                        <p class="text-center">작업을 시작하려면 '+' 버튼을 누르거나<br>이미지 파일을 열어주세요.</p>
+                    </div>
+                    <div id="drag-overlay" class="absolute inset-0 bg-blue-500 bg-opacity-20 border-4 border-dashed border-blue-600 rounded-md items-center justify-center text-blue-800 font-bold text-2xl hidden pointer-events-none">
+                        <p>여기에 이미지를 드롭하세요</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Panel: JSON Output -->
+        <div class="mt-6 bg-white p-4 rounded-lg shadow-lg flex-shrink-0">
+            <div id="json-accordion-toggle" class="flex justify-between items-center mb-2 cursor-pointer">
+                <div class="flex items-center">
+                     <h3 class="text-lg font-semibold">6. JSON 결과물</h3>
+                     <svg id="json-accordion-icon" class="w-5 h-5 transition-transform transform ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                </div>
+                <button id="export-json" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md transition-colors shadow-sm">JSON 다른 이름으로 저장...</button>
+            </div>
+            <div id="json-accordion-content" class="accordion-content">
+                <textarea id="json-output" class="w-full h-48 p-2 border rounded-md font-mono text-sm bg-gray-900 text-green-400" readonly></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <!-- All Sprites Modal -->
+    <div id="sprite-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl h-full max-h-[80vh] flex flex-col">
+            <div class="p-4 border-b flex justify-between items-center flex-shrink-0">
+                <h2 class="text-xl font-bold">전체 스프라이트 목록</h2>
+                <button id="close-modal-btn" class="text-2xl font-bold hover:text-red-500">&times;</button>
+            </div>
+            <div id="modal-grid" class="p-4 overflow-y-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Sprite previews will be injected here by JS -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // DOM Elements
+        const imageLoader = document.getElementById('image-loader');
+        const jsonLoader = document.getElementById('json-loader');
+        const canvasContainer = document.getElementById('sprite-canvas-container');
+        const canvas = document.getElementById('sprite-canvas');
+        const ctx = canvas.getContext('2d');
+        const canvasPlaceholder = document.getElementById('canvas-placeholder');
+        const dragOverlay = document.getElementById('drag-overlay');
+        const previewCanvas = document.getElementById('preview-canvas');
+        const previewCtx = previewCanvas.getContext('2d');
+        const nameInput = document.getElementById('sprite-name');
+        const xInput = document.getElementById('sprite-x');
+        const yInput = document.getElementById('sprite-y');
+        const wInput = document.getElementById('sprite-w');
+        const hInput = document.getElementById('sprite-h');
+        const zoomValueDisplay = document.getElementById('zoom-value-display');
+        const addSpriteBtn = document.getElementById('add-sprite');
+        const exportBtn = document.getElementById('export-json');
+        const jsonOutput = document.getElementById('json-output');
+        const spriteList = document.getElementById('sprite-list');
+        const sliceBySizeBtn = document.getElementById('slice-by-size-btn');
+        const sliceByGridBtn = document.getElementById('slice-by-grid-btn');
+        const sliceBySmartBtn = document.getElementById('slice-by-smart-btn');
+        const accordionToggle = document.getElementById('accordion-toggle');
+        const accordionContent = document.getElementById('accordion-content');
+        const jsonAccordionToggle = document.getElementById('json-accordion-toggle');
+        const jsonAccordionContent = document.getElementById('json-accordion-content');
+        const jsonAccordionIcon = document.getElementById('json-accordion-icon');
+        const tabBar = document.getElementById('tab-bar');
+        const addTabBtn = document.getElementById('add-tab-btn');
+        const showAllSpritesBtn = document.getElementById('show-all-sprites-btn');
+        const spriteModal = document.getElementById('sprite-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalGrid = document.getElementById('modal-grid');
+        const allControlInputs = [nameInput, xInput, yInput, wInput, hInput, addSpriteBtn, showAllSpritesBtn];
+
+        // --- State Management ---
+        let tabs = [];
+        let activeTabId = null;
+        let nextTabId = 1;
+
+        function getActiveTab() {
+            if (activeTabId === null) return null;
+            return tabs.find(t => t.id === activeTabId);
+        }
+
+        function createNewTabState(file = null, image = null) {
+            const id = nextTabId++;
+            let fileName;
+
+            if (file) {
+                fileName = file.name;
+            } else {
+                let newTabNumber = 1;
+                const untitledNumbers = new Set(
+                    tabs.map(t => {
+                        const match = t.fileName.match(/^무제-(\d+)$/);
+                        return match ? parseInt(match[1], 10) : null;
+                    }).filter(n => n !== null)
+                );
+                while (untitledNumbers.has(newTabNumber)) {
+                    newTabNumber++;
+                }
+                fileName = `무제-${newTabNumber}`;
+            }
+            
+            const initialState = { sheetFile: file ? file.name : '', sprites: {} };
+            return {
+                id: id,
+                file: file,
+                fileName: fileName,
+                image: image,
+                spriteData: JSON.parse(JSON.stringify(initialState)),
+                history: [initialState],
+                historyIndex: 0,
+                selectedSpriteName: null,
+                selection: { startX: 0, startY: 0, endX: 0, endY: 0 },
+                viewState: { zoomLevel: 1, viewOffsetX: 0, viewOffsetY: 0 },
+                interactionState: {
+                    isSelecting: false, isPanning: false, isResizing: false, isMovingSelection: false,
+                    activeHandle: null, panStart: { x: 0, y: 0 }, mouseStartPos: {x: 0, y: 0},
+                    selectionStartRect: {x: 0, y: 0, w: 0, h: 0}
+                }
+            };
+        }
+
+        // --- Event Listeners ---
+        imageLoader.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            loadImageFile(file);
+            e.target.value = null;
+        });
+
+        jsonLoader.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const activeTab = getActiveTab();
+            if (!activeTab || !activeTab.image) {
+                alert('JSON을 적용할 이미지를 먼저 열어주세요.');
+                e.target.value = null;
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const data = JSON.parse(event.target.result);
+                    if (!data.sheetFile || typeof data.sprites !== 'object') {
+                        throw new Error('호환되지 않는 JSON 형식입니다.');
+                    }
+                    if (data.sheetFile !== activeTab.fileName) {
+                        if (!confirm(`JSON 파일의 시트 이름('${data.sheetFile}')과 현재 이미지 이름('${activeTab.fileName}')이 다릅니다.\n그래도 불러오시겠습니까?`)) {
+                            return;
+                        }
+                    }
+
+                    activeTab.spriteData = data;
+                    pushHistory(activeTab, 'Load JSON');
+                    updateAllUI();
+                    draw();
+                    alert(`'${file.name}'에서 스프라이트 ${Object.keys(data.sprites).length}개를 성공적으로 불러왔습니다.`);
+
+                } catch (err) {
+                    alert('JSON 파일을 읽는 데 실패했습니다: ' + err.message);
+                } finally {
+                    e.target.value = null;
+                }
+            };
+            reader.readAsText(file);
+        });
+        
+        addTabBtn.addEventListener('click', () => {
+             const newTab = createNewTabState();
+             tabs.push(newTab);
+             switchTab(newTab.id);
+        });
+
+        canvasContainer.addEventListener('mousedown', handleMouseDown);
+        canvasContainer.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseup', handleMouseUp);
+        canvasContainer.addEventListener('wheel', handleWheel, { passive: false });
+        
+        canvasContainer.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dragOverlay.style.display = 'flex';
+        });
+        canvasContainer.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dragOverlay.style.display = 'none';
+        });
+        canvasContainer.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dragOverlay.style.display = 'none';
+            if (e.dataTransfer.files.length > 0) {
+                const file = e.dataTransfer.files[0];
+                if (file.type.startsWith('image/')) {
+                    loadImageFile(file);
+                } else if (file.type === 'application/json') {
+                    jsonLoader.files = e.dataTransfer.files;
+                    jsonLoader.dispatchEvent(new Event('change'));
+                } else {
+                    alert('이미지 또는 JSON 파일만 드롭할 수 있습니다.');
+                }
+            }
+        });
+
+        const resizeObserver = new ResizeObserver(() => {
+            canvas.width = canvasContainer.clientWidth;
+            canvas.height = canvasContainer.clientHeight;
+            draw();
+        });
+        resizeObserver.observe(canvasContainer);
+
+        window.addEventListener('keydown', (e) => {
+            const activeTab = getActiveTab();
+            if (!activeTab || !activeTab.image) return;
+
+            const activeElement = document.activeElement;
+            const isInputFocused = activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA');
+
+            if (isInputFocused) return;
+
+            if (e.ctrlKey || e.metaKey) { 
+                let handled = false;
+                if (e.key.toLowerCase() === 'z') {
+                    if (e.shiftKey) {
+                        redo(activeTab);
+                    } else {
+                        undo(activeTab);
+                    }
+                    handled = true;
+                } else if (e.key.toLowerCase() === 'y') {
+                    redo(activeTab);
+                    handled = true;
+                }
+                
+                if (handled) {
+                    e.preventDefault();
+                }
+            }
+        });
+
+        // --- Core Logic ---
+
+        function loadImageFile(file) {
+            let activeTab = getActiveTab();
+            if (!activeTab || activeTab.image) {
+                const newTab = createNewTabState(file);
+                tabs.push(newTab);
+                switchTab(newTab.id);
+                activeTab = newTab;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const image = new Image();
+                image.onload = () => {
+                    activeTab.image = image;
+                    if (!activeTab.file) {
+                        activeTab.file = file;
+                        activeTab.fileName = file.name;
+                    }
+                    
+                    const initialState = { sheetFile: file.name, sprites: {} };
+                    activeTab.spriteData = JSON.parse(JSON.stringify(initialState));
+                    activeTab.history = [initialState];
+                    activeTab.historyIndex = 0;
+                    
+                    const { viewState } = activeTab;
+                    viewState.zoomLevel = Math.min(canvas.width / image.width, canvas.height / image.height, 1);
+                    viewState.viewOffsetX = (image.width / 2) - (canvas.width / 2 / viewState.zoomLevel);
+                    viewState.viewOffsetY = (image.height / 2) - (canvas.height / 2 / viewState.zoomLevel);
+
+                    renderTabs();
+                    loadTabData(activeTab);
+                    draw();
+                };
+                image.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // --- History Management (Undo/Redo) ---
+        function pushHistory(tab, reason = '') {
+            if (tab.historyIndex < tab.history.length - 1) {
+                tab.history = tab.history.slice(0, tab.historyIndex + 1);
+            }
+            
+            tab.history.push(JSON.parse(JSON.stringify(tab.spriteData)));
+            tab.historyIndex = tab.history.length - 1;
+
+            const maxHistorySize = 50;
+            if (tab.history.length > maxHistorySize) {
+                tab.history.shift();
+                tab.historyIndex--;
+            }
+        }
+
+        function undo(tab) {
+            if (tab.historyIndex > 0) {
+                tab.historyIndex--;
+                tab.spriteData = JSON.parse(JSON.stringify(tab.history[tab.historyIndex]));
+                updateAllUI();
+                draw();
+            }
+        }
+
+        function redo(tab) {
+            if (tab.historyIndex < tab.history.length - 1) {
+                tab.historyIndex++;
+                tab.spriteData = JSON.parse(JSON.stringify(tab.history[tab.historyIndex]));
+                updateAllUI();
+                draw();
+            }
+        }
+
+
+        // --- Tab Management ---
+        function switchTab(tabId) {
+            activeTabId = tabId;
+            const activeTab = getActiveTab();
+            renderTabs();
+            
+            if (!activeTab) {
+                resetFullUI();
+                return;
+            }
+            
+            loadTabData(activeTab);
+            draw();
+        }
+
+        function closeTab(e, tabId) {
+            e.stopPropagation();
+            const index = tabs.findIndex(t => t.id === tabId);
+            if (index > -1) {
+                tabs.splice(index, 1);
+                if (activeTabId === tabId) {
+                    const newActiveTab = tabs[index] || tabs[index - 1] || null;
+                    switchTab(newActiveTab ? newActiveTab.id : null);
+                } else {
+                    renderTabs();
+                }
+            }
+        }
+        
+        function renderTabs() {
+            const tabContent = Array.from(tabBar.children).filter(el => el.id !== 'add-tab-btn');
+            tabContent.forEach(el => el.remove());
+
+            tabs.forEach(tab => {
+                const tabEl = document.createElement('div');
+                tabEl.className = `tab flex items-center px-4 py-2 border-r cursor-pointer ${tab.id === activeTabId ? 'bg-white font-semibold' : 'bg-gray-100 hover:bg-gray-200'}`;
+                tabEl.innerHTML = `<span class="truncate max-w-xs">${tab.fileName}</span>`;
+                
+                const closeBtn = document.createElement('button');
+                closeBtn.innerHTML = `&times;`;
+                closeBtn.className = 'tab-close-btn ml-2 text-lg leading-none font-bold hover:text-red-500';
+                closeBtn.onclick = (e) => closeTab(e, tab.id);
+                
+                tabEl.appendChild(closeBtn);
+                tabEl.onclick = () => switchTab(tab.id);
+                tabBar.insertBefore(tabEl, addTabBtn);
+            });
+        }
+        
+        // --- Mouse Interaction Handlers ---
+        function getMousePos(e, activeTab) {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            const { zoomLevel, viewOffsetX, viewOffsetY } = activeTab.viewState;
+            const imageX = (mouseX / zoomLevel) + viewOffsetX;
+            const imageY = (mouseY / zoomLevel) + viewOffsetY;
+            return { x: imageX, y: imageY };
+        }
+
+        function handleMouseDown(e) {
+            const activeTab = getActiveTab();
+            if (!activeTab || !activeTab.image) return;
+            e.preventDefault();
+            const state = activeTab.interactionState;
+
+            if (e.button === 1) { // Middle mouse for panning
+                state.isPanning = true;
+                state.panStart = { x: e.clientX, y: e.clientY };
+                canvas.style.cursor = 'grabbing';
+                return;
+            }
+            
+            if (e.button === 0) { // Left mouse button
+                const pos = getMousePos(e, activeTab);
+                
+                // Check for interaction with the CURRENT selection box first
+                let rect = getSelectionRect(activeTab);
+                const handle = getHandleAtPos(pos.x, pos.y, rect, activeTab.viewState.zoomLevel);
+
+                if (handle) {
+                    state.isResizing = true;
+                    state.activeHandle = handle;
+                    state.mouseStartPos = pos;
+                    state.selectionStartRect = rect;
+                    return;
+                }
+
+                if (isPointInRect(pos.x, pos.y, rect)) {
+                    state.isMovingSelection = true;
+                    state.mouseStartPos = pos;
+                    state.selectionStartRect = rect;
+                    return;
+                }
+                
+                // If not interacting with current selection, check if we clicked on a DEFINED sprite
+                const clickedSprite = findSpriteAtPos(pos, activeTab);
+                if (clickedSprite) {
+                    const { name, coords } = clickedSprite;
+                    
+                    nameInput.value = name;
+                    xInput.value = coords.x;
+                    yInput.value = coords.y;
+                    wInput.value = coords.w;
+                    hInput.value = coords.h;
+                    activeTab.selectedSpriteName = name;
+                    
+                    drawSelectionFromInputs();
+                    updatePreview();
+                    updateSpriteList();
+                    
+                    state.isMovingSelection = true;
+                    state.mouseStartPos = pos;
+                    state.selectionStartRect = getSelectionRect(activeTab);
+                    return;
+                }
+
+                // If we clicked on nothing, start a new selection
+                state.isSelecting = true;
+                activeTab.selection = { startX: pos.x, startY: pos.y, endX: pos.x, endY: pos.y };
+                activeTab.selectedSpriteName = null;
+                nameInput.value = '';
+                updateSpriteList();
+            }
+        }
+        
+        function handleMouseMove(e) {
+            const activeTab = getActiveTab();
+            if (!activeTab || !activeTab.image) return;
+            e.preventDefault();
+            const pos = getMousePos(e, activeTab);
+            const state = activeTab.interactionState;
+            const viewState = activeTab.viewState;
+
+            if (state.isPanning) {
+                const dx = e.clientX - state.panStart.x;
+                const dy = e.clientY - state.panStart.y;
+                viewState.viewOffsetX -= dx / viewState.zoomLevel;
+                viewState.viewOffsetY -= dy / viewState.zoomLevel;
+                state.panStart = { x: e.clientX, y: e.clientY };
+            } else if (state.isResizing) {
+                resizeSelection(pos, activeTab);
+                updateInputsFromSelection(activeTab);
+            } else if (state.isMovingSelection) {
+                moveSelection(pos, activeTab);
+                updateInputsFromSelection(activeTab);
+            } else if (state.isSelecting) {
+                activeTab.selection.endX = pos.x;
+                activeTab.selection.endY = pos.y;
+            } else {
+                updateCursor(pos, activeTab);
+            }
+            draw();
+        }
+
+        function handleMouseUp(e) {
+            const activeTab = getActiveTab();
+            if (!activeTab || !activeTab.image) return;
+            e.preventDefault();
+            const state = activeTab.interactionState;
+            if (state.isSelecting) {
+                state.isSelecting = false;
+                updateInputsFromSelection(activeTab);
+            }
+            state.isPanning = state.isResizing = state.isMovingSelection = false;
+            state.activeHandle = null;
+            updateCursor(getMousePos(e, activeTab), activeTab);
+        }
+
+        function handleWheel(e) {
+            const activeTab = getActiveTab();
+            if (!activeTab || !activeTab.image) return;
+            e.preventDefault();
+            const { viewState } = activeTab;
+            const scrollDelta = e.deltaY > 0 ? 0.9 : 1.1;
+            const oldZoom = viewState.zoomLevel;
+            const newZoom = Math.max(0.1, Math.min(30, oldZoom * scrollDelta));
+            if (newZoom === oldZoom) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            
+            const worldXBefore = (mouseX / oldZoom) + viewState.viewOffsetX;
+            const worldYBefore = (mouseY / oldZoom) + viewState.viewOffsetY;
+            viewState.zoomLevel = newZoom;
+            const worldXAfter = (mouseX / newZoom) + viewState.viewOffsetX;
+            const worldYAfter = (mouseY / newZoom) + viewState.viewOffsetY;
+            
+            viewState.viewOffsetX += worldXBefore - worldXAfter;
+            viewState.viewOffsetY += worldYBefore - worldYAfter;
+            
+            updateZoom();
+            draw();
+        }
+        
+        // --- Interaction Logic & Drawing ---
+        function updateCursor(pos, activeTab) {
+            const rect = getSelectionRect(activeTab);
+            const handle = getHandleAtPos(pos.x, pos.y, rect, activeTab.viewState.zoomLevel);
+            if (handle) {
+                canvas.style.cursor = getCursorForHandle(handle);
+                return;
+            }
+            
+            if (isPointInRect(pos.x, pos.y, rect)) {
+                canvas.style.cursor = 'move';
+                return;
+            }
+        
+            if (findSpriteAtPos(pos, activeTab)) {
+                canvas.style.cursor = 'pointer';
+                return;
+            }
+            
+            canvas.style.cursor = 'crosshair';
+        }
+        
+        function moveSelection(pos, tab) {
+            const { interactionState, selection } = tab;
+            const dx = pos.x - interactionState.mouseStartPos.x;
+            const dy = pos.y - interactionState.mouseStartPos.y;
+            selection.startX = interactionState.selectionStartRect.x + dx;
+            selection.startY = interactionState.selectionStartRect.y + dy;
+            selection.endX = interactionState.selectionStartRect.x + interactionState.selectionStartRect.w + dx;
+            selection.endY = interactionState.selectionStartRect.y + interactionState.selectionStartRect.h + dy;
+        }
+
+        function resizeSelection(pos, tab) {
+            const { interactionState, selection } = tab;
+            let { x, y, w, h } = interactionState.selectionStartRect;
+            const dx = pos.x - interactionState.mouseStartPos.x;
+            const dy = pos.y - interactionState.mouseStartPos.y;
+
+            const lowerHandle = interactionState.activeHandle.toLowerCase();
+
+            if (lowerHandle.includes('right')) w += dx;
+            if (lowerHandle.includes('left')) { x += dx; w -= dx; }
+            if (lowerHandle.includes('bottom')) h += dy;
+            if (lowerHandle.includes('top')) { y += dy; h -= dy; }
+
+            if (w < 0) {
+                x += w; w = -w;
+                interactionState.activeHandle = interactionState.activeHandle.replace('left', 'right_temp').replace('right', 'left').replace('right_temp', 'right');
+                interactionState.mouseStartPos.x = interactionState.selectionStartRect.x + interactionState.selectionStartRect.w;
+            }
+            if (h < 0) {
+                y += h; h = -h;
+                interactionState.activeHandle = interactionState.activeHandle.replace('top', 'bottom_temp').replace('bottom', 'top').replace('bottom_temp', 'bottom');
+                interactionState.mouseStartPos.y = interactionState.selectionStartRect.y + interactionState.selectionStartRect.h;
+            }
+            selection.startX = x; selection.startY = y;
+            selection.endX = x + w; selection.endY = y + h;
+        }
+
+        function draw() {
+            const activeTab = getActiveTab();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (!activeTab || !activeTab.image) return;
+            
+            const { image, viewState, spriteData } = activeTab;
+            const { zoomLevel, viewOffsetX, viewOffsetY } = viewState;
+
+            ctx.save();
+            ctx.scale(zoomLevel, zoomLevel);
+            ctx.translate(-viewOffsetX, -viewOffsetY);
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(image, 0, 0);
+
+            ctx.strokeStyle = 'rgba(0, 255, 0, 0.7)';
+            ctx.lineWidth = 1 / zoomLevel;
+            Object.values(spriteData.sprites).forEach(s => ctx.strokeRect(s.x, s.y, s.w, s.h));
+
+            const rect = getSelectionRect(activeTab);
+            if (rect.w > 0 || rect.h > 0) {
+                ctx.fillStyle = 'rgba(34, 197, 94, 0.3)';
+                ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
+                ctx.strokeStyle = 'rgba(34, 197, 94, 0.8)';
+                ctx.lineWidth = 2 / zoomLevel;
+                ctx.strokeRect(rect.x, rect.y, rect.w, rect.h);
+                
+                const handles = getHandles(rect);
+                const handleScreenSize = 8 / zoomLevel;
+                const handleRadius = handleScreenSize / 2;
+
+                for (const key in handles) {
+                    const handle = handles[key];
+                    const isCorner = key.includes('Left') || key.includes('Right');
+
+                    if (isCorner) {
+                        ctx.fillStyle = 'rgba(59, 130, 246, 1)';
+                        ctx.beginPath();
+                        ctx.arc(handle.x, handle.y, handleRadius, 0, 2 * Math.PI);
+                        ctx.fill();
+                    } else {
+                        ctx.fillStyle = 'rgba(34, 197, 94, 1)';
+                        ctx.fillRect(handle.x - handleRadius, handle.y - handleRadius, handleScreenSize, handleScreenSize);
+                    }
+                }
+            }
+            ctx.restore();
+        }
+        
+        function updatePreview() {
+            const activeTab = getActiveTab();
+            previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+            if (!activeTab || !activeTab.image) return;
+            
+            const w = parseInt(wInput.value) || 0;
+            const h = parseInt(hInput.value) || 0;
+            if (w <= 0 || h <= 0) return;
+
+            const x = parseInt(xInput.value) || 0, y = parseInt(yInput.value) || 0;
+            const scale = Math.min(previewCanvas.width / w, previewCanvas.height / h);
+            const drawW = w * scale, drawH = h * scale;
+            const drawX = (previewCanvas.width - drawW) / 2;
+            const drawY = (previewCanvas.height - drawH) / 2;
+
+            previewCtx.imageSmoothingEnabled = false;
+            previewCtx.drawImage(activeTab.image, x, y, w, h, drawX, drawY, drawW, drawH);
+        }
+
+        // --- UI & Data Update Functions ---
+        function resetFullUI() {
+            allControlInputs.forEach(el => { el.disabled = true; el.value = ''; });
+            spriteList.innerHTML = `<p class="text-sm text-gray-500 text-center py-4">이미지를 불러오세요.</p>`;
+            jsonOutput.value = '';
+            canvasPlaceholder.innerHTML = `<p class="text-center">작업을 시작하려면 '+' 버튼을 누르거나<br>이미지 파일을 열어주세요.</p>`;
+            canvasPlaceholder.style.display = 'flex';
+            canvas.style.cursor = 'default';
+            previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+            draw();
+        }
+
+        function loadTabData(tab) {
+            if (tab.image) {
+                allControlInputs.forEach(el => el.disabled = false);
+                canvasPlaceholder.style.display = 'none';
+                canvas.style.cursor = 'crosshair';
+                xInput.value = yInput.value = wInput.value = hInput.value = nameInput.value = '';
+                updateAllUI();
+                updateZoom();
+                updatePreview();
+            } else {
+                allControlInputs.forEach(el => { el.disabled = true; el.value = ''; });
+                canvasPlaceholder.innerHTML = `<p class="text-center">이미지 파일을 열거나<br>여기에 드롭하여 작업을 시작하세요.</p>`;
+                canvasPlaceholder.style.display = 'flex';
+                canvas.style.cursor = 'default';
+                spriteList.innerHTML = `<p class="text-sm text-gray-500 text-center py-4">이미지를 기다리는 중...</p>`;
+                jsonOutput.value = '';
+                updateZoom();
+                previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+            }
+        }
+        
+        [xInput, yInput, wInput, hInput].forEach(input => input.addEventListener('input', () => {
+            drawSelectionFromInputs();
+            updatePreview();
+        }));
+
+        addSpriteBtn.addEventListener('click', () => {
+            const activeTab = getActiveTab();
+            if (!activeTab || !activeTab.image) return;
+            
+            let name = nameInput.value.trim();
+
+            if (!name) {
+                let count = 0;
+                while (`sprite_${count}` in activeTab.spriteData.sprites) {
+                    count++;
+                }
+                name = `sprite_${count}`;
+            }
+
+            if (activeTab.spriteData.sprites[name] && !confirm(`'${name}' 이름이 이미 존재합니다. 덮어쓰시겠습니까?`)) return;
+            const rect = { x: parseInt(xInput.value), y: parseInt(yInput.value), w: parseInt(wInput.value), h: parseInt(hInput.value) };
+            if (isNaN(rect.x) || isNaN(rect.y) || !rect.w || !rect.h || rect.w <= 0 || rect.h <= 0) {
+                 alert('유효한 좌표와 크기를 입력해야 합니다 (너비/높이는 0보다 커야 함).'); 
+                 return;
+            }
+            activeTab.spriteData.sprites[name] = rect;
+            activeTab.selectedSpriteName = name;
+            pushHistory(activeTab, 'Add/Update Sprite');
+            updateAllUI(); draw();
+            nameInput.value = ''; nameInput.focus();
+        });
+
+        const setupAutoSlice = (handler) => async () => {
+            const activeTab = getActiveTab();
+            if (!activeTab || !activeTab.image) return;
+
+            let clearExisting = true;
+            if (Object.keys(activeTab.spriteData.sprites).length > 0) {
+                clearExisting = confirm('기존에 정의된 스프라이트가 있습니다. 기존 목록을 모두 지우고 새로 생성하시겠습니까?\n\n[확인] = 모두 지우기\n[취소] = 기존 목록에 추가하기');
+            }
+
+            await handler(activeTab, clearExisting);
+            pushHistory(activeTab, 'Auto Slice');
+            updateAllUI(); 
+            draw();
+        };
+
+        sliceBySizeBtn.addEventListener('click', setupAutoSlice(async (tab, clear) => {
+            const w = parseInt(document.getElementById('slice-w').value), h = parseInt(document.getElementById('slice-h').value);
+            if (!w || !h || w <= 0 || h <= 0) { alert('유효한 너비와 높이를 입력하세요.'); return; }
+            
+            if (clear) {
+                tab.spriteData.sprites = {};
+            }
+            
+            const offX = parseInt(document.getElementById('slice-offx').value) || 0;
+            const offY = parseInt(document.getElementById('slice-offy').value) || 0;
+            const padX = parseInt(document.getElementById('slice-padx').value) || 0;
+            const padY = parseInt(document.getElementById('slice-pady').value) || 0;
+            
+            let count = Object.keys(tab.spriteData.sprites).length;
+            
+            for (let y = offY; y + h <= tab.image.height; y += h + padY) {
+                for (let x = offX; x + w <= tab.image.width; x += w + padX) {
+                    let newName;
+                    do {
+                        newName = `sprite_${count++}`;
+                    } while (newName in tab.spriteData.sprites);
+                    tab.spriteData.sprites[newName] = { x, y, w, h };
+                }
+            }
+        }));
+
+        sliceByGridBtn.addEventListener('click', setupAutoSlice(async (tab, clear) => {
+            const cols = parseInt(document.getElementById('slice-cols').value), rows = parseInt(document.getElementById('slice-rows').value);
+            if (!cols || !rows || cols <= 0 || rows <= 0) { alert('유효한 열과 행의 수를 입력하세요.'); return; }
+            
+            if (clear) {
+                tab.spriteData.sprites = {};
+            }
+
+            const w = Math.floor(tab.image.width / cols), h = Math.floor(tab.image.height / rows);
+            
+            let count = Object.keys(tab.spriteData.sprites).length;
+            
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    let newName;
+                    do {
+                        newName = `sprite_${count++}`;
+                    } while (newName in tab.spriteData.sprites);
+                    tab.spriteData.sprites[newName] = { x: c * w, y: r * h, w, h };
+                }
+            }
+        }));
+
+        sliceBySmartBtn.addEventListener('click', setupAutoSlice(async (tab, clear) => {
+            sliceBySmartBtn.disabled = true;
+            sliceBySmartBtn.textContent = '처리 중...';
+            await new Promise(resolve => setTimeout(resolve, 10));
+
+            try {
+                const alphaThreshold = parseInt(document.getElementById('alpha-threshold').value) || 0;
+                const { image } = tab;
+                const { width, height } = image;
+
+                const offscreenCanvas = document.createElement('canvas');
+                offscreenCanvas.width = width;
+                offscreenCanvas.height = height;
+                const offscreenCtx = offscreenCanvas.getContext('2d', { willReadFrequently: true });
+                offscreenCtx.drawImage(image, 0, 0);
+                const imageData = offscreenCtx.getImageData(0, 0, width, height).data;
+
+                const visited = new Uint8Array(width * height);
+
+                if (clear) {
+                    tab.spriteData.sprites = {};
+                }
+
+                let count = Object.keys(tab.spriteData.sprites).length;
+
+                for (let y = 0; y < height; y++) {
+                    for (let x = 0; x < width; x++) {
+                        const index = y * width + x;
+                        if (visited[index] === 1 || imageData[index * 4 + 3] <= alphaThreshold) {
+                            continue;
+                        }
+
+                        let minX = x, minY = y, maxX = x, maxY = y;
+                        const queue = [[x, y]];
+                        visited[index] = 1;
+
+                        let head = 0;
+                        while(head < queue.length) {
+                            const [cx, cy] = queue[head++];
+
+                            minX = Math.min(minX, cx);
+                            minY = Math.min(minY, cy);
+                            maxX = Math.max(maxX, cx);
+                            maxY = Math.max(maxY, cy);
+
+                            for (let dy = -1; dy <= 1; dy++) {
+                                for (let dx = -1; dx <= 1; dx++) {
+                                    if (dx === 0 && dy === 0) continue;
+                                    const nx = cx + dx;
+                                    const ny = cy + dy;
+
+                                    if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                                        const nIndex = ny * width + nx;
+                                        if (visited[nIndex] === 0 && imageData[nIndex * 4 + 3] > alphaThreshold) {
+                                            visited[nIndex] = 1;
+                                            queue.push([nx, ny]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        let newName;
+                        do {
+                            newName = `sprite_${count++}`;
+                        } while (newName in tab.spriteData.sprites);
+                        
+                        tab.spriteData.sprites[newName] = {
+                            x: minX,
+                            y: minY,
+                            w: maxX - minX + 1,
+                            h: maxY - minY + 1
+                        };
+                    }
+                }
+            } catch (err) {
+                alert("스마트 분할 중 오류가 발생했습니다: " + err.message);
+                console.error(err);
+            } finally {
+                sliceBySmartBtn.disabled = false;
+                sliceBySmartBtn.textContent = '지능형 생성';
+            }
+        }));
+        
+        accordionToggle.addEventListener('click', () => {
+            accordionToggle.querySelector('svg').classList.toggle('rotate-180');
+            accordionContent.style.maxHeight = accordionContent.style.maxHeight ? null : accordionContent.scrollHeight + "px";
+        });
+        
+        jsonAccordionToggle.addEventListener('click', (e) => {
+            if (e.target.closest('#export-json')) return;
+            jsonAccordionIcon.classList.toggle('rotate-180');
+            jsonAccordionContent.style.maxHeight = jsonAccordionContent.style.maxHeight ? null : jsonAccordionContent.scrollHeight + "px";
+        });
+
+        exportBtn.addEventListener('click', async () => {
+            const activeTab = getActiveTab();
+            if (!activeTab || Object.keys(activeTab.spriteData.sprites).length === 0) {
+                alert('내보낼 스프라이트가 없습니다.');
+                return;
+            }
+            const jsonString = JSON.stringify(activeTab.spriteData, null, 2);
+            const defaultFileName = `${activeTab.fileName.split('.')[0]}_data.json`;
+
+            if (window.showSaveFilePicker) {
+                try {
+                    const handle = await window.showSaveFilePicker({
+                        suggestedName: defaultFileName,
+                        types: [{ description: 'JSON Files', accept: { 'application/json': ['.json'] } }],
+                    });
+                    const writable = await handle.createWritable();
+                    await writable.write(jsonString);
+                    await writable.close();
+                } catch (err) {
+                    if (err.name !== 'AbortError') {
+                        console.error(err.name, err.message);
+                        alert('파일을 저장하는 데 실패했습니다.');
+                    }
+                }
+            } else {
+                const blob = new Blob([jsonString], { type: 'application/json' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = defaultFileName;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(a.href);
+            }
+        });
+
+        // --- Helper Functions ---
+        function findSpriteAtPos(pos, tab) {
+            const sprites = tab.spriteData.sprites;
+            const spriteNames = Object.keys(sprites).reverse(); 
+            for (const name of spriteNames) {
+                const coords = sprites[name];
+                if (isPointInRect(pos.x, pos.y, coords)) {
+                    return { name, coords };
+                }
+            }
+            return null;
+        }
+
+        function getSelectionRect(tab) {
+            const { startX, startY, endX, endY } = tab.selection;
+            const x = Math.min(startX, endX), y = Math.min(startY, endY);
+            const w = Math.abs(startX - endX), h = Math.abs(startY - endY);
+            return { x: Math.floor(x), y: Math.floor(y), w: Math.ceil(w), h: Math.ceil(h) };
+        }
+        
+        function updateInputsFromSelection(tab) {
+            const rect = getSelectionRect(tab);
+            xInput.value = rect.x; yInput.value = rect.y;
+            wInput.value = rect.w; hInput.value = rect.h;
+            updatePreview();
+        }
+
+        function drawSelectionFromInputs() {
+            const activeTab = getActiveTab();
+            if (!activeTab || !activeTab.image) return;
+            const { selection } = activeTab;
+            const x = parseInt(xInput.value) || 0, y = parseInt(yInput.value) || 0;
+            const w = parseInt(wInput.value) || 0, h = parseInt(hInput.value) || 0;
+            selection.startX = x; selection.startY = y;
+            selection.endX = x + w; selection.endY = y + h;
+            draw();
+        }
+
+        function updateZoom() {
+             if(zoomValueDisplay) {
+                const activeTab = getActiveTab();
+                zoomValueDisplay.textContent = activeTab && activeTab.image ? `${(activeTab.viewState.zoomLevel * 100).toFixed(0)}%` : 'N/A';
+             }
+        }
+
+        function updateAllUI() {
+            updateJsonOutput();
+            updateSpriteList();
+        }
+
+        function updateJsonOutput() {
+            const activeTab = getActiveTab();
+            jsonOutput.value = activeTab ? JSON.stringify(activeTab.spriteData, null, 2) : '';
+        }
+
+        function updateSpriteList() {
+            const activeTab = getActiveTab();
+            spriteList.innerHTML = '';
+            if (!activeTab || !activeTab.image || Object.keys(activeTab.spriteData.sprites).length === 0) {
+                 spriteList.innerHTML = `<p class="text-sm text-gray-500 text-center py-4">정의된 스프라이트가 없습니다.</p>`;
+                 return;
+            }
+            Object.entries(activeTab.spriteData.sprites).forEach(([name, coords]) => {
+                const item = document.createElement('div');
+                let classNames = 'sprite-item p-2 rounded-md cursor-pointer flex justify-between items-center';
+                if (name === activeTab.selectedSpriteName) {
+                    classNames += ' selected';
+                }
+                item.className = classNames;
+
+                item.innerHTML = `<span class="font-medium text-sm truncate pr-2">${name}</span><button class="text-red-500 hover:text-red-700 text-xs font-bold flex-shrink-0">삭제</button>`;
+                item.querySelector('button').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (confirm(`'${name}' 스프라이트를 삭제하시겠습니까?`)) {
+                        delete activeTab.spriteData.sprites[name];
+                        if (activeTab.selectedSpriteName === name) {
+                            activeTab.selectedSpriteName = null;
+                            nameInput.value = '';
+                            xInput.value = ''; yInput.value = '';
+                            wInput.value = ''; hInput.value = '';
+                            drawSelectionFromInputs();
+                        }
+                        pushHistory(activeTab, 'Delete Sprite');
+                        updateAllUI(); draw();
+                    }
+                });
+                item.addEventListener('click', () => {
+                    nameInput.value = name;
+                    xInput.value = coords.x; yInput.value = coords.y;
+                    wInput.value = coords.w; hInput.value = coords.h;
+                    activeTab.selectedSpriteName = name;
+                    updateSpriteList();
+                    drawSelectionFromInputs();
+                    updatePreview();
+                    focusOnSprite(coords);
+                });
+                spriteList.appendChild(item);
+            });
+        }
+        
+        function focusOnSprite(coords) {
+            const activeTab = getActiveTab();
+            if (!activeTab || !activeTab.image) return;
+
+            const { x, y, w, h } = coords;
+            const { viewState } = activeTab;
+
+            const padding = 0.8;
+            const zoomX = (canvas.width * padding) / w;
+            const zoomY = (canvas.height * padding) / h;
+            const newZoom = Math.min(zoomX, zoomY, 15);
+
+            const spriteCenterX = x + w / 2;
+            const spriteCenterY = y + h / 2;
+            const newViewOffsetX = spriteCenterX - (canvas.width / 2 / newZoom);
+            const newViewOffsetY = spriteCenterY - (canvas.height / 2 / newZoom);
+            
+            const startZoom = viewState.zoomLevel;
+            const startOffsetX = viewState.viewOffsetX;
+            const startOffsetY = viewState.viewOffsetY;
+            const duration = 300;
+            let startTime = null;
+
+            function animate(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+                viewState.zoomLevel = startZoom + (newZoom - startZoom) * easedProgress;
+                viewState.viewOffsetX = startOffsetX + (newViewOffsetX - startOffsetX) * easedProgress;
+                viewState.viewOffsetY = startOffsetY + (newViewOffsetY - startOffsetY) * easedProgress;
+                
+                draw();
+                updateZoom();
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        function openSpriteModal() {
+            const activeTab = getActiveTab();
+            if (!activeTab || !activeTab.image) return;
+
+            modalGrid.innerHTML = '';
+            const sprites = activeTab.spriteData.sprites;
+            const sortedNames = Object.keys(sprites).sort();
+
+            if(sortedNames.length === 0) {
+                modalGrid.innerHTML = '<p class="col-span-full text-center text-gray-500">표시할 스프라이트가 없습니다.</p>';
+            } else {
+                sortedNames.forEach(name => {
+                    const coords = sprites[name];
+                    const itemContainer = document.createElement('div');
+                    itemContainer.className = 'flex flex-col items-center p-2 rounded-md hover:bg-gray-100 cursor-pointer border';
+                    
+                    const previewCanvas = document.createElement('canvas');
+                    const previewCtx = previewCanvas.getContext('2d');
+                    const maxDim = 100;
+                    const scale = Math.min(maxDim / coords.w, maxDim / coords.h);
+                    previewCanvas.width = coords.w * scale;
+                    previewCanvas.height = coords.h * scale;
+                    previewCtx.imageSmoothingEnabled = false;
+                    previewCtx.drawImage(activeTab.image, coords.x, coords.y, coords.w, coords.h, 0, 0, previewCanvas.width, previewCanvas.height);
+
+                    const nameLabel = document.createElement('span');
+                    nameLabel.className = 'text-xs mt-2 text-center break-all';
+                    nameLabel.textContent = name;
+
+                    itemContainer.appendChild(previewCanvas);
+                    itemContainer.appendChild(nameLabel);
+                    modalGrid.appendChild(itemContainer);
+
+                    itemContainer.addEventListener('click', () => {
+                        closeModal();
+                        const listItem = Array.from(spriteList.querySelectorAll('.sprite-item span')).find(span => span.textContent === name);
+                        if (listItem) {
+                             listItem.parentElement.click();
+                        }
+                    });
+                });
+            }
+            spriteModal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            spriteModal.style.display = 'none';
+        }
+
+        showAllSpritesBtn.addEventListener('click', openSpriteModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        spriteModal.addEventListener('click', (e) => {
+            if (e.target === spriteModal) {
+                closeModal();
+            }
+        });
+
+
+        function getHandles(rect) {
+            const { x, y, w, h } = rect;
+            return {
+                topLeft: { x: x, y: y }, top: { x: x + w / 2, y: y }, topRight: { x: x + w, y: y },
+                left: { x: x, y: y + h / 2 }, right: { x: x + w, y: y + h / 2 },
+                bottomLeft: { x: x, y: y + h }, bottom: { x: x + w / 2, y: y + h }, bottomRight: { x: x + w, y: y + h }
+            };
+        }
+
+        function getHandleAtPos(mouseX, mouseY, rect, zoomLevel) {
+            if (rect.w <= 0 && rect.h <= 0) return null;
+            const handles = getHandles(rect);
+            const tolerance = (12 / 2) / zoomLevel;
+            for (const key in handles) {
+                const handle = handles[key];
+                if (Math.abs(mouseX - handle.x) < tolerance && Math.abs(mouseY - handle.y) < tolerance) {
+                    return key;
+                }
+            }
+            return null;
+        }
+
+        function isPointInRect(px, py, rect) {
+            return px >= rect.x && px <= rect.x + rect.w && py >= rect.y && py <= rect.y + rect.h;
+        }
+        
+        function getCursorForHandle(handle) {
+            const lowerHandle = handle.toLowerCase();
+            if (lowerHandle.includes('top') && lowerHandle.includes('left')) return 'nwse-resize';
+            if (lowerHandle.includes('bottom') && lowerHandle.includes('right')) return 'nwse-resize';
+            if (lowerHandle.includes('top') && lowerHandle.includes('right')) return 'nesw-resize';
+            if (lowerHandle.includes('bottom') && lowerHandle.includes('left')) return 'nesw-resize';
+            if (lowerHandle.includes('top') || lowerHandle.includes('bottom')) return 'ns-resize';
+            if (lowerHandle.includes('left') || lowerHandle.includes('right')) return 'ew-resize';
+            return 'default';
+        }
+
+    </script>
+</body>
+</html>
+
