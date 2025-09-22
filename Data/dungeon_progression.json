@@ -1,0 +1,15 @@
+{
+  "floors": [
+    { "floor": 1, "theme": "main", "variation": 1 },
+    { "floor": 2, "theme": "main", "variation": 1 },
+    { "floor": 3, "theme": "main", "variation": 2 },
+    { "floor": 4, "theme": "cave", "variation": 1 },
+    { "floor": 5, "theme": "cave", "variation": 2 },
+    { "floor": 6, "theme": "hell", "variation": 1 },
+    { "floor": 7, "theme": "main", "variation": 2 },
+    { "floor": 8, "theme": "cave", "variation": 1 },
+    { "floor": 9, "theme": "hell", "variation": 1 },
+    { "floor": 10, "theme": "main", "variation": 1 }
+  ],
+  "default": { "theme": "hell", "variation": 1 }
+}
