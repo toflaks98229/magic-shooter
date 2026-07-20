@@ -20,6 +20,61 @@ import { on, EVENTS } from './events.js';
 import { describeCharacter } from './character.js';
 import { GODS, pietyRank, PIETY_BREAKPOINTS } from './gods.js';
 
+// --- 연출 타이머 ---
+
+/**
+ * @description 아직 실행되지 않은 연출 타이머들.
+ *
+ * 이 파일의 연출은 setTimeout 으로 시간을 끌었다가 뒷정리를 합니다.
+ * 문제는 그 사이에 판이 끝나거나 다시 시작될 수 있다는 것입니다.
+ * 특히 무기 교체는 300ms 동안 두 단계로 진행되는데, 그 도중에 재시작하면
+ * resetRuntime() 이 isSwappingWeapon 을 내려도 예약된 콜백은 그대로 살아남아
+ * 새 판의 무기를 setWeapon() 으로 덮어썼습니다.
+ *
+ * 그래서 예약을 전부 여기 모아 두고, 판이 바뀔 때 resetUi() 가 한꺼번에 취소합니다.
+ */
+const pendingTimers = new Set();
+
+/**
+ * 뒷정리를 예약합니다. setTimeout 을 직접 부르는 대신 이것을 씁니다.
+ * @param {Function} callback - 시간이 지난 뒤 실행할 함수
+ * @param {number} delayMs - 기다릴 시간(ms)
+ * @returns {number} 타이머 식별자
+ */
+function later(callback, delayMs) {
+    const id = setTimeout(() => {
+        pendingTimers.delete(id);
+        callback();
+    }, delayMs);
+    pendingTimers.add(id);
+    return id;
+}
+
+/**
+ * 예약된 연출을 모두 취소하고 연출용 표시를 원래대로 돌립니다.
+ * 새 판을 시작할 때 main.js 가 부릅니다.
+ *
+ * 취소만으로는 부족합니다. 중간에 멈춘 연출이 붙여 둔 CSS 클래스가 남으면
+ * 무기가 화면 밖으로 내려간 채 돌아오지 않기 때문입니다.
+ */
+export function resetUi() {
+    for (const id of pendingTimers) clearTimeout(id);
+    pendingTimers.clear();
+
+    // 교체 진행 플래그도 여기서 내립니다. 이 플래그를 세운 것이 교체 연출이고
+    // 내리는 일은 취소된 콜백이 하기로 되어 있었으므로, 취소했다면 대신 내려야 합니다.
+    // 남겨 두면 playWeaponSwapAnimation 이 "이미 교체 중"으로 보고 계속 되돌아가
+    // 무기를 영영 바꿀 수 없게 됩니다. main.js 는 resetRuntime() 도 부르지만,
+    // 호출 순서에 기대지 않도록 여기서 확실히 해 둡니다.
+    runtime.isSwappingWeapon = false;
+
+    dom.weaponSpriteEl.classList.remove('swapping-out', 'swapping-in');
+    for (const weapon of Object.values(C.WEAPONS)) {
+        if (weapon.attackAnimation) dom.weaponSpriteEl.classList.remove(weapon.attackAnimation);
+    }
+    dom.bloodSplatterEl.style.opacity = 0;
+}
+
 // --- 초기화 ---
 
 /**
@@ -351,7 +406,7 @@ function showHitReaction() {
     updateStatusFace(C.FACE_SPRITES.HIT_REACTION);
 
     // 잠시 후, 혈흔 효과를 서서히 사라지게 하고 얼굴을 원래 상태로 되돌립니다.
-    setTimeout(() => {
+    later(() => {
         dom.bloodSplatterEl.style.opacity = 0;
         updateHUD(); // HUD 전체를 업데이트하여 얼굴을 현재 체력 상태에 맞게 되돌립니다.
     }, C.HIT_REACTION_MS);
@@ -372,7 +427,7 @@ function showAttackEffect({ weapon }) {
     if (weaponData.attackAnimation) {
         const className = weaponData.attackAnimation;
         dom.weaponSpriteEl.classList.add(className);
-        setTimeout(() => dom.weaponSpriteEl.classList.remove(className), C.WEAPON_ATTACK_ANIM_MS);
+        later(() => dom.weaponSpriteEl.classList.remove(className), C.WEAPON_ATTACK_ANIM_MS);
     }
 }
 
@@ -394,7 +449,7 @@ function showFireSprite(weaponData) {
     // 효과가 끝난 후 복원할 스프라이트도 미리 확인합니다.
     const restoreSrc = normalSpriteTexture?.img?.src || placeholderTexture?.img?.src;
 
-    setTimeout(() => {
+    later(() => {
         // 그 사이 무기가 바뀌었을 수 있으므로, 여전히 같은 무기를 들고 있을 때만 복원합니다.
         if (C.WEAPONS[world.player.weapon] === weaponData && !runtime.isSwappingWeapon && restoreSrc) {
             dom.weaponSpriteEl.src = restoreSrc;
@@ -413,14 +468,14 @@ function playWeaponSwapAnimation(newWeapon) {
     dom.weaponSpriteEl.classList.add('swapping-out'); // 무기가 아래로 내려가는 애니메이션
 
     // 무기가 화면 아래로 사라진 후
-    setTimeout(() => {
+    later(() => {
         setWeapon(newWeapon);  // 실제 무기 상태를 변경
         updateWeaponSprite();  // 새 무기 이미지로 교체
         dom.weaponSpriteEl.classList.remove('swapping-out');
         dom.weaponSpriteEl.classList.add('swapping-in'); // 새 무기가 위로 올라오는 애니메이션
 
         // 새 무기가 완전히 올라온 후
-        setTimeout(() => {
+        later(() => {
             dom.weaponSpriteEl.classList.remove('swapping-in');
             runtime.isSwappingWeapon = false;
         }, C.WEAPON_SWAP_HALF_MS);

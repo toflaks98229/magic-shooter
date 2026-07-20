@@ -107,3 +107,55 @@ test('모든 무기에 표시할 이름이 있다', () => {
         assert.ok(weapon.name, `${key} 에 상태창에 적을 이름이 없습니다`);
     }
 });
+
+// --- 연출 타이머 생명주기 -------------------------------------------------------
+
+const events = await import('../Script/events.js');
+const { runtime } = await import('../Script/runtime.js');
+const { registerUiHandlers, resetUi } = await import('../Script/ui.js');
+const { advanceClock } = await import('./helpers/browser-stubs.js');
+
+registerUiHandlers();
+
+test('무기 교체 도중 판이 다시 시작되면 예약된 연출이 새 판을 건드리지 않는다', () => {
+    // 무기 교체는 두 단계로 300ms 에 걸쳐 진행됩니다.
+    // 그 사이에 재시작하면, 예전에는 예약된 콜백이 살아남아
+    // 새 판에서 고른 무기를 이전 판의 교체 대상으로 덮어썼습니다.
+    resetWorld();
+    const world = worldModule.world;
+    world.player.weapon = 'gun';
+
+    events.emit(events.EVENTS.WEAPON_CHANGED, { from: 'gun', to: 'fist' });
+    assert.equal(runtime.isSwappingWeapon, true, '교체 연출이 시작되어야 합니다');
+
+    // 첫 단계가 끝나기 직전에 판이 다시 시작됩니다.
+    advanceClock(C.WEAPON_SWAP_HALF_MS - 1);
+    assert.equal(world.player.weapon, 'gun', '아직 교체가 확정되기 전이어야 합니다');
+
+    resetUi();
+    resetWorld();
+    worldModule.world.player.weapon = 'gun'; // 새 판에서 고른 무기
+
+    // 예약이 살아 있었다면 이 시점에 setWeapon('fist') 가 실행됩니다.
+    advanceClock(C.WEAPON_SWAP_HALF_MS * 4);
+
+    assert.equal(worldModule.world.player.weapon, 'gun',
+        '취소된 연출이 새 판의 무기를 덮어썼습니다');
+});
+
+test('resetUi는 중간에 멈춘 연출의 CSS 클래스를 남기지 않는다', () => {
+    // 취소만 하고 클래스를 그대로 두면 무기가 화면 밖으로 내려간 채 돌아오지 않습니다.
+    resetWorld();
+    worldModule.world.player.weapon = 'gun';
+
+    events.emit(events.EVENTS.WEAPON_CHANGED, { from: 'gun', to: 'fist' });
+    assert.ok(dom.weaponSpriteEl.classList.contains('swapping-out'),
+        '내려가는 연출 클래스가 붙어야 합니다');
+
+    resetUi();
+
+    assert.equal(dom.weaponSpriteEl.classList.contains('swapping-out'), false,
+        'swapping-out 클래스가 남아 있습니다');
+    assert.equal(dom.weaponSpriteEl.classList.contains('swapping-in'), false,
+        'swapping-in 클래스가 남아 있습니다');
+});

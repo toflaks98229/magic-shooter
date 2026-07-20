@@ -21,7 +21,7 @@ import { setupInputHandlers, clearInputQueue } from './input.js';
 import { render, resizeCanvas, loadAssets } from './render.js';
 import { spawnEnemiesForFloor } from './gameLogic.js';
 import { advanceSimulation, resetLoop } from './loop.js';
-import { updateHUD, registerUiHandlers, invalidateSpriteCache } from './ui.js';
+import { updateHUD, registerUiHandlers, invalidateSpriteCache, resetUi } from './ui.js';
 import { initAudio, registerAudioHandlers } from './audio.js';
 import { registerMessageHandlers, clearMessages } from './messages.js';
 import { startCharacterCreation } from './chargen.js';
@@ -163,6 +163,7 @@ function startGame(species = lastSpecies, background = lastBackground) {
     resetLoop();        // 누산기에 남아 있던 시간 제거
     clearInputQueue();  // 이전 판에서 쌓인 입력이 새 판에 반영되지 않도록 비움
     clearMessages();    // 이전 판의 알림이 남아 있지 않도록 비움
+    resetUi();          // 예약된 연출을 취소. 교체 중 재시작하면 새 판의 무기를 덮어썼습니다
     A.setGameRunning(true);
 
     // 종족과 직업을 반영합니다. 최대 체력과 마력이 여기서 정해지므로 층을 만들기 전에 해야 합니다.
