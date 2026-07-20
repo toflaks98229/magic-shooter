@@ -25,6 +25,14 @@ const DATA_OUT = 'Data/tiles/terrain_data.json';
 /** @description 타일 한 변(px). */
 const TILE = 32;
 
+/**
+ * @description 한 가지에서 가져올 변형의 최대 수.
+ *
+ * 원본에는 열 장이 넘는 것도 있지만, 다 넣으면 시트만 커지고 눈에 띄는
+ * 차이는 몇 장에서 멈춥니다. 벽면이 반복되어 보이지 않을 만큼만 담습니다.
+ */
+const MAX_VARIANTS = 4;
+
 /** @description 한 줄에 몇 개를 늘어놓을지. */
 const COLUMNS = 16;
 
@@ -169,19 +177,34 @@ function toRgb(hue, sat, lum) {
  */
 function readTileNames(file) {
     const names = new Map();
+    let current = null;   // 지금 이름이 붙어 있는 목록들
 
     for (const line of fs.readFileSync(file, 'utf8').split(/\r?\n/)) {
         const trimmed = line.trim();
-        if (trimmed === '' || trimmed.startsWith('%') || trimmed.startsWith('#')) continue;
+        if (trimmed === '' || trimmed.startsWith('#')) continue;
+
+        // %weight 같은 지시자는 변형의 흐름을 끊지 않습니다.
+        // 다만 %variation 은 다른 색으로 넘어가는 것이라 거기서 끊습니다.
+        if (trimmed.startsWith('%')) {
+            if (trimmed.startsWith('%variation') || trimmed.startsWith('%repeat')) current = null;
+            continue;
+        }
 
         const parts = trimmed.split(/\s+/);
         const fileName = parts[0];
+        const tileNames = parts.slice(1).filter(n => /^[A-Z][A-Z0-9_]*$/.test(n));
 
-        // 두 번째 칸부터가 이름입니다. 없으면 앞 그림의 변형이라 건너뜁니다.
-        for (const name of parts.slice(1)) {
-            if (!/^[A-Z][A-Z0-9_]*$/.test(name)) continue;
-            if (!names.has(name)) names.set(name, fileName);
+        if (tileNames.length > 0) {
+            // 이름이 붙은 줄입니다. 여기서부터 새 묶음이 시작됩니다.
+            current = [];
+            for (const name of tileNames) {
+                if (!names.has(name)) names.set(name, current);
+            }
         }
+
+        // 이름이 없는 줄은 바로 앞 묶음의 변형입니다. (lair0 뒤의 lair1, lair2...)
+        // 이것을 건너뛰면 가지마다 벽이 한 장뿐이라 벽면이 단조로워집니다.
+        if (current) current.push(fileName);
     }
 
     return names;
@@ -225,14 +248,24 @@ for (const [branch, terrain] of Object.entries(BRANCH_TERRAIN)) {
         // 색만 바꿔 쓰는 타일은 바탕 그림을 찾아 돌립니다.
         const variant = HUE_VARIANTS[tileName];
         const lookup = variant ? variant.from : tileName;
-        const baseName = names.get(lookup);
+        const baseNames = names.get(lookup);
 
-        if (!baseName) { missing.push(`${branch} ${kind} ${tileName} (이름 없음)`); continue; }
+        if (!baseNames?.length) { missing.push(`${branch} ${kind} ${tileName} (이름 없음)`); continue; }
 
-        const image = findImage(baseName, path.join(RLTILES, 'dngn', kind));
-        if (!image) { missing.push(`${branch} ${kind} ${tileName} → ${baseName}.png (그림 없음)`); continue; }
+        // 변형을 상한까지 담습니다. 원본에는 열 장이 넘는 것도 있는데
+        // 다 넣으면 시트만 커지고 눈에 띄는 차이는 몇 장에서 멈춥니다.
+        let taken = 0;
+        for (const baseName of baseNames) {
+            if (taken >= MAX_VARIANTS) break;
 
-        wanted.set(`branch_${kind}_${branch}`, { image, hue: variant?.hue ?? null });
+            const image = findImage(baseName, path.join(RLTILES, 'dngn', kind));
+            if (!image) continue;
+
+            wanted.set(`branch_${kind}_${branch}_${taken}`, { image, hue: variant?.hue ?? null });
+            taken++;
+        }
+
+        if (taken === 0) missing.push(`${branch} ${kind} ${tileName} (그림 없음)`);
     }
 }
 

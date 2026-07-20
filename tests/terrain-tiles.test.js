@@ -42,9 +42,9 @@ function signature(key) {
 
 test('모든 가지에 벽과 바닥이 있다', () => {
     for (const branch of Object.keys(BRANCHES)) {
-        assert.ok(atlas.sprites[`branch_wall_${branch}`],
+        assert.ok(atlas.sprites[`branch_wall_${branch}_0`],
             `${branch} 가지의 벽 타일이 없습니다`);
-        assert.ok(atlas.sprites[`branch_floor_${branch}`],
+        assert.ok(atlas.sprites[`branch_floor_${branch}_0`],
             `${branch} 가지의 바닥 타일이 없습니다`);
     }
 });
@@ -68,7 +68,7 @@ test('가지 텍스처가 픽셀을 갖고 실려 있다', () => {
     // 좌표만 있고 그림이 안 실리면 벽이 통째로 비어 보입니다.
     for (const branch of Object.keys(BRANCHES)) {
         for (const kind of ['wall', 'floor']) {
-            const texture = assets.textures[`branch_${kind}_${branch}`];
+            const texture = assets.textures[`branch_${kind}_${branch}_0`];
             assert.ok(texture, `${branch} 의 ${kind} 텍스처가 실리지 않았습니다`);
             assert.ok(texture.data?.length > 0, `${branch} 의 ${kind} 에 픽셀이 없습니다`);
             assert.equal(texture.w, 32, `${branch} 의 ${kind} 이 32 칸이 아닙니다`);
@@ -81,7 +81,7 @@ test('가지마다 다른 그림을 쓴다', () => {
     // 그러면 이 표를 만든 뜻이 사라집니다.
     const walls = new Set();
     for (const branch of Object.keys(BRANCHES)) {
-        const value = signature(`branch_wall_${branch}`);
+        const value = signature(`branch_wall_${branch}_0`);
         if (value !== null) walls.add(value);
     }
 
@@ -93,9 +93,9 @@ test('가지마다 다른 그림을 쓴다', () => {
 test('색만 바꿔 쓰는 벽도 서로 다르다', () => {
     // 조트 계열 벽은 원본에서 파란 그림 하나를 색상만 돌려 씁니다.
     // 돌리지 않고 그대로 쓰면 디스와 게헨나와 조트가 같은 색이 됩니다.
-    const dis = signature('branch_wall_I');
-    const gehenna = signature('branch_wall_G');
-    const zot = signature('branch_wall_Z');
+    const dis = signature('branch_wall_I_0');
+    const gehenna = signature('branch_wall_G_0');
+    const zot = signature('branch_wall_Z_0');
 
     assert.ok(dis !== null && gehenna !== null && zot !== null, '조트 계열 벽이 없습니다');
     assert.equal(new Set([dis, gehenna, zot]).size, 3,
@@ -107,12 +107,49 @@ test('렌더러가 그 가지의 벽을 실제로 골라 쓴다', () => {
     // 그 연결이 끊겨도 위의 검사들은 모두 통과합니다.
     const source = readFileSync(new URL('../Script/render.js', import.meta.url), 'utf8');
 
-    assert.match(source, /branchTexture\('wall',\s*world\.branch\)/,
+    assert.match(source, /branchTextures\('wall',\s*world\.branch\)/,
         '렌더러가 가지 벽을 꺼내지 않습니다');
-    assert.match(source, /branchTexture\('floor',\s*world\.branch\)/,
+    assert.match(source, /branchTextures\('floor',\s*world\.branch\)/,
         '렌더러가 가지 바닥을 꺼내지 않습니다');
 
     // 꺼내기만 하고 쓰지 않으면 뜻이 없습니다.
-    assert.match(source, /if\s*\(branchWall\s*&&\s*branchFloor\)/,
+    assert.match(source, /if\s*\(branchWall\.length\s*>\s*0\s*&&\s*branchFloor\.length\s*>\s*0\)/,
         '가지 타일이 있어도 쓰지 않습니다');
+});
+
+test('가지마다 벽 변형이 여러 장이다', () => {
+    // 한 장만 쓰면 같은 그림이 끝없이 이어져 벽면이 격자무늬처럼 보입니다.
+    // 원본도 가지마다 변형을 여러 장 두고 섞습니다.
+    for (const branch of Object.keys(BRANCHES)) {
+        let count = 0;
+        while (assets.textures[`branch_wall_${branch}_${count}`]?.data) count++;
+
+        assert.ok(count > 1, `${branch} 가지의 벽 변형이 ${count} 장뿐입니다`);
+    }
+});
+
+test('변형끼리도 서로 다른 그림이다', () => {
+    // 같은 그림을 여러 번 담으면 변형을 가져온 뜻이 없습니다.
+    const shapes = new Set();
+    for (let i = 0; i < 4; i++) {
+        const value = signature(`branch_wall_D_${i}`);
+        if (value !== null) shapes.add(value);
+    }
+
+    assert.ok(shapes.size > 1, `메인 던전의 벽 변형이 모두 같은 그림입니다`);
+});
+
+test('렌더러가 변형 목록을 통째로 넘긴다', () => {
+    // 여러 장을 가져와 놓고 첫 장만 넘기면 변형이 있으나 마나입니다.
+    // 아틀라스만 보는 검사로는 그 끊김이 잡히지 않습니다.
+    const source = readFileSync(new URL('../Script/render.js', import.meta.url), 'utf8');
+
+    assert.match(source, /wallTextures\s*=\s*branchWall\s*;/,
+        '벽 변형 목록을 그대로 넘기지 않습니다');
+    assert.match(source, /floorTextures\s*=\s*branchFloor\s*;/,
+        '바닥 변형 목록을 그대로 넘기지 않습니다');
+
+    // 그리는 쪽이 타일 좌표로 골라 써야 벽면이 섞입니다.
+    assert.match(source, /scene\.wallTextures\[Math\.abs\(wallHash\)\s*%\s*scene\.wallTextures\.length\]/,
+        '벽을 그릴 때 변형을 고르지 않습니다');
 });

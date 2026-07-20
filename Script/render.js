@@ -194,15 +194,15 @@ function renderWorld(width, height) {
     // 원본에서 층의 모습은 어느 가지에 있는가가 정합니다. (tileview.cc:86)
     // 층 번호로 고르던 옛 표는 그 뒤로 물러납니다. 같은 가지 안에서 벽이 바뀌면
     // 어디에 있는지가 지형으로 읽히지 않습니다.
-    const branchWall = branchTexture('wall', world.branch);
-    const branchFloor = branchTexture('floor', world.branch);
+    const branchWall = branchTextures('wall', world.branch);
+    const branchFloor = branchTextures('floor', world.branch);
 
-    if (branchWall && branchFloor) {
-        wallTextures = [branchWall];
-        floorTextures = [branchFloor];
+    if (branchWall.length > 0 && branchFloor.length > 0) {
+        wallTextures = branchWall;
+        floorTextures = branchFloor;
         // 천장은 원본에 없는 개념입니다. 위에서 내려다보는 게임이라 천장을
         // 그리지 않기 때문입니다. 벽과 같은 그림을 씁니다.
-        ceilingTextures = [branchWall];
+        ceilingTextures = branchWall;
 
     } else if (currentTheme) {
         wallTextures = (currentTheme.wall && currentTheme.wall.length > 0) ? currentTheme.wall : [placeholderTex];
@@ -984,20 +984,25 @@ function createPlaceholderTexture(width = 32, height = 32) {
 
 
 /**
- * 그 가지의 벽 또는 바닥 그림을 꺼냅니다.
+ * 그 가지의 벽 또는 바닥 그림들을 꺼냅니다.
  *
  * 원본은 층의 모습을 어느 가지에 있는가로 정합니다. 오크 광산은 몇 층이든
  * 오크 광산처럼 생겼고, 짐승굴은 짐승굴처럼 생겼습니다.
  *
- * prepareSprites 가 아틀라스를 읽을 때 이미 잘라낸 텍스처를 만들어
- * assets.textures 에 넣어 둡니다. 여기서는 그것을 이름으로 꺼내기만 합니다.
- * 키 앞에 branch_ 를 붙인 것은 테마 이름 규칙(wall_main_1_1)과 겹치지 않게
- * 하기 위해서입니다.
+ * 한 가지에 여러 장을 돌려줍니다. 한 장만 쓰면 같은 그림이 끝없이 이어져
+ * 벽면이 격자무늬처럼 보입니다. 원본도 가지마다 변형을 여러 장 두고 섞습니다.
  * @param {string} kind - wall 또는 floor
  * @param {string} branch - 가지 글자
- * @returns {object|null} 텍스처. 없으면 null
+ * @returns {Array<object>} 텍스처들. 없으면 빈 배열
  */
-function branchTexture(kind, branch) {
-    const texture = assets.textures[`branch_${kind}_${branch}`];
-    return texture?.data ? texture : null;
+function branchTextures(kind, branch) {
+    const found = [];
+
+    for (let i = 0; ; i++) {
+        const texture = assets.textures[`branch_${kind}_${branch}_${i}`];
+        if (!texture?.data) break;
+        found.push(texture);
+    }
+
+    return found;
 }
