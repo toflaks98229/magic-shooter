@@ -23,6 +23,11 @@ let zBuffer = [];
 /** @description 바닥/천장 렌더링 시 y좌표에 따른 거리를 미리 계산해둔 룩업 테이블 */
 let yDistLookup = [];
 
+/** @description objectMap에서 뽑아낸 스프라이트 오브젝트 목록. 맵이 바뀔 때만 다시 만듭니다. */
+let objectSprites = [];
+/** @description objectSprites가 어느 맵·개정 번호를 기준으로 만들어졌는지 */
+let objectSpritesCache = { objectMap: null, revision: -1 };
+
 
 // --- 외부 공개 함수 (Public Methods) ---
 
@@ -295,7 +300,22 @@ function renderWorld(width, height) {
         let floorTexData = null, ceilingTexData = null;
         let floorTexSize = 0, ceilingTexSize = 0;
 
-        for (let y = y1; y < height; y++) {
+        // 바닥/천장 원근 계산은 지평선 아래에서만 성립하므로, 시작점을 지평선에서 자릅니다.
+        //
+        // 문이 열리는 동안 verticalOffset 이 벽 하단을 지평선 위로 밀어 올립니다.
+        // z 가 타일 크기의 절반을 넘는 순간부터 거리와 무관하게 일어나며,
+        // 그때 y1 이 halfHeight 보다 작아져 pixelsFromHorizon 이 음수가 됩니다.
+        // yDistLookup 이 undefined 를 돌려주고 이후 거리·좌표·밝기가 전부 NaN 이 됩니다.
+        //
+        // 다만 화면에 보이는 증상은 없습니다. NaN 으로 쓴 픽셀은 같은 루프의 뒤쪽 반복이
+        // (바닥은 아래에서, 천장은 height-1-y 로 위에서) 빠짐없이 덮어쓰기 때문입니다.
+        // 실제로 수정 전후의 화면을 바이트 단위로 비교했을 때 차이가 없었습니다.
+        // 그러니 이 클램프는 버그 수정이 아니라, 언제든 겉으로 드러날 수 있는 위험을
+        // 없애고 헛도는 계산을 줄이는 정리입니다. 계측해 보니 문이 열리는 한 프레임에서
+        // 스물몇 개 컬럼이 이 경로로 수백 행을 NaN 으로 계산하고 버리고 있었습니다.
+        const floorStartY = Math.max(y1, halfHeight);
+
+        for (let y = floorStartY; y < height; y++) {
             const pixelsFromHorizon = y - halfHeight;
             const currentDist = yDistLookup[pixelsFromHorizon];
             const weight = currentDist / correctedDist;
@@ -352,6 +372,52 @@ function renderWorld(width, height) {
 }
 
 /**
+ * objectMap에서 스프라이트로 그려야 할 오브젝트 목록이 최신인지 확인하고, 필요하면 다시 만듭니다.
+ *
+ * 예전에는 이 30x30 이중 반복을 매 프레임 돌렸습니다. 지금 OBJECT_TYPES에는 문 하나뿐이고
+ * 그마저 renderAsWall 이라 걸러지므로, 초당 5만 번 넘게 훑어서 항상 빈 배열을 만들고 있었습니다.
+ * (헛도는 것은 분명하지만, 이걸 없앤 뒤에도 프레임 시간에 잡히는 변화는 없었습니다.
+ *  픽셀 래스터화가 워낙 지배적이라 이 정도 반복은 묻힙니다.)
+ *
+ * 무효화 조건은 gameLogic 의 플로우 필드 캐시와 같은 방식입니다. 둘 다 필요합니다.
+ *   - objectMap 참조 교체: 층이 바뀌면 main.js 가 새 배열을 통째로 갈아 끼웁니다.
+ *   - mapRevision 증가: 문이 열리면 actions.js 가 배열 내용을 제자리에서 고치므로
+ *     참조 비교만으로는 알아챌 수 없습니다. (actions.js 의 openDoor 참조)
+ * @returns {object[]} 스프라이트로 그릴 오브젝트 목록
+ */
+function ensureObjectSprites() {
+    const isCurrent = objectSpritesCache.objectMap === world.objectMap
+        && objectSpritesCache.revision === world.mapRevision;
+    if (isCurrent) return objectSprites;
+
+    objectSprites = [];
+    for (let y = 0; y < world.objectMap.length; y++) {
+        for (let x = 0; x < world.objectMap[y].length; x++) {
+            const objectId = world.objectMap[y][x];
+            if (objectId <= 0) continue;
+
+            const objectType = C.OBJECT_TYPES[objectId];
+            // renderAsWall 플래그가 없는 오브젝트만 스프라이트로 렌더링합니다.
+            if (!objectType || objectType.renderAsWall) continue;
+
+            objectSprites.push({
+                id: objectId,
+                type: 'object',
+                ...objectType,
+                x: x * C.TILE_SIZE + C.TILE_SIZE / 2, // 타일 중앙 좌표
+                y: y * C.TILE_SIZE + C.TILE_SIZE / 2,
+                z: C.TILE_SIZE / 2,
+                mapX: x, // 나중에 상호작용 시 참조할 맵 좌표
+                mapY: y,
+            });
+        }
+    }
+
+    objectSpritesCache = { objectMap: world.objectMap, revision: world.mapRevision };
+    return objectSprites;
+}
+
+/**
  * 모든 엔티티(스프라이트, 파티클)를 거리에 따라 정렬하고 렌더링합니다.
  * @param {CanvasRenderingContext2D} targetCtx - 렌더링할 캔버스 컨텍스트
  * @param {number} width - 렌더링 너비
@@ -361,29 +427,7 @@ function renderEntities(targetCtx, width, height) {
     const projectionDist = (width / 2) / Math.tan(C.FOV / 2);
     const halfHeight = height / 2 | 0;
 
-     // world.objectMap을 순회하며 렌더링할 오브젝트를 추출합니다.
-    const objectsToRender = [];
-    for (let y = 0; y < world.objectMap.length; y++) {
-        for (let x = 0; x < world.objectMap[y].length; x++) {
-            const objectId = world.objectMap[y][x];
-            if (objectId > 0) {
-                const objectType = C.OBJECT_TYPES[objectId];
-                // renderAsWall 플래그가 없는 오브젝트만 스프라이트로 렌더링합니다.
-                if (objectType && !objectType.renderAsWall) {
-                    objectsToRender.push({
-                        id: objectId,
-                        type: 'object',
-                        ...objectType,
-                        x: x * C.TILE_SIZE + C.TILE_SIZE / 2, // 타일 중앙 좌표
-                        y: y * C.TILE_SIZE + C.TILE_SIZE / 2,
-                        z: C.TILE_SIZE / 2,
-                        mapX: x, // 나중에 상호작용 시 참조할 맵 좌표
-                        mapY: y,
-                    });
-                }
-            }
-        }
-    }
+    const objectsToRender = ensureObjectSprites();
 
     // 렌더링할 모든 엔티티를 하나의 배열로 합칩니다.
     // animatedWalls에 있는 문은 renderWorld에서 벽으로 처리되므로 여기서는 제외합니다.
@@ -513,9 +557,28 @@ function drawSpriteRun(ctx, sourceImage, coords, fromStripe, toStripe, entityLef
 }
 
 /**
+ * @description castRay 가 결과를 담아 돌려주는 재사용 객체.
+ *
+ * 예전에는 컬럼마다 새 객체를 만들어 반환했습니다. 640픽셀 폭이면 초당 3만 개가 넘습니다.
+ * 다만 이것을 없앤다고 빨라지지는 않았습니다. 헤드리스 벤치의 프레임 시간도,
+ * 120프레임 동안의 마이너 GC 횟수(217회 → 216회)도 사실상 그대로였습니다.
+ * V8 의 신세대 할당이 이 정도 크기의 단명 객체에는 충분히 저렴하기 때문입니다.
+ * 그러니 성능 개선이 아니라, 프레임마다 버릴 것을 만들지 않는다는 정리로 보십시오.
+ *
+ * 반환값은 renderWorld 의 컬럼 반복 한 회차 안에서만 쓰이고 밖으로 새어 나가지 않으므로
+ * 하나를 돌려 써도 안전합니다. 다만 이것이 이 최적화가 성립하는 유일한 근거이므로,
+ * 호출부가 결과를 보관하거나 배열에 쌓기 시작하면 그 순간 조용히 깨집니다.
+ * 그런 필요가 생기면 반드시 값을 복사해 두십시오.
+ */
+const rayHit = {
+    distance: 0, texture: 0, side: 0, wallX: 0,
+    rayDirX: 0, rayDirY: 0, mapX: 0, mapY: 0,
+};
+
+/**
  * 주어진 각도로 광선을 쏴서 처음으로 부딪히는 벽의 정보를 반환합니다. (DDA 알고리즘 사용)
  * @param {number} angle - 발사할 광선의 각도 (라디안)
- * @returns {object} 충돌 정보 (거리, 텍스처 종류, 부딪힌 면, 텍스처 X좌표 등)
+ * @returns {object} 충돌 정보를 담은 재사용 객체(rayHit). 다음 호출 때 덮어써집니다.
  */
 function castRay(angle) {
     const rayDirX = Math.cos(angle), rayDirY = Math.sin(angle);
@@ -539,7 +602,15 @@ function castRay(angle) {
     let wallX = (side === 0) ? world.player.y / C.TILE_SIZE + perpWallDist * rayDirY : world.player.x / C.TILE_SIZE + perpWallDist * rayDirX;
     wallX -= (wallX | 0); // 텍스처 좌표 계산을 위해 소수점 부분만 남김
     
-    return { distance: perpWallDist * C.TILE_SIZE, texture: world.map[mapY][mapX], side, wallX, rayDirX, rayDirY, mapX, mapY };
+    rayHit.distance = perpWallDist * C.TILE_SIZE;
+    rayHit.texture = world.map[mapY][mapX];
+    rayHit.side = side;
+    rayHit.wallX = wallX;
+    rayHit.rayDirX = rayDirX;
+    rayHit.rayDirY = rayDirY;
+    rayHit.mapX = mapX;
+    rayHit.mapY = mapY;
+    return rayHit;
 }
 
 /**

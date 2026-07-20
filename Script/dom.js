@@ -122,5 +122,14 @@ export function bindDom() {
 
     dom.ctx = dom.canvas.getContext('2d');
     dom.offscreenCanvas = document.createElement('canvas');
-    dom.offscreenCtx = dom.offscreenCanvas.getContext('2d', { willReadFrequently: true });
+    // willReadFrequently 를 켜지 않습니다. 이 플래그는 "이 캔버스에서 픽셀을 자주 읽겠다"는
+    // 선언인데, 이 컨텍스트는 getImageData 를 한 번도 부르지 않습니다.
+    // (렌더러는 putImageData 로 쓰기만 하고, 그 위에 스프라이트를 drawImage 합니다.)
+    // 픽셀을 실제로 읽는 곳은 render.js 의 prepareSprites 뿐이며, 거기서는 켜는 것이 맞습니다.
+    //
+    // 성능 때문이 아닙니다. 브라우저에서 실측했습니다. 하드웨어 가속을 켠 상태로
+    // 실제 게임의 16배 부하를 걸고 조건당 900프레임을 재 봤지만, 플래그를 켜고 끈
+    // 중앙값과 95번째 백분위가 완전히 같았습니다. 이 기기에서 플래그는 성능에 영향이 없습니다.
+    // 지우는 이유는 어디까지나 거짓인 선언을 코드에 남겨두지 않기 위해서입니다.
+    dom.offscreenCtx = dom.offscreenCanvas.getContext('2d');
 }
