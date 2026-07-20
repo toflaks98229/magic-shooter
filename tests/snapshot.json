@@ -1,65 +1,47 @@
 {
   "frames": 1800,
   "stats": {
-    "sounds": 66,
+    "sounds": 74,
     "gameOvers": 0,
     "floors": 2,
-    "attacks": 252,
+    "attacks": 196,
     "interacts": 19,
     "doorsOpened": 2,
-    "hits": 9,
-    "kills": 9
+    "hits": 12,
+    "kills": 12
   },
   "virtualTime": 1029999.9999999302,
   "gameTime": 30000,
   "floor": 2,
   "weapon": "fist",
   "player": {
-    "x": 720,
-    "y": 272,
-    "angle": 3.199608429,
-    "hp": 94,
+    "x": 755.599416389,
+    "y": 559.151834417,
+    "angle": 6.805128711,
+    "hp": 91,
     "ammo": 0
   },
   "counts": {
-    "enemies": 2,
-    "items": 3,
+    "enemies": 0,
+    "items": 2,
     "projectiles": 0,
     "particles": 0,
     "animatedWalls": 0
   },
-  "enemies": [
-    {
-      "sprite": "enemy_snake",
-      "x": 478.4821526,
-      "y": 304.861165237,
-      "hp": 3
-    },
-    {
-      "sprite": "enemy_goblin",
-      "x": 500.259135348,
-      "y": 304.216899346,
-      "hp": 4
-    }
-  ],
+  "enemies": [],
   "items": [
     {
       "itemId": "magic",
-      "x": 689.444425151,
-      "y": 258.604029261
+      "x": 728.359350041,
+      "y": 389.528915808
     },
     {
       "itemId": "healing",
-      "x": 722.844234217,
-      "y": 300.233404584
-    },
-    {
-      "itemId": "magic",
-      "x": 692.792459819,
-      "y": 285.285923685
+      "x": 705.283769973,
+      "y": 767.639854932
     }
   ],
-  "mapChecksum": 243977,
-  "objectMapChecksum": 589,
+  "mapChecksum": 263048,
+  "objectMapChecksum": 0,
   "serializable": true
 }

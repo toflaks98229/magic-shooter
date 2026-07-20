@@ -33,6 +33,11 @@ const LOOK_DELTA_PX = 10;
  * 시뮬레이션을 처음부터 실행하고 결과 스냅샷을 반환합니다.
  * @returns {Promise<object>} 월드 상태 스냅샷
  */
+/**
+ * @description 적과 교전할 때 서는 거리(픽셀).
+ * 주먹 사거리 안이면서 너무 붙지는 않는 거리입니다.
+ */
+const ENGAGE_DISTANCE_PX = 24;
 export async function runSimulation() {
     installBrowserStubs();
     seedRandom(SEED);
@@ -135,7 +140,15 @@ export async function runSimulation() {
         }
         if (!nearest) return;
 
-        world.player.angle = Math.atan2(nearest.y - world.player.y, nearest.x - world.player.x);
+        // 적은 이제 플레이어를 알아채기 전까지 제자리에 있습니다.
+        // 멀리서 겨누기만 해서는 사거리 밖이라 아무 일도 일어나지 않고,
+        // 명중·피해·사망 경로가 통째로 검사에서 빠집니다.
+        // 그래서 문 앞으로 옮겨 가는 것과 같은 방식으로 적 앞에 세웁니다.
+        const angle = Math.atan2(nearest.y - world.player.y, nearest.x - world.player.x);
+        world.player.x = nearest.x - Math.cos(angle) * ENGAGE_DISTANCE_PX;
+        world.player.y = nearest.y - Math.sin(angle) * ENGAGE_DISTANCE_PX;
+        world.player.angle = angle;
+
         dom.canvas.fire('mousedown');
         stats.attacks++;
     }

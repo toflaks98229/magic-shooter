@@ -178,7 +178,11 @@ function convert(raw, file) {
         // 분류
         size: raw.size,
         shape: raw.shape ?? null,
-        intelligence: raw.intelligence ?? null,
+        intelligence: raw.intelligence ?? 'human',
+
+        // 우는 소리. 실제로 중요한 것은 소리의 종류가 아니라 그 반경입니다.
+        // 이 소리를 들은 몬스터가 깨어나 몰려옵니다. (mon-util.cc:1207)
+        shout: raw.shout ?? 'silent',
         holiness,
         genus: raw.genus ?? null,
         species: raw.species ?? null,

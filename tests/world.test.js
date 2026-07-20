@@ -78,6 +78,13 @@ test('저장한 뒤 진행한 세계를 저장 시점으로 되돌린다', () =>
         x: worldModule.world.player.x,
         enemies: worldModule.world.enemies.length,
     };
+    // 적은 플레이어를 알아채기 전까지 제자리에 있습니다.
+    // 깨우지 않으면 세계가 변하지 않아 이 검사가 헛돌게 됩니다.
+    for (const enemy of worldModule.world.enemies) {
+        enemy.state = 'chase';
+        enemy.huntUntil = worldModule.world.time + 1e9;
+    }
+
     const beforeDrift = enemyFingerprint();
 
     runFrames(300); // 저장 이후 세계가 더 진행된다

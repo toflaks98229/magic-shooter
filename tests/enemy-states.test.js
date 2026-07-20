@@ -85,11 +85,11 @@ test('평범한 적은 추격 상태로 시작한다', () => {
 
     assert.ok(world.enemies.length > 0, '적이 스폰되지 않았습니다');
     for (const enemy of world.enemies) {
-        // 성향이 있는 것들은 처음부터 그렇게 움직입니다.
-        // 거리를 두는 적은 kite, 정신없이 나는 적은 erratic 으로 태어납니다.
-        const expected = enemy.maintainRange ? 'kite' : (enemy.batty ? 'erratic' : 'chase');
-        assert.equal(enemy.state, expected,
-            `${enemy.monsterId} 가 ${expected} 로 시작하지 않았습니다`);
+        // 이제 적은 플레이어를 알아채지 못한 채로 태어납니다.
+        // 예전에는 스폰되는 순간부터 위치를 알고 달려왔습니다.
+        assert.equal(enemy.state, 'idle',
+            `${enemy.monsterId} 가 잠든 채로 시작하지 않았습니다`);
+        assert.equal(enemy.huntUntil, 0, '아직 아무도 쫓고 있지 않아야 합니다');
     }
 });
 
@@ -358,4 +358,127 @@ test('헤매는 방향이 무작위지만 재생 가능하다', () => {
         return [Math.round(e.x), Math.round(e.y)];
     };
     assert.deepEqual(runOnce(), runOnce(), '같은 씨앗에서 다른 결과가 나왔습니다');
+});
+
+// --- 알아채고 잊기 -------------------------------------------------------------
+
+test('멀리 있으면 알아채지 못한다', () => {
+    // 예전에는 태어난 순간부터 위치를 알고 곧장 달려왔습니다.
+    // 그래서 이 게임에는 '들키지 않는다'는 선택지가 아예 없었습니다.
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, {
+        intelligence: 'animal', shout: 'silent', speed: 1.0,
+        x: world.player.x + 12 * C.TILE_SIZE, y: world.player.y,   // 인지 거리 8칸 밖
+    });
+    const before = distanceToPlayer(enemy, world);
+
+    run(60);
+
+    assert.equal(enemy.state, 'idle', '멀리 있는데 알아챘습니다');
+    assert.equal(distanceToPlayer(enemy, world), before, '알아채지 못했는데 움직였습니다');
+});
+
+test('가까이 가면 알아채고 쫓아온다', () => {
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, {
+        intelligence: 'animal', shout: 'silent', speed: 1.0,
+        x: world.player.x + 4 * C.TILE_SIZE, y: world.player.y,    // 인지 거리 안
+    });
+    const before = distanceToPlayer(enemy, world);
+
+    run(40);
+
+    assert.notEqual(enemy.state, 'idle', '가까운데 알아채지 못했습니다');
+    assert.ok(distanceToPlayer(enemy, world) < before, '알아챘는데 다가오지 않았습니다');
+});
+
+test('지능이 높을수록 멀리서 알아본다', () => {
+    // 머리가 없는 것은 코앞만, 사람만큼 영리한 것은 방 하나 너머를 봅니다.
+    const noticedAt = (intelligence, tiles) => {
+        const world = emptyRoom();
+        const enemy = placeEnemy(world, {
+            intelligence, shout: 'silent', speed: 0,
+            x: world.player.x + tiles * C.TILE_SIZE, y: world.player.y,
+        });
+        run(4);
+        return enemy.state !== 'idle';
+    };
+
+    assert.equal(noticedAt('brainless', 5), false, '머리 없는 것이 다섯 칸 밖을 봤습니다');
+    assert.equal(noticedAt('animal', 5), true, '짐승이 다섯 칸을 못 봤습니다');
+    assert.equal(noticedAt('animal', 10), false, '짐승이 열 칸 밖을 봤습니다');
+    assert.equal(noticedAt('human', 10), true, '사람만큼 영리한 것이 열 칸을 못 봤습니다');
+});
+
+test('벽 뒤는 보지 못한다', () => {
+    const world = emptyRoom();
+    // 사이를 벽으로 막습니다.
+    const wallTile = Math.floor(world.player.x / C.TILE_SIZE) + 2;
+    for (let y = 0; y < C.MAP_HEIGHT; y++) world.map[y][wallTile] = C.TILE_IDS.WALL;
+
+    const enemy = placeEnemy(world, {
+        intelligence: 'human', shout: 'silent', speed: 0,
+        x: world.player.x + 4 * C.TILE_SIZE, y: world.player.y,
+    });
+
+    run(6);
+    assert.equal(enemy.state, 'idle', '벽 너머를 봤습니다');
+});
+
+test('시야가 끊기면 한동안 쫓다가 잊는다', () => {
+    // 이 시간이 '따돌릴 수 있는가'를 정합니다.
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, {
+        intelligence: 'brainless', shout: 'silent', speed: 0,
+        x: world.player.x + 2 * C.TILE_SIZE, y: world.player.y,
+    });
+
+    run(4);
+    assert.notEqual(enemy.state, 'idle', '가까운데 알아채지 못했습니다');
+
+    // 플레이어가 인지 거리 밖으로 사라집니다.
+    world.player.x += 20 * C.TILE_SIZE;
+    run(4);
+    assert.notEqual(enemy.state, 'idle', '사라지자마자 잊었습니다');
+
+    // 머리가 없는 것은 곧 잊습니다. (100~300 aut = 5~15초)
+    run(400);
+    assert.equal(enemy.state, 'idle', '머리 없는 것이 한참을 기억합니다');
+});
+
+test('울면 벽 너머의 동료까지 깨운다', () => {
+    // '옆방을 깨웠는가'는 실시간에서 일급 판단이 됩니다.
+    const world = emptyRoom();
+    const wallTile = Math.floor(world.player.x / C.TILE_SIZE) + 3;
+    for (let y = 0; y < C.MAP_HEIGHT; y++) world.map[y][wallTile] = C.TILE_IDS.WALL;
+
+    // 우는 놈은 플레이어 옆에, 동료는 벽 너머에 둡니다.
+    const shouter = placeEnemy(world, {
+        intelligence: 'human', shout: 'shout', speed: 0, state: 'idle', huntUntil: 0,
+        x: world.player.x + C.TILE_SIZE, y: world.player.y,
+    });
+    const sleeper = placeEnemy(world, {
+        intelligence: 'human', shout: 'silent', speed: 0, state: 'idle', huntUntil: 0,
+        x: world.player.x + 6 * C.TILE_SIZE, y: world.player.y,   // 벽 너머
+    });
+
+    run(4);
+    assert.notEqual(shouter.state, 'idle', '옆에 있는데 알아채지 못했습니다');
+    assert.notEqual(sleeper.state, 'idle', '동료가 울었는데 깨어나지 않았습니다');
+});
+
+test('조용한 몬스터는 동료를 부르지 않는다', () => {
+    const world = emptyRoom();
+    const quiet = placeEnemy(world, {
+        intelligence: 'human', shout: 'silent', speed: 0, state: 'idle', huntUntil: 0,
+        x: world.player.x + C.TILE_SIZE, y: world.player.y,
+    });
+    const sleeper = placeEnemy(world, {
+        intelligence: 'human', shout: 'silent', speed: 0, state: 'idle', huntUntil: 0,
+        x: world.player.x + 9 * C.TILE_SIZE, y: world.player.y + 9 * C.TILE_SIZE,
+    });
+
+    run(4);
+    assert.notEqual(quiet.state, 'idle');
+    assert.equal(sleeper.state, 'idle', '조용한 적이 동료를 불렀습니다');
 });

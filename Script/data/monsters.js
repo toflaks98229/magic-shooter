@@ -38,6 +38,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -85,6 +86,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -132,6 +134,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -190,6 +193,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -239,6 +243,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -284,6 +289,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -334,6 +340,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -386,6 +393,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -442,6 +450,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "plant",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -491,6 +500,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -541,6 +551,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -596,6 +607,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural",
    "demonic"
@@ -652,6 +664,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -697,6 +710,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "nonliving"
   ],
@@ -754,6 +768,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "nonliving"
   ],
@@ -811,6 +826,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "nonliving"
   ],
@@ -868,6 +884,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "nonliving"
   ],
@@ -925,6 +942,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -975,6 +993,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -1033,6 +1052,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -1087,6 +1107,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "holy"
   ],
@@ -1132,6 +1153,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -1186,6 +1208,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "demon_taunt",
   "holiness": [
    "demonic"
   ],
@@ -1243,6 +1266,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -1294,6 +1318,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "holy"
   ],
@@ -1347,6 +1372,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -1399,6 +1425,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "arachnid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -1449,6 +1476,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -1500,6 +1528,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -1552,6 +1581,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -1602,6 +1632,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -1655,6 +1686,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -1713,6 +1745,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "bellow",
   "holiness": [
    "natural"
   ],
@@ -1762,6 +1795,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -1832,6 +1866,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -1896,6 +1931,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "snake",
   "intelligence": "human",
+  "shout": "loud_roar",
   "holiness": [
    "natural"
   ],
@@ -1956,6 +1992,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -2009,6 +2046,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -2070,6 +2108,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -2115,6 +2154,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -2160,6 +2200,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -2208,6 +2249,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -2261,6 +2303,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -2308,6 +2351,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -2353,6 +2397,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bat",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -2396,6 +2441,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -2449,6 +2495,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -2503,6 +2550,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "bird",
   "intelligence": "human",
+  "shout": "screech",
   "holiness": [
    "natural"
   ],
@@ -2557,6 +2605,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -2618,6 +2667,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
+  "shout": "growl",
   "holiness": [
    "natural"
   ],
@@ -2663,6 +2713,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -2712,6 +2763,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -2753,6 +2805,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -2807,6 +2860,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -2859,6 +2913,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
+  "shout": "croak",
   "holiness": [
    "natural"
   ],
@@ -2909,6 +2964,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -2963,6 +3019,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -3007,6 +3064,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -3066,6 +3124,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -3121,6 +3180,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -3172,6 +3232,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -3218,6 +3279,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "insect",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -3259,6 +3321,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -3320,6 +3383,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -3378,6 +3442,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -3432,6 +3497,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "insect",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -3474,6 +3540,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -3530,6 +3597,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -3577,6 +3645,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -3630,6 +3699,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -3670,6 +3740,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -3732,6 +3803,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "demonic"
   ],
@@ -3785,6 +3857,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "arachnid",
   "intelligence": "animal",
+  "shout": "skitter",
   "holiness": [
    "natural"
   ],
@@ -3831,6 +3904,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
+  "shout": "croak",
   "holiness": [
    "natural"
   ],
@@ -3886,6 +3960,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "scream",
   "holiness": [
    "natural"
   ],
@@ -3933,6 +4008,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -3973,6 +4049,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -4017,6 +4094,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "plant",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -4062,6 +4140,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -4118,6 +4197,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "laugh",
   "holiness": [
    "demonic"
   ],
@@ -4169,6 +4249,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -4218,6 +4299,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
+  "shout": "croak",
   "holiness": [
    "natural"
   ],
@@ -4265,6 +4347,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -4315,6 +4398,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "bellow",
   "holiness": [
    "natural"
   ],
@@ -4362,6 +4446,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bird",
   "intelligence": "animal",
+  "shout": "screech",
   "holiness": [
    "natural"
   ],
@@ -4411,6 +4496,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -4466,6 +4552,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -4519,6 +4606,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -4566,6 +4654,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -4622,6 +4711,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -4673,6 +4763,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "random",
   "holiness": [
    "demonic"
   ],
@@ -4724,6 +4815,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "cherub",
   "holiness": [
    "holy"
   ],
@@ -4782,6 +4874,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "screech",
   "holiness": [
    "natural"
   ],
@@ -4830,6 +4923,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -4878,6 +4972,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "insect",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -4920,6 +5015,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "brainless",
+  "shout": "buzz",
   "holiness": [
    "nonliving"
   ],
@@ -4971,6 +5067,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "brainless",
+  "shout": "buzz",
   "holiness": [
    "nonliving"
   ],
@@ -5022,6 +5119,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -5075,6 +5173,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -5132,6 +5231,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -5179,6 +5279,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -5228,6 +5329,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "gurgle",
   "holiness": [
    "natural"
   ],
@@ -5284,6 +5386,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -5332,6 +5435,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -5378,6 +5482,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -5429,6 +5534,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -5482,6 +5588,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -5527,6 +5634,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -5577,6 +5685,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -5630,6 +5739,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "rustle",
   "holiness": [
    "nonliving"
   ],
@@ -5677,6 +5787,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
+  "shout": "faint_skitter",
   "holiness": [
    "natural"
   ],
@@ -5719,6 +5830,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "moan",
   "holiness": [
    "undead"
   ],
@@ -5767,6 +5879,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "moan",
   "holiness": [
    "undead"
   ],
@@ -5821,6 +5934,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -5872,6 +5986,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "holy"
   ],
@@ -5922,6 +6037,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -5978,6 +6094,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "snail",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -6025,6 +6142,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "moan",
   "holiness": [
    "undead"
   ],
@@ -6075,6 +6193,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -6124,6 +6243,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6171,6 +6291,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "insect",
   "intelligence": "animal",
+  "shout": "faint_skitter",
   "holiness": [
    "undead"
   ],
@@ -6223,6 +6344,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "bellow",
   "holiness": [
    "natural"
   ],
@@ -6269,6 +6391,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -6317,6 +6440,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6363,6 +6487,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6410,6 +6535,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6462,6 +6588,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6510,6 +6637,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6557,6 +6685,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6604,6 +6733,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6651,6 +6781,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6697,6 +6828,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6743,6 +6875,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6790,6 +6923,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6838,6 +6972,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6895,6 +7030,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -6953,6 +7089,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -7011,6 +7148,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -7060,6 +7198,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -7118,6 +7257,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "centipede",
   "intelligence": "animal",
+  "shout": "scream",
   "holiness": [
    "demonic"
   ],
@@ -7164,6 +7304,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -7215,6 +7356,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural",
    "demonic"
@@ -7270,6 +7412,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural",
    "demonic"
@@ -7320,6 +7463,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural",
    "demonic"
@@ -7381,6 +7525,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural",
    "demonic"
@@ -7441,6 +7586,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural",
    "demonic"
@@ -7485,6 +7631,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -7532,6 +7679,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -7592,6 +7740,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "trumpet",
   "holiness": [
    "natural"
   ],
@@ -7637,6 +7786,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -7701,6 +7851,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "blob",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -7759,6 +7910,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "rustle",
   "holiness": [
    "nonliving"
   ],
@@ -7806,6 +7958,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "nonliving"
   ],
@@ -7858,6 +8011,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -7907,6 +8061,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -7955,6 +8110,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -8001,6 +8157,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -8058,6 +8215,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -8105,6 +8263,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -8151,6 +8310,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -8197,6 +8357,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -8243,6 +8404,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -8285,6 +8447,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -8328,6 +8491,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -8371,6 +8535,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -8421,6 +8586,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -8474,6 +8640,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
+  "shout": "bleat",
   "holiness": [
    "natural"
   ],
@@ -8514,6 +8681,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -8572,6 +8740,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -8622,6 +8791,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -8673,6 +8843,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -8722,6 +8893,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -8770,6 +8942,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -8821,6 +8994,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "rustle",
   "holiness": [
    "nonliving"
   ],
@@ -8868,6 +9042,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -8917,6 +9092,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -8974,6 +9150,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "moan",
   "holiness": [
    "undead"
   ],
@@ -9020,6 +9197,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -9084,6 +9262,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -9134,6 +9313,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -9197,6 +9377,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -9251,6 +9432,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -9291,6 +9473,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -9335,6 +9518,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -9384,6 +9568,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "snail",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -9437,6 +9622,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "trumpet",
   "holiness": [
    "natural"
   ],
@@ -9482,6 +9668,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -9539,6 +9726,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "arachnid",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -9587,6 +9775,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -9637,6 +9826,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -9702,6 +9892,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -9752,6 +9943,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -9812,6 +10004,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -9861,6 +10054,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -9910,6 +10104,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -9966,6 +10161,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout2",
   "holiness": [
    "natural"
   ],
@@ -10013,6 +10209,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -10071,6 +10268,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "scream",
   "holiness": [
    "demonic"
   ],
@@ -10118,6 +10316,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -10161,6 +10360,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -10211,6 +10411,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -10259,6 +10460,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -10305,6 +10507,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped",
   "intelligence": "human",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -10359,6 +10562,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -10409,6 +10613,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bat",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -10466,6 +10671,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -10524,6 +10730,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "loud_roar",
   "holiness": [
    "natural"
   ],
@@ -10568,6 +10775,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -10620,6 +10828,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -10664,6 +10873,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -10720,6 +10930,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -10765,6 +10976,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -10814,6 +11026,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -10869,6 +11082,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -10913,6 +11127,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -10969,6 +11184,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -11018,6 +11234,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "holy"
   ],
@@ -11068,6 +11285,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -11123,6 +11341,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -11176,6 +11395,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -11215,6 +11435,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -11264,6 +11485,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -11314,6 +11536,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "rustle",
   "holiness": [
    "nonliving"
   ],
@@ -11357,6 +11580,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -11408,6 +11632,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -11459,6 +11684,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -11510,6 +11736,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "snail",
   "intelligence": "human",
+  "shout": "gurgle",
   "holiness": [
    "natural"
   ],
@@ -11559,6 +11786,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "demonic"
   ],
@@ -11618,6 +11846,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -11678,6 +11907,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "insect_winged",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -11723,6 +11953,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -11779,6 +12010,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -11823,6 +12055,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -11866,6 +12099,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -11909,6 +12143,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -11953,6 +12188,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -12012,6 +12248,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "moan",
   "holiness": [
    "demonic"
   ],
@@ -12063,6 +12300,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -12116,6 +12354,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -12159,6 +12398,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -12205,6 +12445,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -12252,6 +12493,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -12298,6 +12540,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -12346,6 +12589,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -12386,6 +12630,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "holy"
   ],
@@ -12446,6 +12691,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "loud_roar",
   "holiness": [
    "natural"
   ],
@@ -12492,6 +12738,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -12536,6 +12783,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -12585,6 +12833,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -12630,6 +12879,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "orb",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -12679,6 +12929,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "demonic"
   ],
@@ -12733,6 +12984,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -12786,6 +13038,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -12833,6 +13086,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -12886,6 +13140,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "growl",
   "holiness": [
    "natural"
   ],
@@ -12934,6 +13189,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "growl",
   "holiness": [
    "undead"
   ],
@@ -12986,6 +13242,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -13036,6 +13293,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -13095,6 +13353,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -13143,6 +13402,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -13194,6 +13454,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -13242,6 +13503,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -13296,6 +13558,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "screech",
   "holiness": [
    "natural"
   ],
@@ -13345,6 +13608,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -13402,6 +13666,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -13451,6 +13716,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "squeal",
   "holiness": [
    "demonic"
   ],
@@ -13498,6 +13764,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "bark",
   "holiness": [
    "demonic"
   ],
@@ -13549,6 +13816,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -13592,6 +13860,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -13641,6 +13910,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "loud_roar",
   "holiness": [
    "demonic"
   ],
@@ -13694,6 +13964,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "demonic"
   ],
@@ -13747,6 +14018,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -13804,6 +14076,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "trumpet",
   "holiness": [
    "demonic"
   ],
@@ -13846,6 +14119,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -13904,6 +14178,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "scream",
   "holiness": [
    "demonic"
   ],
@@ -13957,6 +14232,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "moan",
   "holiness": [
    "demonic"
   ],
@@ -14016,6 +14292,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "screech",
   "holiness": [
    "natural"
   ],
@@ -14056,6 +14333,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -14112,6 +14390,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -14158,6 +14437,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "squeal",
   "holiness": [
    "natural"
   ],
@@ -14203,6 +14483,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "squeal",
   "holiness": [
    "holy"
   ],
@@ -14250,6 +14531,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "animal",
+  "shout": "buzz",
   "holiness": [
    "natural"
   ],
@@ -14298,6 +14580,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "bark",
   "holiness": [
    "natural"
   ],
@@ -14345,6 +14628,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid_tailed",
   "intelligence": "animal",
+  "shout": "howl",
   "holiness": [
    "natural"
   ],
@@ -14390,6 +14674,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -14436,6 +14721,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -14484,6 +14770,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -14533,6 +14820,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -14592,6 +14880,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "loud_roar",
   "holiness": [
    "natural"
   ],
@@ -14647,6 +14936,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "demonic"
   ],
@@ -14693,6 +14983,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -14762,6 +15053,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -14818,6 +15110,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -14863,6 +15156,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -14912,6 +15206,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -14960,6 +15255,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15006,6 +15302,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "bark",
   "holiness": [
    "natural"
   ],
@@ -15067,6 +15364,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "loud_roar",
   "holiness": [
    "natural"
   ],
@@ -15117,6 +15415,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -15167,6 +15466,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15224,6 +15524,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
+  "shout": "squeak",
   "holiness": [
    "nonliving"
   ],
@@ -15274,6 +15575,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -15336,6 +15638,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15386,6 +15689,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15433,6 +15737,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15479,6 +15784,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15533,6 +15839,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15581,6 +15888,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15627,6 +15935,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15673,6 +15982,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "bark",
   "holiness": [
    "natural"
   ],
@@ -15718,6 +16028,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -15772,6 +16083,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15819,6 +16131,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15872,6 +16185,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -15922,6 +16236,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -15970,6 +16285,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "arachnid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16023,6 +16339,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -16078,6 +16395,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16133,6 +16451,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -16186,6 +16505,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16241,6 +16561,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16294,6 +16615,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
+  "shout": "faint_skitter",
   "holiness": [
    "natural"
   ],
@@ -16342,6 +16664,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -16396,6 +16719,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "animal",
+  "shout": "buzz",
   "holiness": [
    "natural"
   ],
@@ -16444,6 +16768,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16493,6 +16818,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16542,6 +16868,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16588,6 +16915,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16634,6 +16962,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16685,6 +17014,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16734,6 +17064,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16780,6 +17111,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -16826,6 +17158,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -16865,6 +17198,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -16916,6 +17250,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -16966,6 +17301,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -17012,6 +17348,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "scream",
   "holiness": [
    "undead"
   ],
@@ -17062,6 +17399,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -17110,6 +17448,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -17158,6 +17497,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "loud_roar",
   "holiness": [
    "natural"
   ],
@@ -17209,6 +17549,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -17254,6 +17595,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -17318,6 +17660,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -17357,6 +17700,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -17408,6 +17752,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -17456,6 +17801,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "scream",
   "holiness": [
    "demonic"
   ],
@@ -17508,6 +17854,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -17564,6 +17911,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -17612,6 +17960,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -17663,6 +18012,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -17705,6 +18055,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -17753,6 +18104,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -17811,6 +18163,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -17862,6 +18215,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -17916,6 +18270,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -17965,6 +18320,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "fish",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -18009,6 +18365,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -18067,6 +18424,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -18123,6 +18481,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "insect_winged",
   "intelligence": "human",
+  "shout": "buzz",
   "holiness": [
    "natural"
   ],
@@ -18172,6 +18531,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -18231,6 +18591,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "holy"
   ],
@@ -18284,6 +18645,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -18325,6 +18687,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -18372,6 +18735,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -18418,6 +18782,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -18466,6 +18831,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -18512,6 +18878,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -18558,6 +18925,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -18611,6 +18979,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "bellow",
   "holiness": [
    "natural"
   ],
@@ -18663,6 +19032,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -18726,6 +19096,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "buzz",
   "holiness": [
    "demonic"
   ],
@@ -18782,6 +19153,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -18834,6 +19206,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -18894,6 +19267,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -18954,6 +19328,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -19008,6 +19383,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "insect_winged",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -19049,6 +19425,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -19098,6 +19475,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
+  "shout": "growl",
   "holiness": [
    "natural"
   ],
@@ -19144,6 +19522,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -19195,6 +19574,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -19249,6 +19629,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "moan",
   "holiness": [
    "undead"
   ],
@@ -19304,6 +19685,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "random",
   "holiness": [
    "natural"
   ],
@@ -19355,6 +19737,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -19409,6 +19792,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -19463,6 +19847,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -19519,6 +19904,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -19574,6 +19960,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -19628,6 +20015,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -19678,6 +20066,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -19734,6 +20123,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "blob",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -19781,6 +20171,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -19832,6 +20223,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped",
   "intelligence": "human",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -19881,6 +20273,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -19927,6 +20320,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -19982,6 +20376,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -20046,6 +20441,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "human",
+  "shout": "trumpet",
   "holiness": [
    "demonic"
   ],
@@ -20097,6 +20493,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -20146,6 +20543,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -20200,6 +20598,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -20249,6 +20648,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -20298,6 +20698,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -20353,6 +20754,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "bark",
   "holiness": [
    "demonic"
   ],
@@ -20402,6 +20804,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bat",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -20450,6 +20853,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -20505,6 +20909,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -20556,6 +20961,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -20604,6 +21010,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -20651,6 +21058,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -20691,6 +21099,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -20734,6 +21143,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -20788,6 +21198,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -20835,6 +21246,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -20877,6 +21289,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "holy"
   ],
@@ -20931,6 +21344,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "screech",
   "holiness": [
    "demonic"
   ],
@@ -20971,6 +21385,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -21026,6 +21441,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -21067,6 +21483,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -21120,6 +21537,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -21169,6 +21587,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -21217,6 +21636,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -21271,6 +21691,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
+  "shout": "faint_skitter",
   "holiness": [
    "natural"
   ],
@@ -21320,6 +21741,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -21372,6 +21794,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -21418,6 +21841,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -21465,6 +21889,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -21511,6 +21936,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -21558,6 +21984,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -21605,6 +22032,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -21652,6 +22080,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -21698,6 +22127,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -21744,6 +22174,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -21793,6 +22224,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "demon_taunt",
   "holiness": [
    "demonic"
   ],
@@ -21856,6 +22288,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -21915,6 +22348,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -21969,6 +22403,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "brainless",
+  "shout": "roar",
   "holiness": [
    "nonliving"
   ],
@@ -22026,6 +22461,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "loud_roar",
   "holiness": [
    "holy"
   ],
@@ -22069,6 +22505,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving",
    "plant"
@@ -22123,6 +22560,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "insect",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -22175,6 +22613,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -22228,6 +22667,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -22279,6 +22719,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "insect",
   "intelligence": "animal",
+  "shout": "moan",
   "holiness": [
    "undead"
   ],
@@ -22329,6 +22770,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -22371,6 +22813,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -22420,6 +22863,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -22467,6 +22911,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -22515,6 +22960,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -22561,6 +23007,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -22606,6 +23053,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -22659,6 +23107,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -22713,6 +23162,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -22759,6 +23209,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -22822,6 +23273,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
+  "shout": "growl",
   "holiness": [
    "natural"
   ],
@@ -22869,6 +23321,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -22920,6 +23373,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -22978,6 +23432,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -23026,6 +23481,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "human",
+  "shout": "croak",
   "holiness": [
    "natural"
   ],
@@ -23079,6 +23535,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -23133,6 +23590,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "gurgle",
   "holiness": [
    "natural"
   ],
@@ -23185,6 +23643,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -23236,6 +23695,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "moan",
   "holiness": [
    "undead"
   ],
@@ -23287,6 +23747,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "insect_winged",
   "intelligence": "animal",
+  "shout": "buzz",
   "holiness": [
    "natural"
   ],
@@ -23340,6 +23801,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "loud_roar",
   "holiness": [
    "natural"
   ],
@@ -23387,6 +23849,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -23440,6 +23903,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -23490,6 +23954,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "insect",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -23536,6 +24001,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -23582,6 +24048,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "bark",
   "holiness": [
    "natural"
   ],
@@ -23630,6 +24097,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -23679,6 +24147,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "squeak",
   "holiness": [
    "natural"
   ],
@@ -23724,6 +24193,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bird",
   "intelligence": "animal",
+  "shout": "caw",
   "holiness": [
    "natural"
   ],
@@ -23770,6 +24240,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -23823,6 +24294,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -23875,6 +24347,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -23923,6 +24396,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "arachnid",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -23965,6 +24439,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -24018,6 +24493,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -24069,6 +24545,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -24120,6 +24597,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -24166,6 +24644,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -24214,6 +24693,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "squeak",
   "holiness": [
    "natural"
   ],
@@ -24259,6 +24739,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -24307,6 +24788,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "fish",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -24354,6 +24836,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -24402,6 +24885,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -24464,6 +24948,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -24520,6 +25005,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -24572,6 +25058,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -24620,6 +25107,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "screech",
   "holiness": [
    "demonic"
   ],
@@ -24664,6 +25152,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "plant",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -24717,6 +25206,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -24766,6 +25256,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "naga",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -24814,6 +25305,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "naga",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -24862,6 +25354,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "naga",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -24911,6 +25404,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -24958,6 +25452,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -25006,6 +25501,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -25053,6 +25549,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "moan",
   "holiness": [
    "undead"
   ],
@@ -25099,6 +25596,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "plant",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -25148,6 +25646,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -25198,6 +25697,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -25243,6 +25743,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -25296,6 +25797,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -25348,6 +25850,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "holy"
   ],
@@ -25417,6 +25920,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
+  "shout": "loud_roar",
   "holiness": [
    "demonic"
   ],
@@ -25487,6 +25991,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
+  "shout": "loud_roar",
   "holiness": [
    "demonic"
   ],
@@ -25557,6 +26062,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
+  "shout": "loud_roar",
   "holiness": [
    "demonic"
   ],
@@ -25627,6 +26133,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
+  "shout": "loud_roar",
   "holiness": [
    "demonic"
   ],
@@ -25682,6 +26189,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -25728,6 +26236,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "croak",
   "holiness": [
    "demonic"
   ],
@@ -25788,6 +26297,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -25839,6 +26349,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -25883,6 +26394,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -25950,6 +26462,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -25997,6 +26510,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -26050,6 +26564,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "moan",
   "holiness": [
    "undead"
   ],
@@ -26102,6 +26617,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -26154,6 +26670,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "plant",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -26200,6 +26717,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -26243,6 +26761,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bird",
   "intelligence": "animal",
+  "shout": "screech",
   "holiness": [
    "natural"
   ],
@@ -26286,6 +26805,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -26336,6 +26856,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -26377,6 +26898,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -26435,6 +26957,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -26482,6 +27005,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -26530,6 +27054,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -26583,6 +27108,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -26639,6 +27165,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "random",
   "holiness": [
    "demonic"
   ],
@@ -26687,6 +27214,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -26734,6 +27262,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -26784,6 +27313,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "fish",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -26842,6 +27372,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "fish",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -26889,6 +27420,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -26935,6 +27467,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -26986,6 +27519,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -27050,6 +27584,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "demonic"
   ],
@@ -27095,6 +27630,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -27138,6 +27674,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -27190,6 +27727,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -27241,6 +27779,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -27296,6 +27835,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -27355,6 +27895,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -27400,6 +27941,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -27468,6 +28010,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -27516,6 +28059,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -27567,6 +28111,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -27618,6 +28163,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "animal",
+  "shout": "buzz",
   "holiness": [
    "natural"
   ],
@@ -27673,6 +28219,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -27727,6 +28274,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -27776,6 +28324,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -27826,6 +28375,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -27878,6 +28428,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -27929,6 +28480,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -27982,6 +28534,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -28025,6 +28578,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -28068,6 +28622,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -28111,6 +28666,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -28164,6 +28720,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -28212,6 +28769,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -28260,6 +28818,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -28308,6 +28867,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -28355,6 +28915,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -28406,6 +28967,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -28458,6 +29020,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -28512,6 +29075,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -28566,6 +29130,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -28626,6 +29191,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "plant",
   "intelligence": "brainless",
+  "shout": "gurgle",
   "holiness": [
    "plant"
   ],
@@ -28671,6 +29237,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -28725,6 +29292,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -28778,6 +29346,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -28840,6 +29409,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -28888,6 +29458,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -28936,6 +29507,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -28986,6 +29558,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -29042,6 +29615,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "loud_roar",
   "holiness": [
    "natural"
   ],
@@ -29084,6 +29658,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -29138,6 +29713,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -29190,6 +29766,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "insect_winged",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -29249,6 +29826,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "loud_roar",
   "holiness": [
    "natural"
   ],
@@ -29297,6 +29875,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -29345,6 +29924,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -29395,6 +29975,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -29450,6 +30031,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
+  "shout": "faint_skitter",
   "holiness": [
    "natural"
   ],
@@ -29508,6 +30090,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -29566,6 +30149,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -29625,6 +30209,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -29684,6 +30269,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -29748,6 +30334,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "demonic"
   ],
@@ -29805,6 +30392,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -29852,6 +30440,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -29905,6 +30494,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -29963,6 +30553,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "plant",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -30017,6 +30608,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "roar",
   "holiness": [
    "nonliving"
   ],
@@ -30075,6 +30667,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -30127,6 +30720,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -30171,6 +30765,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -30221,6 +30816,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -30276,6 +30872,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "demonic"
   ],
@@ -30326,6 +30923,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snail",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -30373,6 +30971,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -30433,6 +31032,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -30474,6 +31074,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -30536,6 +31137,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout2",
   "holiness": [
    "natural"
   ],
@@ -30583,6 +31185,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -30633,6 +31236,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "demonic"
   ],
@@ -30690,6 +31294,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "bird",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -30738,6 +31343,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "gurgle",
   "holiness": [
    "natural"
   ],
@@ -30791,6 +31397,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -30851,6 +31458,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -30905,6 +31513,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -30952,6 +31561,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -31001,6 +31611,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -31054,6 +31665,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bat",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -31112,6 +31724,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -31172,6 +31785,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "undead"
   ],
@@ -31230,6 +31844,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -31283,6 +31898,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "insect_winged",
   "intelligence": "animal",
+  "shout": "buzz",
   "holiness": [
    "undead"
   ],
@@ -31339,6 +31955,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -31396,6 +32013,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -31449,6 +32067,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -31497,6 +32116,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -31545,6 +32165,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -31593,6 +32214,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "gurgle",
   "holiness": [
    "natural"
   ],
@@ -31646,6 +32268,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -31701,6 +32324,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "blob",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "natural"
   ],
@@ -31758,6 +32382,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -31812,6 +32437,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -31858,6 +32484,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -31907,6 +32534,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -31953,6 +32581,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -32008,6 +32637,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "howl",
   "holiness": [
    "natural"
   ],
@@ -32057,6 +32687,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -32108,6 +32739,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -32155,6 +32787,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -32201,6 +32834,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
+  "shout": "moan",
   "holiness": [
    "undead"
   ],
@@ -32256,6 +32890,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "howl",
   "holiness": [
    "demonic"
   ],
@@ -32307,6 +32942,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -32355,6 +32991,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "demonic"
   ],
@@ -32407,6 +33044,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -32455,6 +33093,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -32498,6 +33137,7 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "moan",
   "holiness": [
    "nonliving"
   ],
@@ -32551,6 +33191,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -32591,6 +33232,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "plant"
   ],
@@ -32648,6 +33290,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "arachnid",
   "intelligence": "animal",
+  "shout": "skitter",
   "holiness": [
    "natural"
   ],
@@ -32696,6 +33339,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "howl",
   "holiness": [
    "natural"
   ],
@@ -32748,6 +33392,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "misc",
   "intelligence": "animal",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -32797,6 +33442,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -32843,6 +33489,7 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "orb",
   "intelligence": "human",
+  "shout": "silent",
   "holiness": [
    "nonliving"
   ],
@@ -32897,6 +33544,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "nonliving"
   ],
@@ -32951,6 +33599,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
+  "shout": "hiss",
   "holiness": [
    "natural"
   ],
@@ -32997,6 +33646,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -33058,6 +33708,7 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
+  "shout": "loud_roar",
   "holiness": [
    "natural"
   ],
@@ -33113,6 +33764,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
+  "shout": "bellow",
   "holiness": [
    "natural"
   ],
@@ -33159,6 +33811,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -33207,6 +33860,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -33259,6 +33913,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
+  "shout": "roar",
   "holiness": [
    "natural"
   ],
@@ -33307,6 +33962,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
+  "shout": "bellow",
   "holiness": [
    "demonic"
   ],
@@ -33358,6 +34014,7 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "shout",
   "holiness": [
    "natural"
   ],
@@ -33406,6 +34063,7 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
+  "shout": "silent",
   "holiness": [
    "undead"
   ],
@@ -33456,6 +34114,7 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
+  "shout": "gurgle",
   "holiness": [
    "demonic"
   ],

@@ -223,6 +223,11 @@ function toRuntimeMonster(data) {
         will: data.will,
         holiness: data.holiness,
         resists: data.resists,
+
+        // 알아채고 잊는 규칙에 쓰입니다. (dcss/awareness.js)
+        // 지능이 인지 거리와 기억 시간을, 우는 소리가 동료를 부르는 반경을 정합니다.
+        intelligence: data.intelligence,
+        shout: data.shout,
         exp: data.exp,
         damage: attack ? attack.damage : 0,
         attackType: attack ? attack.type : null,

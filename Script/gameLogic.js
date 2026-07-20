@@ -22,6 +22,7 @@ import { aimRadius, rollMonsterHp, monsterAttackRoll, playerEvasion } from './dc
 import { pickAimedTarget } from './dcss/aim.js';
 import { skillValue } from './dcss/training.js';
 import { random2 } from './dcss/random.js';
+import { trackingRangeTiles, rollFoeMemoryMs, shoutRadiusTiles, canShout } from './dcss/awareness.js';
 
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
 
@@ -182,17 +183,69 @@ function aimAtEnemies(player, maxRange = Infinity) {
 }
 
 /**
- * 몬스터가 어떤 상태로 태어날지 정합니다.
+ * 알아챈 뒤에 어떻게 움직일지 정합니다.
  *
  * 성향은 원본의 깃발에서 옵니다. 거리를 두는 적과 정신없이 나는 적은
  * 처음부터 그렇게 움직여야, 쫓아와 때리는 적과 섞였을 때 차이가 읽힙니다.
  * @param {object} template - 몬스터 정의
- * @returns {string} 시작 상태
+ * @returns {string} 사냥을 시작할 때의 상태
  */
 function initialState(template) {
     if (template.maintainRange) return 'kite';
     if (template.batty) return 'erratic';
     return 'chase';
+}
+
+/**
+ * 이 몬스터가 지금 플레이어를 알아보는지 봅니다.
+ *
+ * 얼마나 멀리서 알아보는지는 지능이 정합니다. (mon-pathfind.cc:35)
+ * 벽 너머는 보지 못하므로 시야도 함께 확인합니다.
+ * @param {object} enemy - 몬스터
+ * @param {number} distance - 플레이어까지의 거리(픽셀)
+ * @returns {boolean} 알아보면 true
+ */
+function noticesPlayer(enemy, distance) {
+    const range = trackingRangeTiles(enemy.intelligence) * C.TILE_SIZE;
+    if (distance > range) return false;
+    return hasLineOfSight(enemy.x, enemy.y, world.player.x, world.player.y);
+}
+
+/**
+ * 사냥을 시작하거나, 이미 쫓고 있었다면 기억을 새로 채웁니다.
+ *
+ * 기억하는 시간은 지능이 정합니다. 사람만큼 영리한 것은 한참을 뒤지고 다니지만
+ * 머리가 없는 것은 곧 잊습니다. 이 차이가 '따돌릴 수 있는가'를 만듭니다.
+ * @param {object} enemy - 몬스터
+ * @param {number} now - 게임 내부 시각
+ */
+function rousePlayerHunt(enemy, now) {
+    enemy.huntUntil = now + rollFoeMemoryMs(enemy.intelligence);
+}
+
+/**
+ * 우는 소리로 주변의 잠든 몬스터를 깨웁니다. (shout.cc:237)
+ *
+ * '옆방을 깨웠는가'는 실시간에서 일급 판단이 됩니다. 조용한 적을 하나씩 처리할지,
+ * 시끄러운 적을 먼저 끊을지가 달라지기 때문입니다.
+ * 반경은 원본이 소리 종류마다 정해 둔 값을 그대로 씁니다.
+ * @param {object} shouter - 운 몬스터
+ * @param {number} now - 게임 내부 시각
+ */
+function alertNeighbours(shouter, now) {
+    if (!canShout(shouter)) return;
+
+    const radius = shoutRadiusTiles(shouter.shout) * C.TILE_SIZE;
+    if (radius <= 0) return;
+
+    for (const other of world.enemies) {
+        if (other === shouter || other.state !== 'idle') continue;
+        if (Math.hypot(other.x - shouter.x, other.y - shouter.y) > radius) continue;
+
+        // 소리는 벽을 넘어갑니다. 시야를 확인하지 않는 것이 요점입니다.
+        rousePlayerHunt(other, now);
+        other.state = initialState(other);
+    }
 }
 
 /**
@@ -336,8 +389,9 @@ export function spawnMonster(id, position) {
         // 스폰 직후 쿨다운에 걸리지 않도록 과거 시각으로 둡니다.
         lastAttackTime: C.PAST_TIME,
         lastHitTime: 0,
-        // 성향에 맞는 상태로 시작합니다. (ENEMY_STATES 참조)
-        state: initialState(template),
+        // 아직 플레이어를 알아채지 못한 상태로 태어납니다. (ENEMY_STATES 참조)
+        state: 'idle',
+        huntUntil: 0,
     };
 
     // 굴린 최대치에서 시작합니다. maxHp 를 쓰는 자리에서 계산해야
@@ -522,6 +576,35 @@ function isFrightened(enemy, distance, now) {
  * 새 상태를 추가할 때는 move/act/next 셋을 모두 채우면 됩니다.
  */
 const ENEMY_STATES = {
+    /**
+     * 아직 플레이어를 알아채지 못했다.
+     *
+     * 지금까지 모든 적은 태어난 순간부터 플레이어의 위치를 알고 곧장 달려왔습니다.
+     * 벽 뒤로 숨어도 방을 나가도 소용이 없어서, 이 게임에는 '들키지 않는다'거나
+     * '따돌린다'는 선택지가 아예 없었습니다.
+     *
+     * 이제 시야에 들어와야 알아챕니다. 얼마나 멀리서 알아보는지는 지능이 정합니다.
+     * 머리가 없는 것은 코앞만 보고, 사람만큼 영리한 것은 방 하나 너머를 봅니다.
+     */
+    idle: {
+        move() {
+            // 제자리에 있습니다. 배회는 넣지 않았습니다.
+            // 실시간에서 어슬렁거리는 적은 '깨어 있는 적'과 구분되지 않아,
+            // 알아챈 것인지 아닌지가 오히려 읽기 어려워집니다.
+        },
+        act() {
+            // 알아채기 전에는 아무것도 하지 않습니다.
+        },
+        next(enemy, { distance, now }) {
+            if (!noticesPlayer(enemy, distance)) return 'idle';
+
+            // 알아채는 순간 웁니다. 그 소리가 주변을 깨웁니다.
+            rousePlayerHunt(enemy, now);
+            alertNeighbours(enemy, now);
+            return initialState(enemy);
+        },
+    },
+
     /**
      * 거리를 두고 쏜다. (mon-behv.cc:115 maintain_range)
      *
@@ -943,6 +1026,16 @@ function updateEnemies(now, dtFactor) {
 
         // 세이브에 state 가 없던 시절의 적은 추격으로 봅니다.
         const state = ENEMY_STATES[enemy.state] ?? ENEMY_STATES.chase;
+
+        // 보이는 동안에는 기억이 계속 새로 채워집니다.
+        // 시야가 끊긴 뒤부터 잊기까지의 시간이 지능에 따라 갈립니다.
+        if (enemy.state !== 'idle') {
+            if (noticesPlayer(enemy, distance)) rousePlayerHunt(enemy, now);
+            else if (now > (enemy.huntUntil ?? 0)) {
+                enemy.state = 'idle';
+                continue;
+            }
+        }
 
         // 정신없이 나는 적은 방향이 정해져 있지 않으면 새로 뽑습니다.
         if (enemy.state === 'erratic' && now >= (enemy.erraticUntil ?? 0)) {

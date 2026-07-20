@@ -272,6 +272,8 @@ test('자폭병은 다가가면 점화하고 터지며 사라진다', () => {
     });
     const hpBefore = world.player.hp;
 
+    // 알아채는 데 한 스텝이 듭니다. 예전에는 스폰되는 순간부터 깨어 있었습니다.
+    gameLogic.update(C.SIMULATION_STEP_MS);
     gameLogic.update(C.SIMULATION_STEP_MS);
     assert.ok(bomb.fuseStartedAt !== null, '가까이 있는데 점화되지 않았습니다');
     assert.equal(world.player.hp, hpBefore, '점화 즉시 터지면 피할 방법이 없습니다');
