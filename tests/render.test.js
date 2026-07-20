@@ -47,22 +47,23 @@ render();
 const { _pixels: pixels, _w: width, _h: height } = screen;
 
 /**
- * 화면의 가로 띠 하나에 대한 평균 밝기를 구합니다.
+ * 화면의 가로 띠 하나에 대한 평균 색을 구합니다.
  * @param {number} fromRatio - 시작 높이 비율 (0~1)
  * @param {number} toRatio - 끝 높이 비율 (0~1)
- * @returns {number} 0~255 평균 밝기
+ * @returns {{r: number, g: number, b: number, brightness: number}} 평균 색
  */
-function averageBrightness(fromRatio, toRatio) {
+function averageColour(fromRatio, toRatio) {
     const from = Math.floor(height * fromRatio), to = Math.floor(height * toRatio);
-    let sum = 0, count = 0;
+    let r = 0, g = 0, b = 0, count = 0;
     for (let y = from; y < to; y++) {
         for (let x = 0; x < width; x++) {
             const i = (y * width + x) * 4;
-            sum += 0.299 * pixels[i] + 0.587 * pixels[i + 1] + 0.114 * pixels[i + 2];
+            r += pixels[i]; g += pixels[i + 1]; b += pixels[i + 2];
             count++;
         }
     }
-    return sum / count;
+    r /= count; g /= count; b /= count;
+    return { r, g, b, brightness: 0.299 * r + 0.587 * g + 0.114 * b };
 }
 
 test('화면이 비어 있지 않다', () => {
@@ -84,14 +85,19 @@ test('화면이 단색이 아니다', () => {
 
 test('천장·벽·바닥이 서로 구분된다', () => {
     // 레이캐스터는 화면을 위(천장) / 가운데(벽) / 아래(바닥)로 나눠 그립니다.
-    // 세 구간의 밝기가 모두 같다면 한 가지 텍스처만 그려지고 있다는 뜻입니다.
-    const ceiling = averageBrightness(0, 0.25);
-    const middle = averageBrightness(0.4, 0.6);
-    const floor = averageBrightness(0.75, 1);
+    // 셋이 같은 그림이라면 한 가지 텍스처만 그려지고 있다는 뜻입니다.
+    //
+    // 밝기만 보면 안 됩니다. 던전은 대체로 어두워서 천장과 바닥이 서로 다른 재질이어도
+    // 밝기는 비슷하게 나옵니다. 색까지 함께 봐야 실제로 다른 재질인지 알 수 있습니다.
+    const ceiling = averageColour(0, 0.25);
+    const middle = averageColour(0.4, 0.6);
+    const floor = averageColour(0.75, 1);
 
-    assert.ok(Math.abs(ceiling - floor) > 1,
-        `천장(${ceiling.toFixed(1)})과 바닥(${floor.toFixed(1)})이 구분되지 않습니다`);
-    assert.ok(middle > 0, '화면 중앙이 완전히 검습니다');
+    const distance = Math.hypot(ceiling.r - floor.r, ceiling.g - floor.g, ceiling.b - floor.b);
+    assert.ok(distance > 1.5,
+        `천장 rgb(${ceiling.r.toFixed(1)},${ceiling.g.toFixed(1)},${ceiling.b.toFixed(1)})과 ` +
+        `바닥 rgb(${floor.r.toFixed(1)},${floor.g.toFixed(1)},${floor.b.toFixed(1)})이 구분되지 않습니다`);
+    assert.ok(middle.brightness > 0, '화면 중앙이 완전히 검습니다');
 });
 
 test('플레이스홀더가 화면을 덮고 있지 않다', () => {

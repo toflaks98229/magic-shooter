@@ -35,7 +35,7 @@ export const BRANCHES = {
     T: {
         id: 'T', name: '만신전', parent: 'D',
         entryFrom: 4, entryTo: 7, depth: 1, rune: false,
-        theme: 'main', themeVariation: 2,
+        theme: 'vault', themeVariation: 1,
         monsters: ['zombie', 'skeleton', 'imp'],
     },
     L: {
@@ -61,14 +61,14 @@ export const BRANCHES = {
     P: {
         id: 'P', name: '뱀굴', parent: 'L',
         entryFrom: 2, entryTo: 3, depth: 4, rune: true,
-        theme: 'cave', themeVariation: 1,
+        theme: 'snake', themeVariation: 1,
         exclusiveGroup: 'lair-crawl',
         monsters: ['snake', 'hydra', 'spider', 'beast'],
     },
     N: {
         id: 'N', name: '거미 둥지', parent: 'L',
         entryFrom: 2, entryTo: 3, depth: 4, rune: true,
-        theme: 'cave', themeVariation: 2,
+        theme: 'spider', themeVariation: 1,
         exclusiveGroup: 'lair-crawl',
         monsters: ['spider', 'beast', 'slime'],
     },
@@ -81,31 +81,31 @@ export const BRANCHES = {
     O: {
         id: 'O', name: '오크 광산', parent: 'D',
         entryFrom: 9, entryTo: 12, depth: 2, rune: false,
-        theme: 'main', themeVariation: 2,
+        theme: 'orc', themeVariation: 1,
         monsters: ['orc', 'orc_warrior', 'goblin', 'centaur'],
     },
     E: {
         id: 'E', name: '엘프 회관', parent: 'O',
         entryFrom: 2, entryTo: 2, depth: 3, rune: false,
-        theme: 'main', themeVariation: 1,
+        theme: 'vault', themeVariation: 1,
         monsters: ['orc_warrior', 'imp', 'spectre', 'demon'],
     },
     V: {
         id: 'V', name: '보물창고', parent: 'D',
         entryFrom: 13, entryTo: 14, depth: 5, rune: true,
-        theme: 'main', themeVariation: 2,
+        theme: 'vault', themeVariation: 1,
         monsters: ['orc_warrior', 'gargoyle', 'hell_knight', 'centaur'],
     },
     C: {
         id: 'C', name: '납골당', parent: 'V',
         entryFrom: 2, entryTo: 3, depth: 3, rune: false,
-        theme: 'main', themeVariation: 1,
+        theme: 'crypt', themeVariation: 1,
         monsters: ['zombie', 'skeleton', 'mummy', 'spectre'],
     },
     W: {
         id: 'W', name: '고대의 무덤', parent: 'C',
         entryFrom: 3, entryTo: 3, depth: 3, rune: true,
-        theme: 'hell', themeVariation: 2,
+        theme: 'crypt', themeVariation: 2,
         monsters: ['mummy', 'spectre', 'skeleton', 'demon'],
     },
     U: {
@@ -125,7 +125,7 @@ export const BRANCHES = {
     X: {
         id: 'X', name: '코키투스', parent: 'H',
         entryFrom: 1, entryTo: 1, depth: 7, rune: true,
-        theme: 'hell', themeVariation: 1,
+        theme: 'ice', themeVariation: 1,
         monsters: ['ice_giant', 'simulacrum', 'ice_beast', 'spectre'],
     },
     G: {
@@ -137,13 +137,13 @@ export const BRANCHES = {
     Y: {
         id: 'Y', name: '타르타로스', parent: 'H',
         entryFrom: 1, entryTo: 1, depth: 7, rune: true,
-        theme: 'hell', themeVariation: 2,
+        theme: 'crypt', themeVariation: 2,
         monsters: ['spectre', 'demon', 'mummy'],
     },
     I: {
         id: 'I', name: '철의 도시 디스', parent: 'H',
         entryFrom: 1, entryTo: 1, depth: 7, rune: true,
-        theme: 'hell', themeVariation: 1,
+        theme: 'hell', themeVariation: 2,
         monsters: ['hell_knight', 'gargoyle', 'demon'],
     },
     Z: {

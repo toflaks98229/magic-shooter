@@ -5,10 +5,13 @@
  * 이 프로젝트는 npm 의존성이 없는 상태를 유지하고 있으므로 sharp 같은 라이브러리 대신
  * Node 내장 zlib만으로 처리합니다.
  *
- * 지원 범위는 이 저장소의 타일시트가 쓰는 형식으로 한정합니다.
- *   - 비트 심도 8, 컬러 타입 6(RGBA) 또는 2(RGB), 3(팔레트)
+ * 지원 범위는 이 저장소가 다루는 PNG로 한정합니다.
+ *   - 비트 심도 1/2/4/8 (4비트 이하는 팔레트 이미지에서 쓰입니다)
+ *   - 컬러 타입 0(그레이) 2(RGB) 3(팔레트) 4(그레이+알파) 6(RGBA)
  *   - 비인터레이스
  * 그 외 형식은 명시적으로 오류를 냅니다. 조용히 잘못된 픽셀을 내놓는 것보다 낫습니다.
+ *
+ * DCSS 원본 타일 중 일부가 4비트 팔레트 PNG라 낮은 비트 심도까지 다룹니다.
  */
 
 import { inflateSync, deflateSync } from 'node:zlib';
@@ -57,28 +60,36 @@ export function readPng(path) {
         offset += 12 + length;
     }
 
-    if (bitDepth !== 8) throw new Error(`비트 심도 ${bitDepth}는 지원하지 않습니다: ${path}`);
+    if (![1, 2, 4, 8].includes(bitDepth)) throw new Error(`비트 심도 ${bitDepth}는 지원하지 않습니다: ${path}`);
     if (interlace !== 0) throw new Error(`인터레이스 PNG는 지원하지 않습니다: ${path}`);
     if (!(colorType in CHANNELS)) throw new Error(`컬러 타입 ${colorType}는 지원하지 않습니다: ${path}`);
+    if (bitDepth < 8 && colorType !== 0 && colorType !== 3) {
+        throw new Error(`비트 심도 ${bitDepth}는 팔레트/그레이스케일에서만 지원합니다: ${path}`);
+    }
 
     const channels = CHANNELS[colorType];
     const raw = inflateSync(Buffer.concat(idatParts));
-    const stride = width * channels;
-    const pixels = unfilter(raw, width, height, channels, stride);
 
-    return { width, height, data: toRgba(pixels, width, height, colorType, channels, palette, transparency) };
+    // 한 행의 바이트 수. 비트 심도가 8 미만이면 한 바이트에 여러 픽셀이 들어갑니다.
+    const stride = Math.ceil((width * channels * bitDepth) / 8);
+    // 필터가 '왼쪽 픽셀'로 참조하는 거리. 1바이트 미만이면 1바이트로 취급합니다.
+    const filterBytes = Math.max(1, (channels * bitDepth) >> 3);
+
+    const filtered = unfilter(raw, height, filterBytes, stride);
+    const pixels = bitDepth === 8 ? filtered : unpackSamples(filtered, width, height, channels, bitDepth, stride);
+
+    return { width, height, data: toRgba(pixels, width, height, colorType, channels, palette, transparency, bitDepth) };
 }
 
 /**
  * PNG의 스캔라인 필터를 해제해 원본 바이트를 복원합니다.
  * @param {Buffer} raw - 압축 해제된 데이터 (각 행 앞에 필터 바이트 1개)
- * @param {number} width - 이미지 너비
  * @param {number} height - 이미지 높이
- * @param {number} channels - 픽셀당 채널 수
+ * @param {number} filterBytes - 필터가 '왼쪽'으로 참조할 바이트 거리
  * @param {number} stride - 필터 바이트를 제외한 한 행의 바이트 수
- * @returns {Buffer} 필터가 해제된 픽셀 바이트
+ * @returns {Buffer} 필터가 해제된 바이트
  */
-function unfilter(raw, width, height, channels, stride) {
+function unfilter(raw, height, filterBytes, stride) {
     const out = Buffer.alloc(height * stride);
 
     for (let y = 0; y < height; y++) {
@@ -89,9 +100,9 @@ function unfilter(raw, width, height, channels, stride) {
 
         for (let x = 0; x < stride; x++) {
             const rawByte = line[x];
-            const left = x >= channels ? out[target + x - channels] : 0;
+            const left = x >= filterBytes ? out[target + x - filterBytes] : 0;
             const up = y > 0 ? out[above + x] : 0;
-            const upLeft = (y > 0 && x >= channels) ? out[above + x - channels] : 0;
+            const upLeft = (y > 0 && x >= filterBytes) ? out[above + x - filterBytes] : 0;
 
             let value;
             switch (filterType) {
@@ -123,10 +134,36 @@ function paeth(a, b, c) {
 }
 
 /**
+ * 한 바이트에 여러 개가 들어 있는 샘플을 픽셀당 한 바이트로 펼칩니다.
+ * @param {Buffer} filtered - 필터가 해제된 바이트
+ * @param {number} width - 이미지 너비
+ * @param {number} height - 이미지 높이
+ * @param {number} channels - 픽셀당 채널 수
+ * @param {number} bitDepth - 비트 심도 (1, 2, 4)
+ * @param {number} stride - 한 행의 바이트 수
+ * @returns {Buffer} 샘플당 한 바이트로 펼친 데이터
+ */
+function unpackSamples(filtered, width, height, channels, bitDepth, stride) {
+    const out = Buffer.alloc(width * height * channels);
+    const mask = (1 << bitDepth) - 1;
+    const perByte = 8 / bitDepth;
+
+    for (let y = 0; y < height; y++) {
+        for (let i = 0; i < width * channels; i++) {
+            const byte = filtered[y * stride + ((i / perByte) | 0)];
+            // 상위 비트부터 채워집니다.
+            const shift = 8 - bitDepth * ((i % perByte) + 1);
+            out[y * width * channels + i] = (byte >> shift) & mask;
+        }
+    }
+    return out;
+}
+
+/**
  * 임의의 컬러 타입 픽셀을 RGBA로 변환합니다.
  * @returns {Uint8ClampedArray} RGBA 픽셀
  */
-function toRgba(pixels, width, height, colorType, channels, palette, transparency) {
+function toRgba(pixels, width, height, colorType, channels, palette, transparency, bitDepth = 8) {
     const rgba = new Uint8ClampedArray(width * height * 4);
 
     for (let i = 0; i < width * height; i++) {
@@ -145,7 +182,9 @@ function toRgba(pixels, width, height, colorType, channels, palette, transparenc
             rgba[dst + 2] = palette[index * 3 + 2];
             rgba[dst + 3] = transparency && index < transparency.length ? transparency[index] : 255;
         } else if (colorType === 0) {                // 그레이스케일
-            rgba[dst] = rgba[dst + 1] = rgba[dst + 2] = pixels[src];
+            // 낮은 비트 심도의 값을 0~255 범위로 늘립니다.
+            const level = bitDepth === 8 ? pixels[src] : Math.round((pixels[src] * 255) / ((1 << bitDepth) - 1));
+            rgba[dst] = rgba[dst + 1] = rgba[dst + 2] = level;
             rgba[dst + 3] = 255;
         } else if (colorType === 4) {                // 그레이스케일 + 알파
             rgba[dst] = rgba[dst + 1] = rgba[dst + 2] = pixels[src];

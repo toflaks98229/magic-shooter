@@ -122,3 +122,32 @@ test('HUD 얼굴 스프라이트는 아직 없다 (알려진 공백)', () => {
     assert.deepEqual(present, [],
         `얼굴 스프라이트가 추가되었습니다(${present.join(', ')}). 이 테스트를 제거하십시오.`);
 });
+
+test('모든 던전의 테마가 실제 텍스처를 갖는다', async () => {
+    // 분기와 포탈이 저마다 테마를 지정하므로, 오타 하나로 어느 던전만 조용히
+    // 플레이스홀더가 되는 일이 생길 수 있습니다.
+    const { BRANCHES } = await import('../Script/branches.js');
+    const { PORTAL_DUNGEONS } = await import('../Script/portals.js');
+
+    for (const dungeon of [...Object.values(BRANCHES), ...Object.values(PORTAL_DUNGEONS)]) {
+        for (const surface of ['wall', 'floor', 'ceiling']) {
+            const prefix = `${surface}_${dungeon.theme}_${dungeon.themeVariation}_`;
+            const found = [...sprites.keys()].filter(k => k.startsWith(prefix));
+            assert.ok(found.length > 0,
+                `${dungeon.name}(${dungeon.theme} v${dungeon.themeVariation})의 ${surface} 텍스처가 없습니다`);
+        }
+    }
+});
+
+test('테마 텍스처가 crawl 저장소에서 확인된 좌표를 쓴다', () => {
+    // 눈으로 고른 좌표는 조용히 틀립니다. locate-tiles.js 가 원본과 픽셀 대조로
+    // 확정한 결과만 아틀라스에 들어가야 합니다.
+    const locations = JSON.parse(readFileSync(projectRoot + 'Data/tiles/tile-locations.json', 'utf8'));
+    const verified = new Set(Object.values(locations.tiles).map(t => `${t.sheet}:${t.x},${t.y}`));
+
+    for (const [name, { atlas, rect }] of sprites) {
+        if (!/^(wall|floor|ceiling)_/.test(name)) continue;
+        assert.ok(verified.has(`${atlas.key}:${rect.x},${rect.y}`),
+            `${name}의 좌표 (${rect.x},${rect.y})가 확인된 목록에 없습니다`);
+    }
+});

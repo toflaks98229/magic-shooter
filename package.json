@@ -9,6 +9,7 @@
     "test:update-snapshot": "node tests/update-snapshot.js",
     "build:atlas": "node tools/build-atlas.js",
     "preview": "node tools/preview.js",
-    "bench": "node tools/bench.js"
+    "bench": "node tools/bench.js",
+    "locate:tiles": "node tools/locate-tiles.js"
   }
 }

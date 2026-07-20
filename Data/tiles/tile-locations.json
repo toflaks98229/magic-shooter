@@ -1,0 +1,1238 @@
+{
+  "note": "npm run locate:tiles 로 생성됩니다. 직접 고치지 마십시오.",
+  "source": "https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/",
+  "tiles": {
+    "wall_main_1": {
+      "sheet": "wall",
+      "source": "dngn/wall/brick_dark_1_0",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "wall_main_2": {
+      "sheet": "wall",
+      "source": "dngn/wall/brick_dark_1_1",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "wall_main_3": {
+      "sheet": "wall",
+      "source": "dngn/wall/brick_dark_1_2",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "wall_main_4": {
+      "sheet": "wall",
+      "source": "dngn/wall/brick_dark_1_3",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "wall_main_5": {
+      "sheet": "wall",
+      "source": "dngn/wall/brick_dark_1_4",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "wall_main_6": {
+      "sheet": "wall",
+      "source": "dngn/wall/brick_dark_1_5",
+      "x": 160,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "wall_vault_1": {
+      "sheet": "wall",
+      "source": "dngn/wall/vault_stone00",
+      "x": 416,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "wall_vault_2": {
+      "sheet": "wall",
+      "source": "dngn/wall/vault_stone01",
+      "x": 448,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "wall_vault_3": {
+      "sheet": "wall",
+      "source": "dngn/wall/vault_stone02",
+      "x": 480,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "wall_vault_4": {
+      "sheet": "wall",
+      "source": "dngn/wall/vault_stone03",
+      "x": 512,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "wall_vault_5": {
+      "sheet": "wall",
+      "source": "dngn/wall/vault_stone04",
+      "x": 544,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "wall_vault_6": {
+      "sheet": "wall",
+      "source": "dngn/wall/vault_stone05",
+      "x": 576,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "wall_lair_1": {
+      "sheet": "wall",
+      "source": "dngn/wall/lair0",
+      "x": 256,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "wall_lair_2": {
+      "sheet": "wall",
+      "source": "dngn/wall/lair1",
+      "x": 288,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "wall_lair_3": {
+      "sheet": "wall",
+      "source": "dngn/wall/lair2",
+      "x": 320,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "wall_lair_4": {
+      "sheet": "wall",
+      "source": "dngn/wall/lair3",
+      "x": 352,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "wall_lair_5": {
+      "sheet": "wall",
+      "source": "dngn/wall/lair4",
+      "x": 384,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "wall_lair_6": {
+      "sheet": "wall",
+      "source": "dngn/wall/lair5",
+      "x": 416,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "wall_snake_1": {
+      "sheet": "wall",
+      "source": "dngn/wall/snake0",
+      "x": 896,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "wall_snake_2": {
+      "sheet": "wall",
+      "source": "dngn/wall/snake1",
+      "x": 928,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "wall_snake_3": {
+      "sheet": "wall",
+      "source": "dngn/wall/snake2",
+      "x": 960,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "wall_snake_4": {
+      "sheet": "wall",
+      "source": "dngn/wall/snake3",
+      "x": 992,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "wall_snake_5": {
+      "sheet": "wall",
+      "source": "dngn/wall/snake4",
+      "x": 0,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "wall_snake_6": {
+      "sheet": "wall",
+      "source": "dngn/wall/snake5",
+      "x": 32,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "wall_spider_1": {
+      "sheet": "wall",
+      "source": "dngn/wall/spider00",
+      "x": 608,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "wall_spider_2": {
+      "sheet": "wall",
+      "source": "dngn/wall/spider01",
+      "x": 640,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "wall_spider_3": {
+      "sheet": "wall",
+      "source": "dngn/wall/spider02",
+      "x": 672,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "wall_spider_4": {
+      "sheet": "wall",
+      "source": "dngn/wall/spider03",
+      "x": 704,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "wall_spider_5": {
+      "sheet": "wall",
+      "source": "dngn/wall/spider04",
+      "x": 736,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "wall_spider_6": {
+      "sheet": "wall",
+      "source": "dngn/wall/spider05",
+      "x": 768,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "wall_crypt_1": {
+      "sheet": "wall",
+      "source": "dngn/wall/crypt0",
+      "x": 448,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "wall_crypt_2": {
+      "sheet": "wall",
+      "source": "dngn/wall/crypt1",
+      "x": 480,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "wall_crypt_3": {
+      "sheet": "wall",
+      "source": "dngn/wall/crypt2",
+      "x": 512,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "wall_crypt_4": {
+      "sheet": "wall",
+      "source": "dngn/wall/crypt3",
+      "x": 544,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "wall_crypt_5": {
+      "sheet": "wall",
+      "source": "dngn/wall/crypt4",
+      "x": 576,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "wall_orc_1": {
+      "sheet": "wall",
+      "source": "dngn/wall/orc0",
+      "x": 672,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "wall_orc_2": {
+      "sheet": "wall",
+      "source": "dngn/wall/orc1",
+      "x": 704,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "wall_orc_3": {
+      "sheet": "wall",
+      "source": "dngn/wall/orc2",
+      "x": 736,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "wall_orc_4": {
+      "sheet": "wall",
+      "source": "dngn/wall/orc3",
+      "x": 768,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "wall_orc_5": {
+      "sheet": "wall",
+      "source": "dngn/wall/orc4",
+      "x": 800,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "wall_orc_6": {
+      "sheet": "wall",
+      "source": "dngn/wall/orc5",
+      "x": 832,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "wall_hell_1": {
+      "sheet": "wall",
+      "source": "dngn/wall/hell01",
+      "x": 224,
+      "y": 1024,
+      "w": 32,
+      "h": 32
+    },
+    "wall_hell_2": {
+      "sheet": "wall",
+      "source": "dngn/wall/hell02",
+      "x": 256,
+      "y": 1024,
+      "w": 32,
+      "h": 32
+    },
+    "wall_hell_3": {
+      "sheet": "wall",
+      "source": "dngn/wall/hell03",
+      "x": 288,
+      "y": 1024,
+      "w": 32,
+      "h": 32
+    },
+    "wall_hell_4": {
+      "sheet": "wall",
+      "source": "dngn/wall/hell04",
+      "x": 320,
+      "y": 1024,
+      "w": 32,
+      "h": 32
+    },
+    "wall_hell_5": {
+      "sheet": "wall",
+      "source": "dngn/wall/hell05",
+      "x": 352,
+      "y": 1024,
+      "w": 32,
+      "h": 32
+    },
+    "wall_hell_6": {
+      "sheet": "wall",
+      "source": "dngn/wall/hell06",
+      "x": 384,
+      "y": 1024,
+      "w": 32,
+      "h": 32
+    },
+    "wall_zot_1": {
+      "sheet": "wall",
+      "source": "dngn/wall/zot_stone_last00",
+      "x": 608,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "wall_zot_2": {
+      "sheet": "wall",
+      "source": "dngn/wall/zot_stone_last01",
+      "x": 640,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "wall_zot_3": {
+      "sheet": "wall",
+      "source": "dngn/wall/zot_stone_last02",
+      "x": 672,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "wall_zot_4": {
+      "sheet": "wall",
+      "source": "dngn/wall/zot_stone_last03",
+      "x": 704,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "wall_zot_5": {
+      "sheet": "wall",
+      "source": "dngn/wall/zot_stone_last04",
+      "x": 736,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "wall_zot_6": {
+      "sheet": "wall",
+      "source": "dngn/wall/zot_stone_last05",
+      "x": 768,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "wall_sandstone_1": {
+      "sheet": "wall",
+      "source": "dngn/wall/sandstone_wall0",
+      "x": 448,
+      "y": 1088,
+      "w": 32,
+      "h": 32
+    },
+    "wall_sandstone_2": {
+      "sheet": "wall",
+      "source": "dngn/wall/sandstone_wall1",
+      "x": 480,
+      "y": 1088,
+      "w": 32,
+      "h": 32
+    },
+    "wall_sandstone_3": {
+      "sheet": "wall",
+      "source": "dngn/wall/sandstone_wall2",
+      "x": 512,
+      "y": 1088,
+      "w": 32,
+      "h": 32
+    },
+    "wall_sandstone_4": {
+      "sheet": "wall",
+      "source": "dngn/wall/sandstone_wall3",
+      "x": 544,
+      "y": 1088,
+      "w": 32,
+      "h": 32
+    },
+    "wall_sandstone_5": {
+      "sheet": "wall",
+      "source": "dngn/wall/sandstone_wall4",
+      "x": 576,
+      "y": 1088,
+      "w": 32,
+      "h": 32
+    },
+    "wall_sandstone_6": {
+      "sheet": "wall",
+      "source": "dngn/wall/sandstone_wall5",
+      "x": 608,
+      "y": 1088,
+      "w": 32,
+      "h": 32
+    },
+    "floor_main_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/grey_dirt0",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "floor_main_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/grey_dirt1",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "floor_main_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/grey_dirt2",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "floor_main_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/grey_dirt3",
+      "x": 160,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "floor_main_5": {
+      "sheet": "floor",
+      "source": "dngn/floor/grey_dirt4",
+      "x": 192,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "floor_main_6": {
+      "sheet": "floor",
+      "source": "dngn/floor/grey_dirt5",
+      "x": 224,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lair_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/lair0",
+      "x": 576,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lair_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/lair1",
+      "x": 608,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lair_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/lair2",
+      "x": 640,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lair_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/lair3",
+      "x": 672,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lair_5": {
+      "sheet": "floor",
+      "source": "dngn/floor/lair4",
+      "x": 704,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lair_6": {
+      "sheet": "floor",
+      "source": "dngn/floor/lair5",
+      "x": 736,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "floor_bones_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/green_bones01",
+      "x": 512,
+      "y": 864,
+      "w": 32,
+      "h": 32
+    },
+    "floor_bones_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/green_bones02",
+      "x": 544,
+      "y": 864,
+      "w": 32,
+      "h": 32
+    },
+    "floor_bones_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/green_bones03",
+      "x": 576,
+      "y": 864,
+      "w": 32,
+      "h": 32
+    },
+    "floor_bones_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/green_bones04",
+      "x": 608,
+      "y": 864,
+      "w": 32,
+      "h": 32
+    },
+    "floor_bones_5": {
+      "sheet": "floor",
+      "source": "dngn/floor/green_bones05",
+      "x": 640,
+      "y": 864,
+      "w": 32,
+      "h": 32
+    },
+    "floor_bones_6": {
+      "sheet": "floor",
+      "source": "dngn/floor/green_bones06",
+      "x": 672,
+      "y": 864,
+      "w": 32,
+      "h": 32
+    },
+    "floor_black_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/black_cobalt01",
+      "x": 352,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_black_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/black_cobalt02",
+      "x": 384,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_black_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/black_cobalt03",
+      "x": 416,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_black_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/black_cobalt04",
+      "x": 448,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_black_5": {
+      "sheet": "floor",
+      "source": "dngn/floor/black_cobalt05",
+      "x": 480,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_black_6": {
+      "sheet": "floor",
+      "source": "dngn/floor/black_cobalt06",
+      "x": 512,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_orc_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/orc0",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "floor_orc_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/orc1",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "floor_orc_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/orc2",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "floor_orc_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/orc3",
+      "x": 160,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "floor_orc_5": {
+      "sheet": "floor",
+      "source": "dngn/floor/orc4",
+      "x": 192,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "floor_orc_6": {
+      "sheet": "floor",
+      "source": "dngn/floor/orc5",
+      "x": 224,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "floor_hell_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/infernal01",
+      "x": 992,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "floor_hell_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/infernal02",
+      "x": 0,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "floor_hell_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/infernal03",
+      "x": 32,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "floor_hell_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/infernal04",
+      "x": 64,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "floor_hell_5": {
+      "sheet": "floor",
+      "source": "dngn/floor/infernal05",
+      "x": 96,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "floor_hell_6": {
+      "sheet": "floor",
+      "source": "dngn/floor/infernal06",
+      "x": 128,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "floor_frozen_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/frozen0",
+      "x": 736,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_frozen_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/frozen1",
+      "x": 768,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_frozen_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/frozen2",
+      "x": 800,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_frozen_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/frozen3",
+      "x": 832,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_frozen_5": {
+      "sheet": "floor",
+      "source": "dngn/floor/frozen4",
+      "x": 864,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_frozen_6": {
+      "sheet": "floor",
+      "source": "dngn/floor/frozen5",
+      "x": 896,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lava_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/lava00",
+      "x": 576,
+      "y": 928,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lava_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/lava01",
+      "x": 608,
+      "y": 928,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lava_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/lava02",
+      "x": 640,
+      "y": 928,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lava_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/lava03",
+      "x": 672,
+      "y": 928,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lava_5": {
+      "sheet": "floor",
+      "source": "dngn/floor/lava04",
+      "x": 704,
+      "y": 928,
+      "w": 32,
+      "h": 32
+    },
+    "floor_lava_6": {
+      "sheet": "floor",
+      "source": "dngn/floor/lava05",
+      "x": 736,
+      "y": 928,
+      "w": 32,
+      "h": 32
+    },
+    "floor_spider_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/spider00",
+      "x": 704,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "floor_spider_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/spider01",
+      "x": 736,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "floor_spider_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/spider02",
+      "x": 768,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "floor_spider_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/spider03",
+      "x": 800,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "floor_spider_5": {
+      "sheet": "floor",
+      "source": "dngn/floor/spider04",
+      "x": 832,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "floor_spider_6": {
+      "sheet": "floor",
+      "source": "dngn/floor/spider05",
+      "x": 864,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "floor_sand_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/sand1",
+      "x": 192,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "floor_sand_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/sand2",
+      "x": 224,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "floor_sand_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/sand3",
+      "x": 256,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "floor_sand_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/sand4",
+      "x": 288,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "floor_sand_5": {
+      "sheet": "floor",
+      "source": "dngn/floor/sand5",
+      "x": 320,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "floor_sand_6": {
+      "sheet": "floor",
+      "source": "dngn/floor/sand6",
+      "x": 352,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "floor_limestone_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/limestone0",
+      "x": 384,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "floor_limestone_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/limestone1",
+      "x": 416,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "floor_limestone_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/limestone2",
+      "x": 448,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "floor_limestone_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/limestone3",
+      "x": 480,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "floor_limestone_5": {
+      "sheet": "floor",
+      "source": "dngn/floor/limestone4",
+      "x": 512,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "floor_limestone_6": {
+      "sheet": "floor",
+      "source": "dngn/floor/limestone5",
+      "x": 544,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_rock_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/rough_red0",
+      "x": 320,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_rock_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/rough_red1",
+      "x": 352,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_rock_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/rough_red2",
+      "x": 384,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_rock_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/rough_red3",
+      "x": 416,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_dirt_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/dirt0",
+      "x": 992,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_dirt_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/dirt1",
+      "x": 0,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_dirt_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/dirt2",
+      "x": 32,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_mud_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/mud0",
+      "x": 320,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_mud_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/mud1",
+      "x": 352,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_mud_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/mud2",
+      "x": 384,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_mud_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/mud3",
+      "x": 416,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_tomb_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/tomb0",
+      "x": 64,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_tomb_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/tomb1",
+      "x": 96,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_tomb_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/tomb2",
+      "x": 128,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_tomb_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/tomb3",
+      "x": 160,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_ice_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/ice0",
+      "x": 448,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_ice_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/ice1",
+      "x": 480,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_ice_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/ice2",
+      "x": 512,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_ice_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/ice3",
+      "x": 544,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_volcanic_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/volcanic_floor0",
+      "x": 320,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_volcanic_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/volcanic_floor1",
+      "x": 352,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_volcanic_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/volcanic_floor2",
+      "x": 384,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_volcanic_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/volcanic_floor3",
+      "x": 416,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_marble_1": {
+      "sheet": "floor",
+      "source": "dngn/floor/marble_floor1",
+      "x": 832,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_marble_2": {
+      "sheet": "floor",
+      "source": "dngn/floor/marble_floor2",
+      "x": 864,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_marble_3": {
+      "sheet": "floor",
+      "source": "dngn/floor/marble_floor3",
+      "x": 896,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "ceil_marble_4": {
+      "sheet": "floor",
+      "source": "dngn/floor/marble_floor4",
+      "x": 928,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "door_closed": {
+      "sheet": "feat",
+      "source": "dngn/doors/closed_door",
+      "x": 739,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "door_closed_crypt": {
+      "sheet": "feat",
+      "source": "dngn/doors/closed_door_crypt",
+      "x": 960,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    }
+  }
+}

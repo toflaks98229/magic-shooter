@@ -150,15 +150,24 @@ mapGenerator.js
 
 아틀라스는 손으로 쓰지 않고 생성합니다.
 
-    npm run build:atlas
+    npm run locate:tiles     (좌표 확정, 네트워크 필요)
+    npm run build:atlas      (아틀라스 생성)
 
-어느 시트의 어느 좌표를 무엇으로 쓸지는 tools/build-atlas.js 의 THEMES와 SPRITES 표에
-모여 있습니다. 스프라이트를 교체하려면 이 표만 고치고 다시 생성하면 됩니다.
-좌표가 시트 밖으로 나가면 생성 단계에서 오류로 멈추고, 코드가 요구하는 스프라이트가
-빠지면 tests/atlas.test.js 가 실패합니다.
+타일시트는 Dungeon Crawl Stone Soup 의 것입니다. 시트는 여러 타일을 한 장으로 묶은 것이라
+어느 좌표가 어떤 타일인지 그림만 봐서는 알 수 없습니다. 처음에는 눈으로 골랐는데,
+그 방식은 'hell 벽인 줄 알았던 것이 사실 황금 벽돌'이었던 것처럼 조용히 틀립니다.
 
-타일시트는 Dungeon Crawl Stone Soup 의 것을 사용합니다. 이 타일셋에는 Doom 식 HUD 얼굴
-이미지가 없어 face_* 스프라이트는 비어 있으며, 해당 자리는 플레이스홀더로 표시됩니다.
+locate-tiles.js 는 crawl 저장소(github.com/crawl/crawl)에서 이름이 붙은 원본 타일을 받아
+시트 안에서 픽셀이 완전히 일치하는 위치를 찾습니다. 좌표가 이름으로 확정되고,
+시트를 다른 버전으로 교체하면 일치하지 않아 즉시 드러납니다.
+결과는 Data/tiles/tile-locations.json 에 저장되며 build-atlas.js 가 이것을 읽습니다.
+네트워크가 필요한 것은 좌표 확정 단계뿐입니다.
+
+어느 던전이 어떤 재질을 쓸지는 build-atlas.js 의 THEMES 표에 있습니다. 원작의 재질 이름을
+그대로 쓰므로 짐승굴은 lair, 납골당은 crypt, 지옥은 hell 벽이 나옵니다.
+
+이 타일셋에는 Doom 식 HUD 얼굴 이미지가 없어 face_* 스프라이트는 비어 있으며,
+해당 자리는 플레이스홀더로 표시됩니다.
 
 화면 확인: 브라우저를 띄우지 않고도 한 프레임을 PNG로 뽑아 확인할 수 있습니다.
 
