@@ -79,6 +79,98 @@ const BRANCH_TABLE_NAMES = {
     U: 'Depths', H: 'Hell', Z: 'Zot',
 };
 
+/** @description 이름으로 정확히 짝지어 둔 그림 */
+const SPRITE_BY_NAME = {
+    'rat': 'enemy_rat', 'kobold': 'enemy_kobold', 'goblin': 'enemy_goblin',
+    'orc': 'enemy_orc', 'orc warrior': 'enemy_orc_warrior', 'centaur': 'enemy_centaur',
+    'hydra': 'enemy_hydra', 'jelly': 'enemy_jelly', 'zombie': 'enemy_zombie',
+    'skeletal warrior': 'enemy_skeleton', 'mummy': 'enemy_mummy',
+    'ice beast': 'enemy_ice_beast', 'ice dragon': 'enemy_ice_dragon',
+    'frost giant': 'enemy_ice_giant', 'fire giant': 'enemy_fire_giant',
+    'stone giant': 'enemy_stone_giant', 'gargoyle': 'enemy_gargoyle',
+    'minotaur': 'enemy_minotaur', 'naga': 'enemy_naga', 'merfolk': 'enemy_merfolk',
+    'killer bee': 'enemy_killer_bee', 'mana viper': 'enemy_mana_viper',
+    'menkaure': 'enemy_menkaure', 'rakshasa': 'enemy_rakshasa',
+    'simulacrum': 'enemy_simulacrum', 'crocodile': 'enemy_crocodile',
+    'cacodemon': 'enemy_cacodemon', 'hell knight': 'enemy_hell_knight',
+    'iron golem': 'enemy_golem', 'deep elf knight': 'enemy_deep_elf_knight',
+    'phantom': 'enemy_phantasmal', 'wraith': 'enemy_spectre', 'troll': 'enemy_troll',
+    'bullfrog': 'enemy_frog', 'giant spider': 'enemy_spider',
+};
+
+/**
+ * @description 글리프 문자로 그림을 고르는 표.
+ *
+ * 우리 아틀라스에는 적 그림이 마흔세 개뿐인데 DCSS 몬스터는 오백쉰다섯 종입니다.
+ * 이름으로 하나하나 짝지으면 대부분이 빈손으로 남아 플레이스홀더가 화면을 채웁니다.
+ * 실제로 D:1 에 나오는 열두 종 중 아홉 종이 그림 없이 나오고 있었습니다.
+ *
+ * DCSS 의 글리프 문자는 그 자체가 분류입니다. r 은 설치류, S 는 뱀, K 는 코볼트처럼
+ * 같은 글자를 쓰는 것들은 생김새도 비슷합니다. 그래서 글리프를 기준으로 삼으면
+ * 한 글자당 하나만 정해도 전부 그럴듯하게 덮입니다.
+ *
+ * 정확한 그림은 아닙니다. 타일 좌표를 뽑아 낱낱이 붙이기 전까지의 임시 표현이며,
+ * 그때가 되면 이 표는 사라집니다. 다만 '무엇인지 알아볼 수 있는 그림'이
+ * '알아볼 수 없는 플레이스홀더'보다 낫다고 보았습니다.
+ */
+const SPRITE_BY_GLYPH = {
+    // 짐승
+    r: 'enemy_rat',         b: 'enemy_beast',       h: 'enemy_beast',
+    j: 'enemy_goblin',      J: 'enemy_jelly',       l: 'enemy_crocodile',
+    F: 'enemy_frog',        w: 'enemy_snake',       S: 'enemy_snake',
+    s: 'enemy_spider',      a: 'enemy_killer_bee',  y: 'enemy_killer_bee',
+    R: 'enemy_hell_knight', Y: 'enemy_beast',       c: 'enemy_centaur',
+    H: 'enemy_beast',       B: 'enemy_beast',       m: 'enemy_merfolk',
+    D: 'enemy_ice_dragon',  d: 'enemy_ice_dragon',  X: 'enemy_hydra',
+    t: 'enemy_crocodile',   q: 'enemy_ice_dragon',  k: 'enemy_ice_dragon',
+
+    // 인간형
+    K: 'enemy_kobold',      g: 'enemy_goblin',
+    o: 'enemy_orc',         e: 'enemy_deep_elf',    Q: 'enemy_deep_elf',
+    N: 'enemy_naga',        T: 'enemy_troll',
+    C: 'enemy_stone_giant', O: 'enemy_stone_giant',
+    p: 'enemy_hell_knight', '@': 'enemy_hell_knight',
+
+    // 언데드
+    Z: 'enemy_zombie',      z: 'enemy_zombie',      M: 'enemy_mummy',
+    W: 'enemy_spectre',     L: 'enemy_spectre',     V: 'enemy_phantasmal',
+    '%': 'enemy_zombie',
+
+    // 악마
+    i: 'enemy_imp',         u: 'enemy_imp',         '5': 'enemy_imp',
+    '&': 'enemy_cacodemon',
+    '1': 'enemy_fire_demon', '2': 'enemy_fire_demon',
+    '3': 'enemy_demon',     '4': 'enemy_demon',
+
+    // 그 밖
+    G: 'enemy_gargoyle',    v: 'enemy_simulacrum',  '*': 'enemy_golem',
+    '8': 'enemy_golem',     '9': 'enemy_golem',     '0': 'enemy_golem',
+    ';': 'enemy_golem',     "'": 'enemy_golem',
+    f: 'enemy_slime',       P: 'enemy_slime',
+    A: 'enemy_killer_bee',  I: 'enemy_golem',       E: 'enemy_ice_beast',
+    n: 'enemy_zombie',      x: 'enemy_jelly',
+};
+
+/**
+ * 몬스터에게 붙일 그림을 고릅니다.
+ *
+ * 이름으로 정확히 짝지어 둔 것이 있으면 그것을 쓰고, 없으면 글리프로 고릅니다.
+ * 글리프도 모르면 마지막으로 계열을 봅니다. 그래도 없으면 null 이고,
+ * 그때만 렌더러가 색 사각형으로 그립니다.
+ * @param {object} data - 몬스터 데이터
+ * @returns {string|null} 스프라이트 키
+ */
+function pickSprite(data) {
+    if (SPRITE_BY_NAME[data.name]) return SPRITE_BY_NAME[data.name];
+    if (SPRITE_BY_GLYPH[data.glyph]) return SPRITE_BY_GLYPH[data.glyph];
+
+    if (data.holiness.includes('undead')) return 'enemy_zombie';
+    if (data.holiness.includes('demonic')) return 'enemy_demon';
+    if (data.holiness.includes('plant')) return 'enemy_slime';
+    if (data.holiness.includes('nonliving')) return 'enemy_golem';
+    return null;
+}
+
 /**
  * DCSS 의 speed 를 이 게임의 이동 속도(기준 프레임당 픽셀)로 바꿉니다.
  *
@@ -152,7 +244,7 @@ function toRuntimeMonster(data) {
         size: data.sizePixels,
         glyph: data.glyph,
         color: GLYPH_COLOURS[data.colour] ?? GLYPH_COLOURS.lightgrey,
-        spriteKey: data.spriteKey,
+        spriteKey: pickSprite(data),
 
         // 행동
         behavior: BEHAVIOR_OVERRIDES[data.id] ?? 'melee',

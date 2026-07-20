@@ -233,9 +233,13 @@ export function spawnEnemiesForFloor() {
 
     // 어느 층에 무엇이 나오는가는 DCSS 의 출현표가 정합니다.
     // 예전에는 tier 라는 자체 값으로 대충 정했는데, 이제 원본의 난이도 곡선을 그대로 씁니다.
+    // 출현표는 '가지 안에서 몇 층인가'로 색인합니다. 절대 깊이가 아닙니다.
+    // 오크 광산의 표는 1~4 밖에 없는데 절대 깊이 12 를 넘기면 후보가 하나도 없어,
+    // 그 던전에 적이 아예 나오지 않습니다. 실제로 오크 광산·뱀굴·엘프 회관이
+    // 텅 비어 있었습니다. 적 수와 아이템 등급은 절대 깊이를 그대로 씁니다.
     const count = Math.min(C.MAX_ENEMIES_PER_FLOOR, dangerLevel * 2 + 3);
     for (let i = 0; i < count; i++) {
-        const id = rollMonsterFor(world.branch, dangerLevel);
+        const id = rollMonsterFor(world.branch, world.floor);
         if (id) spawnMonster(id, findSpawnPoint());
     }
 

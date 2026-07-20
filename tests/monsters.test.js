@@ -358,3 +358,49 @@ test('경험치를 주지 않는 몬스터가 실제로 있다', () => {
     assert.ok(free.length > 20, `경험치 0 인 몬스터가 ${free.length}종뿐입니다`);
     assert.ok(M.MONSTERS.rat.exp > 0, '쥐는 경험치를 주어야 합니다');
 });
+
+// --- 그림과 스폰 깊이 -----------------------------------------------------------
+
+test('스폰되는 모든 몬스터에 그림이 있다', () => {
+    // 아틀라스의 적 그림은 마흔세 개뿐인데 몬스터는 오백쉰다섯 종입니다.
+    // 이름으로만 짝지으면 대부분이 빈손으로 남아, 실제로 D:1 에 나오는 열두 종 중
+    // 아홉 종이 플레이스홀더로 나오고 있었습니다.
+    // 글리프 문자가 곧 분류이므로 그것으로 덮습니다.
+    const missing = Object.values(M.MONSTERS)
+        .filter(m => m.spawnable && !m.spriteKey);
+    assert.deepEqual(missing.map(m => `${m.id}(${m.glyph})`), [],
+        '그림 없이 나오는 몬스터가 있습니다');
+});
+
+test('1층에 나오는 것이 전부 알아볼 수 있다', () => {
+    seedRandom(0x5717E);
+    const seen = new Set();
+    for (let i = 0; i < 2000; i++) {
+        const id = M.rollMonsterFor('D', 1);
+        if (id) seen.add(id);
+    }
+    for (const id of seen) {
+        assert.ok(M.MONSTERS[id].spriteKey, `${id} 가 그림 없이 나옵니다`);
+    }
+});
+
+test('출현표는 가지 안에서의 깊이로 색인한다', () => {
+    // 절대 깊이를 넘기면 후보가 하나도 없어 그 던전이 텅 빕니다.
+    // 오크 광산의 표는 1~4 밖에 없는데 절대 깊이는 12 부터라,
+    // 실제로 오크 광산·뱀굴·엘프 회관에 적이 하나도 나오지 않았습니다.
+    seedRandom(0xDEE7);
+    for (const branch of ['O', 'P', 'E', 'L', 'V']) {
+        let found = 0;
+        for (let i = 0; i < 100; i++) if (M.rollMonsterFor(branch, 1)) found++;
+        assert.ok(found > 90, `${branch} 1층에서 ${found}/100 만 뽑혔습니다`);
+    }
+});
+
+test('가지의 1층에 실제로 적이 스폰된다', () => {
+    // 위 검사는 뽑기만 봅니다. 게임을 실제로 굴려 층이 채워지는지도 봅니다.
+    seedRandom(0xB2A);
+    for (const branch of ['O', 'P', 'E']) {
+        const enemies = spawnIn(branch, 1);
+        assert.ok(enemies.length > 0, `${branch} 1층이 비었습니다`);
+    }
+});
