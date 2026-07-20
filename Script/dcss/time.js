@@ -136,3 +136,31 @@ export function monsterActionMsWithStatus(speed = BASELINE_DELAY, status = {}) {
     if (status.slowed) effective = divRandRound(effective * 2, 3);
     return monsterActionMs(effective);
 }
+
+/**
+ * 행동 하나에 걸리는 시간을 구합니다. (monster.cc:5947 energy_cost)
+ *
+ * DCSS 는 속도를 두 축으로 나눕니다. speed 는 에너지를 버는 속도이고,
+ * energy 는 행동 하나의 값입니다. 둘이 나뉘어 실제 속도가 정해집니다.
+ *
+ * 이 분리가 있어야 '걷기는 빠른데 크게 휘두르는' 몬스터를 표현할 수 있습니다.
+ * 독사는 speed 13 에 물에서의 비용이 6 이라, 땅에서 1.3배인데 물에서는 2.17배입니다.
+ * 하나의 숫자로 뭉뚱그리면 이 차이가 사라집니다.
+ * @param {number} speed - 몬스터의 speed
+ * @param {number} [cost] - 이 행동의 에너지 비용. 기본은 10
+ * @returns {number} 걸리는 시간(aut). 행동할 수 없으면 Infinity
+ */
+export function actionAuts(speed, cost = BASELINE_DELAY) {
+    if (!canAct(speed)) return Infinity;
+    return (cost * BASELINE_DELAY) / speed;
+}
+
+/**
+ * 행동 하나에 걸리는 시간을 밀리초로 구합니다.
+ * @param {number} speed - 몬스터의 speed
+ * @param {number} [cost] - 이 행동의 에너지 비용
+ * @returns {number} 걸리는 시간(ms)
+ */
+export function actionMs(speed, cost = BASELINE_DELAY) {
+    return autToMs(actionAuts(speed, cost));
+}

@@ -28,6 +28,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -68,6 +75,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -108,6 +122,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
@@ -159,6 +180,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -201,6 +229,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "snake",
   "intelligence": "animal",
@@ -239,6 +274,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -282,6 +324,13 @@ export const MONSTER_DATA = [
   "colour": "etc_air",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -327,6 +376,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "snake",
   "intelligence": "human",
@@ -376,6 +432,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "plant",
   "intelligence": "human",
@@ -418,6 +481,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
@@ -461,6 +531,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 8,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -509,6 +586,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -558,6 +642,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "snake",
   "intelligence": "animal",
@@ -596,6 +687,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -646,6 +744,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 5,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -696,6 +801,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 15,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -746,6 +858,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -796,6 +915,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -839,6 +965,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -890,6 +1023,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "animal",
@@ -937,6 +1077,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -975,6 +1122,13 @@ export const MONSTER_DATA = [
   "colour": "etc_tree",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -1022,6 +1176,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -1072,6 +1233,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -1116,6 +1284,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -1162,6 +1337,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -1207,6 +1389,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "arachnid",
   "intelligence": "human",
@@ -1250,6 +1439,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -1294,6 +1490,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -1339,6 +1542,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 30,
+   "swim": 30,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "brainless",
@@ -1382,6 +1592,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -1428,6 +1645,13 @@ export const MONSTER_DATA = [
   "colour": "etc_random",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "orb",
   "intelligence": "brainless",
@@ -1479,6 +1703,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -1521,6 +1752,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -1584,6 +1822,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
@@ -1641,6 +1886,13 @@ export const MONSTER_DATA = [
   "colour": "etc_electricity",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "snake",
   "intelligence": "human",
@@ -1694,6 +1946,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -1740,6 +1999,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
@@ -1794,6 +2060,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
@@ -1832,6 +2105,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
@@ -1870,6 +2150,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
@@ -1911,6 +2198,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -1957,6 +2251,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 12,
+   "swim": 12,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -1997,6 +2298,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -2035,6 +2343,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "bat",
   "intelligence": "animal",
@@ -2071,6 +2386,13 @@ export const MONSTER_DATA = [
   "colour": "etc_magic",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
@@ -2117,6 +2439,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -2164,6 +2493,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "bird",
   "intelligence": "human",
@@ -2211,6 +2547,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "snake",
   "intelligence": "animal",
@@ -2265,6 +2608,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
@@ -2303,6 +2653,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
@@ -2345,6 +2702,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
@@ -2379,6 +2743,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
@@ -2426,6 +2797,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 20,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
@@ -2471,6 +2849,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
@@ -2514,6 +2899,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "human",
@@ -2561,6 +2953,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -2598,6 +2997,13 @@ export const MONSTER_DATA = [
   "colour": "etc_ice",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -2650,6 +3056,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -2698,6 +3111,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 14,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -2742,6 +3162,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -2781,6 +3208,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "insect",
   "intelligence": "animal",
@@ -2815,6 +3249,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "orb",
   "intelligence": "brainless",
@@ -2869,6 +3310,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -2920,6 +3368,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -2967,6 +3422,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "insect",
   "intelligence": "animal",
@@ -3002,6 +3464,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "orb",
   "intelligence": "brainless",
@@ -3051,6 +3520,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -3091,6 +3567,13 @@ export const MONSTER_DATA = [
   "colour": "etc_orb_glow",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -3137,6 +3620,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "snake",
   "intelligence": "human",
@@ -3170,6 +3660,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
@@ -3225,6 +3722,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -3271,6 +3775,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "arachnid",
   "intelligence": "animal",
@@ -3310,6 +3821,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
@@ -3358,6 +3876,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 45,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -3398,6 +3923,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -3431,6 +3963,13 @@ export const MONSTER_DATA = [
   "colour": "etc_earth",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
@@ -3468,6 +4007,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "plant",
   "intelligence": "brainless",
@@ -3506,6 +4052,13 @@ export const MONSTER_DATA = [
   "colour": "etc_jewel",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "brainless",
@@ -3555,6 +4108,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": "enemy_cacodemon",
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -3599,6 +4159,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 30,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -3641,6 +4208,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
@@ -3681,6 +4255,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -3724,6 +4305,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -3764,6 +4352,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "bird",
   "intelligence": "animal",
@@ -3806,6 +4401,13 @@ export const MONSTER_DATA = [
   "colour": "etc_gold",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
@@ -3854,6 +4456,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
@@ -3900,6 +4509,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": "enemy_centaur",
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
@@ -3940,6 +4556,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -3989,6 +4612,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 7,
+   "swim": 7,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -4033,6 +4663,13 @@ export const MONSTER_DATA = [
   "colour": "etc_random",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -4077,6 +4714,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -4128,6 +4772,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 20
+  },
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
@@ -4169,6 +4820,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -4210,6 +4868,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "insect",
   "intelligence": "animal",
@@ -4245,6 +4910,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "brainless",
@@ -4289,6 +4961,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "brainless",
@@ -4333,6 +5012,13 @@ export const MONSTER_DATA = [
   "colour": "etc_silver",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -4379,6 +5065,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -4429,6 +5122,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "blob",
   "intelligence": "brainless",
@@ -4469,6 +5169,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -4511,6 +5218,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -4560,6 +5274,13 @@ export const MONSTER_DATA = [
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -4601,6 +5322,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
@@ -4640,6 +5368,13 @@ export const MONSTER_DATA = [
   "colour": "etc_gold",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 20
+  },
   "size": "medium",
   "shape": "blob",
   "intelligence": "brainless",
@@ -4684,6 +5419,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -4730,6 +5472,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": "enemy_crocodile",
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -4768,6 +5517,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -4811,6 +5567,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
@@ -4857,6 +5620,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 20,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
@@ -4897,6 +5667,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
@@ -4932,6 +5709,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
@@ -4973,6 +5757,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 14,
+   "swim": 14,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
@@ -5020,6 +5811,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5064,6 +5862,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -5107,6 +5912,13 @@ export const MONSTER_DATA = [
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
@@ -5156,6 +5968,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "snail",
   "intelligence": "animal",
@@ -5196,6 +6015,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5239,6 +6065,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -5281,6 +6114,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5321,6 +6161,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "insect",
   "intelligence": "animal",
@@ -5366,6 +6213,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -5405,6 +6259,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
@@ -5446,6 +6307,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5485,6 +6353,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5525,6 +6400,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5570,6 +6452,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5611,6 +6500,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5651,6 +6547,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5691,6 +6594,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5731,6 +6641,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5770,6 +6687,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5809,6 +6733,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": "enemy_deep_elf_knight",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5849,6 +6780,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 5,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5890,6 +6828,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5940,6 +6885,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -5991,6 +6943,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6042,6 +7001,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6084,6 +7050,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6135,6 +7108,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "centipede",
   "intelligence": "animal",
@@ -6174,6 +7154,13 @@ export const MONSTER_DATA = [
   "colour": "etc_random",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
@@ -6218,6 +7205,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6266,6 +7260,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6309,6 +7310,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6363,6 +7371,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6416,6 +7431,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6453,6 +7475,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "human",
@@ -6493,6 +7522,13 @@ export const MONSTER_DATA = [
   "colour": "ETC_IRON",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -6546,6 +7582,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -6584,6 +7627,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6641,6 +7691,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "blob",
   "intelligence": "human",
@@ -6692,6 +7749,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
@@ -6732,6 +7796,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6777,6 +7848,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6819,6 +7897,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -6860,6 +7945,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -6899,6 +7991,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -6949,6 +8048,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -6989,6 +8095,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -7028,6 +8141,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -7067,6 +8187,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -7106,6 +8233,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -7141,6 +8275,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -7177,6 +8318,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -7213,6 +8361,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
@@ -7256,6 +8411,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -7302,6 +8464,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
@@ -7335,6 +8504,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -7386,6 +8562,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -7429,6 +8612,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -7473,6 +8663,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -7515,6 +8712,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -7556,6 +8760,13 @@ export const MONSTER_DATA = [
   "colour": "etc_earth",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -7600,6 +8811,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
@@ -7640,6 +8858,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -7682,6 +8907,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -7732,6 +8964,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -7771,6 +9010,13 @@ export const MONSTER_DATA = [
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "animal",
@@ -7828,6 +9074,13 @@ export const MONSTER_DATA = [
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "snake",
   "intelligence": "animal",
@@ -7871,6 +9124,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
@@ -7927,6 +9187,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
@@ -7974,6 +9241,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -8007,6 +9281,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -8044,6 +9325,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "animal",
@@ -8086,6 +9374,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "snail",
   "intelligence": "animal",
@@ -8132,6 +9427,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -8170,6 +9472,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -8220,6 +9529,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "arachnid",
   "intelligence": "animal",
@@ -8261,6 +9577,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 6,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -8304,6 +9627,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "blob",
   "intelligence": "brainless",
@@ -8362,6 +9692,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -8405,6 +9742,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -8458,6 +9802,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
@@ -8500,6 +9851,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 15,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -8542,6 +9900,13 @@ export const MONSTER_DATA = [
   "colour": "etc_blood",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
@@ -8591,6 +9956,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -8631,6 +10003,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -8682,6 +10061,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -8722,6 +10108,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
@@ -8758,6 +10151,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 8,
+   "swim": 8,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
@@ -8801,6 +10201,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -8842,6 +10249,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -8881,6 +10295,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "quadruped",
   "intelligence": "human",
@@ -8928,6 +10349,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -8971,6 +10399,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "bat",
   "intelligence": "animal",
@@ -9021,6 +10456,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -9072,6 +10514,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -9109,6 +10558,13 @@ export const MONSTER_DATA = [
   "colour": "etc_fire",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -9154,6 +10610,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": "enemy_fire_giant",
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -9191,6 +10654,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -9240,6 +10710,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -9278,6 +10755,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -9320,6 +10804,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -9368,6 +10859,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "blob",
   "intelligence": "brainless",
@@ -9405,6 +10903,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
@@ -9454,6 +10959,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -9496,6 +11008,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -9539,6 +11058,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -9587,6 +11113,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -9633,6 +11166,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -9665,6 +11205,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -9707,6 +11254,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": "enemy_ice_giant",
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -9750,6 +11304,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
@@ -9786,6 +11347,13 @@ export const MONSTER_DATA = [
   "colour": "etc_magic",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
@@ -9830,6 +11398,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
@@ -9874,6 +11449,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": "enemy_gargoyle",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
@@ -9918,6 +11500,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "snail",
   "intelligence": "human",
@@ -9960,6 +11549,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -10012,6 +11608,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -10065,6 +11668,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "insect_winged",
   "intelligence": "animal",
@@ -10103,6 +11713,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -10152,6 +11769,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -10189,6 +11813,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -10225,6 +11856,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -10261,6 +11899,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
@@ -10298,6 +11943,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
@@ -10350,6 +12002,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -10394,6 +12053,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "orb",
   "intelligence": "human",
@@ -10440,6 +12106,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -10476,6 +12149,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -10515,6 +12195,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -10555,6 +12242,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -10594,6 +12288,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 15,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -10635,6 +12336,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": "enemy_goblin",
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -10668,6 +12376,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "brainless",
@@ -10721,6 +12436,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -10760,6 +12482,13 @@ export const MONSTER_DATA = [
   "colour": "etc_gold",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "orb",
   "intelligence": "brainless",
@@ -10797,6 +12526,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": "enemy_golem",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -10839,6 +12575,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
@@ -10877,6 +12620,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "orb",
   "intelligence": "human",
@@ -10919,6 +12669,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -10966,6 +12723,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -11012,6 +12776,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -11052,6 +12823,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -11098,6 +12876,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -11139,6 +12924,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -11184,6 +12976,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -11227,6 +13026,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "snake",
   "intelligence": "human",
@@ -11279,6 +13085,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
@@ -11320,6 +13133,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -11364,6 +13184,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -11405,6 +13232,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -11452,6 +13286,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -11494,6 +13335,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 5,
+   "swim": 5,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "misc",
   "intelligence": "brainless",
@@ -11544,6 +13392,13 @@ export const MONSTER_DATA = [
   "colour": "etc_iron",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -11586,6 +13441,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -11626,6 +13488,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -11670,6 +13539,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": "enemy_hell_knight",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -11706,6 +13582,13 @@ export const MONSTER_DATA = [
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -11748,6 +13631,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -11794,6 +13684,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -11840,6 +13737,13 @@ export const MONSTER_DATA = [
   "colour": "etc_fire",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -11890,6 +13794,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -11925,6 +13836,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "brainless",
@@ -11976,6 +13894,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -12022,6 +13947,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -12074,6 +14006,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -12107,6 +14046,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -12156,6 +14102,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -12195,6 +14148,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -12233,6 +14193,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -12273,6 +14240,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "animal",
@@ -12314,6 +14288,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -12354,6 +14335,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid_tailed",
   "intelligence": "animal",
@@ -12392,6 +14380,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -12431,6 +14426,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": "enemy_hydra",
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -12472,6 +14474,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": "enemy_ice_beast",
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -12514,6 +14523,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -12566,6 +14582,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": "enemy_ice_dragon",
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -12614,6 +14637,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -12653,6 +14683,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -12715,6 +14752,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -12764,6 +14808,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -12802,6 +14853,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -12844,6 +14902,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -12885,6 +14950,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -12924,6 +14996,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -12978,6 +15057,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -13021,6 +15107,13 @@ export const MONSTER_DATA = [
   "colour": "etc_iron",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -13064,6 +15157,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13114,6 +15214,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 7,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
@@ -13157,6 +15264,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13212,6 +15326,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13255,6 +15376,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13295,6 +15423,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13334,6 +15469,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13381,6 +15523,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13422,6 +15571,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13461,6 +15617,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 15,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13500,6 +15663,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -13538,6 +15708,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": "enemy_jelly",
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
@@ -13585,6 +15762,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 12,
+   "swim": 12,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13625,6 +15809,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13671,6 +15862,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 6,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "animal",
@@ -13714,6 +15912,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13755,6 +15960,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "arachnid",
   "intelligence": "human",
@@ -13801,6 +16013,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13849,6 +16068,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13897,6 +16123,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13943,6 +16176,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -13991,6 +16231,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 45,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14037,6 +16284,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
@@ -14078,6 +16332,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14125,6 +16386,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": "enemy_killer_bee",
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "animal",
@@ -14166,6 +16434,13 @@ export const MONSTER_DATA = [
   "colour": "etc_random",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14208,6 +16483,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14250,6 +16532,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 15
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14289,6 +16578,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14328,6 +16624,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14372,6 +16675,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14414,6 +16724,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14453,6 +16770,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": "enemy_kobold",
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14492,6 +16816,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -14524,6 +16855,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -14568,6 +16906,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "snake",
   "intelligence": "animal",
@@ -14611,6 +16956,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "animal",
@@ -14650,6 +17002,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
@@ -14693,6 +17052,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
@@ -14734,6 +17100,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14775,6 +17148,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -14819,6 +17199,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -14857,6 +17244,13 @@ export const MONSTER_DATA = [
   "colour": "etc_electricity",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
@@ -14914,6 +17308,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -14946,6 +17347,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "orb",
   "intelligence": "brainless",
@@ -14990,6 +17398,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 15,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15031,6 +17446,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15076,6 +17498,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
@@ -15125,6 +17554,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15166,6 +17602,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
@@ -15210,6 +17653,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15245,6 +17695,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15286,6 +17743,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": "enemy_mana_viper",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
@@ -15337,6 +17801,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -15381,6 +17852,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15428,6 +17906,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15470,6 +17955,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "fish",
   "intelligence": "animal",
@@ -15507,6 +17999,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15558,6 +18057,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15607,6 +18113,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "insect_winged",
   "intelligence": "human",
@@ -15649,6 +18162,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15701,6 +18221,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -15747,6 +18274,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15781,6 +18315,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15821,6 +18362,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 6,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15860,6 +18408,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15901,6 +18456,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15940,6 +18502,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": "enemy_merfolk",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -15979,6 +18548,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -16025,6 +18601,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": "enemy_minotaur",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -16070,6 +18653,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "human",
@@ -16126,6 +18716,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -16175,6 +18772,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
@@ -16220,6 +18824,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
@@ -16273,6 +18884,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -16326,6 +18944,13 @@ export const MONSTER_DATA = [
   "colour": "etc_mutagenic",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "blob",
   "intelligence": "brainless",
@@ -16373,6 +18998,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "insect_winged",
   "intelligence": "animal",
@@ -16407,6 +19039,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -16449,6 +19088,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
@@ -16488,6 +19134,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -16532,6 +19185,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": "enemy_mummy",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -16579,6 +19239,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
@@ -16627,6 +19294,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -16671,6 +19345,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 14,
+   "swim": 14,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
@@ -16718,6 +19399,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 14,
+   "swim": 14,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
@@ -16765,6 +19453,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 14,
+   "swim": 14,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
@@ -16814,6 +19509,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 14,
+   "swim": 14,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
@@ -16862,6 +19564,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": "enemy_naga",
   "sizePixels": 26,
+  "energy": {
+   "walk": 14,
+   "swim": 14,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
@@ -16909,6 +19618,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 14,
+   "swim": 14,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
@@ -16952,6 +19668,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "brainless",
@@ -17001,6 +19724,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "blob",
   "intelligence": "human",
@@ -17041,6 +19771,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 20
+  },
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
@@ -17085,6 +19822,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 8,
+   "swim": 8,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "quadruped",
   "intelligence": "human",
@@ -17127,6 +19871,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17166,6 +19917,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17214,6 +19972,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17271,6 +20036,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "human",
@@ -17315,6 +20087,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17357,6 +20136,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17404,6 +20190,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
@@ -17446,6 +20239,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17488,6 +20288,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17536,6 +20343,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -17578,6 +20392,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "bat",
   "intelligence": "animal",
@@ -17619,6 +20440,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17667,6 +20495,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17711,6 +20546,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
@@ -17752,6 +20594,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 15,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17792,6 +20641,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 15,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17825,6 +20681,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
@@ -17861,6 +20724,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
@@ -17908,6 +20778,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17948,6 +20825,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 15,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -17983,6 +20867,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "orb",
   "intelligence": "human",
@@ -18030,6 +20921,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -18063,6 +20961,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18111,6 +21016,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "human",
@@ -18145,6 +21057,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
@@ -18191,6 +21110,13 @@ export const MONSTER_DATA = [
   "colour": "etc_unholy",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "human",
@@ -18233,6 +21159,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "human",
@@ -18274,6 +21207,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "human",
@@ -18321,6 +21261,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 20
+  },
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
@@ -18363,6 +21310,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18408,6 +21362,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18447,6 +21408,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18487,6 +21455,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18526,6 +21501,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18566,6 +21548,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18606,6 +21595,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": "enemy_orc_warrior",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18646,6 +21642,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18685,6 +21688,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": "enemy_orc",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18724,6 +21734,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -18766,6 +21783,13 @@ export const MONSTER_DATA = [
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18822,6 +21846,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18874,6 +21905,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -18921,6 +21959,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "brainless",
@@ -18971,6 +22016,13 @@ export const MONSTER_DATA = [
   "colour": "etc_holy",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -19007,6 +22059,13 @@ export const MONSTER_DATA = [
   "colour": "etc_silver",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -19054,6 +22113,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 5,
+   "swim": 5,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "insect",
   "intelligence": "brainless",
@@ -19099,6 +22165,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -19145,6 +22218,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": "enemy_phantasmal",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -19189,6 +22269,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "insect",
   "intelligence": "animal",
@@ -19232,6 +22319,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -19267,6 +22361,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -19309,6 +22410,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -19349,6 +22457,13 @@ export const MONSTER_DATA = [
   "colour": "etc_ice",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -19390,6 +22505,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -19429,6 +22551,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
@@ -19467,6 +22596,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
@@ -19513,6 +22649,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -19560,6 +22703,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -19599,6 +22749,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -19655,6 +22812,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
@@ -19695,6 +22859,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
@@ -19739,6 +22910,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
@@ -19790,6 +22968,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -19831,6 +23016,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "human",
@@ -19877,6 +23069,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -19924,6 +23123,13 @@ export const MONSTER_DATA = [
   "colour": "etc_random",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -19969,6 +23175,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -20013,6 +23226,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
@@ -20057,6 +23277,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "insect_winged",
   "intelligence": "animal",
@@ -20103,6 +23330,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -20143,6 +23377,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -20189,6 +23430,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -20232,6 +23480,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "insect",
   "intelligence": "animal",
@@ -20271,6 +23526,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -20310,6 +23572,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -20351,6 +23620,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": "enemy_rakshasa",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -20393,6 +23669,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": "enemy_rat",
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -20431,6 +23714,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "bird",
   "intelligence": "animal",
@@ -20470,6 +23760,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -20516,6 +23813,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -20561,6 +23865,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -20602,6 +23913,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "arachnid",
   "intelligence": "animal",
@@ -20637,6 +23955,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -20683,6 +24008,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -20727,6 +24059,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -20771,6 +24110,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
@@ -20810,6 +24156,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -20851,6 +24204,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -20889,6 +24249,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -20930,6 +24297,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 8,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "fish",
   "intelligence": "animal",
@@ -20970,6 +24344,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "blob",
   "intelligence": "brainless",
@@ -21011,6 +24392,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -21066,6 +24454,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "blob",
   "intelligence": "brainless",
@@ -21115,6 +24510,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -21160,6 +24562,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -21201,6 +24610,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -21238,6 +24654,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "plant",
   "intelligence": "brainless",
@@ -21284,6 +24707,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -21326,6 +24756,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 7,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "naga",
   "intelligence": "human",
@@ -21367,6 +24804,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 7,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "naga",
   "intelligence": "human",
@@ -21408,6 +24852,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 7,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "naga",
   "intelligence": "human",
@@ -21450,6 +24901,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "brainless",
@@ -21490,6 +24948,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -21531,6 +24996,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
@@ -21571,6 +25043,13 @@ export const MONSTER_DATA = [
   "colour": "etc_bone",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
@@ -21610,6 +25089,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "plant",
   "intelligence": "brainless",
@@ -21652,6 +25138,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 4,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
@@ -21695,6 +25188,13 @@ export const MONSTER_DATA = [
   "colour": "etc_fire",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -21733,6 +25233,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "orb",
   "intelligence": "animal",
@@ -21779,6 +25286,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -21824,6 +25338,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -21886,6 +25407,13 @@ export const MONSTER_DATA = [
   "colour": "etc_ice",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
@@ -21949,6 +25477,13 @@ export const MONSTER_DATA = [
   "colour": "etc_iron",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
@@ -22012,6 +25547,13 @@ export const MONSTER_DATA = [
   "colour": "etc_death",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
@@ -22075,6 +25617,13 @@ export const MONSTER_DATA = [
   "colour": "etc_fire",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
@@ -22123,6 +25672,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -22162,6 +25718,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -22215,6 +25778,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -22259,6 +25829,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -22296,6 +25873,13 @@ export const MONSTER_DATA = [
   "colour": "etc_dithmenos",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
@@ -22356,6 +25940,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -22396,6 +25987,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -22442,6 +26040,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -22487,6 +26092,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "animal",
@@ -22532,6 +26144,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "plant",
   "intelligence": "human",
@@ -22571,6 +26190,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -22607,6 +26233,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "bird",
   "intelligence": "animal",
@@ -22643,6 +26276,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
@@ -22686,6 +26326,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
@@ -22720,6 +26367,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
@@ -22771,6 +26425,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -22811,6 +26472,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 15,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -22852,6 +26520,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -22898,6 +26573,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": "enemy_simulacrum",
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
@@ -22947,6 +26629,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -22988,6 +26677,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 6,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -23028,6 +26724,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": "enemy_skeleton",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -23071,6 +26774,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "fish",
   "intelligence": "animal",
@@ -23122,6 +26832,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 7,
+   "swim": 7,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "fish",
   "intelligence": "animal",
@@ -23162,6 +26879,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
@@ -23201,6 +26925,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
@@ -23245,6 +26976,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "blob",
   "intelligence": "brainless",
@@ -23302,6 +27040,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -23340,6 +27085,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": "enemy_snake",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -23376,6 +27128,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -23421,6 +27180,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "snake",
   "intelligence": "brainless",
@@ -23465,6 +27231,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
@@ -23513,6 +27286,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -23565,6 +27345,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -23603,6 +27390,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "brainless",
@@ -23664,6 +27458,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -23705,6 +27506,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -23749,6 +27557,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
@@ -23793,6 +27608,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "animal",
@@ -23841,6 +27663,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "brainless",
@@ -23888,6 +27717,13 @@ export const MONSTER_DATA = [
   "colour": "etc_random",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -23930,6 +27766,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -23973,6 +27816,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -24018,6 +27868,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -24062,6 +27919,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 18
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "brainless",
@@ -24108,6 +27972,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "human",
@@ -24144,6 +28015,13 @@ export const MONSTER_DATA = [
   "colour": "lightgrey",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "brainless",
@@ -24180,6 +28058,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": "enemy_spider",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -24216,6 +28101,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -24262,6 +28154,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 6,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -24303,6 +28202,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 6,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -24344,6 +28250,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -24385,6 +28298,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 6,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -24425,6 +28345,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 6,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
@@ -24469,6 +28396,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 6,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
@@ -24514,6 +28448,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -24561,6 +28502,13 @@ export const MONSTER_DATA = [
   "colour": "etc_magic",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
@@ -24608,6 +28556,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "animal",
@@ -24661,6 +28616,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "plant",
   "intelligence": "brainless",
@@ -24699,6 +28661,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "human",
@@ -24746,6 +28715,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "snake",
   "intelligence": "human",
@@ -24792,6 +28768,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -24847,6 +28830,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -24888,6 +28878,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
@@ -24929,6 +28926,13 @@ export const MONSTER_DATA = [
   "colour": "etc_fire",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -24972,6 +28976,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -25021,6 +29032,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -25056,6 +29074,13 @@ export const MONSTER_DATA = [
   "colour": "etc_silver",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
@@ -25103,6 +29128,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "orb",
   "intelligence": "human",
@@ -25148,6 +29180,13 @@ export const MONSTER_DATA = [
   "colour": "etc_gold",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "insect_winged",
   "intelligence": "animal",
@@ -25200,6 +29239,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -25241,6 +29287,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -25282,6 +29335,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 12,
+   "swim": 12,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
@@ -25325,6 +29385,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -25373,6 +29440,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
@@ -25424,6 +29498,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -25475,6 +29556,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -25527,6 +29615,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -25579,6 +29674,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -25636,6 +29738,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "human",
@@ -25686,6 +29795,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "human",
@@ -25726,6 +29842,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -25772,6 +29895,13 @@ export const MONSTER_DATA = [
   "colour": "etc_vehumet",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 8,
+   "swim": 8,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -25823,6 +29953,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 12,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "plant",
   "intelligence": "animal",
@@ -25870,6 +30007,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -25921,6 +30065,13 @@ export const MONSTER_DATA = [
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
@@ -25966,6 +30117,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
@@ -26003,6 +30161,13 @@ export const MONSTER_DATA = [
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
@@ -26046,6 +30211,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
@@ -26094,6 +30266,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -26137,6 +30316,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "snail",
   "intelligence": "animal",
@@ -26177,6 +30363,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -26230,6 +30423,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -26264,6 +30464,13 @@ export const MONSTER_DATA = [
   "colour": "etc_air",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
@@ -26319,6 +30526,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 15,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -26359,6 +30573,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "snake",
   "intelligence": "animal",
@@ -26402,6 +30623,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
@@ -26452,6 +30680,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "bird",
   "intelligence": "human",
@@ -26493,6 +30728,13 @@ export const MONSTER_DATA = [
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 9,
+   "swim": 9,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "animal",
@@ -26539,6 +30781,13 @@ export const MONSTER_DATA = [
   "colour": "etc_bone",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "misc",
   "intelligence": "brainless",
@@ -26592,6 +30841,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
@@ -26639,6 +30895,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "animal",
@@ -26679,6 +30942,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -26721,6 +30991,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "misc",
   "intelligence": "human",
@@ -26767,6 +31044,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "bat",
   "intelligence": "animal",
@@ -26818,6 +31102,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -26871,6 +31162,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -26922,6 +31220,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -26968,6 +31273,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "insect_winged",
   "intelligence": "animal",
@@ -27017,6 +31329,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -27067,6 +31386,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 14,
+   "swim": 14,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
@@ -27113,6 +31439,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -27154,6 +31487,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -27195,6 +31535,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -27236,6 +31583,13 @@ export const MONSTER_DATA = [
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 9,
+   "swim": 9,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -27282,6 +31636,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -27330,6 +31691,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "blob",
   "intelligence": "brainless",
@@ -27380,6 +31748,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -27427,6 +31802,13 @@ export const MONSTER_DATA = [
   "colour": "etc_elven",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "brainless",
@@ -27466,6 +31848,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "misc",
   "intelligence": "brainless",
@@ -27508,6 +31897,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "fungus",
   "intelligence": "brainless",
@@ -27547,6 +31943,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
@@ -27595,6 +31998,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -27637,6 +32047,13 @@ export const MONSTER_DATA = [
   "colour": "etc_water",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
@@ -27681,6 +32098,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 6,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
@@ -27721,6 +32145,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -27760,6 +32191,13 @@ export const MONSTER_DATA = [
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
@@ -27808,6 +32246,13 @@ export const MONSTER_DATA = [
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -27852,6 +32297,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -27893,6 +32345,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -27938,6 +32397,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -27979,6 +32445,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -28015,6 +32488,13 @@ export const MONSTER_DATA = [
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 12,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "tiny",
   "shape": "misc",
   "intelligence": "brainless",
@@ -28061,6 +32541,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -28094,6 +32581,13 @@ export const MONSTER_DATA = [
   "colour": "darkgray",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "plant",
   "intelligence": "brainless",
@@ -28144,6 +32638,13 @@ export const MONSTER_DATA = [
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "arachnid",
   "intelligence": "animal",
@@ -28185,6 +32686,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -28230,6 +32738,13 @@ export const MONSTER_DATA = [
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "misc",
   "intelligence": "animal",
@@ -28272,6 +32787,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": "enemy_spectre",
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -28311,6 +32833,13 @@ export const MONSTER_DATA = [
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 15,
+  "energy": {
+   "walk": 8,
+   "swim": 8,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "little",
   "shape": "orb",
   "intelligence": "human",
@@ -28358,6 +32887,13 @@ export const MONSTER_DATA = [
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -28405,6 +32941,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
@@ -28444,6 +32987,13 @@ export const MONSTER_DATA = [
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -28498,6 +33048,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 32,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
@@ -28546,6 +33103,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
@@ -28585,6 +33149,13 @@ export const MONSTER_DATA = [
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
@@ -28626,6 +33197,13 @@ export const MONSTER_DATA = [
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
@@ -28671,6 +33249,13 @@ export const MONSTER_DATA = [
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
@@ -28712,6 +33297,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
@@ -28756,6 +33348,13 @@ export const MONSTER_DATA = [
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
@@ -28797,6 +33396,13 @@ export const MONSTER_DATA = [
   "colour": "brown",
   "spriteKey": "enemy_skeleton",
   "sizePixels": 18,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "small",
   "shape": "misc",
   "intelligence": "brainless",
@@ -28840,6 +33446,13 @@ export const MONSTER_DATA = [
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
+  "energy": {
+   "walk": 10,
+   "swim": 10,
+   "attack": 10,
+   "missile": 10,
+   "spell": 10
+  },
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",

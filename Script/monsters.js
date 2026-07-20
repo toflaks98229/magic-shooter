@@ -19,7 +19,7 @@
 import { MONSTER_DATA } from './data/monsters.js';
 import { SPAWN_TABLES } from './data/spawn-tables.js';
 import { TILE_SIZE, REFERENCE_FRAME_MS } from './constants.js';
-import { monsterActionMs, monsterActionAuts, AUT_MS, canAct } from './dcss/time.js';
+import { monsterActionMs, monsterActionAuts, actionAuts, actionMs, AUT_MS, canAct } from './dcss/time.js';
 import { pickMonster } from './dcss/monster-pick.js';
 
 /**
@@ -88,9 +88,9 @@ const BRANCH_TABLE_NAMES = {
  * @param {number} dcssSpeed - YAML 의 speed
  * @returns {number} 기준 프레임당 이동 픽셀
  */
-function toMoveSpeed(dcssSpeed) {
+function toMoveSpeed(dcssSpeed, walkCost) {
     if (!canAct(dcssSpeed)) return 0;
-    return (TILE_SIZE / (monsterActionAuts(dcssSpeed) * AUT_MS)) * REFERENCE_FRAME_MS;
+    return (TILE_SIZE / (actionAuts(dcssSpeed, walkCost) * AUT_MS)) * REFERENCE_FRAME_MS;
 }
 
 /**
@@ -137,14 +137,16 @@ function toRuntimeMonster(data) {
 
         // 시간. aut 을 실시간으로 환산합니다.
         dcssSpeed: data.speed,
-        speed: toMoveSpeed(data.speed),
+        speed: toMoveSpeed(data.speed, data.energy.walk),
 
         // 움직이지 않는 몬스터에 Infinity 를 담으면 안 됩니다.
         // world 는 JSON 으로 저장되는데 JSON.stringify(Infinity) 는 null 이 되어,
         // 세이브를 불러오는 순간 쿨다운 비교가 통째로 무너집니다.
         // 대신 canAct 로 표시하고 쿨다운은 유한한 값으로 둡니다.
         canAct: canAct(data.speed) && !data.flags.includes('stationary'),
-        cooldown: canAct(data.speed) ? monsterActionMs(data.speed) : 0,
+        // 공격 주기는 걷기와 따로입니다. energy.attack 이 15 면 느리게 휘두릅니다.
+        cooldown: canAct(data.speed) ? actionMs(data.speed, data.energy.attack) : 0,
+        energy: data.energy,
 
         // 표현
         size: data.sizePixels,

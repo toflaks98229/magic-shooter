@@ -342,3 +342,75 @@ export function playerMaxHp(xl, fightingSkill, hpMod = 0) {
     hp = Math.trunc(hp * (10 + hpMod) / 10);
     return Math.max(1, hp);
 }
+
+/**
+ * @description 저항이 '있느냐 없느냐'로 작동하는 속성들. (fight.cc:723 _is_boolean_resist)
+ * 이쪽은 같은 저항 수치라도 더 강하게 막습니다.
+ */
+const BOOLEAN_RESISTS = new Set(['elec', 'miasma', 'poison']);
+
+/**
+ * @description 저항으로 막을 수 있는 피해의 비율(%). (fight.cc:741)
+ * 얼음과 번개는 절반만, 독화살은 70%만 막힙니다. 나머지는 그냥 들어옵니다.
+ */
+const RESISTIBLE_FRACTION = {
+    ice: 50, water: 50, thunder: 50, lava: 50,
+    poison_arrow: 70, mercury: 70,
+};
+
+/**
+ * 저항으로 피해를 줄입니다. (fight.cc:853 resist_adjust_damage)
+ *
+ * 몬스터 쪽 공식입니다. 플레이어와 계수가 다릅니다.
+ *   저항 -1 이면 1.5배로 더 아프고
+ *   1 이면 1/2 (있느냐 없느냐 계열은 1/3)
+ *   2 면 1/5 (1/6)
+ *   3 이상이면 아예 통하지 않습니다
+ *
+ * 막을 수 없는 몫이 따로 있는 속성도 있습니다. 얼음은 절반만 막히므로
+ * 냉기 완전 저항인 몬스터에게도 얼음 화살은 절반이 들어갑니다.
+ * @param {number} damage - 들어온 피해
+ * @param {number} level - 저항 수치. 음수면 취약합니다
+ * @param {string} [flavour] - 피해 속성
+ * @returns {number} 남은 피해
+ */
+export function resistDamage(damage, level, flavour = 'plain') {
+    if (!level) return damage;
+
+    const fraction = RESISTIBLE_FRACTION[flavour] ?? 100;
+    let resistible = Math.trunc(damage * fraction / 100);
+    const irresistible = damage - resistible;
+
+    if (level > 0) {
+        // 몬스터는 3 이면 이미 면역입니다. 플레이어는 4 까지 가야 합니다.
+        if (level >= 3) {
+            resistible = 0;
+        } else {
+            const bonus = BOOLEAN_RESISTS.has(flavour) ? 1 : 0;
+            resistible = Math.trunc(resistible / (1 + bonus + level * level));
+        }
+    } else {
+        // 취약하면 1.5배로 들어옵니다.
+        resistible = Math.trunc(resistible * 15 / 10);
+    }
+
+    return Math.max(resistible + irresistible, 0);
+}
+
+/**
+ * 몬스터의 저항표에서 해당 속성의 수치를 찾습니다.
+ * @param {object} resists - 몬스터의 resists
+ * @param {string} flavour - 피해 속성
+ * @returns {number} 저항 수치. 없으면 0
+ */
+export function resistLevel(resists, flavour) {
+    if (!resists) return 0;
+
+    // 여러 속성이 같은 저항으로 접힙니다. (fight.cc:759 get_beam_resist_type)
+    const collapsed = {
+        lava: 'fire', ice: 'cold',
+        poison_arrow: 'poison', mercury: 'poison',
+    }[flavour] ?? flavour;
+
+    return resists[collapsed] ?? 0;
+}

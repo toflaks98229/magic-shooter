@@ -317,3 +317,46 @@ test('플레이어 최대 HP 가 원본 공식과 같다', () => {
     assert.ok(C.playerMaxHp(10, 0, 2) > C.playerMaxHp(10, 0, 0), '종족 보정이 반영되어야 합니다');
     assert.ok(C.playerMaxHp(1, 0, -30) >= 1, 'HP 는 최소 1 입니다');
 });
+
+// --- 저항 --------------------------------------------------------------------
+
+test('저항 단계가 원본 표와 같다', () => {
+    // 몬스터 쪽 계수입니다. 플레이어와 다릅니다. (fight.cc:853)
+    assert.equal(C.resistDamage(100, -1, 'fire'), 150, '취약하면 1.5배');
+    assert.equal(C.resistDamage(100, 0, 'fire'), 100);
+    assert.equal(C.resistDamage(100, 1, 'fire'), 50, '저항 1 은 절반');
+    assert.equal(C.resistDamage(100, 2, 'fire'), 20, '저항 2 는 1/5');
+    assert.equal(C.resistDamage(100, 3, 'fire'), 0, '몬스터는 3 이면 면역');
+    assert.equal(C.resistDamage(100, 4, 'fire'), 0);
+});
+
+test('있느냐 없느냐 계열은 더 강하게 막는다', () => {
+    // 전기·독·독기는 같은 수치라도 한 단계 더 막습니다. (fight.cc:723)
+    assert.equal(C.resistDamage(100, 1, 'poison'), 33);
+    assert.equal(C.resistDamage(100, 2, 'poison'), 16);
+    assert.ok(C.resistDamage(100, 1, 'poison') < C.resistDamage(100, 1, 'fire'));
+});
+
+test('일부만 막히는 속성이 있다', () => {
+    // 얼음은 절반만 막힙니다. 냉기 면역이어도 얼음 화살은 절반이 들어갑니다.
+    // 이것을 놓치면 면역 몬스터가 무적이 됩니다.
+    assert.equal(C.resistDamage(100, 3, 'ice'), 50);
+    assert.equal(C.resistDamage(100, 3, 'cold'), 0, '순수 냉기는 완전히 막힙니다');
+    assert.equal(C.resistDamage(100, 3, 'poison_arrow'), 30, '독화살은 70% 만 막힙니다');
+});
+
+test('저항이 없으면 그대로 통과한다', () => {
+    assert.equal(C.resistDamage(37, 0), 37);
+    assert.equal(C.resistDamage(37, 0, 'fire'), 37);
+});
+
+test('여러 속성이 같은 저항으로 접힌다', () => {
+    // 용암은 불로, 얼음은 냉기로, 독화살은 독으로 봅니다. (fight.cc:759)
+    const resists = { fire: 2, cold: 1, poison: 3 };
+    assert.equal(C.resistLevel(resists, 'lava'), 2);
+    assert.equal(C.resistLevel(resists, 'ice'), 1);
+    assert.equal(C.resistLevel(resists, 'poison_arrow'), 3);
+    assert.equal(C.resistLevel(resists, 'fire'), 2);
+    assert.equal(C.resistLevel(resists, 'elec'), 0, '없는 저항은 0');
+    assert.equal(C.resistLevel(null, 'fire'), 0, '저항표가 없어도 멈추지 않습니다');
+});

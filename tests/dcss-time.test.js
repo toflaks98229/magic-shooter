@@ -114,3 +114,22 @@ test('AUT_MS 를 바꿔도 속도 비율은 그대로다', () => {
     const ratio15 = T.monsterActionMs(15) / T.monsterActionMs(10);
     assert.ok(Math.abs(ratio15 - 2 / 3) < 1e-9);
 });
+
+test('행동 비용이 속도와 따로 논다', () => {
+    // DCSS 는 속도를 두 축으로 나눕니다. speed 는 에너지를 버는 속도,
+    // energy 는 행동 하나의 값입니다. 이 분리가 있어야
+    // '빠르게 다가와 크게 휘두르는' 적을 표현할 수 있습니다.
+    assert.equal(T.actionAuts(10, 10), 10, '기준은 10 aut');
+    assert.equal(T.actionAuts(20, 10), 5, '두 배 빠르면 절반');
+    assert.equal(T.actionAuts(10, 20), 20, '비용이 두 배면 두 배');
+    assert.equal(T.actionAuts(20, 20), 10, '둘이 상쇄되면 기준으로 돌아옵니다');
+});
+
+test('행동 비용을 주지 않으면 기준값을 쓴다', () => {
+    assert.equal(T.actionAuts(13), T.actionAuts(13, 10));
+});
+
+test('움직이지 않는 몬스터는 어떤 행동도 하지 않는다', () => {
+    assert.equal(T.actionAuts(0, 10), Infinity);
+    assert.equal(T.actionMs(0, 5), Infinity);
+});

@@ -58,6 +58,28 @@ const SPRITE_BY_NAME = {
 
 /** @description DCSS 의 크기 범주를 이 게임의 충돌 반경(픽셀)으로 옮긴 표 */
 /**
+ * 행동별 시간 비용을 정리합니다. (mon-util.h:33 mon_energy_usage)
+ *
+ * 적지 않은 항목은 10 입니다. speed 가 '에너지를 버는 속도'라면
+ * 이 값은 '행동 하나의 값'이라, 둘이 나뉘어 실제 속도를 정합니다.
+ * 그래서 걷기는 빠른데 크게 휘두르는 몬스터를 표현할 수 있습니다.
+ * move 는 walk 와 swim 을 한꺼번에 정하는 줄임말입니다.
+ * @param {object|undefined} raw - YAML 의 energy
+ * @returns {object} 행동별 비용
+ */
+function parseEnergy(raw) {
+    const energy = { walk: 10, swim: 10, attack: 10, missile: 10, spell: 10 };
+    if (!raw) return energy;
+
+    for (const [key, value] of Object.entries(raw)) {
+        if (key === 'move') { energy.walk = value; energy.swim = value; continue; }
+        if (!(key in energy)) throw new Error();
+        energy[key] = value;
+    }
+    return energy;
+}
+
+/**
  * 신성 계열이 공짜로 주는 저항을 얹습니다. (mon-util.cc:270 _apply_holiness_resists)
  *
  * YAML 은 언데드와 무생물의 독 저항을 일부러 적지 않습니다. 계열에서 따라오기 때문입니다.
@@ -148,6 +170,10 @@ function convert(raw, file) {
         colour: raw.glyph?.colour ?? 'lightgrey',
         spriteKey: SPRITE_BY_NAME[raw.name] ?? null,
         sizePixels: SIZE_PIXELS[raw.size] ?? SIZE_PIXELS.medium,
+
+        // 행동별 시간 비용. speed 와 곱해져 실제 속도를 정합니다.
+        // move 는 walk 와 swim 을 한꺼번에 정하는 줄임말입니다. (mon-gen.py:308)
+        energy: parseEnergy(raw.energy),
 
         // 분류
         size: raw.size,
