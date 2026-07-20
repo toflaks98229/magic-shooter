@@ -189,6 +189,7 @@ export function openDoor(tileX, tileY) {
 
     // 오브젝트를 제거해 충돌을 없애고 통과 가능하게 만듭니다.
     world.objectMap[tileY][tileX] = 0;
+    world.mapRevision++; // 통행 가능 여부가 바뀌었으므로 경로 캐시를 무효화합니다.
 
     emit(EVENTS.DOOR_OPENED, { tileX, tileY });
 }

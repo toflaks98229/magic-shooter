@@ -6,8 +6,17 @@
  * 무기 교체 애니메이션 진행 여부 등)은 전부 이쪽에 둡니다.
  */
 
+import { RENDER_RESOLUTION_SCALE } from './constants.js';
+
 /** @description 세션 동안만 유지되는 실행 상태 */
 export const runtime = {
+    /**
+     * @description 렌더링 해상도 축소 배율.
+     * 값이 클수록 낮은 해상도로 그려 빨라지고, 작을수록 선명해집니다.
+     * 기기 성능에 맞춰 조절할 수 있도록 상수가 아니라 런타임 설정으로 둡니다.
+     */
+    renderScale: RENDER_RESOLUTION_SCALE,
+
     /** @description 게임이 현재 실행 중인지 여부 */
     isGameRunning: false,
 

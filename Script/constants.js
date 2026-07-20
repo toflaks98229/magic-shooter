@@ -45,8 +45,18 @@ export const MAP_WIDTH = 30;
 export const MAP_HEIGHT = 30;
 /** @description 시야각 (Field of View), 60도 */
 export const FOV = Math.PI / 3;
-/** @description 렌더링 해상도 스케일. 값이 클수록 낮은 해상도로 렌더링하여 성능을 향상시킵니다. */
-export const RENDER_RESOLUTION_SCALE = 8;
+/**
+ * @description 렌더링 해상도 축소 배율의 기본값. 값이 클수록 낮은 해상도로 그립니다.
+ *
+ * 오랫동안 8이었습니다. 1920px 화면이 240px로 그려질 만큼 낮은 값인데,
+ * 스프라이트를 수직선마다 그리고 바닥 픽셀마다 텍스처를 다시 고르던 시절에는
+ * 그렇게까지 낮추지 않으면 프레임을 유지할 수 없었기 때문입니다.
+ * 그 두 가지를 정리한 뒤 실측한 결과 640x360에서도 렌더 비용이 4ms 수준이라 3으로 낮췄습니다.
+ *
+ * 기기에 따라 조절할 수 있도록 실제 사용 값은 runtime.renderScale 에 있습니다.
+ * 저사양 기기에서 프레임이 모자라면 그 값을 키우면 됩니다.
+ */
+export const RENDER_RESOLUTION_SCALE = 3;
 /** @description 벽이나 객체가 너무 가까울 때 화면을 뚫고 나오는 시각적 오류를 방지하기 위한 최소 렌더링 거리 */
 export const MIN_RENDER_DISTANCE = 16;
 
@@ -114,6 +124,70 @@ export const PAST_TIME = -1e9;
 export const FLOOR_CLEAR_HEAL = 15;
 /** @description 다음 층으로 진입할 때 보충해 주는 탄약 */
 export const FLOOR_CLEAR_AMMO = 10;
+
+// --- 맵 타일 정의 ---
+
+/**
+ * @description 맵 배열에 기록되는 타일 ID.
+ * 이전에는 0/1/4/5 라는 숫자가 mapGenerator, gameLogic, render 세 파일에 흩어져 있어
+ * 새 타일(함정, 용암, 부술 수 있는 벽)을 추가하려면 다섯 군데를 동시에 고쳐야 했습니다.
+ */
+export const TILE_IDS = {
+    FLOOR: 0,
+    WALL: 1,
+    EXIT: 4,
+    DOOR: 5,
+};
+
+/**
+ * @description 타일 종류별 속성.
+ *
+ * solid   - 통과할 수 없음 (이동 판정)
+ * opaque  - 광선을 막음 (렌더링, 시야, 발사체·파티클 충돌)
+ * spawnable - 적이 스폰될 수 있음
+ * wallTexture - 벽으로 그릴 때 쓸 텍스처. 'theme'이면 현재 던전 테마의 벽 텍스처를 씁니다.
+ * interaction - 스페이스바로 상호작용했을 때의 동작
+ *
+ * 문(DOOR)은 solid가 아닙니다. 닫힌 문의 통행 차단은 objectMap의 오브젝트가 담당하며,
+ * 이 타일은 "문처럼 생긴 벽으로 그린다"는 뜻만 갖습니다.
+ */
+export const TILE_TYPES = {
+    [TILE_IDS.FLOOR]: {
+        id: TILE_IDS.FLOOR, name: 'floor',
+        solid: false, opaque: false, spawnable: true,
+        wallTexture: null, interaction: null,
+    },
+    [TILE_IDS.WALL]: {
+        id: TILE_IDS.WALL, name: 'wall',
+        solid: true, opaque: true, spawnable: false,
+        wallTexture: 'theme', interaction: null,
+    },
+    [TILE_IDS.EXIT]: {
+        id: TILE_IDS.EXIT, name: 'exit',
+        solid: true, opaque: true, spawnable: false,
+        wallTexture: 'exit', interaction: 'exit',
+    },
+    [TILE_IDS.DOOR]: {
+        id: TILE_IDS.DOOR, name: 'door',
+        solid: false, opaque: true, spawnable: false,
+        wallTexture: 'door_gate_1', interaction: null,
+    },
+};
+
+/** @description 맵 바깥을 조회했을 때 돌려줄 타일. 벽과 동일하게 취급해 광선이 새어나가지 않게 합니다. */
+const OUT_OF_BOUNDS = TILE_TYPES[TILE_IDS.WALL];
+
+/**
+ * 맵 좌표의 타일 속성을 조회합니다. 범위를 벗어나면 벽으로 취급합니다.
+ * @param {number[][]} map - 맵 배열
+ * @param {number} x - 타일 X 좌표
+ * @param {number} y - 타일 Y 좌표
+ * @returns {object} TILE_TYPES 항목
+ */
+export function tileAt(map, x, y) {
+    return TILE_TYPES[map[y]?.[x]] ?? OUT_OF_BOUNDS;
+}
+
 
 /**
  * @description 맵 오브젝트 유형별 속성을 정의한 객체.

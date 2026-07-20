@@ -92,8 +92,8 @@ export function resizeCanvas() {
     dom.canvas.width = window.innerWidth;
     dom.canvas.height = window.innerHeight;
     // 성능을 위해 실제 렌더링은 낮은 해상도로 수행
-    dom.offscreenCanvas.width = window.innerWidth / C.RENDER_RESOLUTION_SCALE | 0;
-    dom.offscreenCanvas.height = window.innerHeight / C.RENDER_RESOLUTION_SCALE | 0;
+    dom.offscreenCanvas.width = window.innerWidth / runtime.renderScale | 0;
+    dom.offscreenCanvas.height = window.innerHeight / runtime.renderScale | 0;
 
     // 픽셀 아트 스타일을 유지하기 위해 이미지 스무딩을 비활성화합니다.
     dom.ctx.imageSmoothingEnabled = false;
@@ -162,13 +162,19 @@ function renderWorld(width, height) {
     const projectionDist = (width / 2) / Math.tan(C.FOV / 2);
     const halfHeight = height / 2 | 0;
 
-    // --- 애니메이션 벽(문) 정보 룩업 테이블 생성 ---
-    // 렌더링 루프 전에 미리 애니메이션 중인 벽의 정보를 맵 좌표를 키로 하는 객체에 저장해두어,
-    // 루프 내에서 빠르게 접근할 수 있도록 합니다.
-    const animatedWallLookup = {};
-    world.animatedWalls.forEach(wall => {
-        animatedWallLookup[`${wall.mapX},${wall.mapY}`] = wall;
-    });
+    // --- 애니메이션 벽(문) 정보 룩업 ---
+    // 열릴 때만 존재하므로 대부분의 프레임에서는 비어 있습니다.
+    // 예전에는 컬럼마다 `x,y` 문자열 키를 만들어 조회했는데, 해상도가 높아질수록
+    // 프레임당 수백 개의 임시 문자열이 생겼습니다. 정수 키로 바꾸고,
+    // 애니메이션 중인 벽이 없으면 조회 자체를 건너뜁니다.
+    const animatedWalls = world.animatedWalls;
+    const hasAnimatedWalls = animatedWalls.length > 0;
+    const animatedWallLookup = hasAnimatedWalls ? new Map() : null;
+    if (hasAnimatedWalls) {
+        for (const wall of animatedWalls) {
+            animatedWallLookup.set(wall.mapY * C.MAP_WIDTH + wall.mapX, wall);
+        }
+    }
     
     // --- 테마 시스템 적용 ---
     const placeholderTex = assets.textures.placeholder;
@@ -203,8 +209,9 @@ function renderWorld(width, height) {
         let wallTopY = halfHeight - wallHeight / 2;
         
         // --- 애니메이션 벽(문) 처리 ---
-        // 광선이 부딪힌 타일이 애니메이션 중인 벽인지 룩업 테이블에서 확인합니다.
-        const animatedWall = animatedWallLookup[`${ray.mapX},${ray.mapY}`];
+        const animatedWall = hasAnimatedWalls
+            ? animatedWallLookup.get(ray.mapY * C.MAP_WIDTH + ray.mapX)
+            : undefined;
         let verticalOffset = 0;
         if (animatedWall) {
             // 애니메이션 중인 벽이라면, Z좌표를 기반으로 화면에서의 수직 오프셋을 계산합니다.
@@ -218,26 +225,20 @@ function renderWorld(width, height) {
         const y0 = Math.max(0, wallTopY | 0);
         const y1 = Math.min(height, wallBottomY | 0);
 
-        // --- 벽 텍스처 선택 로직 ---
+        // --- 벽 텍스처 선택 ---
+        // 어떤 타일을 어떤 텍스처로 그릴지는 TILE_TYPES 표가 정합니다.
+        const wallTextureKey = C.TILE_TYPES[ray.texture]?.wallTexture;
         let wallTextureInfo;
-        const wallType = ray.texture;
 
-        if (wallType === 1) { // 일반 벽
-            if (wallTextures.length > 0) {
-                const wallHash = (ray.mapX * 19 + ray.mapY * 73);
-                const texIndex = Math.abs(wallHash) % wallTextures.length;
-                wallTextureInfo = wallTextures[texIndex];
-            } else {
-                wallTextureInfo = placeholderTex;
-            }
-        } else if (wallType === 4) { // 출구
-            wallTextureInfo = assets.textures.exit || placeholderTex;
-        } else if (wallType === 5) { // 문
-            wallTextureInfo = assets.textures.door_gate_1 || placeholderTex;
+        if (wallTextureKey === 'theme') {
+            // 타일 좌표 해시로 테마 텍스처를 섞어 벽면이 단조롭지 않게 합니다.
+            const wallHash = (ray.mapX * 19 + ray.mapY * 73);
+            wallTextureInfo = wallTextures[Math.abs(wallHash) % wallTextures.length];
+        } else if (wallTextureKey) {
+            wallTextureInfo = assets.textures[wallTextureKey] || placeholderTex;
         } else {
             wallTextureInfo = placeholderTex;
         }
-        // --- 로직 종료 ---
         
         const wallTexture = wallTextureInfo.data;
         const texSize = wallTextureInfo.w;
@@ -282,6 +283,13 @@ function renderWorld(width, height) {
         floorXWall *= C.TILE_SIZE; floorYWall *= C.TILE_SIZE;
 
         // 벽 아래(애니메이션으로 올라간 공간 포함)부터 바닥/천장 픽셀을 채웁니다.
+        // 텍스처 선택은 타일이 바뀔 때만 다시 하면 되므로, 직전 타일의 결과를 재사용합니다.
+        // (예전에는 픽셀마다 해시와 나머지 연산을 두 번씩 계산했습니다.)
+        let cachedTileHash = -1;
+        let floorTextureInfo = null, ceilingTextureInfo = null;
+        let floorTexData = null, ceilingTexData = null;
+        let floorTexSize = 0, ceilingTexSize = 0;
+
         for (let y = y1; y < height; y++) {
             const pixelsFromHorizon = y - halfHeight;
             const currentDist = yDistLookup[pixelsFromHorizon];
@@ -299,15 +307,16 @@ function renderWorld(width, height) {
             const mapTileY = currentFloorY / C.TILE_SIZE | 0;
             const tileHash = (mapTileX * 23 + mapTileY * 83);
 
-            const floorTexIndex = Math.abs(tileHash) % floorTextures.length;
-            const floorTextureInfo = floorTextures[floorTexIndex];
-            const floorTexData = floorTextureInfo.data;
-            const floorTexSize = floorTextureInfo.w;
-
-            const ceilingTexIndex = Math.abs(tileHash) % ceilingTextures.length;
-            const ceilingTextureInfo = ceilingTextures[ceilingTexIndex];
-            const ceilingTexData = ceilingTextureInfo.data;
-            const ceilingTexSize = ceilingTextureInfo.w;
+            if (tileHash !== cachedTileHash) {
+                cachedTileHash = tileHash;
+                const absHash = tileHash < 0 ? -tileHash : tileHash;
+                floorTextureInfo = floorTextures[absHash % floorTextures.length];
+                floorTexData = floorTextureInfo.data;
+                floorTexSize = floorTextureInfo.w;
+                ceilingTextureInfo = ceilingTextures[absHash % ceilingTextures.length];
+                ceilingTexData = ceilingTextureInfo.data;
+                ceilingTexSize = ceilingTextureInfo.w;
+            }
 
             if (floorTexData) {
                 // 기존의 비트 마스크(& size-1) 방식은 텍스처 크기가 2의 거듭제곱일 때만 동작했습니다.
@@ -431,20 +440,20 @@ function renderEntities(targetCtx, width, height) {
                     const startX = Math.max(0, Math.floor(entityLeftX));
                     const endX = Math.min(width, Math.ceil(entityLeftX + entitySize));
 
-                    // zBuffer를 사용하여 각 수직선(stripe)이 벽 뒤에 가려지는지 확인합니다.
-                    for (let stripe = startX; stripe < endX; stripe++) {
-                        if (zBuffer[stripe] > correctedDist) {
-                            const texX = Math.floor(((stripe - entityLeftX) / entitySize) * sourceCoords.w);
-                            if (texX >= 0 && texX < sourceCoords.w) {
-                                // 1픽셀 너비의 수직선을 잘라서 그립니다.
-                                targetCtx.drawImage(
-                                    sourceImage,
-                                    sourceCoords.x + texX, sourceCoords.y,
-                                    1, sourceCoords.h,
-                                    stripe, entityTopY,
-                                    1, entitySize
-                                );
-                            }
+                    // zBuffer로 벽에 가려지는 수직선을 걸러내되, 보이는 구간이 연속되는 동안은
+                    // 한 번의 drawImage로 묶어서 그립니다.
+                    // 예전에는 수직선 하나마다 drawImage를 호출해, 스프라이트 하나에
+                    // 폭만큼의 호출이 발생했습니다.
+                    let runStart = -1;
+                    for (let stripe = startX; stripe <= endX; stripe++) {
+                        const visible = stripe < endX && zBuffer[stripe] > correctedDist;
+
+                        if (visible && runStart < 0) {
+                            runStart = stripe;              // 보이는 구간 시작
+                        } else if (!visible && runStart >= 0) {
+                            drawSpriteRun(targetCtx, sourceImage, sourceCoords,
+                                runStart, stripe, entityLeftX, entitySize, entityTopY);
+                            runStart = -1;                  // 구간 종료
                         }
                     }
                 }
@@ -460,6 +469,34 @@ function renderEntities(targetCtx, width, height) {
         }
     });
     targetCtx.globalAlpha = 1.0; // 투명도 복구
+}
+
+/**
+ * 스프라이트의 연속된 수직선 구간을 한 번에 그립니다.
+ * @param {CanvasRenderingContext2D} ctx - 대상 컨텍스트
+ * @param {*} sourceImage - 스프라이트 시트 이미지
+ * @param {{x: number, y: number, w: number, h: number}} coords - 시트 안에서의 스프라이트 위치
+ * @param {number} fromStripe - 구간 시작 화면 X (포함)
+ * @param {number} toStripe - 구간 끝 화면 X (제외)
+ * @param {number} entityLeftX - 스프라이트가 시작되는 화면 X (소수 포함)
+ * @param {number} entitySize - 화면에 그려질 스프라이트의 크기
+ * @param {number} entityTopY - 그려질 화면 Y
+ */
+function drawSpriteRun(ctx, sourceImage, coords, fromStripe, toStripe, entityLeftX, entitySize, entityTopY) {
+    // 화면 구간을 원본 텍스처 구간으로 되돌립니다.
+    const texFrom = Math.floor(((fromStripe - entityLeftX) / entitySize) * coords.w);
+    const texTo = Math.ceil(((toStripe - entityLeftX) / entitySize) * coords.w);
+
+    const clampedFrom = Math.max(0, Math.min(coords.w - 1, texFrom));
+    const clampedTo = Math.max(clampedFrom + 1, Math.min(coords.w, texTo));
+
+    ctx.drawImage(
+        sourceImage,
+        coords.x + clampedFrom, coords.y,
+        clampedTo - clampedFrom, coords.h,
+        fromStripe, entityTopY,
+        toStripe - fromStripe, entitySize
+    );
 }
 
 /**
@@ -482,7 +519,7 @@ function castRay(angle) {
     while (hit === 0) {
         if (sideDistX < sideDistY) { sideDistX += deltaDistX; mapX += stepX; side = 0; } // X축 방향으로 한 칸 이동
         else { sideDistY += deltaDistY; mapY += stepY; side = 1; } // Y축 방향으로 한 칸 이동
-        if (world.map[mapY]?.[mapX] > 0) hit = 1; // 벽에 부딪힘
+        if (C.tileAt(world.map, mapX, mapY).opaque) hit = 1; // 벽·문·출구에 부딪힘
     }
 
     const perpWallDist = (side === 0) ? (sideDistX - deltaDistX) : (sideDistY - deltaDistY);

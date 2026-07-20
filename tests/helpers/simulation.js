@@ -187,7 +187,6 @@ function buildSnapshot({ world, serializeWorld, stats }) {
         enemies: world.enemies.map(e => ({
             sprite: e.spriteKey,
             x: round(e.x), y: round(e.y), hp: round(e.hp),
-            path: e.path ? e.path.length : null,
         })),
         items: world.items.map(i => ({ type: i.type, x: round(i.x), y: round(i.y) })),
         mapChecksum: checksum(world.map.flat()),

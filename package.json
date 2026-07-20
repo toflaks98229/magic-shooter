@@ -8,6 +8,7 @@
     "test": "node --test \"tests/**/*.test.js\"",
     "test:update-snapshot": "node tests/update-snapshot.js",
     "build:atlas": "node tools/build-atlas.js",
-    "preview": "node tools/preview.js"
+    "preview": "node tools/preview.js",
+    "bench": "node tools/bench.js"
   }
 }

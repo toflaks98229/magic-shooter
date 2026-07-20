@@ -55,7 +55,7 @@ export function update(deltaTime) {
     }
 
     // 3. 적 AI 및 로직 처리
-    updateEnemies(now, dtFactor, deltaTime);
+    updateEnemies(now, dtFactor);
 
     // 4. 발사체 이동 및 충돌 처리
     updateProjectiles(dtFactor);
@@ -184,8 +184,8 @@ export function interactWithWorld() {
     const tileX = Math.floor(checkX / C.TILE_SIZE);
     const tileY = Math.floor(checkY / C.TILE_SIZE);
 
-    // 1. 출구(4) 타일인지 확인합니다.
-    if (world.map[tileY]?.[tileX] === 4) {
+    // 1. 출구 타일인지 확인합니다.
+    if (C.tileAt(world.map, tileX, tileY).interaction === 'exit') {
         A.reachExit(); // 다음 층으로 이동하는 처리는 main.js가 구독합니다.
         return;
     }
@@ -204,6 +204,130 @@ export function interactWithWorld() {
 }
 
 
+// --- 경로 탐색: 플로우 필드 (Flow Field) ---
+//
+// 이전에는 적마다 플레이어까지 BFS를 돌리고, 탐색 중인 경로 전체를 배열로 복사해
+// 큐에 넣었습니다. 적이 늘어날수록 비용이 선형으로 늘고 임시 배열이 쏟아져
+// 주기적인 프레임 끊김의 원인이었습니다.
+//
+// 이 게임에서 모든 적의 목표는 언제나 플레이어 한 곳입니다.
+// 그래서 맵 전체에 대해 "플레이어까지 몇 걸음인가"를 한 번만 계산해 두면
+// 적은 자기 칸에서 값이 가장 작은 이웃으로 한 걸음 옮기기만 하면 됩니다.
+// 적이 몇 마리든 경로 탐색 비용은 그대로입니다.
+
+/** @description 플로우 필드에서 '도달 불가'를 나타내는 값 */
+const UNREACHABLE = -1;
+
+/** @description 각 타일에서 플레이어까지의 걸음 수 */
+let flowField = null;
+/** @description BFS에 재사용하는 큐. 프레임마다 새로 할당하지 않기 위해 보관합니다. */
+let flowQueue = null;
+/** @description 마지막으로 계산한 시점의 플레이어 타일과 맵 상태 */
+let flowFieldCache = { tileX: -1, tileY: -1, map: null, revision: -1 };
+
+/**
+ * 플로우 필드가 최신인지 확인하고, 필요하면 다시 계산합니다.
+ * 플레이어가 다른 칸으로 옮겼거나, 층이 바뀌었거나, 문이 열려 통행이 달라졌을 때만 계산합니다.
+ */
+function ensureFlowField() {
+    const tileX = Math.floor(world.player.x / C.TILE_SIZE);
+    const tileY = Math.floor(world.player.y / C.TILE_SIZE);
+
+    const isCurrent = flowField
+        && flowFieldCache.tileX === tileX
+        && flowFieldCache.tileY === tileY
+        && flowFieldCache.map === world.map
+        && flowFieldCache.revision === world.mapRevision;
+    if (isCurrent) return;
+
+    computeFlowField(tileX, tileY);
+    flowFieldCache = { tileX, tileY, map: world.map, revision: world.mapRevision };
+}
+
+/**
+ * 플레이어 위치에서 시작하는 너비 우선 탐색으로 모든 칸의 걸음 수를 채웁니다.
+ * @param {number} targetX - 플레이어의 타일 X 좌표
+ * @param {number} targetY - 플레이어의 타일 Y 좌표
+ */
+function computeFlowField(targetX, targetY) {
+    const width = C.MAP_WIDTH, height = C.MAP_HEIGHT;
+    const size = width * height;
+
+    if (!flowField || flowField.length !== size) {
+        flowField = new Int32Array(size);
+        flowQueue = new Int32Array(size);
+    }
+    flowField.fill(UNREACHABLE);
+
+    if (targetX < 0 || targetY < 0 || targetX >= width || targetY >= height) return;
+
+    let head = 0, tail = 0;
+    const start = targetY * width + targetX;
+    flowField[start] = 0;
+    flowQueue[tail++] = start;
+
+    while (head < tail) {
+        const node = flowQueue[head++];
+        const x = node % width;
+        const y = (node / width) | 0;
+        const nextDistance = flowField[node] + 1;
+
+        // 상하좌우 네 방향. 기존 BFS와 동일하게 대각선 이동은 허용하지 않습니다.
+        for (let d = 0; d < 4; d++) {
+            const nx = x + (d === 2 ? 1 : d === 3 ? -1 : 0);
+            const ny = y + (d === 0 ? 1 : d === 1 ? -1 : 0);
+            if (nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
+
+            const neighbour = ny * width + nx;
+            if (flowField[neighbour] !== UNREACHABLE) continue;
+            if (!isPassable(nx, ny)) continue;
+
+            flowField[neighbour] = nextDistance;
+            flowQueue[tail++] = neighbour;
+        }
+    }
+}
+
+/**
+ * 플로우 필드를 따라 적을 플레이어 쪽으로 한 걸음 옮깁니다.
+ * @param {object} enemy - 이동시킬 적
+ * @param {number} dtFactor - 프레임 시간 보정값
+ */
+function followFlowField(enemy, dtFactor) {
+    const width = C.MAP_WIDTH;
+    const tileX = Math.floor(enemy.x / C.TILE_SIZE);
+    const tileY = Math.floor(enemy.y / C.TILE_SIZE);
+    if (tileX < 0 || tileY < 0 || tileX >= width || tileY >= C.MAP_HEIGHT) return;
+
+    const here = flowField[tileY * width + tileX];
+    if (here === UNREACHABLE || here === 0) return; // 길이 없거나 이미 플레이어 칸
+
+    // 걸음 수가 더 작은 이웃 = 플레이어에게 더 가까운 칸
+    let bestNode = -1;
+    let bestDistance = here;
+    for (let d = 0; d < 4; d++) {
+        const nx = tileX + (d === 2 ? 1 : d === 3 ? -1 : 0);
+        const ny = tileY + (d === 0 ? 1 : d === 1 ? -1 : 0);
+        if (nx < 0 || ny < 0 || nx >= width || ny >= C.MAP_HEIGHT) continue;
+
+        const neighbour = ny * width + nx;
+        const distance = flowField[neighbour];
+        if (distance !== UNREACHABLE && distance < bestDistance) {
+            bestDistance = distance;
+            bestNode = neighbour;
+        }
+    }
+    if (bestNode < 0) return;
+
+    const targetX = (bestNode % width) * C.TILE_SIZE + C.TILE_SIZE / 2;
+    const targetY = ((bestNode / width) | 0) * C.TILE_SIZE + C.TILE_SIZE / 2;
+    const angle = Math.atan2(targetY - enemy.y, targetX - enemy.x);
+    const speed = enemy.speed * dtFactor;
+
+    enemy.x += Math.cos(angle) * speed;
+    enemy.y += Math.sin(angle) * speed;
+}
+
 // --- 내부 헬퍼 함수 (Private Methods) ---
 
 /**
@@ -213,8 +337,8 @@ export function interactWithWorld() {
  * @returns {boolean} 통과 가능하면 true
  */
 function isPassable(x, y) {
-    // 1. 맵 경계를 벗어나거나 벽(0이 아닌 값)인지 확인
-    if (world.map[y]?.[x] !== 0 && world.map[y]?.[x] !== 5) { // 문(5)도 통과 가능해야 합니다.
+    // 1. 지형이 통행을 막는지 확인 (맵 밖은 벽으로 취급됩니다)
+    if (C.tileAt(world.map, x, y).solid) {
         return false;
     }
 
@@ -271,9 +395,8 @@ export function hasLineOfSight(x1, y1, x2, y2) {
         // 목표 타일에 도착했다면 도중에 막힌 벽이 없었다는 뜻입니다.
         if (mapX === targetX && mapY === targetY) return true;
 
-        const tile = world.map[mapY]?.[mapX];
-        if (tile === undefined) return false; // 맵 밖으로 나감
-        if (tile > 0) return false;           // 벽/문/출구에 막힘
+        // 벽·문·출구는 시야를 막습니다. 맵 밖도 벽으로 취급되므로 함께 걸러집니다.
+        if (C.tileAt(world.map, mapX, mapY).opaque) return false;
     }
     return false;
 }
@@ -329,53 +452,18 @@ function handlePlayerMovement(dtFactor) {
  * @param {number} now - 현재 타임스탬프
  * @param {number} dtFactor - 프레임 시간 보정값
  */
-function updateEnemies(now, dtFactor, deltaTime) {
+function updateEnemies(now, dtFactor) {
     const player = world.player;
+
+    // 모든 적이 같은 목표(플레이어)를 향하므로 경로는 프레임당 한 번만 계산하면 됩니다.
+    ensureFlowField();
 
     world.enemies.forEach(enemy => {
         const dx_player = player.x - enemy.x;
         const dy_player = player.y - enemy.y;
         const dist_player = Math.hypot(dx_player, dy_player);
 
-        // --- 경로 탐색 및 이동 (Pathfinding & Movement) ---
-        enemy.pathRecalculationTimer -= deltaTime;
-
-        // 경로 재계산 타이머가 다 됐을 때 경로를 다시 찾습니다.
-        if (enemy.pathRecalculationTimer <= 0) {
-            enemy.pathRecalculationTimer = 1000 + Math.random() * 500; // 1 ~ 1.5초마다 재계산
-            const startNode = { x: Math.floor(enemy.x / C.TILE_SIZE), y: Math.floor(enemy.y / C.TILE_SIZE) };
-            const endNode = { x: Math.floor(player.x / C.TILE_SIZE), y: Math.floor(player.y / C.TILE_SIZE) };
-
-            // 목표 지점이 바뀌었는지 확인합니다.
-            const targetMoved = !enemy.pathTarget || enemy.pathTarget.x !== endNode.x || enemy.pathTarget.y !== endNode.y;
-
-            // 경로가 아예 없거나(null), 경로가 비어있거나, 목표 지점이 바뀌었을 때만 경로를 재계산합니다.
-            if (!enemy.path || enemy.path.length === 0 || targetMoved) {
-                enemy.path = findPath(startNode, endNode);
-                enemy.pathTarget = endNode;
-            }
-        }
-
-        // 계산된 경로가 있고(null이 아니고) 경로에 다음 지점이 남아있을 때 이동합니다.
-        if (enemy.path && enemy.path.length > 0) {
-            const nextNode = enemy.path[0];
-            const targetX = nextNode.x * C.TILE_SIZE + C.TILE_SIZE / 2;
-            const targetY = nextNode.y * C.TILE_SIZE + C.TILE_SIZE / 2;
-
-            const dx_node = targetX - enemy.x;
-            const dy_node = targetY - enemy.y;
-            const dist_node = Math.hypot(dx_node, dy_node);
-
-            // 다음 경로 지점에 충분히 가까워지면 경로에서 해당 지점을 제거합니다.
-            if (dist_node < enemy.speed * dtFactor * 1.5) {
-                enemy.path.shift();
-            } else { // 다음 경로 지점을 향해 이동합니다.
-                const angle = Math.atan2(dy_node, dx_node);
-                const speed = enemy.speed * dtFactor;
-                enemy.x += Math.cos(angle) * speed;
-                enemy.y += Math.sin(angle) * speed;
-            }
-        }
+        followFlowField(enemy, dtFactor);
 
         // --- 공격 AI (플레이어와의 직접적인 거리를 기반으로) ---
         if (enemy.type === 'melee' && dist_player < C.TILE_SIZE) { // 근접 타입
@@ -413,7 +501,7 @@ function updateProjectiles(dtFactor) {
         proj.y += Math.sin(proj.angle) * proj.speed * dtFactor;
 
         // 벽과 충돌하면 발사체를 제거하고 파티클 효과를 생성합니다.
-        if (world.map[Math.floor(proj.y / C.TILE_SIZE)]?.[Math.floor(proj.x / C.TILE_SIZE)] !== 0) {
+        if (C.tileAt(world.map, Math.floor(proj.x / C.TILE_SIZE), Math.floor(proj.y / C.TILE_SIZE)).opaque) {
             const sheetKey = assets.spriteKeyToSheet[proj.spriteKey];
             const atlas = assets.spriteAtlases[sheetKey];
             const color = atlas?.sprites[proj.spriteKey]?.color || '#fff';
@@ -471,9 +559,6 @@ function spawnEnemy() {
         // 스폰 직후 쿨다운에 걸리지 않도록 과거 시각으로 둡니다.
         lastAttackTime: C.PAST_TIME,
         lastHitTime: 0,
-        path: [], // 길찾기 관련 속성 초기화
-        pathRecalculationTimer: Math.random() * 500, // 초기 계산 시간을 분산시켜 성능 부담 완화
-        pathTarget: null,
     });
 }
 
@@ -493,7 +578,7 @@ function findSpawnPoint() {
         const mapX = Math.floor(x / C.TILE_SIZE);
         const mapY = Math.floor(y / C.TILE_SIZE);
 
-        if (world.map[mapY]?.[mapX] === 0 && Math.hypot(x - player.x, y - player.y) >= minDistance) {
+        if (C.tileAt(world.map, mapX, mapY).spawnable && Math.hypot(x - player.x, y - player.y) >= minDistance) {
             return { x, y };
         }
     }
@@ -505,7 +590,7 @@ function findSpawnPoint() {
     let bestDistance = -1;
     for (let mapY = 0; mapY < world.map.length; mapY++) {
         for (let mapX = 0; mapX < world.map[mapY].length; mapX++) {
-            if (world.map[mapY][mapX] !== 0) continue;
+            if (!C.tileAt(world.map, mapX, mapY).spawnable) continue;
             const x = mapX * C.TILE_SIZE + C.TILE_SIZE / 2;
             const y = mapY * C.TILE_SIZE + C.TILE_SIZE / 2;
             const distance = Math.hypot(x - player.x, y - player.y);
@@ -540,7 +625,7 @@ function updateParticles(dtFactor) {
         p.lifespan -= dtFactor;
 
         // 간단한 충돌 처리: 벽과 충돌 시 속도 반감 및 방향 반전
-        if (world.map[Math.floor(p.y / C.TILE_SIZE)]?.[Math.floor(p.x / C.TILE_SIZE)] !== 0) {
+        if (C.tileAt(world.map, Math.floor(p.x / C.TILE_SIZE), Math.floor(p.y / C.TILE_SIZE)).opaque) {
             p.vx *= -0.5;
             p.vy *= -0.5;
         }
@@ -580,49 +665,6 @@ function createParticleExplosion(x, y, color = '#ffffff') {
 }
 
 /**
- * BFS(너비 우선 탐색) 알고리즘을 사용하여 시작 지점에서 목표 지점까지의 최단 경로를 찾습니다.
- * @param {{x: number, y: number}} startNode - 시작 타일 좌표
- * @param {{x: number, y: number}} endNode - 목표 타일 좌표
- * @returns {Array<{x: number, y: number}>|null} 경로 좌표 배열 또는 경로가 없으면 null
- */
-function findPath(startNode, endNode) {
-    const queue = [[startNode]]; // 탐색할 경로들을 담는 큐
-    const visited = new Set([`${startNode.x},${startNode.y}`]); // 이미 방문한 노드를 기록
-    const directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]; // 하, 상, 우, 좌
-
-    while (queue.length > 0) {
-        const path = queue.shift(); // 큐에서 가장 오래된 경로를 꺼냄
-        const lastNode = path[path.length - 1];
-
-        // 목표 지점에 도달하면 경로를 반환
-        if (lastNode.x === endNode.x && lastNode.y === endNode.y) {
-            return path.slice(1); // 시작 노드를 제외한 경로 반환
-        }
-
-        // 성능 제한: 너무 긴 경로는 탐색하지 않아 무한 루프나 과도한 계산을 방지
-        if (path.length > 50) continue;
-
-        // 현재 위치에서 4방향으로 탐색
-        for (const [dx, dy] of directions) {
-            const newX = lastNode.x + dx;
-            const newY = lastNode.y + dy;
-            const key = `${newX},${newY}`;
-
-            // 맵 범위 안이고, 벽이 아니며, 아직 방문하지 않은 곳이라면
-            if (newX >= 0 && newX < C.MAP_WIDTH &&
-                newY >= 0 && newY < C.MAP_HEIGHT &&
-                isPassable(newX, newY) && // isPassable 함수로 벽과 오브젝트를 모두 검사
-                !visited.has(key)) {
-                visited.add(key);
-                const newPath = [...path, { x: newX, y: newY }]; // 새 경로 생성
-                queue.push(newPath); // 큐에 추가하여 다음 탐색에 사용
-            }
-        }
-    }
-    return null; // 모든 경로를 탐색했지만 목표에 도달하지 못함
-}
-
-/**
  * 애니메이션 중인 벽(예: 열리는 문)의 상태를 매 프레임 업데이트합니다.
  * @param {number} now - 현재 타임스탬프 (Date.now())
  */
@@ -637,7 +679,8 @@ function updateAnimatedWalls(now) {
 
         if (progress >= 1) {
             // 애니메이션이 끝나면 맵에서 해당 타일을 완전히 비워버립니다.
-            world.map[wall.mapY][wall.mapX] = 0;
+            world.map[wall.mapY][wall.mapX] = C.TILE_IDS.FLOOR;
+            world.mapRevision++; // 통행 가능 여부가 바뀌었으므로 경로를 다시 계산해야 합니다.
             // 애니메이션 배열에서 제거합니다.
             world.animatedWalls.splice(i, 1);
         }
