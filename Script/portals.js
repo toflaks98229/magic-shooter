@@ -46,20 +46,20 @@ const EARLY_AND_MID = {
         name: '얼음 동굴', minDepth: 7, maxDepth: 14, chance: 0.1,
         depth: 1, bonusItems: 6, theme: 'ice', themeVariation: 1,
         flavour: '살을 에는 냉기가 새어 나온다',
-        monsters: ['ice_beast', 'simulacrum', 'ice_giant'],
+        monsters: ['ice_beast', 'simulacrum', 'ice_giant', 'ice_dragon'],
     },
     gauntlet: {
         name: '건틀릿', minDepth: 9, maxDepth: 16, chance: 0.08,
         depth: 1, bonusItems: 8, theme: 'vault', themeVariation: 1,
         flavour: '쇠창살 너머에서 미노타우로스의 발굽 소리가 난다',
-        monsters: ['orc_warrior', 'beast', 'gargoyle'],
+        monsters: ['orc_warrior', 'beast', 'gargoyle', 'troll'],
         boss: 'minotaur',
     },
     volcano: {
         name: '화산', minDepth: 9, maxDepth: 16, chance: 0.08,
         depth: 1, bonusItems: 7, theme: 'hell', themeVariation: 2,
         flavour: '뜨거운 재가 흩날리고 용암 냄새가 난다',
-        monsters: ['fire_demon', 'gargoyle', 'centaur', 'hell_knight'],
+        monsters: ['fire_demon', 'fire_giant', 'gargoyle', 'centaur'],
     },
 };
 
@@ -69,22 +69,22 @@ const EARLY_AND_MID = {
  * 기믹은 아직 구현되어 있지 않고 지금은 보상이 두둑한 단층 맵으로 동작합니다.
  */
 const WIZARD_LABS = {
-    saltFlats: { name: '소금의 황무지', flavour: '지평선까지 하얗게 마른 땅이 펼쳐진다', bonusItems: 12 },
-    zigguratLab: { name: '시고투비의 생체 실험실', flavour: '변이의 안개가 스며 나온다', bonusItems: 9 },
-    cloudMage: { name: '구름 마법사의 전당', flavour: '정전기 섞인 안개가 밀려온다', bonusItems: 9 },
-    doroklohe: { name: '도로클로헤의 무덤', flavour: '엄폐물 하나 없는 방이 보인다', bonusItems: 9 },
-    hellbinder: { name: '헬바인더의 회당', flavour: '악마를 부르는 주문이 들린다', bonusItems: 10 },
-    iskenderun: { name: '이스켄데룬의 신비한 탑', flavour: '석상의 눈이 파괴의 구를 겨눈다', bonusItems: 10 },
-    lehudib: { name: '레후딥의 달 기지', flavour: '어비스의 기운이 새어 나온다', bonusItems: 10 },
-    gollubria: { name: '골루브리아의 룰렛', flavour: '유리벽 너머로 포탈들이 깜빡인다', bonusItems: 9 },
-    wucadMu: { name: '우카드 무의 수도원', flavour: '끊임없이 무언가를 불러내는 소리가 난다', bonusItems: 9 },
-    zonguldrok: { name: '종굴드록의 영묘', flavour: '언데드의 물결이 문 앞을 메우고 있다', bonusItems: 10 },
-    eringya: { name: '에링야의 격식 정원', flavour: '기묘하게 정돈된 정원이 펼쳐진다', bonusItems: 9 },
-    tukima: { name: '투키마의 촬영소', flavour: '주인 없는 무기들이 춤추고 있다', bonusItems: 9 },
-    yara: { name: '야라의 결투가 학원', flavour: '결투의 구호가 규칙적으로 울린다', bonusItems: 9 },
-    borgnjor: { name: '보르고뇨르의 영묘', flavour: '죽은 것들이 다시 일어서는 기척이 든다', bonusItems: 10 },
-    maxwell: { name: '맥스웰의 작업장', flavour: '금속이 맞부딪는 소리가 규칙적으로 난다', bonusItems: 11 },
-    alistair: { name: '알리스테어의 파티 저택', flavour: '흥청거리는 소리와 부식의 냄새가 뒤섞인다', bonusItems: 10 },
+    saltFlats: { name: '소금의 황무지', flavour: '지평선까지 하얗게 마른 땅이 펼쳐진다', bonusItems: 12 , monsters: ['naga', 'mana_viper', 'deep_elf', 'stone_giant'] },
+    zigguratLab: { name: '시고투비의 생체 실험실', flavour: '변이의 안개가 스며 나온다', bonusItems: 9 , monsters: ['jelly', 'cacodemon', 'slime', 'troll'] },
+    cloudMage: { name: '구름 마법사의 전당', flavour: '정전기 섞인 안개가 밀려온다', bonusItems: 9 , monsters: ['deep_elf', 'mana_viper', 'phantasmal'] },
+    doroklohe: { name: '도로클로헤의 무덤', flavour: '엄폐물 하나 없는 방이 보인다', bonusItems: 9 , monsters: ['skeleton', 'phantasmal', 'golem', 'spectre'] },
+    hellbinder: { name: '헬바인더의 회당', flavour: '악마를 부르는 주문이 들린다', bonusItems: 10 , monsters: ['imp', 'cacodemon', 'deep_elf', 'fire_demon'] },
+    iskenderun: { name: '이스켄데룬의 신비한 탑', flavour: '석상의 눈이 파괴의 구를 겨눈다', bonusItems: 10 , monsters: ['golem', 'deep_elf', 'ice_dragon'] },
+    lehudib: { name: '레후딥의 달 기지', flavour: '어비스의 기운이 새어 나온다', bonusItems: 10 , monsters: ['cacodemon', 'stone_giant', 'troll'] },
+    gollubria: { name: '골루브리아의 룰렛', flavour: '유리벽 너머로 포탈들이 깜빡인다', bonusItems: 9 , monsters: ['phantasmal', 'spectre', 'cacodemon'] },
+    wucadMu: { name: '우카드 무의 수도원', flavour: '끊임없이 무언가를 불러내는 소리가 난다', bonusItems: 9 , monsters: ['golem', 'phantasmal', 'deep_elf'] },
+    zonguldrok: { name: '종굴드록의 영묘', flavour: '언데드의 물결이 문 앞을 메우고 있다', bonusItems: 10 , monsters: ['zombie', 'skeleton', 'spectre', 'phantasmal'] },
+    eringya: { name: '에링야의 격식 정원', flavour: '기묘하게 정돈된 정원이 펼쳐진다', bonusItems: 9 , monsters: ['mana_viper', 'merfolk', 'killer_bee'] },
+    tukima: { name: '투키마의 촬영소', flavour: '주인 없는 무기들이 춤추고 있다', bonusItems: 9 , monsters: ['rakshasa', 'phantasmal', 'golem'] },
+    yara: { name: '야라의 결투가 학원', flavour: '결투의 구호가 규칙적으로 울린다', bonusItems: 9 , monsters: ['mana_viper', 'deep_elf_knight', 'deep_elf'] },
+    borgnjor: { name: '보르고뇨르의 영묘', flavour: '죽은 것들이 다시 일어서는 기척이 든다', bonusItems: 10 , monsters: ['zombie', 'skeleton', 'spectre', 'deep_elf'] },
+    maxwell: { name: '맥스웰의 작업장', flavour: '금속이 맞부딪는 소리가 규칙적으로 난다', bonusItems: 11 , monsters: ['golem', 'deep_elf_knight', 'fire_giant', 'orc_warrior'] },
+    alistair: { name: '알리스테어의 파티 저택', flavour: '흥청거리는 소리와 부식의 냄새가 뒤섞인다', bonusItems: 10 , monsters: ['deep_elf', 'cacodemon', 'rakshasa'] },
 };
 
 /** @description 특수한 목적의 이벤트 포탈 */
@@ -94,7 +94,7 @@ const EVENT_PORTALS = {
         // 다른 포탈과 달리 한 게임에 세 번까지 나타납니다.
         maxPerGame: 3, depth: 1, bonusItems: 6, theme: 'crypt', themeVariation: 2,
         flavour: '유령들의 거처가 모습을 드러낸다',
-        monsters: ['spectre', 'skeleton', 'mummy', 'zombie'],
+        monsters: ['spectre', 'phantasmal', 'skeleton', 'mummy'],
     },
     bazaar: {
         name: '시장', minDepth: 4, maxDepth: 20, chance: 0.12,
@@ -106,7 +106,7 @@ const EVENT_PORTALS = {
         name: '매장고', minDepth: 6, maxDepth: 22, chance: 0.07,
         depth: 1, bonusItems: 14, theme: 'vault', themeVariation: 2,
         flavour: '값비싼 무언가가 잠긴 문 뒤에서 반짝인다',
-        monsters: ['gargoyle', 'hell_knight', 'demon'],
+        monsters: ['gargoyle', 'hell_knight', 'golem'],
     },
 };
 

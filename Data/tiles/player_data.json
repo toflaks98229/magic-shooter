@@ -169,6 +169,118 @@
       "h": 32,
       "color": "#55363a"
     },
+    "enemy_deep_elf": {
+      "x": 153,
+      "y": 1382,
+      "w": 30,
+      "h": 32,
+      "color": "#464036"
+    },
+    "enemy_deep_elf_knight": {
+      "x": 127,
+      "y": 1382,
+      "w": 26,
+      "h": 32,
+      "color": "#2d3a3a"
+    },
+    "enemy_ice_dragon": {
+      "x": 0,
+      "y": 1446,
+      "w": 32,
+      "h": 32,
+      "color": "#445862"
+    },
+    "enemy_fire_giant": {
+      "x": 159,
+      "y": 1414,
+      "w": 31,
+      "h": 32,
+      "color": "#732512"
+    },
+    "enemy_stone_giant": {
+      "x": 221,
+      "y": 1414,
+      "w": 32,
+      "h": 32,
+      "color": "#5d513f"
+    },
+    "enemy_naga": {
+      "x": 56,
+      "y": 1046,
+      "w": 31,
+      "h": 29,
+      "color": "#6b6230"
+    },
+    "enemy_jelly": {
+      "x": 950,
+      "y": 1478,
+      "w": 32,
+      "h": 22,
+      "color": "#7e0f04"
+    },
+    "enemy_crocodile": {
+      "x": 0,
+      "y": 758,
+      "w": 32,
+      "h": 29,
+      "color": "#324015"
+    },
+    "enemy_merfolk": {
+      "x": 341,
+      "y": 1702,
+      "w": 21,
+      "h": 32,
+      "color": "#363428"
+    },
+    "enemy_phantasmal": {
+      "x": 904,
+      "y": 1606,
+      "w": 32,
+      "h": 32,
+      "color": "#4f8b5c"
+    },
+    "enemy_golem": {
+      "x": 407,
+      "y": 1238,
+      "w": 32,
+      "h": 31,
+      "color": "#453e45"
+    },
+    "enemy_rakshasa": {
+      "x": 929,
+      "y": 1142,
+      "w": 32,
+      "h": 32,
+      "color": "#66301e"
+    },
+    "enemy_troll": {
+      "x": 371,
+      "y": 1606,
+      "w": 32,
+      "h": 32,
+      "color": "#1d3611"
+    },
+    "enemy_mana_viper": {
+      "x": 175,
+      "y": 1046,
+      "w": 28,
+      "h": 30,
+      "color": "#451761"
+    },
+    "enemy_cacodemon": {
+      "x": 218,
+      "y": 1142,
+      "w": 32,
+      "h": 32,
+      "color": "#5f450c"
+    },
+    "enemy_killer_bee": {
+      "x": 398,
+      "y": 790,
+      "w": 32,
+      "h": 32,
+      "color": "#5f230b"
+    },
     "enemy_menkaure": {
       "x": 301,
       "y": 1542,

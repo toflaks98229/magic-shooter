@@ -51,6 +51,21 @@ const EVENT_MESSAGES = {
         text: `${name}에 발을 들였다.`,
         style: 'info',
     }),
+    [EVENTS.ITEM_PICKED_UP]: ({ definition }) => ({
+        text: definition ? `${definition.name}을 마셨다.` : '무언가를 주웠다.',
+        style: 'achievement',
+    }),
+    [EVENTS.BUFF_EXPIRED]: ({ effect }) => ({
+        text: `${BUFF_NAMES[effect] || effect} 효과가 사라졌다.`,
+        style: 'loss',
+    }),
+};
+
+/** @description 지속 효과의 표시 이름 */
+const BUFF_NAMES = {
+    might: '힘',
+    haste: '가속',
+    resistance: '보호',
 };
 
 /**

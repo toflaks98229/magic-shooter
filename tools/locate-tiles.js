@@ -107,6 +107,27 @@ const WANTED = {
     mon_hell_knight: 'mon/humanoids/humans/hell_knight',
     mon_demon: 'mon/demons/executioner',
 
+    // 표에 이름이 나온 던전별 고유 종.
+    // 천사(mon/holy)와 식물(mon/fungi_plants) 계열은 이 시트 버전에 통째로 빠져 있어
+    // 목록에서 뺐습니다. 해당 던전은 다른 몬스터로 구성합니다.
+    mon_deep_elf: ['mon/humanoids/elves/deep_elf_sorcerer', 'mon/humanoids/elves/deep_elf_death_mage', 'mon/humanoids/elves/elf', 'mon/humanoids/humans/necromancer', 'mon/humanoids/humans/arcanist'],
+    mon_deep_elf_knight: ['mon/humanoids/elves/deep_elf_knight', 'mon/humanoids/elves/deep_elf_archer', 'mon/humanoids/humans/death_knight', 'mon/humanoids/humans/human'],
+    mon_ice_dragon: 'mon/dragons/ice_dragon',
+    mon_fire_giant: 'mon/humanoids/giants/fire_giant',
+    mon_stone_giant: 'mon/humanoids/giants/stone_giant',
+    // 나가 계열은 이 시트 버전에 없어 뱀 계열로 대신합니다.
+    mon_naga: ['mon/demihumanoids/naga/naga', 'mon/animals/anaconda', 'mon/animals/black_mamba', 'mon/animals/water_moccasin'],
+    mon_jelly: 'mon/amorphous/jelly',
+    mon_crocodile: 'mon/animals/crocodile',
+    mon_merfolk: 'mon/demihumanoids/merfolk/merfolk',
+    mon_phantasmal: 'mon/undead/phantasmal_warrior',
+    mon_golem: 'mon/nonliving/iron_golem',
+    mon_rakshasa: ['mon/demons/rakshasa', 'mon/demons/neqoxec', 'mon/demons/orange_demon', 'mon/demons/ynoxinul'],
+    mon_troll: 'mon/humanoids/troll',
+    mon_mana_viper: 'mon/animals/mana_viper',
+    mon_cacodemon: 'mon/demons/cacodemon',
+    mon_killer_bee: ['mon/animals/killer_bee', 'mon/animals/queen_bee', 'mon/animals/hornet', 'mon/animals/soldier_ant'],
+
     // 네임드
     mon_menkaure: 'mon/unique/menkaure',
     mon_minotaur: 'mon/demihumanoids/minotaur',
@@ -118,8 +139,15 @@ const WANTED = {
     //
     // 'i-' 로 시작하는 파일은 식별된 아이템 위에 덧그리는 작은 기호이지 물건 그림이 아닙니다.
     // 실제 생김새는 물약이면 색 이름(ruby, sky_blue), 지팡이면 재질 이름(gem_*)입니다.
-    item_potion_heal: ['item/potion/ruby', 'item/potion/pink', 'item/potion/magenta'],
-    item_potion_magic: ['item/potion/sky_blue', 'item/potion/brilliant_blue', 'item/potion/cyan'],
+    // 물약은 색마다 다른 병 그림이 있어, 효과별로 다른 색을 골라 구분되게 합니다.
+    item_potion_heal: ['item/potion/ruby', 'item/potion/pink'],
+    item_potion_magic: ['item/potion/sky_blue', 'item/potion/brilliant_blue'],
+    item_potion_greater_heal: ['item/potion/purple_red', 'item/potion/magenta'],
+    item_potion_might: ['item/potion/orange', 'item/potion/brown'],
+    item_potion_haste: ['item/potion/golden', 'item/potion/yellow'],
+    item_potion_resistance: ['item/potion/emerald', 'item/potion/cyan'],
+    item_potion_vitality: ['item/potion/effervescent', 'item/potion/bubbly'],
+    item_potion_capacity: ['item/potion/silver', 'item/potion/white'],
     weapon_wand: ['item/wand/gem_gold', 'item/wand/gem_brass', 'item/wand/gem_ivory'],
     weapon_wand_fire: ['item/wand/gem_glass', 'item/wand/gem_silver', 'item/wand/gem_copper'],
     weapon_glove: ['item/armour/glove1', 'item/armour/glove2'],

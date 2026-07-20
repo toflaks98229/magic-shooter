@@ -35,10 +35,19 @@ world.map = [
 const center = (tileX, tileY) => [tileX * TILE + TILE / 2, tileY * TILE + TILE / 2];
 
 test('막힌 것이 없으면 시야가 통한다', () => {
-    assert.equal(hasLineOfSight(...center(1, 1), ...center(1, 1)), true, '같은 타일');
+    assert.equal(hasLineOfSight(...center(1, 1), ...center(1, 1)), true, '완전히 같은 지점');
     assert.equal(hasLineOfSight(...center(1, 1), ...center(3, 1)), true, '수평');
     assert.equal(hasLineOfSight(...center(1, 1), ...center(1, 5)), true, '수직');
     assert.equal(hasLineOfSight(...center(1, 1), ...center(3, 3)), true, '대각선');
+});
+
+test('같은 칸 안의 다른 지점도 시야가 통한다', () => {
+    // 코앞의 적은 같은 칸에 서 있습니다. DDA 는 한 칸 옮긴 뒤에 도착을 확인하므로,
+    // 출발 칸을 먼저 걸러내지 않으면 목표를 지나쳐 영영 닿지 못합니다.
+    const [x, y] = center(2, 2);
+    assert.equal(hasLineOfSight(x, y, x + 10, y), true, '같은 칸 오른쪽');
+    assert.equal(hasLineOfSight(x, y, x, y + 10), true, '같은 칸 아래쪽');
+    assert.equal(hasLineOfSight(x, y, x + 8, y + 8), true, '같은 칸 대각선');
 });
 
 test('벽이 시야를 막는다', () => {

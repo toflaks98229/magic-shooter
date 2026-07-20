@@ -156,6 +156,24 @@ const SPRITES = {
         enemy_fire_demon: { name: 'mon_fire_demon' },
         enemy_hell_knight: { name: 'mon_hell_knight' },
         enemy_demon: { name: 'mon_demon' },
+        // 표에 이름이 나온 던전별 고유 종
+        enemy_deep_elf: { name: 'mon_deep_elf' },
+        enemy_deep_elf_knight: { name: 'mon_deep_elf_knight' },
+        enemy_ice_dragon: { name: 'mon_ice_dragon' },
+        enemy_fire_giant: { name: 'mon_fire_giant' },
+        enemy_stone_giant: { name: 'mon_stone_giant' },
+        enemy_naga: { name: 'mon_naga' },
+        enemy_jelly: { name: 'mon_jelly' },
+        enemy_crocodile: { name: 'mon_crocodile' },
+        enemy_merfolk: { name: 'mon_merfolk' },
+        enemy_phantasmal: { name: 'mon_phantasmal' },
+        enemy_golem: { name: 'mon_golem' },
+        enemy_rakshasa: { name: 'mon_rakshasa' },
+        enemy_troll: { name: 'mon_troll' },
+        enemy_mana_viper: { name: 'mon_mana_viper' },
+        enemy_cacodemon: { name: 'mon_cacodemon' },
+        enemy_killer_bee: { name: 'mon_killer_bee' },
+
         enemy_menkaure: { name: 'mon_menkaure' },
         enemy_purgy: { name: 'mon_purgy' },
         enemy_minotaur: { name: 'mon_minotaur' },
@@ -165,6 +183,12 @@ const SPRITES = {
         // 이 게임은 '마법소녀 슈팅'이라 총 자리에 지팡이가, 주먹 자리에 장갑이 들어갑니다.
         item_health: { name: 'item_potion_heal' },        // 치유의 물약
         item_ammo: { name: 'item_potion_magic' },         // 마력의 물약
+        item_greater_health: { name: 'item_potion_greater_heal' },
+        item_might: { name: 'item_potion_might' },
+        item_haste: { name: 'item_potion_haste' },
+        item_resistance: { name: 'item_potion_resistance' },
+        item_vitality: { name: 'item_potion_vitality' },
+        item_capacity: { name: 'item_potion_capacity' },
         projectile_fireball: { name: 'bolt_magenta' },    // 자홍색 마법 광선
         projectile_bullet: { name: 'bolt_cyan' },         // 청록색 마법 광선
         fist: { name: 'weapon_glove' },                   // 장갑

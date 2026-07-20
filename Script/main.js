@@ -16,6 +16,7 @@ import { dom, bindDom } from './dom.js';
 import { on, EVENTS } from './events.js';
 import { generateDungeon } from './mapGenerator.js';
 import { getBranch, formatLocation } from './branches.js';
+import { rollItem } from './items.js';
 import { setupInputHandlers, clearInputQueue } from './input.js';
 import { render, resizeCanvas, loadAssets } from './render.js';
 import { spawnEnemiesForFloor } from './gameLogic.js';
@@ -257,15 +258,13 @@ function scatterBonusItems(count) {
     }
     if (floors.length === 0) return;
 
+    const dangerLevel = A.currentDangerLevel();
     for (let i = 0; i < count; i++) {
         const spot = floors[Math.floor(Math.random() * floors.length)];
-        const template = Math.random() < 0.5 ? C.ITEM_TYPES.HEALTH : C.ITEM_TYPES.AMMO;
-        world.items.push({
-            ...template,
-            x: spot.x * C.TILE_SIZE + C.TILE_SIZE / 2,
-            y: spot.y * C.TILE_SIZE + C.TILE_SIZE / 2,
-            z: C.TILE_SIZE / 2,
-        });
+        const itemId = rollItem(dangerLevel);
+        if (itemId) {
+            A.dropItem(itemId, spot.x * C.TILE_SIZE + C.TILE_SIZE / 2, spot.y * C.TILE_SIZE + C.TILE_SIZE / 2);
+        }
     }
 }
 

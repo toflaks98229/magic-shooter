@@ -48,6 +48,7 @@ export function update(deltaTime) {
     updateParticles(dtFactor);
     updateAnimatedWalls(now); // 애니메이션 벽(열리는 문) 상태 업데이트
     A.closeExpiredPortals();  // 시간이 다 된 포탈 닫기
+    A.expireBuffs();          // 시간이 다 된 지속 효과 해제
 
     // 2. 무기 자동 전환 (탄약이 없으면 주먹으로)
     //    교체 연출이 진행 중일 때는 요청하지 않습니다. 실제 무기 변경은
@@ -135,7 +136,7 @@ export function attack() {
             .find(({ enemy }) => hasLineOfSight(player.x, player.y, enemy.x, enemy.y));
 
         if (hitEnemy) {
-            A.damageEnemy(hitEnemy.enemy, weaponData.damage, now);
+            A.damageEnemy(hitEnemy.enemy, playerDamage(weaponData.damage), now);
         }
 
     } else if (player.weapon === 'fist') {
@@ -156,12 +157,21 @@ export function attack() {
                 // 전방 부채꼴(FOV의 1/4) 범위 안에 있고, 벽에 가리지 않았는지 확인
                 if (Math.abs(angleDiff) < C.FOV / 4 &&
                     hasLineOfSight(player.x, player.y, enemy.x, enemy.y)) {
-                    A.damageEnemy(enemy, weaponData.damage, now);
+                    A.damageEnemy(enemy, playerDamage(weaponData.damage), now);
                     hasHit = true;
                 }
             }
         });
     }
+}
+
+/**
+ * 지속 효과를 반영한 플레이어의 공격력을 구합니다.
+ * @param {number} base - 무기의 기본 피해량
+ * @returns {number} 실제로 들어갈 피해량
+ */
+function playerDamage(base) {
+    return Math.round(base * A.buffModifier('damageMultiplier', 1));
 }
 
 /**
@@ -508,6 +518,11 @@ export function hasLineOfSight(x1, y1, x2, y2) {
     let mapX = Math.floor(posX), mapY = Math.floor(posY);
     const targetX = Math.floor(x2 / C.TILE_SIZE), targetY = Math.floor(y2 / C.TILE_SIZE);
 
+    // 같은 칸 안에 있으면 사이를 막을 것이 없습니다.
+    // 아래 반복문은 한 칸 옮긴 뒤에 도착 여부를 보기 때문에, 이 경우를 먼저 걸러내지 않으면
+    // 출발 칸을 그냥 지나쳐 영영 목표에 닿지 못합니다. (코앞의 적을 못 맞히게 됩니다.)
+    if (mapX === targetX && mapY === targetY) return true;
+
     // 광선이 X축/Y축 격자선을 하나 넘을 때마다 이동하는 거리
     const deltaDistX = dirX === 0 ? Infinity : Math.abs(1 / dirX);
     const deltaDistY = dirY === 0 ? Infinity : Math.abs(1 / dirY);
@@ -562,7 +577,7 @@ function handlePlayerMovement(dtFactor) {
         }
 
         runtime.bobbingAngle += C.BOB_SPEED * dtFactor; // 화면 흔들림 각도 업데이트
-        const moveSpeed = C.MOVE_SPEED * dtFactor;
+        const moveSpeed = C.MOVE_SPEED * dtFactor * A.buffModifier('speedMultiplier', 1);
         // 플레이어 시야 방향을 기준으로 한 이동 벡터 계산 (전진/후진, 좌/우)
         const moveX = (Math.cos(player.angle) * forward - Math.sin(player.angle) * strafe) * moveSpeed;
         const moveY = (Math.sin(player.angle) * forward + Math.cos(player.angle) * strafe) * moveSpeed;

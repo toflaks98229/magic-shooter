@@ -69,6 +69,12 @@ export function createWorld() {
         runes: [],
 
         /**
+         * @description 현재 걸려 있는 지속 효과. [{ effect, expiresAt }]
+         * expiresAt 은 게임 내부 시간 기준이라 세이브를 불러와도 남은 시간이 이어집니다.
+         */
+        buffs: [],
+
+        /**
          * @description 포탈 던전에 들어온 시점의 누적 깊이.
          *
          * 포탈 던전은 정규 가지처럼 고정된 위치가 없어 표만 보고는 깊이를 알 수 없습니다.

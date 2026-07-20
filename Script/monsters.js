@@ -159,6 +159,95 @@ export const MONSTERS = {
         color: '#5e2f8f', spriteKey: 'enemy_demon',
     },
 
+    // --- 던전별 고유 종 -------------------------------------------------------
+    // 아래는 던전 구성표에 이름이 나온 것들입니다.
+    crocodile: {
+        name: '악어', tier: 6, behavior: 'melee',
+        hp: 75, speed: 0.95, damage: 20, cooldown: 1000, size: 26,
+        color: '#5c6b3a', spriteKey: 'enemy_crocodile',
+    },
+    merfolk: {
+        name: '인어', tier: 7, behavior: 'ranged',
+        hp: 60, speed: 1.05, damage: 16, cooldown: 1200, size: 23,
+        projectileSpeed: 4.2, range: 32 * 9,
+        color: '#3f8f9c', spriteKey: 'enemy_merfolk',
+    },
+    naga: {
+        name: '나가', tier: 8, behavior: 'melee',
+        hp: 95, speed: 0.8, damage: 24, cooldown: 1100, size: 27,
+        color: '#4a7c3f', spriteKey: 'enemy_naga',
+    },
+    killer_bee: {
+        name: '살인벌', tier: 5, behavior: 'melee',
+        hp: 30, speed: 1.5, damage: 13, cooldown: 600, size: 16,
+        color: '#c8a02c', spriteKey: 'enemy_killer_bee',
+    },
+    jelly: {
+        name: '젤리', tier: 7, behavior: 'melee',
+        hp: 70, speed: 0.7, damage: 19, cooldown: 900, size: 24,
+        color: '#8fb84a', spriteKey: 'enemy_jelly',
+    },
+    deep_elf: {
+        name: '딥 엘프 마법사', tier: 11, behavior: 'ranged',
+        hp: 65, speed: 0.9, damage: 24, cooldown: 1300, size: 24,
+        projectileSpeed: 4.5, range: 32 * 11,
+        color: '#8f6fc0', spriteKey: 'enemy_deep_elf',
+    },
+    deep_elf_knight: {
+        name: '딥 엘프 기사', tier: 12, behavior: 'melee',
+        hp: 120, speed: 1.05, damage: 28, cooldown: 950, size: 26,
+        color: '#5f5f8f', spriteKey: 'enemy_deep_elf_knight',
+    },
+    ice_dragon: {
+        name: '얼음 용', tier: 13, behavior: 'ranged',
+        hp: 180, speed: 0.75, damage: 30, cooldown: 1500, size: 32,
+        projectileSpeed: 3.8, range: 32 * 10,
+        color: '#5aa8d8', spriteKey: 'enemy_ice_dragon',
+    },
+    fire_giant: {
+        name: '화염 거인', tier: 14, behavior: 'melee',
+        hp: 190, speed: 0.8, damage: 36, cooldown: 1300, size: 31,
+        color: '#c85a2a', spriteKey: 'enemy_fire_giant',
+    },
+    stone_giant: {
+        name: '바위 거인', tier: 13, behavior: 'melee',
+        hp: 200, speed: 0.65, damage: 34, cooldown: 1400, size: 32,
+        color: '#8a8478', spriteKey: 'enemy_stone_giant',
+    },
+    troll: {
+        name: '트롤', tier: 10, behavior: 'melee',
+        hp: 140, speed: 1.0, damage: 28, cooldown: 1000, size: 29,
+        color: '#6b7c4a', spriteKey: 'enemy_troll',
+    },
+    golem: {
+        name: '골렘', tier: 14, behavior: 'melee',
+        hp: 210, speed: 0.55, damage: 32, cooldown: 1500, size: 30,
+        color: '#7a7a82', spriteKey: 'enemy_golem',
+    },
+    phantasmal: {
+        name: '환영 전사', tier: 12, behavior: 'melee',
+        hp: 85, speed: 1.1, damage: 26, cooldown: 900, size: 25,
+        color: '#7fc0c8', spriteKey: 'enemy_phantasmal',
+    },
+    rakshasa: {
+        name: '락샤샤', tier: 13, behavior: 'summoner',
+        hp: 110, speed: 0.95, damage: 24, cooldown: 1100, size: 26,
+        summonId: 'phantasmal', summonCooldown: 6000, maxSummons: 2,
+        color: '#d07a2a', spriteKey: 'enemy_rakshasa',
+    },
+    mana_viper: {
+        name: '마나 바이퍼', tier: 12, behavior: 'ranged',
+        hp: 70, speed: 1.0, damage: 22, cooldown: 1400, size: 24,
+        projectileSpeed: 4.0, range: 32 * 9,
+        color: '#9c5fc8', spriteKey: 'enemy_mana_viper',
+    },
+    cacodemon: {
+        name: '커럽터', tier: 15, behavior: 'summoner',
+        hp: 150, speed: 0.7, damage: 26, cooldown: 1300, size: 29,
+        summonId: 'imp', summonCooldown: 4500, maxSummons: 3,
+        color: '#a04ac0', spriteKey: 'enemy_cacodemon',
+    },
+
     // --- 네임드 -------------------------------------------------------------
     menkaure: {
         name: '멘카우레', tier: 4, behavior: 'summoner', named: true,

@@ -49,6 +49,11 @@ export const EVENTS = {
     PORTAL_APPEARED: 'portal:appeared',
     /** 포탈이 시간이 다 되어 닫힘. detail: { id, name } */
     PORTAL_CLOSED: 'portal:closed',
+
+    /** 지속 효과가 걸림. detail: { effect, durationMs } */
+    BUFF_APPLIED: 'buff:applied',
+    /** 지속 효과가 끝남. detail: { effect } */
+    BUFF_EXPIRED: 'buff:expired',
 };
 
 /** @description 실제 디스패치를 담당하는 내부 버스. 외부에 노출하지 않습니다. */

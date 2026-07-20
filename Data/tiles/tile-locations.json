@@ -1426,6 +1426,134 @@
       "w": 32,
       "h": 32
     },
+    "mon_deep_elf": {
+      "sheet": "player",
+      "source": "mon/humanoids/humans/necromancer",
+      "x": 153,
+      "y": 1382,
+      "w": 30,
+      "h": 32
+    },
+    "mon_deep_elf_knight": {
+      "sheet": "player",
+      "source": "mon/humanoids/humans/death_knight",
+      "x": 127,
+      "y": 1382,
+      "w": 26,
+      "h": 32
+    },
+    "mon_ice_dragon": {
+      "sheet": "player",
+      "source": "mon/dragons/ice_dragon",
+      "x": 0,
+      "y": 1446,
+      "w": 32,
+      "h": 32
+    },
+    "mon_fire_giant": {
+      "sheet": "player",
+      "source": "mon/humanoids/giants/fire_giant",
+      "x": 159,
+      "y": 1414,
+      "w": 31,
+      "h": 32
+    },
+    "mon_stone_giant": {
+      "sheet": "player",
+      "source": "mon/humanoids/giants/stone_giant",
+      "x": 221,
+      "y": 1414,
+      "w": 32,
+      "h": 32
+    },
+    "mon_naga": {
+      "sheet": "player",
+      "source": "mon/animals/anaconda",
+      "x": 56,
+      "y": 1046,
+      "w": 31,
+      "h": 29
+    },
+    "mon_jelly": {
+      "sheet": "player",
+      "source": "mon/amorphous/jelly",
+      "x": 950,
+      "y": 1478,
+      "w": 32,
+      "h": 22
+    },
+    "mon_crocodile": {
+      "sheet": "player",
+      "source": "mon/animals/crocodile",
+      "x": 0,
+      "y": 758,
+      "w": 32,
+      "h": 29
+    },
+    "mon_merfolk": {
+      "sheet": "player",
+      "source": "mon/demihumanoids/merfolk/merfolk",
+      "x": 341,
+      "y": 1702,
+      "w": 21,
+      "h": 32
+    },
+    "mon_phantasmal": {
+      "sheet": "player",
+      "source": "mon/undead/phantasmal_warrior",
+      "x": 904,
+      "y": 1606,
+      "w": 32,
+      "h": 32
+    },
+    "mon_golem": {
+      "sheet": "player",
+      "source": "mon/nonliving/iron_golem",
+      "x": 407,
+      "y": 1238,
+      "w": 32,
+      "h": 31
+    },
+    "mon_rakshasa": {
+      "sheet": "player",
+      "source": "mon/demons/orange_demon",
+      "x": 929,
+      "y": 1142,
+      "w": 32,
+      "h": 32
+    },
+    "mon_troll": {
+      "sheet": "player",
+      "source": "mon/humanoids/troll",
+      "x": 371,
+      "y": 1606,
+      "w": 32,
+      "h": 32
+    },
+    "mon_mana_viper": {
+      "sheet": "player",
+      "source": "mon/animals/mana_viper",
+      "x": 175,
+      "y": 1046,
+      "w": 28,
+      "h": 30
+    },
+    "mon_cacodemon": {
+      "sheet": "player",
+      "source": "mon/demons/cacodemon",
+      "x": 218,
+      "y": 1142,
+      "w": 32,
+      "h": 32
+    },
+    "mon_killer_bee": {
+      "sheet": "player",
+      "source": "mon/animals/hornet",
+      "x": 398,
+      "y": 790,
+      "w": 32,
+      "h": 32
+    },
     "mon_menkaure": {
       "sheet": "player",
       "source": "mon/unique/menkaure",
@@ -1462,6 +1590,54 @@
       "sheet": "main",
       "source": "item/potion/sky_blue",
       "x": 784,
+      "y": 602,
+      "w": 25,
+      "h": 27
+    },
+    "item_potion_greater_heal": {
+      "sheet": "main",
+      "source": "item/potion/purple_red",
+      "x": 759,
+      "y": 602,
+      "w": 25,
+      "h": 27
+    },
+    "item_potion_might": {
+      "sheet": "main",
+      "source": "item/potion/orange",
+      "x": 384,
+      "y": 602,
+      "w": 25,
+      "h": 27
+    },
+    "item_potion_haste": {
+      "sheet": "main",
+      "source": "item/potion/golden",
+      "x": 684,
+      "y": 602,
+      "w": 25,
+      "h": 27
+    },
+    "item_potion_resistance": {
+      "sheet": "main",
+      "source": "item/potion/emerald",
+      "x": 484,
+      "y": 602,
+      "w": 25,
+      "h": 27
+    },
+    "item_potion_vitality": {
+      "sheet": "main",
+      "source": "item/potion/effervescent",
+      "x": 634,
+      "y": 602,
+      "w": 25,
+      "h": 27
+    },
+    "item_potion_capacity": {
+      "sheet": "main",
+      "source": "item/potion/silver",
+      "x": 309,
       "y": 602,
       "w": 25,
       "h": 27

@@ -15,6 +15,48 @@
       "h": 27,
       "color": "#5d7c8e"
     },
+    "item_greater_health": {
+      "x": 759,
+      "y": 602,
+      "w": 25,
+      "h": 27,
+      "color": "#6c4d57"
+    },
+    "item_might": {
+      "x": 384,
+      "y": 602,
+      "w": 25,
+      "h": 27,
+      "color": "#76513f"
+    },
+    "item_haste": {
+      "x": 684,
+      "y": 602,
+      "w": 25,
+      "h": 27,
+      "color": "#897348"
+    },
+    "item_resistance": {
+      "x": 484,
+      "y": 602,
+      "w": 25,
+      "h": 27,
+      "color": "#4b624c"
+    },
+    "item_vitality": {
+      "x": 634,
+      "y": 602,
+      "w": 25,
+      "h": 27,
+      "color": "#7a677f"
+    },
+    "item_capacity": {
+      "x": 309,
+      "y": 602,
+      "w": 25,
+      "h": 27,
+      "color": "#676b6e"
+    },
     "projectile_fireball": {
       "x": 802,
       "y": 1028,

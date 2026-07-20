@@ -11,6 +11,7 @@ import * as C from './constants.js';
 import { world, createWorld, setWorld } from './world.js';
 import { getBranch, childBranchesOf, absoluteDepth, rollBranchSelection } from './branches.js';
 import { rollPortalForFloor } from './portals.js';
+import { getItem, rollItem, DROP_CHANCE, BUFF_MODIFIERS } from './items.js';
 import { runtime, setDynamicLight } from './runtime.js';
 import { emit, EVENTS } from './events.js';
 
@@ -43,8 +44,62 @@ export function setFloor(floor) {
  * @param {object} [source] - 피해를 입힌 주체 (적, 발사체 등)
  */
 export function damagePlayer(amount, source = null) {
-    world.player.hp -= amount;
-    emit(EVENTS.PLAYER_DAMAGED, { amount, source, hp: world.player.hp });
+    // 보호 효과가 걸려 있으면 받는 피해가 줄어듭니다.
+    const taken = Math.max(1, Math.round(amount * buffModifier('damageTaken', 1)));
+
+    world.player.hp -= taken;
+    emit(EVENTS.PLAYER_DAMAGED, { amount: taken, source, hp: world.player.hp });
+}
+
+/**
+ * 현재 걸려 있는 지속 효과들의 배율을 곱해서 돌려줍니다.
+ * @param {string} field - BUFF_MODIFIERS 의 항목 이름
+ * @param {number} base - 아무 효과도 없을 때의 값
+ * @returns {number} 적용된 배율
+ */
+export function buffModifier(field, base = 1) {
+    let value = base;
+    for (const buff of world.buffs) {
+        const modifier = BUFF_MODIFIERS[buff.effect]?.[field];
+        if (modifier !== undefined) value *= modifier;
+    }
+    return value;
+}
+
+/**
+ * 특정 지속 효과가 걸려 있는지 확인합니다.
+ * @param {string} effect - 효과 이름
+ * @returns {boolean} 걸려 있으면 true
+ */
+export function hasBuff(effect) {
+    return world.buffs.some(buff => buff.effect === effect);
+}
+
+/**
+ * 지속 효과를 겁니다. 같은 효과가 이미 있으면 시간을 새로 채웁니다.
+ * @param {string} effect - 효과 이름
+ * @param {number} durationMs - 지속 시간
+ */
+export function applyBuff(effect, durationMs) {
+    const expiresAt = world.time + durationMs;
+    const existing = world.buffs.find(buff => buff.effect === effect);
+
+    if (existing) existing.expiresAt = Math.max(existing.expiresAt, expiresAt);
+    else world.buffs.push({ effect, expiresAt });
+
+    emit(EVENTS.BUFF_APPLIED, { effect, durationMs });
+}
+
+/**
+ * 시간이 다 된 지속 효과를 걷어냅니다. 매 프레임 확인합니다.
+ */
+export function expireBuffs() {
+    for (let i = world.buffs.length - 1; i >= 0; i--) {
+        if (world.time < world.buffs[i].expiresAt) continue;
+
+        const [expired] = world.buffs.splice(i, 1);
+        emit(EVENTS.BUFF_EXPIRED, { effect: expired.effect });
+    }
 }
 
 /**
@@ -142,14 +197,10 @@ export function damageEnemy(enemy, amount, now) {
 export function killEnemyAt(index) {
     const deadEnemy = world.enemies.splice(index, 1)[0];
 
-    if (Math.random() < 0.5) { // 50% 확률로 아이템 드랍
-        const itemType = Math.random() < 0.6 ? 'AMMO' : 'HEALTH'; // 탄약 60%, 체력 40%
-        world.items.push({
-            ...C.ITEM_TYPES[itemType],
-            x: deadEnemy.x,
-            y: deadEnemy.y,
-            z: C.TILE_SIZE / 2,
-        });
+    // 깊이에 맞는 아이템이 확률적으로 떨어집니다.
+    if (Math.random() < DROP_CHANCE) {
+        const itemId = rollItem(currentDangerLevel());
+        if (itemId) dropItem(itemId, deadEnemy.x, deadEnemy.y);
     }
 
     emit(EVENTS.ENEMY_DIED, { enemy: deadEnemy });
@@ -164,12 +215,63 @@ export function killEnemyAt(index) {
  */
 export function pickUpItemAt(index) {
     const item = world.items[index];
+    const definition = getItem(item.itemId);
 
-    if (item.type === 'health') healPlayer(item.amount);
-    else if (item.type === 'ammo') giveAmmo(item.amount);
+    if (definition) applyItemEffect(definition);
 
-    emit(EVENTS.ITEM_PICKED_UP, { item });
+    emit(EVENTS.ITEM_PICKED_UP, { item, definition });
     world.items.splice(index, 1);
+}
+
+/**
+ * @description 아이템 효과별 처리. items.js 의 effect 값이 이 표의 키와 일치해야 합니다.
+ * 지속 효과는 여기서 시간을 걸어두고, 실제 영향은 buffModifier 를 읽는 쪽이 반영합니다.
+ */
+const ITEM_EFFECTS = {
+    heal: (item) => healPlayer(item.amount),
+    restoreAmmo: (item) => giveAmmo(item.amount),
+
+    // 최대치를 올리면서 그만큼 채워줍니다. 올려놓고 비어 있으면 보상 같지 않습니다.
+    maxHp: (item) => {
+        world.player.maxHp += item.amount;
+        world.player.hp += item.amount;
+    },
+    maxAmmo: (item) => {
+        world.player.maxAmmo += item.amount;
+        world.player.ammo = Math.min(world.player.maxAmmo, world.player.ammo + item.amount);
+    },
+};
+
+/**
+ * 아이템의 효과를 적용합니다.
+ * @param {object} definition - items.js 의 아이템 정의
+ */
+function applyItemEffect(definition) {
+    const apply = ITEM_EFFECTS[definition.effect];
+
+    if (apply) apply(definition);
+    else if (definition.durationMs) applyBuff(definition.effect, definition.durationMs);
+    else console.warn(`알 수 없는 아이템 효과: ${definition.effect}`);
+}
+
+/**
+ * 지정한 아이템을 바닥에 떨어뜨립니다.
+ * @param {string} itemId - items.js 의 아이템 id
+ * @param {number} x - 월드 X 좌표
+ * @param {number} y - 월드 Y 좌표
+ */
+export function dropItem(itemId, x, y) {
+    const definition = getItem(itemId);
+    if (!definition) return;
+
+    world.items.push({
+        itemId,
+        name: definition.name,
+        spriteKey: definition.spriteKey,
+        color: definition.color,
+        size: definition.size,
+        x, y, z: C.TILE_SIZE / 2,
+    });
 }
 
 // --- 월드 오브젝트 ----------------------------------------------------------
@@ -209,7 +311,7 @@ export function reachExit() {
  * @description 던전을 옮겨 다녀도 따라다니는 항목들.
  * 서브 던전에서 다치고 나왔는데 멀쩡해지면 안 되므로 복원 대상이 아닙니다.
  */
-const CARRIED_FORWARD = ['runes', 'time', 'branchEntrances', 'portalsUsed'];
+const CARRIED_FORWARD = ['runes', 'time', 'branchEntrances', 'portalsUsed', 'buffs'];
 
 /**
  * @description 플레이어 상태 중 '어디에 서 있는가'에 해당하는 항목.
