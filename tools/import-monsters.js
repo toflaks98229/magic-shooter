@@ -2,8 +2,8 @@
  * @fileoverview DCSS 몬스터 YAML 683종을 이 게임이 읽는 JSON 으로 옮깁니다.
  *
  * 사용법:
- *   node tools/import-monsters.js <크롤 소스 경로>
- *   예) node tools/import-monsters.js ../crawl/crawl-ref/source
+ *   node tools/import-monsters.js [크롤 소스 경로]
+ *   기본값은 Data/crawl/crawl-ref/source 입니다 (DCSS 0.34 브랜치).
  *
  * 옮기는 것은 수치뿐입니다. 그림은 별개의 문제입니다.
  * DCSS 몬스터 그림은 Data/tiles/main.png 안에 전부 들어 있지만(배포판과 바이트가
@@ -164,11 +164,9 @@ export function importMonsters(sourceDir) {
 // --- 명령줄로 실행했을 때 ------------------------------------------------------
 
 if (process.argv[1] && process.argv[1].endsWith('import-monsters.js')) {
-    const sourceDir = process.argv[2];
-    if (!sourceDir) {
-        console.error('사용법: node tools/import-monsters.js <크롤 소스 경로>');
-        process.exit(1);
-    }
+    // 기본 출처는 저장소 안에 둔 DCSS 0.34 클론입니다.
+    // 버전이 어긋나면 수치가 조용히 달라지므로 경로를 함부로 바꾸지 마십시오.
+    const sourceDir = process.argv[2] || 'Data/crawl/crawl-ref/source';
 
     const { monsters, skipped } = importMonsters(sourceDir);
     const outPath = path.join('Script', 'data', 'monsters.json');

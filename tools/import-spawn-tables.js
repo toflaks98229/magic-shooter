@@ -2,7 +2,8 @@
  * @fileoverview DCSS 의 몬스터 출현표를 옮깁니다.
  *
  * 사용법:
- *   node tools/import-spawn-tables.js <크롤 소스 경로>
+ *   node tools/import-spawn-tables.js [크롤 소스 경로]
+ *   기본값은 Data/crawl/crawl-ref/source 입니다 (DCSS 0.34 브랜치).
  *
  * mon-pick-data.h 는 던전 가지마다 "어느 깊이에서 어떤 몬스터가 얼마나 자주 나오는가"를
  * 정의합니다. 항목 하나는 { 최소깊이, 최대깊이, 가중치, 분포모양, 몬스터 } 이고,
@@ -98,11 +99,9 @@ export function importSpawnTables(sourceDir) {
 // --- 명령줄로 실행했을 때 ------------------------------------------------------
 
 if (process.argv[1] && process.argv[1].endsWith('import-spawn-tables.js')) {
-    const sourceDir = process.argv[2];
-    if (!sourceDir) {
-        console.error('사용법: node tools/import-spawn-tables.js <크롤 소스 경로>');
-        process.exit(1);
-    }
+    // 기본 출처는 저장소 안에 둔 DCSS 0.34 클론입니다.
+    // 버전이 어긋나면 수치가 조용히 달라지므로 경로를 함부로 바꾸지 마십시오.
+    const sourceDir = process.argv[2] || 'Data/crawl/crawl-ref/source';
 
     const { tables } = importSpawnTables(sourceDir);
     const outPath = path.join('Script', 'data', 'spawn-tables.json');

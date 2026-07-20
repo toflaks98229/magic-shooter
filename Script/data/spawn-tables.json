@@ -504,7 +504,7 @@
     "max": 19,
     "weight": 475,
     "shape": "SEMI",
-    "monster": "MONS_DEEP_ELF_PYROMANCER"
+    "monster": "MONS_DEEP_ELF_FIRE_MAGE"
    },
    {
     "min": 12,
@@ -735,7 +735,7 @@
     "max": 25,
     "weight": 136,
     "shape": "SEMI",
-    "monster": "MONS_DEEP_ELF_ZEPHYRMANCER"
+    "monster": "MONS_DEEP_ELF_AIR_MAGE"
    },
    {
     "min": 18,
@@ -1057,14 +1057,14 @@
     "max": 7,
     "weight": 1360,
     "shape": "FLAT",
-    "monster": "MONS_DEEP_ELF_ZEPHYRMANCER"
+    "monster": "MONS_DEEP_ELF_AIR_MAGE"
    },
    {
     "min": 1,
     "max": 7,
     "weight": 1360,
     "shape": "FLAT",
-    "monster": "MONS_DEEP_ELF_PYROMANCER"
+    "monster": "MONS_DEEP_ELF_FIRE_MAGE"
    },
    {
     "min": 1,
@@ -4552,7 +4552,7 @@
    {
     "min": -1,
     "max": 6,
-    "weight": 1125,
+    "weight": 1150,
     "shape": "FALL",
     "monster": "MONS_ABOMINATION_SMALL"
    },
@@ -4683,22 +4683,22 @@
     "monster": "MONS_WIGHT"
    },
    {
-    "min": 0,
-    "max": 6,
-    "weight": 75,
+    "min": 1,
+    "max": 8,
+    "weight": 70,
     "shape": "FALL",
     "monster": "MONS_WRAITH"
    },
    {
-    "min": 0,
-    "max": 6,
-    "weight": 15,
+    "min": 1,
+    "max": 8,
+    "weight": 10,
     "shape": "FALL",
     "monster": "MONS_SHADOWGHAST"
    },
    {
-    "min": 0,
-    "max": 6,
+    "min": 1,
+    "max": 8,
     "weight": 25,
     "shape": "FALL",
     "monster": "MONS_VAMPIRE"
@@ -4712,7 +4712,7 @@
    },
    {
     "min": 1,
-    "max": 4,
+    "max": 5,
     "weight": 21,
     "shape": "FALL",
     "monster": "MONS_JELLY"
@@ -4740,7 +4740,7 @@
    },
    {
     "min": 1,
-    "max": 4,
+    "max": 5,
     "weight": 46,
     "shape": "FALL",
     "monster": "MONS_FIRE_BAT"
@@ -4790,14 +4790,14 @@
    {
     "min": 1,
     "max": 3,
-    "weight": 32,
+    "weight": 33,
     "shape": "FLAT",
     "monster": "MONS_GREAT_ORB_OF_EYES"
    },
    {
     "min": 4,
     "max": 5,
-    "weight": 32,
+    "weight": 33,
     "shape": "FALL",
     "monster": "MONS_GREAT_ORB_OF_EYES"
    },
@@ -4811,7 +4811,7 @@
    {
     "min": 1,
     "max": 5,
-    "weight": 28,
+    "weight": 29,
     "shape": "FLAT",
     "monster": "MONS_BLINK_FROG"
    },
@@ -4898,6 +4898,13 @@
     "weight": 5,
     "shape": "FLAT",
     "monster": "MONS_WHITE_DRACONIAN"
+   },
+   {
+    "min": 1,
+    "max": 5,
+    "weight": 8,
+    "shape": "FLAT",
+    "monster": "MONS_EYE_OF_DEVASTATION"
    },
    {
     "min": 1,
@@ -5014,14 +5021,14 @@
    {
     "min": 1,
     "max": 3,
-    "weight": 24,
+    "weight": 25,
     "shape": "FLAT",
     "monster": "MONS_GUARDIAN_SERPENT"
    },
    {
     "min": 4,
     "max": 6,
-    "weight": 24,
+    "weight": 25,
     "shape": "FALL",
     "monster": "MONS_GUARDIAN_SERPENT"
    },
@@ -5098,21 +5105,21 @@
    {
     "min": 6,
     "max": 7,
-    "weight": 825,
+    "weight": 850,
     "shape": "FALL",
     "monster": "MONS_ABOMINATION_LARGE"
    },
    {
     "min": 1,
     "max": 5,
-    "weight": 50,
+    "weight": 52,
     "shape": "FLAT",
     "monster": "MONS_VERY_UGLY_THING"
    },
    {
     "min": 6,
     "max": 7,
-    "weight": 50,
+    "weight": 52,
     "shape": "FALL",
     "monster": "MONS_VERY_UGLY_THING"
    },
@@ -5139,7 +5146,7 @@
    },
    {
     "min": 1,
-    "max": 6,
+    "max": 8,
     "weight": 30,
     "shape": "FALL",
     "monster": "MONS_HELL_HOUND"
@@ -5271,13 +5278,6 @@
     "monster": "MONS_PROFANE_SERVITOR"
    },
    {
-    "min": 3,
-    "max": 9,
-    "weight": 80,
-    "shape": "RISE",
-    "monster": "MONS_HERALD_OF_THE_ABYSS"
-   },
-   {
     "min": 1,
     "max": 5,
     "weight": 2,
@@ -5292,7 +5292,7 @@
     "monster": "MONS_SHADOW_DRAGON"
    },
    {
-    "min": 2,
+    "min": 1,
     "max": 5,
     "weight": 2,
     "shape": "FLAT",
@@ -5398,13 +5398,6 @@
    },
    {
     "min": 1,
-    "max": 6,
-    "weight": 80,
-    "shape": "FLAT",
-    "monster": "MONS_ABYSSAL_ACOLYTE"
-   },
-   {
-    "min": 1,
     "max": 7,
     "weight": 225,
     "shape": "FLAT",
@@ -5413,7 +5406,7 @@
    {
     "min": 1,
     "max": 7,
-    "weight": 290,
+    "weight": 300,
     "shape": "FLAT",
     "monster": "MONS_SMOKE_DEMON"
    },
@@ -5481,7 +5474,7 @@
     "monster": "MONS_EXECUTIONER"
    },
    {
-    "min": 2,
+    "min": 1,
     "max": 7,
     "weight": 10,
     "shape": "FLAT",
@@ -5509,7 +5502,7 @@
     "monster": "MONS_SILENT_SPECTRE"
    },
    {
-    "min": 2,
+    "min": 1,
     "max": 7,
     "weight": 80,
     "shape": "FLAT",
@@ -5525,19 +5518,19 @@
    {
     "min": 1,
     "max": 7,
-    "weight": 45,
+    "weight": 46,
     "shape": "FLAT",
     "monster": "MONS_LICH"
    },
    {
-    "min": 2,
+    "min": 1,
     "max": 7,
     "weight": 8,
     "shape": "FLAT",
     "monster": "MONS_ANCIENT_LICH"
    },
    {
-    "min": 2,
+    "min": 1,
     "max": 7,
     "weight": 8,
     "shape": "FLAT",
@@ -5567,7 +5560,7 @@
    {
     "min": 1,
     "max": 7,
-    "weight": 16,
+    "weight": 17,
     "shape": "FLAT",
     "monster": "MONS_EIDOLON"
    },
@@ -5602,58 +5595,58 @@
    {
     "min": 1,
     "max": 7,
-    "weight": 8,
-    "shape": "FLAT",
-    "monster": "MONS_EYE_OF_DEVASTATION"
-   },
-   {
-    "min": 1,
-    "max": 7,
-    "weight": 50,
+    "weight": 52,
     "shape": "FLAT",
     "monster": "MONS_GLOWING_ORANGE_BRAIN"
    },
    {
-    "min": 2,
+    "min": 1,
     "max": 7,
     "weight": 3,
     "shape": "FLAT",
     "monster": "MONS_DRACONIAN_STORMCALLER"
    },
    {
-    "min": 2,
+    "min": 1,
     "max": 7,
     "weight": 3,
     "shape": "FLAT",
     "monster": "MONS_DRACONIAN_MONK"
    },
    {
-    "min": 2,
+    "min": 1,
     "max": 7,
     "weight": 5,
     "shape": "FLAT",
     "monster": "MONS_DRACONIAN_SHIFTER"
    },
    {
-    "min": 2,
+    "min": 1,
     "max": 7,
     "weight": 3,
     "shape": "FLAT",
     "monster": "MONS_DRACONIAN_ANNIHILATOR"
    },
    {
-    "min": 2,
+    "min": 1,
     "max": 7,
     "weight": 3,
     "shape": "FLAT",
     "monster": "MONS_DRACONIAN_KNIGHT"
    },
    {
-    "min": 2,
+    "min": 1,
     "max": 7,
     "weight": 3,
     "shape": "FLAT",
     "monster": "MONS_DRACONIAN_SCORCHER"
+   },
+   {
+    "min": 1,
+    "max": 7,
+    "weight": 5,
+    "shape": "FLAT",
+    "monster": "MONS_BUNYIP"
    },
    {
     "min": 3,
@@ -6518,102 +6511,6 @@
     "weight": 100,
     "shape": "FLAT",
     "monster": "MONS_SHADOWGHAST"
-   }
-  ]
- },
- "Gulch": {
-  "oodCap": null,
-  "entries": [
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 5,
-    "shape": "FLAT",
-    "monster": "MONS_ALLIGATOR"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 5,
-    "shape": "FLAT",
-    "monster": "MONS_SNAPPING_TURTLE"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 5,
-    "shape": "FLAT",
-    "monster": "MONS_ANACONDA"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 25,
-    "shape": "FLAT",
-    "monster": "MONS_RADROACH"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 25,
-    "shape": "FLAT",
-    "monster": "MONS_SLIME_CREATURE"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 100,
-    "shape": "FLAT",
-    "monster": "MONS_CRAWLING_FLESH_CAGE"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 200,
-    "shape": "FLAT",
-    "monster": "MONS_MONGREL_WURM"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 175,
-    "shape": "FLAT",
-    "monster": "MONS_FUNGAL_SHAMBLER"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 200,
-    "shape": "FLAT",
-    "monster": "MONS_ROAMING_SLUDGEFISH"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 175,
-    "shape": "FLAT",
-    "monster": "MONS_RUSTED_INSPECTOR"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 75,
-    "shape": "FLAT",
-    "monster": "MONS_TELENCEPHALON"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 25,
-    "shape": "FLAT",
-    "monster": "MONS_SEWAGE_SOVEREIGN"
-   },
-   {
-    "min": 1,
-    "max": 1,
-    "weight": 25,
-    "shape": "FLAT",
-    "monster": "MONS_SCRAPSHELL_CHIMERA"
    }
   ]
  },

@@ -72,45 +72,6 @@
   "habitat": null
  },
  {
-  "id": "abyssal-acolyte",
-  "enumName": "MONS_ABYSSAL_ACOLYTE",
-  "name": "abyssal acolyte",
-  "hd": 12,
-  "hp10x": 580,
-  "ac": 2,
-  "ev": 16,
-  "will": 60,
-  "exp": 695,
-  "attacks": [
-   {
-    "type": "hit",
-    "damage": 8,
-    "flavour": "plain"
-   }
-  ],
-  "speed": 10,
-  "glyph": "ψ",
-  "colour": "lightblue",
-  "spriteKey": null,
-  "sizePixels": 22,
-  "size": "medium",
-  "shape": "humanoid",
-  "intelligence": "human",
-  "holiness": null,
-  "genus": null,
-  "species": null,
-  "flags": [
-   "speaks",
-   "warm_blood",
-   "no_poly_to",
-   "no_gen_derived"
-  ],
-  "resists": null,
-  "spells": "abyssal_acolyte",
-  "uses": "starting_equipment",
-  "habitat": null
- },
- {
   "id": "acid-blob",
   "enumName": "MONS_ACID_BLOB",
   "name": "acid blob",
@@ -294,8 +255,8 @@
    }
   ],
   "speed": 25,
-  "glyph": "Σ",
-  "colour": "lightcyan",
+  "glyph": "E",
+  "colour": "etc_air",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -577,9 +538,9 @@
   "habitat": "amphibious"
  },
  {
-  "id": "ancestor-elementalist",
-  "enumName": "MONS_ANCESTOR_ELEMENTALIST",
-  "name": "elementalist",
+  "id": "ancestor-battlemage",
+  "enumName": "MONS_ANCESTOR_BATTLEMAGE",
+  "name": "battlemage",
   "hd": 1,
   "hp10x": 1,
   "ac": 5,
@@ -594,8 +555,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "Æ",
-  "colour": "yellow",
+  "glyph": "R",
+  "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
@@ -613,8 +574,7 @@
    "fast_regen",
    "no_poly_to",
    "ancestor",
-   "no_gen_derived",
-   "cautious"
+   "no_gen_derived"
   ],
   "resists": {
    "fire": 1,
@@ -642,8 +602,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "Æ",
-  "colour": "lightmagenta",
+  "glyph": "R",
+  "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
@@ -689,7 +649,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Æ",
+  "glyph": "R",
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
@@ -736,8 +696,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "Æ",
-  "colour": "cyan",
+  "glyph": "R",
+  "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
@@ -994,7 +954,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Č",
+  "glyph": "C",
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 32,
@@ -1212,7 +1172,7 @@
   ],
   "speed": 10,
   "glyph": "p",
-  "colour": "magenta",
+  "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
@@ -1227,6 +1187,49 @@
   ],
   "resists": null,
   "spells": "arcanist",
+  "uses": "weapons_armour",
+  "habitat": null
+ },
+ {
+  "id": "armataur",
+  "enumName": "MONS_ARMATAUR",
+  "name": "armataur",
+  "hd": 8,
+  "hp10x": 450,
+  "ac": 15,
+  "ev": 5,
+  "will": 10,
+  "exp": 400,
+  "attacks": [
+   {
+    "type": "hit",
+    "damage": 18,
+    "flavour": "plain"
+   },
+   {
+    "type": "tail_slap",
+    "damage": 12,
+    "flavour": "plain"
+   }
+  ],
+  "speed": 10,
+  "glyph": "H",
+  "colour": "yellow",
+  "spriteKey": null,
+  "sizePixels": 26,
+  "size": "large",
+  "shape": "humanoid",
+  "intelligence": "human",
+  "holiness": null,
+  "genus": null,
+  "species": null,
+  "flags": [
+   "speaks",
+   "no_poly_to",
+   "no_gen_derived"
+  ],
+  "resists": null,
+  "spells": null,
   "uses": "weapons_armour",
   "habitat": null
  },
@@ -1336,8 +1339,8 @@
   "exp": 0,
   "attacks": [],
   "speed": 10,
-  "glyph": "◊",
-  "colour": "lightmagenta",
+  "glyph": "*",
+  "colour": "etc_random",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -1541,7 +1544,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Ď",
+  "glyph": "D",
   "colour": "etc_electricity",
   "spriteKey": null,
   "sizePixels": 32,
@@ -1952,7 +1955,7 @@
   "exp": 140,
   "attacks": [],
   "speed": 30,
-  "glyph": "¤",
+  "glyph": "*",
   "colour": "etc_magic",
   "spriteKey": null,
   "sizePixels": 15,
@@ -1995,7 +1998,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "a",
+  "glyph": "h",
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
@@ -2133,7 +2136,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "a",
+  "glyph": "h",
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
@@ -2286,7 +2289,7 @@
   ],
   "speed": 10,
   "glyph": "9",
-  "colour": "lightred",
+  "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -2413,7 +2416,7 @@
    }
   ],
   "speed": 14,
-  "glyph": "U",
+  "glyph": "n",
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
@@ -2447,7 +2450,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 10,
-  "glyph": "Δ",
+  "glyph": "I",
   "colour": "etc_ice",
   "spriteKey": null,
   "sizePixels": 22,
@@ -2541,7 +2544,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "U",
+  "glyph": "n",
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
@@ -2827,7 +2830,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 20,
-  "glyph": "●",
+  "glyph": "*",
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 32,
@@ -2910,7 +2913,7 @@
   "exp": 9999,
   "attacks": [],
   "speed": 10,
-  "glyph": "╬",
+  "glyph": "I",
   "colour": "etc_orb_glow",
   "spriteKey": null,
   "sizePixels": 26,
@@ -2976,14 +2979,14 @@
   "enumName": "MONS_BRIAR_PATCH",
   "name": "briar patch",
   "hd": 10,
-  "hp10x": 300,
+  "hp10x": 150,
   "ac": 10,
   "ev": 0,
   "will": "invuln",
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "◊",
+  "glyph": "P",
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 18,
@@ -3202,7 +3205,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ψ",
+  "glyph": "p",
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
@@ -3269,7 +3272,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "◊",
+  "glyph": "P",
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 32,
@@ -3901,7 +3904,7 @@
    }
   ],
   "speed": 20,
-  "glyph": "Q",
+  "glyph": "x",
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 12,
@@ -3940,7 +3943,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Č",
+  "glyph": "C",
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 32,
@@ -4012,8 +4015,8 @@
   "exp": 0,
   "attacks": [],
   "speed": 15,
-  "glyph": "λ",
-  "colour": "lightcyan",
+  "glyph": "*",
+  "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 12,
   "size": "tiny",
@@ -4138,7 +4141,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "U",
+  "glyph": "n",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 18,
@@ -4148,7 +4151,7 @@
   "holiness": [
    "undead"
   ],
-  "genus": "ghoul",
+  "genus": null,
   "species": null,
   "flags": [
    "see_invis",
@@ -4308,7 +4311,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ğ",
+  "glyph": "j",
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 22,
@@ -4545,7 +4548,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "8",
+  "glyph": "9",
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 26,
@@ -4657,7 +4660,7 @@
   "exp": 1166,
   "attacks": [],
   "speed": 15,
-  "glyph": "ž",
+  "glyph": "z",
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 12,
@@ -4695,7 +4698,7 @@
   "exp": 2722,
   "attacks": [],
   "speed": 10,
-  "glyph": "U",
+  "glyph": "z",
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 12,
@@ -4907,7 +4910,7 @@
    }
   ],
   "speed": 25,
-  "glyph": "f",
+  "glyph": "z",
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 12,
@@ -4987,7 +4990,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ψ",
+  "glyph": "p",
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
@@ -5124,6 +5127,43 @@
   "habitat": null
  },
  {
+  "id": "deep-elf-air-mage",
+  "enumName": "MONS_DEEP_ELF_AIR_MAGE",
+  "name": "deep elf zephyrmancer",
+  "hd": 9,
+  "hp10x": 405,
+  "ac": 0,
+  "ev": 13,
+  "will": 40,
+  "exp": 599,
+  "attacks": [
+   {
+    "type": "hit",
+    "damage": 5,
+    "flavour": "plain"
+   }
+  ],
+  "speed": 10,
+  "glyph": "e",
+  "colour": "cyan",
+  "spriteKey": null,
+  "sizePixels": 22,
+  "size": "medium",
+  "shape": "humanoid",
+  "intelligence": "human",
+  "holiness": null,
+  "genus": null,
+  "species": "elf",
+  "flags": [
+   "speaks",
+   "warm_blood"
+  ],
+  "resists": null,
+  "spells": "deep_elf_air_mage",
+  "uses": "weapons_armour",
+  "habitat": null
+ },
+ {
   "id": "deep-elf-annihilator",
   "enumName": "MONS_DEEP_ELF_ANNIHILATOR",
   "name": "deep elf annihilator",
@@ -5141,7 +5181,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "E",
+  "glyph": "e",
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
@@ -5222,7 +5262,7 @@
    }
   ],
   "speed": 15,
-  "glyph": "E",
+  "glyph": "e",
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
@@ -5261,7 +5301,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "E",
+  "glyph": "e",
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
@@ -5299,7 +5339,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "E",
+  "glyph": "e",
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
@@ -5337,7 +5377,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "E",
+  "glyph": "e",
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
@@ -5354,6 +5394,43 @@
   ],
   "resists": null,
   "spells": "deep_elf_elementalist",
+  "uses": "weapons_armour",
+  "habitat": null
+ },
+ {
+  "id": "deep-elf-fire-mage",
+  "enumName": "MONS_DEEP_ELF_FIRE_MAGE",
+  "name": "deep elf pyromancer",
+  "hd": 9,
+  "hp10x": 405,
+  "ac": 0,
+  "ev": 13,
+  "will": 40,
+  "exp": 600,
+  "attacks": [
+   {
+    "type": "hit",
+    "damage": 5,
+    "flavour": "plain"
+   }
+  ],
+  "speed": 10,
+  "glyph": "e",
+  "colour": "red",
+  "spriteKey": null,
+  "sizePixels": 22,
+  "size": "medium",
+  "shape": "humanoid",
+  "intelligence": "human",
+  "holiness": null,
+  "genus": null,
+  "species": "elf",
+  "flags": [
+   "speaks",
+   "warm_blood"
+  ],
+  "resists": null,
+  "spells": "deep_elf_fire_mage",
   "uses": "weapons_armour",
   "habitat": null
  },
@@ -5375,7 +5452,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "E",
+  "glyph": "e",
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
@@ -5450,7 +5527,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "E",
+  "glyph": "e",
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
@@ -5472,43 +5549,6 @@
   "habitat": null
  },
  {
-  "id": "deep-elf-pyromancer",
-  "enumName": "MONS_DEEP_ELF_PYROMANCER",
-  "name": "deep elf pyromancer",
-  "hd": 9,
-  "hp10x": 405,
-  "ac": 0,
-  "ev": 13,
-  "will": 40,
-  "exp": 600,
-  "attacks": [
-   {
-    "type": "hit",
-    "damage": 5,
-    "flavour": "plain"
-   }
-  ],
-  "speed": 10,
-  "glyph": "e",
-  "colour": "red",
-  "spriteKey": null,
-  "sizePixels": 22,
-  "size": "medium",
-  "shape": "humanoid",
-  "intelligence": "human",
-  "holiness": null,
-  "genus": null,
-  "species": "elf",
-  "flags": [
-   "speaks",
-   "warm_blood"
-  ],
-  "resists": null,
-  "spells": "deep_elf_pyromancer",
-  "uses": "weapons_armour",
-  "habitat": null
- },
- {
   "id": "deep-elf-sorcerer",
   "enumName": "MONS_DEEP_ELF_SORCERER",
   "name": "deep elf sorcerer",
@@ -5526,7 +5566,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "E",
+  "glyph": "e",
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
@@ -5543,43 +5583,6 @@
   ],
   "resists": null,
   "spells": "deep_elf_sorcerer",
-  "uses": "weapons_armour",
-  "habitat": null
- },
- {
-  "id": "deep-elf-zephyrmancer",
-  "enumName": "MONS_DEEP_ELF_ZEPHYRMANCER",
-  "name": "deep elf zephyrmancer",
-  "hd": 9,
-  "hp10x": 405,
-  "ac": 0,
-  "ev": 13,
-  "will": 40,
-  "exp": 599,
-  "attacks": [
-   {
-    "type": "hit",
-    "damage": 5,
-    "flavour": "plain"
-   }
-  ],
-  "speed": 10,
-  "glyph": "e",
-  "colour": "cyan",
-  "spriteKey": null,
-  "sizePixels": 22,
-  "size": "medium",
-  "shape": "humanoid",
-  "intelligence": "human",
-  "holiness": null,
-  "genus": null,
-  "species": "elf",
-  "flags": [
-   "speaks",
-   "warm_blood"
-  ],
-  "resists": null,
-  "spells": "deep_elf_zephyrmancer",
   "uses": "weapons_armour",
   "habitat": null
  },
@@ -5835,7 +5838,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "◊",
+  "glyph": "P",
   "colour": "etc_random",
   "spriteKey": null,
   "sizePixels": 18,
@@ -6143,8 +6146,8 @@
   "exp": 850,
   "attacks": [],
   "speed": 10,
-  "glyph": "‡",
-  "colour": "white",
+  "glyph": "I",
+  "colour": "ETC_IRON",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -6369,7 +6372,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "n",
+  "glyph": "R",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
@@ -6935,8 +6938,8 @@
   "exp": 8,
   "attacks": [],
   "speed": 12,
-  "glyph": "ŵ",
-  "colour": "lightblue",
+  "glyph": "W",
+  "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
@@ -7024,7 +7027,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "n",
+  "glyph": "R",
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
@@ -7145,8 +7148,8 @@
    }
   ],
   "speed": 8,
-  "glyph": "Σ",
-  "colour": "brown",
+  "glyph": "E",
+  "colour": "etc_earth",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -7187,7 +7190,7 @@
   ],
   "speed": 10,
   "glyph": ";",
-  "colour": "brown",
+  "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 18,
   "size": "small",
@@ -7310,7 +7313,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Ŵ",
+  "glyph": "W",
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
@@ -7400,7 +7403,7 @@
    }
   ],
   "speed": 12,
-  "glyph": "ω",
+  "glyph": "w",
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 32,
@@ -7494,8 +7497,8 @@
    }
   ],
   "speed": 16,
-  "glyph": "8",
-  "colour": "lightcyan",
+  "glyph": "9",
+  "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -7538,7 +7541,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "n",
+  "glyph": "R",
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
@@ -7569,8 +7572,8 @@
   "exp": 1039,
   "attacks": [],
   "speed": 10,
-  "glyph": "Σ",
-  "colour": "lightblue",
+  "glyph": "E",
+  "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -7603,7 +7606,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "Σ",
+  "glyph": "E",
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
@@ -7849,7 +7852,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "j",
+  "glyph": "J",
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 15,
@@ -8077,7 +8080,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Σ",
+  "glyph": "E",
   "colour": "etc_blood",
   "spriteKey": null,
   "sizePixels": 18,
@@ -8324,7 +8327,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "E",
+  "glyph": "e",
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 22,
@@ -8400,7 +8403,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "a",
+  "glyph": "h",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 15,
@@ -8618,8 +8621,8 @@
   "exp": 196,
   "attacks": [],
   "speed": 13,
-  "glyph": "Σ",
-  "colour": "red",
+  "glyph": "E",
+  "colour": "etc_fire",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -8741,7 +8744,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Ŵ",
+  "glyph": "W",
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
@@ -8894,8 +8897,8 @@
   "exp": 0,
   "attacks": [],
   "speed": 50,
-  "glyph": "●",
-  "colour": "red",
+  "glyph": "v",
+  "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 15,
   "size": "little",
@@ -9221,7 +9224,7 @@
   ],
   "speed": 10,
   "glyph": ";",
-  "colour": "lightblue",
+  "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 18,
   "size": "small",
@@ -9283,49 +9286,6 @@
   "habitat": null
  },
  {
-  "id": "fungal-shambler",
-  "enumName": "MONS_FUNGAL_SHAMBLER",
-  "name": "fungal shambler",
-  "hd": 15,
-  "hp10x": 930,
-  "ac": 8,
-  "ev": 11,
-  "will": 60,
-  "exp": 900,
-  "attacks": [
-   {
-    "type": "hit",
-    "damage": 20,
-    "flavour": "weakness"
-   },
-   {
-    "type": "spore",
-    "damage": 20,
-    "flavour": "burstshroom"
-   }
-  ],
-  "speed": 10,
-  "glyph": "f",
-  "colour": "magenta",
-  "spriteKey": null,
-  "sizePixels": 22,
-  "size": "medium",
-  "shape": "humanoid",
-  "intelligence": "brainless",
-  "holiness": [
-   "plant"
-  ],
-  "genus": "fungus",
-  "species": null,
-  "flags": [],
-  "resists": {
-   "poison": 1
-  },
-  "spells": null,
-  "uses": "starting_equipment",
-  "habitat": null
- },
- {
   "id": "fungus",
   "enumName": "MONS_FUNGUS",
   "name": "fungus",
@@ -9380,7 +9340,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ŋ",
+  "glyph": "9",
   "colour": "lightgray",
   "spriteKey": "enemy_gargoyle",
   "sizePixels": 22,
@@ -9559,7 +9519,7 @@
    }
   ],
   "speed": 12,
-  "glyph": "λ",
+  "glyph": "y",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
@@ -9640,7 +9600,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "U",
+  "glyph": "n",
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 22,
@@ -9773,7 +9733,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 15,
-  "glyph": "●",
+  "glyph": "*",
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 15,
@@ -9908,8 +9868,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "i",
-  "colour": "lightgreen",
+  "glyph": "p",
+  "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
@@ -9922,49 +9882,6 @@
   "resists": null,
   "spells": null,
   "uses": "open_doors",
-  "habitat": null
- },
- {
-  "id": "glowmurk-ghast",
-  "enumName": "MONS_GLOWMURK_GHAST",
-  "name": "glowmurk ghast",
-  "hd": 13,
-  "hp10x": 245,
-  "ac": 0,
-  "ev": 13,
-  "will": 60,
-  "exp": 120,
-  "attacks": [
-   {
-    "type": "touch",
-    "damage": 24,
-    "flavour": "contam_water"
-   }
-  ],
-  "speed": 16,
-  "glyph": "ŵ",
-  "colour": "lightmagenta",
-  "spriteKey": null,
-  "sizePixels": 22,
-  "size": "medium",
-  "shape": "humanoid",
-  "intelligence": "human",
-  "holiness": [
-   "undead"
-  ],
-  "genus": "phantom",
-  "species": null,
-  "flags": [
-   "flies",
-   "see_invis",
-   "speaks",
-   "insubstantial"
-  ],
-  "resists": {
-   "cold": 3
-  },
-  "spells": null,
-  "uses": null,
   "habitat": null
  },
  {
@@ -9985,7 +9902,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ğ",
+  "glyph": "j",
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
@@ -10022,7 +9939,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ğ",
+  "glyph": "j",
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
@@ -10060,7 +9977,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ğ",
+  "glyph": "j",
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
@@ -10191,92 +10108,6 @@
   "habitat": "amphibious"
  },
  {
-  "id": "goji",
-  "enumName": "MONS_GOJI",
-  "name": "Goji",
-  "hd": 9,
-  "hp10x": 920,
-  "ac": 6,
-  "ev": 10,
-  "will": 80,
-  "exp": 900,
-  "attacks": [
-   {
-    "type": "hit",
-    "damage": 20,
-    "flavour": "plain"
-   },
-   {
-    "type": "sting",
-    "damage": 16,
-    "flavour": "plain"
-   }
-  ],
-  "speed": 12,
-  "glyph": "g",
-  "colour": "lightblue",
-  "spriteKey": null,
-  "sizePixels": 26,
-  "size": "large",
-  "shape": "humanoid",
-  "intelligence": "human",
-  "holiness": null,
-  "genus": null,
-  "species": "goblin",
-  "flags": [
-   "flies",
-   "fighter",
-   "speaks",
-   "unique",
-   "male",
-   "warm_blood"
-  ],
-  "resists": null,
-  "spells": "goji",
-  "uses": "starting_equipment",
-  "habitat": null
- },
- {
-  "id": "goji_unmounted",
-  "enumName": "MONS_GOJI_UNMOUNTED",
-  "name": "Goji",
-  "hd": 9,
-  "hp10x": 600,
-  "ac": 4,
-  "ev": 8,
-  "will": 40,
-  "exp": 200,
-  "attacks": [
-   {
-    "type": "hit",
-    "damage": 16,
-    "flavour": "plain"
-   }
-  ],
-  "speed": 10,
-  "glyph": "g",
-  "colour": "lightblue",
-  "spriteKey": null,
-  "sizePixels": 18,
-  "size": "small",
-  "shape": "humanoid",
-  "intelligence": "human",
-  "holiness": null,
-  "genus": null,
-  "species": "goblin",
-  "flags": [
-   "fighter",
-   "speaks",
-   "unique",
-   "male",
-   "warm_blood"
-  ],
-  "resists": null,
-  "spells": null,
-  "uses": "starting_equipment",
-  "habitat": null
- },
- {
   "id": "golden-dragon",
   "enumName": "MONS_GOLDEN_DRAGON",
   "name": "golden dragon",
@@ -10376,7 +10207,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "8",
+  "glyph": "9",
   "colour": "lightgray",
   "spriteKey": "enemy_golem",
   "sizePixels": 22,
@@ -10661,7 +10492,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ğ",
+  "glyph": "j",
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
@@ -10700,7 +10531,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ğ",
+  "glyph": "j",
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 22,
@@ -10831,7 +10662,7 @@
    }
   ],
   "speed": 12,
-  "glyph": "Þ",
+  "glyph": "H",
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 32,
@@ -10995,7 +10826,7 @@
    }
   ],
   "speed": 25,
-  "glyph": "Q",
+  "glyph": "H",
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
@@ -11122,7 +10953,7 @@
    }
   ],
   "speed": 14,
-  "glyph": "a",
+  "glyph": "h",
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
@@ -11202,7 +11033,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ψ",
+  "glyph": "p",
   "colour": "red",
   "spriteKey": "enemy_hell_knight",
   "sizePixels": 22,
@@ -11441,7 +11272,7 @@
   "exp": 1650,
   "attacks": [],
   "speed": 10,
-  "glyph": "‡",
+  "glyph": "I",
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 32,
@@ -11556,50 +11387,6 @@
   "habitat": null
  },
  {
-  "id": "herald-of-the-abyss",
-  "enumName": "MONS_HERALD_OF_THE_ABYSS",
-  "name": "herald of the Abyss",
-  "hd": 16,
-  "hp10x": 800,
-  "ac": 6,
-  "ev": 19,
-  "will": 80,
-  "exp": 1350,
-  "attacks": [
-   {
-    "type": "hit",
-    "damage": 22,
-    "flavour": "plain"
-   }
-  ],
-  "speed": 10,
-  "glyph": "ψ",
-  "colour": "yellow",
-  "spriteKey": null,
-  "sizePixels": 22,
-  "size": "medium",
-  "shape": "humanoid",
-  "intelligence": "human",
-  "holiness": null,
-  "genus": null,
-  "species": null,
-  "flags": [
-   "see_invis",
-   "speaks",
-   "warm_blood",
-   "no_poly_to",
-   "no_gen_derived"
-  ],
-  "resists": {
-   "elec": 1,
-   "fire": 1,
-   "cold": 1
-  },
-  "spells": "herald_of_the_abyss",
-  "uses": "starting_equipment",
-  "habitat": null
- },
- {
   "id": "hippogriff",
   "enumName": "MONS_HIPPOGRIFF",
   "name": "hippogriff",
@@ -11627,7 +11414,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Þ",
+  "glyph": "H",
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 26,
@@ -11658,8 +11445,8 @@
   "exp": 515,
   "attacks": [],
   "speed": 5,
-  "glyph": "‡",
-  "colour": "lightblue",
+  "glyph": "I",
+  "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -11741,7 +11528,7 @@
    }
   ],
   "speed": 13,
-  "glyph": "a",
+  "glyph": "h",
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 18,
@@ -11777,7 +11564,7 @@
    }
   ],
   "speed": 14,
-  "glyph": "a",
+  "glyph": "h",
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 18,
@@ -11892,7 +11679,7 @@
    }
   ],
   "speed": 12,
-  "glyph": "a",
+  "glyph": "h",
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 18,
@@ -12398,7 +12185,7 @@
    }
   ],
   "speed": 12,
-  "glyph": "ψ",
+  "glyph": "a",
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
@@ -12528,7 +12315,7 @@
    }
   ],
   "speed": 6,
-  "glyph": "Σ",
+  "glyph": "E",
   "colour": "etc_iron",
   "spriteKey": null,
   "sizePixels": 26,
@@ -12616,7 +12403,7 @@
    }
   ],
   "speed": 7,
-  "glyph": "8",
+  "glyph": "9",
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 26,
@@ -13019,7 +12806,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "j",
+  "glyph": "J",
   "colour": "lightred",
   "spriteKey": "enemy_jelly",
   "sizePixels": 18,
@@ -13997,7 +13784,7 @@
    }
   ],
   "speed": 17,
-  "glyph": "ω",
+  "glyph": "w",
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 26,
@@ -14075,7 +13862,7 @@
    }
   ],
   "speed": 15,
-  "glyph": "ž",
+  "glyph": "z",
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 12,
@@ -14192,7 +13979,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Ď",
+  "glyph": "D",
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 32,
@@ -14269,7 +14056,7 @@
   "exp": 613,
   "attacks": [],
   "speed": 10,
-  "glyph": "‡",
+  "glyph": "I",
   "colour": "etc_electricity",
   "spriteKey": null,
   "sizePixels": 18,
@@ -14353,7 +14140,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 10,
-  "glyph": "¤",
+  "glyph": "*",
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 12,
@@ -14475,7 +14262,7 @@
   "exp": 2,
   "attacks": [],
   "speed": 13,
-  "glyph": "ŵ",
+  "glyph": "*",
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 18,
@@ -14721,12 +14508,12 @@
    }
   ],
   "speed": 10,
-  "glyph": "Þ",
+  "glyph": "H",
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
-  "shape": "quadruped_winged",
+  "shape": "quadruped",
   "intelligence": "animal",
   "holiness": null,
   "genus": null,
@@ -14882,7 +14669,7 @@
   "exp": 307,
   "attacks": [],
   "speed": 7,
-  "glyph": "ŵ",
+  "glyph": "W",
   "colour": "yellow",
   "spriteKey": null,
   "sizePixels": 22,
@@ -15518,7 +15305,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ŋ",
+  "glyph": "9",
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
@@ -15560,7 +15347,7 @@
    }
   ],
   "speed": 13,
-  "glyph": "8",
+  "glyph": "E",
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
@@ -15581,50 +15368,6 @@
   "spells": "monarch_bomb",
   "uses": null,
   "habitat": null
- },
- {
-  "id": "mongrel-wurm",
-  "enumName": "MONS_MONGREL_WURM",
-  "name": "mongrel wurm",
-  "hd": 11,
-  "hp10x": 685,
-  "ac": 7,
-  "ev": 13,
-  "will": 60,
-  "exp": 844,
-  "attacks": [
-   {
-    "type": "bite",
-    "damage": 33,
-    "flavour": "poison_strong"
-   },
-   {
-    "type": "headbutt",
-    "damage": 17,
-    "flavour": "plain"
-   }
-  ],
-  "speed": 13,
-  "glyph": "k",
-  "colour": "green",
-  "spriteKey": null,
-  "sizePixels": 26,
-  "size": "large",
-  "shape": "snake",
-  "intelligence": "animal",
-  "holiness": null,
-  "genus": "drake",
-  "species": null,
-  "flags": [
-   "warm_blood"
-  ],
-  "resists": {
-   "poison": 1,
-   "fire": 1
-  },
-  "spells": "mongrel_wurm",
-  "uses": null,
-  "habitat": "amphibious"
  },
  {
   "id": "moon-troll",
@@ -15750,7 +15493,7 @@
    }
   ],
   "speed": 12,
-  "glyph": "λ",
+  "glyph": "y",
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 18,
@@ -15782,7 +15525,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "λ",
+  "glyph": "y",
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
@@ -15942,8 +15685,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "ž",
-  "colour": "magenta",
+  "glyph": "z",
+  "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 12,
   "size": "tiny",
@@ -16343,7 +16086,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ŋ",
+  "glyph": "9",
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 22,
@@ -16380,7 +16123,7 @@
   "exp": 450,
   "attacks": [],
   "speed": 10,
-  "glyph": "j",
+  "glyph": "J",
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 18,
@@ -16422,7 +16165,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "a",
+  "glyph": "h",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 15,
@@ -16462,7 +16205,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ψ",
+  "glyph": "p",
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
@@ -16499,7 +16242,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "U",
+  "glyph": "n",
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,
@@ -16973,7 +16716,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ψ",
+  "glyph": "p",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
@@ -17427,7 +17170,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 30,
-  "glyph": "●",
+  "glyph": "*",
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 15,
@@ -17470,8 +17213,8 @@
   "exp": 4638,
   "attacks": [],
   "speed": 15,
-  "glyph": "Θ",
-  "colour": "yellow",
+  "glyph": "*",
+  "colour": "etc_unholy",
   "spriteKey": null,
   "sizePixels": 15,
   "size": "little",
@@ -17509,7 +17252,7 @@
   "exp": 4638,
   "attacks": [],
   "speed": 15,
-  "glyph": "Θ",
+  "glyph": "*",
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 15,
@@ -17547,7 +17290,7 @@
   "exp": 4638,
   "attacks": [],
   "speed": 15,
-  "glyph": "Θ",
+  "glyph": "*",
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 15,
@@ -17631,8 +17374,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "ö",
-  "colour": "colour_undef",
+  "glyph": "o",
+  "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
@@ -18244,8 +17987,8 @@
   "exp": 0,
   "attacks": [],
   "speed": 10,
-  "glyph": "◊",
-  "colour": "lightgrey",
+  "glyph": "P",
+  "colour": "etc_silver",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -18487,7 +18230,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 10,
-  "glyph": "Δ",
+  "glyph": "I",
   "colour": "brown",
   "spriteKey": null,
   "sizePixels": 26,
@@ -18526,7 +18269,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 10,
-  "glyph": "◊",
+  "glyph": "I",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 26,
@@ -18564,7 +18307,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 10,
-  "glyph": "Δ",
+  "glyph": "I",
   "colour": "etc_ice",
   "spriteKey": null,
   "sizePixels": 22,
@@ -18602,7 +18345,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 10,
-  "glyph": "Δ",
+  "glyph": "I",
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
@@ -18637,7 +18380,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "◊",
+  "glyph": "P",
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 18,
@@ -18674,7 +18417,7 @@
   "exp": 2700,
   "attacks": [],
   "speed": 10,
-  "glyph": "8",
+  "glyph": "9",
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 26,
@@ -18717,8 +18460,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "Z",
-  "colour": "lightmagenta",
+  "glyph": "W",
+  "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
@@ -18849,7 +18592,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "a",
+  "glyph": "h",
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 26,
@@ -18976,7 +18719,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Č",
+  "glyph": "C",
   "colour": "blue",
   "spriteKey": null,
   "sizePixels": 32,
@@ -19188,7 +18931,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Ŵ",
+  "glyph": "W",
   "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
@@ -19310,7 +19053,7 @@
    }
   ],
   "speed": 20,
-  "glyph": "Σ",
+  "glyph": "E",
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
@@ -19324,7 +19067,6 @@
   "species": null,
   "flags": [
    "see_invis",
-   "amorphous",
    "batty"
   ],
   "resists": {
@@ -19432,7 +19174,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ψ",
+  "glyph": "a",
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
@@ -19834,7 +19576,7 @@
    "undead"
   ],
   "genus": null,
-  "species": "revenant",
+  "species": null,
   "flags": [
    "see_invis",
    "speaks"
@@ -19997,44 +19739,6 @@
   "resists": null,
   "spells": null,
   "uses": null,
-  "habitat": "amphibious"
- },
- {
-  "id": "roaming-sludgefish",
-  "enumName": "MONS_ROAMING_SLUDGEFISH",
-  "name": "roaming sludgefish",
-  "hd": 14,
-  "hp10x": 710,
-  "ac": 5,
-  "ev": 19,
-  "will": 80,
-  "exp": 945,
-  "attacks": [
-   {
-    "type": "bite",
-    "damage": 34,
-    "flavour": "antimagic"
-   }
-  ],
-  "speed": 10,
-  "glyph": "F",
-  "colour": "lightmagenta",
-  "spriteKey": null,
-  "sizePixels": 26,
-  "size": "large",
-  "shape": "fish",
-  "intelligence": "human",
-  "holiness": null,
-  "genus": null,
-  "species": null,
-  "flags": [
-   "cold_blood"
-  ],
-  "resists": {
-   "poison": 3
-  },
-  "spells": "roaming_sludgefish",
-  "uses": "open_doors",
   "habitat": "amphibious"
  },
  {
@@ -20375,48 +20079,6 @@
   "habitat": null
  },
  {
-  "id": "rusted-inspector",
-  "enumName": "MONS_RUSTED_INSPECTOR",
-  "name": "rusted inspector",
-  "hd": 14,
-  "hp10x": 815,
-  "ac": 16,
-  "ev": 2,
-  "will": 100,
-  "exp": 816,
-  "attacks": [
-   {
-    "type": "bite",
-    "damage": 34,
-    "flavour": "corrode"
-   }
-  ],
-  "speed": 10,
-  "glyph": "9",
-  "colour": "brown",
-  "spriteKey": null,
-  "sizePixels": 22,
-  "size": "medium",
-  "shape": "snake",
-  "intelligence": "human",
-  "holiness": [
-   "nonliving"
-  ],
-  "genus": null,
-  "species": null,
-  "flags": [
-   "see_invis",
-   "no_skeleton"
-  ],
-  "resists": {
-   "elec": 1,
-   "corr": 1
-  },
-  "spells": "rusted_inspector",
-  "uses": "open_doors",
-  "habitat": "amphibious"
- },
- {
   "id": "sacred-lotus",
   "enumName": "MONS_SACRED_LOTUS",
   "name": "sacred lotus",
@@ -20428,7 +20090,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "◊",
+  "glyph": "P",
   "colour": "white",
   "spriteKey": null,
   "sizePixels": 22,
@@ -20727,59 +20389,6 @@
   "habitat": null
  },
  {
-  "id": "scrapshell-chimera",
-  "enumName": "MONS_SCRAPSHELL_CHIMERA",
-  "name": "scrapshell chimera",
-  "hd": 21,
-  "hp10x": 1235,
-  "ac": 27,
-  "ev": 4,
-  "will": 120,
-  "exp": 2332,
-  "attacks": [
-   {
-    "type": "bite",
-    "damage": 39,
-    "flavour": "drag"
-   },
-   {
-    "type": "kick",
-    "damage": 36,
-    "flavour": "plain"
-   },
-   {
-    "type": "sting",
-    "damage": 31,
-    "flavour": "plain"
-   }
-  ],
-  "speed": 10,
-  "glyph": "H",
-  "colour": "cyan",
-  "spriteKey": null,
-  "sizePixels": 32,
-  "size": "giant",
-  "shape": "misc",
-  "intelligence": "animal",
-  "holiness": null,
-  "genus": null,
-  "species": null,
-  "flags": [
-   "see_invis",
-   "no_poly_to",
-   "no_gen_derived"
-  ],
-  "resists": {
-   "elec": 1,
-   "poison": 1,
-   "fire": 2,
-   "cold": 2
-  },
-  "spells": "scrapshell_chimera",
-  "uses": null,
-  "habitat": "amphibious"
- },
- {
   "id": "screaming-refraction",
   "enumName": "MONS_SCREAMING_REFRACTION",
   "name": "screaming refraction",
@@ -20797,15 +20406,15 @@
    }
   ],
   "speed": 10,
-  "glyph": "x",
-  "colour": "lightgreen",
+  "glyph": "z",
+  "colour": "etc_bone",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
   "holiness": [
-   "nonliving"
+   "undead"
   ],
   "genus": null,
   "species": null,
@@ -20915,7 +20524,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "U",
+  "glyph": "n",
   "colour": "etc_fire",
   "spriteKey": null,
   "sizePixels": 22,
@@ -20950,7 +20559,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 10,
-  "glyph": "◊",
+  "glyph": "*",
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
@@ -21037,7 +20646,7 @@
    }
   ],
   "speed": 15,
-  "glyph": "Å",
+  "glyph": "A",
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
@@ -21098,7 +20707,7 @@
    }
   ],
   "speed": 14,
-  "glyph": "Ď",
+  "glyph": "D",
   "colour": "etc_ice",
   "spriteKey": null,
   "sizePixels": 32,
@@ -21159,7 +20768,7 @@
    }
   ],
   "speed": 14,
-  "glyph": "Ď",
+  "glyph": "D",
   "colour": "etc_iron",
   "spriteKey": null,
   "sizePixels": 32,
@@ -21220,7 +20829,7 @@
    }
   ],
   "speed": 14,
-  "glyph": "Ď",
+  "glyph": "D",
   "colour": "etc_death",
   "spriteKey": null,
   "sizePixels": 32,
@@ -21327,8 +20936,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "p",
-  "colour": "lightcyan",
+  "glyph": "a",
+  "colour": "brown",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
@@ -21345,46 +20954,6 @@
   "spells": "servant_of_whispers",
   "uses": "weapons_armour",
   "habitat": null
- },
- {
-  "id": "sewage-sovereign",
-  "enumName": "MONS_SEWAGE_SOVEREIGN",
-  "name": "sewage sovereign",
-  "hd": 16,
-  "hp10x": 1560,
-  "ac": 9,
-  "ev": 3,
-  "will": 120,
-  "exp": 1850,
-  "attacks": [
-   {
-    "type": "gore",
-    "damage": 46,
-    "flavour": "plain"
-   }
-  ],
-  "speed": 10,
-  "glyph": "a",
-  "colour": "etc_earth",
-  "spriteKey": null,
-  "sizePixels": 26,
-  "size": "large",
-  "shape": "quadruped",
-  "intelligence": "animal",
-  "holiness": null,
-  "genus": "hog",
-  "species": null,
-  "flags": [
-   "warm_blood",
-   "herd",
-   "fast_regen"
-  ],
-  "resists": {
-   "poison": 1
-  },
-  "spells": "sewage_sovereign",
-  "uses": null,
-  "habitat": "amphibious"
  },
  {
   "id": "shadow-demon",
@@ -21589,7 +21158,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Σ",
+  "glyph": "E",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
@@ -21625,7 +21194,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 5,
-  "glyph": "‡",
+  "glyph": "I",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
@@ -21653,16 +21222,16 @@
   "id": "shadow-wraith",
   "enumName": "MONS_SHADOW_WRAITH",
   "name": "shadow wraith",
-  "hd": 12,
-  "hp10x": 570,
-  "ac": 13,
-  "ev": 13,
+  "hd": 10,
+  "hp10x": 550,
+  "ac": 7,
+  "ev": 7,
   "will": 100,
   "exp": 761,
   "attacks": [
    {
     "type": "hit",
-    "damage": 31,
+    "damage": 27,
     "flavour": "drain_speed"
    }
   ],
@@ -21681,9 +21250,9 @@
   "species": null,
   "flags": [
    "flies",
+   "invis",
    "see_invis",
-   "insubstantial",
-   "lurker"
+   "insubstantial"
   ],
   "resists": null,
   "spells": null,
@@ -21788,8 +21357,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "i",
-  "colour": "lightgreen",
+  "glyph": "p",
+  "colour": "lightred",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
@@ -21929,7 +21498,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 20,
-  "glyph": "●",
+  "glyph": "v",
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 15,
@@ -22054,7 +21623,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ŵ",
+  "glyph": "W",
   "colour": "cyan",
   "spriteKey": null,
   "sizePixels": 22,
@@ -22384,7 +21953,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "j",
+  "glyph": "J",
   "colour": "green",
   "spriteKey": null,
   "sizePixels": 18,
@@ -22593,7 +22162,7 @@
    }
   ],
   "speed": 13,
-  "glyph": "ω",
+  "glyph": "w",
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 26,
@@ -22768,7 +22337,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 40,
-  "glyph": "¤",
+  "glyph": "*",
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 15,
@@ -22907,8 +22476,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "W",
-  "colour": "yellow",
+  "glyph": "*",
+  "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 18,
   "size": "small",
@@ -23200,7 +22769,7 @@
   "exp": 1450,
   "attacks": [],
   "speed": 10,
-  "glyph": "8",
+  "glyph": "9",
   "colour": "lightmagenta",
   "spriteKey": null,
   "sizePixels": 22,
@@ -23243,7 +22812,7 @@
    }
   ],
   "speed": 12,
-  "glyph": "Þ",
+  "glyph": "H",
   "colour": "lightgreen",
   "spriteKey": null,
   "sizePixels": 26,
@@ -23277,7 +22846,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "Þ",
+  "glyph": "H",
   "colour": "lightgrey",
   "spriteKey": null,
   "sizePixels": 32,
@@ -23341,7 +22910,7 @@
   "exp": 725,
   "attacks": [],
   "speed": 10,
-  "glyph": "Δ",
+  "glyph": "I",
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
@@ -23647,45 +23216,6 @@
   "habitat": null
  },
  {
-  "id": "stack-of-scrap",
-  "enumName": "MONS_STACK_OF_SCRAP",
-  "name": "stack of scrap",
-  "hd": 10,
-  "hp10x": 560,
-  "ac": 18,
-  "ev": 0,
-  "will": "invuln",
-  "exp": 0,
-  "attacks": [],
-  "speed": 10,
-  "glyph": "Δ",
-  "colour": "yellow",
-  "spriteKey": null,
-  "sizePixels": 32,
-  "size": "giant",
-  "shape": "misc",
-  "intelligence": "brainless",
-  "holiness": [
-   "nonliving"
-  ],
-  "genus": null,
-  "species": null,
-  "flags": [
-   "fragile",
-   "stationary",
-   "no_exp_gain",
-   "no_threat"
-  ],
-  "resists": {
-   "fire": 3,
-   "cold": 3,
-   "elec": 3
-  },
-  "spells": null,
-  "uses": null,
-  "habitat": "amphibious"
- },
- {
   "id": "star-jelly",
   "enumName": "MONS_STAR_JELLY",
   "name": "star jelly",
@@ -23882,7 +23412,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ω",
+  "glyph": "w",
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 26,
@@ -24174,7 +23704,7 @@
   "exp": 1370,
   "attacks": [],
   "speed": 10,
-  "glyph": "‡",
+  "glyph": "I",
   "colour": "etc_silver",
   "spriteKey": null,
   "sizePixels": 18,
@@ -24261,7 +23791,7 @@
    }
   ],
   "speed": 12,
-  "glyph": "λ",
+  "glyph": "y",
   "colour": "etc_gold",
   "spriteKey": null,
   "sizePixels": 18,
@@ -24494,46 +24024,6 @@
   },
   "spells": null,
   "uses": null,
-  "habitat": null
- },
- {
-  "id": "telencephalon",
-  "enumName": "MONS_TELENCEPHALON",
-  "name": "telencephalon",
-  "hd": 8,
-  "hp10x": 550,
-  "ac": 12,
-  "ev": 4,
-  "will": 100,
-  "exp": 714,
-  "attacks": [],
-  "speed": 10,
-  "glyph": "G",
-  "colour": "lightcyan",
-  "spriteKey": null,
-  "sizePixels": 22,
-  "size": "medium",
-  "shape": "orb",
-  "intelligence": "human",
-  "holiness": null,
-  "genus": null,
-  "species": null,
-  "flags": [
-   "flies",
-   "see_invis",
-   "unblindable",
-   "warm_blood",
-   "no_skeleton",
-   "cautious"
-  ],
-  "resists": {
-   "elec": 3,
-   "poison": 1,
-   "fire": 1,
-   "cold": 1
-  },
-  "spells": "telencephalon",
-  "uses": "open_doors",
   "habitat": null
  },
  {
@@ -25116,7 +24606,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "◊",
+  "glyph": "P",
   "colour": "colour_undef",
   "spriteKey": null,
   "sizePixels": 12,
@@ -25626,7 +25116,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "8",
+  "glyph": "9",
   "colour": "etc_bone",
   "spriteKey": null,
   "sizePixels": 32,
@@ -25799,7 +25289,7 @@
   ],
   "speed": 8,
   "glyph": "9",
-  "colour": "cyan",
+  "colour": "brown",
   "spriteKey": null,
   "sizePixels": 15,
   "size": "little",
@@ -26420,7 +25910,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ŋ",
+  "glyph": "9",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
@@ -26465,7 +25955,7 @@
   ],
   "speed": 10,
   "glyph": "9",
-  "colour": "green",
+  "colour": "etc_elven",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -26576,7 +26066,7 @@
    }
   ],
   "speed": 14,
-  "glyph": "ŋ",
+  "glyph": "9",
   "colour": "lightcyan",
   "spriteKey": null,
   "sizePixels": 22,
@@ -26661,8 +26151,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "Σ",
-  "colour": "blue",
+  "glyph": "E",
+  "colour": "etc_water",
   "spriteKey": null,
   "sizePixels": 26,
   "size": "large",
@@ -26740,7 +26230,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "n",
+  "glyph": "m",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 22,
@@ -26777,7 +26267,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "ž",
+  "glyph": "z",
   "colour": "lightblue",
   "spriteKey": null,
   "sizePixels": 12,
@@ -26946,8 +26436,8 @@
    }
   ],
   "speed": 10,
-  "glyph": "U",
-  "colour": "brown",
+  "glyph": "z",
+  "colour": "green",
   "spriteKey": null,
   "sizePixels": 22,
   "size": "medium",
@@ -27092,7 +26582,7 @@
   "exp": 0,
   "attacks": [],
   "speed": 0,
-  "glyph": "◊",
+  "glyph": "P",
   "colour": "darkgray",
   "spriteKey": null,
   "sizePixels": 18,
@@ -27297,7 +26787,7 @@
   "exp": 770,
   "attacks": [],
   "speed": 10,
-  "glyph": "Θ",
+  "glyph": "*",
   "colour": "magenta",
   "spriteKey": null,
   "sizePixels": 15,
@@ -27474,7 +26964,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "Ď",
+  "glyph": "D",
   "colour": "red",
   "spriteKey": null,
   "sizePixels": 32,
@@ -27669,7 +27159,7 @@
   "ac": 3,
   "ev": 10,
   "will": 40,
-  "exp": 425,
+  "exp": 212,
   "attacks": [
    {
     "type": "hit",
@@ -27720,7 +27210,7 @@
    }
   ],
   "speed": 10,
-  "glyph": "@",
+  "glyph": "a",
   "colour": "lightgray",
   "spriteKey": null,
   "sizePixels": 22,

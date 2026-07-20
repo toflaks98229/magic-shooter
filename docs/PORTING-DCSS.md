@@ -3,15 +3,24 @@
 이 문서는 Dungeon Crawl Stone Soup 의 시스템을 이 프로젝트로 옮기는 작업의 기준입니다.
 각 단계는 순서대로 실행하며, 앞 단계가 끝나기 전에 뒤 단계를 시작하지 않습니다.
 
-## 출처
+## 출처 — 버전을 반드시 맞출 것
+
+기준 버전은 **DCSS 0.34** 하나입니다.
 
 | 무엇 | 어디 |
 |---|---|
-| 몬스터 683종 · 종족 48종 · 직업 26종 | `crawl-ref/source/dat/mons·species·jobs/*.yaml` |
-| 전투·성장 공식 | `crawl-ref/source/*.cc` (C++) |
-| 맵과 볼트 | `Data/stone_soup-tiles-0.34/dat/des/*.des` |
-| 스킬 적성표 | `Data/stone_soup-tiles-0.34/docs/aptitudes.txt` |
-| 타일 | `Data/tiles/*.png` (이미 이식됨) |
+| C++ 소스와 YAML 데이터 | `Data/crawl/` (`stone_soup-0.34` 브랜치, 0.34.1) |
+| 맵과 볼트 · 문서 · 타일 | `Data/stone_soup-tiles-0.34/` (같은 0.34 배포판) |
+| 이식된 타일 | `Data/tiles/*.png` |
+
+`Data/crawl` 은 저장소에 담지 않습니다(664MB). `.gitignore` 에 있습니다.
+이식 도구는 이 경로를 기본값으로 읽으며, 없으면 인자로 경로를 받습니다.
+
+**버전을 섞으면 조용히 어긋납니다.** 실제로 이 작업 도중 trunk(0.32 이후)를 잠시
+쓴 적이 있는데, 몬스터 16종이 더 있었고 2종의 수치가 달랐으며 출현표도 한 가지
+많았습니다. 다행히 `random.cc` 와 `random-pick.h` 는 두 버전이 완전히 같아
+난수와 출현 알고리즘은 영향이 없었지만, `fight.cc`·`attack.cc`·`actor.cc` 는
+수백 줄이 다릅니다. 3단계 전투 공식은 반드시 0.34 를 봐야 합니다.
 
 라이선스는 GPL-2.0-or-later 로 맞췄습니다. `LICENSE` 참조.
 
