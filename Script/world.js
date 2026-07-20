@@ -18,6 +18,7 @@
 
 import { PAST_TIME } from './constants.js';
 import { STARTING_BRANCH } from './branches.js';
+import { createSkillState } from './dcss/training.js';
 
 /**
  * 완전히 새로운 세계 상태를 생성해 반환합니다.
@@ -136,6 +137,10 @@ export function createWorld() {
             background: 'fighter',  // 직업 키 (backgrounds.js)
             god: null,              // 섬기는 신 키. null 이면 무신론자입니다.
             piety: 0,               // 신앙심. 0~200 이고 단계는 gods.js 의 pietyRank 가 셉니다.
+
+            // 스킬. DCSS 처럼 '쓰는 것이 는다' 방식으로 자랍니다.
+            // 전부 직렬화 가능한 값이라 세이브에 그대로 담깁니다.
+            skills: createSkillState(),
         },
 
         /** @description 이번 층에 놓인 제단. [{tileX, tileY, god}] */

@@ -14,11 +14,13 @@ import { runtime } from './runtime.js';
 import { assets } from './assets.js';
 import { getBranch } from './branches.js';
 import { getMonster, rollMonsterFor } from './monsters.js';
+import { SPECIES } from './species.js';
 import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
-import { modifier as characterModifier } from './character.js';
+import { modifier as characterModifier, aptitudeFor } from './character.js';
 import { emit, EVENTS } from './events.js';
 import { aimRadius, rollMonsterHp } from './dcss/combat.js';
 import { pickAimedTarget } from './dcss/aim.js';
+import { skillValue } from './dcss/training.js';
 
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
 
@@ -130,7 +132,13 @@ export function attack() {
         A.setDynamicLightFromWeapon(weaponData);
 
         const hit = aimAtEnemies(player);
-        if (hit) A.damageEnemy(hit.target, playerDamage(weaponData.damage), now);
+        if (hit) {
+            A.damageEnemy(hit.target, playerDamage(weaponData.damage), now);
+            // 맞았을 때만 훈련합니다. 허공에 쏘면서 스킬이 오르면
+            // 벽을 보고 난사하는 것이 최선의 성장법이 됩니다.
+            A.practise('fighting');
+            A.practise(weaponSkillOf(player.weapon));
+        }
 
     } else if (player.weapon === 'fist') {
         // 주먹 휘두르기 연출은 ui.js가 WEAPON_FIRED를 받아 처리합니다.
@@ -138,7 +146,11 @@ export function attack() {
 
         // 주먹은 사거리가 짧을 뿐, 겨누는 방식은 총과 같습니다.
         const hit = aimAtEnemies(player, weaponData.range);
-        if (hit) A.damageEnemy(hit.target, playerDamage(weaponData.damage), now);
+        if (hit) {
+            A.damageEnemy(hit.target, playerDamage(weaponData.damage), now);
+            A.practise('fighting');
+            A.practise(weaponSkillOf(player.weapon));
+        }
     }
 }
 
@@ -157,9 +169,7 @@ export function attack() {
  * @returns {{target: object, distance: number}|null} 맞은 적
  */
 function aimAtEnemies(player, maxRange = Infinity) {
-    // 플레이어의 명중값입니다. 스킬이 붙기 전이라 아직 고정값입니다.
-    // 4단계에서 스킬과 능력치가 들어오면 여기서 계산됩니다.
-    const toLand = C.BASE_PLAYER_TO_HIT;
+    const toLand = playerToHit();
 
     return pickAimedTarget(
         player,
@@ -168,6 +178,37 @@ function aimAtEnemies(player, maxRange = Infinity) {
         (enemy, forward) => forward <= maxRange
             && hasLineOfSight(player.x, player.y, enemy.x, enemy.y),
     );
+}
+
+/**
+ * 이 무기가 어느 스킬을 쓰는지 정합니다.
+ *
+ * 이 게임의 무기는 주먹과 지팡이 둘뿐이라, DCSS 의 열 가지 무기 스킬 중
+ * 대응하는 것만 씁니다. 무기가 늘면 여기에 붙입니다.
+ * @param {string} weapon - 무기 키
+ * @returns {string} 스킬 이름
+ */
+function weaponSkillOf(weapon) {
+    return weapon === 'fist' ? 'unarmed_combat' : 'evocations';
+}
+
+/**
+ * 플레이어의 명중값을 구합니다. (attack.cc:177 calc_pre_roll_to_hit 의 플레이어 가지)
+ *
+ * 원본은 15 + 민첩/2 에 격투와 무기 스킬을 각각 굴려 더합니다.
+ * 굴리는 부분은 여기서 하지 않습니다. 이 값은 굴리기 전의 상한이고,
+ * 실제 명중 여부는 조준이 정하기 때문입니다. 대신 이 상한이 회피와 비교되어
+ * 과녁 크기를 정하므로(combat.aimRadius), 스킬이 오르면 맞추기 쉬워집니다.
+ * @returns {number} 굴리기 전의 명중값
+ */
+function playerToHit() {
+    const player = world.player;
+    const dex = SPECIES[player.species]?.dex ?? 8;
+    const weaponSkill = weaponSkillOf(player.weapon);
+
+    return 15 + Math.trunc(dex / 2)
+        + skillValue(player.skills, 'fighting', aptitudeFor('fighting'))
+        + skillValue(player.skills, weaponSkill, aptitudeFor(weaponSkill));
 }
 
 /**

@@ -37,7 +37,11 @@ export const MONSTER_DATA = [
   "genus": "abomination_small",
   "species": null,
   "flags": [],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -73,7 +77,11 @@ export const MONSTER_DATA = [
   "genus": null,
   "species": null,
   "flags": [],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -103,7 +111,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -152,7 +162,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": null,
   "flags": [
@@ -192,13 +204,15 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "snake",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -228,7 +242,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "spriggan",
   "flags": [
@@ -239,7 +255,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -280,7 +296,10 @@ export const MONSTER_DATA = [
    "insubstantial"
   ],
   "resists": {
-   "elec": 3
+   "elec": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "air_elemental",
   "uses": null,
@@ -311,7 +330,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "guardian_serpent",
   "flags": [
@@ -368,7 +389,8 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "fire": -1
+   "fire": -1,
+   "torment": 1
   },
   "spells": "alderking",
   "uses": null,
@@ -399,13 +421,15 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "snapping_turtle",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -440,13 +464,15 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant_lizard",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -498,7 +524,9 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {
+   "torment": 1
+  },
   "spells": "amaemon",
   "uses": "weapons_armour",
   "habitat": null
@@ -533,13 +561,15 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "snake",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -585,7 +615,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -632,7 +665,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -679,7 +715,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -726,7 +765,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -766,7 +808,10 @@ export const MONSTER_DATA = [
    "fighter"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "ancient_champion",
   "uses": "weapons_armour",
@@ -809,7 +854,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "ancient_lich",
   "uses": "open_doors",
@@ -853,7 +901,11 @@ export const MONSTER_DATA = [
   "flags": [
    "flies"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -900,7 +952,8 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "poison": 1
+   "poison": 1,
+   "neg": 3
   },
   "spells": "angel",
   "uses": "weapons_armour",
@@ -915,7 +968,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "7",
@@ -933,7 +986,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -985,7 +1042,9 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": -1,
-   "cold": 2
+   "cold": 2,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "antaeus",
   "uses": "weapons_armour",
@@ -1026,7 +1085,10 @@ export const MONSTER_DATA = [
    "see_invis"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "antique_champion",
   "uses": "weapons_armour",
@@ -1066,7 +1128,9 @@ export const MONSTER_DATA = [
    "warm_blood",
    "has_aura"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -1113,7 +1177,9 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": -1,
    "fire": 2,
-   "cold": 2
+   "cold": 2,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "apocalypse_crab",
   "uses": null,
@@ -1144,7 +1210,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "arachnid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "spider",
   "species": null,
   "flags": [
@@ -1155,7 +1223,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "arachne",
   "uses": "weapons_armour",
   "habitat": null
@@ -1185,14 +1253,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "arcanist",
   "uses": "weapons_armour",
   "habitat": null
@@ -1227,7 +1297,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -1235,7 +1307,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -1279,7 +1351,11 @@ export const MONSTER_DATA = [
    "flies",
    "unblindable"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -1328,7 +1404,9 @@ export const MONSTER_DATA = [
    "elec": 1,
    "poison": 1,
    "fire": 3,
-   "damnation": 1
+   "damnation": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "asmodeus",
   "uses": "weapons_armour",
@@ -1353,7 +1431,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "orb",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -1402,7 +1482,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "minotaur",
   "flags": [
@@ -1412,7 +1494,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "asterion",
   "uses": "weapons_armour",
   "habitat": null
@@ -1457,7 +1539,9 @@ export const MONSTER_DATA = [
    "poison": 1,
    "fire": 3,
    "cold": -1,
-   "damnation": 1
+   "damnation": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "azrael",
   "uses": "weapons_armour",
@@ -1503,7 +1587,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -1558,7 +1644,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "snake",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": "storm_dragon",
   "flags": [
@@ -1609,7 +1697,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": "storm_dragon",
   "flags": [
@@ -1637,7 +1727,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 10,
   "will": "invuln",
-  "exp": 20,
+  "exp": 0,
   "attacks": [
    {
     "type": "hit",
@@ -1668,7 +1758,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 3,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -1704,13 +1797,15 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "snake",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -1752,7 +1847,8 @@ export const MONSTER_DATA = [
    "peripheral"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -1767,7 +1863,7 @@ export const MONSTER_DATA = [
   "ac": 1,
   "ev": 0,
   "will": "invuln",
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 10,
   "glyph": "P",
@@ -1786,7 +1882,8 @@ export const MONSTER_DATA = [
    "stationary"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": "ballistomycete",
   "uses": null,
@@ -1830,7 +1927,9 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": 1,
    "fire": 3,
-   "cold": -1
+   "cold": -1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "balrug",
   "uses": "weapons_armour",
@@ -1861,7 +1960,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "frog",
   "species": null,
   "flags": [
@@ -1869,7 +1970,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -1899,13 +2000,15 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant_lizard",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "basilisk",
   "uses": null,
   "habitat": null
@@ -1935,7 +2038,9 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bat",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -1945,7 +2050,7 @@ export const MONSTER_DATA = [
    "batty",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -1987,7 +2092,10 @@ export const MONSTER_DATA = [
    "elec": 3,
    "fire": 2,
    "cold": 2,
-   "corr": 1
+   "corr": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -2002,7 +2110,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "h",
@@ -2020,7 +2128,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -2055,7 +2167,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "bird",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -2110,7 +2224,11 @@ export const MONSTER_DATA = [
    "see_invis",
    "insubstantial"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "bes_kemwar",
   "uses": null,
   "habitat": null
@@ -2150,13 +2268,15 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "bear",
   "species": null,
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "bear",
   "uses": null,
   "habitat": null
@@ -2186,7 +2306,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "draconian",
   "species": null,
   "flags": [
@@ -2226,7 +2348,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "snake",
   "species": null,
   "flags": [
@@ -2248,7 +2372,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 99,
   "will": 10,
-  "exp": 60,
+  "exp": 0,
   "attacks": [],
   "speed": 50,
   "glyph": "*",
@@ -2271,7 +2395,10 @@ export const MONSTER_DATA = [
    "peripheral"
   ],
   "resists": {
-   "fire": 3
+   "fire": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -2313,7 +2440,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 2,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -2344,13 +2474,15 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "frog",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "blinker",
   "uses": null,
   "habitat": "amphibious"
@@ -2399,7 +2531,9 @@ export const MONSTER_DATA = [
    "elec": 3,
    "poison": 1,
    "fire": -1,
-   "cold": 2
+   "cold": 2,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "blizzard_demon",
   "uses": "open_doors",
@@ -2439,7 +2573,10 @@ export const MONSTER_DATA = [
    "no_zombie"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -2477,7 +2614,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": -1,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -2527,7 +2667,10 @@ export const MONSTER_DATA = [
    "no_zombie"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "blorkula",
   "uses": "weapons_armour",
@@ -2568,7 +2711,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "bog_body",
   "uses": "open_doors",
@@ -2599,14 +2745,16 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "see_invis",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "boggart",
   "uses": "weapons_armour",
   "habitat": null
@@ -2636,7 +2784,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "insect",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -2678,7 +2828,10 @@ export const MONSTER_DATA = [
    "peripheral"
   ],
   "resists": {
-   "fire": 3
+   "fire": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -2731,7 +2884,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "bone_dragon",
   "uses": null,
@@ -2780,7 +2936,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "boris",
   "uses": "weapons_armour",
@@ -2811,7 +2970,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "insect",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -2859,7 +3020,10 @@ export const MONSTER_DATA = [
    "elec": 1,
    "fire": 1,
    "cold": 1,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -2874,7 +3038,7 @@ export const MONSTER_DATA = [
   "ac": 8,
   "ev": 5,
   "will": "invuln",
-  "exp": 0,
+  "exp": 10,
   "attacks": [
    {
     "type": "hit",
@@ -2902,7 +3066,10 @@ export const MONSTER_DATA = [
    "fast_regen"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -2939,7 +3106,11 @@ export const MONSTER_DATA = [
    "insubstantial",
    "fast_regen"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "boundless_tesseract",
   "uses": null,
   "habitat": null
@@ -2969,14 +3140,16 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "ribbon_worm",
   "species": null,
   "flags": [
    "fast_regen",
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "brain_worm",
   "uses": null,
   "habitat": null
@@ -3013,7 +3186,8 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "fire": -1
+   "fire": -1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -3067,7 +3241,9 @@ export const MONSTER_DATA = [
    "poison": 1,
    "fire": 3,
    "cold": -1,
-   "damnation": 1
+   "damnation": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "brimstone_fiend",
   "uses": "open_doors",
@@ -3098,14 +3274,16 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "arachnid",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "spider",
   "species": null,
   "flags": [
    "web_immune",
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "broodmother",
   "uses": null,
   "habitat": null
@@ -3135,13 +3313,15 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "frog",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -3181,7 +3361,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -3219,14 +3401,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "burial_acolyte",
   "uses": "weapons_armour",
   "habitat": null
@@ -3261,7 +3445,8 @@ export const MONSTER_DATA = [
    "no_exp_gain"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -3298,7 +3483,8 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "fire": -1
+   "fire": -1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -3323,7 +3509,9 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -3381,7 +3569,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "poison": 1
+   "poison": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "cacodemon",
   "uses": "open_doors",
@@ -3422,7 +3612,8 @@ export const MONSTER_DATA = [
    "no_poly_to"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -3453,7 +3644,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "frog",
   "species": null,
   "flags": [
@@ -3491,7 +3684,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -3502,7 +3697,7 @@ export const MONSTER_DATA = [
    "female",
    "priest"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "cassandra",
   "uses": "weapons_armour",
   "habitat": null
@@ -3532,7 +3727,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "yak",
   "species": null,
   "flags": [
@@ -3570,7 +3767,9 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bird",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -3610,7 +3809,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "orb",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -3656,7 +3857,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "centaur",
   "flags": [
@@ -3665,7 +3868,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "archer"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -3700,7 +3903,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -3708,7 +3913,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "archer"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -3754,7 +3959,9 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": 1,
    "fire": 3,
-   "damnation": 1
+   "damnation": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "cerebov",
   "uses": "weapons_armour",
@@ -3796,7 +4003,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "poison": 1
+   "poison": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "weapons_armour",
@@ -3833,7 +4042,10 @@ export const MONSTER_DATA = [
   "genus": null,
   "species": null,
   "flags": [],
-  "resists": null,
+  "resists": {
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -3882,7 +4094,8 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "poison": 1,
-   "fire": 1
+   "fire": 1,
+   "neg": 3
   },
   "spells": "battlecry",
   "uses": "weapons_armour",
@@ -3918,7 +4131,9 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "misc",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -3927,7 +4142,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "no_poly_to"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "chonchon",
   "uses": null,
   "habitat": null
@@ -3957,7 +4172,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant",
   "species": "stone_giant",
   "flags": [
@@ -3966,7 +4183,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -3996,7 +4213,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "insect",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -4019,7 +4238,7 @@ export const MONSTER_DATA = [
   "ac": 13,
   "ev": 0,
   "will": "invuln",
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 15,
   "glyph": "*",
@@ -4039,7 +4258,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 1,
-   "elec": 1
+   "elec": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -4080,7 +4302,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 1,
-   "elec": 1
+   "elec": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -4111,7 +4336,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -4120,7 +4347,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "cloud_mage",
   "uses": "weapons_armour",
   "habitat": null
@@ -4166,7 +4393,10 @@ export const MONSTER_DATA = [
    "speaks"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "cognitogaunt",
   "uses": "open_doors",
@@ -4202,7 +4432,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -4230,7 +4462,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "t",
@@ -4248,7 +4480,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -4278,7 +4514,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -4325,7 +4563,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "gnoll",
   "flags": [
@@ -4334,7 +4574,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -4375,7 +4615,10 @@ export const MONSTER_DATA = [
    "peripheral"
   ],
   "resists": {
-   "fire": 3
+   "fire": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -4400,7 +4643,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -4455,7 +4700,9 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": 1,
    "fire": 3,
-   "cold": -1
+   "cold": -1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "blinker",
   "uses": "weapons_armour",
@@ -4486,13 +4733,15 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -4531,7 +4780,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 3,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "crystal_echidna",
   "uses": null,
@@ -4574,7 +4826,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 3,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "crystal_guardian",
   "uses": "open_doors",
@@ -4611,7 +4866,11 @@ export const MONSTER_DATA = [
   "genus": "walking_tome",
   "species": "earthen_tome",
   "flags": [],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "walking_tome",
   "uses": null,
   "habitat": null
@@ -4641,7 +4900,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "spider",
   "species": null,
   "flags": [
@@ -4687,7 +4948,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 2,
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "curse_skull",
   "uses": null,
@@ -4725,7 +4989,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 3,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "curse_toe",
   "uses": null,
@@ -4756,14 +5023,16 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant",
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -4809,7 +5078,8 @@ export const MONSTER_DATA = [
    "speaks"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "neg": 3
   },
   "spells": "daeva",
   "uses": "weapons_armour",
@@ -4855,7 +5125,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 2,
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -4886,7 +5159,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "snail",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "elephant_slug",
   "species": null,
   "flags": [
@@ -4933,7 +5208,10 @@ export const MONSTER_DATA = [
    "speaks"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -4964,7 +5242,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "drake",
   "species": null,
   "flags": [
@@ -5004,7 +5284,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -5012,7 +5294,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "death_knight",
   "uses": "weapons_armour",
   "habitat": null
@@ -5053,7 +5335,11 @@ export const MONSTER_DATA = [
    "no_skeleton",
    "no_zombie"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -5083,14 +5369,16 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "yak",
   "species": null,
   "flags": [
    "warm_blood",
    "herd"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -5127,7 +5415,10 @@ export const MONSTER_DATA = [
   "species": "wandering_mushroom",
   "flags": [],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "deathcap",
   "uses": null,
@@ -5158,14 +5449,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "deep_elf_air_mage",
   "uses": "weapons_armour",
   "habitat": null
@@ -5195,7 +5488,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -5203,7 +5498,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "annihilator",
   "uses": "weapons_armour",
   "habitat": null
@@ -5233,7 +5528,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -5241,7 +5538,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "archer"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "deep_elf_archer",
   "uses": "weapons_armour",
   "habitat": null
@@ -5276,7 +5573,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -5285,7 +5584,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "two_weapons"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -5315,7 +5614,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -5323,7 +5624,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "deep_elf_death_mage",
   "uses": "weapons_armour",
   "habitat": null
@@ -5353,7 +5654,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -5361,7 +5664,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "deep_elf_demonologist",
   "uses": "weapons_armour",
   "habitat": null
@@ -5391,7 +5694,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -5399,7 +5704,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "deep_elf_elementalist",
   "uses": "weapons_armour",
   "habitat": null
@@ -5429,14 +5734,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "deep_elf_fire_mage",
   "uses": "weapons_armour",
   "habitat": null
@@ -5466,14 +5773,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "deep_elf_high_priest",
   "uses": "weapons_armour",
   "habitat": null
@@ -5503,7 +5812,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -5511,7 +5822,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "deep_elf_knight",
   "uses": "weapons_armour",
   "habitat": null
@@ -5541,7 +5852,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -5550,7 +5863,7 @@ export const MONSTER_DATA = [
    "archer",
    "prefer_ranged"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -5580,7 +5893,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -5588,7 +5903,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "deep_elf_sorcerer",
   "uses": "weapons_armour",
   "habitat": null
@@ -5628,7 +5943,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "troll",
   "species": "deep_troll",
   "flags": [
@@ -5637,7 +5954,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "deep_troll_earth_mage",
   "uses": "open_doors",
   "habitat": null
@@ -5677,7 +5994,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "troll",
   "species": "deep_troll",
   "flags": [
@@ -5686,7 +6005,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "deep_troll_shaman",
   "uses": "open_doors",
   "habitat": null
@@ -5726,7 +6045,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "troll",
   "species": null,
   "flags": [
@@ -5736,7 +6057,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "fast_regen"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -5766,7 +6087,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "human",
   "species": null,
   "flags": [
@@ -5775,7 +6098,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -5827,7 +6150,9 @@ export const MONSTER_DATA = [
    "no_skeleton"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -5864,7 +6189,8 @@ export const MONSTER_DATA = [
    "no_threat"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -5906,7 +6232,8 @@ export const MONSTER_DATA = [
    "warm_blood"
   ],
   "resists": {
-   "fire": 3
+   "fire": 3,
+   "torment": 1
   },
   "spells": "demonspawn_blood_saint",
   "uses": "weapons_armour",
@@ -5953,7 +6280,8 @@ export const MONSTER_DATA = [
    "warm_blood"
   ],
   "resists": {
-   "neg": 3
+   "neg": 3,
+   "torment": 1
   },
   "spells": "demonspawn_corrupter",
   "uses": "weapons_armour",
@@ -5996,7 +6324,8 @@ export const MONSTER_DATA = [
    "warm_blood"
   ],
   "resists": {
-   "cold": 3
+   "cold": 3,
+   "torment": 1
   },
   "spells": "demonspawn_soul_scholar",
   "uses": "weapons_armour",
@@ -6048,7 +6377,9 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {
+   "torment": 1
+  },
   "spells": "demonspawn_warmonger",
   "uses": "weapons_armour",
   "habitat": null
@@ -6099,7 +6430,9 @@ export const MONSTER_DATA = [
    "warm_blood",
    "no_poly_to"
   ],
-  "resists": null,
+  "resists": {
+   "torment": 1
+  },
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -6135,7 +6468,10 @@ export const MONSTER_DATA = [
    "no_threat"
   ],
   "resists": {
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -6174,7 +6510,10 @@ export const MONSTER_DATA = [
    "elec": 3,
    "fire": 2,
    "cold": 2,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "sawblade",
   "uses": null,
@@ -6210,13 +6549,15 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "elephant",
   "species": null,
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -6265,7 +6606,9 @@ export const MONSTER_DATA = [
    "fire": 1,
    "cold": 1,
    "corr": 3,
-   "damnation": 1
+   "damnation": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "dispater",
   "uses": "weapons_armour",
@@ -6301,7 +6644,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "blob",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "jelly",
   "flags": [
@@ -6356,7 +6701,11 @@ export const MONSTER_DATA = [
   "genus": "walking_tome",
   "species": "earthen_tome",
   "flags": [],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "walking_tome",
   "uses": null,
   "habitat": null
@@ -6397,7 +6746,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 2,
-   "cold": -1
+   "cold": -1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "weapons_armour",
@@ -6428,7 +6780,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -6438,7 +6792,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "donald",
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -6468,7 +6822,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -6477,7 +6833,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "dowan",
   "uses": "weapons_armour",
   "habitat": null
@@ -6507,14 +6863,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "draconian",
   "flags": [
    "speaks",
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "annihilator",
   "uses": "weapons_armour",
   "habitat": null
@@ -6544,7 +6902,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "draconian",
   "flags": [
@@ -6552,7 +6912,7 @@ export const MONSTER_DATA = [
    "speaks",
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "draconian_knight",
   "uses": "weapons_armour",
   "habitat": null
@@ -6592,7 +6952,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "draconian",
   "flags": [
@@ -6600,7 +6962,7 @@ export const MONSTER_DATA = [
    "speaks",
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -6630,14 +6992,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "draconian",
   "flags": [
    "speaks",
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "draconian_scorcher",
   "uses": "weapons_armour",
   "habitat": null
@@ -6667,14 +7031,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "draconian",
   "flags": [
    "speaks",
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "draconian_shifter",
   "uses": "weapons_armour",
   "habitat": null
@@ -6704,14 +7070,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "draconian",
   "flags": [
    "speaks",
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "draconian_stormcaller",
   "uses": "weapons_armour",
   "habitat": null
@@ -6741,7 +7109,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -6750,7 +7120,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -6764,7 +7134,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "D",
@@ -6782,7 +7152,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -6796,7 +7170,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "k",
@@ -6814,7 +7188,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -6847,7 +7225,10 @@ export const MONSTER_DATA = [
    "no_regen"
   ],
   "resists": {
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -6890,7 +7271,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "dread_lich",
   "uses": "open_doors",
@@ -6921,14 +7305,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "warm_blood",
    "herd"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "dream_sheep",
   "uses": null,
   "habitat": null
@@ -6964,7 +7350,10 @@ export const MONSTER_DATA = [
    "insubstantial"
   ],
   "resists": {
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -7010,7 +7399,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "fire": 1
+   "fire": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -7041,7 +7432,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -7083,7 +7476,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -7093,7 +7488,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -7123,7 +7518,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -7132,7 +7529,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -7172,7 +7569,10 @@ export const MONSTER_DATA = [
    "elec": 3,
    "fire": 3,
    "cold": 3,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -7209,7 +7609,11 @@ export const MONSTER_DATA = [
   "genus": "walking_tome",
   "species": null,
   "flags": [],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "walking_tome",
   "uses": null,
   "habitat": null
@@ -7239,7 +7643,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -7249,7 +7655,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -7291,7 +7697,9 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": 1,
    "fire": 3,
-   "cold": -1
+   "cold": -1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "efreet",
   "uses": "weapons_armour",
@@ -7338,7 +7746,10 @@ export const MONSTER_DATA = [
    "insubstantial"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "eidolon",
   "uses": "open_doors",
@@ -7381,7 +7792,10 @@ export const MONSTER_DATA = [
    "elec": 3,
    "fire": 3,
    "cold": 3,
-   "corr": 3
+   "corr": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -7432,7 +7846,10 @@ export const MONSTER_DATA = [
    "elec": 3,
    "fire": 3,
    "cold": 3,
-   "corr": 3
+   "corr": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -7457,7 +7874,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -7524,7 +7943,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "electric_golem",
   "uses": "open_doors",
@@ -7555,14 +7977,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "eleionoma",
   "uses": "starting_equipment",
   "habitat": null
@@ -7595,7 +8019,10 @@ export const MONSTER_DATA = [
    "amorphous"
   ],
   "resists": {
-   "elec": 1
+   "elec": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "elemental_wellspring",
   "uses": null,
@@ -7610,7 +8037,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "E",
@@ -7628,7 +8055,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -7658,7 +8089,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "snail",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -7702,13 +8135,15 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -7738,7 +8173,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -7746,7 +8183,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "no_poly_to"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -7786,7 +8223,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "arachnid",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "scorpion",
   "species": null,
   "flags": [
@@ -7825,7 +8264,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "spriggan",
   "flags": [
@@ -7836,7 +8277,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "enchantress",
   "uses": "weapons_armour",
   "habitat": null
@@ -7866,7 +8307,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -7922,7 +8365,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -7933,7 +8378,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "entropy_weaver",
   "uses": "open_doors",
   "habitat": null
@@ -7978,7 +8423,9 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "poison": 1,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "ereshkigal",
   "uses": "weapons_armour",
@@ -8014,7 +8461,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "octopode",
   "flags": [
@@ -8024,7 +8473,7 @@ export const MONSTER_DATA = [
    "female",
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "erica",
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -8054,7 +8503,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "ogre",
   "flags": [
@@ -8064,7 +8515,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "erolcha",
   "uses": "weapons_armour",
   "habitat": null
@@ -8094,7 +8545,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -8106,7 +8559,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "no_poly_to"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -8141,7 +8594,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant",
   "species": null,
   "flags": [
@@ -8149,7 +8604,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "two_weapons"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -8179,7 +8634,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -8188,7 +8645,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "eustachio",
   "uses": "weapons_armour",
   "habitat": null
@@ -8241,7 +8698,9 @@ export const MONSTER_DATA = [
    "elec": 1,
    "poison": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "executioner",
   "uses": "open_doors",
@@ -8266,7 +8725,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "floating_eye",
   "species": null,
   "flags": [
@@ -8300,7 +8761,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "floating_eye",
   "species": null,
   "flags": [
@@ -8341,7 +8804,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elf",
   "flags": [
@@ -8350,7 +8815,7 @@ export const MONSTER_DATA = [
    "unique",
    "gender_neutral"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "fannar",
   "uses": "weapons_armour",
   "habitat": null
@@ -8380,14 +8845,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "faun",
   "uses": "starting_equipment",
   "habitat": null
@@ -8417,7 +8884,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -8427,7 +8896,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -8462,7 +8931,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -8503,7 +8974,9 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bat",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "bat",
   "species": null,
   "flags": [
@@ -8551,7 +9024,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "crab",
   "species": null,
   "flags": [
@@ -8600,7 +9075,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": null,
   "flags": [
@@ -8646,7 +9123,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 3,
-   "cold": -1
+   "cold": -1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -8677,7 +9157,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant",
   "species": null,
   "flags": [
@@ -8702,7 +9184,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 5,
   "will": "invuln",
-  "exp": 5,
+  "exp": 0,
   "attacks": [],
   "speed": 15,
   "glyph": "v",
@@ -8727,7 +9209,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 3,
-   "cold": -1
+   "cold": -1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -8768,7 +9253,11 @@ export const MONSTER_DATA = [
    "speaks",
    "insubstantial"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "flayed_ghost",
   "uses": "open_doors",
   "habitat": null
@@ -8782,7 +9271,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "G",
@@ -8800,7 +9289,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -8830,7 +9323,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -8841,7 +9336,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -8876,7 +9371,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -8926,7 +9423,10 @@ export const MONSTER_DATA = [
    "no_threat"
   ],
   "resists": {
-   "fire": 3
+   "fire": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -8957,7 +9457,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -8967,7 +9469,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "frances",
   "uses": "weapons_armour",
   "habitat": null
@@ -9008,7 +9510,8 @@ export const MONSTER_DATA = [
    "speaks"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "neg": 3
   },
   "spells": "fravashi",
   "uses": "starting_equipment",
@@ -9039,7 +9542,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "demigod",
   "flags": [
@@ -9050,7 +9555,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "frederick",
   "uses": "weapons_armour",
   "habitat": null
@@ -9097,7 +9602,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": -1,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -9128,13 +9636,15 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant_lizard",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -9148,7 +9658,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "F",
@@ -9166,7 +9676,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -9196,7 +9710,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant",
   "species": null,
   "flags": [
@@ -9245,7 +9761,10 @@ export const MONSTER_DATA = [
   "flags": [],
   "resists": {
    "fire": -1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "walking_tome",
   "uses": null,
@@ -9286,7 +9805,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -9323,7 +9845,8 @@ export const MONSTER_DATA = [
    "no_threat"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -9364,7 +9887,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "gargoyle",
   "uses": "starting_equipment",
@@ -9395,7 +9921,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "snail",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "elephant_slug",
   "flags": [
@@ -9405,7 +9933,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "gastronok",
   "uses": "starting_equipment",
   "habitat": "amphibious"
@@ -9449,7 +9977,10 @@ export const MONSTER_DATA = [
    "male",
    "tall_tile"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "geryon",
   "uses": "starting_equipment",
   "habitat": null
@@ -9493,7 +10024,11 @@ export const MONSTER_DATA = [
    "no_skeleton",
    "no_zombie"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "ghost_crab",
   "uses": null,
   "habitat": "amphibious"
@@ -9533,7 +10068,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "insect_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "moth",
   "species": null,
   "flags": [
@@ -9579,7 +10116,11 @@ export const MONSTER_DATA = [
    "insubstantial",
    "no_poly_to"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -9623,7 +10164,10 @@ export const MONSTER_DATA = [
    "no_zombie"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -9638,7 +10182,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "l",
@@ -9656,7 +10200,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -9670,7 +10218,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "C",
@@ -9688,7 +10236,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -9712,7 +10264,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "floating_eye",
   "species": null,
   "flags": [
@@ -9765,7 +10319,10 @@ export const MONSTER_DATA = [
    "fire": 3,
    "cold": 3,
    "corr": 3,
-   "damnation": 1
+   "damnation": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -9813,7 +10370,9 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "poison": 1,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "gloorx_vloq",
   "uses": "open_doors",
@@ -9838,7 +10397,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -9882,11 +10443,13 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "shapeshifter",
   "species": null,
   "flags": [],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -9916,14 +10479,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "gnoll",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "bouda",
   "uses": "weapons_armour",
   "habitat": null
@@ -9953,7 +10518,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "gnoll",
   "flags": [
@@ -9961,7 +10528,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -9991,14 +10558,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -10028,7 +10597,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "goblin",
   "flags": [
@@ -10037,7 +10608,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -10067,14 +10638,16 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -10109,7 +10682,9 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_threat"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3
+  },
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -10149,7 +10724,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": null,
   "flags": [
@@ -10186,7 +10763,9 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "orb",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "floating_eye",
   "species": null,
   "flags": [
@@ -10211,7 +10790,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "9",
@@ -10229,7 +10808,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -10259,13 +10842,15 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "frog",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -10295,7 +10880,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "orb",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "floating_eye",
   "species": null,
   "flags": [
@@ -10344,7 +10931,9 @@ export const MONSTER_DATA = [
    "see_invis"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "green_death",
   "uses": "open_doors",
@@ -10380,7 +10969,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "draconian",
   "species": null,
   "flags": [
@@ -10424,7 +11015,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "draconian",
   "species": null,
   "flags": [
@@ -10432,7 +11025,7 @@ export const MONSTER_DATA = [
    "cold_blood",
    "no_poly_to"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -10475,7 +11068,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "cold": 2
+   "cold": 2,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "grinder",
   "uses": "starting_equipment",
@@ -10506,7 +11101,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "gnoll",
   "flags": [
@@ -10515,7 +11112,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -10556,7 +11153,11 @@ export const MONSTER_DATA = [
    "male",
    "no_zombie"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -10595,7 +11196,10 @@ export const MONSTER_DATA = [
    "fighter"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "weapons_armour",
@@ -10626,7 +11230,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -10676,7 +11282,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "sphinx",
   "species": null,
   "flags": [
@@ -10685,7 +11293,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "guardian_sphinx",
   "uses": "starting_equipment",
   "habitat": null
@@ -10725,7 +11333,10 @@ export const MONSTER_DATA = [
    "speaks"
   ],
   "resists": {
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "halazid_warlock",
   "uses": "open_doors",
@@ -10756,7 +11367,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -10765,7 +11378,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -10795,7 +11408,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -10805,7 +11420,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "harold",
   "uses": "weapons_armour",
   "habitat": null
@@ -10840,7 +11455,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_winged",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -10864,7 +11481,7 @@ export const MONSTER_DATA = [
   "ac": 13,
   "ev": 10,
   "will": "invuln",
-  "exp": 0,
+  "exp": 10,
   "attacks": [
    {
     "type": "hit",
@@ -10891,7 +11508,10 @@ export const MONSTER_DATA = [
    "fighter"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -10927,7 +11547,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -10937,7 +11559,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "two_weapons"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "headmaster",
   "uses": "weapons_armour",
   "habitat": null
@@ -10974,7 +11596,9 @@ export const MONSTER_DATA = [
   "species": null,
   "flags": [],
   "resists": {
-   "fire": 3
+   "fire": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "hell_hog",
   "uses": null,
@@ -11016,7 +11640,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 3,
-   "cold": -1
+   "cold": -1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "hell_hound",
   "uses": null,
@@ -11047,7 +11673,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -11071,7 +11699,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "&",
@@ -11089,7 +11717,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -11127,7 +11759,10 @@ export const MONSTER_DATA = [
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -11175,7 +11810,9 @@ export const MONSTER_DATA = [
    "poison": 3,
    "fire": 3,
    "cold": 3,
-   "damnation": 1
+   "damnation": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "hell_sentinel",
   "uses": "open_doors",
@@ -11206,7 +11843,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -11214,7 +11853,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "hellbinder",
   "uses": "weapons_armour",
   "habitat": null
@@ -11262,7 +11901,10 @@ export const MONSTER_DATA = [
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "hellephant",
   "uses": null,
   "habitat": null
@@ -11303,7 +11945,10 @@ export const MONSTER_DATA = [
    "elec": 1,
    "fire": 3,
    "cold": 1,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "hellfire_mortar",
   "uses": null,
@@ -11342,7 +11987,9 @@ export const MONSTER_DATA = [
   "flags": [],
   "resists": {
    "poison": 1,
-   "damnation": 1
+   "damnation": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "hellion",
   "uses": "open_doors",
@@ -11387,7 +12034,9 @@ export const MONSTER_DATA = [
    "flies"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -11428,14 +12077,16 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "flies",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "hippogriff",
   "uses": null,
   "habitat": null
@@ -11474,7 +12125,10 @@ export const MONSTER_DATA = [
    "elec": 1,
    "fire": -1,
    "cold": 3,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "hoarfrost_cannon",
   "uses": null,
@@ -11505,14 +12159,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "goblin",
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -11542,13 +12198,15 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -11586,7 +12244,9 @@ export const MONSTER_DATA = [
   "flags": [
    "flies"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -11616,7 +12276,9 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -11655,7 +12317,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -11663,7 +12327,7 @@ export const MONSTER_DATA = [
    "unblindable",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -11693,13 +12357,15 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid_tailed",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "howler_monkey",
   "uses": "open_doors",
   "habitat": null
@@ -11729,14 +12395,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -11766,7 +12434,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -11805,7 +12475,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -11854,7 +12526,9 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": 1,
    "fire": -1,
-   "cold": 3
+   "cold": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -11895,7 +12569,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": null,
   "flags": [
@@ -11953,7 +12629,9 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": 1,
    "fire": -1,
-   "cold": 3
+   "cold": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "ice_fiend",
   "uses": "open_doors",
@@ -11991,7 +12669,10 @@ export const MONSTER_DATA = [
    "elec": 1,
    "fire": -1,
    "cold": 3,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "ice_statue",
   "uses": null,
@@ -12053,7 +12734,9 @@ export const MONSTER_DATA = [
    "elec": 1,
    "poison": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "ignacio",
   "uses": "starting_equipment",
@@ -12084,13 +12767,15 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant_lizard",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -12120,7 +12805,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "goblin",
   "flags": [
@@ -12130,7 +12817,7 @@ export const MONSTER_DATA = [
    "female",
    "always_wand"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -12160,7 +12847,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "merfolk",
   "flags": [
@@ -12169,7 +12858,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "ilsuiw",
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -12199,14 +12888,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "imperial_myrmidon",
   "uses": "weapons_armour",
   "habitat": null
@@ -12236,7 +12927,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "hound",
   "species": null,
   "flags": [
@@ -12248,7 +12941,7 @@ export const MONSTER_DATA = [
    "no_zombie",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -12288,7 +12981,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": null,
   "flags": [
@@ -12338,7 +13033,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 3,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "iron_elemental",
   "uses": null,
@@ -12369,7 +13067,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant",
   "species": null,
   "flags": [
@@ -12426,7 +13126,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 3,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -12469,7 +13172,9 @@ export const MONSTER_DATA = [
    "elec": 1,
    "poison": 1,
    "fire": 3,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "weapons_armour",
@@ -12510,7 +13215,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "troll",
   "species": null,
   "flags": [
@@ -12551,7 +13258,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -12559,7 +13268,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "has_aura"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "ironbound_beastmaster",
   "uses": "weapons_armour",
   "habitat": null
@@ -12589,14 +13298,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "ironbound_convoker",
   "uses": "weapons_armour",
   "habitat": null
@@ -12626,7 +13337,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -12671,7 +13384,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "goblin",
   "flags": [
@@ -12680,7 +13395,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "two_weapons"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "ironbound_mechanist",
   "uses": "weapons_armour",
   "habitat": null
@@ -12710,14 +13425,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "ironbound_preserver",
   "uses": "weapons_armour",
   "habitat": null
@@ -12747,14 +13464,16 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "ogre",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "ironbound_thunderhulk",
   "uses": "weapons_armour",
   "habitat": null
@@ -12784,13 +13503,15 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "hound",
   "species": null,
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -12820,7 +13541,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -12865,7 +13588,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "frog",
   "species": "barachi",
   "flags": [
@@ -12873,7 +13598,7 @@ export const MONSTER_DATA = [
    "unique",
    "gender_neutral"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "jeremiah",
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -12903,7 +13628,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -12912,7 +13639,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "jessica",
   "uses": "weapons_armour",
   "habitat": null
@@ -12956,7 +13683,10 @@ export const MONSTER_DATA = [
    "fighter"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -12987,7 +13717,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "dwarf",
   "flags": [
@@ -12996,7 +13728,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "jorgrun",
   "uses": "weapons_armour",
   "habitat": null
@@ -13026,7 +13758,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "arachnid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -13035,7 +13769,7 @@ export const MONSTER_DATA = [
    "web_immune",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "jorogumo",
   "uses": "open_doors",
   "habitat": null
@@ -13084,7 +13818,10 @@ export const MONSTER_DATA = [
    "male"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "jory",
   "uses": "weapons_armour",
@@ -13115,7 +13852,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -13126,7 +13865,7 @@ export const MONSTER_DATA = [
    "archer",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -13173,7 +13912,10 @@ export const MONSTER_DATA = [
    "female"
   ],
   "resists": {
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "josephina",
   "uses": "weapons_armour",
@@ -13204,7 +13946,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -13250,7 +13994,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant",
   "species": null,
   "flags": [
@@ -13259,7 +14005,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -13294,7 +14040,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "spider",
   "species": null,
   "flags": [
@@ -13346,7 +14094,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "khufu",
   "uses": "weapons_armour",
@@ -13377,7 +14128,9 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -13416,7 +14169,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "human",
   "species": null,
   "flags": [
@@ -13426,7 +14181,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "killer_klown",
   "uses": "starting_equipment",
   "habitat": null
@@ -13456,7 +14211,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -13466,7 +14223,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "kirke",
   "uses": "weapons_armour",
   "habitat": null
@@ -13496,14 +14253,16 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "kobold",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "kobold_blastminer",
   "uses": "weapons_armour",
   "habitat": null
@@ -13533,14 +14292,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "kobold",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -13570,14 +14331,16 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "kobold",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "kobold_demonologist",
   "uses": "weapons_armour",
   "habitat": null
@@ -13612,7 +14375,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "kobold",
   "flags": [
@@ -13652,14 +14417,16 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "kobold",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "kobold_geomancer",
   "uses": "weapons_armour",
   "habitat": null
@@ -13689,14 +14456,16 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -13726,13 +14495,15 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant_lizard",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -13756,7 +14527,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "kraken",
   "species": null,
   "flags": [
@@ -13768,7 +14541,7 @@ export const MONSTER_DATA = [
    "no_threat",
    "peripheral"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -13798,7 +14571,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "kraken",
   "species": null,
   "flags": [
@@ -13809,7 +14584,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "peripheral"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -13839,14 +14614,16 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "cold_blood",
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "kraken",
   "uses": null,
   "habitat": "deep_water"
@@ -13885,7 +14662,10 @@ export const MONSTER_DATA = [
    "flies"
   ],
   "resists": {
-   "fire": 2
+   "fire": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "laughing_skull",
   "uses": null,
@@ -13916,7 +14696,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "snake",
   "species": null,
   "flags": [
@@ -13963,7 +14745,10 @@ export const MONSTER_DATA = [
   "flags": [
    "speaks"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -13993,7 +14778,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "hydra",
   "flags": [
@@ -14045,7 +14832,10 @@ export const MONSTER_DATA = [
    "speaks"
   ],
   "resists": {
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "lich",
   "uses": "open_doors",
@@ -14083,7 +14873,10 @@ export const MONSTER_DATA = [
    "elec": 3,
    "fire": 2,
    "cold": 2,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "zapper",
   "uses": null,
@@ -14124,13 +14917,15 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "drake",
   "species": null,
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "lindwurm",
   "uses": null,
   "habitat": null
@@ -14164,7 +14959,11 @@ export const MONSTER_DATA = [
    "insubstantial",
    "no_exp_gain"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -14194,7 +14993,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "ogre",
   "flags": [
@@ -14203,7 +15004,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "lodul",
   "uses": "weapons_armour",
   "habitat": null
@@ -14251,7 +15052,9 @@ export const MONSTER_DATA = [
    "elec": 3,
    "poison": 1,
    "fire": 1,
-   "cold": 3
+   "cold": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "lom_lobon",
   "uses": "open_doors",
@@ -14266,7 +15069,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 10,
   "will": "invuln",
-  "exp": 2,
+  "exp": 0,
   "attacks": [],
   "speed": 13,
   "glyph": "*",
@@ -14291,7 +15094,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -14322,7 +15128,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -14331,7 +15139,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "louise",
   "uses": "weapons_armour",
   "habitat": null
@@ -14371,7 +15179,11 @@ export const MONSTER_DATA = [
    "insubstantial",
    "no_exp_gain"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -14401,7 +15213,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -14410,7 +15224,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "maggie",
   "uses": "weapons_armour",
   "habitat": null
@@ -14434,7 +15248,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "merfolk",
   "flags": [
@@ -14443,7 +15259,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "merfolk_avatar",
   "uses": "open_doors",
   "habitat": "amphibious"
@@ -14473,7 +15289,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "snake",
   "species": null,
   "flags": [
@@ -14522,14 +15340,16 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "flies",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "manticore",
   "uses": null,
   "habitat": null
@@ -14578,7 +15398,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "fire": 2
+   "fire": 2,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "mara",
   "uses": "weapons_armour",
@@ -14609,7 +15431,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -14619,7 +15443,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "margery",
   "uses": "weapons_armour",
   "habitat": null
@@ -14658,7 +15482,10 @@ export const MONSTER_DATA = [
    "flies"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -14695,7 +15522,11 @@ export const MONSTER_DATA = [
    "fast_regen",
    "has_aura"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -14730,7 +15561,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "vine_stalker",
   "flags": [
@@ -14742,7 +15575,7 @@ export const MONSTER_DATA = [
    "no_skeleton",
    "always_wand"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "maurice",
   "uses": "weapons_armour",
   "habitat": null
@@ -14777,7 +15610,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "insect_winged",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "killer_bee",
   "species": null,
   "flags": [
@@ -14830,7 +15665,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": -1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "menkaure",
   "uses": "open_doors",
@@ -14880,7 +15718,8 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "poison": 1
+   "poison": 1,
+   "neg": 3
   },
   "spells": "mennas",
   "uses": "weapons_armour",
@@ -14911,7 +15750,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "merfolk",
   "flags": [
@@ -14919,7 +15760,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "merfolk_aquamancer",
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -14943,7 +15784,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "merfolk",
   "flags": [
@@ -14951,7 +15794,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "merfolk_avatar",
   "uses": "open_doors",
   "habitat": "amphibious"
@@ -14981,14 +15824,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "merfolk",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -15018,7 +15863,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "merfolk",
   "flags": [
@@ -15027,7 +15874,7 @@ export const MONSTER_DATA = [
    "archer",
    "prefer_ranged"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -15057,14 +15904,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "merfolk",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "merfolk_siren",
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -15094,14 +15943,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -15131,7 +15982,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -15140,7 +15993,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -15175,7 +16028,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -15183,7 +16038,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -15231,7 +16086,9 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "poison": 1,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "mlioglotl",
   "uses": null,
@@ -15288,7 +16145,9 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "poison": 1,
-   "fire": 1
+   "fire": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "mnoleg",
   "uses": "open_doors",
@@ -15330,7 +16189,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 3,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "molten_gargoyle",
   "uses": "starting_equipment",
@@ -15370,7 +16232,10 @@ export const MONSTER_DATA = [
    "flies"
   ],
   "resists": {
-   "fire": 3
+   "fire": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "monarch_bomb",
   "uses": null,
@@ -15411,7 +16276,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "troll",
   "species": null,
   "flags": [
@@ -15462,7 +16329,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -15507,7 +16376,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "insect_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "moth",
   "species": null,
   "flags": [
@@ -15515,7 +16386,7 @@ export const MONSTER_DATA = [
    "web_immune",
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "moth_of_wrath",
   "uses": null,
   "habitat": null
@@ -15529,7 +16400,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "y",
@@ -15547,7 +16418,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -15577,14 +16452,16 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "cold_blood",
    "warded"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "mountainshell",
   "uses": null,
   "habitat": null
@@ -15624,7 +16501,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "mummy_priest",
   "uses": "weapons_armour",
@@ -15663,7 +16543,10 @@ export const MONSTER_DATA = [
   "flags": [],
   "resists": {
    "fire": -1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -15713,7 +16596,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 2,
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "murray",
   "uses": null,
@@ -15744,14 +16630,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -15786,7 +16674,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "naga",
   "flags": [
@@ -15831,7 +16721,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "naga",
   "flags": [
@@ -15876,7 +16768,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "naga",
   "flags": [
@@ -15923,7 +16817,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "naga",
   "flags": [
@@ -15969,7 +16865,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -16014,7 +16912,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "naga",
   "flags": [
@@ -16065,7 +16965,11 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "nameless",
   "uses": null,
   "habitat": null
@@ -16112,7 +17016,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "cold": 3,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "nargun",
   "uses": null,
@@ -16137,7 +17044,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -16179,7 +17088,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "felid",
   "flags": [
@@ -16189,7 +17100,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "natasha",
   "uses": "starting_equipment",
   "habitat": null
@@ -16219,14 +17130,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "necromancer",
   "uses": "weapons_armour",
   "habitat": null
@@ -16265,7 +17178,10 @@ export const MONSTER_DATA = [
    "no_zombie"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -16315,7 +17231,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 1,
-   "poison": 1
+   "poison": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "nekomata",
   "uses": "starting_equipment",
@@ -16367,7 +17285,10 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "hellephant",
   "uses": null,
   "habitat": null
@@ -16406,7 +17327,9 @@ export const MONSTER_DATA = [
    "flies"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "neqoxec",
   "uses": "open_doors",
@@ -16437,7 +17360,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "orc",
   "flags": [
@@ -16447,7 +17372,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "nergalle",
   "uses": "weapons_armour",
   "habitat": null
@@ -16482,7 +17407,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "centaur",
   "flags": [
@@ -16492,7 +17419,7 @@ export const MONSTER_DATA = [
    "archer",
    "gender_neutral"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "nessos",
   "uses": "weapons_armour",
   "habitat": null
@@ -16522,7 +17449,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -16532,7 +17461,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "nikola",
   "uses": "weapons_armour",
   "habitat": null
@@ -16562,7 +17491,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -16573,7 +17504,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "norris",
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -16617,7 +17548,10 @@ export const MONSTER_DATA = [
    "see_invis",
    "unblindable"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "oblivion_hound",
   "uses": null,
   "habitat": null
@@ -16660,7 +17594,10 @@ export const MONSTER_DATA = [
    "speaks"
   ],
   "resists": {
-   "fire": 2
+   "fire": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -16699,7 +17636,10 @@ export const MONSTER_DATA = [
    "elec": 1,
    "fire": 2,
    "cold": 2,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "obsidian_statue",
   "uses": null,
@@ -16730,14 +17670,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "occultist",
   "uses": "weapons_armour",
   "habitat": null
@@ -16772,7 +17714,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -16781,7 +17725,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -16811,7 +17755,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "ogre",
   "flags": [
@@ -16819,7 +17765,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "ogre_mage",
   "uses": "weapons_armour",
   "habitat": null
@@ -16849,14 +17795,16 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -16890,7 +17838,8 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "corr": 3
+   "corr": 3,
+   "torment": 1
   },
   "spells": "acid_spit",
   "uses": null,
@@ -16925,7 +17874,8 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "corr": 3
+   "corr": 3,
+   "torment": 1
   },
   "spells": "oklob_sapling",
   "uses": null,
@@ -16961,7 +17911,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "oni",
   "flags": [
@@ -16969,7 +17921,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "oni_incarcerator",
   "uses": "starting_equipment",
   "habitat": null
@@ -16999,7 +17951,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -17008,7 +17962,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -17042,7 +17996,9 @@ export const MONSTER_DATA = [
    "see_invis",
    "has_aura"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3
+  },
   "spells": "ophan",
   "uses": null,
   "habitat": null
@@ -17083,7 +18039,10 @@ export const MONSTER_DATA = [
   "genus": null,
   "species": null,
   "flags": [],
-  "resists": null,
+  "resists": {
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -17121,7 +18080,10 @@ export const MONSTER_DATA = [
    "elec": 1,
    "fire": 2,
    "cold": 2,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "orange_crystal_statue",
   "uses": null,
@@ -17152,7 +18114,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "misc",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -17160,7 +18124,7 @@ export const MONSTER_DATA = [
    "see_invis",
    "no_poly_to"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -17202,7 +18166,10 @@ export const MONSTER_DATA = [
    "fire": 3,
    "cold": 3,
    "corr": 3,
-   "damnation": 1
+   "damnation": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -17241,7 +18208,10 @@ export const MONSTER_DATA = [
    "elec": 3,
    "fire": 1,
    "cold": 1,
-   "corr": 3
+   "corr": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "orb_of_entropy",
   "uses": null,
@@ -17279,7 +18249,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 3,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "orb_of_fire",
   "uses": null,
@@ -17317,7 +18290,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 1,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "orb_of_winter",
   "uses": null,
@@ -17348,7 +18324,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "spider",
   "species": null,
   "flags": [
@@ -17388,7 +18366,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "orc",
   "flags": [
@@ -17401,7 +18381,7 @@ export const MONSTER_DATA = [
    "no_gen_derived",
    "fast_regen"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "ghost",
   "uses": "starting_equipment",
   "habitat": "amphibious"
@@ -17431,14 +18411,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "orc",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "orc_high_priest",
   "uses": "weapons_armour",
   "habitat": null
@@ -17468,7 +18450,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "orc",
   "flags": [
@@ -17476,7 +18460,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "orc_knight",
   "uses": "weapons_armour",
   "habitat": null
@@ -17506,14 +18490,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "orc",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "orc_priest",
   "uses": "weapons_armour",
   "habitat": null
@@ -17543,7 +18529,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "orc",
   "flags": [
@@ -17551,7 +18539,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "orc_sorcerer",
   "uses": "weapons_armour",
   "habitat": null
@@ -17581,7 +18569,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "orc",
   "flags": [
@@ -17589,7 +18579,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "battlecry",
   "uses": "weapons_armour",
   "habitat": null
@@ -17619,7 +18609,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "orc",
   "flags": [
@@ -17627,7 +18619,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -17657,14 +18649,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "orc",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "orc_wizard",
   "uses": "weapons_armour",
   "habitat": null
@@ -17694,14 +18688,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -17731,7 +18727,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "draconian",
   "species": null,
   "flags": [
@@ -17784,7 +18782,9 @@ export const MONSTER_DATA = [
    "tall_tile"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "ghost",
   "uses": "open_doors",
@@ -17825,7 +18825,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "troll",
   "flags": [
@@ -17835,7 +18837,7 @@ export const MONSTER_DATA = [
    "fast_regen",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -17875,7 +18877,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "troll",
   "flags": [
@@ -17885,7 +18889,7 @@ export const MONSTER_DATA = [
    "fast_regen",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -17931,7 +18935,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "peacekeeper",
   "uses": null,
@@ -17977,7 +18984,9 @@ export const MONSTER_DATA = [
    "see_invis",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3
+  },
   "spells": "pearl_dragon",
   "uses": null,
   "habitat": null
@@ -18015,7 +19024,9 @@ export const MONSTER_DATA = [
   "resists": {
    "fire": 1,
    "cold": 1,
-   "elec": 1
+   "elec": 1,
+   "poison": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -18057,7 +19068,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -18100,7 +19114,10 @@ export const MONSTER_DATA = [
    "insubstantial"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "blink_close",
   "uses": "open_doors",
@@ -18141,7 +19158,10 @@ export const MONSTER_DATA = [
    "insubstantial"
   ],
   "resists": {
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -18181,7 +19201,11 @@ export const MONSTER_DATA = [
    "web_immune",
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -18211,7 +19235,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "kobold",
   "flags": [
@@ -18220,7 +19246,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -18258,7 +19284,10 @@ export const MONSTER_DATA = [
   "resists": {
    "fire": 1,
    "cold": 1,
-   "elec": 1
+   "elec": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -18283,7 +19312,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -18334,7 +19365,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": -1,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -18370,7 +19404,11 @@ export const MONSTER_DATA = [
    "remnant",
    "no_threat"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -18406,7 +19444,8 @@ export const MONSTER_DATA = [
    "no_threat"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -18443,7 +19482,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -18487,7 +19529,11 @@ export const MONSTER_DATA = [
    "insubstantial",
    "no_poly_to"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "ghost",
   "uses": "open_doors",
   "habitat": null
@@ -18517,7 +19563,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -18566,7 +19614,11 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "two_weapons"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -18606,7 +19658,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "bear",
   "species": null,
   "flags": [
@@ -18654,7 +19708,10 @@ export const MONSTER_DATA = [
    "insubstantial"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -18697,7 +19754,10 @@ export const MONSTER_DATA = [
    "has_aura"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "polterguardian",
   "uses": "open_doors",
@@ -18733,7 +19793,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant",
   "species": "cyclops",
   "flags": [
@@ -18742,7 +19804,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "polyphemus",
   "uses": "starting_equipment",
   "habitat": null
@@ -18772,7 +19834,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "frog",
   "species": "human",
   "flags": [
@@ -18781,7 +19845,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "blinker",
   "uses": null,
   "habitat": "amphibious"
@@ -18829,7 +19893,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -18860,7 +19927,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant",
   "species": null,
   "flags": [
@@ -18903,14 +19972,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "draconian",
   "species": null,
   "flags": [
    "speaks",
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -18955,7 +20026,11 @@ export const MONSTER_DATA = [
    "see_invis",
    "insubstantial"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "putrid_mouth",
   "uses": "open_doors",
   "habitat": null
@@ -18985,7 +20060,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "insect_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "killer_bee",
   "species": null,
   "flags": [
@@ -19029,7 +20106,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": null,
   "flags": [
@@ -19037,7 +20116,7 @@ export const MONSTER_DATA = [
    "see_invis",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "quicksilver_dragon",
   "uses": null,
   "habitat": null
@@ -19079,7 +20158,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 3,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "quicksilver_dragon",
   "uses": null,
@@ -19110,13 +20192,15 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -19151,14 +20235,16 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "insect",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "web_immune",
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "radroach",
   "uses": null,
   "habitat": null
@@ -19188,14 +20274,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "ragged_hierophant",
   "uses": "weapons_armour",
   "habitat": null
@@ -19225,7 +20313,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "hound",
   "species": null,
   "flags": [
@@ -19273,7 +20363,9 @@ export const MONSTER_DATA = [
    "see_invis"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "rakshasa",
   "uses": "weapons_armour",
@@ -19304,13 +20396,15 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -19340,14 +20434,16 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bird",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "flies",
    "speaks"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "raven",
   "uses": null,
   "habitat": null
@@ -19390,7 +20486,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -19433,7 +20531,9 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": 1,
    "fire": 3,
-   "cold": -1
+   "cold": -1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "weapons_armour",
@@ -19464,7 +20564,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "draconian",
   "species": null,
   "flags": [
@@ -19503,7 +20605,9 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "arachnid",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "spider",
   "species": null,
   "flags": [
@@ -19548,7 +20652,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -19589,7 +20696,10 @@ export const MONSTER_DATA = [
    "speaks"
   ],
   "resists": {
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "revenant",
   "uses": "open_doors",
@@ -19630,7 +20740,10 @@ export const MONSTER_DATA = [
    "speaks"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -19661,14 +20774,16 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "fast_regen",
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "ribbon_worm",
   "uses": null,
   "habitat": null
@@ -19698,7 +20813,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "drake",
   "species": null,
   "flags": [
@@ -19737,13 +20854,15 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "rat",
   "species": null,
   "flags": [
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -19773,7 +20892,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "goblin",
   "species": "hobgoblin",
   "flags": [
@@ -19782,7 +20903,7 @@ export const MONSTER_DATA = [
    "unique",
    "gender_neutral"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "robin",
   "uses": "weapons_armour",
   "habitat": null
@@ -19812,7 +20933,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "fish",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [],
@@ -19850,7 +20973,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -19905,7 +21030,10 @@ export const MONSTER_DATA = [
    "elec": 1,
    "fire": 2,
    "cold": 2,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "roxanne",
   "uses": "starting_equipment",
@@ -19941,7 +21069,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "jelly",
   "flags": [
@@ -19999,7 +21129,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "royal_mummy",
   "uses": "weapons_armour",
@@ -20030,7 +21163,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -20039,7 +21174,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "rupert",
   "uses": "weapons_armour",
   "habitat": null
@@ -20079,7 +21214,9 @@ export const MONSTER_DATA = [
    "elec": 1,
    "poison": 1,
    "fire": 3,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -20118,7 +21255,8 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": 3,
    "neg": 3,
-   "miasma": 1
+   "miasma": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -20149,7 +21287,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "orc",
   "flags": [
@@ -20159,7 +21299,7 @@ export const MONSTER_DATA = [
    "unique",
    "gender_neutral"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "saint_roka",
   "uses": "weapons_armour",
   "habitat": null
@@ -20189,7 +21329,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "naga",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "naga",
   "species": "salamander",
   "flags": [
@@ -20228,7 +21370,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "naga",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "naga",
   "species": "salamander",
   "flags": [
@@ -20267,7 +21411,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "naga",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "naga",
   "species": null,
   "flags": [
@@ -20313,7 +21459,11 @@ export const MONSTER_DATA = [
   "genus": "golem",
   "species": null,
   "flags": [],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -20343,7 +21493,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "faun",
   "species": null,
   "flags": [
@@ -20352,7 +21504,7 @@ export const MONSTER_DATA = [
    "archer",
    "prefer_ranged"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "satyr",
   "uses": "starting_equipment",
   "habitat": null
@@ -20382,7 +21534,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -20431,7 +21585,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "screaming_refraction",
   "uses": "open_doors",
@@ -20466,7 +21623,8 @@ export const MONSTER_DATA = [
    "stationary"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": "scrub_nettle",
   "uses": null,
@@ -20497,13 +21655,15 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "snake",
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -20548,7 +21708,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 3,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -20563,7 +21726,7 @@ export const MONSTER_DATA = [
   "ac": 15,
   "ev": 0,
   "will": "invuln",
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 10,
   "glyph": "*",
@@ -20573,7 +21736,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -20617,7 +21782,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant_lizard",
   "species": null,
   "flags": [
@@ -20625,7 +21792,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_zombie"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "seismosaurus",
   "uses": null,
   "habitat": null
@@ -20675,7 +21842,8 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "poison": 1,
-   "fire": 3
+   "fire": 3,
+   "neg": 3
   },
   "spells": "seraph",
   "uses": "weapons_armour",
@@ -20736,7 +21904,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "cold": 3
+   "cold": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "serpent_of_hell_coc",
   "uses": null,
@@ -20797,7 +21967,9 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "serpent_of_hell_dis",
   "uses": null,
@@ -20858,7 +22030,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "cold": 2
+   "cold": 2,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "serpent_of_hell_tar",
   "uses": null,
@@ -20919,7 +22093,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "fire": 3
+   "fire": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "serpent_of_hell_geh",
   "uses": null,
@@ -20950,14 +22126,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "servant_of_whispers",
   "uses": "weapons_armour",
   "habitat": null
@@ -20997,7 +22175,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "cold": 2
+   "cold": 2,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "shadow_demon",
   "uses": "open_doors",
@@ -21038,7 +22218,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": null,
   "flags": [
@@ -21090,7 +22272,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "cold": 2
+   "cold": 2,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "shadow_imp",
   "uses": "open_doors",
@@ -21131,7 +22315,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -21184,7 +22371,11 @@ export const MONSTER_DATA = [
    "no_exp_gain",
    "no_poly_to"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -21220,7 +22411,11 @@ export const MONSTER_DATA = [
    "see_invis",
    "stationary"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "shadow_turret",
   "uses": null,
   "habitat": null
@@ -21261,7 +22456,11 @@ export const MONSTER_DATA = [
    "see_invis",
    "insubstantial"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -21302,7 +22501,10 @@ export const MONSTER_DATA = [
    "insubstantial"
   ],
   "resists": {
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "shadowghast",
   "uses": "open_doors",
@@ -21340,7 +22542,8 @@ export const MONSTER_DATA = [
   "species": null,
   "flags": [],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": "shambling_mangrove",
   "uses": null,
@@ -21371,11 +22574,13 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -21405,7 +22610,9 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "bird",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -21439,7 +22646,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "orb",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "floating_eye",
   "species": null,
   "flags": [
@@ -21480,7 +22689,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "snake",
   "species": null,
   "flags": [
@@ -21529,7 +22740,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 3,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -21560,7 +22774,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "merfolk",
   "flags": [
@@ -21568,7 +22784,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "no_poly_to"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "merfolk_siren",
   "uses": "weapons_armour",
   "habitat": "amphibious"
@@ -21598,7 +22814,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -21607,7 +22825,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "orc_wizard",
   "uses": "weapons_armour",
   "habitat": null
@@ -21649,7 +22867,10 @@ export const MONSTER_DATA = [
    "insubstantial"
   ],
   "resists": {
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -21690,7 +22911,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": -1,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -21734,7 +22958,10 @@ export const MONSTER_DATA = [
   "flags": [
    "fighter"
   ],
-  "resists": null,
+  "resists": {
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -21771,7 +22998,9 @@ export const MONSTER_DATA = [
   "species": null,
   "flags": [],
   "resists": {
-   "elec": 3
+   "elec": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -21811,7 +23040,10 @@ export const MONSTER_DATA = [
    "fighter"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "weapons_armour",
@@ -21842,7 +23074,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "fish",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -21891,7 +23125,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "fish",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -21899,7 +23135,7 @@ export const MONSTER_DATA = [
    "cold_blood",
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -21936,7 +23172,8 @@ export const MONSTER_DATA = [
   "species": null,
   "flags": [],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -21967,7 +23204,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -22009,7 +23248,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -22075,7 +23316,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "fire": 2
+   "fire": 2,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "smoke_demon",
   "uses": "open_doors",
@@ -22090,7 +23333,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "S",
@@ -22108,7 +23351,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -22145,7 +23392,8 @@ export const MONSTER_DATA = [
    "peripheral"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -22188,7 +23436,8 @@ export const MONSTER_DATA = [
    "peripheral"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -22219,13 +23468,15 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped_tailless",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "cold_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -22265,7 +23516,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "troll",
   "flags": [
@@ -22275,7 +23528,7 @@ export const MONSTER_DATA = [
    "fast_regen",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "snorg",
   "uses": "open_doors",
   "habitat": null
@@ -22315,7 +23568,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "tengu",
   "flags": [
@@ -22327,7 +23582,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "sojobo",
   "uses": "weapons_armour",
   "habitat": null
@@ -22368,7 +23623,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 3,
-   "cold": -1
+   "cold": -1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -22409,7 +23667,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "kobold",
   "flags": [
@@ -22418,7 +23678,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "sonja",
   "uses": "weapons_armour",
   "habitat": null
@@ -22459,7 +23719,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "soul_eater",
   "uses": "open_doors",
@@ -22500,7 +23762,11 @@ export const MONSTER_DATA = [
    "see_invis",
    "insubstantial"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -22530,7 +23796,9 @@ export const MONSTER_DATA = [
   "size": "tiny",
   "shape": "insect_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -22589,7 +23857,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 2,
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -22634,7 +23905,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -22659,7 +23933,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "human",
   "species": null,
   "flags": [
@@ -22670,7 +23946,7 @@ export const MONSTER_DATA = [
    "no_gen_derived",
    "no_threat"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -22711,7 +23987,10 @@ export const MONSTER_DATA = [
    "insubstantial"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -22726,7 +24005,7 @@ export const MONSTER_DATA = [
   "ac": 5,
   "ev": 10,
   "will": "invuln",
-  "exp": 11,
+  "exp": 0,
   "attacks": [
    {
     "type": "hit",
@@ -22758,7 +24037,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -22795,7 +24077,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 2,
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -22826,7 +24111,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "sphinx",
   "species": null,
   "flags": [
@@ -22836,7 +24123,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "sphinx_marauder",
   "uses": "starting_equipment",
   "habitat": null
@@ -22850,7 +24137,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "H",
@@ -22868,7 +24155,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -22882,7 +24173,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": "s",
@@ -22900,7 +24191,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -22914,7 +24209,7 @@ export const MONSTER_DATA = [
   "ac": 15,
   "ev": 0,
   "will": "invuln",
-  "exp": 725,
+  "exp": 0,
   "attacks": [],
   "speed": 10,
   "glyph": "I",
@@ -22936,7 +24231,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": -1,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -22967,7 +24265,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "spriggan",
   "flags": [
@@ -22976,7 +24276,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "spriggan_air_mage",
   "uses": "weapons_armour",
   "habitat": null
@@ -23006,7 +24306,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "spriggan",
   "flags": [
@@ -23015,7 +24317,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "spriggan_berserker",
   "uses": "weapons_armour",
   "habitat": null
@@ -23045,7 +24347,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "spriggan",
   "flags": [
@@ -23054,7 +24358,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -23084,7 +24388,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "spriggan",
   "flags": [
@@ -23092,7 +24398,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "spriggan_druid",
   "uses": "weapons_armour",
   "habitat": null
@@ -23122,7 +24428,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "spriggan",
   "flags": [
@@ -23164,7 +24472,9 @@ export const MONSTER_DATA = [
   "size": "little",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -23172,7 +24482,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -23207,7 +24517,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "goblin",
   "flags": [
@@ -23217,7 +24529,7 @@ export const MONSTER_DATA = [
    "male",
    "two_weapons"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "sprozz",
   "uses": "weapons_armour",
   "habitat": null
@@ -23252,7 +24564,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -23306,7 +24620,11 @@ export const MONSTER_DATA = [
    "see_invis",
    "amorphous"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -23358,7 +24676,8 @@ export const MONSTER_DATA = [
    "poison": 1,
    "fire": 1,
    "cold": 1,
-   "corr": 1
+   "corr": 1,
+   "torment": 1
   },
   "spells": "starflower",
   "uses": null,
@@ -23396,7 +24715,11 @@ export const MONSTER_DATA = [
    "no_threat",
    "peripheral"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -23438,7 +24761,11 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "peripheral"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -23452,7 +24779,7 @@ export const MONSTER_DATA = [
   "ac": 12,
   "ev": 1,
   "will": "invuln",
-  "exp": 0,
+  "exp": 10,
   "attacks": [
    {
     "type": "weap_only",
@@ -23484,7 +24811,10 @@ export const MONSTER_DATA = [
    "elec": 1,
    "fire": 2,
    "cold": 2,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -23520,7 +24850,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": null,
   "flags": [
@@ -23559,7 +24891,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "ribbon_worm",
   "species": null,
   "flags": [
@@ -23607,7 +24941,10 @@ export const MONSTER_DATA = [
    "no_skeleton"
   ],
   "resists": {
-   "fire": 3
+   "fire": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "stoker",
   "uses": null,
@@ -23638,14 +24975,16 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant",
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -23685,7 +25024,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": null,
   "flags": [
@@ -23731,7 +25072,10 @@ export const MONSTER_DATA = [
    "elec": 1,
    "fire": 2,
    "cold": 2,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "strange_machine",
   "uses": null,
@@ -23774,7 +25118,9 @@ export const MONSTER_DATA = [
    "elec": 1,
    "poison": 1,
    "fire": 3,
-   "cold": -1
+   "cold": -1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -23805,7 +25151,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "insect_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "moth",
   "species": null,
   "flags": [
@@ -23855,7 +25203,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": null,
   "flags": [
@@ -23894,7 +25244,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "drake",
   "species": null,
   "flags": [
@@ -23933,13 +25285,15 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "ribbon_worm",
   "species": null,
   "flags": [
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "swamp_worm",
   "uses": null,
   "habitat": "amphibious"
@@ -23988,7 +25342,10 @@ export const MONSTER_DATA = [
    "miasma_ring"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "tainted_leviathan",
   "uses": "starting_equipment",
@@ -24019,7 +25376,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "arachnid",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "spider",
   "species": null,
   "flags": [
@@ -24068,7 +25427,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "tengu",
   "flags": [
@@ -24077,7 +25438,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "tengu_conjurer",
   "uses": "weapons_armour",
   "habitat": null
@@ -24117,7 +25478,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "tengu",
   "flags": [
@@ -24127,7 +25490,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "tengu_reaver",
   "uses": "weapons_armour",
   "habitat": null
@@ -24167,7 +25530,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "tengu",
   "flags": [
@@ -24177,7 +25542,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "archer"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -24217,7 +25582,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -24227,7 +25594,7 @@ export const MONSTER_DATA = [
    "no_gen_derived",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -24284,7 +25651,9 @@ export const MONSTER_DATA = [
    "elec": 1,
    "poison": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -24326,7 +25695,11 @@ export const MONSTER_DATA = [
   "genus": null,
   "species": null,
   "flags": [],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "tentacled_starspawn",
   "uses": "open_doors",
   "habitat": null
@@ -24356,7 +25729,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -24365,7 +25740,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -24412,7 +25787,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "fire": 3,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "thermic_dynamo",
   "uses": null,
@@ -24458,7 +25836,8 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "fire": -1
+   "fire": -1,
+   "torment": 1
   },
   "spells": "thorn_hunter",
   "uses": null,
@@ -24506,7 +25885,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "thrashing_horror",
   "uses": null,
@@ -24542,7 +25924,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid_winged_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "draconian",
   "flags": [
@@ -24585,7 +25969,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "giant",
   "species": null,
   "flags": [
@@ -24631,7 +26017,8 @@ export const MONSTER_DATA = [
    "no_threat"
   ],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -24671,7 +26058,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -24717,7 +26107,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 1,
-   "fire": 1
+   "fire": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "tormentor",
   "uses": "open_doors",
@@ -24748,7 +26140,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snail",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "elephant_slug",
   "species": null,
   "flags": [
@@ -24756,7 +26150,7 @@ export const MONSTER_DATA = [
    "no_skeleton",
    "has_aura"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -24770,7 +26164,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": "invuln",
-  "exp": 0,
+  "exp": 10,
   "attacks": [
    {
     "type": "weap_only",
@@ -24795,7 +26189,10 @@ export const MONSTER_DATA = [
    "stationary"
   ],
   "resists": {
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "starting_equipment",
@@ -24836,7 +26233,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -24844,7 +26243,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "fast_regen"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -24858,7 +26257,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 5,
   "will": "invuln",
-  "exp": 5,
+  "exp": 0,
   "attacks": [],
   "speed": 10,
   "glyph": "v",
@@ -24884,7 +26283,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 3,
    "fire": 1,
-   "cold": 3
+   "cold": 3,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -24920,7 +26322,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "ogre",
   "species": null,
   "flags": [
@@ -24928,7 +26332,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "two_weapons"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "starting_equipment",
   "habitat": null
@@ -24958,13 +26362,15 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "no_skeleton"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": "amphibious"
@@ -25011,7 +26417,9 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "poison": 1,
-   "cold": 2
+   "cold": 2,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "tzitzimitl",
   "uses": "open_doors",
@@ -25055,7 +26463,9 @@ export const MONSTER_DATA = [
   "flags": [],
   "resists": {
    "fire": -1,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -25086,7 +26496,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -25095,7 +26507,7 @@ export const MONSTER_DATA = [
    "herd",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -25139,7 +26551,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "undertaker",
   "uses": "open_doors",
@@ -25193,7 +26608,10 @@ export const MONSTER_DATA = [
   "resists": {
    "fire": 1,
    "cold": 1,
-   "elec": 1
+   "elec": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "undying_armoury",
   "uses": "open_doors",
@@ -25224,7 +26642,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "misc",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -25232,7 +26652,7 @@ export const MONSTER_DATA = [
    "see_invis",
    "batty"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -25262,7 +26682,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "orc",
   "flags": [
@@ -25272,7 +26694,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -25314,7 +26736,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "ushabti",
   "uses": null,
@@ -25357,7 +26782,11 @@ export const MONSTER_DATA = [
    "warm_blood",
    "no_poly_to"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -25406,7 +26835,10 @@ export const MONSTER_DATA = [
    "flies"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "vampire_bloodprince",
   "uses": "weapons_armour",
@@ -25454,7 +26886,10 @@ export const MONSTER_DATA = [
    "warm_blood"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "vampire_knight",
   "uses": "weapons_armour",
@@ -25502,7 +26937,10 @@ export const MONSTER_DATA = [
    "warm_blood"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "vampire_mage",
   "uses": "weapons_armour",
@@ -25543,7 +26981,11 @@ export const MONSTER_DATA = [
    "no_skeleton",
    "no_zombie"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -25589,7 +27031,10 @@ export const MONSTER_DATA = [
    "warm_blood"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "vampire",
   "uses": "weapons_armour",
@@ -25625,7 +27070,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "naga",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "naga",
   "flags": [
@@ -25669,7 +27116,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -25678,7 +27127,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -25708,7 +27157,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -25717,7 +27168,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "vault_sentinel",
   "uses": "weapons_armour",
   "habitat": null
@@ -25747,7 +27198,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -25756,7 +27209,7 @@ export const MONSTER_DATA = [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "vault_warden",
   "uses": "weapons_armour",
   "habitat": null
@@ -25786,7 +27239,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "misc",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "ugly_thing",
   "species": null,
   "flags": [
@@ -25795,7 +27250,7 @@ export const MONSTER_DATA = [
    "herd",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "open_doors",
   "habitat": null
@@ -25830,7 +27285,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -25841,7 +27298,7 @@ export const MONSTER_DATA = [
    "no_poly_to",
    "no_gen_derived"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -25876,7 +27333,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "blob",
   "intelligence": "brainless",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "jelly",
   "species": null,
   "flags": [
@@ -25937,7 +27396,10 @@ export const MONSTER_DATA = [
    "elec": 1,
    "fire": 1,
    "cold": 1,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "vv",
   "uses": "open_doors",
@@ -25979,7 +27441,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -25994,7 +27459,7 @@ export const MONSTER_DATA = [
   "ac": 0,
   "ev": 0,
   "will": 10,
-  "exp": 0,
+  "exp": 10,
   "attacks": [],
   "speed": 0,
   "glyph": ";",
@@ -26012,7 +27477,11 @@ export const MONSTER_DATA = [
   "flags": [
    "cant_spawn"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": null,
   "uses": null,
   "habitat": null
@@ -26049,7 +27518,8 @@ export const MONSTER_DATA = [
   "species": null,
   "flags": [],
   "resists": {
-   "poison": 1
+   "poison": 1,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -26094,7 +27564,10 @@ export const MONSTER_DATA = [
    "elec": 1,
    "fire": 1,
    "cold": 1,
-   "petrify": 1
+   "petrify": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "war_gargoyle",
   "uses": "starting_equipment",
@@ -26125,7 +27598,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "hound",
   "species": null,
   "flags": [
@@ -26175,7 +27650,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "fire": -1
+   "fire": -1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -26206,7 +27684,9 @@ export const MONSTER_DATA = [
   "size": "small",
   "shape": "snake",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "snake",
   "species": null,
   "flags": [
@@ -26244,14 +27724,16 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "speaks",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "water_nymph",
   "uses": "open_doors",
   "habitat": "amphibious"
@@ -26290,7 +27772,10 @@ export const MONSTER_DATA = [
    "flies"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "weeping_skull",
   "uses": null,
@@ -26337,7 +27822,9 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": 1,
    "fire": -1,
-   "cold": 3
+   "cold": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "wendigo",
   "uses": null,
@@ -26368,7 +27855,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "draconian",
   "species": null,
   "flags": [
@@ -26419,7 +27908,9 @@ export const MONSTER_DATA = [
   "resists": {
    "poison": 1,
    "fire": -1,
-   "cold": 2
+   "cold": 2,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "white_imp",
   "uses": "open_doors",
@@ -26457,7 +27948,10 @@ export const MONSTER_DATA = [
   "species": null,
   "flags": [],
   "resists": {
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "weapons_armour",
@@ -26488,7 +27982,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "dwarf",
   "flags": [
@@ -26498,7 +27994,7 @@ export const MONSTER_DATA = [
    "unique",
    "male"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "wiglaf",
   "uses": "weapons_armour",
   "habitat": null
@@ -26534,7 +28030,10 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "fire": 2
+   "fire": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "will_o_the_wisp",
   "uses": null,
@@ -26565,14 +28064,16 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "drake",
   "species": null,
   "flags": [
    "flies",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "wind_drake",
   "uses": null,
   "habitat": null
@@ -26609,7 +28110,8 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "poison": 3,
-   "neg": 3
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -26645,7 +28147,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "arachnid",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "spider",
   "species": null,
   "flags": [
@@ -26684,7 +28188,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "hound",
   "species": null,
   "flags": [
@@ -26692,7 +28198,7 @@ export const MONSTER_DATA = [
    "unblindable",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -26735,7 +28241,11 @@ export const MONSTER_DATA = [
   "flags": [
    "flies"
   ],
-  "resists": null,
+  "resists": {
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
+  },
   "spells": "worldbinder",
   "uses": "open_doors",
   "habitat": null
@@ -26776,7 +28286,10 @@ export const MONSTER_DATA = [
    "insubstantial"
   ],
   "resists": {
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": "open_doors",
@@ -26814,7 +28327,10 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "fire": 1,
-   "cold": 1
+   "cold": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "wretched_star",
   "uses": null,
@@ -26858,7 +28374,10 @@ export const MONSTER_DATA = [
   "resists": {
    "fire": 1,
    "cold": 1,
-   "elec": 1
+   "elec": 1,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "wyrmhole",
   "uses": null,
@@ -26889,14 +28408,16 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped_winged",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "flies",
    "warm_blood"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -26926,7 +28447,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "formicid",
   "species": null,
   "flags": [
@@ -26938,7 +28461,7 @@ export const MONSTER_DATA = [
    "gender_neutral",
    "burrows"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "xakkrixis",
   "uses": "weapons_armour",
   "habitat": null
@@ -26978,7 +28501,9 @@ export const MONSTER_DATA = [
   "size": "giant",
   "shape": "quadruped_winged",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "dragon",
   "species": "fire_dragon",
   "flags": [
@@ -27024,14 +28549,16 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "quadruped",
   "intelligence": "animal",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
    "warm_blood",
    "herd"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": null,
   "habitat": null
@@ -27061,7 +28588,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "yaktaur",
   "flags": [
@@ -27070,7 +28599,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "archer"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -27100,7 +28629,9 @@ export const MONSTER_DATA = [
   "size": "large",
   "shape": "centaur",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": null,
   "flags": [
@@ -27108,7 +28639,7 @@ export const MONSTER_DATA = [
    "warm_blood",
    "archer"
   ],
-  "resists": null,
+  "resists": {},
   "spells": null,
   "uses": "weapons_armour",
   "habitat": null
@@ -27143,7 +28674,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid_tailed",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": "draconian",
   "species": null,
   "flags": [
@@ -27193,7 +28726,9 @@ export const MONSTER_DATA = [
   "resists": {
    "elec": 1,
    "poison": 1,
-   "cold": 1
+   "cold": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "ynoxinul",
   "uses": "open_doors",
@@ -27224,7 +28759,9 @@ export const MONSTER_DATA = [
   "size": "medium",
   "shape": "humanoid",
   "intelligence": "human",
-  "holiness": null,
+  "holiness": [
+   "natural"
+  ],
   "genus": null,
   "species": "human",
   "flags": [
@@ -27233,7 +28770,7 @@ export const MONSTER_DATA = [
    "unique",
    "female"
   ],
-  "resists": null,
+  "resists": {},
   "spells": "zenata",
   "uses": "weapons_armour",
   "habitat": null
@@ -27272,7 +28809,10 @@ export const MONSTER_DATA = [
    "no_regen"
   ],
   "resists": {
-   "cold": 2
+   "cold": 2,
+   "poison": 3,
+   "neg": 3,
+   "torment": 1
   },
   "spells": null,
   "uses": null,
@@ -27313,7 +28853,9 @@ export const MONSTER_DATA = [
   ],
   "resists": {
    "elec": 1,
-   "poison": 1
+   "poison": 1,
+   "neg": 3,
+   "torment": 1
   },
   "spells": "zykzyl",
   "uses": "open_doors",

@@ -301,3 +301,60 @@ test('소환사는 하수인을 부르되 한도를 넘지 않는다', () => {
     assert.ok(minions.length <= summoner.maxSummons,
         `한도 ${summoner.maxSummons}를 넘어 ${minions.length}마리를 불렀습니다`);
 });
+
+// --- 원본이 명시한 규칙 ---------------------------------------------------------
+
+test('원본이 배치를 막아 둔 몬스터는 나오지 않는다', () => {
+    // cant_spawn 은 내부용이라는 표시입니다. (mon-place.cc:908)
+    // 수치가 멀쩡해 보여도 나오면 안 되며, HP 0 인 자리표시자와는 다른 축입니다.
+    const blocked = Object.values(M.MONSTERS).filter(m => m.spawnable === false);
+    assert.ok(blocked.length > 50, '걸러진 몬스터가 너무 적습니다');
+
+    seedRandom(0xC5);
+    for (let i = 0; i < 3000; i++) {
+        const id = M.rollMonsterFor('D', 1 + (i % 15));
+        if (id) assert.ok(M.MONSTERS[id].spawnable, `${id} 는 나오면 안 됩니다`);
+    }
+});
+
+test('제자리 몬스터는 속도와 무관하게 움직이지 않는다', () => {
+    // stationary 는 speed 와 별개의 축입니다. 속도가 있어도 제자리에서만 싸웁니다.
+    // 이것을 놓치면 나무가 플레이어를 쫓아옵니다. (mon-util.cc:628)
+    const stationary = Object.values(M.MONSTERS).filter(m => m.stationary);
+    assert.ok(stationary.length > 20, `제자리 몬스터가 ${stationary.length}종뿐입니다`);
+    for (const m of stationary) {
+        assert.equal(m.canAct, false, `${m.id} 가 제자리인데 행동 가능합니다`);
+    }
+});
+
+test('언데드와 무생물이 계열에서 오는 저항을 갖는다', () => {
+    // YAML 은 이 저항을 일부러 적지 않습니다. 계열에서 따라오기 때문입니다.
+    // 옮기지 않으면 언데드가 독에 멀쩡히 당하는 게임이 됩니다.
+    // (mon-util.cc:270 _apply_holiness_resists)
+    const zombie = M.MONSTERS.zombie;
+    assert.deepEqual(zombie.holiness, ['undead']);
+    assert.equal(zombie.resists.poison, 3, '언데드가 독 저항이 없습니다');
+    assert.equal(zombie.resists.neg, 3, '언데드가 음에너지 저항이 없습니다');
+    assert.equal(zombie.resists.torment, 1, '언데드가 고문 저항이 없습니다');
+
+    // 자연물은 그 어느 것도 공짜로 받지 않습니다.
+    const rat = M.MONSTERS.rat;
+    assert.deepEqual(rat.holiness, ['natural']);
+    assert.equal(rat.resists.poison, undefined);
+    assert.equal(rat.resists.neg, undefined);
+});
+
+test('계열이 빠짐없이 채워져 있다', () => {
+    // 원본은 자연물일 때 생략합니다. null 로 남기면 판정이 통째로 빗나갑니다.
+    for (const m of Object.values(M.MONSTERS)) {
+        assert.ok(Array.isArray(m.holiness) && m.holiness.length > 0, `${m.id}: 계열이 비었습니다`);
+    }
+});
+
+test('경험치를 주지 않는 몬스터가 실제로 있다', () => {
+    // no_exp_gain 이 붙으면 0 입니다. (mon-util.cc:659)
+    // 소환물과 분신이 여기 해당하며, 그대로 두면 무한 경험치가 됩니다.
+    const free = Object.values(M.MONSTERS).filter(m => m.exp === 0);
+    assert.ok(free.length > 20, `경험치 0 인 몬스터가 ${free.length}종뿐입니다`);
+    assert.ok(M.MONSTERS.rat.exp > 0, '쥐는 경험치를 주어야 합니다');
+});

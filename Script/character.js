@@ -143,6 +143,22 @@ export function isForbidden(conduct) {
  * 캐릭터를 한 줄로 설명합니다. DCSS 가 상태창 맨 위에 적어 두는 것과 같은 형식입니다.
  * @returns {string} 예: '트롤 광전사 (트로그)'
  */
+/**
+ * 지금 종족의 스킬 적성을 돌려줍니다.
+ *
+ * 적성은 학습 속도입니다. 0 이 기준이고 +4 면 두 배 빨리 배웁니다.
+ * null 은 아예 배울 수 없다는 뜻입니다. 펠리드는 무기를, 드라코니안은 갑옷을
+ * 배울 수 없는데, 그 자리에 0 을 돌려주면 배울 수 있는 것처럼 되어 버립니다.
+ * @param {string} skill - 스킬 이름
+ * @returns {number|null} 적성
+ */
+export function aptitudeFor(skill) {
+    const species = SPECIES[world.player.species];
+    if (!species) return 0;
+    const aptitude = species.skillAptitudes?.[skill];
+    return aptitude === undefined ? 0 : aptitude;
+}
+
 export function describeCharacter() {
     const species = SPECIES[world.player.species];
     const background = BACKGROUNDS[world.player.background];

@@ -15,7 +15,8 @@ import { getItem, rollItem, DROP_CHANCE, BUFF_MODIFIERS } from './items.js';
 import { addToInventory, takeFromInventory } from './inventory.js';
 import { runtime, setDynamicLight } from './runtime.js';
 import { emit, EVENTS } from './events.js';
-import { modifier, invalidateCharacter, isForbidden } from './character.js';
+import { modifier, invalidateCharacter, isForbidden, aptitudeFor } from './character.js';
+import { gainExperience, exercise } from './dcss/training.js';
 import { GODS, MAX_PIETY, pietyRank, startingPiety, canWorship } from './gods.js';
 import { SPECIES } from './species.js';
 
@@ -267,10 +268,22 @@ export function killEnemyAt(index) {
     const mpOnKill = modifier('mpOnKill');
     if (mpOnKill > 0) giveAmmo(mpOnKill);
 
+    // 경험치는 최근에 쓴 스킬들에 나뉘어 들어갑니다.
+    // 무엇에 넣을지 고르는 것이 아니라, 무엇을 하고 있었는지가 배분을 정합니다.
+    if (deadEnemy.exp > 0) gainExperience(world.player.skills, deadEnemy.exp, aptitudeFor);
+
     gainPietyFromKill(deadEnemy);
 
     emit(EVENTS.ENEMY_DIED, { enemy: deadEnemy });
     return deadEnemy;
+}
+
+/**
+ * 방금 무엇을 했는지 기록합니다. 경험치가 이 비율대로 나뉩니다.
+ * @param {string} skill - 스킬 이름
+ */
+export function practise(skill) {
+    exercise(world.player.skills, skill);
 }
 
 // --- 신앙 -------------------------------------------------------------------

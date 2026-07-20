@@ -106,11 +106,22 @@ function toRuntimeMonster(data) {
         enumName: data.enumName,
         name: data.name,
 
+        // 스폰해서는 안 되는 것들을 걸러냅니다.
+        //
         // DCSS 에는 '분류용 자리표시자'가 섞여 있습니다. bear·dragon·snake 처럼
-        // HD 도 공격도 0 인 항목들로, 실제로 나오는 몬스터가 아니라
-        // 다형변신이나 무작위 하위 종류를 고를 때 쓰는 이름입니다.
-        // 그대로 스폰하면 HP 0 으로 태어나 즉사합니다.
-        spawnable: data.hp10x > 0 && data.attacks.length > 0,
+        // HD 도 공격도 0 인 항목들로, 실제 몬스터가 아니라 다형변신이나
+        // 무작위 하위 종류를 고를 때 쓰는 이름입니다. 그대로 스폰하면 즉사합니다.
+        //
+        // cant_spawn 은 원본이 명시적으로 배치를 막아 둔 것입니다.
+        // (mon-place.cc:908) 수치가 멀쩡해 보여도 내부용이라 나오면 안 됩니다.
+        spawnable: data.hp10x > 0
+            && data.attacks.length > 0
+            && !data.flags.includes('cant_spawn'),
+
+        // stationary 는 speed 와 별개입니다. 속도가 있어도 제자리에서만 싸웁니다.
+        // 포탑과 식물이 여기 해당하며, 움직이면 안 되는 것을 움직이게 두면
+        // 나무가 플레이어를 쫓아옵니다. (mon-util.cc:628)
+        stationary: data.flags.includes('stationary'),
 
         // 전투. DCSS 수치를 그대로 씁니다.
         hp10x: data.hp10x,
@@ -118,6 +129,8 @@ function toRuntimeMonster(data) {
         ac: data.ac,
         ev: data.ev,
         will: data.will,
+        holiness: data.holiness,
+        resists: data.resists,
         exp: data.exp,
         damage: attack ? attack.damage : 0,
         attackType: attack ? attack.type : null,
@@ -130,7 +143,7 @@ function toRuntimeMonster(data) {
         // world 는 JSON 으로 저장되는데 JSON.stringify(Infinity) 는 null 이 되어,
         // 세이브를 불러오는 순간 쿨다운 비교가 통째로 무너집니다.
         // 대신 canAct 로 표시하고 쿨다운은 유한한 값으로 둡니다.
-        canAct: canAct(data.speed),
+        canAct: canAct(data.speed) && !data.flags.includes('stationary'),
         cooldown: canAct(data.speed) ? monsterActionMs(data.speed) : 0,
 
         // 표현

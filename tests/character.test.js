@@ -87,7 +87,7 @@ test('종족에 따라 체력이 달라진다', () => {
 });
 
 test('딥 엘프가 미노타우로스보다 마력이 많다', () => {
-    startAs('deepElf', 'conjurer');
+    startAs('deep-elf', 'conjurer');
     const elfMp = worldModule.world.player.maxAmmo;
 
     startAs('minotaur', 'conjurer');

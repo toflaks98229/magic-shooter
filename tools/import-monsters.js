@@ -57,6 +57,31 @@ const SPRITE_BY_NAME = {
 };
 
 /** @description DCSS 의 크기 범주를 이 게임의 충돌 반경(픽셀)으로 옮긴 표 */
+/**
+ * 신성 계열이 공짜로 주는 저항을 얹습니다. (mon-util.cc:270 _apply_holiness_resists)
+ *
+ * YAML 은 언데드와 무생물의 독 저항을 일부러 적지 않습니다. 계열에서 따라오기 때문입니다.
+ * 이것을 옮기지 않으면 언데드가 독에 멀쩡히 당하는 게임이 됩니다.
+ * @param {object} resists - YAML 의 resists
+ * @param {string[]} holiness - 신성 계열 목록
+ * @returns {object} 보강된 저항
+ */
+function applyHolinessResists(resists, holiness) {
+    const out = { ...resists };
+    const has = (kind) => holiness.includes(kind);
+
+    // 언데드와 무생물은 독이 통하지 않습니다.
+    if (has('undead') || has('nonliving')) out.poison = 3;
+
+    // 자연물과 식물만 음에너지에 취약합니다. 나머지는 완전 저항입니다.
+    if (!has('natural') && !has('plant')) out.neg = 3;
+
+    // 고문은 살아 있는 것에만 듭니다.
+    if (has('undead') || has('demonic') || has('plant') || has('nonliving')) out.torment = 1;
+
+    return out;
+}
+
 const SIZE_PIXELS = {
     tiny: 12, little: 15, small: 18, medium: 22, large: 26, giant: 32,
 };
@@ -90,6 +115,11 @@ function convert(raw, file) {
         if (raw[required] === undefined) throw new Error(`${file}: ${required} 가 없습니다`);
     }
 
+    // holiness 는 목록입니다. 자연물이 기본이며 적지 않으면 생략됩니다.
+    const holiness = raw.holiness
+        ? (Array.isArray(raw.holiness) ? raw.holiness : [raw.holiness])
+        : ['natural'];
+
     const attacks = (Array.isArray(raw.attacks) ? raw.attacks : [raw.attacks])
         .filter(a => a && a.damage > 0)
         .map(a => ({ type: a.type, damage: a.damage, flavour: a.flavour ?? 'plain' }));
@@ -105,7 +135,8 @@ function convert(raw, file) {
         ac: raw.ac,
         ev: raw.ev,
         will: raw.will ?? 0,
-        exp: raw.exp ?? 0,
+        // no_exp_gain 이 붙으면 경험치를 주지 않습니다. (mon-util.cc:659)
+        exp: (raw.flags ?? []).includes('no_exp_gain') ? 0 : (raw.exp ?? 10),
         attacks,
 
         // speed 를 생략한 몬스터가 434종입니다. 생략은 '기본 속도'라는 뜻이라
@@ -122,11 +153,11 @@ function convert(raw, file) {
         size: raw.size,
         shape: raw.shape ?? null,
         intelligence: raw.intelligence ?? null,
-        holiness: raw.holiness ?? null,
+        holiness,
         genus: raw.genus ?? null,
         species: raw.species ?? null,
         flags: raw.flags ?? [],
-        resists: raw.resists ?? null,
+        resists: applyHolinessResists(raw.resists ?? {}, holiness),
         spells: raw.spells ?? null,
         uses: raw.uses ?? null,
         habitat: raw.habitat ?? null,
