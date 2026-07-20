@@ -10,6 +10,9 @@
  *   hp/speed/damage/cooldown - 기본 능력치
  *   size      - 충돌 및 렌더링 크기
  *   color     - 피격 파티클 색. 스프라이트를 못 찾았을 때의 대체 색으로도 쓰입니다.
+ *   fleeBelow - 체력이 최대치의 이 비율 아래로 떨어지면 도망칩니다. 없으면 끝까지 싸웁니다.
+ *               언데드·구조물·보스에는 넣지 않았습니다. 겁먹는 것이 어색하기 때문입니다.
+ *               behavior 와는 다른 축입니다. 무엇으로 싸우든 겁은 먹을 수 있습니다.
  *
  * 행동별 추가 값
  *   ranged   : projectileSpeed, range
@@ -25,21 +28,25 @@ export const MONSTERS = {
         name: '쥐', tier: 1, behavior: 'melee',
         hp: 14, speed: 1.1, damage: 5, cooldown: 700, size: 14,
         color: '#9a8f86', spriteKey: 'enemy_rat',
+        fleeBelow: 0.35,
     },
     kobold: {
         name: '코볼트 산적', tier: 1, behavior: 'melee',
         hp: 22, speed: 0.9, damage: 8, cooldown: 900, size: 18,
         color: '#c8762c', spriteKey: 'enemy_kobold',
+        fleeBelow: 0.3,
     },
     snake: {
         name: '뱀', tier: 2, behavior: 'melee',
         hp: 26, speed: 1.0, damage: 11, cooldown: 800, size: 17,
         color: '#4f9c3a', spriteKey: 'enemy_snake',
+        fleeBelow: 0.25,
     },
     frog: {
         name: '거대 개구리', tier: 2, behavior: 'melee',
         hp: 34, speed: 0.8, damage: 10, cooldown: 1000, size: 22,
         color: '#3f8fb0', spriteKey: 'enemy_frog',
+        fleeBelow: 0.25,
     },
 
     // --- 오크·성채 ---------------------------------------------------------
@@ -47,6 +54,7 @@ export const MONSTERS = {
         name: '고블린', tier: 2, behavior: 'melee',
         hp: 28, speed: 0.95, damage: 10, cooldown: 850, size: 19,
         color: '#8fa03a', spriteKey: 'enemy_goblin',
+        fleeBelow: 0.3,
     },
     orc: {
         name: '오크', tier: 4, behavior: 'melee',
@@ -63,6 +71,7 @@ export const MONSTERS = {
         hp: 55, speed: 1.0, damage: 14, cooldown: 1300, size: 26,
         projectileSpeed: 4.5, range: 32 * 11,
         color: '#a9713c', spriteKey: 'enemy_centaur',
+        fleeBelow: 0.4,
     },
 
     // --- 짐승굴 -------------------------------------------------------------
@@ -75,6 +84,7 @@ export const MONSTERS = {
         name: '거대 거미', tier: 5, behavior: 'melee',
         hp: 40, speed: 1.4, damage: 14, cooldown: 700, size: 20,
         color: '#6b3f9c', spriteKey: 'enemy_spider',
+        fleeBelow: 0.25,
     },
     hydra: {
         name: '히드라', tier: 9, behavior: 'melee',

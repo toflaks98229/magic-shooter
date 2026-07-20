@@ -122,6 +122,29 @@ export const ENEMY_SEPARATION_STRENGTH = 0.5;
 export const ENEMY_SEPARATION_RANGE = 1.1;
 
 /**
+ * @description 도망을 시작하는 거리(타일). 이보다 가까워야 겁을 먹습니다.
+ * 멀리서 다친 적까지 달아나면 화면 밖에서 무슨 일이 벌어지는지 알 수 없습니다.
+ */
+export const FLEE_START_DISTANCE_TILES = 6;
+
+/**
+ * @description 도망을 그만두는 거리(타일). 여기까지 벌리면 숨을 돌리고 다시 덤빕니다.
+ *
+ * 시작 거리보다 넉넉히 크게 둡니다. 두 값이 같으면 경계에서 도망과 추격을
+ * 매 스텝 오가며 제자리걸음을 합니다. 벌어진 두 값이 그 진동을 막습니다.
+ */
+export const FLEE_STOP_DISTANCE_TILES = 10;
+
+/**
+ * @description 몰린 적이 체념하고 싸우는 시간(ms).
+ *
+ * 물러날 곳이 없으면 돌아서서 뭅니다. 그런데 돌아선 다음 스텝에 다시 겁을 먹으면
+ * 도망과 추격을 매 스텝 오가며 공격이 절반만 나갑니다.
+ * 그래서 한 번 몰리면 이 시간 동안은 겁을 먹지 않고 싸우게 합니다.
+ */
+export const CORNERED_FIGHT_MS = 2000;
+
+/**
  * @description 시뮬레이션 한 스텝의 길이(ms).
  * 게임 로직은 실제 프레임 간격과 무관하게 항상 이 크기로만 전진합니다.
  * 덕분에 30FPS든 144FPS든 같은 시간에 같은 결과가 나옵니다.

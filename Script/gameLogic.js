@@ -231,6 +231,8 @@ export function spawnMonster(id, position) {
         // 스폰 직후 쿨다운에 걸리지 않도록 과거 시각으로 둡니다.
         lastAttackTime: C.PAST_TIME,
         lastHitTime: 0,
+        // 모든 적은 플레이어를 쫓는 것으로 시작합니다. (ENEMY_STATES 참조)
+        state: 'chase',
     };
 
     // 행동별로 필요한 상태를 붙입니다.
@@ -369,6 +371,91 @@ const ENEMY_BEHAVIORS = {
     },
 };
 
+// --- 적 상태 기계 (FSM) -----------------------------------------------------
+//
+// 예전에는 모든 적이 조건 없이 플레이어를 향해 걷고, behavior 핸들러가 공격만 맡았습니다.
+// 도망처럼 '걷는 방향이 달라지는' 행동을 넣을 자리가 없었습니다.
+//
+// 이제 적은 상태를 하나 갖고, 상태가 세 가지를 정합니다.
+//   move - 이번 스텝에 어디로 움직이는가
+//   act  - 움직인 뒤 무엇을 하는가 (behavior 핸들러는 여기서 불립니다)
+//   next - 다음 스텝에 어떤 상태가 되는가
+//
+// behavior(무엇으로 싸우는가)와 state(지금 무엇을 하는가)는 다른 축입니다.
+// 오크도 망령도 다치면 도망칠 수 있어야 하므로 둘을 곱하지 않고 나란히 둡니다.
+
+/**
+ * 지금 겁을 먹을 상황인지 판단합니다.
+ *
+ * 도망칠 수 있는 몬스터인지는 monsters.js 의 fleeBelow 가 정합니다.
+ * 값이 없으면 끝까지 싸웁니다. 언데드나 구조물이 도망치면 어색하기 때문입니다.
+ * @param {object} enemy - 판단할 적
+ * @param {number} distance - 플레이어까지의 거리
+ * @param {number} now - 게임 내부 시각
+ * @returns {boolean} 도망쳐야 하면 true
+ */
+function isFrightened(enemy, distance, now) {
+    if (!enemy.fleeBelow) return false;
+    if (enemy.hp / enemy.maxHp >= enemy.fleeBelow) return false;
+
+    // 방금 몰려서 돌아선 참이라면 한동안은 겁을 먹지 않습니다.
+    // 이것이 없으면 몰린 적이 도망과 추격을 매 스텝 오가며 공격이 절반만 나갑니다.
+    if (now < (enemy.corneredUntil ?? 0)) return false;
+
+    // 이미 도망치는 중이라면 충분히 멀어질 때까지 계속 달아납니다.
+    // 시작 거리와 그만두는 거리를 벌려 두어야 경계에서 진동하지 않습니다.
+    const limit = enemy.state === 'flee' ? C.FLEE_STOP_DISTANCE_TILES : C.FLEE_START_DISTANCE_TILES;
+    return distance < C.TILE_SIZE * limit;
+}
+
+/**
+ * @description 적이 가질 수 있는 상태들.
+ * 새 상태를 추가할 때는 move/act/next 셋을 모두 채우면 됩니다.
+ */
+const ENEMY_STATES = {
+    /** 플레이어를 쫓아가 싸운다 */
+    chase: {
+        move(enemy, dtFactor) {
+            followFlowField(enemy, dtFactor);
+        },
+        act(enemy, context) {
+            const behave = ENEMY_BEHAVIORS[enemy.behavior];
+            if (behave) behave(enemy, context);
+        },
+        next(enemy, { distance, now }) {
+            return isFrightened(enemy, distance, now) ? 'flee' : 'chase';
+        },
+    },
+
+    /**
+     * 등을 돌리고 달아난다.
+     *
+     * 달아나는 동안은 공격하지 않습니다. 도망치면서 때리면 플레이어 입장에서는
+     * 그냥 잡기 어려운 적일 뿐이고, 겁먹었다는 것이 읽히지 않습니다.
+     */
+    flee: {
+        move(enemy, dtFactor) {
+            // 막다른 곳이면 false 가 돌아옵니다. next 에서 씁니다.
+            enemy.cornered = !fleeAlongFlowField(enemy, dtFactor);
+        },
+        act() {
+            // 아무것도 하지 않습니다.
+        },
+        next(enemy, { distance, now }) {
+            // 몰린 짐승은 돌아서서 뭅니다. 벽을 향해 떨듯이 서 있는 것보다 낫고,
+            // 플레이어가 구석으로 몰아넣는 선택에 의미가 생깁니다.
+            //
+            // 체념한 시각을 적어 두는 것이 중요합니다. 돌아서기만 하고 끝내면
+            // 다음 스텝에 다시 겁을 먹어 도망과 추격을 매 스텝 오갑니다.
+            if (enemy.cornered) {
+                enemy.corneredUntil = now + C.CORNERED_FIGHT_MS;
+                return 'chase';
+            }
+            return isFrightened(enemy, distance, now) ? 'flee' : 'chase';
+        },
+    },
+};
+
 // --- 경로 탐색: 플로우 필드 (Flow Field) ---
 //
 // 이전에는 적마다 플레이어까지 BFS를 돌리고, 탐색 중인 경로 전체를 배열로 복사해
@@ -491,6 +578,54 @@ function followFlowField(enemy, dtFactor) {
 
     enemy.x += Math.cos(angle) * speed;
     enemy.y += Math.sin(angle) * speed;
+}
+
+/**
+ * 플로우 필드를 거꾸로 거슬러 적을 플레이어에게서 멀어지게 합니다.
+ *
+ * 추격에 쓰는 필드를 그대로 씁니다. 걸음 수가 '작아지는' 이웃으로 가면 다가가는 것이니,
+ * '커지는' 이웃으로 가면 멀어집니다. 도망을 위해 따로 계산할 것이 없습니다.
+ *
+ * 여기서 벽을 피하는 판정을 따로 하지 않는 것은, 플로우 필드가 이미 통행 가능한 칸에만
+ * 값을 채워 두었기 때문입니다. UNREACHABLE 인 이웃은 벽이거나 닿을 수 없는 곳입니다.
+ * @param {object} enemy - 이동시킬 적
+ * @param {number} dtFactor - 프레임 시간 보정값
+ * @returns {boolean} 물러날 칸을 찾았으면 true, 막다른 곳이면 false
+ */
+function fleeAlongFlowField(enemy, dtFactor) {
+    const width = C.MAP_WIDTH;
+    const tileX = Math.floor(enemy.x / C.TILE_SIZE);
+    const tileY = Math.floor(enemy.y / C.TILE_SIZE);
+    if (tileX < 0 || tileY < 0 || tileX >= width || tileY >= C.MAP_HEIGHT) return false;
+
+    const here = flowField[tileY * width + tileX];
+    if (here === UNREACHABLE) return false;
+
+    // 걸음 수가 더 큰 이웃 = 플레이어에게서 더 먼 칸
+    let bestNode = -1;
+    let bestDistance = here;
+    for (let d = 0; d < 4; d++) {
+        const nx = tileX + (d === 2 ? 1 : d === 3 ? -1 : 0);
+        const ny = tileY + (d === 0 ? 1 : d === 1 ? -1 : 0);
+        if (nx < 0 || ny < 0 || nx >= width || ny >= C.MAP_HEIGHT) continue;
+
+        const neighbour = ny * width + nx;
+        const distance = flowField[neighbour];
+        if (distance !== UNREACHABLE && distance > bestDistance) {
+            bestDistance = distance;
+            bestNode = neighbour;
+        }
+    }
+    if (bestNode < 0) return false; // 사방이 플레이어에게 더 가깝습니다. 몰렸습니다.
+
+    const targetX = (bestNode % width) * C.TILE_SIZE + C.TILE_SIZE / 2;
+    const targetY = ((bestNode / width) | 0) * C.TILE_SIZE + C.TILE_SIZE / 2;
+    const angle = Math.atan2(targetY - enemy.y, targetX - enemy.x);
+    const speed = enemy.speed * dtFactor;
+
+    enemy.x += Math.cos(angle) * speed;
+    enemy.y += Math.sin(angle) * speed;
+    return true;
 }
 
 // --- 내부 헬퍼 함수 (Private Methods) ---
@@ -639,10 +774,15 @@ function updateEnemies(now, dtFactor) {
         const dy = player.y - enemy.y;
         const distance = Math.hypot(dx, dy);
 
-        followFlowField(enemy, dtFactor);
+        // 세이브에 state 가 없던 시절의 적은 추격으로 봅니다.
+        const state = ENEMY_STATES[enemy.state] ?? ENEMY_STATES.chase;
+        const context = { now, dtFactor, player, distance, dx, dy };
 
-        const behave = ENEMY_BEHAVIORS[enemy.behavior];
-        if (behave) behave(enemy, { now, dtFactor, player, distance, dx, dy });
+        // 움직인 뒤 행동하고, 마지막에 다음 상태를 정합니다.
+        // 상태 전이를 끝에 두어야 이번 스텝의 행동이 항상 한 상태 안에서 일어납니다.
+        state.move(enemy, dtFactor, context);
+        state.act(enemy, context);
+        enemy.state = state.next(enemy, context);
     }
 
     // 걸음을 다 옮긴 뒤에 겹친 것을 풉니다.

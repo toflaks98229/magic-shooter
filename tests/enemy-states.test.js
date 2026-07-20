@@ -1,0 +1,282 @@
+/**
+ * @fileoverview 적 상태 기계(FSM)를 확인합니다.
+ *
+ * 적은 이제 상태를 하나 갖고, 상태가 '어디로 움직이는가 · 무엇을 하는가 · 다음에 무엇이 되는가'를
+ * 정합니다. behavior(무엇으로 싸우는가)와는 다른 축입니다.
+ *
+ * 회귀 스냅샷으로는 이것을 확인할 수 없습니다. 1800프레임 뒤의 최종 상태만 보는데,
+ * 도망이 한 번도 걸리지 않거나 걸렸다가 돌아와도 스냅샷은 그대로이기 때문입니다.
+ * 실제로 FSM 을 넣은 뒤에도 스냅샷은 한 줄도 바뀌지 않았습니다.
+ * 그래서 겁먹을 상황을 직접 만들어 봅니다.
+ */
+
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { installBrowserStubs, bindStubDom } from './helpers/browser-stubs.js';
+
+installBrowserStubs();
+
+const C = await import('../Script/constants.js');
+const worldModule = await import('../Script/world.js');
+const { resetWorld } = worldModule;
+const { dom } = await import('../Script/dom.js');
+const A = await import('../Script/actions.js');
+const gameLogic = await import('../Script/gameLogic.js');
+const M = await import('../Script/monsters.js');
+
+bindStubDom(dom);
+
+/**
+ * 벽으로만 둘러싸인 빈 방을 만들고 플레이어를 가운데 세웁니다.
+ * @returns {object} 준비된 월드
+ */
+function emptyRoom() {
+    resetWorld();
+    const world = worldModule.world;
+
+    world.map = Array.from({ length: C.MAP_HEIGHT }, (_, y) =>
+        Array.from({ length: C.MAP_WIDTH }, (_, x) =>
+            (x === 0 || y === 0 || x === C.MAP_WIDTH - 1 || y === C.MAP_HEIGHT - 1)
+                ? C.TILE_IDS.WALL : C.TILE_IDS.FLOOR));
+    world.objectMap = Array.from({ length: C.MAP_HEIGHT }, () => Array(C.MAP_WIDTH).fill(0));
+
+    world.player.x = 15 * C.TILE_SIZE + C.TILE_SIZE / 2;
+    world.player.y = 15 * C.TILE_SIZE + C.TILE_SIZE / 2;
+    A.setGameRunning(true);
+    return world;
+}
+
+/**
+ * 적 한 마리를 세웁니다.
+ * @param {object} world - 월드
+ * @param {object} overrides - 덮어쓸 속성
+ * @returns {object} 세워진 적
+ */
+function placeEnemy(world, overrides = {}) {
+    const enemy = {
+        monsterId: 'rat', spriteKey: 'enemy_rat', behavior: 'melee',
+        x: 15 * C.TILE_SIZE + C.TILE_SIZE / 2,
+        y: 13 * C.TILE_SIZE + C.TILE_SIZE / 2,   // 플레이어에서 두 칸 위
+        z: C.TILE_SIZE / 2,
+        hp: 100, maxHp: 100, speed: 1.0, damage: 5, cooldown: 500, size: 14,
+        lastAttackTime: C.PAST_TIME, lastHitTime: 0, state: 'chase',
+        ...overrides,
+    };
+    world.enemies.push(enemy);
+    return enemy;
+}
+
+/** @param {number} steps - 굴릴 스텝 수 */
+function run(steps) {
+    for (let i = 0; i < steps; i++) gameLogic.update(C.SIMULATION_STEP_MS);
+}
+
+/** @param {object} e @param {object} world @returns {number} 플레이어까지의 거리 */
+function distanceToPlayer(e, world) {
+    return Math.hypot(e.x - world.player.x, e.y - world.player.y);
+}
+
+// --- 골격 --------------------------------------------------------------------
+
+test('적은 추격 상태로 시작한다', () => {
+    const world = emptyRoom();
+    world.floor = 1;
+    gameLogic.spawnEnemiesForFloor();
+
+    assert.ok(world.enemies.length > 0, '적이 스폰되지 않았습니다');
+    for (const enemy of world.enemies) {
+        assert.equal(enemy.state, 'chase', `${enemy.monsterId} 가 추격으로 시작하지 않았습니다`);
+    }
+});
+
+test('state 가 없는 옛 세이브의 적도 추격으로 움직인다', () => {
+    // 이어하기가 붙기 전에 저장된 판에는 state 필드가 없습니다.
+    // 상태를 못 찾아 멈춰 서면 판을 이어받자마자 적이 얼어붙습니다.
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, { state: undefined });
+    const before = distanceToPlayer(enemy, world);
+
+    run(30);
+
+    assert.ok(distanceToPlayer(enemy, world) < before, '옛 세이브의 적이 다가오지 않았습니다');
+});
+
+test('겁이 없는 적은 빈사여도 계속 덤빈다', () => {
+    // fleeBelow 가 없으면 끝까지 싸웁니다. 언데드나 구조물이 도망치면 어색합니다.
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, { hp: 1, maxHp: 100 }); // fleeBelow 없음
+    const before = distanceToPlayer(enemy, world);
+
+    run(30);
+
+    assert.equal(enemy.state, 'chase', '겁이 없는 적이 도망쳤습니다');
+    assert.ok(distanceToPlayer(enemy, world) < before, '다가오지 않았습니다');
+});
+
+// --- 도망 --------------------------------------------------------------------
+
+test('체력이 떨어진 적은 도망친다', () => {
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, { hp: 20, maxHp: 100, fleeBelow: 0.35 });
+    const before = distanceToPlayer(enemy, world);
+
+    run(60);
+
+    assert.equal(enemy.state, 'flee', '도망 상태로 넘어가지 않았습니다');
+    assert.ok(distanceToPlayer(enemy, world) > before,
+        `멀어지지 않았습니다. ${before.toFixed(0)} → ${distanceToPlayer(enemy, world).toFixed(0)}`);
+});
+
+test('멀쩡한 적은 도망치지 않는다', () => {
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, { hp: 100, maxHp: 100, fleeBelow: 0.35 });
+    const before = distanceToPlayer(enemy, world);
+
+    run(30);
+
+    assert.equal(enemy.state, 'chase');
+    assert.ok(distanceToPlayer(enemy, world) < before, '다가오지 않았습니다');
+});
+
+test('멀리서 다친 적은 굳이 달아나지 않는다', () => {
+    // 화면 밖에서 적들이 달아나 버리면 무슨 일이 벌어지는지 알 수 없습니다.
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, {
+        hp: 5, maxHp: 100, fleeBelow: 0.35,
+        y: (15 - C.FLEE_START_DISTANCE_TILES - 3) * C.TILE_SIZE + C.TILE_SIZE / 2,
+    });
+
+    run(10);
+    assert.equal(enemy.state, 'chase', '멀리 있는데도 도망쳤습니다');
+});
+
+test('도망치는 동안에는 때리지 않는다', () => {
+    // 도망치면서 공격하면 겁먹었다는 것이 읽히지 않고 그냥 잡기 어려운 적이 됩니다.
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, {
+        hp: 20, maxHp: 100, fleeBelow: 0.35,
+        x: world.player.x, y: world.player.y + 4,   // 때릴 수 있을 만큼 붙여 둡니다
+        speed: 0,                                    // 붙은 채로 두어 사거리를 벗어나지 않게 합니다
+        damage: 50, cooldown: 0,
+    });
+    enemy.state = 'flee';
+    const hpBefore = world.player.hp;
+
+    run(30);
+
+    assert.equal(world.player.hp, hpBefore, '도망치는 적이 플레이어를 때렸습니다');
+});
+
+test('충분히 멀어지면 숨을 돌리고 다시 덤빈다', () => {
+    // 한 번 겁먹었다고 영영 달아나기만 하면 잡을 수도 무시할 수도 없는 적이 됩니다.
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, { hp: 20, maxHp: 100, fleeBelow: 0.35 });
+
+    run(60);
+    assert.equal(enemy.state, 'flee', '먼저 도망쳐야 합니다');
+
+    // 그만두는 거리 너머로 옮겨 놓습니다.
+    enemy.x = world.player.x;
+    enemy.y = world.player.y - (C.FLEE_STOP_DISTANCE_TILES + 2) * C.TILE_SIZE;
+    run(2);
+
+    assert.equal(enemy.state, 'chase', '충분히 멀어졌는데도 계속 도망칩니다');
+});
+
+test('도망과 추격을 경계에서 오가지 않는다', () => {
+    // 시작 거리와 그만두는 거리가 같으면 그 지점에서 매 스텝 상태가 뒤집혀 제자리걸음을 합니다.
+    assert.ok(C.FLEE_STOP_DISTANCE_TILES > C.FLEE_START_DISTANCE_TILES,
+        '그만두는 거리가 시작 거리보다 커야 진동하지 않습니다');
+
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, {
+        hp: 20, maxHp: 100, fleeBelow: 0.35, speed: 0,   // 움직이지 않게 두고 상태만 봅니다
+        y: world.player.y - C.FLEE_START_DISTANCE_TILES * C.TILE_SIZE,
+    });
+
+    const seen = [];
+    for (let i = 0; i < 20; i++) {
+        gameLogic.update(C.SIMULATION_STEP_MS);
+        seen.push(enemy.state);
+    }
+
+    const flips = seen.filter((s, i) => i > 0 && s !== seen[i - 1]).length;
+    assert.ok(flips <= 1, `상태가 ${flips}번 뒤집혔습니다: ${seen.join(',')}`);
+});
+
+test('구석에 몰린 적은 돌아서서 싸운다', () => {
+    // 물러날 곳이 없는데 도망 상태로 남으면 벽을 보고 떨기만 합니다.
+    // 플레이어가 몰아넣는 선택에 의미가 생기도록 돌아서게 합니다.
+    const world = emptyRoom();
+
+    // 진짜 막다른 곳을 만듭니다. 방 모서리만으로는 부족합니다.
+    // 벽을 따라 옆으로 빠져나갈 수 있어 도망칠 길이 남기 때문입니다.
+    // 아래쪽 칸까지 막아 출구가 플레이어 쪽 하나만 남게 합니다.
+    const cornerX = 1, cornerY = 1;
+    world.map[cornerY + 1][cornerX] = C.TILE_IDS.WALL;
+
+    world.player.x = (cornerX + 1) * C.TILE_SIZE + C.TILE_SIZE / 2;
+    world.player.y = cornerY * C.TILE_SIZE + C.TILE_SIZE / 2;
+
+    const enemy = placeEnemy(world, {
+        hp: 20, maxHp: 100, fleeBelow: 0.35, speed: 0.5,
+        x: cornerX * C.TILE_SIZE + C.TILE_SIZE / 2,
+        y: cornerY * C.TILE_SIZE + C.TILE_SIZE / 2,
+        state: 'flee',
+    });
+
+    run(20);
+
+    assert.equal(enemy.state, 'chase', '몰린 적이 돌아서지 않았습니다');
+});
+
+// --- 데이터 ------------------------------------------------------------------
+
+test('겁을 먹는 몬스터의 기준값이 온전하다', () => {
+    for (const [id, monster] of Object.entries(M.MONSTERS)) {
+        if (monster.fleeBelow === undefined) continue;
+        assert.ok(monster.fleeBelow > 0 && monster.fleeBelow < 1,
+            `${id} 의 fleeBelow 가 0과 1 사이가 아닙니다: ${monster.fleeBelow}`);
+    }
+});
+
+test('몰린 적이 도망과 추격을 매 스텝 오가지 않는다', () => {
+    // 돌아서기만 하고 끝내면 다음 스텝에 다시 겁을 먹습니다.
+    // 그러면 공격이 한 스텝 걸러 한 번씩만 나가 반쯤 얼어붙은 것처럼 보입니다.
+    const world = emptyRoom();
+    const cornerX = 1, cornerY = 1;
+    world.map[cornerY + 1][cornerX] = C.TILE_IDS.WALL;
+    world.player.x = (cornerX + 1) * C.TILE_SIZE + C.TILE_SIZE / 2;
+    world.player.y = cornerY * C.TILE_SIZE + C.TILE_SIZE / 2;
+
+    const enemy = placeEnemy(world, {
+        hp: 20, maxHp: 100, fleeBelow: 0.35, speed: 0.5,
+        x: cornerX * C.TILE_SIZE + C.TILE_SIZE / 2,
+        y: cornerY * C.TILE_SIZE + C.TILE_SIZE / 2,
+        state: 'flee',
+    });
+
+    const seen = [];
+    for (let i = 0; i < 20; i++) {
+        gameLogic.update(C.SIMULATION_STEP_MS);
+        seen.push(enemy.state);
+    }
+
+    const flips = seen.filter((s, i) => i > 0 && s !== seen[i - 1]).length;
+    assert.ok(flips <= 1, `몰린 적의 상태가 ${flips}번 뒤집혔습니다: ${seen.join(',')}`);
+});
+
+test('겁을 먹는 몬스터가 실제로 존재한다', () => {
+    // 이 검사가 없으면 monsters.js 에서 fleeBelow 를 전부 지워도 아무도 눈치채지 못합니다.
+    // 도망 상태를 구현해 두고 정작 아무도 도망치지 않는 상태가 됩니다.
+    const scared = Object.entries(M.MONSTERS).filter(([, m]) => m.fleeBelow !== undefined);
+    assert.ok(scared.length >= 3,
+        `겁을 먹는 몬스터가 ${scared.length}종뿐입니다. 도망 상태가 사실상 죽은 코드입니다.`);
+
+    // 언데드와 구조물은 겁을 먹지 않아야 합니다. 도망치면 어색합니다.
+    for (const id of ['zombie', 'skeleton', 'gargoyle']) {
+        if (!M.MONSTERS[id]) continue;
+        assert.equal(M.MONSTERS[id].fleeBelow, undefined,
+            `${id} 은(는) 겁을 먹지 않아야 합니다`);
+    }
+});
