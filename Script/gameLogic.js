@@ -89,8 +89,15 @@ function processQueuedInput() {
     if (lookDelta !== 0) world.player.angle += lookDelta;
 
     drainActionQueue(action => {
+        // 소지품 사용은 어느 칸인지가 함께 필요해 객체로 들어옵니다.
+        if (typeof action === 'object') {
+            if (action.type === 'useSlot') A.useInventorySlot(action.slotIndex);
+            return;
+        }
+
         if (action === INPUT_ACTIONS.ATTACK) attack();
         else if (action === INPUT_ACTIONS.INTERACT) interactWithWorld();
+        else if (action === INPUT_ACTIONS.TOGGLE_INVENTORY) runtime.isInventoryOpen = !runtime.isInventoryOpen;
     });
 }
 

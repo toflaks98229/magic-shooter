@@ -1,93 +1,215 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>2.5D 레트로 FPS (로그라이크 버전)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>마법소녀 슈팅</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        /*
+         * 화면 구성은 Dungeon Crawl Stone Soup 을 따릅니다.
+         * 왼쪽에 게임 화면, 오른쪽에 상태 패널, 소지품은 접었다 펼치는 창입니다.
+         */
+        :root {
+            --panel-width: 320px;
+            --bg: #0b0b0d;
+            --panel-bg: #141416;
+            --border: #3a3a40;
+            --text: #c8c8c0;
+            --dim: #74747c;
+            --hp: #a83232;
+            --hp-bg: #3a1414;
+            --mp: #2f6fa8;
+            --mp-bg: #14243a;
+            --highlight: #d8c070;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            background-color: #000;
-            color: #fff;
+            background: var(--bg);
+            color: var(--text);
             margin: 0;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
             font-family: 'VT323', monospace;
+            font-size: 20px;
         }
+
         #game-container {
             position: relative;
+            display: flex;
             width: 100vw;
             height: 100vh;
-            max-width: 100vw;
-            max-height: 100vh;
+        }
+
+        /* --- 게임 화면 ------------------------------------------------------ */
+
+        #viewport {
+            position: relative;
+            flex: 1;
+            min-width: 0;
             overflow: hidden;
         }
+
         canvas {
             display: block;
             width: 100%;
             height: 100%;
-            background-color: #111;
+            background: #000;
             cursor: crosshair;
             image-rendering: pixelated;
-            image-rendering: -moz-crisp-edges;
             image-rendering: crisp-edges;
         }
-        #hud {
+
+        /* --- 상태 패널 (DCSS 우측 패널) -------------------------------------- */
+
+        #status-panel {
+            width: var(--panel-width);
+            flex: 0 0 var(--panel-width);
+            background: var(--panel-bg);
+            border-left: 2px solid var(--border);
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .panel-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+            line-height: 1.15;
+        }
+
+        .panel-label { color: var(--dim); }
+
+        /* DCSS 의 Health / Magic 막대 */
+        .stat-bar {
+            position: relative;
+            height: 18px;
+            border: 1px solid var(--border);
+            background: #000;
+            margin-top: 2px;
+        }
+        .stat-bar-fill {
             position: absolute;
-            bottom: 0;
-            left: 0;
+            inset: 0 auto 0 0;
             width: 100%;
-            height: 80px;
-            padding: 0 20px;
-            box-sizing: border-box;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAQSURBVBhXY2BgYGD4//8/AymsAAP58/v3AAAAAElFTkSuQmCC') repeat-x bottom;
-            background-color: #1c1c1c;
-            border-top: 4px solid #5a5a5a;
+            transition: width 0.12s linear;
+        }
+        .stat-bar-text {
+            position: relative;
+            display: block;
+            text-align: center;
+            line-height: 16px;
+            text-shadow: 1px 1px 0 #000;
+        }
+        #hp-bar-fill { background: var(--hp); }
+        #hp-bar { background: var(--hp-bg); }
+        #mp-bar-fill { background: var(--mp); }
+        #mp-bar { background: var(--mp-bg); }
+
+        #status-face {
+            width: 52px;
+            height: 58px;
+            background: #000;
+            border: 2px solid var(--border);
+            flex: 0 0 auto;
+            image-rendering: pixelated;
+            padding: 2px;
+        }
+        #status-face-img { width: 100%; height: 100%; object-fit: contain; }
+
+        .panel-divider {
+            border-top: 1px solid var(--border);
+            margin: 2px 0;
+        }
+
+        #buff-list { color: var(--highlight); min-height: 1.2em; }
+
+        /* --- 소지품 창 ------------------------------------------------------ */
+
+        #inventory {
+            border: 1px solid var(--border);
+            background: #101012;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            flex: 1;
+        }
+
+        #inventory-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 32px;
-            color: #ff0000;
+            padding: 3px 8px;
+            background: #1c1c20;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            user-select: none;
         }
-        .hud-panel {
+        #inventory-header:hover { background: #26262c; }
+        #inventory-toggle { color: var(--dim); }
+
+        #inventory-body {
+            overflow-y: auto;
+            padding: 6px 8px;
+            flex: 1;
+        }
+        /* 접힌 상태에서는 제목 줄만 남습니다. */
+        #inventory.collapsed { flex: 0 0 auto; }
+        #inventory.collapsed #inventory-body { display: none; }
+
+        .inv-category {
+            color: var(--dim);
+            margin-top: 4px;
+        }
+        .inv-category:first-child { margin-top: 0; }
+
+        .inv-item {
             display: flex;
-            align-items: center;
-            gap: 20px;
-            width: 33%;
+            gap: 6px;
+            padding-left: 4px;
         }
-        .hud-panel.right {
-            justify-content: flex-end;
-        }
-        .hud-panel.center {
-            justify-content: center;
-        }
-        
-        #status-face {
-            width: 60px;
-            height: 68px;
-            background-color: #000;
-            border: 3px solid #555;
+        .inv-letter { color: var(--highlight); width: 1.6em; }
+        .inv-empty { color: var(--dim); }
+
+        /* --- 알림 ----------------------------------------------------------- */
+
+        #message-log {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(680px, 88%);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            image-rendering: pixelated;
-            padding: 2px;
-            box-sizing: border-box;
+            gap: 3px;
+            pointer-events: none;
+            text-shadow: 2px 2px 0 #000;
+            font-size: 24px;
+            z-index: 50;
         }
-        #status-face-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            image-rendering: pixelated;
+        .message-line { animation: message-fade 6s forwards; }
+        @keyframes message-fade {
+            0% { opacity: 0; transform: translateY(-6px); }
+            8% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
         }
-       
+
+        /* --- 무기와 화면 효과 ------------------------------------------------ */
+
         #weapon-view {
             position: absolute;
-            bottom: 80px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             width: 320px;
@@ -106,23 +228,24 @@
             transition: transform 0.05s ease-out, bottom 0.05s ease-out;
             transform-origin: bottom center;
         }
-        #weapon-sprite.attacking {
-            transform: translateX(10px) translateY(-10px) scale(1.05);
+        #weapon-sprite.attacking { transform: translateX(10px) translateY(-10px) scale(1.05); }
+        #weapon-sprite.swapping-out { animation: swap-out 0.15s forwards ease-in; }
+        #weapon-sprite.swapping-in { animation: swap-in 0.15s forwards ease-out; }
+        @keyframes swap-out { from { bottom: 0; } to { bottom: -250px; } }
+        @keyframes swap-in { from { bottom: -250px; } to { bottom: 0; } }
+
+        .blood-splatter {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.5) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.4) 0%, transparent 25%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease-out;
         }
-        #weapon-sprite.swapping-out {
-             animation: swap-out 0.15s forwards ease-in;
-        }
-        #weapon-sprite.swapping-in {
-             animation: swap-in 0.15s forwards ease-out;
-        }
-        @keyframes swap-out {
-            from { bottom: 0; }
-            to { bottom: -250px; }
-        }
-        @keyframes swap-in {
-            from { bottom: -250px; }
-            to { bottom: 0; }
-        }
+
+        /* --- 모바일 조작 ----------------------------------------------------- */
 
         #mobile-controls {
             position: absolute;
@@ -134,13 +257,12 @@
             justify-content: space-between;
             align-items: center;
             user-select: none;
-            -webkit-user-select: none;
         }
         #move-stick-zone {
             position: relative;
             width: 150px;
             height: 150px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.2);
         }
@@ -148,94 +270,39 @@
             position: absolute;
             width: 70px;
             height: 70px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
             top: 40px;
             left: 40px;
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.45);
         }
-        #action-buttons {
-            display: flex;
-            gap: 20px;
-        }
+        #action-buttons { display: flex; gap: 20px; }
         .action-btn {
             width: 90px;
             height: 90px;
-            background: rgba(255, 0, 0, 0.4);
+            background: rgba(168, 50, 50, 0.35);
             border-radius: 50%;
-            border: 2px solid rgba(255, 0, 0, 0.6);
+            border: 2px solid rgba(168, 50, 50, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .action-btn svg {
-            width: 50px;
-            height: 50px;
-            fill: white;
-        }
+        .action-btn svg { width: 50px; height: 50px; fill: #fff; }
         #look-zone {
             position: absolute;
             top: 0;
             left: 50%;
             width: 50%;
-            height: calc(100vh - 200px);
+            height: calc(100% - 200px);
             display: none;
         }
-        .muzzle-flash {
+
+        /* --- 타이틀 / 게임 오버 (DCSS 메뉴 구성) ------------------------------ */
+
+        .fullscreen-menu {
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle, rgba(255,255,150,0.8) 0%, rgba(255,165,0,0) 60%);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.05s ease-out;
-        }
-        #message-log {
-            position: absolute;
-            top: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: min(720px, 90vw);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            pointer-events: none;
-            text-shadow: 2px 2px 0 #000;
-            font-size: 26px;
-            z-index: 50;
-        }
-        .message-line {
-            animation: message-fade 6s forwards;
-        }
-        @keyframes message-fade {
-            0%   { opacity: 0; transform: translateY(-8px); }
-            8%   { opacity: 1; transform: translateY(0); }
-            80%  { opacity: 1; }
-            100% { opacity: 0; }
-        }
-        .blood-splatter {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: radial-gradient(circle at 20% 20%, rgba(255,0,0,0.5) 0%, transparent 30%),
-                              radial-gradient(circle at 80% 70%, rgba(255,0,0,0.4) 0%, transparent 25%);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease-out;
-        }
-        #game-over-screen, #start-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
+            inset: 0;
+            background: #050506;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -243,81 +310,177 @@
             text-align: center;
             z-index: 100;
         }
-        #game-over-screen h1, #start-screen h1 {
-            font-size: 80px;
-            color: #ff0000;
+
+        .menu-title {
+            font-size: 76px;
+            line-height: 1;
+            color: #e0a83a;
+            text-shadow: 3px 3px 0 #000, 0 0 24px rgba(224, 168, 58, 0.28);
+            letter-spacing: 3px;
             margin: 0;
         }
-        #game-over-screen p, #start-screen p {
+        .menu-subtitle {
             font-size: 30px;
-            margin: 20px 0;
+            color: #8b8b93;
+            letter-spacing: 8px;
+            margin: 4px 0 0;
         }
-        .start-btn {
+        .menu-rule {
+            width: min(520px, 70%);
+            border-top: 2px solid #4a4a52;
+            margin: 22px 0 26px;
+        }
+
+        /* DCSS 의 (a) 항목 나열식 메뉴 */
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: min(420px, 76%);
+        }
+        .menu-item {
             font-family: 'VT323', monospace;
-            font-size: 40px;
-            padding: 10px 30px;
-            background: #ff0000;
-            border: none;
-            color: white;
+            font-size: 30px;
+            text-align: left;
+            padding: 5px 16px;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text);
             cursor: pointer;
-            text-transform: uppercase;
         }
-        .start-btn:disabled {
-            background: #880000;
-            cursor: not-allowed;
+        .menu-item:hover:not(:disabled),
+        .menu-item:focus-visible {
+            background: #1e1e24;
+            border-color: var(--border);
+            color: #fff;
+            outline: none;
         }
+        .menu-item:disabled { color: var(--dim); cursor: progress; }
+        .menu-key { color: var(--highlight); }
+
+        .menu-footer {
+            margin-top: 28px;
+            color: var(--dim);
+            font-size: 22px;
+            line-height: 1.5;
+        }
+        .menu-note { color: #6a6a72; font-size: 19px; margin-top: 14px; }
     </style>
 </head>
+
 <body>
     <div id="game-container">
-        <canvas id="game-canvas"></canvas>
-        <div id="hud">
-             <div class="hud-panel left">
-                <div>AMMO: <span id="player-ammo">50</span></div>
+        <!-- 게임 화면 -->
+        <div id="viewport">
+            <canvas id="game-canvas"></canvas>
+            <div class="blood-splatter"></div>
+            <div id="message-log"></div>
+
+            <div id="weapon-view">
+                <img id="weapon-sprite" src="" alt="weapon" />
             </div>
-            <div class="hud-panel center">
-                <div id="status-face">
-                    <img id="status-face-img" src="" alt="status"/>
+
+            <div id="look-zone"></div>
+            <div id="mobile-controls">
+                <div id="move-stick-zone">
+                    <div id="move-stick"></div>
                 </div>
-            </div>
-            <div class="hud-panel right">
-                <div>HP: <span id="player-hp">100</span></div>
-                <div>FLOOR: <span id="floor-count">D:1</span></div>
-                <div>RUNES: <span id="rune-count">0</span></div>
-                <div>ENEMIES: <span id="enemy-count">0</span></div>
-            </div>
-        </div>
-        <!-- <div class="muzzle-flash"></div> 이 줄을 삭제합니다. -->
-        <div class="blood-splatter"></div>
-        <div id="message-log"></div>
-        <div id="weapon-view">
-            <img id="weapon-sprite" src="" alt="weapon"/>
-        </div>
-        
-        <div id="look-zone"></div>
-        <div id="mobile-controls">
-            <div id="move-stick-zone">
-                <div id="move-stick"></div>
-            </div>
-            <div id="action-buttons">
-                <div id="shoot-btn" class="action-btn">
-                    <svg viewBox="0 0 24 24"><path d="M19.1,6.29,17.71,4.9,12,10.59,6.29,4.9,4.9,6.29,10.59,12,4.9,17.71,6.29,19.1,12,13.41,17.71,19.1,19.1,17.71,13.41,12Z"/></svg>
+                <div id="action-buttons">
+                    <div id="shoot-btn" class="action-btn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19.1,6.29,17.71,4.9,12,10.59,6.29,4.9,4.9,6.29,10.59,12,4.9,17.71,6.29,19.1,12,13.41,17.71,19.1,19.1,17.71,13.41,12Z" />
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="start-screen">
-            <h1>CYBER-HELL</h1>
-            <p>WASD + Mouse | Touch Controls</p>
-            <button class="start-btn" id="start-game-btn">START</button>
+        <!-- 상태 패널 -->
+        <aside id="status-panel">
+            <div class="panel-row">
+                <div id="status-face">
+                    <img id="status-face-img" src="" alt="상태" />
+                </div>
+                <div style="flex:1">
+                    <div class="panel-row">
+                        <span class="panel-label">Health</span>
+                        <span id="player-hp">100/100</span>
+                    </div>
+                    <div class="stat-bar" id="hp-bar">
+                        <div class="stat-bar-fill" id="hp-bar-fill"></div>
+                    </div>
+                    <div class="panel-row" style="margin-top:6px">
+                        <span class="panel-label">Magic</span>
+                        <span id="player-ammo">50/100</span>
+                    </div>
+                    <div class="stat-bar" id="mp-bar">
+                        <div class="stat-bar-fill" id="mp-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-divider"></div>
+
+            <div class="panel-row">
+                <span class="panel-label">Place</span><span id="floor-count">D:1</span>
+            </div>
+            <div class="panel-row">
+                <span class="panel-label">Runes</span><span id="rune-count">0</span>
+            </div>
+            <div class="panel-row">
+                <span class="panel-label">Enemies</span><span id="enemy-count">0</span>
+            </div>
+            <div class="panel-row">
+                <span class="panel-label">Time</span><span id="game-time">0.0</span>
+            </div>
+
+            <div class="panel-divider"></div>
+            <div id="buff-list"></div>
+
+            <!-- 소지품: 제목 줄을 눌러 접고 펼칩니다 -->
+            <div id="inventory">
+                <div id="inventory-header">
+                    <span id="inventory-title">소지품 0/20칸</span>
+                    <span id="inventory-toggle">[-]</span>
+                </div>
+                <div id="inventory-body">
+                    <div class="inv-empty">가진 것이 없다.</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 타이틀 -->
+        <div id="start-screen" class="fullscreen-menu">
+            <h1 class="menu-title">마법소녀 슈팅</h1>
+            <p class="menu-subtitle">DUNGEON EXPEDITION</p>
+            <div class="menu-rule"></div>
+
+            <div class="menu-list">
+                <button class="menu-item" id="start-game-btn"><span class="menu-key">(a)</span> 새 탐험 시작</button>
+            </div>
+
+            <div class="menu-footer" id="start-help">
+                WASD 이동 · 마우스 조준 · 클릭 공격<br>
+                Space 상호작용 · I 소지품 · 1~9 물약 사용
+            </div>
+            <div class="menu-note">타일은 공개 도메인 타일셋 RLTiles 를 기반으로 한 Dungeon Crawl Stone Soup 의 것입니다.</div>
         </div>
-        <div id="game-over-screen" style="display: none;">
-            <h1>GAME OVER</h1>
-            <p>You reached floor <span id="final-floor">0</span>.</p>
-            <button class="start-btn" id="restart-game-btn">RESTART</button>
+
+        <!-- 게임 오버 -->
+        <div id="game-over-screen" class="fullscreen-menu" style="display:none">
+            <h1 class="menu-title" style="color:#a83232">탐험 종료</h1>
+            <p class="menu-subtitle">YOU HAVE DIED</p>
+            <div class="menu-rule"></div>
+            <div class="menu-footer">
+                도달한 곳 <span id="final-floor">D:1</span>
+            </div>
+            <div class="menu-list" style="margin-top:24px">
+                <button class="menu-item" id="restart-game-btn"><span class="menu-key">(a)</span> 다시 시작</button>
+            </div>
         </div>
     </div>
+
     <script type="module" src="Script/main.js"></script>
 </body>
-</html>
 
+</html>

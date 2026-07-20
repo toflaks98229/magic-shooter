@@ -163,7 +163,7 @@ function startGame() {
  */
 function gameOver() {
     A.setGameRunning(false);
-    dom.finalFloorEl.textContent = world.floor;
+    dom.finalFloorEl.textContent = formatLocation(world.branch, world.floor);
     dom.gameOverScreen.style.display = 'flex';
     document.exitPointerLock(); // 마우스 포인터 잠금 해제
 }

@@ -12,6 +12,7 @@ import { world, createWorld, setWorld } from './world.js';
 import { getBranch, childBranchesOf, absoluteDepth, rollBranchSelection } from './branches.js';
 import { rollPortalForFloor } from './portals.js';
 import { getItem, rollItem, DROP_CHANCE, BUFF_MODIFIERS } from './items.js';
+import { addToInventory, takeFromInventory } from './inventory.js';
 import { runtime, setDynamicLight } from './runtime.js';
 import { emit, EVENTS } from './events.js';
 
@@ -217,10 +218,34 @@ export function pickUpItemAt(index) {
     const item = world.items[index];
     const definition = getItem(item.itemId);
 
-    if (definition) applyItemEffect(definition);
+    // 소지품이 가득 차면 줍지 않고 바닥에 그대로 둡니다.
+    // 조용히 사라지면 무엇을 놓쳤는지 알 수 없습니다.
+    if (!addToInventory(world.inventory, item.itemId)) {
+        emit(EVENTS.INVENTORY_FULL, { item, definition });
+        return false;
+    }
 
     emit(EVENTS.ITEM_PICKED_UP, { item, definition });
     world.items.splice(index, 1);
+    return true;
+}
+
+/**
+ * 소지품의 한 칸을 사용합니다.
+ * @param {number} index - 칸 번호
+ * @returns {boolean} 실제로 썼으면 true
+ */
+export function useInventorySlot(index) {
+    const slot = world.inventory[index];
+    if (!slot) return false;
+
+    const definition = getItem(slot.itemId);
+    if (!definition) return false;
+
+    takeFromInventory(world.inventory, index);
+    applyItemEffect(definition);
+    emit(EVENTS.ITEM_USED, { itemId: slot.itemId, definition });
+    return true;
 }
 
 /**
@@ -311,7 +336,7 @@ export function reachExit() {
  * @description 던전을 옮겨 다녀도 따라다니는 항목들.
  * 서브 던전에서 다치고 나왔는데 멀쩡해지면 안 되므로 복원 대상이 아닙니다.
  */
-const CARRIED_FORWARD = ['runes', 'time', 'branchEntrances', 'portalsUsed', 'buffs'];
+const CARRIED_FORWARD = ['runes', 'time', 'branchEntrances', 'portalsUsed', 'buffs', 'inventory'];
 
 /**
  * @description 플레이어 상태 중 '어디에 서 있는가'에 해당하는 항목.

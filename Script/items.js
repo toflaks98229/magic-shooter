@@ -4,7 +4,8 @@
  * 이전에는 체력과 탄약 두 가지뿐이라, 바닥에 떨어진 것을 보고 고민할 일이 없었습니다.
  * 지금 주울지 아껴둘지 판단할 거리를 만들려면 즉시 효과와 지속 효과가 함께 있어야 합니다.
  *
- *   effect     - 획득 시 적용할 효과. items.js 의 ITEM_EFFECTS 에 같은 이름이 있어야 합니다.
+ *   category   - 소지품 창에서 묶일 분류 (inventory.js 의 CATEGORIES)
+ *   effect     - 사용 시 적용할 효과. items.js 의 ITEM_EFFECTS 에 같은 이름이 있어야 합니다.
  *   tier       - 등장하기 시작하는 대략적인 깊이
  *   weight     - 같은 깊이의 후보들 사이에서의 상대 등장 빈도
  *   durationMs - 지속 효과의 유지 시간 (즉시 효과에는 없습니다)
@@ -17,34 +18,34 @@
 export const ITEMS = {
     // --- 즉시 효과 ---------------------------------------------------------
     healing: {
-        name: '치유의 물약', effect: 'heal', amount: 30,
+        name: '치유의 물약', category: 'potion', effect: 'heal', amount: 30,
         tier: 1, weight: 30, size: 15, color: '#c0392b',
         spriteKey: 'item_health',
     },
     magic: {
-        name: '마력의 물약', effect: 'restoreAmmo', amount: 25,
+        name: '마력의 물약', category: 'potion', effect: 'restoreAmmo', amount: 25,
         tier: 1, weight: 30, size: 15, color: '#2980b9',
         spriteKey: 'item_ammo',
     },
     greaterHealing: {
-        name: '완전 치유의 물약', effect: 'heal', amount: 80,
+        name: '완전 치유의 물약', category: 'potion', effect: 'heal', amount: 80,
         tier: 8, weight: 8, size: 16, color: '#e74c3c',
         spriteKey: 'item_greater_health',
     },
 
     // --- 지속 효과 ---------------------------------------------------------
     might: {
-        name: '힘의 물약', effect: 'might', durationMs: 20_000,
+        name: '힘의 물약', category: 'potion', effect: 'might', durationMs: 20_000,
         tier: 3, weight: 10, size: 15, color: '#c0392b',
         spriteKey: 'item_might',
     },
     haste: {
-        name: '가속의 물약', effect: 'haste', durationMs: 15_000,
+        name: '가속의 물약', category: 'potion', effect: 'haste', durationMs: 15_000,
         tier: 5, weight: 10, size: 15, color: '#f39c12',
         spriteKey: 'item_haste',
     },
     resistance: {
-        name: '보호의 물약', effect: 'resistance', durationMs: 25_000,
+        name: '보호의 물약', category: 'potion', effect: 'resistance', durationMs: 25_000,
         tier: 7, weight: 8, size: 15, color: '#16a085',
         spriteKey: 'item_resistance',
     },
@@ -52,12 +53,12 @@ export const ITEMS = {
     // --- 영구 강화 ---------------------------------------------------------
     // 던전 깊은 곳까지 내려갈 동기를 주는 보상입니다.
     vitality: {
-        name: '생명의 물약', effect: 'maxHp', amount: 15,
+        name: '생명의 물약', category: 'potion', effect: 'maxHp', amount: 15,
         tier: 10, weight: 4, size: 16, color: '#27ae60',
         spriteKey: 'item_vitality',
     },
     capacity: {
-        name: '마력 확장의 물약', effect: 'maxAmmo', amount: 20,
+        name: '마력 확장의 물약', category: 'potion', effect: 'maxAmmo', amount: 20,
         tier: 10, weight: 4, size: 16, color: '#8e44ad',
         spriteKey: 'item_capacity',
     },

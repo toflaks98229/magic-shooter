@@ -33,6 +33,9 @@ export const runtime = {
     /** @description 무기 교체 애니메이션이 진행 중인지 여부 */
     isSwappingWeapon: false,
 
+    /** @description 소지품 창이 펼쳐져 있는지 여부. 접어두면 요약만 보입니다. */
+    isInventoryOpen: false,
+
     /** @description 총 발사 등 동적인 광원 효과의 상태 */
     dynamicLight: { active: false, x: 0, y: 0, intensity: 0, falloff: 0.001 },
 };

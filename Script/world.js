@@ -69,6 +69,12 @@ export function createWorld() {
         runes: [],
 
         /**
+         * @description 소지품. [{ itemId, count }]
+         * 주운 것은 여기에 들어가고, 언제 쓸지는 플레이어가 정합니다.
+         */
+        inventory: [],
+
+        /**
          * @description 현재 걸려 있는 지속 효과. [{ effect, expiresAt }]
          * expiresAt 은 게임 내부 시간 기준이라 세이브를 불러와도 남은 시간이 이어집니다.
          */

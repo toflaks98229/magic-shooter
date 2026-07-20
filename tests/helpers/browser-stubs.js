@@ -96,7 +96,15 @@ export function createStubElement(id = '?') {
             add(c) { this._set.add(c); },
             remove(c) { this._set.delete(c); },
             contains(c) { return this._set.has(c); },
+            toggle(c, force) {
+                const on = force === undefined ? !this._set.has(c) : force;
+                if (on) this._set.add(c); else this._set.delete(c);
+                return on;
+            },
         },
+        children: [],
+        append(...nodes) { this.children.push(...nodes); },
+        replaceChildren(...nodes) { this.children = nodes; },
         addEventListener(type, fn) { (handlers[type] ||= []).push(fn); },
         removeEventListener(type, fn) {
             const list = handlers[type];
@@ -148,6 +156,8 @@ export function installBrowserStubs() {
     globalThis.document = {
         createElement(tag) {
             const el = createStubElement(`<${tag}>`);
+            el.className = '';
+            el.remove = () => { };
             if (tag === 'canvas') {
                 el.width = 0;
                 el.height = 0;

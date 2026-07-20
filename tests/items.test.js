@@ -33,10 +33,18 @@ function emptyRoom() {
     worldModule.world.player.y = 10 * C.TILE_SIZE;
 }
 
-/** 플레이어 발밑에 아이템을 놓고 한 스텝 진행해 줍게 합니다. */
+/** 플레이어 발밑에 아이템을 놓고 한 스텝 진행해 소지품에 넣습니다. */
 function pickUp(itemId) {
     A.dropItem(itemId, worldModule.world.player.x, worldModule.world.player.y);
     gameLogic.update(C.SIMULATION_STEP_MS);
+}
+
+/** 주운 뒤 곧바로 사용합니다. 예전처럼 밟자마자 효과가 나는지 보는 테스트용입니다. */
+function pickUpAndUse(itemId) {
+    pickUp(itemId);
+    const index = worldModule.world.inventory.findIndex(slot => slot.itemId === itemId);
+    assert.ok(index >= 0, `${itemId} 가 소지품에 들어가지 않았습니다`);
+    A.useInventorySlot(index);
 }
 
 // --- 정의 -------------------------------------------------------------------
@@ -87,10 +95,14 @@ test('등장 빈도가 반영된다', () => {
 test('치유의 물약이 체력을 회복시킨다', () => {
     emptyRoom();
     worldModule.world.player.hp = 40;
-    pickUp('healing');
 
-    assert.equal(worldModule.world.player.hp, 70);
+    pickUp('healing');
     assert.equal(worldModule.world.items.length, 0, '주운 아이템이 바닥에 남아 있습니다');
+    assert.equal(worldModule.world.player.hp, 40, '주웠을 뿐인데 효과가 났습니다');
+
+    A.useInventorySlot(0);
+    assert.equal(worldModule.world.player.hp, 70);
+    assert.equal(worldModule.world.inventory.length, 0, '쓴 물약이 소지품에 남아 있습니다');
 });
 
 test('영구 강화는 최대치를 올리고 그만큼 채워준다', () => {
@@ -98,7 +110,7 @@ test('영구 강화는 최대치를 올리고 그만큼 채워준다', () => {
     const beforeMax = worldModule.world.player.maxHp;
     worldModule.world.player.hp = 50;
 
-    pickUp('vitality');
+    pickUpAndUse('vitality');
 
     assert.equal(worldModule.world.player.maxHp, beforeMax + 15);
     assert.equal(worldModule.world.player.hp, 65, '올려놓고 비어 있으면 보상 같지 않습니다');

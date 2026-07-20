@@ -29,8 +29,12 @@ export const EVENTS = {
     /** 적이 사망함. detail: { enemy } */
     ENEMY_DIED: 'enemy:died',
 
-    /** 아이템을 획득함. detail: { item } */
+    /** 아이템을 주워 소지품에 넣음. detail: { item, definition } */
     ITEM_PICKED_UP: 'item:pickedUp',
+    /** 소지품이 가득 차 줍지 못함. detail: { item, definition } */
+    INVENTORY_FULL: 'inventory:full',
+    /** 소지품의 아이템을 사용함. detail: { itemId, definition } */
+    ITEM_USED: 'item:used',
     /** 문이 열림. detail: { tileX, tileY } */
     DOOR_OPENED: 'door:opened',
     /** 출구에 도달함. detail: { floor } */

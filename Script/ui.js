@@ -13,6 +13,8 @@ import { runtime } from './runtime.js';
 import { assets } from './assets.js';
 import { dom } from './dom.js';
 import { formatLocation } from './branches.js';
+import { groupInventory, inventorySummary, describeStack, INVENTORY_SLOTS } from './inventory.js';
+import { BUFF_MODIFIERS } from './items.js';
 import { setWeapon } from './actions.js';
 import { on, EVENTS } from './events.js';
 
@@ -26,6 +28,11 @@ export function registerUiHandlers() {
     on(EVENTS.PLAYER_DAMAGED, showHitReaction);
     on(EVENTS.WEAPON_FIRED, showAttackEffect);
     on(EVENTS.WEAPON_CHANGED, ({ to }) => playWeaponSwapAnimation(to));
+
+    // 소지품 창은 제목 줄을 눌러서도 접고 펼 수 있습니다.
+    dom.inventoryHeaderEl.addEventListener('click', () => {
+        runtime.isInventoryOpen = !runtime.isInventoryOpen;
+    });
 }
 
 // --- 외부 공개 함수 (Public Methods) ---
@@ -35,15 +42,108 @@ export function registerUiHandlers() {
  * 매 프레임 호출되므로, 값이 실제로 바뀐 경우에만 DOM에 쓰도록 더티 체크를 합니다.
  */
 export function updateHUD() {
-    setText(dom.playerHpEl, Math.ceil(world.player.hp));
-    setText(dom.playerAmmoEl, world.player.ammo);
+    const player = world.player;
+
+    // DCSS 처럼 현재값/최대값과 막대를 함께 보여줍니다.
+    setText(dom.playerHpEl, `${Math.ceil(player.hp)}/${player.maxHp}`);
+    setText(dom.playerAmmoEl, `${player.ammo}/${player.maxAmmo}`);
+    setBarWidth(dom.hpBarFillEl, player.hp / player.maxHp);
+    setBarWidth(dom.mpBarFillEl, player.ammo / player.maxAmmo);
+
     setText(dom.enemyCountEl, world.enemies.length);
     // 가지 안에서의 층만 보여주면 짐승굴 2층인지 메인 2층인지 알 수 없으므로
     // DCSS 관례대로 '가지:층' 형태로 표시합니다.
     setText(dom.floorCountEl, formatLocation(world.branch, world.floor));
     setText(dom.runeCountEl, world.runes.length);
+    setText(dom.gameTimeEl, (world.time / 1000).toFixed(1));
+
+    updateBuffList();
+    updateInventory();
     updateStatusFace(); // 상태 얼굴 업데이트
     updateWeaponSprite(); // 무기 스프라이트 업데이트
+}
+
+/**
+ * 막대의 채워진 길이를 설정합니다.
+ * @param {HTMLElement} element - 막대 요소
+ * @param {number} ratio - 0~1 비율
+ */
+function setBarWidth(element, ratio) {
+    const percent = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+    if (element.style.width !== percent) element.style.width = percent;
+}
+
+/** @description 지속 효과의 표시 이름 */
+const BUFF_LABELS = { might: '힘', haste: '가속', resistance: '보호' };
+
+/**
+ * 걸려 있는 지속 효과와 남은 시간을 보여줍니다.
+ * DCSS 가 상태 이상을 패널에 나열하는 자리를 대신합니다.
+ */
+function updateBuffList() {
+    const text = world.buffs
+        .map(buff => `${BUFF_LABELS[buff.effect] || buff.effect} ${Math.ceil((buff.expiresAt - world.time) / 1000)}s`)
+        .join('  ');
+    setText(dom.buffListEl, text);
+}
+
+/**
+ * 소지품 창을 다시 그립니다.
+ *
+ * 매 프레임 호출되므로, 내용이 실제로 달라졌을 때만 DOM 을 새로 만듭니다.
+ * 그렇지 않으면 초당 수십 번 목록 전체를 다시 만들게 됩니다.
+ */
+function updateInventory() {
+    dom.inventoryEl.classList.toggle('collapsed', !runtime.isInventoryOpen);
+    setText(dom.inventoryToggleEl, runtime.isInventoryOpen ? '[-]' : '[+]');
+    setText(dom.inventoryTitleEl, inventorySummary(world.inventory));
+
+    const signature = world.inventory.map(slot => `${slot.itemId}:${slot.count}`).join(',');
+    if (signature === lastInventorySignature) return;
+    lastInventorySignature = signature;
+
+    dom.inventoryBodyEl.replaceChildren(...buildInventoryRows());
+}
+
+/** @description 마지막으로 그린 소지품 내용. 달라졌을 때만 다시 그립니다. */
+let lastInventorySignature = null;
+
+/**
+ * 소지품 목록의 DOM 요소들을 만듭니다.
+ * @returns {HTMLElement[]} 표시할 줄들
+ */
+function buildInventoryRows() {
+    if (world.inventory.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'inv-empty';
+        empty.textContent = '가진 것이 없다.';
+        return [empty];
+    }
+
+    const rows = [];
+    for (const group of groupInventory(world.inventory)) {
+        const heading = document.createElement('div');
+        heading.className = 'inv-category';
+        heading.textContent = group.name;
+        rows.push(heading);
+
+        for (const entry of group.entries) {
+            const row = document.createElement('div');
+            row.className = 'inv-item';
+
+            const letter = document.createElement('span');
+            letter.className = 'inv-letter';
+            // 첫 아홉 칸은 숫자키로 곧바로 쓸 수 있어 그 숫자를 함께 보여줍니다.
+            letter.textContent = entry.index < 9 ? `${entry.index + 1})` : `${entry.letter})`;
+
+            const label = document.createElement('span');
+            label.textContent = describeStack(entry.itemId, entry.count);
+
+            row.append(letter, label);
+            rows.push(row);
+        }
+    }
+    return rows;
 }
 
 // --- 이벤트 핸들러 (Private) ---

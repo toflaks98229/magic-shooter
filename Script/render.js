@@ -89,11 +89,16 @@ export function render() {
  * 캔버스 크기를 창 크기에 맞게 조절하고 렌더링 버퍼를 재생성합니다.
  */
 export function resizeCanvas() {
-    dom.canvas.width = window.innerWidth;
-    dom.canvas.height = window.innerHeight;
+    // 화면 오른쪽을 상태 패널이 차지하므로 창 크기가 아니라 캔버스가 실제로 차지한
+    // 영역을 기준으로 삼습니다. 창 크기를 쓰면 그림이 패널 밑으로 밀려납니다.
+    const width = dom.canvas.clientWidth || window.innerWidth;
+    const height = dom.canvas.clientHeight || window.innerHeight;
+
+    dom.canvas.width = width;
+    dom.canvas.height = height;
     // 성능을 위해 실제 렌더링은 낮은 해상도로 수행
-    dom.offscreenCanvas.width = window.innerWidth / runtime.renderScale | 0;
-    dom.offscreenCanvas.height = window.innerHeight / runtime.renderScale | 0;
+    dom.offscreenCanvas.width = width / runtime.renderScale | 0;
+    dom.offscreenCanvas.height = height / runtime.renderScale | 0;
 
     // 픽셀 아트 스타일을 유지하기 위해 이미지 스무딩을 비활성화합니다.
     dom.ctx.imageSmoothingEnabled = false;

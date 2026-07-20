@@ -31,7 +31,11 @@ let moveInput = { x: 0, y: 0 };
 export const INPUT_ACTIONS = {
     ATTACK: 'attack',
     INTERACT: 'interact',
+    TOGGLE_INVENTORY: 'toggleInventory',
 };
+
+/** @description 소지품 칸을 곧바로 쓰는 키. 숫자 1~9 가 첫 아홉 칸에 대응합니다. */
+const QUICK_USE_KEYS = ['Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9'];
 
 /**
  * @description 아직 시뮬레이션에 반영되지 않은 단발성 동작들.
@@ -58,9 +62,27 @@ export function setupInputHandlers() {
     document.addEventListener('keydown', e => {
         keys[e.code] = true;
         // --- 새로운 로직: 상호작용 키 (스페이스바) ---
-        if (e.code === 'Space' && runtime.isGameRunning) {
+        if (!runtime.isGameRunning) return;
+
+        if (e.code === 'Space') {
             e.preventDefault(); // 브라우저 기본 동작(페이지 스크롤) 방지
             queueAction(INPUT_ACTIONS.INTERACT);
+            return;
+        }
+
+        // 소지품 창 열고 닫기
+        if (e.code === 'KeyI') {
+            e.preventDefault();
+            queueAction(INPUT_ACTIONS.TOGGLE_INVENTORY);
+            return;
+        }
+
+        // 숫자키로 소지품 칸을 곧바로 사용합니다.
+        // 실시간 전투 중에 창을 열어 고를 여유는 없기 때문입니다.
+        const quickSlot = QUICK_USE_KEYS.indexOf(e.code);
+        if (quickSlot >= 0) {
+            e.preventDefault();
+            queueUseSlot(quickSlot);
         }
     });
     document.addEventListener('keyup', e => { keys[e.code] = false; });
@@ -104,6 +126,15 @@ export function getPlayerMovement() {
     const forward = (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0) - stickY;
     const strafe = (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0) + stickX;
     return { forward, strafe };
+}
+
+/**
+ * 소지품 칸 사용을 큐에 쌓습니다.
+ * @param {number} slotIndex - 사용할 칸 번호
+ */
+function queueUseSlot(slotIndex) {
+    if (actionQueue.length >= C.MAX_QUEUED_INPUTS) return;
+    actionQueue.push({ type: 'useSlot', slotIndex });
 }
 
 /**
