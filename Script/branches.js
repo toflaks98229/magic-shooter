@@ -21,6 +21,8 @@
  *                    넷 다 나오면 룬을 너무 쉽게 모으게 됩니다.
  */
 
+import { PORTAL_DUNGEONS } from './portals.js';
+
 /** @description 게임에 존재하는 모든 던전 가지 */
 export const BRANCHES = {
     D: {
@@ -135,12 +137,15 @@ export const BRANCHES = {
 export const STARTING_BRANCH = 'D';
 
 /**
- * 가지 정보를 조회합니다. 알 수 없는 id는 메인 던전으로 대체합니다.
- * @param {string} id - 가지 식별 기호
- * @returns {object} BRANCHES 항목
+ * 던전 정보를 조회합니다. 정규 가지와 포탈 던전을 모두 찾습니다.
+ *
+ * 포탈 던전도 일단 들어가고 나면 '지금 있는 던전'이라는 점에서 가지와 다르지 않습니다.
+ * 층 표시, 최하층 판정, 복귀 처리가 모두 같은 코드를 타도록 조회를 하나로 둡니다.
+ * @param {string} id - 던전 식별자
+ * @returns {object} 던전 정의. 알 수 없으면 메인 던전.
  */
 export function getBranch(id) {
-    return BRANCHES[id] || BRANCHES[STARTING_BRANCH];
+    return BRANCHES[id] || PORTAL_DUNGEONS[id] || BRANCHES[STARTING_BRANCH];
 }
 
 /**

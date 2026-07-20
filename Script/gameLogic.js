@@ -46,6 +46,7 @@ export function update(deltaTime) {
     handlePlayerMovement(dtFactor);
     updateParticles(dtFactor);
     updateAnimatedWalls(now); // 애니메이션 벽(열리는 문) 상태 업데이트
+    A.closeExpiredPortals();  // 시간이 다 된 포탈 닫기
 
     // 2. 무기 자동 전환 (탄약이 없으면 주먹으로)
     //    교체 연출이 진행 중일 때는 요청하지 않습니다. 실제 무기 변경은
@@ -198,6 +199,12 @@ export function interactWithWorld() {
     if (interaction === 'branch') {
         const entrance = world.entrances.find(e => e.tileX === tileX && e.tileY === tileY);
         if (entrance) A.enterBranch(entrance.branch);
+        return;
+    }
+
+    if (interaction === 'portal') {
+        const portal = world.portals.find(p => p.tileX === tileX && p.tileY === tileY);
+        if (portal) A.enterPortal(portal.id);
         return;
     }
 

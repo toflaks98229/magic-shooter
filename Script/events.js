@@ -44,6 +44,11 @@ export const EVENTS = {
     BRANCH_LEFT: 'branch:left',
     /** 룬을 획득함. detail: { branch, total } */
     RUNE_COLLECTED: 'rune:collected',
+
+    /** 이 층에 포탈이 열림. detail: { id, name, flavour, closesInMs } */
+    PORTAL_APPEARED: 'portal:appeared',
+    /** 포탈이 시간이 다 되어 닫힘. detail: { id, name } */
+    PORTAL_CLOSED: 'portal:closed',
 };
 
 /** @description 실제 디스패치를 담당하는 내부 버스. 외부에 노출하지 않습니다. */

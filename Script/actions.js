@@ -10,6 +10,7 @@
 import * as C from './constants.js';
 import { world, createWorld, setWorld } from './world.js';
 import { getBranch, childBranchesOf, absoluteDepth, rollBranchSelection } from './branches.js';
+import { rollPortalForFloor } from './portals.js';
 import { runtime, setDynamicLight } from './runtime.js';
 import { emit, EVENTS } from './events.js';
 
@@ -208,7 +209,7 @@ export function reachExit() {
  * @description 던전을 옮겨 다녀도 따라다니는 항목들.
  * 서브 던전에서 다치고 나왔는데 멀쩡해지면 안 되므로 복원 대상이 아닙니다.
  */
-const CARRIED_FORWARD = ['runes', 'time', 'branchEntrances'];
+const CARRIED_FORWARD = ['runes', 'time', 'branchEntrances', 'portalsUsed'];
 
 /**
  * @description 플레이어 상태 중 '어디에 서 있는가'에 해당하는 항목.
@@ -245,6 +246,8 @@ export function enterBranch(branchId) {
     next.branch = branch.id;
     next.floor = 1;
     next.parentStack = stack;
+    // 포탈은 위치가 고정되어 있지 않으므로 들어온 깊이를 기억해 둡니다.
+    next.portalDangerLevel = branch.isPortal ? currentDangerLevel() : null;
 
     setWorld(next);
     emit(EVENTS.BRANCH_ENTERED, { branch: branch.id, name: branch.name, depth: stack.length });
@@ -316,10 +319,89 @@ export function collectRune(branchId) {
     emit(EVENTS.RUNE_COLLECTED, { branch: branchId, total: world.runes.length });
 }
 
+// --- 포탈 던전 --------------------------------------------------------------
+
+/**
+ * 이번 층에 포탈이 열릴지 굴리고, 열린다면 그 정보를 반환합니다.
+ * 실제로 맵의 어디에 놓을지는 호출한 쪽이 정합니다.
+ * @returns {object|null} 열린 포탈의 정의, 없으면 null
+ */
+export function rollPortalForCurrentFloor() {
+    return rollPortalForFloor(currentDangerLevel(), world.portalsUsed);
+}
+
+/**
+ * 포탈을 현재 층에 등록합니다.
+ * @param {object} portal - portals.js의 던전 정의
+ * @param {number} tileX - 놓인 타일 X 좌표
+ * @param {number} tileY - 놓인 타일 Y 좌표
+ */
+export function openPortal(portal, tileX, tileY) {
+    world.portals.push({
+        id: portal.id, tileX, tileY,
+        expiresAt: world.time + portal.lifetimeMs,
+    });
+    world.portalsUsed[portal.id] = (world.portalsUsed[portal.id] || 0) + 1;
+
+    emit(EVENTS.PORTAL_APPEARED, {
+        id: portal.id, name: portal.name, flavour: portal.flavour,
+        closesInMs: portal.lifetimeMs,
+    });
+}
+
+/**
+ * 시간이 다 된 포탈을 닫습니다. 매 프레임 확인합니다.
+ * 닫힌 자리는 평범한 바닥이 되어 다시는 들어갈 수 없습니다.
+ */
+export function closeExpiredPortals() {
+    for (let i = world.portals.length - 1; i >= 0; i--) {
+        const portal = world.portals[i];
+        if (world.time < portal.expiresAt) continue;
+
+        removePortalTile(portal);
+        world.portals.splice(i, 1);
+        emit(EVENTS.PORTAL_CLOSED, { id: portal.id, name: getBranch(portal.id).name });
+    }
+}
+
+/**
+ * 포탈 타일을 바닥으로 되돌립니다.
+ * @param {{tileX: number, tileY: number}} portal - 대상 포탈
+ */
+function removePortalTile(portal) {
+    const row = world.map[portal.tileY];
+    if (!row || row[portal.tileX] !== C.TILE_IDS.PORTAL) return;
+
+    row[portal.tileX] = C.TILE_IDS.FLOOR;
+    world.mapRevision++; // 통행 가능 여부가 바뀌었으므로 경로 캐시를 무효화합니다.
+}
+
+/**
+ * 포탈로 들어갑니다.
+ *
+ * 들어가는 순간 포탈은 닫힙니다. 그래야 나왔을 때 같은 곳을 다시 들어갈 수 없고,
+ * 되돌아온 층에도 쓸모없는 입구가 남지 않습니다.
+ * @param {string} portalId - 들어갈 포탈 던전의 식별자
+ * @returns {boolean} 실제로 진입했으면 true
+ */
+export function enterPortal(portalId) {
+    const index = world.portals.findIndex(p => p.id === portalId);
+    if (index < 0) return false;
+
+    removePortalTile(world.portals[index]);
+    world.portals.splice(index, 1);
+
+    return enterBranch(portalId);
+}
+
 /**
  * 현재 위치의 누적 깊이를 반환합니다. 난이도 계산에 씁니다.
  * @returns {number} 게임 시작 지점으로부터의 깊이
  */
 export function currentDangerLevel() {
+    // 포탈 던전은 들어온 깊이를 기준으로 삼습니다.
+    if (world.portalDangerLevel !== null) {
+        return world.portalDangerLevel + world.floor - 1;
+    }
     return absoluteDepth(world.branch, world.floor);
 }

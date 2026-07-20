@@ -22,6 +22,7 @@ import { spawnEnemiesForFloor } from './gameLogic.js';
 import { advanceSimulation, resetLoop } from './loop.js';
 import { updateHUD, registerUiHandlers } from './ui.js';
 import { initAudio, registerAudioHandlers } from './audio.js';
+import { registerMessageHandlers, clearMessages } from './messages.js';
 
 // --- 모듈 스코프 변수 (Private Member Variables) ---
 
@@ -44,6 +45,7 @@ function init() {
     // 2. 표현 계층이 게임 이벤트를 구독하도록 등록합니다.
     registerUiHandlers();
     registerAudioHandlers();
+    registerMessageHandlers();
     registerGameFlowHandlers();
 
     // 3. 브라우저 이벤트 리스너 설정
@@ -141,6 +143,7 @@ function startGame() {
     resetRuntime();     // 흔들림 위상, 무기 교체 플래그 등 세션 상태도 초기화
     resetLoop();        // 누산기에 남아 있던 시간 제거
     clearInputQueue();  // 이전 판에서 쌓인 입력이 새 판에 반영되지 않도록 비움
+    clearMessages();    // 이전 판의 알림이 남아 있지 않도록 비움
     A.setGameRunning(true);
 
     generateNewFloor();
@@ -219,6 +222,7 @@ function generateNewFloor() {
     world.map = dungeon.map;
     world.objectMap = dungeon.objectMap;
     placeBranchEntrances(dungeon);
+    placePortal(dungeon);
 
     // 플레이어를 맵의 시작 지점으로 이동
     world.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;
@@ -234,6 +238,35 @@ function generateNewFloor() {
 
     // 새로운 층에 맞는 적들을 스폰
     spawnEnemiesForFloor();
+
+    // 포탈 던전은 짧은 대신 보상이 두둑합니다.
+    const branch = getBranch(world.branch);
+    if (branch.isPortal) scatterBonusItems(branch.bonusItems);
+}
+
+/**
+ * 포탈 던전의 보상 아이템을 바닥에 흩뿌립니다.
+ * @param {number} count - 배치할 아이템 수
+ */
+function scatterBonusItems(count) {
+    const floors = [];
+    for (let y = 0; y < world.map.length; y++) {
+        for (let x = 0; x < world.map[y].length; x++) {
+            if (C.tileAt(world.map, x, y).spawnable) floors.push({ x, y });
+        }
+    }
+    if (floors.length === 0) return;
+
+    for (let i = 0; i < count; i++) {
+        const spot = floors[Math.floor(Math.random() * floors.length)];
+        const template = Math.random() < 0.5 ? C.ITEM_TYPES.HEALTH : C.ITEM_TYPES.AMMO;
+        world.items.push({
+            ...template,
+            x: spot.x * C.TILE_SIZE + C.TILE_SIZE / 2,
+            y: spot.y * C.TILE_SIZE + C.TILE_SIZE / 2,
+            z: C.TILE_SIZE / 2,
+        });
+    }
 }
 
 /**
@@ -254,6 +287,24 @@ function placeBranchEntrances(dungeon) {
         world.entrances.push({ tileX: spot.x, tileY: spot.y, branch: branchId });
         console.log(`${getBranch(branchId).name}의 입구가 ${formatLocation(world.branch, world.floor)}에 있습니다.`);
     }
+}
+
+/**
+ * 이번 층에 포탈이 열리는지 굴리고, 열린다면 맵에 배치합니다.
+ * 확률로 결정되므로 대부분의 층에는 아무것도 생기지 않습니다.
+ * @param {{playerStart: {x: number, y: number}}} dungeon - 방금 생성된 던전
+ */
+function placePortal(dungeon) {
+    world.portals = [];
+
+    const portal = A.rollPortalForCurrentFloor();
+    if (!portal) return;
+
+    const spot = findEntranceSpot(dungeon);
+    if (!spot) return;
+
+    world.map[spot.y][spot.x] = C.TILE_IDS.PORTAL;
+    A.openPortal(portal, spot.x, spot.y);
 }
 
 /**

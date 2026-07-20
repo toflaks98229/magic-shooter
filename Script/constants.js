@@ -138,6 +138,7 @@ export const TILE_IDS = {
     EXIT: 4,
     DOOR: 5,
     BRANCH_ENTRANCE: 6,
+    PORTAL: 7,
 };
 
 /**
@@ -178,6 +179,12 @@ export const TILE_TYPES = {
         solid: true, opaque: true, spawnable: false,
         // 출구와 같은 텍스처를 쓰되, 어느 가지로 이어지는지는 world.entrances가 압니다.
         wallTexture: 'exit', interaction: 'branch',
+    },
+    [TILE_IDS.PORTAL]: {
+        id: TILE_IDS.PORTAL, name: 'portal',
+        solid: true, opaque: true, spawnable: false,
+        // 시간이 지나면 사라지는 임시 입구입니다. world.portals가 언제 닫히는지 압니다.
+        wallTexture: 'exit', interaction: 'portal',
     },
 };
 

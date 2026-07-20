@@ -52,8 +52,30 @@ export function createWorld() {
         /** @description 현재 층에 놓인 하위 가지 입구들 */
         entrances: [],
 
+        /**
+         * @description 현재 층에 열려 있는 포탈들.
+         * 각 항목은 { id, tileX, tileY, expiresAt } 이며, expiresAt은 게임 내부 시간 기준입니다.
+         */
+        portals: [],
+
+        /**
+         * @description 포탈 던전별로 이번 판에 몇 번 생성되었는지.
+         * 대부분 한 번뿐이고 네크로폴리스만 세 번까지 나타납니다.
+         * 던전을 옮겨 다녀도 유지되어야 하므로 월드가 아니라 판 단위의 값입니다.
+         */
+        portalsUsed: {},
+
         /** @description 지금까지 획득한 룬의 가지 식별 기호 목록 */
         runes: [],
+
+        /**
+         * @description 포탈 던전에 들어온 시점의 누적 깊이.
+         *
+         * 포탈 던전은 정규 가지처럼 고정된 위치가 없어 표만 보고는 깊이를 알 수 없습니다.
+         * D:13에서 들어간 연구소를 1층 취급하면 후반 보상을 초반 난이도로 얻게 되므로,
+         * 들어올 때의 위험도를 기억해 두고 적 스폰에 씁니다. 포탈이 아니면 null입니다.
+         */
+        portalDangerLevel: null,
 
         /**
          * @description 게임 내부 경과 시간(ms).
