@@ -176,6 +176,12 @@ function updateWeaponSprite() {
 }
 
 /**
+ * @description 이미 경고한 텍스처 키. updateHUD가 매 프레임 호출되므로,
+ * 누락된 스프라이트 하나가 초당 수십 줄의 콘솔 경고를 쏟아내는 것을 막습니다.
+ */
+const warnedTextures = new Set();
+
+/**
  * 텍스처를 찾아 img 요소에 적용합니다. 없으면 플레이스홀더로 대체합니다.
  * @param {HTMLImageElement} imgEl - 대상 img 요소
  * @param {string} textureKey - 표시할 텍스처 키
@@ -190,7 +196,10 @@ function applySprite(imgEl, textureKey, label) {
         newSrc = texture.img.src;
     } else if (placeholder && placeholder.img) {
         newSrc = placeholder.img.src;
-        console.warn(`${label} sprite not found: ${textureKey}. Using placeholder.`);
+        if (!warnedTextures.has(textureKey)) {
+            warnedTextures.add(textureKey);
+            console.warn(`${label} sprite not found: ${textureKey}. Using placeholder.`);
+        }
     }
 
     // 현재 이미지와 다를 경우에만 src를 변경하여 불필요한 DOM 조작을 방지합니다.

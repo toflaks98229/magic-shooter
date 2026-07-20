@@ -1,0 +1,12 @@
+{
+  "sheetFile": "feat.png",
+  "sprites": {
+    "door_gate_1": {
+      "x": 32,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#3d3b30"
+    }
+  }
+}

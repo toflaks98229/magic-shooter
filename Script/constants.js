@@ -5,14 +5,18 @@
 
 // --- 에셋 경로 ---
 
-/** @description 게임에 사용될 스프라이트 시트들의 좌표 정보가 담긴 JSON 파일들의 경로 */
+/**
+ * @description 스프라이트 시트의 좌표 정보가 담긴 아틀라스 파일들의 경로.
+ * 각 아틀라스는 sheetFile로 같은 폴더의 PNG를 가리킵니다.
+ * 이 파일들은 손으로 쓰는 것이 아니라 `npm run build:atlas`로 생성됩니다.
+ */
 export const SPRITE_SHEET_URLS = {
-    main: 'Image/main_data.json',
-    wall: 'Image/wall_data.json',
-    floor: 'Image/floor_data.json',
-    gui: 'Image/gui_data.json',
-    player: 'Image/player_data.json',
-    feat: 'Image/feat_data.json'
+    main: 'Data/tiles/main_data.json',
+    wall: 'Data/tiles/wall_data.json',
+    floor: 'Data/tiles/floor_data.json',
+    gui: 'Data/tiles/gui_data.json',
+    player: 'Data/tiles/player_data.json',
+    feat: 'Data/tiles/feat_data.json'
 };
 
 // --- 던전 테마 설정 ---

@@ -1,0 +1,33 @@
+{
+  "sheetFile": "player.png",
+  "sprites": {
+    "enemy_grunt": {
+      "x": 468,
+      "y": 96,
+      "w": 32,
+      "h": 40,
+      "color": "#461a0b"
+    },
+    "enemy_berserker": {
+      "x": 437,
+      "y": 96,
+      "w": 31,
+      "h": 39,
+      "color": "#40150c"
+    },
+    "enemy_imp": {
+      "x": 437,
+      "y": 142,
+      "w": 32,
+      "h": 40,
+      "color": "#452b5d"
+    },
+    "enemy_commando": {
+      "x": 0,
+      "y": 96,
+      "w": 31,
+      "h": 39,
+      "color": "#1c3d2f"
+    }
+  }
+}
