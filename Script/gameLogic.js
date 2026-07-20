@@ -18,7 +18,7 @@ import { SPECIES } from './species.js';
 import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
 import { modifier as characterModifier, aptitudeFor } from './character.js';
 import { emit, EVENTS } from './events.js';
-import { aimRadius, rollMonsterHp, monsterAttackRoll, playerEvasion } from './dcss/combat.js';
+import { aimRadius, rollMonsterHp, monsterAttackRoll, playerEvasion, archerBonusDamage } from './dcss/combat.js';
 import { pickAimedTarget } from './dcss/aim.js';
 import { skillValue } from './dcss/training.js';
 import { random2 } from './dcss/random.js';
@@ -484,13 +484,26 @@ const ENEMY_BEHAVIORS = {
     /** 사거리 안에서 발사체를 쏜다 */
     ranged(enemy, { now, distance, dx, dy }) {
         if (distance >= enemy.range) return;
+
+        // 붙으면 쏘지 못합니다. (mon-act.cc:1522)
+        // 원본에서 몬스터는 바로 옆에 있는 상대에게 활을 쏘지 않습니다.
+        // prefer_ranged 를 가진 것들만 예외입니다.
+        // 이 규칙이 있어야 원거리 적에게 '거리를 좁힌다'는 대응이 생깁니다.
+        if (distance < C.TILE_SIZE * 1.5 && !enemy.preferRanged) return;
+
         if (now - enemy.lastAttackTime <= enemy.cooldown) return;
 
         enemy.lastAttackTime = now;
         world.projectiles.push({
             x: enemy.x, y: enemy.y, z: C.TILE_SIZE / 2,
             angle: Math.atan2(dy, dx),
-            speed: enemy.projectileSpeed, damage: enemy.damage,
+            speed: enemy.projectileSpeed,
+
+            // 활잡이는 피해가 얹힙니다. (fight.cc:1671 archer_bonus_damage)
+            // 명중값도 올라가지만 이 게임의 발사체는 굴림이 아니라 부딪힘으로
+            // 맞는지를 정하므로, 그쪽은 반영할 자리가 없습니다.
+            damage: enemy.damage + (enemy.archer ? archerBonusDamage(enemy.hd) : 0),
+
             size: C.PROJECTILE_TYPES.ENEMY_FIREBALL.size, from: 'enemy',
             spriteKey: C.PROJECTILE_TYPES.ENEMY_FIREBALL.spriteKey,
         });

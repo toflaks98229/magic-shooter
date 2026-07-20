@@ -482,3 +482,70 @@ test('조용한 몬스터는 동료를 부르지 않는다', () => {
     assert.notEqual(quiet.state, 'idle');
     assert.equal(sleeper.state, 'idle', '조용한 적이 동료를 불렀습니다');
 });
+
+// --- 원거리 적의 약점 -----------------------------------------------------------
+
+test('원거리 적은 붙으면 쏘지 못한다', () => {
+    // 이 규칙이 있어야 원거리 적에게 '거리를 좁힌다'는 대응이 생깁니다.
+    // 없으면 코앞에서도 계속 쏘아 붙을 이유가 사라집니다. (mon-act.cc:1522)
+    const world = emptyRoom();
+    placeEnemy(world, {
+        behavior: 'ranged', range: C.TILE_SIZE * 11, projectileSpeed: 4.5,
+        speed: 0, cooldown: 0, damage: 5, hd: 4,
+        state: 'chase', huntUntil: 1e9,
+        x: world.player.x + C.TILE_SIZE, y: world.player.y,   // 바로 옆
+    });
+
+    run(30);
+    assert.equal(world.projectiles.length, 0, '붙었는데 쏘았습니다');
+});
+
+test('멀어지면 다시 쏜다', () => {
+    const world = emptyRoom();
+    placeEnemy(world, {
+        behavior: 'ranged', range: C.TILE_SIZE * 11, projectileSpeed: 4.5,
+        speed: 0, cooldown: 0, damage: 5, hd: 4,
+        state: 'chase', huntUntil: 1e9,
+        x: world.player.x + C.TILE_SIZE * 5, y: world.player.y,
+    });
+
+    run(10);
+    assert.ok(world.projectiles.length > 0, '사거리 안인데 쏘지 않았습니다');
+});
+
+test('붙어서도 쏘는 적이 따로 있다', () => {
+    // prefer_ranged 를 가진 일곱 종은 코앞에서도 쏩니다.
+    // 거리를 좁혀도 통하지 않는 적이 섞여야 대응이 한 가지로 굳지 않습니다.
+    const world = emptyRoom();
+    placeEnemy(world, {
+        behavior: 'ranged', preferRanged: true,
+        range: C.TILE_SIZE * 11, projectileSpeed: 4.5,
+        speed: 0, cooldown: 0, damage: 5, hd: 4,
+        state: 'chase', huntUntil: 1e9,
+        x: world.player.x + C.TILE_SIZE, y: world.player.y,
+    });
+
+    run(10);
+    assert.ok(world.projectiles.length > 0, '붙어서도 쏘는 적이 쏘지 않았습니다');
+});
+
+test('활잡이는 같은 화살이라도 더 아프다', () => {
+    // HD 에 비례해 피해가 얹힙니다. 깊은 곳의 활잡이가 훨씬 위험해집니다.
+    const shoot = (archer, hd) => {
+        const world = emptyRoom();
+        placeEnemy(world, {
+            behavior: 'ranged', archer, hd,
+            range: C.TILE_SIZE * 11, projectileSpeed: 4.5,
+            speed: 0, cooldown: 0, damage: 5,
+            state: 'chase', huntUntil: 1e9,
+            x: world.player.x + C.TILE_SIZE * 5, y: world.player.y,
+        });
+        run(2);
+        return world.projectiles[0]?.damage ?? 0;
+    };
+
+    seedRandom(0xA2C);
+    let plain = 0, skilled = 0;
+    for (let i = 0; i < 40; i++) { plain += shoot(false, 12); skilled += shoot(true, 12); }
+    assert.ok(skilled > plain, `보통 ${plain}, 활잡이 ${skilled}`);
+});

@@ -465,3 +465,17 @@ export function monsterAttackRoll(attacker, defender) {
 
     return { hit: true, damage };
 }
+
+/**
+ * 활잡이가 원거리 공격에 얹는 피해를 구합니다. (fight.cc:1671 archer_bonus_damage)
+ *
+ * 원본은 random2avg(bonus, 2) 로 굴려 더합니다. HD 에 비례하므로
+ * 깊은 곳의 활잡이는 같은 화살이라도 훨씬 아픕니다.
+ * @param {number} hd - 몬스터의 HD
+ * @returns {number} 얹을 피해
+ */
+export function archerBonusDamage(hd) {
+    const bonus = Math.trunc(hd * 4 / 3);
+    if (bonus <= 0) return 0;
+    return random2avg(bonus, 2);
+}
