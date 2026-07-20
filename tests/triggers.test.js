@@ -21,7 +21,8 @@ const worldModule = await import('../Script/world.js');
 const { dom } = await import('../Script/dom.js');
 const actions = await import('../Script/actions.js');
 const gameLogic = await import('../Script/gameLogic.js');
-const { placeMinivaults } = await import('../Script/vaults.js');
+const { placeMinivaults, stampVaultAt } = await import('../Script/vaults.js');
+const { VAULTS } = await import('../Script/data/vaults.js');
 const { addTrigger, TRIGGER_ON, TRIGGER_DO } = await import('../Script/triggers.js');
 const { EVENTS, on, off } = await import('../Script/events.js');
 
@@ -248,15 +249,19 @@ test('쥐덫 볼트가 실제로 터진다', () => {
     // 이 검사는 통째로 이어진 길을 봅니다. 임포터가 압력판과 열릴 벽을 읽고,
     // 찍을 때 자리를 적고, beginFloor 가 기믹을 걸고, 밟으면 지형이 바뀝니다.
     // 어느 한 곳만 끊겨도 볼트는 찍히는데 아무 일도 일어나지 않습니다.
+    // 볼트가 354 개로 늘면서 무작위로 뽑기를 기다리면 몇 천 번을 돌려야 합니다.
+    // 이 검사가 보려는 것은 그 볼트가 뽑힐 확률이 아니라, 뽑혔을 때 이어진
+    // 길이 온전한가입니다. 그래서 그 볼트를 직접 찍습니다.
+    const trap = VAULTS.find(v => v.name === 'dk_rats_in_the_wall');
+    assert.ok(trap, '쥐덫 볼트를 가져오지 못했습니다');
+
     let tested = false;
 
-    for (let seed = 0; seed < 600 && !tested; seed++) {
+    for (let seed = 0; seed < 40 && !tested; seed++) {
         seedRandom(seed);
         const world = openFloor();
 
-        const placed = placeMinivaults(world.map, { count: 1 });
-        if (placed[0]?.name !== 'dk_rats_in_the_wall') continue;
-
+        const placed = [stampVaultAt(world.map, trap, 20, 20)];
         const vault = placed[0];
         assert.ok(vault.plates?.length > 0, '압력판을 읽지 못했습니다');
         assert.ok(vault.sealed?.length > 0, '열릴 벽을 읽지 못했습니다');

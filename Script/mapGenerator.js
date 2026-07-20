@@ -19,7 +19,7 @@
 
 import { TILE_IDS, tileAt } from './constants.js';
 import { rollLayout, LAYOUTS } from './layouts.js';
-import { placeMinivaults } from './vaults.js';
+import { placeMinivaults, rollFloorVault, stampFloorVault } from './vaults.js';
 import {
     buildRooms, buildRoguey, buildCorridors, buildCity,
     buildCaves, buildNarrowCaves, buildDivisions, buildOpen,
@@ -43,6 +43,16 @@ export function generateDungeon(width, height, options = {}) {
 
     const map = Array.from({ length: height }, () => Array(width).fill(TILE_IDS.WALL));
     const objectMap = Array.from({ length: height }, () => Array(width).fill(0));
+
+    // 손으로 그린 판이 통째로 나오는 층.
+    //
+    // 원본에서는 이런 볼트가 뽑히면 절차 생성을 아예 건너뜁니다. 층이 곧 볼트입니다.
+    // 하수구나 납골당처럼 그 자체로 자족적인 판이라, 들어가는 순간
+    // '여긴 만들어진 곳이구나' 가 분명히 읽힙니다.
+    if (Math.random() < FLOOR_VAULT_CHANCE) {
+        const built = buildFromFloorVault(map, objectMap);
+        if (built) return built;
+    }
 
     let spots = buildLayout(map, layoutId);
 
@@ -347,4 +357,101 @@ function createFallbackDungeon(width, height) {
 /** @returns {string[]} 쓸 수 있는 레이아웃 키 목록. 미리보기와 테스트가 씁니다. */
 export function allLayouts() {
     return Object.keys(LAYOUTS);
+}
+
+/**
+ * @description 층이 통째로 손으로 그린 판일 확률.
+ *
+ * 흔하면 안 됩니다. 손으로 그린 판은 두 번째 만나는 순간 외운 판이 되므로,
+ * 가끔 나와야 그 층이 특별해집니다. 원본의 포탈 던전도 드물게 나타납니다.
+ */
+const FLOOR_VAULT_CHANCE = 0.12;
+
+/**
+ * 층 볼트 하나를 통째로 찍어 층을 만듭니다.
+ *
+ * 절차 생성을 아예 건너뜁니다. 이것이 층 자체이기 때문입니다.
+ * 다만 지켜야 할 것은 같습니다. 시작 지점과 출구가 있어야 하고,
+ * 그 사이를 걸어갈 수 있어야 합니다. 볼트가 그것을 갖추지 못했으면
+ * 절차 생성으로 되돌립니다. 갈 수 없는 층보다 평범한 층이 낫습니다.
+ * @param {number[][]} map - 벽으로 찬 맵
+ * @param {number[][]} objectMap - 오브젝트 격자
+ * @returns {object|null} 만들어진 층. 쓸 수 없으면 null
+ */
+function buildFromFloorVault(map, objectMap) {
+    const vault = rollFloorVault();
+    if (!vault) return null;
+
+    const placed = stampFloorVault(map, vault);
+
+    // 설 자리를 찾습니다. 볼트가 @ 로 입구를 적어 두었어도 이 게임에는
+    // 그 개념이 없어, 바닥 중 아무 데나 골라 거기서 시작합니다.
+    const start = findOpenTile(map, placed);
+    if (!start) return null;
+
+    // 출구는 볼트가 계단으로 적어 둔 자리를 씁니다. 없으면 가장 먼 바닥입니다.
+    // 볼트에는 계단이 여럿일 수 있습니다. 원본은 층마다 내려가는 계단을 셋 두지만
+    // 이 게임은 하나입니다. 첫 번째만 남기고 나머지는 바닥으로 되돌립니다.
+    let exit = null;
+    for (let y = 0; y < map.length; y++) {
+        for (let x = 0; x < map[y].length; x++) {
+            if (map[y][x] !== TILE_IDS.EXIT) continue;
+            if (exit) map[y][x] = TILE_IDS.FLOOR;
+            else exit = { x, y };
+        }
+    }
+
+    if (!exit) {
+        exit = pickExit(map, start);
+        map[exit.y][exit.x] = TILE_IDS.EXIT;
+    }
+
+    // 갇힌 바닥을 메우고, 출구까지 갈 수 있는지 확인합니다.
+    sealUnreachable(map, start);
+    const reachable = reachableFrom(map, start);
+    const exitReachable = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+        .some(([dx, dy]) => reachable[exit.y + dy]?.[exit.x + dx]);
+    if (!exitReachable) return null;
+
+    return {
+        map, objectMap, playerStart: start,
+        layout: `vault:${vault.name}`,
+        vaults: [placed],
+    };
+}
+
+/**
+ * 볼트 안에서 설 만한 바닥을 하나 찾습니다.
+ * @param {number[][]} map - 층
+ * @param {object} placed - 찍힌 볼트의 기록
+ * @returns {{x: number, y: number}|null} 찾은 자리
+ */
+function findOpenTile(map, placed) {
+    const spots = [];
+    for (let y = placed.top; y < placed.top + placed.height; y++) {
+        for (let x = placed.left; x < placed.left + placed.width; x++) {
+            if (map[y]?.[x] === undefined) continue;
+            // 맨바닥이어야 합니다. 얕은 물 위에서 시작하면 물에 선 채로
+            // 판이 열리고, 하수구 볼트는 물이 많아 실제로 자주 그렇게 됩니다.
+            if (map[y][x] !== TILE_IDS.FLOOR) continue;
+            spots.push({ x, y });
+        }
+    }
+    if (spots.length === 0) return null;
+    return spots[Math.floor(Math.random() * spots.length)];
+}
+
+/**
+ * 맵에서 그 타일을 처음 찾습니다.
+ * @param {number[][]} map - 층
+ * @param {number} tileId - 찾을 타일
+ * @returns {{x: number, y: number}|null} 자리
+ */
+function findTile(map, tileId) {
+    for (let y = 0; y < map.length; y++) {
+        for (let x = 0; x < map[y].length; x++) {
+            if (map[y][x] === tileId) return { x, y };
+        }
+    }
+    return null;
 }

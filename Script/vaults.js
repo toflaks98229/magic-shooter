@@ -15,7 +15,7 @@
  */
 
 import { VAULTS } from './data/vaults.js';
-import { TILE_IDS, tileAt } from './constants.js';
+import { TILE_IDS, tileAt, MAP_WIDTH, MAP_HEIGHT } from './constants.js';
 import { random2 } from './dcss/random.js';
 
 /**
@@ -429,4 +429,53 @@ export function placeMinivaults(map, options = {}) {
  */
 export function vaultCount() {
     return VAULTS.length;
+}
+
+/**
+ * 층 전체를 정의하는 볼트 하나를 고릅니다.
+ *
+ * 원본에서는 이런 볼트가 뽑히면 절차 생성을 아예 건너뜁니다. 층이 곧 볼트입니다.
+ * 흔하면 안 됩니다. 손으로 그린 판은 두 번째 만나는 순간 외운 판이 되므로,
+ * 가끔 나와야 그 층이 특별해집니다.
+ * @returns {object|null} 고른 볼트. 없으면 null
+ */
+export function rollFloorVault() {
+    const candidates = VAULTS.filter(v => v.encompass
+        && v.rows.length <= MAP_HEIGHT && v.rows[0].length <= MAP_WIDTH);
+    return pickVault(candidates);
+}
+
+/**
+ * 층 볼트를 맵에 통째로 찍습니다.
+ *
+ * 미니볼트와 달리 이미 있는 바닥과 겹칠 필요가 없습니다. 이것이 층 자체이므로
+ * 맵을 벽으로 채운 뒤 한가운데에 놓습니다.
+ * @param {Array<Array<number>>} map - 벽으로 찬 맵
+ * @param {object} vault - 층 볼트
+ * @returns {object} 찍은 결과
+ */
+export function stampFloorVault(map, vault) {
+    const grid = randomiseVault(vault);
+    const left = Math.floor((map[0].length - grid[0].length) / 2);
+    const top = Math.floor((map.length - grid.length) / 2);
+
+    const stamped = stamp(map, grid, left, top, vault);
+    return { name: vault.name, left, top, width: grid[0].length, height: grid.length, ...stamped };
+}
+
+/**
+ * 볼트를 정해진 자리에 찍습니다. 검사와 도구가 씁니다.
+ *
+ * 무작위 배치를 거치지 않으므로, 어떤 볼트가 제대로 찍히는지를
+ * 뽑기 운에 기대지 않고 확인할 수 있습니다.
+ * @param {Array<Array<number>>} map - 층
+ * @param {object} vault - 볼트 정의
+ * @param {number} left - 왼쪽 타일 좌표
+ * @param {number} top - 위쪽 타일 좌표
+ * @returns {object} 찍은 결과
+ */
+export function stampVaultAt(map, vault, left, top) {
+    const grid = randomiseVault(vault);
+    const stamped = stamp(map, grid, left, top, vault);
+    return { name: vault.name, left, top, width: grid[0].length, height: grid.length, ...stamped };
 }

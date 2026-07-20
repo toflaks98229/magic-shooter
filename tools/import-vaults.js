@@ -20,6 +20,10 @@ import path from 'node:path';
 const DEFAULT_SOURCE = 'Data/crawl/crawl-ref/source';
 const OUTPUT = 'Script/data/vaults.js';
 
+/** @description 이 게임의 맵 치수. DCSS 의 GXM/GYM 과 같습니다. */
+const MAP_WIDTH = 80;
+const MAP_HEIGHT = 70;
+
 /**
  * @description 가져올 파일들.
  *
@@ -31,6 +35,15 @@ const SOURCE_FILES = [
     'dat/des/variable/mini_features.des',   // 몬스터 없는 순수 구조물
     'dat/des/variable/mini_monsters.des',   // 몬스터가 배치된 방
     'dat/des/traps/rats_trap.des',          // 밟으면 벽이 열리는 기믹
+
+    // 층 전체를 정의하는 볼트(encompass).
+    //
+    // 원본의 encompass 볼트 355 개 중 대부분은 신전이나 분기 최하층이라
+    // 이 게임에 대응물이 없습니다. 포탈 던전은 다릅니다. 하수구도 납골당도
+    // 그 자체로 자족적인 한 판이라, 이 게임의 '한 층' 에 그대로 맞습니다.
+    'dat/des/portals/sewer.des',
+    'dat/des/portals/ossuary.des',
+    'dat/des/portals/icecave.des',
 ];
 
 /**
@@ -47,6 +60,20 @@ const GLYPHS = {
     '^': 'TRIGGER_PLATE',
     '@': 'FLOOR',           // 볼트로 들어오는 입구. 바닥으로 둡니다
     'z': 'SEALED_WALL',
+
+    // 계단. 이 게임에는 층을 잇는 길이 한 종류뿐이라 내려가는 것만 출구로 삼고,
+    // 올라가는 것은 바닥으로 둡니다.
+    '>': 'EXIT', '}': 'EXIT', ')': 'EXIT', ']': 'EXIT',
+    '<': 'FLOOR', '{': 'FLOOR', '(': 'FLOOR', '[': 'FLOOR',
+
+    // 물건 자리. 볼트에서 물건을 놓는 것은 아직 옮기지 않아 바닥으로 둡니다.
+    '$': 'FLOOR', '%': 'FLOOR', '*': 'FLOOR', '|': 'FLOOR',
+    'd': 'FLOOR', 'e': 'FLOOR', 'f': 'FLOOR', 'g': 'FLOOR',
+    'h': 'FLOOR', 'i': 'FLOOR', 'j': 'FLOOR', 'k': 'FLOOR',
+
+    // 구조물. 대응물이 없어 알아볼 수 있는 것으로 놓습니다.
+    'A': 'FLOOR',                     // 돌 아치
+    'B': 'STATUE', 'C': 'STATUE',     // 제단
 
     '.': 'FLOOR',
     'x': 'WALL',        // 바위벽
@@ -125,7 +152,7 @@ function parseVaults(text) {
         if (key === 'ORIENT') current.orient = value;
         if (key === 'SUBST') current.subst.push(value);
         if (key === 'MONS') current.mons.push(...splitSlots(value));
-        if (key === 'KMONS') current.kmons.push(value);
+        if (key === 'KMONS') current.kmons.push(value);   // 아래에서 글리프별로 풉니다
         if (key === 'KFEAT') current.kfeat.push(value);
         if (key === 'NSUBST') current.nsubst.push(value);
         if (key === 'SHUFFLE') (current.shuffle ??= []).push(value);
@@ -150,6 +177,26 @@ function splitSlots(value) {
             .replace(/^w:\d+\s*/, '')
             .split(';')[0].trim())
         .filter(Boolean));
+}
+
+/**
+ * KMONS 한 줄을 규칙으로 바꿉니다. (`n = Terence / Maggie, human`)
+ *
+ * MONS 는 일곱 칸까지인데 KMONS 는 글리프에 직접 묶어 그 제한을 넘깁니다.
+ * 슬래시는 '그중 하나', 쉼표는 '앞의 것이 안 되면 이것' 입니다.
+ * 여기서는 둘 다 후보로 봅니다. 유니크를 가려낼 장치가 없기 때문입니다.
+ * @param {string} line - KMONS 값
+ * @returns {object|null} 규칙
+ */
+function parseKmons(line) {
+    const matched = /^(\S+)\s*[=:]\s*(.+)$/.exec(line);
+    if (!matched) return null;
+
+    const [, glyphs, rest] = matched;
+    const names = rest.split(/[,/]/).map(n => n.trim()).filter(Boolean);
+    if (names.length === 0) return null;
+
+    return { glyphs: [...glyphs], names };
 }
 
 /**
@@ -199,6 +246,19 @@ const KFEAT_FEATURES = {
 
     // 함정 중 밟는 순간을 잡을 수 있는 것만 옮깁니다.
     'pressure plate trap': 'TRIGGER_PLATE',
+
+    // 나머지 함정은 아직 만들지 않았습니다. 밟아도 아무 일이 없으면
+    // 거짓말이 되므로, 바닥으로 두어 없는 것으로 합니다.
+    'alarm trap': 'FLOOR', 'net trap': 'FLOOR', 'dispersal trap': 'FLOOR',
+    'shaft trap': 'FLOOR', 'teleport trap': 'FLOOR', 'zot trap': 'FLOOR',
+    'arrow trap': 'FLOOR', 'spear trap': 'FLOOR', 'blade trap': 'FLOOR',
+    'bolt trap': 'FLOOR', 'needle trap': 'FLOOR', 'axe trap': 'FLOOR',
+
+    petrified_tree: 'TREE', mangrove: 'TREE', demonic_tree: 'TREE',
+    broken_door: 'FLOOR', open_clear_door: 'FLOOR',
+    closed_clear_door: 'GLASS', runed_clear_door: 'GLASS',
+    stone_arch: 'FLOOR', fountain_blue: 'FLOOR', dry_fountain: 'FLOOR',
+    granite_statue: 'STATUE',
 };
 
 /**
@@ -296,12 +356,21 @@ function parseShuffle(line) {
  * @returns {string|null} 버리는 이유. 쓸 수 있으면 null
  */
 function rejectionReason(vault, maxSize) {
-    // 층 전체를 정의하는 볼트는 80x70 을 전제로 쓰여 있습니다.
-    if (vault.orient) return 'orient';
-
     const height = vault.rows.length;
     const width = Math.max(...vault.rows.map(r => r.length));
-    if (width > maxSize || height > maxSize) return 'size';
+
+    // 층 전체를 정의하는 볼트는 크기 잣대가 다릅니다. 방 하나가 아니라
+    // 판 하나이므로 맵 전체에 들어가기만 하면 됩니다.
+    //
+    // 예전에는 이것들을 통째로 버렸습니다. 맵이 30x30 이던 시절에는 정말로
+    // 들어가지 않았기 때문입니다. 80x70 으로 키우면서 그 이유는 사라졌는데
+    // 필터는 그대로 두고 있었습니다.
+    if (vault.orient) {
+        if (vault.orient.trim() !== 'encompass') return 'orient';
+        if (width > MAP_WIDTH || height > MAP_HEIGHT) return 'size';
+    } else if (width > maxSize || height > maxSize) {
+        return 'size';
+    }
 
     // 읽을 수 없는 지시자가 있으면 반쯤만 이해한 채로 찍게 됩니다.
     for (const line of vault.nsubst) {
@@ -316,8 +385,11 @@ function rejectionReason(vault, maxSize) {
     for (const line of vault.kfeat) {
         if (!parseKfeat(line)) return 'kfeat';
     }
-    // KMONS 는 아직 옮기지 않았습니다.
-    if (vault.kmons.length > 0) return 'kmons';
+    // KMONS 는 글리프 하나에 몬스터를 직접 묶습니다. MONS 의 일곱 칸 제한을
+    // 넘기려고 쓰는 것이라, 읽지 못하는 줄이 있으면 그 볼트는 버립니다.
+    for (const line of vault.kmons) {
+        if (!parseKmons(line)) return 'kmons';
+    }
 
     // 모르는 글리프가 하나라도 있으면 버립니다.
     //
@@ -330,6 +402,9 @@ function rejectionReason(vault, maxSize) {
         ...(vault.shuffle ?? []).flatMap(l => parseShuffle(l).flatMap(r => r.glyphs ?? r.blocks?.flat() ?? [])),
     ]);
     const kfeatGlyphs = new Set(vault.kfeat.flatMap(l => parseKfeat(l)?.glyphs ?? []));
+    for (const line of vault.kmons) {
+        for (const glyph of parseKmons(line)?.glyphs ?? []) kfeatGlyphs.add(glyph);
+    }
     for (const row of vault.rows) {
         for (const glyph of row) {
             if (kfeatGlyphs.has(glyph) || placeholders.has(glyph)) continue;
@@ -428,6 +503,19 @@ for (const relative of SOURCE_FILES) {
 
         // 모든 줄을 가장 긴 줄에 맞춰 늘립니다. 짧은 줄의 나머지는 볼트 밖입니다.
         // KFEAT 이 정한 글리프를 볼트마다 따로 기록합니다.
+        // KMONS: 글리프 하나에 몬스터를 직접 묶습니다.
+        const kmons = {};
+        let unknownKmons = false;
+        for (const line of vault.kmons) {
+            const rule = parseKmons(line);
+            if (!rule) { unknownKmons = true; break; }
+
+            const ids = rule.names.map(name => toMonsterId(name, known)).filter(Boolean);
+            if (ids.length === 0) { unknownKmons = true; break; }
+            for (const glyph of rule.glyphs) kmons[glyph] = ids;
+        }
+        if (unknownKmons) { rejected.kmons = (rejected.kmons ?? 0) + 1; continue; }
+
         const kfeat = {};
         for (const line of vault.kfeat) {
             const rule = parseKfeat(line);
@@ -458,6 +546,9 @@ for (const relative of SOURCE_FILES) {
             shuffle: (vault.shuffle ?? []).flatMap(parseShuffle),
             mons: slots,
             kfeat,
+            // 층 전체를 정의하는 볼트는 미니볼트와 쓰이는 자리가 다릅니다.
+            kmons,
+            encompass: vault.orient?.trim() === 'encompass' || undefined,
         });
     }
 }

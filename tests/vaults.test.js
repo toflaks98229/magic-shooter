@@ -293,3 +293,66 @@ test('NSUBST 는 개수를 고정한다', () => {
     assert.equal(counts.size, 1, `개수가 판마다 달랐습니다: ${[...counts].join(', ')}`);
     assert.ok(counts.has(5), `다섯 칸이어야 하는데 ${[...counts].join(', ')} 였습니다`);
 });
+
+// --- 층 전체를 정의하는 볼트 -------------------------------------------------------
+
+test('층 볼트를 가져왔다', () => {
+    // 처음에는 ORIENT 가 붙은 볼트를 통째로 버렸습니다. 맵이 30x30 이던 시절에는
+    // 정말로 들어가지 않았기 때문입니다. 80x70 으로 키우면서 그 이유는 사라졌는데
+    // 필터는 그대로 두고 있었습니다.
+    const floorVaults = VAULTS.filter(v => v.encompass);
+    assert.ok(floorVaults.length > 0, '층 볼트가 하나도 없습니다');
+});
+
+test('층 볼트가 맵 안에 들어간다', () => {
+    for (const vault of VAULTS.filter(v => v.encompass)) {
+        assert.ok(vault.rows.length <= C.MAP_HEIGHT,
+            `${vault.name} 이 맵보다 높습니다 (${vault.rows.length})`);
+        assert.ok(vault.rows[0].length <= C.MAP_WIDTH,
+            `${vault.name} 이 맵보다 넓습니다 (${vault.rows[0].length})`);
+    }
+});
+
+test('층 볼트가 실제로 층이 된다', () => {
+    // 절차 생성을 건너뛰고 볼트가 곧 층이 됩니다.
+    let found = 0;
+    for (let seed = 0; seed < 300 && found === 0; seed++) {
+        seedRandom(seed);
+        const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, {});
+        if (dungeon.layout?.startsWith('vault:')) found++;
+    }
+    assert.ok(found > 0, '삼백 판을 돌려도 층 볼트가 한 번도 안 나왔습니다');
+});
+
+test('층 볼트로 만든 층도 걸어서 나갈 수 있다', () => {
+    // 손으로 그린 판이라도 지켜야 할 것은 같습니다. 시작 지점에서 출구까지
+    // 걸어갈 수 있어야 하고, 출구는 하나여야 하고, 맨바닥에서 시작해야 합니다.
+    let checked = 0;
+
+    for (let seed = 0; seed < 600 && checked < 25; seed++) {
+        seedRandom(seed);
+        const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, {});
+        if (!dungeon.layout?.startsWith('vault:')) continue;
+        checked++;
+
+        assert.equal(dungeon.map[dungeon.playerStart.y][dungeon.playerStart.x], C.TILE_IDS.FLOOR,
+            `${dungeon.layout}: 맨바닥에서 시작하지 않습니다`);
+
+        const exits = dungeon.map.flat().filter(t => t === C.TILE_IDS.EXIT).length;
+        assert.equal(exits, 1, `${dungeon.layout}: 출구가 ${exits} 개입니다`);
+
+        const seen = reachable(dungeon.map, dungeon.playerStart);
+        let exitReachable = false;
+        for (let y = 0; y < C.MAP_HEIGHT; y++) {
+            for (let x = 0; x < C.MAP_WIDTH; x++) {
+                if (dungeon.map[y][x] !== C.TILE_IDS.EXIT) continue;
+                for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+                    if (seen[y + dy]?.[x + dx]) exitReachable = true;
+                }
+            }
+        }
+        assert.ok(exitReachable, `${dungeon.layout}: 출구까지 갈 수 없습니다`);
+    }
+
+    assert.ok(checked > 0, '층 볼트가 한 번도 안 나왔습니다');
+});
