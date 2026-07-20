@@ -22,6 +22,10 @@ export const SPRITE_SHEET_URLS = {
     // 몬스터마다의 그림. rltiles/mon 의 개별 PNG 를 모은 것으로,
     // 다른 시트와 달리 build-monster-atlas.js 가 따로 만듭니다.
     monsters: 'Data/tiles/monsters_data.json',
+
+    // 가지마다의 벽과 바닥. 원본은 층 번호가 아니라 어느 가지에 있는가로
+    // 층의 모습을 정합니다. 오크 광산은 몇 층이든 오크 광산처럼 생겼습니다.
+    terrain: 'Data/tiles/terrain_data.json',
 };
 
 // --- 던전 테마 설정 ---
