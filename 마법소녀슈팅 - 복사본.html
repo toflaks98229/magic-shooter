@@ -87,6 +87,9 @@
             line-height: 1.15;
         }
 
+        /* 칭호 줄은 원본처럼 노란색입니다. (output.cc:1469) */
+        .title-row { color: #d8c070; }
+
         .panel-label { color: var(--dim); }
 
         /* DCSS 의 Health / Magic 막대 */
@@ -492,8 +495,13 @@
 
             <div class="panel-divider"></div>
 
+            <!-- 원본의 첫 두 줄입니다. 1행은 이름과 칭호, 2행은 종족과 신.
+                 칭호는 가장 높은 스킬이 정하므로, 무엇을 해 왔는지가 이름에 남습니다. -->
+            <div class="panel-row title-row">
+                <span id="title-line">-</span>
+            </div>
             <div class="panel-row">
-                <span class="panel-label">Name</span><span id="character-line">-</span>
+                <span id="character-line">-</span>
             </div>
             <div class="panel-row">
                 <span class="panel-label">God</span><span id="god-line">-</span>

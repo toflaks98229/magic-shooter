@@ -17,7 +17,9 @@ import { groupInventory, inventorySummary, describeStack, INVENTORY_SLOTS } from
 import { BUFF_MODIFIERS } from './items.js';
 import { setWeapon } from './actions.js';
 import { on, EVENTS } from './events.js';
-import { describeCharacter } from './character.js';
+import { describeCharacter, characterTitle } from './character.js';
+import { titleLine } from './dcss/titles.js';
+import { BACKGROUNDS } from './backgrounds.js';
 import { GODS, pietyRank, PIETY_BREAKPOINTS } from './gods.js';
 
 // --- 연출 타이머 ---
@@ -210,10 +212,33 @@ let drawnCharacter = null;
  * 종족과 직업을 한 줄로 보여줍니다. DCSS 상태창 맨 위와 같은 자리입니다.
  */
 function updateCharacterLine() {
+    // 원본의 1행. 이름과 칭호입니다. 마흔두 칸을 넘으면 the 를 쉼표로 바꿉니다.
+    const title = characterTitle();
+    const heading = title ? titleLine(playerName(), title) : playerName();
+    if (heading !== drawnTitle) {
+        drawnTitle = heading;
+        setText(dom.titleLineEl, heading || '-');
+    }
+
+    // 원본의 2행. 종족과 섬기는 신입니다.
     const line = describeCharacter();
     if (line === drawnCharacter) return;
     drawnCharacter = line;
     setText(dom.characterLineEl, line || '-');
+}
+
+/** @description 칭호 줄에 마지막으로 그린 내용 */
+let drawnTitle = null;
+
+/**
+ * 플레이어의 이름을 구합니다.
+ *
+ * 아직 이름을 짓는 자리가 없어 직업 이름을 씁니다. 이름 입력이 들어오면
+ * 여기만 고치면 됩니다.
+ * @returns {string} 이름
+ */
+function playerName() {
+    return BACKGROUNDS[world.player.background]?.name ?? '모험가';
 }
 
 /** @description 신 칸에 마지막으로 그린 내용 */

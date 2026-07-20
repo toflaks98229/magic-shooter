@@ -9,9 +9,11 @@
  */
 
 import { world } from './world.js';
+import { playerTitle } from './dcss/titles.js';
+import { skillValue } from './dcss/training.js';
 import { SPECIES, derive } from './species.js';
 import { BACKGROUNDS, rollStartingItems } from './backgrounds.js';
-import { GODS, startingPiety, canWorship } from './gods.js';
+import { GODS, startingPiety, canWorship, pietyRank } from './gods.js';
 
 /** @description 기본값이 1(곱셈)인 항목들. 나머지는 0(덧셈)으로 다룹니다. */
 const MULTIPLIED = new Set([
@@ -167,4 +169,28 @@ export function describeCharacter() {
     const god = GODS[world.player.god];
     return god ? `${species.name} ${background.name} (${god.name})`
         : `${species.name} ${background.name}`;
+}
+
+/**
+ * 이름 뒤에 붙일 칭호를 구합니다.
+ *
+ * 원본은 가장 높은 스킬이 무엇이고 얼마나 높은지로 칭호를 정합니다.
+ * 레벨 숫자는 얼마나 오래 했는지만 말하지만, 칭호는 어떻게 해 왔는지를 말합니다.
+ * 같은 깊이라도 Warrior 와 Spry 는 다른 사람입니다.
+ * @returns {string} 칭호
+ */
+export function characterTitle() {
+    const species = SPECIES[world.player.species];
+
+    // 적성을 함께 넘겨야 합니다. 빠뜨리면 필요 점수가 무한이 되어
+    // 어떤 스킬도 0 수준을 벗어나지 못하고, 칭호가 영영 바뀌지 않습니다.
+    const valueOf = (skills, skill) => skillValue(skills, skill, aptitudeFor(skill));
+
+    return playerTitle(world.player.skills, valueOf, {
+        species,
+        god: world.player.god,
+        pietyRank: pietyRank(world.player.piety),
+        str: species?.str ?? 8,
+        dex: species?.dex ?? 8,
+    });
 }
