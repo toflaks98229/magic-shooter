@@ -14,6 +14,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import * as C from '../Script/constants.js';
+import { MONSTERS } from '../Script/monsters.js';
 
 const projectRoot = fileURLToPath(new URL('..', import.meta.url));
 const progression = JSON.parse(readFileSync(projectRoot + 'Data/dungeon_progression.json', 'utf8'));
@@ -65,7 +66,7 @@ test('모든 스프라이트 좌표가 시트 범위 안에 있다', () => {
 
 test('constants.js가 참조하는 스프라이트가 모두 존재한다', () => {
     const required = [
-        ...Object.values(C.ENEMY_TYPES).map(t => t.spriteKey),
+        ...Object.values(MONSTERS).map(m => m.spriteKey),
         ...Object.values(C.ITEM_TYPES).map(t => t.spriteKey),
         ...Object.values(C.PROJECTILE_TYPES).map(t => t.spriteKey),
         ...Object.values(C.OBJECT_TYPES).map(t => t.spriteKey),

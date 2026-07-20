@@ -25,7 +25,7 @@ const { dom } = await import('../Script/dom.js');
 const { runtime } = await import('../Script/runtime.js');
 const actions = await import('../Script/actions.js');
 const { loadAssets, render, resizeCanvas } = await import('../Script/render.js');
-const { spawnEnemiesForFloor } = await import('../Script/gameLogic.js');
+const { spawnEnemiesForFloor, spawnMonster } = await import('../Script/gameLogic.js');
 const { generateDungeon } = await import('../Script/mapGenerator.js');
 
 const screen = attachHeadlessCanvas(dom);
@@ -52,8 +52,12 @@ const forward = (distance, side = 0) => ({
     x: world.player.x + Math.cos(world.player.angle) * distance - Math.sin(world.player.angle) * side,
     y: world.player.y + Math.sin(world.player.angle) * distance + Math.cos(world.player.angle) * side,
 });
-world.enemies.slice(0, 3).forEach((enemy, i) => {
-    Object.assign(enemy, forward(C.TILE_SIZE * (4 + i * 2), (i - 1) * C.TILE_SIZE * 1.4));
+// 서로 다른 몬스터를 나란히 세워 스프라이트를 한눈에 확인합니다.
+const showcase = (process.argv[5] || 'orc,spectre,ice_giant,fire_demon').split(',');
+world.enemies.length = 0;
+showcase.forEach((id, i) => {
+    const spot = forward(C.TILE_SIZE * (4 + i * 0.4), (i - (showcase.length - 1) / 2) * C.TILE_SIZE * 1.5);
+    spawnMonster(id, spot);
 });
 world.items.push({ ...C.ITEM_TYPES.HEALTH, ...forward(C.TILE_SIZE * 3, C.TILE_SIZE * 0.8), z: C.TILE_SIZE / 2 });
 world.items.push({ ...C.ITEM_TYPES.AMMO, ...forward(C.TILE_SIZE * 3.4, -C.TILE_SIZE * 0.9), z: C.TILE_SIZE / 2 });

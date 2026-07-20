@@ -16,6 +16,8 @@
  *   bonusItems  - 보상으로 추가 배치할 아이템 수
  *   theme       - 렌더링 테마 (assets에 실제로 있는 것이어야 합니다)
  *   flavour     - 등장 알림에 쓸 설명
+ *   monsters    - 이 던전에서 나오는 몬스터 목록 (monsters.js의 id)
+ *   boss        - 최하층에 한 마리만 배치할 네임드 몬스터
  */
 
 /** @description 초·중반에 나타나는 특수 던전 */
@@ -24,31 +26,40 @@ const EARLY_AND_MID = {
         name: '납골당', minDepth: 2, maxDepth: 8, chance: 0.12,
         depth: 1, bonusItems: 5, theme: 'main', themeVariation: 2,
         flavour: '메마른 뼈 냄새가 풍기는 통로가 열렸다',
+        monsters: ['zombie', 'skeleton', 'mummy'],
+        boss: 'menkaure',
     },
     sewer: {
         name: '하수구', minDepth: 2, maxDepth: 8, chance: 0.12,
         depth: 1, bonusItems: 4, theme: 'cave', themeVariation: 2,
         flavour: '축축한 물소리가 아래에서 들려온다',
+        monsters: ['rat', 'snake', 'kobold', 'frog'],
+        boss: 'purgy',
     },
     bailey: {
         name: '성채', minDepth: 7, maxDepth: 14, chance: 0.1,
         depth: 1, bonusItems: 6, theme: 'main', themeVariation: 1,
         flavour: '오크의 함성이 성벽 너머에서 울린다',
+        monsters: ['orc', 'orc_warrior', 'goblin', 'centaur'],
     },
     iceCave: {
         name: '얼음 동굴', minDepth: 7, maxDepth: 14, chance: 0.1,
         depth: 1, bonusItems: 6, theme: 'cave', themeVariation: 1,
         flavour: '살을 에는 냉기가 새어 나온다',
+        monsters: ['ice_beast', 'simulacrum', 'ice_giant'],
     },
     gauntlet: {
         name: '건틀릿', minDepth: 9, maxDepth: 16, chance: 0.08,
         depth: 1, bonusItems: 8, theme: 'main', themeVariation: 2,
         flavour: '쇠창살 너머에서 미노타우로스의 발굽 소리가 난다',
+        monsters: ['orc_warrior', 'beast', 'gargoyle'],
+        boss: 'minotaur',
     },
     volcano: {
         name: '화산', minDepth: 9, maxDepth: 16, chance: 0.08,
         depth: 1, bonusItems: 7, theme: 'hell', themeVariation: 2,
         flavour: '뜨거운 재가 흩날리고 용암 냄새가 난다',
+        monsters: ['fire_demon', 'gargoyle', 'centaur', 'hell_knight'],
     },
 };
 
@@ -83,16 +94,19 @@ const EVENT_PORTALS = {
         // 다른 포탈과 달리 한 게임에 세 번까지 나타납니다.
         maxPerGame: 3, depth: 1, bonusItems: 6, theme: 'hell', themeVariation: 1,
         flavour: '유령들의 거처가 모습을 드러낸다',
+        monsters: ['spectre', 'skeleton', 'mummy', 'zombie'],
     },
     bazaar: {
         name: '시장', minDepth: 4, maxDepth: 20, chance: 0.12,
         depth: 1, bonusItems: 10, theme: 'main', themeVariation: 2,
         flavour: '흥정하는 소리와 함께 시장이 열렸다',
+        monsters: ['kobold', 'goblin', 'orc'],
     },
     treasureTrove: {
         name: '매장고', minDepth: 6, maxDepth: 22, chance: 0.07,
         depth: 1, bonusItems: 14, theme: 'main', themeVariation: 1,
         flavour: '값비싼 무언가가 잠긴 문 뒤에서 반짝인다',
+        monsters: ['gargoyle', 'hell_knight', 'demon'],
     },
 };
 
@@ -110,7 +124,11 @@ const DEFAULTS = {
 };
 
 /** @description 연구소는 후반에만, 낮은 확률로 나타납니다. */
-const WIZLAB_PLACEMENT = { minDepth: 13, maxDepth: 26, chance: 0.05, lifetimeMs: 120_000, theme: 'hell', themeVariation: 2 };
+const WIZLAB_PLACEMENT = {
+    minDepth: 13, maxDepth: 26, chance: 0.05, lifetimeMs: 120_000,
+    theme: 'hell', themeVariation: 2,
+    monsters: ['demon', 'hell_knight', 'spectre', 'gargoyle', 'fire_demon'],
+};
 
 /**
  * 정의 표들을 하나로 합치고 기본값을 채웁니다.

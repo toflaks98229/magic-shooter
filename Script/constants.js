@@ -93,6 +93,14 @@ export const SPAWN_MAX_ATTEMPTS = 200;
 export const SPAWN_MIN_DISTANCE_TILES = 5;
 
 /**
+ * @description 한 층에 배치할 수 있는 적의 최대 수.
+ *
+ * 적 수는 누적 깊이에 비례하는데, 서브 던전이 생기면서 깊이가 25를 넘게 되어
+ * 상한이 없으면 30x30 맵에 50마리 넘게 들어차게 됩니다.
+ */
+export const MAX_ENEMIES_PER_FLOOR = 30;
+
+/**
  * @description 시뮬레이션 한 스텝의 길이(ms).
  * 게임 로직은 실제 프레임 간격과 무관하게 항상 이 크기로만 전진합니다.
  * 덕분에 30FPS든 144FPS든 같은 시간에 같은 결과가 나옵니다.
@@ -219,17 +227,8 @@ export const OBJECT_TYPES = {
 
 
 // --- 엔티티(개체) 정의 ---
-
-/**
- * @description 적 유형별 속성을 정의한 객체.
- * spriteKey는 로드된 JSON 파일들 중 하나에 정의된 이름과 일치해야 합니다.
- */
-export const ENEMY_TYPES = {
-    MELEE_GRUNT:     { color: '#ff8c00', hp: 40, speed: 0.7, type: 'melee', damage: 10, cooldown: 1000, size: 20, spriteKey: 'enemy_grunt' },
-    MELEE_BERSERKER: { color: '#dc143c', hp: 80, speed: 1.2, type: 'melee', damage: 20, cooldown: 1500, size: 25, spriteKey: 'enemy_berserker' },
-    RANGED_IMP:      { color: '#9932cc', hp: 30, speed: 0.5, type: 'ranged', damage: 15, cooldown: 2000, projectileSpeed: 2.5, range: TILE_SIZE * 7, spriteKey: 'enemy_imp' },
-    RANGED_COMMANDO: { color: '#00ced1', hp: 60, speed: 0.3, type: 'ranged', damage: 10, cooldown: 1000, projectileSpeed: 4.0, range: TILE_SIZE * 10, spriteKey: 'enemy_commando' }
-};
+// 적의 정의는 monsters.js 로 옮겼습니다. 종류가 늘어나면서 상수 파일에 두기에는
+// 양이 많아졌고, 던전별 스폰 목록과 함께 관리되는 편이 자연스럽기 때문입니다.
 
 /**
  * @description 드랍 아이템 유형별 속성을 정의한 객체.

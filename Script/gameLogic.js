@@ -13,6 +13,7 @@ import { world } from './world.js';
 import { runtime } from './runtime.js';
 import { assets } from './assets.js';
 import { getBranch } from './branches.js';
+import { getMonster, availableMonsters, DEFAULT_SPAWN_TABLE } from './monsters.js';
 import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
 
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
@@ -167,10 +168,51 @@ export function attack() {
  * 현재 층(floor)에 맞는 수의 적들을 스폰합니다.
  */
 export function spawnEnemiesForFloor() {
-    // 가지 안에서의 층이 아니라 누적 깊이를 씁니다.
-    // 짐승굴 3층은 메인 3층이 아니라 메인 12층쯤의 위험도여야 하기 때문입니다.
-    const numEnemies = A.currentDangerLevel() * 2 + 3;
-    for (let i = 0; i < numEnemies; i++) spawnEnemy();
+    const dangerLevel = A.currentDangerLevel();
+    const dungeon = getBranch(world.branch);
+    const pool = availableMonsters(dungeon.monsters || DEFAULT_SPAWN_TABLE, dangerLevel);
+
+    const count = Math.min(C.MAX_ENEMIES_PER_FLOOR, dangerLevel * 2 + 3);
+    for (let i = 0; i < count; i++) {
+        const id = pool[Math.floor(Math.random() * pool.length)];
+        if (id) spawnMonster(id, findSpawnPoint());
+    }
+
+    // 보스가 지정된 던전은 최하층에 한 마리만 배치합니다.
+    if (dungeon.boss && world.floor >= dungeon.depth) {
+        spawnMonster(dungeon.boss, findSpawnPoint());
+    }
+}
+
+/**
+ * 지정한 몬스터를 특정 위치에 생성합니다.
+ * @param {string} id - monsters.js의 몬스터 id
+ * @param {{x: number, y: number}} position - 생성할 월드 좌표
+ * @returns {object|null} 생성된 적. 알 수 없는 id면 null.
+ */
+export function spawnMonster(id, position) {
+    const template = getMonster(id);
+    if (!template) {
+        console.warn(`알 수 없는 몬스터: ${id}`);
+        return null;
+    }
+
+    const enemy = {
+        ...template,
+        monsterId: id,
+        x: position.x, y: position.y, z: C.TILE_SIZE / 2,
+        maxHp: template.hp,
+        // 스폰 직후 쿨다운에 걸리지 않도록 과거 시각으로 둡니다.
+        lastAttackTime: C.PAST_TIME,
+        lastHitTime: 0,
+    };
+
+    // 행동별로 필요한 상태를 붙입니다.
+    if (template.behavior === 'exploder') enemy.fuseStartedAt = null;
+    if (template.behavior === 'summoner') enemy.summonedCount = 0;
+
+    world.enemies.push(enemy);
+    return enemy;
 }
 
 /**
@@ -221,6 +263,79 @@ export function interactWithWorld() {
     }
 }
 
+
+// --- 적 행동 (Behaviours) ---
+//
+// 행동을 if/else 로 늘리면 유형이 많아질수록 손댈 수 없게 됩니다.
+// 이름으로 찾아 실행하는 표로 두어, 새 행동을 더할 때 항목 하나만 추가하면 되게 합니다.
+// monsters.js 의 behavior 값이 이 표의 키와 일치해야 합니다.
+
+/**
+ * @description 행동별 처리기. 각 처리기는 (enemy, context)를 받습니다.
+ * context: { now, dtFactor, player, distance, dx, dy }
+ */
+const ENEMY_BEHAVIORS = {
+    /** 붙어서 때린다 */
+    melee(enemy, { now, distance }) {
+        if (distance >= C.TILE_SIZE) return;
+        if (now - enemy.lastAttackTime <= enemy.cooldown) return;
+
+        enemy.lastAttackTime = now;
+        A.damagePlayer(enemy.damage, enemy);
+    },
+
+    /** 사거리 안에서 발사체를 쏜다 */
+    ranged(enemy, { now, distance, dx, dy }) {
+        if (distance >= enemy.range) return;
+        if (now - enemy.lastAttackTime <= enemy.cooldown) return;
+
+        enemy.lastAttackTime = now;
+        world.projectiles.push({
+            x: enemy.x, y: enemy.y, z: C.TILE_SIZE / 2,
+            angle: Math.atan2(dy, dx),
+            speed: enemy.projectileSpeed, damage: enemy.damage,
+            size: C.PROJECTILE_TYPES.ENEMY_FIREBALL.size, from: 'enemy',
+            spriteKey: C.PROJECTILE_TYPES.ENEMY_FIREBALL.spriteKey,
+        });
+    },
+
+    /**
+     * 가까워지면 점화하고, 잠시 뒤 터지며 스스로 사라진다.
+     * 점화한 뒤에는 물러나도 늦으므로, 다가오는 것을 미리 처리해야 합니다.
+     */
+    exploder(enemy, { now, distance }) {
+        if (enemy.fuseStartedAt === null || enemy.fuseStartedAt === undefined) {
+            if (distance < C.TILE_SIZE * 1.2) enemy.fuseStartedAt = now;
+            return;
+        }
+        if (now - enemy.fuseStartedAt < enemy.fuseMs) return;
+
+        if (distance < enemy.blastRadius) {
+            // 중심에서 멀수록 피해가 줄어듭니다.
+            const falloff = 1 - distance / enemy.blastRadius;
+            A.damagePlayer(Math.round(enemy.blastDamage * falloff), enemy);
+        }
+        createParticleExplosion(enemy.x, enemy.y, enemy.color);
+        enemy.hp = 0; // 이번 프레임의 사망 처리에서 정리됩니다.
+    },
+
+    /** 근접 공격을 하면서 주기적으로 하수인을 부른다 */
+    summoner(enemy, context) {
+        ENEMY_BEHAVIORS.melee(enemy, context);
+
+        const { now, distance } = context;
+        if (distance > C.TILE_SIZE * 12) return;                  // 너무 멀면 부르지 않음
+        if (enemy.summonedCount >= enemy.maxSummons) return;
+        if (now - (enemy.lastSummonTime ?? C.PAST_TIME) <= enemy.summonCooldown) return;
+
+        enemy.lastSummonTime = now;
+        enemy.summonedCount++;
+        spawnMonster(enemy.summonId, {
+            x: enemy.x + (Math.random() - 0.5) * C.TILE_SIZE,
+            y: enemy.y + (Math.random() - 0.5) * C.TILE_SIZE,
+        });
+    },
+};
 
 // --- 경로 탐색: 플로우 필드 (Flow Field) ---
 //
@@ -476,33 +591,20 @@ function updateEnemies(now, dtFactor) {
     // 모든 적이 같은 목표(플레이어)를 향하므로 경로는 프레임당 한 번만 계산하면 됩니다.
     ensureFlowField();
 
-    world.enemies.forEach(enemy => {
-        const dx_player = player.x - enemy.x;
-        const dy_player = player.y - enemy.y;
-        const dist_player = Math.hypot(dx_player, dy_player);
+    // 소환으로 배열이 늘어날 수 있으므로 길이를 미리 고정해 순회합니다.
+    // 이번 프레임에 태어난 하수인은 다음 프레임부터 움직입니다.
+    const count = world.enemies.length;
+    for (let i = 0; i < count; i++) {
+        const enemy = world.enemies[i];
+        const dx = player.x - enemy.x;
+        const dy = player.y - enemy.y;
+        const distance = Math.hypot(dx, dy);
 
         followFlowField(enemy, dtFactor);
 
-        // --- 공격 AI (플레이어와의 직접적인 거리를 기반으로) ---
-        if (enemy.type === 'melee' && dist_player < C.TILE_SIZE) { // 근접 타입
-            if (now - enemy.lastAttackTime > enemy.cooldown) {
-                enemy.lastAttackTime = now;
-                A.damagePlayer(enemy.damage, enemy);
-            }
-        } else if (enemy.type === 'ranged' && dist_player < enemy.range) { // 원거리 타입
-            if (now - enemy.lastAttackTime > enemy.cooldown) {
-                enemy.lastAttackTime = now;
-                const angle = Math.atan2(dy_player, dx_player);
-                // 발사체를 생성하여 배열에 추가합니다.
-                world.projectiles.push({
-                    x: enemy.x, y: enemy.y, z: C.TILE_SIZE / 2, angle,
-                    speed: enemy.projectileSpeed, damage: enemy.damage,
-                    size: C.PROJECTILE_TYPES.ENEMY_FIREBALL.size, from: 'enemy',
-                    spriteKey: C.PROJECTILE_TYPES.ENEMY_FIREBALL.spriteKey
-                });
-            }
-        }
-    });
+        const behave = ENEMY_BEHAVIORS[enemy.behavior];
+        if (behave) behave(enemy, { now, dtFactor, player, distance, dx, dy });
+    }
 }
 
 /**
@@ -559,25 +661,6 @@ function handleEnemyDeaths() {
             A.killEnemyAt(i);
         }
     }
-}
-
-/**
- * 무작위 유형의 적 한 마리를 맵의 안전한 위치(벽이 아니고 플레이어와 떨어진 곳)에 스폰합니다.
- */
-function spawnEnemy() {
-    const { x, y } = findSpawnPoint(); // 스폰 위치 탐색
-    const enemyTypes = Object.keys(C.ENEMY_TYPES);
-    const typeKey = enemyTypes[Math.floor(Math.random() * enemyTypes.length)]; // 스폰할 적 유형 무작위 선택
-    const template = C.ENEMY_TYPES[typeKey];
-    // 적 객체를 생성하여 배열에 추가
-    world.enemies.push({
-        ...template,
-        x, y, z: C.TILE_SIZE / 2,
-        maxHp: template.hp,
-        // 스폰 직후 쿨다운에 걸리지 않도록 과거 시각으로 둡니다.
-        lastAttackTime: C.PAST_TIME,
-        lastHitTime: 0,
-    });
 }
 
 /**

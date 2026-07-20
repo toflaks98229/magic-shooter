@@ -16,6 +16,7 @@
  *   rune      - 최하층에서 룬을 얻을 수 있는지
  *   theme     - 렌더링에 쓸 테마 이름 (assets에 실제로 있는 것이어야 합니다)
  *   themeVariation - 테마 변형 번호
+ *   monsters  - 이 던전에서 나오는 몬스터 목록 (monsters.js의 id)
  *   exclusiveGroup - 같은 그룹의 가지 중 한 판에 하나만 생성됩니다.
  *                    늪지와 해안, 뱀굴과 거미 둥지가 그렇습니다.
  *                    넷 다 나오면 룬을 너무 쉽게 모으게 됩니다.
@@ -29,70 +30,83 @@ export const BRANCHES = {
         id: 'D', name: '메인 던전', parent: null,
         entryFrom: 0, entryTo: 0, depth: 15, rune: false,
         theme: 'main', themeVariation: 1,
+        monsters: ['rat', 'kobold', 'goblin', 'snake', 'zombie', 'skeleton', 'orc', 'imp', 'orc_warrior', 'centaur', 'gargoyle', 'hell_knight'],
     },
     T: {
         id: 'T', name: '만신전', parent: 'D',
         entryFrom: 4, entryTo: 7, depth: 1, rune: false,
         theme: 'main', themeVariation: 2,
+        monsters: ['zombie', 'skeleton', 'imp'],
     },
     L: {
         id: 'L', name: '짐승굴', parent: 'D',
         entryFrom: 8, entryTo: 11, depth: 5, rune: false,
         theme: 'cave', themeVariation: 1,
+        monsters: ['beast', 'spider', 'snake', 'frog', 'hydra'],
     },
     S: {
         id: 'S', name: '늪지', parent: 'L',
         entryFrom: 2, entryTo: 3, depth: 4, rune: true,
         theme: 'cave', themeVariation: 2,
         exclusiveGroup: 'lair-wet',
+        monsters: ['frog', 'snake', 'slime', 'hydra', 'spider'],
     },
     A: {
         id: 'A', name: '해안', parent: 'L',
         entryFrom: 2, entryTo: 3, depth: 4, rune: true,
         theme: 'cave', themeVariation: 2,
         exclusiveGroup: 'lair-wet',
+        monsters: ['frog', 'centaur', 'beast', 'hydra'],
     },
     P: {
         id: 'P', name: '뱀굴', parent: 'L',
         entryFrom: 2, entryTo: 3, depth: 4, rune: true,
         theme: 'cave', themeVariation: 1,
         exclusiveGroup: 'lair-crawl',
+        monsters: ['snake', 'hydra', 'spider', 'beast'],
     },
     N: {
         id: 'N', name: '거미 둥지', parent: 'L',
         entryFrom: 2, entryTo: 3, depth: 4, rune: true,
         theme: 'cave', themeVariation: 2,
         exclusiveGroup: 'lair-crawl',
+        monsters: ['spider', 'beast', 'slime'],
     },
     M: {
         id: 'M', name: '슬라임굴', parent: 'L',
         entryFrom: 4, entryTo: 5, depth: 5, rune: true,
         theme: 'cave', themeVariation: 2,
+        monsters: ['slime', 'simulacrum', 'beast'],
     },
     O: {
         id: 'O', name: '오크 광산', parent: 'D',
         entryFrom: 9, entryTo: 12, depth: 2, rune: false,
         theme: 'main', themeVariation: 2,
+        monsters: ['orc', 'orc_warrior', 'goblin', 'centaur'],
     },
     E: {
         id: 'E', name: '엘프 회관', parent: 'O',
         entryFrom: 2, entryTo: 2, depth: 3, rune: false,
         theme: 'main', themeVariation: 1,
+        monsters: ['orc_warrior', 'imp', 'spectre', 'demon'],
     },
     V: {
         id: 'V', name: '보물창고', parent: 'D',
         entryFrom: 13, entryTo: 14, depth: 5, rune: true,
         theme: 'main', themeVariation: 2,
+        monsters: ['orc_warrior', 'gargoyle', 'hell_knight', 'centaur'],
     },
     C: {
         id: 'C', name: '납골당', parent: 'V',
         entryFrom: 2, entryTo: 3, depth: 3, rune: false,
         theme: 'main', themeVariation: 1,
+        monsters: ['zombie', 'skeleton', 'mummy', 'spectre'],
     },
     W: {
         id: 'W', name: '고대의 무덤', parent: 'C',
         entryFrom: 3, entryTo: 3, depth: 3, rune: true,
         theme: 'hell', themeVariation: 2,
+        monsters: ['mummy', 'spectre', 'skeleton', 'demon'],
     },
     U: {
         id: 'U', name: '심층부', parent: 'D',
@@ -100,36 +114,43 @@ export const BRANCHES = {
         // 그대로 두면 조트에 갈 수 없습니다. DCSS 원작대로 5층으로 맞췄습니다.
         entryFrom: 15, entryTo: 15, depth: 5, rune: false,
         theme: 'hell', themeVariation: 2,
+        monsters: ['hell_knight', 'demon', 'gargoyle', 'ice_giant'],
     },
     H: {
         id: 'H', name: '지옥의 안뜰', parent: 'U',
         entryFrom: 1, entryTo: 4, depth: 1, rune: false,
         theme: 'hell', themeVariation: 1,
+        monsters: ['imp', 'fire_demon', 'hell_knight'],
     },
     X: {
         id: 'X', name: '코키투스', parent: 'H',
         entryFrom: 1, entryTo: 1, depth: 7, rune: true,
         theme: 'hell', themeVariation: 1,
+        monsters: ['ice_giant', 'simulacrum', 'ice_beast', 'spectre'],
     },
     G: {
         id: 'G', name: '게헨나', parent: 'H',
         entryFrom: 1, entryTo: 1, depth: 7, rune: true,
         theme: 'hell', themeVariation: 1,
+        monsters: ['fire_demon', 'hell_knight', 'gargoyle'],
     },
     Y: {
         id: 'Y', name: '타르타로스', parent: 'H',
         entryFrom: 1, entryTo: 1, depth: 7, rune: true,
         theme: 'hell', themeVariation: 2,
+        monsters: ['spectre', 'demon', 'mummy'],
     },
     I: {
         id: 'I', name: '철의 도시 디스', parent: 'H',
         entryFrom: 1, entryTo: 1, depth: 7, rune: true,
         theme: 'hell', themeVariation: 1,
+        monsters: ['hell_knight', 'gargoyle', 'demon'],
     },
     Z: {
         id: 'Z', name: '조트의 왕국', parent: 'U',
         entryFrom: 5, entryTo: 5, depth: 5, rune: true,
         theme: 'hell', themeVariation: 2,
+        monsters: ['demon', 'hell_knight', 'ice_giant', 'hydra'],
     },
 };
 

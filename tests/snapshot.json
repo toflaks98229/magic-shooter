@@ -1,7 +1,7 @@
 {
   "frames": 1800,
   "stats": {
-    "sounds": 76,
+    "sounds": 81,
     "gameOvers": 2,
     "floors": 2,
     "attacks": 180,
@@ -13,65 +13,65 @@
   "floor": 2,
   "weapon": "fist",
   "player": {
-    "x": 432,
-    "y": 368,
+    "x": 816,
+    "y": 464,
     "angle": 8.85,
-    "hp": 50,
+    "hp": 45,
     "ammo": 0
   },
   "counts": {
     "enemies": 7,
     "items": 0,
     "projectiles": 0,
-    "particles": 0,
+    "particles": 10,
     "animatedWalls": 0
   },
   "enemies": [
     {
-      "sprite": "enemy_berserker",
-      "x": 425.124847303,
-      "y": 382.972500508,
-      "hp": 80
+      "sprite": "enemy_rat",
+      "x": 800.540820267,
+      "y": 456.435465298,
+      "hp": 14
     },
     {
-      "sprite": "enemy_grunt",
-      "x": 463.994562593,
-      "y": 498.135026419,
+      "sprite": "enemy_goblin",
+      "x": 815.96741369,
+      "y": 479.770103926,
+      "hp": 28
+    },
+    {
+      "sprite": "enemy_orc",
+      "x": 648.576376835,
+      "y": 498.090661764,
+      "hp": 48
+    },
+    {
+      "sprite": "enemy_zombie",
+      "x": 773.284702609,
+      "y": 486.185602829,
       "hp": 40
     },
     {
-      "sprite": "enemy_commando",
-      "x": 816.018840944,
-      "y": 693.908687011,
-      "hp": 60
-    },
-    {
-      "sprite": "enemy_grunt",
-      "x": 447.559143709,
-      "y": 360.823602314,
-      "hp": 40
-    },
-    {
-      "sprite": "enemy_grunt",
-      "x": 367.912050337,
-      "y": 575.419081797,
-      "hp": 40
-    },
-    {
-      "sprite": "enemy_grunt",
-      "x": 447.992837947,
-      "y": 359.415851288,
-      "hp": 40
+      "sprite": "enemy_snake",
+      "x": 704.485067469,
+      "y": 496.251785443,
+      "hp": 26
     },
     {
       "sprite": "enemy_imp",
-      "x": 463.999435397,
-      "y": 596.29643322,
+      "x": 800.168379591,
+      "y": 471.743835913,
       "hp": 30
+    },
+    {
+      "sprite": "enemy_orc",
+      "x": 831.42444909,
+      "y": 471.435518229,
+      "hp": 48
     }
   ],
   "items": [],
-  "mapChecksum": 192374,
+  "mapChecksum": 212202,
   "objectMapChecksum": 0,
   "serializable": true
 }

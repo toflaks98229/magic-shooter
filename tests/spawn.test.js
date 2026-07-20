@@ -35,10 +35,10 @@ function setupWorld(map, playerTileX, playerTileY) {
 
 test('넓은 맵에서는 항상 바닥이면서 플레이어와 떨어진 곳에 스폰한다', () => {
     setupWorld(grid(30, 30, 0), 15, 15);
-    worldModule.world.floor = 20; // 층이 높을수록 많이 스폰된다 (floor * 2 + 3 = 43마리)
+    worldModule.world.floor = 20; // 깊을수록 많이 스폰되지만 MAX_ENEMIES_PER_FLOOR 로 상한이 걸립니다
     spawnEnemiesForFloor();
 
-    assert.equal(worldModule.world.enemies.length, 43);
+    assert.equal(worldModule.world.enemies.length, C.MAX_ENEMIES_PER_FLOOR);
     const minDistance = TILE * C.SPAWN_MIN_DISTANCE_TILES;
     for (const enemy of worldModule.world.enemies) {
         const tileX = Math.floor(enemy.x / TILE);

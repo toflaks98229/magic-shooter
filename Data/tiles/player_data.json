@@ -1,19 +1,152 @@
 {
   "sheetFile": "player.png",
   "sprites": {
-    "enemy_grunt": {
-      "x": 468,
+    "enemy_rat": {
+      "x": 92,
+      "y": 188,
+      "w": 32,
+      "h": 39,
+      "color": "#59432d"
+    },
+    "enemy_kobold": {
+      "x": 0,
+      "y": 188,
+      "w": 31,
+      "h": 40,
+      "color": "#46311c"
+    },
+    "enemy_snake": {
+      "x": 969,
+      "y": 96,
+      "w": 32,
+      "h": 39,
+      "color": "#1d391e"
+    },
+    "enemy_frog": {
+      "x": 905,
       "y": 96,
       "w": 32,
       "h": 40,
-      "color": "#461a0b"
+      "color": "#0b2746"
     },
-    "enemy_berserker": {
+    "enemy_beast": {
+      "x": 281,
+      "y": 188,
+      "w": 32,
+      "h": 39,
+      "color": "#292929"
+    },
+    "enemy_spider": {
+      "x": 747,
+      "y": 142,
+      "w": 31,
+      "h": 39,
+      "color": "#2f1c40"
+    },
+    "enemy_hydra": {
+      "x": 320,
+      "y": 1446,
+      "w": 32,
+      "h": 36,
+      "color": "#6e635c"
+    },
+    "enemy_slime": {
+      "x": 341,
+      "y": 142,
+      "w": 32,
+      "h": 40,
+      "color": "#272e16"
+    },
+    "enemy_goblin": {
+      "x": 216,
+      "y": 142,
+      "w": 32,
+      "h": 39,
+      "color": "#3e3f1f"
+    },
+    "enemy_orc": {
+      "x": 0,
+      "y": 142,
+      "w": 32,
+      "h": 40,
+      "color": "#2b441f"
+    },
+    "enemy_orc_warrior": {
       "x": 437,
       "y": 96,
       "w": 31,
       "h": 39,
       "color": "#40150c"
+    },
+    "enemy_centaur": {
+      "x": 874,
+      "y": 142,
+      "w": 32,
+      "h": 40,
+      "color": "#4f4031"
+    },
+    "enemy_zombie": {
+      "x": 623,
+      "y": 188,
+      "w": 31,
+      "h": 39,
+      "color": "#2e2e2e"
+    },
+    "enemy_skeleton": {
+      "x": 967,
+      "y": 142,
+      "w": 31,
+      "h": 38,
+      "color": "#413120"
+    },
+    "enemy_mummy": {
+      "x": 343,
+      "y": 326,
+      "w": 32,
+      "h": 39,
+      "color": "#525e1a"
+    },
+    "enemy_spectre": {
+      "x": 534,
+      "y": 1078,
+      "w": 32,
+      "h": 43,
+      "color": "#7488ac"
+    },
+    "enemy_ice_beast": {
+      "x": 532,
+      "y": 96,
+      "w": 32,
+      "h": 39,
+      "color": "#121d42"
+    },
+    "enemy_simulacrum": {
+      "x": 564,
+      "y": 96,
+      "w": 32,
+      "h": 40,
+      "color": "#0e2b5d"
+    },
+    "enemy_ice_giant": {
+      "x": 874,
+      "y": 96,
+      "w": 31,
+      "h": 39,
+      "color": "#0c1c40"
+    },
+    "enemy_gargoyle": {
+      "x": 842,
+      "y": 142,
+      "w": 32,
+      "h": 39,
+      "color": "#332e28"
+    },
+    "enemy_fire_demon": {
+      "x": 468,
+      "y": 96,
+      "w": 32,
+      "h": 40,
+      "color": "#461a0b"
     },
     "enemy_imp": {
       "x": 437,
@@ -22,12 +155,40 @@
       "h": 40,
       "color": "#452b5d"
     },
-    "enemy_commando": {
-      "x": 0,
+    "enemy_hell_knight": {
+      "x": 343,
       "y": 96,
-      "w": 31,
+      "w": 32,
       "h": 39,
-      "color": "#1c3d2f"
+      "color": "#632913"
+    },
+    "enemy_demon": {
+      "x": 405,
+      "y": 142,
+      "w": 32,
+      "h": 39,
+      "color": "#301d42"
+    },
+    "enemy_menkaure": {
+      "x": 375,
+      "y": 326,
+      "w": 32,
+      "h": 40,
+      "color": "#5d7114"
+    },
+    "enemy_purgy": {
+      "x": 698,
+      "y": 48,
+      "w": 32,
+      "h": 40,
+      "color": "#2b583f"
+    },
+    "enemy_minotaur": {
+      "x": 529,
+      "y": 188,
+      "w": 32,
+      "h": 39,
+      "color": "#4e4e4e"
     }
   }
 }
