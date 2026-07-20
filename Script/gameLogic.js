@@ -232,7 +232,7 @@ function isPassable(x, y) {
  * @param {number} y2 - 목표 월드 Y 좌표
  * @returns {boolean} 시야가 통하면 true
  */
-function hasLineOfSight(x1, y1, x2, y2) {
+export function hasLineOfSight(x1, y1, x2, y2) {
     const posX = x1 / C.TILE_SIZE, posY = y1 / C.TILE_SIZE;
     const dx = x2 - x1, dy = y2 - y1;
     const dist = Math.hypot(dx, dy);

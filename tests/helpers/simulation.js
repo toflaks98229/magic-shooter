@@ -1,0 +1,184 @@
+/**
+ * @fileoverview 결정론적 헤드리스 시뮬레이션.
+ *
+ * 시드 난수와 가상 시계로 게임 루프를 재현하고, 끝에 월드 상태의 스냅샷을 반환합니다.
+ * 같은 시드로 몇 번을 돌려도 결과가 완전히 동일하므로, 스냅샷이 바뀌었다는 것은
+ * 곧 시뮬레이션 동작이 바뀌었다는 뜻입니다. (regression.test.js가 이를 이용합니다.)
+ *
+ * 시나리오는 아래 경로를 의도적으로 모두 통과합니다.
+ *   이동 4방향 · 벽 충돌 · 시점 회전 · 공격(총→탄약 소진→주먹) · 무기 교체 연출
+ *   적 BFS 추적 · 근접/원거리 공격 · 발사체 · 파티클 · 아이템 드랍과 획득
+ *   문 열기 2회(애니메이션 벽) · 층 전환 · HUD 갱신
+ */
+
+import {
+    installBrowserStubs, seedRandom, installClock, advanceClock,
+    currentTime, fireDocumentEvent, bindStubDom,
+} from './browser-stubs.js';
+
+/** @description 시뮬레이션 시드. 바꾸면 스냅샷도 함께 갱신해야 합니다. */
+const SEED = 0x5EED1234;
+/** @description 재생할 프레임 수 (60FPS 기준 30초) */
+const FRAMES = 1800;
+/** @description 한 프레임의 길이(ms) */
+const FRAME_MS = 1000 / 60;
+/** @description 이동 키를 순환시킬 주기(프레임) */
+const PHASE_FRAMES = 150;
+/** @description 순환시킬 이동 키 */
+const MOVE_KEYS = ['KeyW', 'KeyD', 'KeyS', 'KeyA'];
+
+/**
+ * 시뮬레이션을 처음부터 실행하고 결과 스냅샷을 반환합니다.
+ * @returns {Promise<object>} 월드 상태 스냅샷
+ */
+export async function runSimulation() {
+    installBrowserStubs();
+    seedRandom(SEED);
+    installClock();
+
+    // 스텁을 세운 뒤에 게임 모듈을 불러와야 window/document 참조가 성립합니다.
+    const C = await import('../../Script/constants.js');
+    const { world, serializeWorld } = await import('../../Script/world.js');
+    const { dom } = await import('../../Script/dom.js');
+    const events = await import('../../Script/events.js');
+    const actions = await import('../../Script/actions.js');
+    const gameLogic = await import('../../Script/gameLogic.js');
+    const input = await import('../../Script/input.js');
+    const ui = await import('../../Script/ui.js');
+    const audio = await import('../../Script/audio.js');
+    const { generateDungeon } = await import('../../Script/mapGenerator.js');
+
+    bindStubDom(dom);
+
+    // 실제 게임과 동일하게 각 계층을 이벤트에 연결합니다.
+    gameLogic.registerGameplayHandlers();
+    ui.registerUiHandlers();
+    audio.registerAudioHandlers();
+
+    const stats = { sounds: 0, gameOvers: 0, floors: 1, attacks: 0, interacts: 0, doorsOpened: 0 };
+
+    // 사운드 재생은 audioCtx가 없어 실제로는 일어나지 않으므로,
+    // audio.js의 매핑과 동일한 이벤트를 구독해 '몇 번 울렸어야 하는지'를 센다.
+    const E = events.EVENTS;
+    for (const type of [E.ENEMY_HIT, E.PLAYER_DAMAGED, E.ITEM_PICKED_UP, E.WEAPON_CHANGED, E.DOOR_OPENED]) {
+        events.on(type, () => { stats.sounds++; });
+    }
+    events.on(E.WEAPON_FIRED, ({ weapon }) => {
+        if (C.WEAPONS[weapon]?.sound) stats.sounds++;
+    });
+
+    // main.js가 담당하는 흐름 제어를 테스트용으로 대체한다.
+    events.on(E.PLAYER_DIED, () => {
+        stats.gameOvers++;
+        world.player.hp = world.player.maxHp; // 시뮬레이션을 계속 이어가기 위해 부활
+    });
+    events.on(E.EXIT_REACHED, () => {
+        stats.floors++;
+        world.floor += 1;
+        buildFloor();
+    });
+
+    function buildFloor() {
+        const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
+        world.map = dungeon.map;
+        world.objectMap = dungeon.objectMap;
+        world.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;
+        world.player.y = dungeon.playerStart.y * C.TILE_SIZE + C.TILE_SIZE / 2;
+        for (const list of [world.enemies, world.items, world.projectiles,
+        world.particles, world.animatedObjects, world.animatedWalls]) list.length = 0;
+        gameLogic.spawnEnemiesForFloor();
+    }
+
+    /**
+     * 문 앞에 플레이어를 세우고 상호작용시킨다.
+     * 무작위 배회만으로는 문을 만나지 못하는 경우가 많아 명시적으로 통과시킨다.
+     */
+    function openNearestDoor() {
+        for (let y = 0; y < world.objectMap.length; y++) {
+            for (let x = 0; x < world.objectMap[y].length; x++) {
+                if (world.objectMap[y][x] !== 1) continue;
+                world.player.x = (x - 1) * C.TILE_SIZE + C.TILE_SIZE / 2; // 문의 서쪽 칸
+                world.player.y = y * C.TILE_SIZE + C.TILE_SIZE / 2;
+                world.player.angle = 0;                                    // 동쪽을 바라봄
+                gameLogic.interactWithWorld();
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    input.setupInputHandlers();
+    actions.setGameRunning(true);
+    world.floor = 1;
+    buildFloor();
+
+    let heldKey = null;
+    for (let frame = 0; frame < FRAMES; frame++) {
+        // 이동 키를 순환시켜 4방향 이동과 벽 충돌을 모두 통과시킨다.
+        const wantKey = MOVE_KEYS[Math.floor(frame / PHASE_FRAMES) % MOVE_KEYS.length];
+        if (wantKey !== heldKey) {
+            if (heldKey) fireDocumentEvent('keyup', { code: heldKey });
+            fireDocumentEvent('keydown', { code: wantKey });
+            heldKey = wantKey;
+        }
+
+        world.player.angle += 0.013; // 마우스 시점 회전과 동일한 경로
+
+        if (frame % 10 === 0) { gameLogic.attack(); stats.attacks++; }
+        if (frame % 97 === 0) { gameLogic.interactWithWorld(); stats.interacts++; }
+        if (frame === 600) stats.doorsOpened += openNearestDoor();
+        if (frame === 1200) events.emit(E.EXIT_REACHED, { floor: world.floor });
+        if (frame === 1210) stats.doorsOpened += openNearestDoor();
+
+        advanceClock(FRAME_MS);
+        gameLogic.update(FRAME_MS);
+        ui.updateHUD();
+    }
+
+    return buildSnapshot({ world, serializeWorld, stats });
+}
+
+/**
+ * 부동소수 오차가 아닌 실제 동작 변화만 잡도록 값을 정리해 스냅샷을 만듭니다.
+ * @param {object} context - 시뮬레이션 결과
+ * @returns {object} 비교 가능한 스냅샷
+ */
+function buildSnapshot({ world, serializeWorld, stats }) {
+    const round = (n) => Number.isFinite(n) ? Number(n.toFixed(9)) : String(n);
+    const checksum = (values) => values.reduce((acc, v, i) => (acc + v * (i + 1)) % 2147483647, 0);
+
+    return {
+        frames: FRAMES,
+        stats,
+        virtualTime: currentTime(),
+        floor: world.floor,
+        weapon: world.player.weapon,
+        player: {
+            x: round(world.player.x),
+            y: round(world.player.y),
+            angle: round(world.player.angle),
+            hp: round(world.player.hp),
+            ammo: world.player.ammo,
+        },
+        counts: {
+            enemies: world.enemies.length,
+            items: world.items.length,
+            projectiles: world.projectiles.length,
+            particles: world.particles.length,
+            animatedWalls: world.animatedWalls.length,
+        },
+        enemies: world.enemies.map(e => ({
+            sprite: e.spriteKey,
+            x: round(e.x), y: round(e.y), hp: round(e.hp),
+            path: e.path ? e.path.length : null,
+        })),
+        items: world.items.map(i => ({ type: i.type, x: round(i.x), y: round(i.y) })),
+        mapChecksum: checksum(world.map.flat()),
+        objectMapChecksum: checksum(world.objectMap.flat()),
+        // 월드가 통째로 직렬화되는지도 함께 확인합니다(리팩토링의 핵심 목표).
+        serializable: (() => {
+            try { serializeWorld(); return true; }
+            catch (error) { return String(error.message); }
+        })(),
+    };
+}

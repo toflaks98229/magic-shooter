@@ -1,0 +1,83 @@
+{
+  "frames": 1800,
+  "stats": {
+    "sounds": 54,
+    "gameOvers": 0,
+    "floors": 2,
+    "attacks": 180,
+    "interacts": 19,
+    "doorsOpened": 2
+  },
+  "virtualTime": 1029999.9999999302,
+  "floor": 2,
+  "weapon": "fist",
+  "player": {
+    "x": 670.74979674,
+    "y": 340.702738453,
+    "angle": 7.657,
+    "hp": 100,
+    "ammo": 0
+  },
+  "counts": {
+    "enemies": 7,
+    "items": 0,
+    "projectiles": 1,
+    "particles": 0,
+    "animatedWalls": 0
+  },
+  "enemies": [
+    {
+      "sprite": "enemy_commando",
+      "x": 663.491406762,
+      "y": 449.762214715,
+      "hp": 60,
+      "path": 4
+    },
+    {
+      "sprite": "enemy_imp",
+      "x": 541.877448582,
+      "y": 271.99999941,
+      "hp": 30,
+      "path": 6
+    },
+    {
+      "sprite": "enemy_commando",
+      "x": 304.000015569,
+      "y": 665.406491697,
+      "hp": 60,
+      "path": 20
+    },
+    {
+      "sprite": "enemy_grunt",
+      "x": 646.402935258,
+      "y": 451.806028303,
+      "hp": 40,
+      "path": 4
+    },
+    {
+      "sprite": "enemy_berserker",
+      "x": 243.609204113,
+      "y": 432.714778762,
+      "hp": 80,
+      "path": 12
+    },
+    {
+      "sprite": "enemy_berserker",
+      "x": 168.736304641,
+      "y": 831.040145382,
+      "hp": 80,
+      "path": null
+    },
+    {
+      "sprite": "enemy_grunt",
+      "x": 136.65831238,
+      "y": 726.596596241,
+      "hp": 40,
+      "path": null
+    }
+  ],
+  "items": [],
+  "mapChecksum": 210396,
+  "objectMapChecksum": 1044,
+  "serializable": true
+}
