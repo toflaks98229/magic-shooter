@@ -153,6 +153,12 @@ export function createWorld() {
          */
         vaults: [],
 
+        /**
+         * @description 이번 층에 걸린 기믹들.
+         * 밟으면 벽이 열리는 것, 다가가면 알리는 것 같은 사건들입니다.
+         */
+        triggers: [],
+
         /** @description 현재 맵에 존재하는 모든 적 */
         enemies: [],
         /** @description 현재 맵에 존재하는 모든 발사체 */
@@ -182,7 +188,7 @@ export function createWorld() {
 export const FLOOR_SCOPED_COLLECTIONS = [
     'enemies', 'projectiles', 'items', 'particles',
     'animatedObjects', 'animatedWalls',
-    'entrances', 'altars', 'portals', 'vaults',
+    'entrances', 'altars', 'portals', 'vaults', 'triggers',
 ];
 
 /**

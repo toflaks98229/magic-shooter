@@ -19,6 +19,7 @@ import { modifier, invalidateCharacter, isForbidden, aptitudeFor } from './chara
 import { gainExperience, exercise } from './dcss/training.js';
 import { GODS, MAX_PIETY, pietyRank, startingPiety, canWorship } from './gods.js';
 import { SPECIES } from './species.js';
+import { addTrigger, checkDeathTriggers, TRIGGER_ON, TRIGGER_DO } from './triggers.js';
 
 // --- 게임 진행 상태 ---------------------------------------------------------
 
@@ -62,6 +63,35 @@ export function beginFloor(dungeon) {
     // 이 층에 찍힌 볼트 기록. 볼트가 지정한 자리에 몬스터를 놓을 때 씁니다.
     // 비우기(FLOOR_SCOPED_COLLECTIONS)가 위에서 이미 지나갔으므로 여기서 채웁니다.
     world.vaults.push(...(dungeon.vaults ?? []));
+    installVaultTriggers(dungeon.vaults ?? []);
+}
+
+/**
+ * 볼트가 남긴 기믹 자리로 실제 트리거를 겁니다.
+ *
+ * 원본의 쥐덫 볼트가 이 모양입니다. 복도에 압력판이 있고 그 옆 벽 안에
+ * 쥐들이 갇혀 있습니다. 밟으면 벽이 열리며 쏟아집니다.
+ * 압력판과 열릴 벽이 한 볼트 안에 함께 있을 때만 겁니다. 둘 중 하나만
+ * 있으면 무엇과 무엇을 잇는지 알 수 없습니다.
+ * @param {Array<object>} vaults - 이 층에 찍힌 볼트들
+ */
+function installVaultTriggers(vaults) {
+    for (const vault of vaults) {
+        if (!vault.plates?.length || !vault.sealed?.length) continue;
+
+        for (const plate of vault.plates) {
+            addTrigger({
+                on: TRIGGER_ON.ENTER,
+                action: TRIGGER_DO.CHANGE_TERRAIN,
+                tileX: plate.tileX,
+                tileY: plate.tileY,
+                data: {
+                    spots: vault.sealed,
+                    becomes: 'FLOOR',
+                },
+            });
+        }
+    }
 }
 
 /**
@@ -277,6 +307,9 @@ export function killEnemyAt(index) {
     if (deadEnemy.exp > 0) gainExperience(world.player.skills, deadEnemy.exp, aptitudeFor);
 
     gainPietyFromKill(deadEnemy);
+
+    // 우두머리가 죽으면 길이 열리는 식의 기믹이 여기서 터집니다.
+    checkDeathTriggers(deadEnemy.monsterId);
 
     emit(EVENTS.ENEMY_DIED, { enemy: deadEnemy });
     return deadEnemy;

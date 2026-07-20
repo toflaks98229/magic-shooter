@@ -33,6 +33,13 @@ export const EVENTS = {
     /** 불려 나온 적이 시간이 다해 사라짐. 죽은 것과 다릅니다. */
     ENEMY_DISMISSED: 'enemy:dismissed',
 
+    /** 층에 걸린 기믹이 터짐. 연출과 소리가 이걸 듣습니다. */
+    TRIGGER_FIRED: 'trigger:fired',
+    /** 기믹이 무언가를 알림. 보이지 않을 때의 문구가 따로 있습니다. */
+    TRIGGER_MESSAGE: 'trigger:message',
+    /** 기믹이 주변을 깨움. */
+    TRIGGER_ROUSE: 'trigger:rouse',
+
     /** 섬기는 신이 바뀜. detail: { god, name } */
     GOD_CHANGED: 'god:changed',
     /** 제단에서 거부당함. detail: { god, reason } */

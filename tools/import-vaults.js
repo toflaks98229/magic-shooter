@@ -30,6 +30,7 @@ const OUTPUT = 'Script/data/vaults.js';
 const SOURCE_FILES = [
     'dat/des/variable/mini_features.des',   // 몬스터 없는 순수 구조물
     'dat/des/variable/mini_monsters.des',   // 몬스터가 배치된 방
+    'dat/des/traps/rats_trap.des',          // 밟으면 벽이 열리는 기믹
 ];
 
 /**
@@ -41,6 +42,12 @@ const SOURCE_FILES = [
  * 반쯤 이해한 볼트를 찍어 넣으면 무엇이 잘못됐는지 알아보기 어렵습니다.
  */
 const GLYPHS = {
+
+    // 기믹 자리. 밟으면 무슨 일이 일어나는 칸과, 그때 열릴 벽입니다.
+    '^': 'TRIGGER_PLATE',
+    '@': 'FLOOR',           // 볼트로 들어오는 입구. 바닥으로 둡니다
+    'z': 'SEALED_WALL',
+
     '.': 'FLOOR',
     'x': 'WALL',        // 바위벽
     'X': 'WALL',        // 부술 수 없는 바위벽. 이 게임에는 파기가 없어 같습니다
@@ -189,6 +196,9 @@ const KFEAT_FEATURES = {
     lava: 'LAVA', l: 'LAVA',
     tree: 'TREE', t: 'TREE',
     closed_door: 'DOOR', open_door: 'FLOOR', runed_door: 'DOOR',
+
+    // 함정 중 밟는 순간을 잡을 수 있는 것만 옮깁니다.
+    'pressure plate trap': 'TRIGGER_PLATE',
 };
 
 /**
@@ -310,10 +320,19 @@ function rejectionReason(vault, maxSize) {
     if (vault.kmons.length > 0) return 'kmons';
 
     // 모르는 글리프가 하나라도 있으면 버립니다.
+    //
+    // 다만 SUBST/NSUBST/SHUFFLE 이 갈아 끼울 자리는 legend 에 없어도 됩니다.
+    // 그것들은 임시 표식이라 찍기 전에 사라집니다. 이 예외를 두지 않아서
+    // 쥐덫 볼트처럼 'R 을 몬스터로 바꾼다' 는 볼트가 통째로 버려지고 있었습니다.
+    const placeholders = new Set([
+        ...vault.subst.map(l => parseSubst(l)?.from).filter(Boolean),
+        ...vault.nsubst.flatMap(l => parseNsubst(l).map(r => r.from)),
+        ...(vault.shuffle ?? []).flatMap(l => parseShuffle(l).flatMap(r => r.glyphs ?? r.blocks?.flat() ?? [])),
+    ]);
     const kfeatGlyphs = new Set(vault.kfeat.flatMap(l => parseKfeat(l)?.glyphs ?? []));
     for (const row of vault.rows) {
         for (const glyph of row) {
-            if (kfeatGlyphs.has(glyph)) continue;
+            if (kfeatGlyphs.has(glyph) || placeholders.has(glyph)) continue;
             if (!(glyph in GLYPHS)) return `glyph:${glyph}`;
         }
     }

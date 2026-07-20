@@ -42,6 +42,11 @@ const TILE_BY_GLYPH = {
     MONSTER_TOUGHER: TILE_IDS.FLOOR,
     MONSTER_SLOT: TILE_IDS.FLOOR,
     GRATE: TILE_IDS.GRATE,
+
+    // 압력판은 밟을 수 있어야 하므로 바닥입니다.
+    TRIGGER_PLATE: TILE_IDS.FLOOR,
+    // 열릴 벽은 처음에는 벽입니다. 기믹이 터질 때 바닥이 됩니다.
+    SEALED_WALL: TILE_IDS.WALL,
     OUTSIDE: null,
 };
 
@@ -59,6 +64,11 @@ const GLYPH_NAMES = {
     '1': 'MONSTER_SLOT', '2': 'MONSTER_SLOT', '3': 'MONSTER_SLOT',
     '4': 'MONSTER_SLOT', '5': 'MONSTER_SLOT', '6': 'MONSTER_SLOT',
     '7': 'MONSTER_SLOT',
+
+
+    // 기믹 자리. 밟으면 무슨 일이 일어나는 칸과, 그때 바뀔 칸입니다.
+    '^': 'TRIGGER_PLATE',   // 압력판
+    'z': 'SEALED_WALL',     // 열릴 벽. 기믹이 터지면 바닥이 됩니다
 
     ' ': 'OUTSIDE',
 };
@@ -109,9 +119,20 @@ function pickVault(candidates) {
  * @param {Array<object>} substitutions - 규칙들
  * @returns {Array<Array<string>>} 확정된 글리프 격자
  */
+/** @description 기믹 자리를 나타내는 글리프. 치환이 지우지 못하게 지킵니다. */
+const TRIGGER_GLYPHS = new Set(['^', 'z']);
+
 function applySubstitutions(grid, substitutions) {
 
     for (const rule of substitutions) {
+        // 기믹 표식을 지우는 치환은 건너뜁니다.
+        //
+        // 원본에서 z 는 '여기가 열릴 벽이다' 를 루아 마커에게 알려 주는 표식이고,
+        // 마커가 자리를 기억한 뒤 SUBST 로 벽으로 되돌립니다. 루아가 없는 여기서는
+        // 그 되돌리기를 그대로 따르면 자리를 기억할 새도 없이 사라집니다.
+        // 대신 표식을 남겨 두고, 찍을 때 벽으로 놓으면서 자리를 적습니다.
+        if (TRIGGER_GLYPHS.has(rule.from)) continue;
+
         // 전체가 같은 것으로 바뀌는 규칙은 한 번만 굴립니다.
         const fixed = rule.once ? weightedChoice(rule.choices) : null;
 
@@ -302,19 +323,20 @@ function fitsAt(map, grid, left, top, keepClear) {
  */
 function stamp(map, grid, left, top, vault) {
     const spawns = [];
+    const plates = [];
+    const sealed = [];
 
     for (let y = 0; y < grid.length; y++) {
         for (let x = 0; x < grid[y].length; x++) {
             const glyph = grid[y][x];
-            const name = GLYPH_NAMES[glyph];
 
-            // KFEAT 이 정한 글리프는 볼트마다 뜻이 다릅니다.
+            // KFEAT 이 정한 글리프는 볼트마다 뜻이 다릅니다. 표준 legend 보다 우선합니다.
+            //
+            // 이름을 먼저 정하고 나머지를 한 갈래로 처리합니다. 예전에는 KFEAT 을
+            // 따로 처리하고 곧바로 넘어가서, KFEAT 으로 놓인 압력판이 기믹 자리로
+            // 수집되지 않았습니다. 쥐덫 볼트가 찍혀도 아무 일도 일어나지 않았습니다.
             const kfeat = vault.kfeat?.[glyph];
-            if (kfeat) {
-                const chosen = kfeat[random2(kfeat.length)];
-                map[top + y][left + x] = TILE_BY_GLYPH[chosen] ?? TILE_IDS.FLOOR;
-                continue;
-            }
+            const name = kfeat ? kfeat[random2(kfeat.length)] : GLYPH_NAMES[glyph];
 
             const tile = TILE_BY_GLYPH[name];
             if (tile === null || tile === undefined) continue;   // 볼트 밖입니다
@@ -322,10 +344,13 @@ function stamp(map, grid, left, top, vault) {
 
             const monsterId = monsterFor(glyph, name, vault);
             if (monsterId) spawns.push({ id: monsterId, tileX: left + x, tileY: top + y });
+
+            if (name === 'TRIGGER_PLATE') plates.push({ tileX: left + x, tileY: top + y });
+            if (name === 'SEALED_WALL') sealed.push({ tileX: left + x, tileY: top + y });
         }
     }
 
-    return spawns;
+    return { spawns, plates, sealed };
 }
 
 /**
@@ -385,11 +410,11 @@ export function placeMinivaults(map, options = {}) {
 
             if (!fitsAt(map, grid, left, top, options.keepClear)) continue;
 
-            const spawns = stamp(map, grid, left, top, vault);
+            const stamped = stamp(map, grid, left, top, vault);
             placed.push({
                 name: vault.name, left, top,
                 width: vaultWidth, height: vaultHeight,
-                spawns,
+                ...stamped,
             });
             break;
         }

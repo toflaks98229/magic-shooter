@@ -23,6 +23,7 @@ import { aimRadius, rollMonsterHp, monsterAttackRoll, playerEvasion, archerBonus
 import { pickAimedTarget } from './dcss/aim.js';
 import { skillValue } from './dcss/training.js';
 import { random2, randomRange, rollDice } from './dcss/random.js';
+import { checkPositionTriggers, checkSightTriggers, checkDeathTriggers } from './triggers.js';
 import { autToMs } from './dcss/time.js';
 import { trackingRangeTiles, rollFoeMemoryMs, shoutRadiusTiles, canShout } from './dcss/awareness.js';
 import {
@@ -78,13 +79,20 @@ export function update(deltaTime) {
     // 4. 발사체 이동 및 충돌 처리
     updateProjectiles(dtFactor);
 
-    // 5. 아이템 획득 처리
+    // 5. 층에 걸린 기믹 확인
+    //
+    // 타일이 바뀌었을 때만 봅니다. 매 프레임 보면 한 타일 안에서 서성이는
+    // 동안 같은 기믹이 초당 예순 번 터집니다. 원본에서 밟기는 턴마다 한 번인데,
+    // 실시간에서는 경계를 계속 넘나들기 때문입니다.
+    updateTriggers();
+
+    // 6. 아이템 획득 처리
     handleItemPickup();
 
-    // 6. 적 사망 처리 및 아이템 드랍
+    // 7. 적 사망 처리 및 아이템 드랍
     handleEnemyDeaths();
 
-    // 7. 플레이어 사망 확인
+    // 8. 플레이어 사망 확인
     //    피해를 입은 즉시가 아니라 프레임 끝에서 한 번만 확인합니다.
     //    중간에 게임을 멈추면 나머지 갱신이 건너뛰어져 상태가 어긋나기 때문입니다.
     if (world.player.hp <= 0) {
@@ -93,6 +101,30 @@ export function update(deltaTime) {
 }
 
 // --- 외부 공개 함수 (Public Methods) ---
+
+/**
+ * 층에 걸린 기믹을 살핍니다.
+ *
+ * 플레이어가 선 타일이 바뀌었을 때만 일합니다. 매 프레임 보면 한 타일 안에서
+ * 서성이는 동안 같은 기믹이 초당 예순 번 터집니다. 원본에서 밟기는 턴마다
+ * 한 번인데 실시간에서는 경계를 계속 넘나들기 때문입니다.
+ */
+function updateTriggers() {
+    const tileX = Math.floor(world.player.x / C.TILE_SIZE);
+    const tileY = Math.floor(world.player.y / C.TILE_SIZE);
+
+    if (tileX === lastPlayerTile.x && tileY === lastPlayerTile.y) return;
+    lastPlayerTile = { x: tileX, y: tileY };
+
+    checkPositionTriggers(tileX, tileY);
+    checkSightTriggers((tx, ty) => hasLineOfSight(
+        world.player.x, world.player.y,
+        tx * C.TILE_SIZE + C.TILE_SIZE / 2, ty * C.TILE_SIZE + C.TILE_SIZE / 2,
+    ));
+}
+
+/** @description 지난 스텝에 플레이어가 서 있던 타일. 경계를 넘었는지 보려고 기억합니다. */
+let lastPlayerTile = { x: -1, y: -1 };
 
 /**
  * 프레임 사이에 쌓인 입력을 시뮬레이션에 반영합니다.
