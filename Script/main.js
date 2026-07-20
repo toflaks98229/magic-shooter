@@ -58,19 +58,6 @@ function init() {
     resizeCanvas(); // 최초 캔버스 크기 설정
     setupInputHandlers(); // 키보드, 마우스, 터치 입력 설정
 
-    // 5. 타이틀 삽화를 고릅니다. 시트와 달리 그림 한 장이라 에셋 로딩을 기다릴 필요가 없습니다.
-    showTitleSplash();
-}
-
-/**
- * 타이틀 화면에 삽화 한 장을 골라 띄웁니다.
- *
- * 에셋 로딩과 별개로 처음부터 보여야 하므로 여기서 바로 src 를 넣습니다.
- * 그림이 없더라도 CSS 가 빈 칸을 감추므로 화면이 깨지지는 않습니다.
- */
-function showTitleSplash() {
-    const choice = C.TITLE_SPLASH_URLS[Math.floor(Math.random() * C.TITLE_SPLASH_URLS.length)];
-    if (choice) dom.titleSplashEl.src = choice;
 }
 
 /**

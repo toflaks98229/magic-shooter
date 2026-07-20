@@ -357,15 +357,6 @@
             margin: 22px 0 26px;
         }
 
-        /* DCSS 처럼 들어갈 때마다 다른 삽화를 띄웁니다. 그림이 아직 안 왔으면 자리만 비워 둡니다. */
-        .menu-splash {
-            max-width: min(420px, 46vw);
-            max-height: 34vh;
-            object-fit: contain;
-            image-rendering: pixelated;
-            margin-bottom: 18px;
-        }
-        .menu-splash:not([src]) { display: none; }
 
         /* DCSS 의 (a) 항목 나열식 메뉴 */
         .menu-list {
@@ -494,8 +485,6 @@
             <p class="menu-subtitle">DUNGEON EXPEDITION</p>
             <div class="menu-rule"></div>
 
-            <img class="menu-splash" id="title-splash" alt="">
-
             <div class="menu-list">
                 <button class="menu-item" id="start-game-btn"><span class="menu-key">(a)</span> 새 탐험 시작</button>
             </div>
@@ -504,7 +493,7 @@
                 WASD 이동 · 마우스 조준 · 클릭 공격<br>
                 Space 상호작용 · I 소지품 · 1~9 물약 사용
             </div>
-            <div class="menu-note">타일과 삽화는 공개 도메인 타일셋 RLTiles 를 기반으로 한 Dungeon Crawl Stone Soup 의 것입니다.</div>
+            <div class="menu-note">타일은 공개 도메인 타일셋 RLTiles 를 기반으로 한 Dungeon Crawl Stone Soup 의 것입니다.</div>
         </div>
 
         <!-- 게임 오버 -->
