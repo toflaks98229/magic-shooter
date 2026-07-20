@@ -26,6 +26,10 @@ export const SPRITE_SHEET_URLS = {
     // 가지마다의 벽과 바닥. 원본은 층 번호가 아니라 어느 가지에 있는가로
     // 층의 모습을 정합니다. 오크 광산은 몇 층이든 오크 광산처럼 생겼습니다.
     terrain: 'Data/tiles/terrain_data.json',
+
+    // 볼트가 지정한 전용 타일. 밀랍 벽, 이끼 낀 바닥, 특정 자리의 석상 같은
+    // 것들입니다. 이것이 있어야 볼트가 그 볼트답게 보입니다.
+    vaultTiles: 'Data/tiles/vault-tiles_data.json',
 };
 
 // --- 던전 테마 설정 ---

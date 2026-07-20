@@ -83,8 +83,24 @@ if(globalThis.__DBG) console.log("  전 63,20 =", map[20]?.[63], "볼트", JSON.
     placeDoors(map, objectMap, playerStart, vaults);
 if(globalThis.__DBG) console.log("  후 63,20 =", map[20]?.[63]);
 
-    const exit = pickExit(map, playerStart);
-    map[exit.y][exit.x] = TILE_IDS.EXIT;
+    // 볼트가 계단 글리프를 그려 두었으면 그것을 씁니다.
+    //
+    // 볼트에는 내려가는 계단이 여럿일 수 있습니다. 원본은 층마다 셋을 두지만
+    // 이 게임은 하나입니다. 그대로 두면 층에 출구가 둘이 되어,
+    // 어느 쪽이 진짜인지 알 수 없게 됩니다.
+    let exit = null;
+    for (let y = 0; y < map.length; y++) {
+        for (let x = 0; x < map[y].length; x++) {
+            if (map[y][x] !== TILE_IDS.EXIT) continue;
+            if (exit) map[y][x] = TILE_IDS.FLOOR;
+            else exit = { x, y };
+        }
+    }
+
+    if (!exit) {
+        exit = pickExit(map, playerStart);
+        map[exit.y][exit.x] = TILE_IDS.EXIT;
+    }
 
     // 갇힌 바닥을 메웁니다.
     //

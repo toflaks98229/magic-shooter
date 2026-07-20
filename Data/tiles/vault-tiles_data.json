@@ -1,0 +1,5135 @@
+{
+  "sheetFile": "vault-tiles.png",
+  "sprites": {
+    "vault_bedevilled_crystal_abyss_0": {
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_abyss_1": {
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_cocytus_0": {
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_cocytus_1": {
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_dis_0": {
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_dis_1": {
+      "x": 160,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_gehenna_0": {
+      "x": 192,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_gehenna_1": {
+      "x": 224,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_pandemonium_0": {
+      "x": 256,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_pandemonium_1": {
+      "x": 288,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_pandemonium_2": {
+      "x": 320,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_tartarus_0": {
+      "x": 352,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_bedevilled_crystal_tartarus_1": {
+      "x": 384,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_borg_floor_0": {
+      "x": 416,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_borg_floor_1": {
+      "x": 448,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_borg_floor_2": {
+      "x": 480,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_depths_column_0": {
+      "x": 512,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_depths_crumbled_column_0": {
+      "x": 544,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_cache_of_pizza_0": {
+      "x": 576,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crumbled_column_0": {
+      "x": 608,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crumbled_column_1": {
+      "x": 640,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crumbled_column_2": {
+      "x": 672,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crystal_blue_0": {
+      "x": 704,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crystal_cyan_0": {
+      "x": 736,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crystal_darkgray_0": {
+      "x": 768,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crystal_green_0": {
+      "x": 800,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crystal_lightmagenta_0": {
+      "x": 832,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crystal_lightred_0": {
+      "x": 864,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crystal_magenta_0": {
+      "x": 896,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crystal_red_0": {
+      "x": 928,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_crystal_white_0": {
+      "x": 960,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_dark_flower_pot_broken_0": {
+      "x": 992,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_dead_tree_of_woe_0": {
+      "x": 0,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_dead_tree_of_woe_1": {
+      "x": 32,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_dead_tree_of_woe_2": {
+      "x": 64,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_demonic_tree_10_0": {
+      "x": 96,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_demonic_tree_11_0": {
+      "x": 128,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_demonic_tree_16_0": {
+      "x": 160,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_demonic_tree_1_0": {
+      "x": 192,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_demonic_tree_1_1": {
+      "x": 224,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_demonic_tree_1_2": {
+      "x": 256,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_demonic_tree_2_0": {
+      "x": 288,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_demonic_tree_3_0": {
+      "x": 320,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_demonic_tree_7_0": {
+      "x": 352,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_demonic_tree_8_0": {
+      "x": 384,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_demonic_tree_9_0": {
+      "x": 416,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_dimension_edge_0": {
+      "x": 448,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_disco_ball_0": {
+      "x": 480,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_dry_fountain_white_0": {
+      "x": 512,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_exit_abyss_0": {
+      "x": 544,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_exit_abyss_1": {
+      "x": 576,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_fleshy_orifice_0": {
+      "x": 608,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_fleshy_orifice_1": {
+      "x": 640,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_fleshy_orifice_2": {
+      "x": 672,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_flower_pot_broken_0": {
+      "x": 704,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_fountain_novelty_octopode_0": {
+      "x": 736,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_golden_iron_statue_0": {
+      "x": 768,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_granite_statue_0": {
+      "x": 800,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_granite_statue_1": {
+      "x": 832,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_granite_statue_2": {
+      "x": 864,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_gravestone_0": {
+      "x": 896,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_gravestone_1": {
+      "x": 928,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_gravestone_2": {
+      "x": 960,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_iron_0": {
+      "x": 992,
+      "y": 32,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_iron_1": {
+      "x": 0,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_iron_2": {
+      "x": 32,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_steel_blood_0": {
+      "x": 64,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_steel_blood_1": {
+      "x": 96,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_steel_blood_2": {
+      "x": 128,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_blue_0": {
+      "x": 160,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_blue_1": {
+      "x": 192,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_blue_2": {
+      "x": 224,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_brown_0": {
+      "x": 256,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_brown_1": {
+      "x": 288,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_brown_2": {
+      "x": 320,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_cyan_0": {
+      "x": 352,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_cyan_1": {
+      "x": 384,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_cyan_2": {
+      "x": 416,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_darkgray_0": {
+      "x": 448,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_darkgray_1": {
+      "x": 480,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_darkgray_2": {
+      "x": 512,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_lightblue_0": {
+      "x": 544,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_lightblue_1": {
+      "x": 576,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_lightblue_2": {
+      "x": 608,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_lightcyan_0": {
+      "x": 640,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_lightcyan_1": {
+      "x": 672,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_lightcyan_2": {
+      "x": 704,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_magenta_0": {
+      "x": 736,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_magenta_1": {
+      "x": 768,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_magenta_2": {
+      "x": 800,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_red_0": {
+      "x": 832,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_red_1": {
+      "x": 864,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_red_2": {
+      "x": 896,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_white_0": {
+      "x": 928,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_white_1": {
+      "x": 960,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_white_2": {
+      "x": 992,
+      "y": 64,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_yellow_0": {
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_yellow_1": {
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_wall_yellow_2": {
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_zot_0": {
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_zot_1": {
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_metal_zot_2": {
+      "x": 160,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_oka_iron_statue_0": {
+      "x": 192,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_oka_iron_statue_1": {
+      "x": 224,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_open_sea_0": {
+      "x": 256,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_open_sea_1": {
+      "x": 288,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_portal_gauntlet_gone_0": {
+      "x": 320,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_portal_sewer_rusted_0": {
+      "x": 352,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_sarcophagus_pedestal_left_0": {
+      "x": 384,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_sarcophagus_pedestal_right_0": {
+      "x": 416,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_sarcophagus_sealed_0": {
+      "x": 448,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_silver_statue_0": {
+      "x": 480,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_silver_statue_1": {
+      "x": 512,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_silver_statue_2": {
+      "x": 544,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_starwater_0": {
+      "x": 576,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_starwater_1": {
+      "x": 608,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_starwater_2": {
+      "x": 640,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_ancient_evil_0": {
+      "x": 672,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_ancient_hero_0": {
+      "x": 704,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_angel_0": {
+      "x": 736,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_archer_0": {
+      "x": 768,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_axe_0": {
+      "x": 800,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_cat_0": {
+      "x": 832,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_centaur_0": {
+      "x": 864,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_cerebov_0": {
+      "x": 896,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_demonic_bust_0": {
+      "x": 928,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_depths_fangs_0": {
+      "x": 960,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_depths_seraph_0": {
+      "x": 992,
+      "y": 96,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_depths_tomes_0": {
+      "x": 0,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_depths_zot_ancient_evil_0": {
+      "x": 32,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_depths_zot_angel_0": {
+      "x": 64,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_depths_zot_cerebov_0": {
+      "x": 96,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_depths_zot_devil_0": {
+      "x": 128,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_depths_zot_dragon_0": {
+      "x": 160,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_depths_zot_lich_0": {
+      "x": 192,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_depths_zot_tentacles_0": {
+      "x": 224,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_dragon_0": {
+      "x": 256,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_dwarf_0": {
+      "x": 288,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_elephant_0": {
+      "x": 320,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_hydra_0": {
+      "x": 352,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_imp_0": {
+      "x": 384,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_iron_0": {
+      "x": 416,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_iron_golem_0": {
+      "x": 448,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_maw_0": {
+      "x": 480,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_mermaid_0": {
+      "x": 512,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_naga_0": {
+      "x": 544,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_orb_0": {
+      "x": 576,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_orb_guardian_0": {
+      "x": 608,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_polearm_0": {
+      "x": 640,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_princess_0": {
+      "x": 672,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_sigmund_0": {
+      "x": 704,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_snail_0": {
+      "x": 736,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_sword_0": {
+      "x": 768,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_tengu_0": {
+      "x": 800,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_tentacles_0": {
+      "x": 832,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_triangle_0": {
+      "x": 864,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_twins_0": {
+      "x": 896,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_wraith_0": {
+      "x": 928,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_zot_old_guardian_0": {
+      "x": 960,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_zot_oldest_guardian_0": {
+      "x": 992,
+      "y": 128,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_statue_zot_serpent_0": {
+      "x": 0,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_dark_0": {
+      "x": 32,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_dark_1": {
+      "x": 64,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_dark_2": {
+      "x": 96,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_0": {
+      "x": 128,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_1": {
+      "x": 160,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_2": {
+      "x": 192,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_blue_0": {
+      "x": 224,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_blue_1": {
+      "x": 256,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_blue_2": {
+      "x": 288,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_brown_0": {
+      "x": 320,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_brown_1": {
+      "x": 352,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_brown_2": {
+      "x": 384,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_cyan_0": {
+      "x": 416,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_cyan_1": {
+      "x": 448,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_cyan_2": {
+      "x": 480,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_darkgray_0": {
+      "x": 512,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_darkgray_1": {
+      "x": 544,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_darkgray_2": {
+      "x": 576,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_green_0": {
+      "x": 608,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_green_1": {
+      "x": 640,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_green_2": {
+      "x": 672,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_lightblue_0": {
+      "x": 704,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_lightblue_1": {
+      "x": 736,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_lightblue_2": {
+      "x": 768,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_lightred_0": {
+      "x": 800,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_lightred_1": {
+      "x": 832,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_lightred_2": {
+      "x": 864,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_magenta_0": {
+      "x": 896,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_magenta_1": {
+      "x": 928,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_magenta_2": {
+      "x": 960,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_red_0": {
+      "x": 992,
+      "y": 160,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_red_1": {
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_red_2": {
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_white_0": {
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_white_1": {
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_white_2": {
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_yellow_0": {
+      "x": 160,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_yellow_1": {
+      "x": 192,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_stone_wall_yellow_2": {
+      "x": 224,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_stone_blue_0": {
+      "x": 256,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_stone_cyan_0": {
+      "x": 288,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_stone_darkgray_0": {
+      "x": 320,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_stone_green_0": {
+      "x": 352,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_stone_magenta_0": {
+      "x": 384,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_stone_red_0": {
+      "x": 416,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_stone_white_0": {
+      "x": 448,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_stone_yellow_0": {
+      "x": 480,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_wall_blue_0": {
+      "x": 512,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_wall_brown_0": {
+      "x": 544,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_wall_darkgray_0": {
+      "x": 576,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_wall_green_0": {
+      "x": 608,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_wall_magenta_0": {
+      "x": 640,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_wall_red_0": {
+      "x": 672,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_wall_white_0": {
+      "x": 704,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_transparent_wall_yellow_0": {
+      "x": 736,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_0": {
+      "x": 768,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_1": {
+      "x": 800,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_2": {
+      "x": 832,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_dead_0": {
+      "x": 864,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_dead_1": {
+      "x": 896,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_dead_2": {
+      "x": 928,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_lightred_0": {
+      "x": 960,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_of_woe_0": {
+      "x": 0,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_of_woe_1": {
+      "x": 32,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_of_woe_2": {
+      "x": 64,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_red_0": {
+      "x": 96,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_red_1": {
+      "x": 128,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_red_2": {
+      "x": 160,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_yellow_0": {
+      "x": 192,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_yellow_1": {
+      "x": 224,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_tree_yellow_2": {
+      "x": 256,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_dngn_zonguldrok_shrine_0": {
+      "x": 288,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_black_cobalt_0": {
+      "x": 320,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_black_cobalt_1": {
+      "x": 352,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_black_cobalt_2": {
+      "x": 384,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_cage_0": {
+      "x": 416,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_cage_1": {
+      "x": 448,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_cage_2": {
+      "x": 480,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_cobble_blood_0": {
+      "x": 512,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_cobble_blood_1": {
+      "x": 544,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_cobble_blood_2": {
+      "x": 576,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_crypt_0": {
+      "x": 608,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_crypt_1": {
+      "x": 640,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_crypt_2": {
+      "x": 672,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_crystal_0": {
+      "x": 704,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_crystal_1": {
+      "x": 736,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_crystal_2": {
+      "x": 768,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_crystal_squares_0": {
+      "x": 800,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_crystal_squares_1": {
+      "x": 832,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_crystal_squares_2": {
+      "x": 864,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_0": {
+      "x": 896,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_1": {
+      "x": 928,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_2": {
+      "x": 960,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_blue_0": {
+      "x": 992,
+      "y": 224,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_blue_1": {
+      "x": 0,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_blue_2": {
+      "x": 32,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_green_0": {
+      "x": 64,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_green_1": {
+      "x": 96,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_green_2": {
+      "x": 128,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_magenta_0": {
+      "x": 160,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_magenta_1": {
+      "x": 192,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_magenta_2": {
+      "x": 224,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_red_0": {
+      "x": 256,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_red_1": {
+      "x": 288,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_red_2": {
+      "x": 320,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_white_0": {
+      "x": 352,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_white_1": {
+      "x": 384,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_demonic_white_2": {
+      "x": 416,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_depthstone_0": {
+      "x": 448,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_depthstone_1": {
+      "x": 480,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_depthstone_2": {
+      "x": 512,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_dirt_0": {
+      "x": 544,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_dirt_1": {
+      "x": 576,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_dirt_2": {
+      "x": 608,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_frozen_0": {
+      "x": 640,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_frozen_1": {
+      "x": 672,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_frozen_2": {
+      "x": 704,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_gauntlet_0": {
+      "x": 736,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_gauntlet_1": {
+      "x": 768,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_gauntlet_2": {
+      "x": 800,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grass_0": {
+      "x": 832,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grass_1": {
+      "x": 864,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grass_2": {
+      "x": 896,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grass_dark_0": {
+      "x": 928,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grass_dark_1": {
+      "x": 960,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grass_dark_2": {
+      "x": 992,
+      "y": 256,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_green_bones_0": {
+      "x": 0,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_green_bones_1": {
+      "x": 32,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_green_bones_2": {
+      "x": 64,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grey_dirt_0": {
+      "x": 96,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grey_dirt_1": {
+      "x": 128,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grey_dirt_2": {
+      "x": 160,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grey_dirt_b_0": {
+      "x": 192,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grey_dirt_b_1": {
+      "x": 224,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_grey_dirt_b_2": {
+      "x": 256,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_hall_0": {
+      "x": 288,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_hall_1": {
+      "x": 320,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_hall_2": {
+      "x": 352,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_ice_0": {
+      "x": 384,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_ice_1": {
+      "x": 416,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_ice_2": {
+      "x": 448,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_infernal_0": {
+      "x": 480,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_infernal_1": {
+      "x": 512,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_infernal_2": {
+      "x": 544,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_infernal_blank_0": {
+      "x": 576,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_iron_0": {
+      "x": 608,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_iron_1": {
+      "x": 640,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_iron_2": {
+      "x": 672,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_lair_0": {
+      "x": 704,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_lair_1": {
+      "x": 736,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_lair_2": {
+      "x": 768,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_limestone_0": {
+      "x": 800,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_limestone_1": {
+      "x": 832,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_limestone_2": {
+      "x": 864,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_marble_0": {
+      "x": 896,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_marble_1": {
+      "x": 928,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_marble_2": {
+      "x": 960,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_metal_gold_0": {
+      "x": 992,
+      "y": 288,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_metal_gold_1": {
+      "x": 0,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_metal_gold_2": {
+      "x": 32,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_metal_infernal_0": {
+      "x": 64,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_metal_infernal_1": {
+      "x": 96,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_metal_infernal_2": {
+      "x": 128,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_metal_silver_0": {
+      "x": 160,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_metal_silver_1": {
+      "x": 192,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_metal_silver_2": {
+      "x": 224,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_mosaic_0": {
+      "x": 256,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_mosaic_1": {
+      "x": 288,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_mosaic_2": {
+      "x": 320,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_moss_0": {
+      "x": 352,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_moss_1": {
+      "x": 384,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_moss_2": {
+      "x": 416,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_mud_0": {
+      "x": 448,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_mud_1": {
+      "x": 480,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_mud_2": {
+      "x": 512,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_mystic_chasm_0": {
+      "x": 544,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_mystic_chasm_1": {
+      "x": 576,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_mystic_chasm_2": {
+      "x": 608,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_necropolis_grass_0": {
+      "x": 640,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_necropolis_grass_1": {
+      "x": 672,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_necropolis_grass_2": {
+      "x": 704,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_necropolis_square_grass_0": {
+      "x": 736,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_necropolis_square_grass_1": {
+      "x": 768,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_necropolis_square_grass_2": {
+      "x": 800,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_necropolis_squares_0": {
+      "x": 832,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_necropolis_squares_1": {
+      "x": 864,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_necropolis_squares_2": {
+      "x": 896,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_0": {
+      "x": 928,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_1": {
+      "x": 960,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_2": {
+      "x": 992,
+      "y": 320,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_blue_0": {
+      "x": 0,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_blue_1": {
+      "x": 32,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_blue_2": {
+      "x": 64,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_brown_0": {
+      "x": 96,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_brown_1": {
+      "x": 128,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_brown_2": {
+      "x": 160,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_cyan_0": {
+      "x": 192,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_cyan_1": {
+      "x": 224,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_cyan_2": {
+      "x": 256,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_darkgray_0": {
+      "x": 288,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_darkgray_1": {
+      "x": 320,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_darkgray_2": {
+      "x": 352,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_green_0": {
+      "x": 384,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_green_1": {
+      "x": 416,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_green_2": {
+      "x": 448,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_lightgray_0": {
+      "x": 480,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_lightgray_1": {
+      "x": 512,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_lightgray_2": {
+      "x": 544,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_magenta_0": {
+      "x": 576,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_magenta_1": {
+      "x": 608,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_magenta_2": {
+      "x": 640,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_yellow_0": {
+      "x": 672,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_yellow_1": {
+      "x": 704,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_nerves_yellow_2": {
+      "x": 736,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_normal_0": {
+      "x": 768,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_normal_1": {
+      "x": 800,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_normal_2": {
+      "x": 832,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_orc_0": {
+      "x": 864,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_orc_1": {
+      "x": 896,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_orc_2": {
+      "x": 928,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_0": {
+      "x": 960,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_1": {
+      "x": 992,
+      "y": 352,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_2": {
+      "x": 0,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_blue_0": {
+      "x": 32,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_blue_1": {
+      "x": 64,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_blue_2": {
+      "x": 96,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_brown_0": {
+      "x": 128,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_brown_1": {
+      "x": 160,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_brown_2": {
+      "x": 192,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_cyan_0": {
+      "x": 224,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_cyan_1": {
+      "x": 256,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_cyan_2": {
+      "x": 288,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_darkbrown_0": {
+      "x": 320,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_darkbrown_1": {
+      "x": 352,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_darkbrown_2": {
+      "x": 384,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_darkgray_0": {
+      "x": 416,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_darkgray_1": {
+      "x": 448,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_darkgray_2": {
+      "x": 480,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_green_0": {
+      "x": 512,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_green_1": {
+      "x": 544,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_green_2": {
+      "x": 576,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightblue_0": {
+      "x": 608,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightblue_1": {
+      "x": 640,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightblue_2": {
+      "x": 672,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightcyan_0": {
+      "x": 704,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightcyan_1": {
+      "x": 736,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightcyan_2": {
+      "x": 768,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightgray_0": {
+      "x": 800,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightgray_1": {
+      "x": 832,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightgray_2": {
+      "x": 864,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightgreen_0": {
+      "x": 896,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightgreen_1": {
+      "x": 928,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightgreen_2": {
+      "x": 960,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightmagenta_0": {
+      "x": 992,
+      "y": 384,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightmagenta_1": {
+      "x": 0,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightmagenta_2": {
+      "x": 32,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightred_0": {
+      "x": 64,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightred_1": {
+      "x": 96,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_lightred_2": {
+      "x": 128,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_magenta_0": {
+      "x": 160,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_magenta_1": {
+      "x": 192,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_magenta_2": {
+      "x": 224,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_red_0": {
+      "x": 256,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_red_1": {
+      "x": 288,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_red_2": {
+      "x": 320,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_white_0": {
+      "x": 352,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_white_1": {
+      "x": 384,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_white_2": {
+      "x": 416,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_yellow_0": {
+      "x": 448,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_yellow_1": {
+      "x": 480,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_pebble_yellow_2": {
+      "x": 512,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_0": {
+      "x": 544,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_1": {
+      "x": 576,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_2": {
+      "x": 608,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_blue_0": {
+      "x": 640,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_blue_1": {
+      "x": 672,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_blue_2": {
+      "x": 704,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_brown_0": {
+      "x": 736,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_brown_1": {
+      "x": 768,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_brown_2": {
+      "x": 800,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_cyan_0": {
+      "x": 832,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_cyan_1": {
+      "x": 864,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_cyan_2": {
+      "x": 896,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_darkgray_0": {
+      "x": 928,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_darkgray_1": {
+      "x": 960,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_darkgray_2": {
+      "x": 992,
+      "y": 416,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_green_0": {
+      "x": 0,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_green_1": {
+      "x": 32,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_green_2": {
+      "x": 64,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightblue_0": {
+      "x": 96,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightblue_1": {
+      "x": 128,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightblue_2": {
+      "x": 160,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightgray_0": {
+      "x": 192,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightgray_1": {
+      "x": 224,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightgray_2": {
+      "x": 256,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightgreen_0": {
+      "x": 288,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightgreen_1": {
+      "x": 320,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightgreen_2": {
+      "x": 352,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightmagenta_0": {
+      "x": 384,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightmagenta_1": {
+      "x": 416,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightmagenta_2": {
+      "x": 448,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightred_0": {
+      "x": 480,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightred_1": {
+      "x": 512,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_lightred_2": {
+      "x": 544,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_magenta_0": {
+      "x": 576,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_magenta_1": {
+      "x": 608,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_magenta_2": {
+      "x": 640,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_red_0": {
+      "x": 672,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_red_1": {
+      "x": 704,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_red_2": {
+      "x": 736,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_white_0": {
+      "x": 768,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_white_1": {
+      "x": 800,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_white_2": {
+      "x": 832,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_yellow_0": {
+      "x": 864,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_yellow_1": {
+      "x": 896,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_rough_yellow_2": {
+      "x": 928,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_salt_0": {
+      "x": 960,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_salt_1": {
+      "x": 992,
+      "y": 448,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_salt_2": {
+      "x": 0,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sand_0": {
+      "x": 32,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sand_1": {
+      "x": 64,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sand_2": {
+      "x": 96,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sandstone_0": {
+      "x": 128,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sandstone_1": {
+      "x": 160,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sandstone_2": {
+      "x": 192,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_slime_0": {
+      "x": 224,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_slime_1": {
+      "x": 256,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_slime_2": {
+      "x": 288,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_spider_0": {
+      "x": 320,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_spider_1": {
+      "x": 352,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_spider_2": {
+      "x": 384,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sprouting_ruin_0": {
+      "x": 416,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sprouting_ruin_1": {
+      "x": 448,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sprouting_ruin_2": {
+      "x": 480,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sprouting_squares_0": {
+      "x": 512,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sprouting_squares_1": {
+      "x": 544,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sprouting_squares_2": {
+      "x": 576,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sprouting_stone_0": {
+      "x": 608,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sprouting_stone_1": {
+      "x": 640,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_sprouting_stone_2": {
+      "x": 672,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_studio_0": {
+      "x": 704,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_studio_1": {
+      "x": 736,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_studio_2": {
+      "x": 768,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_swamp_0": {
+      "x": 800,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_swamp_1": {
+      "x": 832,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_swamp_2": {
+      "x": 864,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_tomb_0": {
+      "x": 896,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_tomb_1": {
+      "x": 928,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_tomb_2": {
+      "x": 960,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_vault_0": {
+      "x": 992,
+      "y": 480,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_vault_1": {
+      "x": 0,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_vault_2": {
+      "x": 32,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_vines_0": {
+      "x": 64,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_vines_1": {
+      "x": 96,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_vines_2": {
+      "x": 128,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_volcanic_0": {
+      "x": 160,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_volcanic_1": {
+      "x": 192,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_volcanic_2": {
+      "x": 224,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_w_marble_0": {
+      "x": 256,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_w_marble_1": {
+      "x": 288,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_w_marble_2": {
+      "x": 320,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_zot_diamonds_0": {
+      "x": 352,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_zot_diamonds_1": {
+      "x": 384,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_floor_zot_diamonds_2": {
+      "x": 416,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_metal_wall_necropolis_0": {
+      "x": 448,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_metal_wall_necropolis_1": {
+      "x": 480,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_metal_wall_necropolis_2": {
+      "x": 512,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_metal_wall_necropolis_red_0": {
+      "x": 544,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_metal_wall_necropolis_red_1": {
+      "x": 576,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_metal_wall_necropolis_red_2": {
+      "x": 608,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_metal_wall_workshop_0": {
+      "x": 640,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_metal_wall_workshop_1": {
+      "x": 672,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_metal_wall_workshop_2": {
+      "x": 704,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_rock_wall_crypt_0": {
+      "x": 736,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_rock_wall_crypt_1": {
+      "x": 768,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_rock_wall_crypt_2": {
+      "x": 800,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_shoals_deep_water_0": {
+      "x": 832,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_shoals_deep_water_1": {
+      "x": 864,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_shoals_deep_water_2": {
+      "x": 896,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_shoals_shallow_water_0": {
+      "x": 928,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_shoals_shallow_water_1": {
+      "x": 960,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_shoals_shallow_water_2": {
+      "x": 992,
+      "y": 512,
+      "w": 32,
+      "h": 32
+    },
+    "vault_sigil_algiz_left_0": {
+      "x": 0,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_sigil_algiz_right_0": {
+      "x": 32,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_sigil_circle_0": {
+      "x": 64,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_sigil_cross_0": {
+      "x": 96,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_sigil_fourway_0": {
+      "x": 128,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_sigil_rhombus_0": {
+      "x": 160,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_smooth_wall_beogh_0": {
+      "x": 192,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_smooth_wall_beogh_1": {
+      "x": 224,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_abyss_a_0": {
+      "x": 256,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_abyss_a_1": {
+      "x": 288,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_abyss_a_2": {
+      "x": 320,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_abyss_b_0": {
+      "x": 352,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_abyss_b_1": {
+      "x": 384,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_abyss_b_2": {
+      "x": 416,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_abyss_c_0": {
+      "x": 448,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_abyss_c_1": {
+      "x": 480,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_abyss_c_2": {
+      "x": 512,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_depths_0": {
+      "x": 544,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_depths_1": {
+      "x": 576,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_depths_2": {
+      "x": 608,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_depths_entry_0": {
+      "x": 640,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_depths_entry_1": {
+      "x": 672,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_depths_entry_2": {
+      "x": 704,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_flesh_cage_0": {
+      "x": 736,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_flesh_cage_1": {
+      "x": 768,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_flesh_cage_2": {
+      "x": 800,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_orc_0": {
+      "x": 832,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_orc_1": {
+      "x": 864,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_orc_2": {
+      "x": 896,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_pyre_0": {
+      "x": 928,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_pyre_1": {
+      "x": 960,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_pyre_2": {
+      "x": 992,
+      "y": 544,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_shadow_mesh_0": {
+      "x": 0,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_shadow_mesh_1": {
+      "x": 32,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_shadow_mesh_2": {
+      "x": 64,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_shoals_0": {
+      "x": 96,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_shoals_1": {
+      "x": 128,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_shoals_2": {
+      "x": 160,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_snake_0": {
+      "x": 192,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_snake_1": {
+      "x": 224,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_snake_2": {
+      "x": 256,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_zot_last_0": {
+      "x": 288,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_zot_last_1": {
+      "x": 320,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_stone_wall_zot_last_2": {
+      "x": 352,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_tutorial_pad_0": {
+      "x": 384,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_0": {
+      "x": 416,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_1": {
+      "x": 448,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_2": {
+      "x": 480,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_blue_0": {
+      "x": 512,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_blue_1": {
+      "x": 544,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_blue_2": {
+      "x": 576,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_darkgray_0": {
+      "x": 608,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_darkgray_1": {
+      "x": 640,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_darkgray_2": {
+      "x": 672,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_magenta_0": {
+      "x": 704,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_magenta_1": {
+      "x": 736,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_magenta_2": {
+      "x": 768,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_yellow_0": {
+      "x": 800,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_yellow_1": {
+      "x": 832,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_abyss_yellow_2": {
+      "x": 864,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_borg_stone_0": {
+      "x": 896,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_borg_stone_1": {
+      "x": 928,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_borg_stone_2": {
+      "x": 960,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_0": {
+      "x": 992,
+      "y": 576,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_1": {
+      "x": 0,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_2": {
+      "x": 32,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_brown_vines_0": {
+      "x": 64,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_brown_vines_1": {
+      "x": 96,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_brown_vines_2": {
+      "x": 128,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_dark_0": {
+      "x": 160,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_dark_1": {
+      "x": 192,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_dark_2": {
+      "x": 224,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_dark_leak_0": {
+      "x": 256,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_darkgray_0": {
+      "x": 288,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_darkgray_1": {
+      "x": 320,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_darkgray_2": {
+      "x": 352,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_gray_0": {
+      "x": 384,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_gray_1": {
+      "x": 416,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_gray_2": {
+      "x": 448,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_lightgray_0": {
+      "x": 480,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_lightgray_1": {
+      "x": 512,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_lightgray_2": {
+      "x": 544,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_red_0": {
+      "x": 576,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_red_1": {
+      "x": 608,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_red_2": {
+      "x": 640,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_vines_0": {
+      "x": 672,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_vines_1": {
+      "x": 704,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_vines_2": {
+      "x": 736,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_white_0": {
+      "x": 768,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_white_1": {
+      "x": 800,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_brick_white_2": {
+      "x": 832,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_catacombs_0": {
+      "x": 864,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_catacombs_1": {
+      "x": 896,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_catacombs_2": {
+      "x": 928,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_church_0": {
+      "x": 960,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_church_1": {
+      "x": 992,
+      "y": 608,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_church_2": {
+      "x": 0,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_cobalt_rock_0": {
+      "x": 32,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_cobalt_rock_1": {
+      "x": 64,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_cobalt_rock_2": {
+      "x": 96,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_cobalt_stone_0": {
+      "x": 128,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_cobalt_stone_1": {
+      "x": 160,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_cobalt_stone_2": {
+      "x": 192,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crucible_0": {
+      "x": 224,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crucible_1": {
+      "x": 256,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crucible_2": {
+      "x": 288,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crypt_0": {
+      "x": 320,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crypt_1": {
+      "x": 352,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crypt_2": {
+      "x": 384,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crypt_metal_0": {
+      "x": 416,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crypt_metal_1": {
+      "x": 448,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crypt_metal_2": {
+      "x": 480,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crystal_bookcase_0": {
+      "x": 512,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crystal_bookcase_1": {
+      "x": 544,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crystal_bookcase_2": {
+      "x": 576,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crystal_squares_0": {
+      "x": 608,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crystal_squares_1": {
+      "x": 640,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_crystal_squares_2": {
+      "x": 672,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_emerald_0": {
+      "x": 704,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_emerald_1": {
+      "x": 736,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_emerald_2": {
+      "x": 768,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_flesh_0": {
+      "x": 800,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_flesh_1": {
+      "x": 832,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_flesh_2": {
+      "x": 864,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_0": {
+      "x": 896,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_1": {
+      "x": 928,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_2": {
+      "x": 960,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_darkgray_0": {
+      "x": 992,
+      "y": 640,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_darkgray_1": {
+      "x": 0,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_darkgray_2": {
+      "x": 32,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_magenta_0": {
+      "x": 64,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_magenta_1": {
+      "x": 96,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_magenta_2": {
+      "x": 128,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_of_shadows_0": {
+      "x": 160,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_of_shadows_1": {
+      "x": 192,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_of_shadows_2": {
+      "x": 224,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_white_0": {
+      "x": 256,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_white_1": {
+      "x": 288,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hall_white_2": {
+      "x": 320,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hell_0": {
+      "x": 352,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hell_1": {
+      "x": 384,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_hell_2": {
+      "x": 416,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_ice_0": {
+      "x": 448,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_ice_1": {
+      "x": 480,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_ice_2": {
+      "x": 512,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_ice_block_0": {
+      "x": 544,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_ice_block_1": {
+      "x": 576,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_ice_block_2": {
+      "x": 608,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_icy_stone_0": {
+      "x": 640,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_icy_stone_1": {
+      "x": 672,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_icy_stone_2": {
+      "x": 704,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lab_metal_0": {
+      "x": 736,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lab_metal_1": {
+      "x": 768,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lab_metal_2": {
+      "x": 800,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lab_rock_0": {
+      "x": 832,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lab_rock_1": {
+      "x": 864,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lab_rock_2": {
+      "x": 896,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lab_stone_0": {
+      "x": 928,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lab_stone_1": {
+      "x": 960,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lab_stone_2": {
+      "x": 992,
+      "y": 672,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lair_0": {
+      "x": 0,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lair_1": {
+      "x": 32,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_lair_2": {
+      "x": 64,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_marble_0": {
+      "x": 96,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_marble_1": {
+      "x": 128,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_marble_2": {
+      "x": 160,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_marble_tukima_0": {
+      "x": 192,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_marble_tukima_1": {
+      "x": 224,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_marble_tukima_2": {
+      "x": 256,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_moon_0": {
+      "x": 288,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_moon_1": {
+      "x": 320,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_moon_2": {
+      "x": 352,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_orc_0": {
+      "x": 384,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_orc_1": {
+      "x": 416,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_orc_2": {
+      "x": 448,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_brown_0": {
+      "x": 480,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_brown_1": {
+      "x": 512,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_brown_2": {
+      "x": 544,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_cyan_0": {
+      "x": 576,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_cyan_1": {
+      "x": 608,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_cyan_2": {
+      "x": 640,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_darkgray_0": {
+      "x": 672,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_darkgray_1": {
+      "x": 704,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_darkgray_2": {
+      "x": 736,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_green_0": {
+      "x": 768,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_green_1": {
+      "x": 800,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_green_2": {
+      "x": 832,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_lightblue_0": {
+      "x": 864,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_lightblue_1": {
+      "x": 896,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_lightblue_2": {
+      "x": 928,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_lightgray_0": {
+      "x": 960,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_lightgray_1": {
+      "x": 992,
+      "y": 704,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_lightgray_2": {
+      "x": 0,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_red_0": {
+      "x": 32,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_red_1": {
+      "x": 64,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_red_2": {
+      "x": 96,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_white_0": {
+      "x": 128,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_white_1": {
+      "x": 160,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_white_2": {
+      "x": 192,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_yellow_0": {
+      "x": 224,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_yellow_1": {
+      "x": 256,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_pebble_yellow_2": {
+      "x": 288,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_permarock_clear_blue_0": {
+      "x": 320,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_permarock_clear_darkgray_0": {
+      "x": 352,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_sandstone_0": {
+      "x": 384,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_sandstone_1": {
+      "x": 416,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_sandstone_2": {
+      "x": 448,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_snake_0": {
+      "x": 480,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_snake_1": {
+      "x": 512,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_snake_2": {
+      "x": 544,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_spider_0": {
+      "x": 576,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_spider_1": {
+      "x": 608,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_spider_2": {
+      "x": 640,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_black_marked_0": {
+      "x": 672,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_black_marked_1": {
+      "x": 704,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_black_marked_2": {
+      "x": 736,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_dark_0": {
+      "x": 768,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_dark_1": {
+      "x": 800,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_dark_2": {
+      "x": 832,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_gray_0": {
+      "x": 864,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_gray_1": {
+      "x": 896,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_gray_2": {
+      "x": 928,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_magic_shelf_0": {
+      "x": 960,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_magic_shelf_1": {
+      "x": 992,
+      "y": 736,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_magic_shelf_2": {
+      "x": 0,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_mossy_0": {
+      "x": 32,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_mossy_1": {
+      "x": 64,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_mossy_2": {
+      "x": 96,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_puffball_0": {
+      "x": 128,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_puffball_1": {
+      "x": 160,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_puffball_2": {
+      "x": 192,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_scorched_0": {
+      "x": 224,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_scorched_1": {
+      "x": 256,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_scorched_2": {
+      "x": 288,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_shrine_0": {
+      "x": 320,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_shrine_1": {
+      "x": 352,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_shrine_2": {
+      "x": 384,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_smooth_0": {
+      "x": 416,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_smooth_1": {
+      "x": 448,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_smooth_2": {
+      "x": 480,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_white_0": {
+      "x": 512,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_white_1": {
+      "x": 544,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_stone_white_2": {
+      "x": 576,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_studio_0": {
+      "x": 608,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_studio_1": {
+      "x": 640,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_studio_2": {
+      "x": 672,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_tomb_0": {
+      "x": 704,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_tomb_1": {
+      "x": 736,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_tomb_2": {
+      "x": 768,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_transparent_flesh_0": {
+      "x": 800,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_transparent_flesh_1": {
+      "x": 832,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_transparent_flesh_2": {
+      "x": 864,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_0": {
+      "x": 896,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_1": {
+      "x": 928,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_2": {
+      "x": 960,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_darkgray_0": {
+      "x": 992,
+      "y": 768,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_darkgray_1": {
+      "x": 0,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_darkgray_2": {
+      "x": 32,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_magenta_0": {
+      "x": 64,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_magenta_1": {
+      "x": 96,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_magenta_2": {
+      "x": 128,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_red_0": {
+      "x": 160,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_red_1": {
+      "x": 192,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_undead_red_2": {
+      "x": 224,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_vault_0": {
+      "x": 256,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_vault_1": {
+      "x": 288,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_vault_2": {
+      "x": 320,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_vaults_metal_0": {
+      "x": 352,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_vaults_metal_1": {
+      "x": 384,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_vaults_metal_2": {
+      "x": 416,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_vines_0": {
+      "x": 448,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_vines_1": {
+      "x": 480,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_vines_2": {
+      "x": 512,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_volcanic_0": {
+      "x": 544,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_volcanic_1": {
+      "x": 576,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_volcanic_2": {
+      "x": 608,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_wax_0": {
+      "x": 640,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_wax_1": {
+      "x": 672,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_wax_2": {
+      "x": 704,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_blue_0": {
+      "x": 736,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_blue_1": {
+      "x": 768,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_blue_2": {
+      "x": 800,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_brown_0": {
+      "x": 832,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_brown_1": {
+      "x": 864,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_brown_2": {
+      "x": 896,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_cyan_0": {
+      "x": 928,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_cyan_1": {
+      "x": 960,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_cyan_2": {
+      "x": 992,
+      "y": 800,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_darkgray_0": {
+      "x": 0,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_darkgray_1": {
+      "x": 32,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_darkgray_2": {
+      "x": 64,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_green_0": {
+      "x": 96,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_green_1": {
+      "x": 128,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_green_2": {
+      "x": 160,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_lightblue_0": {
+      "x": 192,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_lightblue_1": {
+      "x": 224,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_lightblue_2": {
+      "x": 256,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_lightmagenta_0": {
+      "x": 288,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_lightmagenta_1": {
+      "x": 320,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_lightmagenta_2": {
+      "x": 352,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_magenta_0": {
+      "x": 384,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_magenta_1": {
+      "x": 416,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_magenta_2": {
+      "x": 448,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_red_0": {
+      "x": 480,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_red_1": {
+      "x": 512,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_red_2": {
+      "x": 544,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_white_0": {
+      "x": 576,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_white_1": {
+      "x": 608,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_white_2": {
+      "x": 640,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_yellow_0": {
+      "x": 672,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_yellow_1": {
+      "x": 704,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    },
+    "vault_wall_zot_yellow_2": {
+      "x": 736,
+      "y": 832,
+      "w": 32,
+      "h": 32
+    }
+  }
+}

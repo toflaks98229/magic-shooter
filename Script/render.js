@@ -323,8 +323,15 @@ function drawWallStripe(scene, i, ray, angle, correctedDist, wallTopY, wallHeigh
     const wallTextureKey = C.TILE_TYPES[ray.texture]?.wallTexture;
     let wallTextureInfo;
 
-    if (wallTextureKey === 'theme') {
-        // 타일 좌표 해시로 테마 텍스처를 섞어 벽면이 단조롭지 않게 합니다.
+    // 볼트가 그 칸에 쓸 그림을 지정했으면 그것이 먼저입니다.
+    // 이것이 없으면 밀랍 벽이 보통 바위벽으로 그려져,
+    // 벌집 볼트가 벌집으로 보이지 않습니다.
+    const override = vaultTexture(ray.mapX, ray.mapY);
+
+    if (override) {
+        wallTextureInfo = override;
+    } else if (wallTextureKey === 'theme') {
+        // 타일 좌표 해시로 텍스처를 섞어 벽면이 단조롭지 않게 합니다.
         const wallHash = (ray.mapX * 19 + ray.mapY * 73);
         wallTextureInfo = scene.wallTextures[Math.abs(wallHash) % scene.wallTextures.length];
     } else if (wallTextureKey) {
@@ -1005,4 +1012,31 @@ function branchTextures(kind, branch) {
     }
 
     return found;
+}
+
+/**
+ * 볼트가 그 칸에 지정한 그림을 꺼냅니다.
+ *
+ * 볼트는 자기가 쓸 타일을 직접 지정할 수 있습니다. 밀랍으로 된 벽, 이끼 낀
+ * 바닥, 특정 자리의 석상 같은 것들입니다. 이것이 있어야 볼트가 그 볼트답게
+ * 보입니다. 벌집 볼트가 보통 바위벽으로 그려지면 벌집으로 보이지 않습니다.
+ *
+ * 지정된 칸이 층 전체에서 몇십 개뿐이라, 대부분의 벽은 여기서 곧바로 빠집니다.
+ * @param {number} tileX - 타일 X
+ * @param {number} tileY - 타일 Y
+ * @returns {object|null} 텍스처. 지정이 없으면 null
+ */
+function vaultTexture(tileX, tileY) {
+    const spot = world.vaultTiles?.[tileY * C.MAP_WIDTH + tileX];
+    if (!spot?.tile) return null;
+
+    // 변형이 여럿이면 칸 좌표로 하나를 고릅니다. 같은 볼트 안에서도
+    // 벽면이 조금씩 달라 보이게 하려는 것입니다.
+    const hash = Math.abs(tileX * 19 + tileY * 73);
+    for (let i = 0; i < 3; i++) {
+        const texture = assets.textures[`vault_${spot.tile}_${(hash + i) % 3}`];
+        if (texture?.data) return texture;
+    }
+
+    return null;
 }

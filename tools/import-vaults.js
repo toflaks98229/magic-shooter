@@ -143,7 +143,7 @@ function parseVaults(text) {
         if (!matched) continue;
 
         const [, key, value] = matched;
-        if (key === 'NAME') current = { name: value, tags: [], subst: [], nsubst: [], mons: [], kmons: [], kfeat: [] };
+        if (key === 'NAME') current = { name: value, tags: [], subst: [], nsubst: [], mons: [], kmons: [], kfeat: [], tiles: [] };
         if (!current) continue;
 
         if (key === 'TAGS') current.tags.push(...value.split(/\s+/).filter(Boolean));
@@ -154,6 +154,14 @@ function parseVaults(text) {
         if (key === 'MONS') current.mons.push(...splitSlots(value));
         if (key === 'KMONS') current.kmons.push(value);   // 아래에서 글리프별로 풉니다
         if (key === 'KFEAT') current.kfeat.push(value);
+
+        // 볼트가 지정한 그림. 이것을 읽지 않으면 밀랍 벽이 보통 바위벽으로
+        // 그려져, 벌집 볼트가 벌집으로 보이지 않습니다.
+        if (key === 'TILE' || key === 'FTILE' || key === 'RTILE') {
+            current.tiles.push({ kind: key, value });
+        }
+        if (key === 'LROCKTILE') current.rockTile = value.trim();
+        if (key === 'LFLOORTILE') current.floorTile = value.trim();
         if (key === 'NSUBST') current.nsubst.push(value);
         if (key === 'SHUFFLE') (current.shuffle ??= []).push(value);
     }
@@ -177,6 +185,32 @@ function splitSlots(value) {
             .replace(/^w:\d+\s*/, '')
             .split(';')[0].trim())
         .filter(Boolean));
+}
+
+/**
+ * TILE / FTILE / RTILE 한 줄을 규칙으로 바꿉니다.
+ *
+ * 글리프가 앞에 붙고 구분자는 = 와 : 둘 다 쓰입니다.
+ * (x = wall_wax / x : wall_abyss) 하나만 보면 글리프를 그림 이름으로
+ * 잘못 읽습니다.
+ * @param {string} value - 지시자 값
+ * @returns {object|null} 규칙
+ */
+function parseTileDirective(value) {
+    const separator = value.search(/[=:]/);
+    if (separator < 0) return null;
+
+    const glyphs = [...value.slice(0, separator).trim()];
+    const rest = value.slice(separator + 1);
+
+    const names = [];
+    for (const part of rest.split('/')) {
+        const name = part.trim().replace(/^w:\d+\s*/, '').split(/\s+/)[0];
+        if (name && /^[a-z_0-9]+$/i.test(name)) names.push(name.toLowerCase());
+    }
+
+    if (glyphs.length === 0 || names.length === 0) return null;
+    return { glyphs, names };
 }
 
 /**
@@ -516,6 +550,19 @@ for (const relative of SOURCE_FILES) {
         }
         if (unknownKmons) { rejected.kmons = (rejected.kmons ?? 0) + 1; continue; }
 
+        // 글리프마다의 그림. 여러 후보가 있으면 찍을 때 하나를 뽑습니다.
+        const tiles = {};
+        for (const entry of vault.tiles ?? []) {
+            const parsed = parseTileDirective(entry.value);
+            if (!parsed) continue;
+
+            for (const glyph of parsed.glyphs) {
+                // TILE 은 그 칸에 그릴 그림, FTILE 은 그 아래 깔릴 바닥입니다.
+                const slot = entry.kind === 'FTILE' ? 'floor' : 'tile';
+                tiles[glyph] = { ...(tiles[glyph] ?? {}), [slot]: parsed.names };
+            }
+        }
+
         const kfeat = {};
         for (const line of vault.kfeat) {
             const rule = parseKfeat(line);
@@ -548,6 +595,9 @@ for (const relative of SOURCE_FILES) {
             kfeat,
             // 층 전체를 정의하는 볼트는 미니볼트와 쓰이는 자리가 다릅니다.
             kmons,
+            tiles,
+            rockTile: vault.rockTile,
+            floorTile: vault.floorTile,
             encompass: vault.orient?.trim() === 'encompass' || undefined,
         });
     }

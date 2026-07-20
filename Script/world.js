@@ -159,6 +159,14 @@ export function createWorld() {
          */
         triggers: [],
 
+        /**
+         * @description 볼트가 지정한 칸별 그림. 타일 색인 → { tile, floor }.
+         *
+         * 배열이 아니라 성긴 객체입니다. 지정된 칸이 층 전체에서 몇십 개뿐이라
+         * 5600 칸짜리 배열을 두는 것보다 낫습니다.
+         */
+        vaultTiles: {},
+
         /** @description 현재 맵에 존재하는 모든 적 */
         enemies: [],
         /** @description 현재 맵에 존재하는 모든 발사체 */

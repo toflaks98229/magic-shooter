@@ -326,6 +326,10 @@ function stamp(map, grid, left, top, vault) {
     const plates = [];
     const sealed = [];
 
+    // 볼트가 그 칸에 쓸 그림을 지정했으면 적어 둡니다.
+    // 렌더러가 이것을 보고 보통 벽 대신 지정된 그림을 그립니다.
+    const tileOverrides = [];
+
     for (let y = 0; y < grid.length; y++) {
         for (let x = 0; x < grid[y].length; x++) {
             const glyph = grid[y][x];
@@ -347,10 +351,30 @@ function stamp(map, grid, left, top, vault) {
 
             if (name === 'TRIGGER_PLATE') plates.push({ tileX: left + x, tileY: top + y });
             if (name === 'SEALED_WALL') sealed.push({ tileX: left + x, tileY: top + y });
+
+            const override = vault.tiles?.[glyph];
+            if (override) {
+                // 후보가 여럿이면 하나를 뽑습니다. 원본도 그렇게 합니다.
+                tileOverrides.push({
+                    tileX: left + x, tileY: top + y,
+                    tile: pickName(override.tile),
+                    floor: pickName(override.floor),
+                });
+            }
         }
     }
 
-    return { spawns, plates, sealed };
+    return { spawns, plates, sealed, tileOverrides };
+}
+
+/**
+ * 후보 중 하나를 뽑습니다.
+ * @param {Array<string>|undefined} names - 그림 이름들
+ * @returns {string|null} 뽑힌 이름
+ */
+function pickName(names) {
+    if (!names?.length) return null;
+    return names[random2(names.length)];
 }
 
 /**

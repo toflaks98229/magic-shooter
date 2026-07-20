@@ -153,3 +153,41 @@ test('렌더러가 변형 목록을 통째로 넘긴다', () => {
     assert.match(source, /scene\.wallTextures\[Math\.abs\(wallHash\)\s*%\s*scene\.wallTextures\.length\]/,
         '벽을 그릴 때 변형을 고르지 않습니다');
 });
+
+// --- 볼트가 지정한 전용 타일 -------------------------------------------------------
+
+test('볼트 전용 타일을 가져왔다', () => {
+    // 볼트는 자기가 쓸 그림을 직접 지정합니다. 밀랍 벽, 이끼 낀 바닥 같은
+    // 것들입니다. 읽지 않으면 그 자리가 보통 벽으로 그려져,
+    // 벌집 볼트가 벌집으로 보이지 않습니다.
+    const keys = Object.keys(assets.textures).filter(k => k.startsWith('vault_'));
+    assert.ok(keys.length > 300, `볼트 타일이 ${keys.length} 장뿐입니다`);
+});
+
+test('볼트가 지정한 이름이 실제로 실려 있다', async () => {
+    // 임포터가 이름을 적어 두어도 그림이 없으면 그 자리가 비어 보입니다.
+    const { VAULTS } = await import('../Script/data/vaults.js');
+
+    let checked = 0;
+    for (const vault of VAULTS) {
+        for (const spot of Object.values(vault.tiles ?? {})) {
+            for (const name of [...(spot.tile ?? []), ...(spot.floor ?? [])]) {
+                assert.ok(assets.textures[`vault_${name}_0`]?.data,
+                    `${vault.name} 이 가리키는 ${name} 이 실리지 않았습니다`);
+                checked++;
+            }
+        }
+    }
+
+    assert.ok(checked > 0, '타일을 지정한 볼트가 하나도 없습니다');
+});
+
+test('렌더러가 볼트 지정을 먼저 본다', () => {
+    // 지정을 읽어 두고 그리는 쪽이 보지 않으면 화면은 그대로입니다.
+    const source = readFileSync(new URL('../Script/render.js', import.meta.url), 'utf8');
+
+    assert.match(source, /const override = vaultTexture\(ray\.mapX, ray\.mapY\)/,
+        '벽을 그릴 때 볼트 지정을 찾지 않습니다');
+    assert.match(source, /if \(override\) \{\s*\n\s*wallTextureInfo = override;/,
+        '볼트 지정이 있어도 쓰지 않습니다');
+});

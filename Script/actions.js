@@ -64,6 +64,27 @@ export function beginFloor(dungeon) {
     // 비우기(FLOOR_SCOPED_COLLECTIONS)가 위에서 이미 지나갔으므로 여기서 채웁니다.
     world.vaults.push(...(dungeon.vaults ?? []));
     installVaultTriggers(dungeon.vaults ?? []);
+    // 층마다 새로 씁니다. 배열이 아니라 객체라 비우기 목록이 다루지 못합니다.
+    for (const key of Object.keys(world.vaultTiles)) delete world.vaultTiles[key];
+    installVaultTiles(dungeon.vaults ?? []);
+}
+
+/**
+ * 볼트가 지정한 그림을 칸마다 기록합니다.
+ *
+ * 렌더러가 타일 좌표로 바로 찾을 수 있게 평평한 표로 둡니다.
+ * 볼트마다 훑으면 벽 하나 그릴 때마다 볼트 목록을 뒤지게 됩니다.
+ * @param {Array<object>} vaults - 이 층에 찍힌 볼트들
+ */
+function installVaultTiles(vaults) {
+    for (const vault of vaults) {
+        for (const spot of vault.tileOverrides ?? []) {
+            world.vaultTiles[spot.tileY * C.MAP_WIDTH + spot.tileX] = {
+                tile: spot.tile,
+                floor: spot.floor,
+            };
+        }
+    }
 }
 
 /**
