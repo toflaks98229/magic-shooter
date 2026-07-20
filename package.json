@@ -10,6 +10,7 @@
     "build:atlas": "node tools/build-atlas.js",
     "preview": "node tools/preview.js",
     "bench": "node tools/bench.js",
-    "locate:tiles": "node tools/locate-tiles.js"
+    "locate:tiles": "node tools/locate-tiles.js",
+    "verify:chargen": "node tools/verify-chargen.js"
   }
 }

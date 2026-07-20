@@ -17,6 +17,8 @@ import { groupInventory, inventorySummary, describeStack, INVENTORY_SLOTS } from
 import { BUFF_MODIFIERS } from './items.js';
 import { setWeapon } from './actions.js';
 import { on, EVENTS } from './events.js';
+import { describeCharacter } from './character.js';
+import { GODS, pietyRank, PIETY_BREAKPOINTS } from './gods.js';
 
 // --- 초기화 ---
 
@@ -56,6 +58,8 @@ export function updateHUD() {
     setText(dom.floorCountEl, formatLocation(world.branch, world.floor));
     setText(dom.gameTimeEl, (world.time / 1000).toFixed(1));
 
+    updateCharacterLine();
+    updateGodLine();
     updateRuneCount();
     updateWieldedWeapon();
     updateBuffList();
@@ -145,6 +149,45 @@ function spriteImage(spriteKey, alt) {
     image.src = texture.img.src;
     image.alt = alt || spriteKey;
     return image;
+}
+
+/** @description 캐릭터 줄에 마지막으로 쓴 내용. 판 중에는 바뀌지 않습니다. */
+let drawnCharacter = null;
+
+/**
+ * 종족과 직업을 한 줄로 보여줍니다. DCSS 상태창 맨 위와 같은 자리입니다.
+ */
+function updateCharacterLine() {
+    const line = describeCharacter();
+    if (line === drawnCharacter) return;
+    drawnCharacter = line;
+    setText(dom.characterLineEl, line || '-');
+}
+
+/** @description 신 칸에 마지막으로 그린 내용 */
+let drawnGod = null;
+
+/**
+ * 섬기는 신과 신앙심을 보여줍니다.
+ *
+ * DCSS 는 신앙심을 숫자가 아니라 별(*)로 보여줍니다. 여섯 칸이고, 채워지지 않은 자리는
+ * 점(.)으로 남습니다. 숫자보다 한눈에 들어와 그대로 따랐습니다.
+ */
+function updateGodLine() {
+    const godId = world.player.god;
+    if (!godId) {
+        if (drawnGod === null) return;
+        drawnGod = null;
+        setText(dom.godLineEl, '-');
+        return;
+    }
+
+    const rank = pietyRank(world.player.piety);
+    const stars = '*'.repeat(rank) + '.'.repeat(PIETY_BREAKPOINTS.length - rank);
+    const line = `${GODS[godId].name} ${stars}`;
+    if (line === drawnGod) return;
+    drawnGod = line;
+    setText(dom.godLineEl, line);
 }
 
 /** @description 룬 칸에 마지막으로 그린 개수. 매 프레임 그림을 새로 만들지 않기 위한 것입니다. */
@@ -247,6 +290,8 @@ export function invalidateSpriteCache() {
     // 그림이 없던 동안 숫자와 글자로만 그려 두었으므로, 그림이 준비되면 다시 그려야 합니다.
     drawnRuneCount = -1;
     drawnWeapon = null;
+    drawnCharacter = null;
+    drawnGod = null;
 }
 
 /**

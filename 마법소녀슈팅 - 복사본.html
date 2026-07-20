@@ -358,6 +358,72 @@
         }
 
 
+        /*
+         * 캐릭터 생성. DCSS 의 종족/직업 선택 화면을 그대로 옮긴 것입니다.
+         * 글자 하나에 항목 하나가 붙고, 원본이 추천하는 조합은 밝게 표시됩니다.
+         */
+        .chargen-prompt {
+            font-size: 26px;
+            color: var(--text);
+            margin: 0 0 4px;
+        }
+        .chargen-hint { color: var(--dim); margin: 0 0 14px; }
+
+        .chargen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 1px 18px;
+            width: min(920px, 88vw);
+            max-height: 56vh;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .chargen-group {
+            grid-column: 1 / -1;
+            color: var(--dim);
+            margin-top: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        .chargen-group:first-child { margin-top: 0; }
+
+        .chargen-item {
+            display: flex;
+            gap: 7px;
+            align-items: baseline;
+            padding: 1px 6px;
+            background: none;
+            border: none;
+            color: var(--text);
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+            width: 100%;
+        }
+        .chargen-item:hover,
+        .chargen-item:focus-visible {
+            background: var(--highlight);
+            color: #17171a;
+            outline: none;
+        }
+        .chargen-item .menu-key { color: var(--highlight); }
+        .chargen-item:hover .menu-key,
+        .chargen-item:focus-visible .menu-key { color: #17171a; }
+
+        /* 원본이 추천하는 조합. DCSS 도 밝은 색으로 구분해 줍니다. */
+        .chargen-item.recommended { color: #7ac0e0; }
+
+        .chargen-detail {
+            width: min(920px, 88vw);
+            min-height: 52px;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+            color: var(--dim);
+            text-align: left;
+        }
+        .chargen-detail strong { color: var(--text); font-weight: normal; }
+
         /* DCSS 의 (a) 항목 나열식 메뉴 */
         .menu-list {
             display: flex;
@@ -449,6 +515,12 @@
             <div class="panel-divider"></div>
 
             <div class="panel-row">
+                <span class="panel-label">Name</span><span id="character-line">-</span>
+            </div>
+            <div class="panel-row">
+                <span class="panel-label">God</span><span id="god-line">-</span>
+            </div>
+            <div class="panel-row">
                 <span class="panel-label">Place</span><span id="floor-count">D:1</span>
             </div>
             <div class="panel-row">
@@ -478,6 +550,17 @@
                 </div>
             </div>
         </aside>
+
+        <!-- 캐릭터 생성. 종족 -> 직업 순으로, DCSS 와 같은 차례입니다. -->
+        <div id="chargen-screen" class="fullscreen-menu" style="display:none">
+            <p class="chargen-prompt" id="chargen-prompt">종족을 고르십시오</p>
+            <p class="chargen-hint" id="chargen-hint">밝은 색은 이 조합을 원본이 추천한다는 뜻입니다.</p>
+            <div class="chargen-grid" id="chargen-grid"></div>
+            <div class="chargen-detail" id="chargen-detail"></div>
+            <div class="menu-footer">
+                <span class="menu-key">*</span> 무작위 · <span class="menu-key">Esc</span> 뒤로
+            </div>
+        </div>
 
         <!-- 타이틀 -->
         <div id="start-screen" class="fullscreen-menu">

@@ -24,6 +24,11 @@ import { advanceSimulation, resetLoop } from './loop.js';
 import { updateHUD, registerUiHandlers, invalidateSpriteCache } from './ui.js';
 import { initAudio, registerAudioHandlers } from './audio.js';
 import { registerMessageHandlers, clearMessages } from './messages.js';
+import { startCharacterCreation } from './chargen.js';
+import { applyCharacter } from './character.js';
+import { SPECIES } from './species.js';
+import { GODS, allGods, canWorship } from './gods.js';
+import { addToInventory } from './inventory.js';
 
 // --- 모듈 스코프 변수 (Private Member Variables) ---
 
@@ -33,6 +38,9 @@ let lastTime = 0;
 let audioCtx = null;
 /** @description 게임 루프가 이미 돌고 있는지 여부. 재시작 시 루프가 중복 실행되는 것을 막습니다. */
 let isLoopRunning = false;
+/** @description 직전에 고른 종족과 직업. 다시 시작할 때 그대로 씁니다. */
+let lastSpecies = 'human';
+let lastBackground = 'fighter';
 
 // --- 게임 생명주기 함수 ---
 
@@ -92,8 +100,11 @@ function handleStartClick() {
         dom.startGameBtn.textContent = '(a) 새 탐험 시작';
         // 이제 그림이 준비되었으므로 소지품과 상태 표시를 다시 그리게 합니다.
         invalidateSpriteCache();
-        startGame();
-        startLoop();
+        // 에셋이 준비된 뒤에 종족과 직업을 고릅니다. 다 고르면 startGame 이 불립니다.
+        startCharacterCreation((species, background) => {
+            startGame(species, background);
+            startLoop();
+        });
     }).catch(err => {
         dom.startGameBtn.textContent = 'ERROR - Check Console';
         console.error('에셋 로딩 중 오류 발생:', err);
@@ -141,7 +152,11 @@ function gameLoop(timestamp = 0) {
  * 게임을 시작하는 함수.
  * 초기화면을 숨기고, 세계 상태를 새로 만들며, 첫 번째 층을 생성합니다.
  */
-function startGame() {
+function startGame(species = lastSpecies, background = lastBackground) {
+    // 다시 시작할 때는 직전에 고른 캐릭터를 그대로 씁니다. 매번 다시 고르게 하면 번거롭습니다.
+    lastSpecies = species;
+    lastBackground = background;
+
     resetWorld();       // 월드를 초기 상태로 재생성 (이전 판의 잔재가 남지 않도록)
     A.rollBranchEntrances(); // 어느 층에 어떤 하위 던전 입구가 놓일지 이번 판에서 한 번만 정합니다
     resetRuntime();     // 흔들림 위상, 무기 교체 플래그 등 세션 상태도 초기화
@@ -149,6 +164,10 @@ function startGame() {
     clearInputQueue();  // 이전 판에서 쌓인 입력이 새 판에 반영되지 않도록 비움
     clearMessages();    // 이전 판의 알림이 남아 있지 않도록 비움
     A.setGameRunning(true);
+
+    // 종족과 직업을 반영합니다. 최대 체력과 마력이 여기서 정해지므로 층을 만들기 전에 해야 합니다.
+    const startingItems = applyCharacter(species, background);
+    for (const itemId of startingItems) addToInventory(world.inventory, itemId);
 
     generateNewFloor();
 
@@ -226,6 +245,7 @@ function generateNewFloor() {
     world.map = dungeon.map;
     world.objectMap = dungeon.objectMap;
     placeBranchEntrances(dungeon);
+    placeAltar(dungeon);
     placePortal(dungeon);
 
     // 플레이어를 맵의 시작 지점으로 이동
@@ -289,6 +309,34 @@ function placeBranchEntrances(dungeon) {
         world.entrances.push({ tileX: spot.x, tileY: spot.y, branch: branchId });
         console.log(`${getBranch(branchId).name}의 입구가 ${formatLocation(world.branch, world.floor)}에 있습니다.`);
     }
+}
+
+/**
+ * 이번 층에 제단이 놓이는지 굴리고, 놓인다면 배치합니다.
+ *
+ * 원본에서 제단은 흔하지 않습니다. 층마다 있으면 아무 때나 갈아탈 수 있어
+ * 신을 고르는 일이 가벼워지기 때문입니다. 대략 네 층에 하나꼴로 둡니다.
+ *
+ * 어떤 신의 제단인지는 층마다 새로 굴립니다. 다만 지금 종족이 섬길 수 없는 신
+ * (언데드에게 선한 신 같은)은 후보에서 빼 둡니다. 걸어가서 거부당하기만 하는
+ * 제단은 놀리는 것이나 다름없기 때문입니다.
+ * @param {{playerStart: {x: number, y: number}}} dungeon - 방금 생성된 던전
+ */
+function placeAltar(dungeon) {
+    world.altars = [];
+    if (Math.random() > 0.25) return;
+
+    const species = SPECIES[world.player.species];
+    const candidates = allGods().filter(id => canWorship(id, species).allowed);
+    if (candidates.length === 0) return;   // 데미갓은 제단을 만나지 않습니다.
+
+    const spot = findEntranceSpot(dungeon);
+    if (!spot) return;
+
+    const god = candidates[Math.floor(Math.random() * candidates.length)];
+    world.map[spot.y][spot.x] = C.TILE_IDS.ALTAR;
+    world.altars.push({ tileX: spot.x, tileY: spot.y, god });
+    console.log(`${GODS[god].name}의 제단이 ${formatLocation(world.branch, world.floor)}에 있습니다.`);
 }
 
 /**

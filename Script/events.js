@@ -29,6 +29,13 @@ export const EVENTS = {
     /** 적이 사망함. detail: { enemy } */
     ENEMY_DIED: 'enemy:died',
 
+    /** 섬기는 신이 바뀜. detail: { god, name } */
+    GOD_CHANGED: 'god:changed',
+    /** 제단에서 거부당함. detail: { god, reason } */
+    WORSHIP_REFUSED: 'god:refused',
+    /** 신앙심의 단계(별)가 올라감. detail: { god, rank } */
+    PIETY_RANK_CHANGED: 'god:pietyRank',
+
     /** 아이템을 주워 소지품에 넣음. detail: { item, definition } */
     ITEM_PICKED_UP: 'item:pickedUp',
     /** 소지품이 가득 차 줍지 못함. detail: { item, definition } */

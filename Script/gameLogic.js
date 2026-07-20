@@ -15,6 +15,7 @@ import { assets } from './assets.js';
 import { getBranch } from './branches.js';
 import { getMonster, availableMonsters, DEFAULT_SPAWN_TABLE } from './monsters.js';
 import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
+import { modifier as characterModifier } from './character.js';
 
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
 
@@ -173,12 +174,16 @@ export function attack() {
 }
 
 /**
- * 지속 효과를 반영한 플레이어의 공격력을 구합니다.
+ * 지속 효과와 캐릭터를 반영한 플레이어의 공격력을 구합니다.
+ *
+ * 장갑은 근접, 지팡이는 마법으로 칩니다. 트롤의 힘이 지팡이 위력을 올리거나
+ * 딥 엘프의 지능이 주먹을 세게 만드는 일이 없도록 갈라 둡니다.
  * @param {number} base - 무기의 기본 피해량
  * @returns {number} 실제로 들어갈 피해량
  */
 function playerDamage(base) {
-    return Math.round(base * A.buffModifier('damageMultiplier', 1));
+    const field = world.player.weapon === 'fist' ? 'meleeDamage' : 'magicDamage';
+    return Math.round(base * A.buffModifier('damageMultiplier', 1) * characterModifier(field));
 }
 
 /**
@@ -258,6 +263,12 @@ export function interactWithWorld() {
     if (interaction === 'branch') {
         const entrance = world.entrances.find(e => e.tileX === tileX && e.tileY === tileY);
         if (entrance) A.enterBranch(entrance.branch);
+        return;
+    }
+
+    if (interaction === 'altar') {
+        const altar = world.altars.find(a => a.tileX === tileX && a.tileY === tileY);
+        if (altar) A.worshipAtAltar(altar.god);
         return;
     }
 
@@ -584,7 +595,9 @@ function handlePlayerMovement(dtFactor) {
         }
 
         runtime.bobbingAngle += C.BOB_SPEED * dtFactor; // 화면 흔들림 각도 업데이트
-        const moveSpeed = C.MOVE_SPEED * dtFactor * A.buffModifier('speedMultiplier', 1);
+        // 스프리건은 빠르고 나가는 느립니다. 케이브리아도스를 섬기면 더 느려집니다.
+        const moveSpeed = C.MOVE_SPEED * dtFactor
+            * A.buffModifier('speedMultiplier', 1) * characterModifier('moveSpeed');
         // 플레이어 시야 방향을 기준으로 한 이동 벡터 계산 (전진/후진, 좌/우)
         const moveX = (Math.cos(player.angle) * forward - Math.sin(player.angle) * strafe) * moveSpeed;
         const moveY = (Math.sin(player.angle) * forward + Math.cos(player.angle) * strafe) * moveSpeed;

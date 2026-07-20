@@ -129,7 +129,17 @@ export function createWorld() {
             maxAmmo: 100,           // 최대 탄약
             weapon: 'gun',          // 현재 사용 중인 무기 키
             lastAttackTime: PAST_TIME, // 마지막으로 공격한 시각. 시작하자마자 공격할 수 있도록 과거로 둡니다.
+
+            // 캐릭터. character.js 의 applyCharacter 가 정하며, 판이 끝날 때까지 종족과 직업은
+            // 바뀌지 않습니다. 신만 개종으로 바뀔 수 있습니다.
+            species: 'human',       // 종족 키 (species.js)
+            background: 'fighter',  // 직업 키 (backgrounds.js)
+            god: null,              // 섬기는 신 키. null 이면 무신론자입니다.
+            piety: 0,               // 신앙심. 0~200 이고 단계는 gods.js 의 pietyRank 가 셉니다.
         },
+
+        /** @description 이번 층에 놓인 제단. [{tileX, tileY, god}] */
+        altars: [],
 
         /** @description 현재 맵에 존재하는 모든 적 */
         enemies: [],

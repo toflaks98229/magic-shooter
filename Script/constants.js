@@ -148,6 +148,7 @@ export const TILE_IDS = {
     DOOR: 5,
     BRANCH_ENTRANCE: 6,
     PORTAL: 7,
+    ALTAR: 8,
 };
 
 /**
@@ -188,6 +189,13 @@ export const TILE_TYPES = {
         solid: true, opaque: true, spawnable: false,
         // 출구와 같은 텍스처를 쓰되, 어느 가지로 이어지는지는 world.entrances가 압니다.
         wallTexture: 'exit', interaction: 'branch',
+    },
+    [TILE_IDS.ALTAR]: {
+        id: TILE_IDS.ALTAR, name: 'altar',
+        solid: true, opaque: true, spawnable: false,
+        // 어느 신의 제단인지는 world.altars 가 압니다. 밟아서 지나가는 것이 아니라
+        // 앞에 서서 스페이스로 개종하는 것이라 벽처럼 막혀 있는 편이 자연스럽습니다.
+        wallTexture: 'exit', interaction: 'altar',
     },
     [TILE_IDS.PORTAL]: {
         id: TILE_IDS.PORTAL, name: 'portal',

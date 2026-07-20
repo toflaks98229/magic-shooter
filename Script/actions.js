@@ -15,6 +15,9 @@ import { getItem, rollItem, DROP_CHANCE, BUFF_MODIFIERS } from './items.js';
 import { addToInventory, takeFromInventory } from './inventory.js';
 import { runtime, setDynamicLight } from './runtime.js';
 import { emit, EVENTS } from './events.js';
+import { modifier, invalidateCharacter, isForbidden } from './character.js';
+import { GODS, MAX_PIETY, pietyRank, startingPiety, canWorship } from './gods.js';
+import { SPECIES } from './species.js';
 
 // --- 게임 진행 상태 ---------------------------------------------------------
 
@@ -46,7 +49,8 @@ export function setFloor(floor) {
  */
 export function damagePlayer(amount, source = null) {
     // 보호 효과가 걸려 있으면 받는 피해가 줄어듭니다.
-    const taken = Math.max(1, Math.round(amount * buffModifier('damageTaken', 1)));
+    // 물약의 보호 효과와 종족·신의 가호가 함께 반영됩니다.
+    const taken = Math.max(1, Math.round(amount * buffModifier('damageTaken', 1) * modifier('damageTaken')));
 
     world.player.hp -= taken;
     emit(EVENTS.PLAYER_DAMAGED, { amount: taken, source, hp: world.player.hp });
@@ -198,14 +202,125 @@ export function damageEnemy(enemy, amount, now) {
 export function killEnemyAt(index) {
     const deadEnemy = world.enemies.splice(index, 1)[0];
 
-    // 깊이에 맞는 아이템이 확률적으로 떨어집니다.
-    if (Math.random() < DROP_CHANCE) {
+    // 깊이에 맞는 아이템이 확률적으로 떨어집니다. 놀이나 고자그는 더 자주 떨어뜨립니다.
+    if (Math.random() < DROP_CHANCE * modifier('itemDropRate')) {
         const itemId = rollItem(currentDangerLevel());
         if (itemId) dropItem(itemId, deadEnemy.x, deadEnemy.y);
     }
 
+    // 마클렙은 죽일 때마다 체력을, 베후멧은 마력을 돌려줍니다.
+    const hpOnKill = modifier('hpOnKill');
+    if (hpOnKill > 0) healPlayer(hpOnKill);
+    const mpOnKill = modifier('mpOnKill');
+    if (mpOnKill > 0) giveAmmo(mpOnKill);
+
+    gainPietyFromKill(deadEnemy);
+
     emit(EVENTS.ENEMY_DIED, { enemy: deadEnemy });
     return deadEnemy;
+}
+
+// --- 신앙 -------------------------------------------------------------------
+
+/**
+ * 적을 처치했을 때 신앙심을 올립니다.
+ *
+ * 원본에서 신마다 신앙심의 원천이 다릅니다. 처치로는 아무것도 얻지 못하는 신도 여럿입니다.
+ * (엘리빌론과 네멜렉스는 탐험으로만, 우스카야우는 피해를 입힐 때만 오릅니다)
+ * @param {object} enemy - 쓰러진 적
+ */
+function gainPietyFromKill(enemy) {
+    const god = GODS[world.player.god];
+    if (!god) return;
+
+    if (god.piety === 'kill') {
+        gainPiety(2);
+    } else if (god.piety === 'killTough') {
+        // 오카와루는 버거운 상대일수록 기뻐합니다. 약한 것을 잡아서는 거의 오르지 않습니다.
+        gainPiety(Math.max(1, Math.round((enemy?.maxHp ?? 10) / 25)));
+    }
+}
+
+/**
+ * 층을 내려갔을 때 신앙심을 올립니다. 탐험으로 신앙심을 얻는 신들을 위한 것입니다.
+ */
+export function gainPietyFromExploration() {
+    if (GODS[world.player.god]?.piety === 'explore') gainPiety(8);
+}
+
+/**
+ * 적에게 피해를 입혔을 때 신앙심을 올립니다. 우스카야우만 여기서 얻습니다.
+ * @param {number} amount - 입힌 피해
+ */
+export function gainPietyFromDamage(amount) {
+    if (GODS[world.player.god]?.piety === 'damage') gainPiety(amount / 20);
+}
+
+/**
+ * 신앙심을 올립니다. 최대치는 원본과 같은 200 입니다.
+ * @param {number} amount - 올릴 양
+ */
+export function gainPiety(amount) {
+    const god = GODS[world.player.god];
+    if (!god || god.pietyOnlyDecreases) return;   // 이그니스의 신앙심은 줄기만 합니다.
+
+    const before = pietyRank(world.player.piety);
+    world.player.piety = Math.min(MAX_PIETY, world.player.piety + amount);
+    const after = pietyRank(world.player.piety);
+
+    if (after > before) emit(EVENTS.PIETY_RANK_CHANGED, { god: world.player.god, rank: after });
+}
+
+/**
+ * 신앙심을 깎습니다. 금기를 어겼을 때 부릅니다.
+ * @param {number} amount - 깎을 양
+ */
+export function losePiety(amount) {
+    if (!world.player.god) return;
+    world.player.piety = Math.max(0, world.player.piety - amount);
+}
+
+/**
+ * 제단 앞에서 개종합니다.
+ *
+ * 이미 그 신을 섬기고 있으면 아무 일도 없고, 다른 신을 섬기던 중이면 갈아탑니다.
+ * 원본에는 배신에 대한 벌(파문)이 있지만 여기서는 신앙심만 처음으로 돌아갑니다.
+ * @param {string} godId - 제단의 신
+ * @returns {{ok: boolean, reason: string}} 성공 여부
+ */
+export function worshipAtAltar(godId) {
+    if (world.player.god === godId) {
+        return { ok: false, reason: `이미 ${GODS[godId].name}을(를) 섬기고 있습니다` };
+    }
+    const result = worship(godId);
+    if (!result.ok) emit(EVENTS.WORSHIP_REFUSED, { god: godId, reason: result.reason });
+    return result;
+}
+
+/**
+ * 신을 섬기기 시작합니다.
+ *
+ * 종족이 거부당하는 신이면 개종하지 않습니다. (언데드는 선한 신을 섬길 수 없습니다)
+ * @param {string} godId - 신 키
+ * @returns {{ok: boolean, reason: string}} 성공 여부
+ */
+export function worship(godId) {
+    const check = canWorship(godId, SPECIES[world.player.species]);
+    if (!check.allowed) return { ok: false, reason: check.reason };
+
+    world.player.god = godId;
+    world.player.piety = startingPiety(godId);
+    invalidateCharacter();
+
+    // 트로그를 섬기면 마법을 쓸 수 없게 되므로 지팡이를 내려놓습니다.
+    if (isForbidden('magic')) {
+        world.player.weapon = 'fist';
+        world.player.ammo = 0;
+        world.player.maxAmmo = 0;
+    }
+
+    emit(EVENTS.GOD_CHANGED, { god: godId, name: GODS[godId].name });
+    return { ok: true, reason: '' };
 }
 
 // --- 아이템 -----------------------------------------------------------------

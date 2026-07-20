@@ -13,6 +13,7 @@
 // --- 모듈 임포트 ---
 import * as C from './constants.js';
 import { runtime } from './runtime.js';
+import { handleChargenKey } from './chargen.js';
 import { dom } from './dom.js';
 
 
@@ -61,6 +62,14 @@ export function setupInputHandlers() {
     // 키보드 이벤트 리스너: 키를 누르거나 뗄 때 'keys' 객체의 상태를 업데이트합니다.
     document.addEventListener('keydown', e => {
         keys[e.code] = true;
+
+        // 캐릭터를 고르는 중이면 그 화면이 먼저 키를 가져갑니다.
+        // (원본처럼 글자키 하나로 종족과 직업을 고를 수 있어야 합니다)
+        if (handleChargenKey(e.key)) {
+            e.preventDefault();
+            return;
+        }
+
         // --- 새로운 로직: 상호작용 키 (스페이스바) ---
         if (!runtime.isGameRunning) return;
 
