@@ -1,0 +1,789 @@
+[
+ {
+  "id": "air-elementalist",
+  "enumName": "JOB_AIR_ELEMENTALIST",
+  "name": "Air Elementalist",
+  "category": "Mage",
+  "str": 0,
+  "int": 7,
+  "dex": 5,
+  "startingSkills": {
+   "dodging": 2,
+   "stealth": 2,
+   "spellcasting": 2,
+   "conjurations": 1,
+   "air magic": 3
+  },
+  "equipment": [
+   "robe",
+   "potion of magic"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "deep elf",
+   "tengu",
+   "draconian",
+   "naga",
+   "vine stalker",
+   "djinni"
+  ]
+ },
+ {
+  "id": "alchemist",
+  "enumName": "JOB_ALCHEMIST",
+  "name": "Alchemist",
+  "category": "Mage",
+  "str": 0,
+  "int": 7,
+  "dex": 5,
+  "startingSkills": {
+   "dodging": 2,
+   "stealth": 2,
+   "spellcasting": 2,
+   "conjurations": 1,
+   "alchemy": 3
+  },
+  "equipment": [
+   "robe",
+   "potion of magic"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "deep elf",
+   "spriggan",
+   "naga",
+   "merfolk",
+   "octopode",
+   "djinni",
+   "demonspawn"
+  ]
+ },
+ {
+  "id": "artificer",
+  "enumName": "JOB_ARTIFICER",
+  "name": "Artificer",
+  "category": "Adventurer",
+  "str": 4,
+  "int": 3,
+  "dex": 5,
+  "startingSkills": {
+   "fighting": 1,
+   "armour": 1,
+   "dodging": 1,
+   "stealth": 1,
+   "evocations": 3
+  },
+  "equipment": [
+   "club",
+   "leather armour",
+   {
+    "\"wand of flame charges": "15\""
+   },
+   {
+    "\"wand of charming charges": "15 no_exclude\""
+   },
+   {
+    "\"wand of iceblast charges": "5 no_exclude\""
+   }
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "kobold",
+   "spriggan",
+   "draconian",
+   "demonspawn",
+   "coglin"
+  ]
+ },
+ {
+  "id": "berserker",
+  "enumName": "JOB_BERSERKER",
+  "name": "Berserker",
+  "category": "Zealot",
+  "str": 9,
+  "int": -1,
+  "dex": 4,
+  "startingSkills": {
+   "fighting": 3,
+   "dodging": 2,
+   "weapon": 3
+  },
+  "equipment": [
+   "animal skin"
+  ],
+  "weaponChoice": "plain",
+  "recommendedSpecies": [
+   "mountain dwarf",
+   "oni",
+   "merfolk",
+   "minotaur",
+   "gargoyle",
+   "armataur"
+  ]
+ },
+ {
+  "id": "brigand",
+  "enumName": "JOB_BRIGAND",
+  "name": "Brigand",
+  "category": "Warrior",
+  "str": 3,
+  "int": 3,
+  "dex": 6,
+  "startingSkills": {
+   "fighting": 2,
+   "dodging": 1,
+   "stealth": 4,
+   "throwing": 2,
+   "weapon": 2
+  },
+  "equipment": [
+   {
+    "\"dagger plus": "2\""
+   },
+   "robe",
+   "cloak",
+   {
+    "\"dart ego": "poisoned q:9\""
+   },
+   {
+    "\"dart ego": "curare q:3\""
+   }
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "troll",
+   "spriggan",
+   "demonspawn",
+   "vine stalker",
+   "gnoll"
+  ]
+ },
+ {
+  "id": "chaos-knight",
+  "enumName": "JOB_CHAOS_KNIGHT",
+  "name": "Chaos Knight",
+  "category": "Zealot",
+  "str": 4,
+  "int": 4,
+  "dex": 4,
+  "startingSkills": {
+   "fighting": 3,
+   "dodging": 1,
+   "armour": 1,
+   "weapon": 3
+  },
+  "equipment": [
+   {
+    "\"leather armour plus": "2\""
+   },
+   "scroll of butterflies no_exclude"
+  ],
+  "weaponChoice": "plain",
+  "recommendedSpecies": [
+   "spriggan",
+   "troll",
+   "gnoll",
+   "merfolk",
+   "minotaur",
+   "draconian",
+   "demonspawn"
+  ]
+ },
+ {
+  "id": "cinder-acolyte",
+  "enumName": "JOB_CINDER_ACOLYTE",
+  "name": "Cinder Acolyte",
+  "category": "Zealot",
+  "str": 6,
+  "int": 6,
+  "dex": 0,
+  "startingSkills": {
+   "fighting": 3,
+   "weapon": 3,
+   "spellcasting": 1,
+   "fire magic": 3
+  },
+  "equipment": [
+   "robe"
+  ],
+  "weaponChoice": "plain",
+  "recommendedSpecies": [
+   "mountain dwarf",
+   "draconian",
+   "oni",
+   "djinni",
+   "gnoll"
+  ]
+ },
+ {
+  "id": "conjurer",
+  "enumName": "JOB_CONJURER",
+  "name": "Conjurer",
+  "category": "Mage",
+  "str": -1,
+  "int": 10,
+  "dex": 3,
+  "startingSkills": {
+   "dodging": 2,
+   "spellcasting": 2,
+   "conjurations": 4,
+   "stealth": 2
+  },
+  "equipment": [
+   "robe",
+   "potion of magic"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "deep elf",
+   "naga",
+   "tengu",
+   "draconian",
+   "demigod",
+   "djinni",
+   "armataur"
+  ]
+ },
+ {
+  "id": "delver",
+  "enumName": "JOB_DELVER",
+  "name": "Delver",
+  "category": "Adventurer",
+  "str": 4,
+  "int": 2,
+  "dex": 6,
+  "startingSkills": {
+   "fighting": 3,
+   "dodging": 2,
+   "stealth": 5,
+   "weapon": 2
+  },
+  "equipment": [
+   "leather armour",
+   "scroll of fog",
+   "scroll of revelation",
+   "scroll of fear",
+   "potion of haste",
+   {
+    "\"wand of digging charges": "3\""
+   }
+  ],
+  "weaponChoice": "plain",
+  "recommendedSpecies": [
+   "felid",
+   "spriggan",
+   "kobold",
+   "gnoll"
+  ]
+ },
+ {
+  "id": "earth-elementalist",
+  "enumName": "JOB_EARTH_ELEMENTALIST",
+  "name": "Earth Elementalist",
+  "category": "Mage",
+  "str": 0,
+  "int": 7,
+  "dex": 5,
+  "startingSkills": {
+   "dodging": 2,
+   "stealth": 2,
+   "spellcasting": 2,
+   "conjurations": 1,
+   "earth magic": 3
+  },
+  "equipment": [
+   "robe",
+   "potion of magic"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "deep elf",
+   "spriggan",
+   "gargoyle",
+   "demigod",
+   "octopode",
+   "revenant"
+  ]
+ },
+ {
+  "id": "enchanter",
+  "enumName": "JOB_ENCHANTER",
+  "name": "Enchanter",
+  "category": "Warrior-mage",
+  "str": 0,
+  "int": 7,
+  "dex": 5,
+  "startingSkills": {
+   "dodging": 2,
+   "spellcasting": 2,
+   "hexes": 3,
+   "stealth": 3,
+   "weapon": 1
+  },
+  "equipment": [
+   {
+    "\"dagger plus": "1\""
+   },
+   "robe",
+   {
+    "\"potion of invisibility q": "2\""
+   }
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "deep elf",
+   "felid",
+   "kobold",
+   "spriggan",
+   "naga",
+   "poltergeist"
+  ]
+ },
+ {
+  "id": "fighter",
+  "enumName": "JOB_FIGHTER",
+  "name": "Fighter",
+  "category": "Warrior",
+  "str": 8,
+  "int": 0,
+  "dex": 4,
+  "startingSkills": {
+   "fighting": 3,
+   "armour": 3,
+   "shields": 3,
+   "weapon": 2
+  },
+  "equipment": [
+   "scale mail",
+   "buckler",
+   {
+    "\"potion of might q": "2\""
+   }
+  ],
+  "weaponChoice": "good",
+  "recommendedSpecies": [
+   "mountain dwarf",
+   "troll",
+   "minotaur",
+   "gargoyle",
+   "armataur",
+   "formicid",
+   "revenant"
+  ]
+ },
+ {
+  "id": "fire-elementalist",
+  "enumName": "JOB_FIRE_ELEMENTALIST",
+  "name": "Fire Elementalist",
+  "category": "Mage",
+  "str": 0,
+  "int": 7,
+  "dex": 5,
+  "startingSkills": {
+   "dodging": 2,
+   "stealth": 2,
+   "spellcasting": 2,
+   "conjurations": 1,
+   "fire magic": 3
+  },
+  "equipment": [
+   "robe",
+   "potion of magic"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "deep elf",
+   "mountain dwarf",
+   "naga",
+   "tengu",
+   "demigod",
+   "gargoyle",
+   "djinni"
+  ]
+ },
+ {
+  "id": "forgewright",
+  "enumName": "JOB_FORGEWRIGHT",
+  "name": "Forgewright",
+  "category": "Mage",
+  "str": 2,
+  "int": 7,
+  "dex": 3,
+  "startingSkills": {
+   "dodging": 2,
+   "stealth": 2,
+   "spellcasting": 2,
+   "forgecraft": 4
+  },
+  "equipment": [
+   {
+    "\"mace tile": "wpn_hammer wtile:hammer itemname:hammer\""
+   },
+   "robe",
+   "potion of magic"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "mountain dwarf",
+   "coglin",
+   "barachi",
+   "human",
+   "vine stalker",
+   "merfolk"
+  ]
+ },
+ {
+  "id": "gladiator",
+  "enumName": "JOB_GLADIATOR",
+  "name": "Gladiator",
+  "category": "Warrior",
+  "str": 6,
+  "int": 0,
+  "dex": 6,
+  "startingSkills": {
+   "fighting": 2,
+   "throwing": 2,
+   "dodging": 3,
+   "weapon": 3
+  },
+  "equipment": [
+   "leather armour",
+   "helmet",
+   {
+    "\"throwing net q": "3\""
+   }
+  ],
+  "weaponChoice": "good",
+  "recommendedSpecies": [
+   "mountain dwarf",
+   "merfolk",
+   "minotaur",
+   "gargoyle",
+   "coglin",
+   "vine stalker"
+  ]
+ },
+ {
+  "id": "hedge-wizard",
+  "enumName": "JOB_HEDGE_WIZARD",
+  "name": "Hedge Wizard",
+  "category": "Mage",
+  "str": 2,
+  "int": 6,
+  "dex": 4,
+  "startingSkills": {
+   "dodging": 2,
+   "stealth": 2,
+   "spellcasting": 3,
+   "conjurations": 2,
+   "translocations": 1,
+   "summonings": 1,
+   "necromancy": 1
+  },
+  "equipment": [
+   "dagger",
+   "robe",
+   "hat",
+   "potion of magic"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "deep elf",
+   "naga",
+   "draconian",
+   "octopode",
+   "human",
+   "djinni"
+  ]
+ },
+ {
+  "id": "hexslinger",
+  "enumName": "JOB_HEXSLINGER",
+  "name": "Hexslinger",
+  "category": "Warrior-mage",
+  "str": 0,
+  "int": 5,
+  "dex": 7,
+  "startingSkills": {
+   "fighting": 1,
+   "dodging": 2,
+   "spellcasting": 1,
+   "hexes": 3,
+   "fire magic": 1,
+   "weapon": 2
+  },
+  "equipment": [
+   "robe",
+   "scroll of poison",
+   {
+    "\"sling plus": "1\""
+   }
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "formicid",
+   "deep elf",
+   "kobold",
+   "spriggan",
+   "gnoll"
+  ]
+ },
+ {
+  "id": "hunter",
+  "enumName": "JOB_HUNTER",
+  "name": "Hunter",
+  "category": "Warrior",
+  "str": 3,
+  "int": 1,
+  "dex": 8,
+  "startingSkills": {
+   "fighting": 2,
+   "dodging": 2,
+   "stealth": 1,
+   "weapon": 4
+  },
+  "equipment": [
+   "shortbow",
+   "leather armour",
+   "scroll of butterflies no_exclude"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "minotaur",
+   "gnoll",
+   "barachi",
+   "kobold",
+   "spriggan"
+  ]
+ },
+ {
+  "id": "ice-elementalist",
+  "enumName": "JOB_ICE_ELEMENTALIST",
+  "name": "Ice Elementalist",
+  "category": "Mage",
+  "str": 0,
+  "int": 7,
+  "dex": 5,
+  "startingSkills": {
+   "dodging": 2,
+   "stealth": 2,
+   "spellcasting": 2,
+   "ice magic": 4
+  },
+  "equipment": [
+   "robe",
+   "potion of magic"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "merfolk",
+   "barachi",
+   "draconian",
+   "demigod",
+   "gargoyle",
+   "djinni",
+   "revenant"
+  ]
+ },
+ {
+  "id": "monk",
+  "enumName": "JOB_MONK",
+  "name": "Monk",
+  "category": "Warrior",
+  "str": 3,
+  "int": 2,
+  "dex": 7,
+  "startingSkills": {
+   "fighting": 3,
+   "dodging": 3,
+   "weapon": 3
+  },
+  "equipment": [
+   "robe",
+   "potion of ambrosia",
+   {
+    "\"orb ego": "light\""
+   }
+  ],
+  "weaponChoice": "plain",
+  "recommendedSpecies": [
+   "mountain dwarf",
+   "troll",
+   "armataur",
+   "merfolk",
+   "gargoyle",
+   "demonspawn"
+  ]
+ },
+ {
+  "id": "necromancer",
+  "enumName": "JOB_NECROMANCER",
+  "name": "Necromancer",
+  "category": "Mage",
+  "str": 0,
+  "int": 7,
+  "dex": 5,
+  "startingSkills": {
+   "dodging": 2,
+   "stealth": 2,
+   "spellcasting": 2,
+   "necromancy": 4
+  },
+  "equipment": [
+   "dagger",
+   "robe",
+   "potion of magic"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "deep elf",
+   "djinni",
+   "mountain dwarf",
+   "demonspawn",
+   "mummy",
+   "revenant"
+  ]
+ },
+ {
+  "id": "reaver",
+  "enumName": "JOB_REAVER",
+  "name": "Reaver",
+  "category": "Warrior-mage",
+  "str": 4,
+  "int": 5,
+  "dex": 3,
+  "startingSkills": {
+   "fighting": 2,
+   "dodging": 2,
+   "spellcasting": 2,
+   "conjurations": 3,
+   "weapon": 3
+  },
+  "equipment": [
+   "leather armour"
+  ],
+  "weaponChoice": "plain",
+  "recommendedSpecies": [
+   "gnoll",
+   "tengu",
+   "barachi",
+   "demonspawn",
+   "draconian",
+   "mountain dwarf"
+  ]
+ },
+ {
+  "id": "shapeshifter",
+  "enumName": "JOB_SHAPESHIFTER",
+  "name": "Shapeshifter",
+  "category": "Adventurer",
+  "str": 6,
+  "int": 2,
+  "dex": 4,
+  "startingSkills": {
+   "fighting": 2,
+   "unarmed combat": 3,
+   "dodging": 2,
+   "shapeshifting": 3
+  },
+  "equipment": [
+   "animal skin",
+   {
+    "\"flux bauble q": "3\""
+   },
+   "potion of lignification",
+   "quill talisman",
+   "protean talisman"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "naga",
+   "merfolk",
+   "draconian",
+   "demigod",
+   "demonspawn",
+   "troll"
+  ]
+ },
+ {
+  "id": "summoner",
+  "enumName": "JOB_SUMMONER",
+  "name": "Summoner",
+  "category": "Mage",
+  "str": 0,
+  "int": 7,
+  "dex": 5,
+  "startingSkills": {
+   "dodging": 2,
+   "stealth": 2,
+   "spellcasting": 2,
+   "summonings": 4
+  },
+  "equipment": [
+   "robe",
+   "potion of magic"
+  ],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "deep elf",
+   "oni",
+   "vine stalker",
+   "merfolk",
+   "tengu"
+  ]
+ },
+ {
+  "id": "wanderer",
+  "enumName": "JOB_WANDERER",
+  "name": "Wanderer",
+  "category": "Adventurer",
+  "str": 0,
+  "int": 0,
+  "dex": 0,
+  "startingSkills": {},
+  "equipment": [],
+  "weaponChoice": null,
+  "recommendedSpecies": [
+   "mountain dwarf",
+   "gnoll",
+   "merfolk",
+   "draconian",
+   "human",
+   "demonspawn",
+   "barachi"
+  ]
+ },
+ {
+  "id": "warper",
+  "enumName": "JOB_WARPER",
+  "name": "Warper",
+  "category": "Warrior-mage",
+  "str": 3,
+  "int": 5,
+  "dex": 4,
+  "startingSkills": {
+   "fighting": 2,
+   "throwing": 1,
+   "armour": 1,
+   "dodging": 2,
+   "spellcasting": 2,
+   "translocations": 3,
+   "weapon": 2
+  },
+  "equipment": [
+   "leather armour",
+   "scroll of blinking",
+   {
+    "\"dart ego": "disjunction q:4\""
+   }
+  ],
+  "weaponChoice": "plain",
+  "recommendedSpecies": [
+   "felid",
+   "spriggan",
+   "armataur",
+   "draconian",
+   "coglin"
+  ]
+ }
+]
