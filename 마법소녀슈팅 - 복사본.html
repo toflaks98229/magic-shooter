@@ -90,6 +90,15 @@
         /* 칭호 줄은 원본처럼 노란색입니다. (output.cc:1469) */
         .title-row { color: #d8c070; }
 
+        /* 원본은 왼쪽 두 칸, 오른쪽 두 칸으로 나뉩니다. (output.cc:1681) */
+        .hud-grid {
+            display: grid;
+            grid-template-columns: 3.2em 1fr 3.2em 1fr;
+            column-gap: 4px;
+            row-gap: 1px;
+            margin: 2px 0;
+        }
+
         .panel-label { color: var(--dim); }
 
         /* DCSS 의 Health / Magic 막대 */
@@ -506,8 +515,22 @@
             <div class="panel-row">
                 <span class="panel-label">God</span><span id="god-line">-</span>
             </div>
-            <div class="panel-row">
-                <span class="panel-label">Place</span><span id="floor-count">D:1</span>
+            <!-- 원본의 5~7행. 왼쪽이 방어, 오른쪽이 능력치입니다. (output.cc:1677) -->
+            <div class="hud-grid">
+                <span class="panel-label">AC:</span><span id="player-ac">0</span>
+                <span class="panel-label">Str:</span><span id="player-str">8</span>
+                <span class="panel-label">EV:</span><span id="player-ev">0</span>
+                <span class="panel-label">Int:</span><span id="player-int">8</span>
+                <span class="panel-label">SH:</span><span id="player-sh">0</span>
+                <span class="panel-label">Dex:</span><span id="player-dex">8</span>
+            </div>
+
+            <!-- 원본의 8행. 왼쪽이 경험 수준, 오른쪽이 지금 있는 곳입니다. -->
+            <div class="hud-grid">
+                <span class="panel-label">XL:</span><span id="player-xl">1</span>
+                <span class="panel-label">Place:</span><span id="floor-count">D:1</span>
+                <span class="panel-label">Next:</span><span id="player-xp-next">0%</span>
+                <span></span><span></span>
             </div>
             <div class="panel-row">
                 <span class="panel-label">Runes</span><span id="rune-count">0</span>

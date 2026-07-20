@@ -22,6 +22,7 @@ import { emit, EVENTS } from './events.js';
 import { aimRadius, rollMonsterHp, monsterAttackRoll, playerEvasion, archerBonusDamage } from './dcss/combat.js';
 import { pickAimedTarget } from './dcss/aim.js';
 import { skillValue } from './dcss/training.js';
+import { currentPlayerEvasion as evasionOf } from './dcss/playerStats.js';
 import { random2, randomRange, rollDice } from './dcss/random.js';
 import { checkPositionTriggers, checkSightTriggers, checkDeathTriggers } from './triggers.js';
 import { autToMs } from './dcss/time.js';
@@ -775,9 +776,7 @@ function strikePlayer(enemy) {
  * @returns {number} 회피
  */
 function currentPlayerEvasion() {
-    const player = world.player;
-    const dex = SPECIES[player.species]?.dex ?? 8;
-    return playerEvasion(skillValue(player.skills, 'dodging', aptitudeFor('dodging')), dex);
+    return evasionOf(world.player, SPECIES[world.player.species], aptitudeFor);
 }
 
 /**

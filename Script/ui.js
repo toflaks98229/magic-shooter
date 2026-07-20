@@ -18,7 +18,14 @@ import { BUFF_MODIFIERS } from './items.js';
 import { setWeapon } from './actions.js';
 import { on, EVENTS } from './events.js';
 import { describeCharacter, characterTitle } from './character.js';
-import { titleLine } from './dcss/titles.js';
+import { titleLine } from './dcss/titles.js';
+import {
+    experienceLevel, experienceProgress, playerStats, playerAC, playerSH,
+    currentPlayerEvasion,
+    MAX_EXPERIENCE_LEVEL,
+} from './dcss/playerStats.js';
+import { SPECIES } from './species.js';
+import { aptitudeFor } from './character.js';
 import { BACKGROUNDS } from './backgrounds.js';
 import { GODS, pietyRank, PIETY_BREAKPOINTS } from './gods.js';
 
@@ -109,7 +116,8 @@ export function updateHUD() {
     setText(dom.enemyCountEl, world.enemies.length);
     // 가지 안에서의 층만 보여주면 짐승굴 2층인지 메인 2층인지 알 수 없으므로
     // DCSS 관례대로 '가지:층' 형태로 표시합니다.
-    setText(dom.floorCountEl, formatLocation(world.branch, world.floor));
+    setText(dom.floorCountEl, formatLocation(world.branch, world.floor));
+    updateVitals();
     setText(dom.gameTimeEl, (world.time / 1000).toFixed(1));
 
     updateCharacterLine();
@@ -208,8 +216,44 @@ function spriteImage(spriteKey, alt) {
 /** @description 캐릭터 줄에 마지막으로 쓴 내용. 판 중에는 바뀌지 않습니다. */
 let drawnCharacter = null;
 
-/**
- * 종족과 직업을 한 줄로 보여줍니다. DCSS 상태창 맨 위와 같은 자리입니다.
+/**
+ * 원본 상태창의 5~8행을 채웁니다. 방어·능력치·경험 수준입니다.
+ *
+ * 표시용으로 새로 만든 값이 아닙니다. 회피는 이미 전투 판정이 쓰고 있었고
+ * 표시만 안 하고 있었습니다. 경험 수준은 몬스터 난이도가 이미 봅니다.
+ */
+function updateVitals() {
+    const player = world.player;
+    const species = SPECIES[player.species];
+
+    const experience = player.skills?.totalGained ?? 0;
+    const level = experienceLevel(experience);
+    const stats = playerStats(species, level);
+
+    setText(dom.playerAcEl, String(playerAC(species, level)));
+    setText(dom.playerEvEl, String(Math.round(currentPlayerEvasion(player, species, aptitudeFor))));
+    setText(dom.playerShEl, String(playerSH()));
+
+    setText(dom.playerStrEl, String(stats.str));
+    setText(dom.playerIntEl, String(stats.int));
+    setText(dom.playerDexEl, String(stats.dex));
+
+    setText(dom.playerXlEl, String(level));
+    setText(dom.playerXpNextEl,
+        level >= MAX_EXPERIENCE_LEVEL ? '-' : `${experienceProgress(experience)}%`);
+
+    // 능력치가 셋 이하로 떨어지면 붉게 물듭니다. (output.cc:1012)
+    // 아직 능력치가 깎이는 일이 없어 늘 평상색이지만, 규칙은 여기 둡니다.
+    for (const [el, value] of [
+        [dom.playerStrEl, stats.str], [dom.playerIntEl, stats.int], [dom.playerDexEl, stats.dex],
+    ]) {
+        if (!el) continue;
+        el.style.color = value <= 0 ? '#e05f5f' : value <= 3 ? '#a83232' : '';
+    }
+}
+
+/**
+ * 종족과 직업을 한 줄로 보여줍니다. DCSS 상태창 맨 위와 같은 자리입니다.
  */
 function updateCharacterLine() {
     // 원본의 1행. 이름과 칭호입니다. 마흔두 칸을 넘으면 the 를 쉼표로 바꿉니다.

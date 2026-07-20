@@ -33,6 +33,14 @@ export function createSkillState() {
         pool: 0,
         /** @description 지금까지 쓴 경험치의 총합. 스킬 점수의 값을 정합니다 */
         totalSpent: 0,
+
+        /**
+         * @description 지금까지 얻은 경험치의 총합.
+         *
+         * 쓴 것(totalSpent)과 다릅니다. 경험 수준은 얻은 것으로 정해집니다.
+         * 스킬에 넣지 못하고 남은 것도 수준에는 들어갑니다.
+         */
+        totalGained: 0,
         /** @description 최근에 무엇을 했는지. 이 비율대로 경험치가 나뉩니다 */
         recent: [],
     };
@@ -78,6 +86,7 @@ export function exercise(state, skill) {
  */
 export function gainExperience(state, experience, aptitudeOf) {
     state.pool += experience;
+    state.totalGained = (state.totalGained ?? 0) + experience;
     if (state.recent.length === 0) return {};
 
     // 최근 행동의 비율대로 나눕니다.
