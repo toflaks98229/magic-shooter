@@ -17,6 +17,8 @@ import { getMonster, availableMonsters, DEFAULT_SPAWN_TABLE } from './monsters.j
 import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
 import { modifier as characterModifier } from './character.js';
 import { emit, EVENTS } from './events.js';
+import { aimRadius } from './dcss/combat.js';
+import { pickAimedTarget } from './dcss/aim.js';
 
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
 
@@ -127,54 +129,45 @@ export function attack() {
         // 발사 시 주변을 밝히는 동적 광원
         A.setDynamicLightFromWeapon(weaponData);
 
-        // 가장 가까운 적을 조준하여 공격 (약간의 조준 보정 포함)
-        const hitEnemy = world.enemies
-            .map(enemy => {
-                const dx = enemy.x - player.x;
-                const dy = enemy.y - player.y;
-                const dist = Math.hypot(dx, dy);
-                const angleToEnemy = Math.atan2(dy, dx);
-                let angleDiff = player.angle - angleToEnemy;
-                // 각도 차이를 -PI ~ PI 범위로 정규화하여 가장 작은 각도 차이를 구합니다.
-                while (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
-                while (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
-                return { enemy, dist, angleDiff };
-            })
-            // 조준 보정 범위(FOV의 1/8) 내에 있는 적만 필터링합니다.
-            .filter(({ angleDiff }) => Math.abs(angleDiff) < C.FOV / 8)
-            // 가까운 순으로 정렬한 뒤, 벽에 가리지 않은 첫 번째 적을 명중 대상으로 삼습니다.
-            // find를 사용하므로 시야 검사는 명중 대상을 찾을 때까지만 수행됩니다.
-            .sort((a, b) => a.dist - b.dist)
-            .find(({ enemy }) => hasLineOfSight(player.x, player.y, enemy.x, enemy.y));
-
-        if (hitEnemy) {
-            A.damageEnemy(hitEnemy.enemy, playerDamage(weaponData.damage), now);
-        }
+        const hit = aimAtEnemies(player);
+        if (hit) A.damageEnemy(hit.target, playerDamage(weaponData.damage), now);
 
     } else if (player.weapon === 'fist') {
         // 주먹 휘두르기 연출은 ui.js가 WEAPON_FIRED를 받아 처리합니다.
         A.reportWeaponFired(player.weapon);
 
-        let hasHit = false; // 한 번의 공격에 한 명의 적만 맞도록 하기 위한 플래그
-        world.enemies.forEach(enemy => {
-            if (hasHit) return;
-            const dist = Math.hypot(enemy.x - player.x, enemy.y - player.y);
-            // 사거리 내에 있는지 확인
-            if (dist < weaponData.range) {
-                const angleToEnemy = Math.atan2(enemy.y - player.y, enemy.x - player.x);
-                let angleDiff = player.angle - angleToEnemy;
-                while (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
-                while (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
-
-                // 전방 부채꼴(FOV의 1/4) 범위 안에 있고, 벽에 가리지 않았는지 확인
-                if (Math.abs(angleDiff) < C.FOV / 4 &&
-                    hasLineOfSight(player.x, player.y, enemy.x, enemy.y)) {
-                    A.damageEnemy(enemy, playerDamage(weaponData.damage), now);
-                    hasHit = true;
-                }
-            }
-        });
+        // 주먹은 사거리가 짧을 뿐, 겨누는 방식은 총과 같습니다.
+        const hit = aimAtEnemies(player, weaponData.range);
+        if (hit) A.damageEnemy(hit.target, playerDamage(weaponData.damage), now);
     }
+}
+
+/**
+ * 겨눈 선에 걸리는 적 중 가장 가까운 것을 찾습니다.
+ *
+ * 예전에는 각도 허용치로 봐줬습니다. 총은 시야각의 1/8, 주먹은 1/4 안에만 들어오면
+ * 가장 가까운 적이 맞는 방식이라, 화면 구석의 적이 정면의 적보다 먼저 맞기도 했습니다.
+ * 그 보정을 걷어냈습니다. 이제 실제로 겨눈 선이 몸을 지나야 맞습니다.
+ *
+ * 회피는 버리지 않고 과녁 크기로 옮겼습니다. EV 가 높은 몬스터는 aimRadius 가
+ * 과녁을 줄이므로 더 정확히 겨눠야 합니다. 주사위로 피하던 것을
+ * '작아서 맞추기 어려운 것'으로 바꾼 셈입니다.
+ * @param {object} player - 플레이어
+ * @param {number} [maxRange] - 사거리. 없으면 시야가 닿는 데까지입니다
+ * @returns {{target: object, distance: number}|null} 맞은 적
+ */
+function aimAtEnemies(player, maxRange = Infinity) {
+    // 플레이어의 명중값입니다. 스킬이 붙기 전이라 아직 고정값입니다.
+    // 4단계에서 스킬과 능력치가 들어오면 여기서 계산됩니다.
+    const toLand = C.BASE_PLAYER_TO_HIT;
+
+    return pickAimedTarget(
+        player,
+        world.enemies,
+        enemy => aimRadius(enemy.size / 2, toLand, enemy.ev ?? 0),
+        (enemy, forward) => forward <= maxRange
+            && hasLineOfSight(player.x, player.y, enemy.x, enemy.y),
+    );
 }
 
 /**

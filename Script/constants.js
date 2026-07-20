@@ -145,6 +145,18 @@ export const FLEE_STOP_DISTANCE_TILES = 10;
 export const CORNERED_FIGHT_MS = 2000;
 
 /**
+ * @description 플레이어의 기본 명중값.
+ *
+ * DCSS 는 15 + 민첩/2 에 격투·무기 스킬 굴림을 더해 구합니다. (attack.cc:177)
+ * 아직 스킬과 능력치가 들어오지 않았으므로, 민첩 10 에 스킬 0 인 사람의 값을
+ * 임시로 고정해 둡니다. 4단계에서 스킬이 들어오면 계산으로 바뀝니다.
+ *
+ * 이 값이 커지면 회피가 높은 몬스터의 과녁도 함께 커집니다.
+ * combat.js 의 aimRadius 가 명중 확률을 과녁 넓이로 옮기기 때문입니다.
+ */
+export const BASE_PLAYER_TO_HIT = 20;
+
+/**
  * @description 시뮬레이션 한 스텝의 길이(ms).
  * 게임 로직은 실제 프레임 간격과 무관하게 항상 이 크기로만 전진합니다.
  * 덕분에 30FPS든 144FPS든 같은 시간에 같은 결과가 나옵니다.

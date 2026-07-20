@@ -25,6 +25,12 @@ test('시나리오가 의도한 경로를 실제로 통과한다', () => {
     // 주요 경로가 실제로 실행되었는지 별도로 확인합니다.
     assert.ok(snapshot.stats.attacks > 100, '공격이 충분히 수행되어야 한다');
     assert.ok(snapshot.stats.sounds > 0, '사운드 이벤트가 발생해야 한다');
+
+    // 공격 '횟수'만으로는 부족합니다. 에임 보정을 걷어낸 뒤 한동안
+    // 180번 쏘고도 적이 전부 무손상이었고, 피해와 사망 처리가 회귀 검사에서
+    // 통째로 빠져 있었습니다. 맞았는지와 죽었는지를 따로 봅니다.
+    assert.ok(snapshot.stats.hits > 0, '한 번도 명중하지 않으면 피해 계산이 검사되지 않는다');
+    assert.ok(snapshot.stats.kills > 0, '한 마리도 죽지 않으면 사망 처리가 검사되지 않는다');
     assert.equal(snapshot.stats.doorsOpened, 2, '문이 두 번 열려야 한다');
     assert.equal(snapshot.stats.floors, 2, '층 전환이 한 번 일어나야 한다');
     assert.equal(snapshot.floor, 2, '최종 층은 2여야 한다');

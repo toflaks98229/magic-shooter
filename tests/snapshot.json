@@ -1,26 +1,28 @@
 {
   "frames": 1800,
   "stats": {
-    "sounds": 69,
-    "gameOvers": 1,
+    "sounds": 64,
+    "gameOvers": 0,
     "floors": 2,
-    "attacks": 180,
+    "attacks": 252,
     "interacts": 19,
-    "doorsOpened": 2
+    "doorsOpened": 2,
+    "hits": 6,
+    "kills": 6
   },
   "virtualTime": 1029999.9999999302,
   "gameTime": 30000,
   "floor": 2,
   "weapon": "fist",
   "player": {
-    "x": 112,
-    "y": 144,
-    "angle": 8.85,
-    "hp": 85,
+    "x": 414.191796287,
+    "y": 86.587974609,
+    "angle": 1.895938692,
+    "hp": 53,
     "ammo": 0
   },
   "counts": {
-    "enemies": 5,
+    "enemies": 4,
     "items": 0,
     "projectiles": 0,
     "particles": 0,
@@ -29,37 +31,31 @@
   "enemies": [
     {
       "sprite": "enemy_orc",
-      "x": 428.293184117,
-      "y": 112.000006902,
+      "x": 401.800966418,
+      "y": 155.685274209,
       "hp": 48
     },
     {
-      "sprite": "enemy_skeleton",
-      "x": 303.999999986,
-      "y": 147.443798068,
-      "hp": 32
+      "sprite": "enemy_kobold",
+      "x": 526.606322987,
+      "y": 329.447365362,
+      "hp": 22
     },
     {
-      "sprite": "enemy_rat",
-      "x": 245.734514132,
-      "y": 113.900043412,
-      "hp": 14
+      "sprite": "enemy_imp",
+      "x": 405.154365134,
+      "y": 177.321570112,
+      "hp": 30
     },
     {
-      "sprite": "enemy_orc",
-      "x": 127.489948886,
-      "y": 137.939373507,
-      "hp": 48
-    },
-    {
-      "sprite": "enemy_orc",
-      "x": 144.000000643,
-      "y": 261.973870748,
-      "hp": 48
+      "sprite": "enemy_goblin",
+      "x": 581.649132117,
+      "y": 208.121062204,
+      "hp": 28
     }
   ],
   "items": [],
-  "mapChecksum": 265676,
-  "objectMapChecksum": 664,
+  "mapChecksum": 279421,
+  "objectMapChecksum": 707,
   "serializable": true
 }

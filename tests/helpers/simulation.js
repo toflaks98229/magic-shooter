@@ -57,7 +57,7 @@ export async function runSimulation() {
     ui.registerUiHandlers();
     audio.registerAudioHandlers();
 
-    const stats = { sounds: 0, gameOvers: 0, floors: 1, attacks: 0, interacts: 0, doorsOpened: 0 };
+    const stats = { sounds: 0, gameOvers: 0, floors: 1, attacks: 0, interacts: 0, doorsOpened: 0, hits: 0, kills: 0 };
 
     // 사운드 재생은 audioCtx가 없어 실제로는 일어나지 않으므로,
     // audio.js의 매핑과 동일한 이벤트를 구독해 '몇 번 울렸어야 하는지'를 센다.
@@ -80,6 +80,12 @@ export async function runSimulation() {
         buildFloor();
     });
     events.on(E.DOOR_OPENED, () => { stats.doorsOpened++; });
+
+    // 공격 '횟수'와 '명중'은 다릅니다. 에임 보정을 걷어낸 뒤 한동안
+    // 180번 쏘고도 적이 전부 무손상이었고, 피해와 사망 처리가 회귀 검사에서
+    // 통째로 빠져 있었습니다. 그때 아무도 눈치채지 못했으므로 따로 셉니다.
+    events.on(E.ENEMY_HIT, () => { stats.hits++; });
+    events.on(E.ENEMY_DIED, () => { stats.kills++; });
 
     function buildFloor() {
         // 레이아웃을 고정합니다. 굴리게 두면 layouts.js 의 가중치를 손볼 때마다
@@ -110,6 +116,28 @@ export async function runSimulation() {
                 return;
             }
         }
+    }
+
+    /**
+     * 가장 가까운 적을 정면으로 겨누고 쏜다.
+     *
+     * 에임 보정을 걷어낸 뒤로는 무작위로 휘둘러서는 아무것도 맞지 않는다.
+     * 실제로 180번 쏘고도 적 일곱이 전부 무손상으로 남았다.
+     * 그러면 피해 계산과 사망 처리가 회귀 검사에서 통째로 빠지므로,
+     * 시나리오가 의도적으로 겨누는 국면을 넣어 그 경로를 지나게 한다.
+     */
+    function aimAtNearestEnemy() {
+        let nearest = null;
+        let best = Infinity;
+        for (const enemy of world.enemies) {
+            const distance = Math.hypot(enemy.x - world.player.x, enemy.y - world.player.y);
+            if (distance < best) { best = distance; nearest = enemy; }
+        }
+        if (!nearest) return;
+
+        world.player.angle = Math.atan2(nearest.y - world.player.y, nearest.x - world.player.x);
+        dom.canvas.fire('mousedown');
+        stats.attacks++;
     }
 
     /** 스페이스바를 눌렀다 뗀다. 실제 input.js 경로를 통과해 큐에 쌓인다. */
@@ -143,6 +171,8 @@ export async function runSimulation() {
         fireDocumentEvent('mousemove', { movementX: LOOK_DELTA_PX });
 
         if (frame % 10 === 0) { dom.canvas.fire('mousedown'); stats.attacks++; }
+        // 주기적으로 실제로 겨누어, 명중·피해·사망 경로를 지나가게 한다.
+        if (frame % 25 === 12) aimAtNearestEnemy();
         if (frame % 97 === 0) { pressInteract(); stats.interacts++; }
         if (frame === 600) aimAtNearestDoor();
         if (frame === 1200) events.emit(E.EXIT_REACHED, { floor: world.floor });
