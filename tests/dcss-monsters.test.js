@@ -11,13 +11,12 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
 
 const P = await import('../Script/dcss/monster-pick.js');
 const R = await import('../Script/dcss/random.js');
 
-const monsters = JSON.parse(fs.readFileSync('Script/data/monsters.json', 'utf8'));
-const tables = JSON.parse(fs.readFileSync('Script/data/spawn-tables.json', 'utf8'));
+const { MONSTER_DATA: monsters } = await import('../Script/data/monsters.js');
+const { SPAWN_TABLES: tables } = await import('../Script/data/spawn-tables.js');
 
 /** @param {string} id @returns {object} 몬스터 정의 */
 const byId = (id) => monsters.find(m => m.id === id);

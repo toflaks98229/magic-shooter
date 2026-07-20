@@ -152,6 +152,34 @@ export function importCharacters(sourceDir) {
     };
 }
 
+/**
+ * 데이터를 자바스크립트 모듈로 씁니다.
+ *
+ * JSON 으로 두면 브라우저에서 fetch 하거나 import 속성을 써야 하는데,
+ * 이 프로젝트는 빌드 단계가 없고 모듈을 그대로 불러 쓰는 구조입니다.
+ * .js 로 내보내면 Node 와 브라우저 양쪽에서 그냥 import 하면 됩니다.
+ * @param {string} outPath - 쓸 경로
+ * @param {string} name - export 할 이름
+ * @param {*} value - 담을 값
+ * @param {string} note - 파일 머리말에 남길 설명
+ */
+function writeDataModule(outPath, name, value, note) {
+    fs.mkdirSync(path.dirname(outPath), { recursive: true });
+    fs.writeFileSync(outPath,
+        `/**
+ * @fileoverview ${note}
+ *
+`
+        + ` * 이 파일은 손으로 고치지 마십시오. tools 의 이식기가 만들어 냅니다.
+`
+        + ` * 출처: Dungeon Crawl Stone Soup 0.34 (GPL-2.0-or-later)
+ */
+
+`
+        + `export const ${name} = ${JSON.stringify(value, null, 1)};
+`);
+}
+
 // --- 명령줄로 실행했을 때 ------------------------------------------------------
 
 if (process.argv[1] && process.argv[1].endsWith('import-characters.js')) {
@@ -159,14 +187,13 @@ if (process.argv[1] && process.argv[1].endsWith('import-characters.js')) {
     const sourceDir = process.argv[2] || 'Data/crawl/crawl-ref/source';
 
     const { species, jobs } = importCharacters(sourceDir);
-    fs.mkdirSync('Script/data', { recursive: true });
-    fs.writeFileSync('Script/data/species.json', JSON.stringify(species, null, 1) + '\n');
-    fs.writeFileSync('Script/data/jobs.json', JSON.stringify(jobs, null, 1) + '\n');
+    writeDataModule('Script/data/species.js', 'SPECIES_DATA', species, 'DCSS 종족 정의를 옮겨 온 표입니다.');
+    writeDataModule('Script/data/jobs.js', 'JOB_DATA', jobs, 'DCSS 직업 정의를 옮겨 온 표입니다.');
 
     const skillNames = new Set();
     for (const s of species) for (const k of Object.keys(s.skillAptitudes)) skillNames.add(k);
 
     console.log(`종족 ${species.length}종, 직업 ${jobs.length}종을 옮겼습니다.`);
     console.log(`  스킬 ${skillNames.size}종의 적성이 들어 있습니다.`);
-    console.log(`  → Script/data/species.json, jobs.json`);
+    console.log(`  → Script/data/species.json, jobs.js`);
 }

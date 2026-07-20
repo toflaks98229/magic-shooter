@@ -13,11 +13,11 @@ import { world } from './world.js';
 import { runtime } from './runtime.js';
 import { assets } from './assets.js';
 import { getBranch } from './branches.js';
-import { getMonster, availableMonsters, DEFAULT_SPAWN_TABLE } from './monsters.js';
+import { getMonster, rollMonsterFor } from './monsters.js';
 import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
 import { modifier as characterModifier } from './character.js';
 import { emit, EVENTS } from './events.js';
-import { aimRadius } from './dcss/combat.js';
+import { aimRadius, rollMonsterHp } from './dcss/combat.js';
 import { pickAimedTarget } from './dcss/aim.js';
 
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
@@ -189,11 +189,12 @@ function playerDamage(base) {
 export function spawnEnemiesForFloor() {
     const dangerLevel = A.currentDangerLevel();
     const dungeon = getBranch(world.branch);
-    const pool = availableMonsters(dungeon.monsters || DEFAULT_SPAWN_TABLE, dangerLevel);
 
+    // 어느 층에 무엇이 나오는가는 DCSS 의 출현표가 정합니다.
+    // 예전에는 tier 라는 자체 값으로 대충 정했는데, 이제 원본의 난이도 곡선을 그대로 씁니다.
     const count = Math.min(C.MAX_ENEMIES_PER_FLOOR, dangerLevel * 2 + 3);
     for (let i = 0; i < count; i++) {
-        const id = pool[Math.floor(Math.random() * pool.length)];
+        const id = rollMonsterFor(world.branch, dangerLevel);
         if (id) spawnMonster(id, findSpawnPoint());
     }
 
@@ -220,13 +221,19 @@ export function spawnMonster(id, position) {
         ...template,
         monsterId: id,
         x: position.x, y: position.y, z: C.TILE_SIZE / 2,
-        maxHp: template.hp,
+        // HP 는 정의된 값이 아니라 스폰할 때 굴립니다. DCSS 의 hp_10x 는
+        // '평균 HP 의 열 배'라 같은 몬스터라도 개체마다 다릅니다.
+        maxHp: rollMonsterHp(template.hp10x),
         // 스폰 직후 쿨다운에 걸리지 않도록 과거 시각으로 둡니다.
         lastAttackTime: C.PAST_TIME,
         lastHitTime: 0,
         // 모든 적은 플레이어를 쫓는 것으로 시작합니다. (ENEMY_STATES 참조)
         state: 'chase',
     };
+
+    // 굴린 최대치에서 시작합니다. maxHp 를 쓰는 자리에서 계산해야
+    // 같은 개체의 hp 와 maxHp 가 어긋나지 않습니다.
+    enemy.hp = enemy.maxHp;
 
     // 행동별로 필요한 상태를 붙입니다.
     if (template.behavior === 'exploder') enemy.fuseStartedAt = null;
@@ -997,6 +1004,7 @@ function createParticleExplosion(x, y, color = '#ffffff') {
     const count = 10; // 생성할 파티클 수
     for (let i = 0; i < count; i++) {
         world.particles.push({
+            isParticle: true,
             x: x,
             y: y,
             z: C.TILE_SIZE / 4 + Math.random() * C.TILE_SIZE / 4, // 약간 위에서 생성

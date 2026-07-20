@@ -525,7 +525,12 @@ function collectEntitiesByDistance() {
         const dx = entity.x - world.player.x;
         const dy = entity.y - world.player.y;
         entity.dist = Math.hypot(dx, dy);
-        entity.isParticle = !entity.spriteKey; // spriteKey가 없으면 파티클로 간주
+        // 파티클인지는 스스로 밝힙니다. 예전에는 spriteKey 가 없으면 파티클로 봤는데,
+        // DCSS 몬스터 659종 중 627종에 아직 그림이 없어 그 추론이 무너졌습니다.
+        // 몬스터가 통째로 파티클로 그려지던 것을 여기서 끊습니다.
+        // 그림 없는 몬스터는 색 사각형으로 그려집니다. 임시 표현이며,
+        // 타일 좌표를 뽑아 spriteKey 를 채우면 저절로 사라집니다.
+        if (entity.isParticle === undefined) entity.isParticle = false;
     }
 
     entities.sort((a, b) => b.dist - a.dist);

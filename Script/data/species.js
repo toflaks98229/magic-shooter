@@ -1,4 +1,11 @@
-[
+/**
+ * @fileoverview DCSS 종족 정의를 옮겨 온 표입니다.
+ *
+ * 이 파일은 손으로 고치지 마십시오. tools 의 이식기가 만들어 냅니다.
+ * 출처: Dungeon Crawl Stone Soup 0.34 (GPL-2.0-or-later)
+ */
+
+export const SPECIES_DATA = [
  {
   "id": "armataur",
   "enumName": "SP_ARMATAUR",
@@ -2274,4 +2281,4 @@
   "selectable": true,
   "genus": null
  }
-]
+];

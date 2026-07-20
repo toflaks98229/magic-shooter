@@ -14,8 +14,8 @@ import fs from 'node:fs';
 
 const S = await import('../Script/dcss/skills.js');
 
-const species = JSON.parse(fs.readFileSync('Script/data/species.json', 'utf8'));
-const jobs = JSON.parse(fs.readFileSync('Script/data/jobs.json', 'utf8'));
+const { SPECIES_DATA: species } = await import('../Script/data/species.js');
+const { JOB_DATA: jobs } = await import('../Script/data/jobs.js');
 
 /** @param {string} id @returns {object} 종족 */
 const sp = (id) => species.find(s => s.id === id);

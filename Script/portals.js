@@ -34,7 +34,7 @@ const EARLY_AND_MID = {
         depth: 1, bonusItems: 4, theme: 'cave', themeVariation: 2,
         flavour: '축축한 물소리가 아래에서 들려온다',
         monsters: ['rat', 'snake', 'kobold', 'frog'],
-        boss: 'purgy',
+        boss: 'ijyb',   // purgy 는 이 게임이 만든 몬스터였습니다. DCSS 의 얕은 층 고유몹으로 바꿉니다
     },
     bailey: {
         name: '성채', minDepth: 7, maxDepth: 14, chance: 0.1,
