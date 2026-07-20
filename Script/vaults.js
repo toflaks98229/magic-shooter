@@ -105,12 +105,11 @@ function pickVault(candidates) {
  *
  * `?  = TUV` 는 칸마다 따로 굴리고, `? : TUV` 는 볼트 전체가 같은 것이 됩니다.
  * 이 한 가지 지시자만으로도 같은 볼트가 판마다 다르게 보입니다.
- * @param {Array<string>} rows - 원본 줄들
+ * @param {Array<Array<string>>} grid - 글리프 격자
  * @param {Array<object>} substitutions - 규칙들
  * @returns {Array<Array<string>>} 확정된 글리프 격자
  */
-function applySubstitutions(rows, substitutions) {
-    const grid = rows.map(row => [...row]);
+function applySubstitutions(grid, substitutions) {
 
     for (const rule of substitutions) {
         // 전체가 같은 것으로 바뀌는 규칙은 한 번만 굴립니다.
@@ -125,6 +124,118 @@ function applySubstitutions(rows, substitutions) {
     }
 
     return grid;
+}
+
+/**
+ * 볼트의 무작위 지시자를 모두 적용해 글리프 격자를 확정합니다.
+ *
+ * 원본은 SUBST/NSUBST/SHUFFLE 을 파일에 적힌 순서대로 적용합니다.
+ * 여기서는 종류별로 묶어 돌립니다. 한 볼트가 세 가지를 뒤섞어 쓰는 일이
+ * 드물어 지금까지는 차이가 없었지만, 그런 볼트가 들어오면 어긋납니다.
+ * 그때가 되면 줄 번호를 함께 담아 순서를 지켜야 합니다.
+ * @param {object} vault - 볼트 정의
+ * @returns {Array<Array<string>>} 확정된 글리프 격자
+ */
+function randomiseVault(vault) {
+    let grid = vault.rows.map(row => [...row]);
+
+    grid = applyShuffles(grid, vault.shuffle ?? []);
+    grid = applyNsubst(grid, vault.nsubst ?? []);
+    grid = applySubstitutions(grid, vault.subst ?? []);
+
+    return grid;
+}
+
+/**
+ * 글리프를 서로 뒤섞습니다.
+ *
+ * `ABC` 는 세 글리프의 뜻이 판마다 자리를 바꾼다는 뜻입니다. 방 셋의 내용물이
+ * 돌아가므로, 한 번 본 볼트라도 어느 방에 무엇이 있는지는 다시 봐야 합니다.
+ * @param {Array<Array<string>>} grid - 글리프 격자
+ * @param {Array<object>} rules - 규칙들
+ * @returns {Array<Array<string>>} 바뀐 격자
+ */
+function applyShuffles(grid, rules) {
+    for (const rule of rules) {
+        if (rule.kind === 'permute') {
+            const shuffled = shuffleCopy(rule.glyphs);
+            const mapping = {};
+            rule.glyphs.forEach((from, i) => { mapping[from] = shuffled[i]; });
+            grid = remap(grid, mapping);
+            continue;
+        }
+
+        // 덩어리째 맞바꿉니다. 첫 덩어리의 자리에 뽑힌 덩어리가 들어갑니다.
+        const chosen = rule.blocks[random2(rule.blocks.length)];
+        const mapping = {};
+        rule.blocks[0].forEach((from, i) => { mapping[from] = chosen[i]; });
+        grid = remap(grid, mapping);
+    }
+
+    return grid;
+}
+
+/**
+ * 정해진 개수만큼만 바꿉니다.
+ *
+ * SUBST 는 칸마다 확률을 굴려 개수가 들쭉날쭉합니다. NSUBST 는 개수를 고정합니다.
+ * 문 하나, 계단 하나, 보물 셋처럼 수가 중요한 것들이 이걸 씁니다.
+ * 이 지시자가 없으면 그런 볼트는 판마다 문이 없거나 셋이 되어 못 씁니다.
+ * @param {Array<Array<string>>} grid - 글리프 격자
+ * @param {Array<object>} rules - 규칙들
+ * @returns {Array<Array<string>>} 바뀐 격자
+ */
+function applyNsubst(grid, rules) {
+    for (const rule of rules) {
+        // 그 글리프가 있는 자리를 모아 섞습니다. 어느 자리가 뽑힐지가 무작위입니다.
+        const spots = [];
+        for (let y = 0; y < grid.length; y++) {
+            for (let x = 0; x < grid[y].length; x++) {
+                if (grid[y][x] === rule.from) spots.push({ x, y });
+            }
+        }
+        const order = shuffleCopy(spots);
+
+        let taken = 0;
+        for (const spec of rule.specs) {
+            // 'rest' 는 나머지 전부입니다. Infinity 를 JSON 에 담을 수 없어
+            // 임포터가 문자열로 표시해 둡니다.
+            const wanted = spec.count === 'rest' ? order.length - taken : spec.count;
+            // 한 번만 굴려 그 몫 전체에 같은 것을 넣을지, 자리마다 따로 굴릴지.
+            const fixed = spec.once ? spec.glyphs[random2(spec.glyphs.length)] : null;
+
+            for (let n = 0; n < wanted && taken < order.length; n++, taken++) {
+                const { x, y } = order[taken];
+                grid[y][x] = fixed ?? spec.glyphs[random2(spec.glyphs.length)];
+            }
+        }
+    }
+
+    return grid;
+}
+
+/**
+ * 글리프를 표대로 한꺼번에 바꿉니다.
+ * @param {Array<Array<string>>} grid - 글리프 격자
+ * @param {object} mapping - 바꿀 표
+ * @returns {Array<Array<string>>} 바뀐 격자
+ */
+function remap(grid, mapping) {
+    return grid.map(row => row.map(glyph => mapping[glyph] ?? glyph));
+}
+
+/**
+ * 배열을 섞은 사본을 돌려줍니다. (피셔-예이츠)
+ * @param {Array} list - 원본
+ * @returns {Array} 섞인 사본
+ */
+function shuffleCopy(list) {
+    const copy = [...list];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const k = random2(i + 1);
+        [copy[i], copy[k]] = [copy[k], copy[i]];
+    }
+    return copy;
 }
 
 /**
@@ -264,7 +375,7 @@ export function placeMinivaults(map, options = {}) {
         const vault = pickVault(usable);
         if (!vault) break;
 
-        const grid = applySubstitutions(vault.rows, vault.subst ?? []);
+        const grid = randomiseVault(vault);
         const vaultHeight = grid.length;
         const vaultWidth = grid[0].length;
 

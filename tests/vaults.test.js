@@ -240,3 +240,56 @@ test('볼트 몬스터가 실제로 층에 놓인다', () => {
 
     assert.ok(spawnedSomewhere, '볼트가 지정한 자리에 적이 하나도 서지 않았습니다');
 });
+
+// --- 개수를 고정하는 지시자 -------------------------------------------------------
+
+test('NSUBST 를 쓰는 볼트를 가져왔다', () => {
+    // 이것이 없어서 볼트 261 개를 버리고 있었습니다.
+    const withNsubst = VAULTS.filter(v => (v.nsubst?.length ?? 0) > 0);
+    assert.ok(withNsubst.length > 0, 'NSUBST 를 쓰는 볼트가 하나도 없습니다');
+});
+
+test('나머지 전부를 뜻하는 표시가 살아 있다', () => {
+    // Infinity 로 담았다가 JSON 을 거치며 null 이 되어 개수가 통째로 사라졌습니다.
+    // 예전에 몬스터 쿨다운에서 겪은 것과 같은 함정입니다.
+    for (const vault of VAULTS) {
+        for (const rule of vault.nsubst ?? []) {
+            for (const spec of rule.specs) {
+                assert.notEqual(spec.count, null,
+                    `${vault.name} 의 NSUBST 개수가 사라졌습니다`);
+            }
+        }
+    }
+});
+
+test('NSUBST 는 개수를 고정한다', () => {
+    // SUBST 는 칸마다 확률을 굴려 개수가 들쭉날쭉합니다. NSUBST 는 고정합니다.
+    // 문 하나, 계단 하나처럼 수가 중요한 볼트가 이걸 씁니다.
+    const target = VAULTS.find(v => v.name === 'corexii_leaking_fountain');
+    if (!target) return;   // 원본이 바뀌면 이 볼트가 없을 수 있습니다
+
+    const counts = new Set();
+    let stamped = 0;
+
+    for (let seed = 0; seed < 400 && stamped < 5; seed++) {
+        seedRandom(seed);
+        const map = Array.from({ length: C.MAP_HEIGHT },
+            () => Array(C.MAP_WIDTH).fill(C.TILE_IDS.FLOOR));
+        const placed = placeMinivaults(map, { count: 1 });
+        if (placed[0]?.name !== target.name) continue;
+
+        stamped++;
+        const box = placed[0];
+        let shallow = 0;
+        for (let y = box.top; y < box.top + box.height; y++) {
+            for (let x = box.left; x < box.left + box.width; x++) {
+                if (map[y][x] === C.TILE_IDS.SHALLOW_WATER) shallow++;
+            }
+        }
+        counts.add(shallow);
+    }
+
+    assert.ok(stamped > 0, '그 볼트가 한 번도 찍히지 않았습니다');
+    assert.equal(counts.size, 1, `개수가 판마다 달랐습니다: ${[...counts].join(', ')}`);
+    assert.ok(counts.has(5), `다섯 칸이어야 하는데 ${[...counts].join(', ')} 였습니다`);
+});

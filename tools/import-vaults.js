@@ -192,6 +192,94 @@ const KFEAT_FEATURES = {
 };
 
 /**
+ * NSUBST 한 줄을 규칙 목록으로 바꿉니다.
+ *
+ * `? = 3:w / *:l` 은 '? 중 셋을 w 로, 나머지를 l 로' 라는 뜻입니다.
+ * 이 지시자가 하는 일은 '정확히 몇 개' 입니다. SUBST 는 칸마다 확률을 굴려서
+ * 판마다 개수가 들쭉날쭉한데, NSUBST 는 개수를 고정합니다. 문 하나, 계단 하나,
+ * 보물 셋처럼 수가 중요한 것들이 이걸 씁니다.
+ *
+ * 한 줄에 쉼표로 여러 글리프를 묶기도 합니다. (`A = 1:. / *:x, B = 1:. / *:x`)
+ * @param {string} line - NSUBST 값
+ * @returns {Array<object>} 규칙들
+ */
+/** @description '나머지 전부'를 뜻하는 표시. Infinity 를 JSON 에 담을 수 없어 씁니다. */
+const REST = 'rest';
+
+function parseNsubst(line) {
+    const rules = [];
+
+    for (const clause of line.split(/,(?=\s*\S\s*[=:])/)) {
+        const matched = /^\s*(\S)\s*=\s*(.+)$/.exec(clause);
+        if (!matched) return [];
+
+        const [, from, rest] = matched;
+        const specs = [];
+
+        for (const raw of rest.split('/')) {
+            const spec = raw.trim();
+            if (spec === '') continue;
+
+            // `3:w` `3=w` `*:l` `*=xx.` `.` (수를 안 적으면 마지막은 *, 나머지는 1)
+            const parsed = /^(\*|\d+)?\s*([=:])?\s*(.+)$/.exec(spec);
+            if (!parsed) return [];
+
+            const [, count, mode, glyphs] = parsed;
+            specs.push({
+                // Infinity 를 담으면 안 됩니다. 이 데이터는 JSON 으로 나가는데
+                // JSON.stringify(Infinity) 는 null 이 되어, 읽는 쪽에서 개수가
+                // 사라집니다. 그래서 '나머지 전부'는 문자열로 표시합니다.
+                count: count === '*' ? REST : (count ? Number(count) : null),
+                once: mode === ':',
+                glyphs: [...glyphs],
+            });
+        }
+
+        if (specs.length === 0) return [];
+
+        // 수를 안 적은 것은 마지막이면 전부, 아니면 하나입니다. (syntax.txt)
+        for (let i = 0; i < specs.length; i++) {
+            if (specs[i].count !== null) continue;
+            specs[i].count = (i === specs.length - 1) ? REST : 1;
+        }
+
+        rules.push({ from, specs });
+    }
+
+    return rules;
+}
+
+/**
+ * SHUFFLE 한 줄을 규칙으로 바꿉니다.
+ *
+ * `ABC` 는 세 글리프를 서로 뒤섞으라는 뜻입니다. 방 세 개의 내용물이
+ * 판마다 자리를 바꾸는 식이라, 외워 둔 볼트도 다시 살펴보게 만듭니다.
+ * `AB/CD` 처럼 슬래시가 있으면 덩어리째 맞바꿉니다.
+ * @param {string} line - SHUFFLE 값
+ * @returns {Array<object>} 규칙들
+ */
+function parseShuffle(line) {
+    const rules = [];
+
+    for (const clause of line.split(',')) {
+        const trimmed = clause.trim();
+        if (trimmed === '') continue;
+
+        if (trimmed.includes('/')) {
+            const blocks = trimmed.split('/').map(b => [...b.trim()]);
+            const width = blocks[0].length;
+            if (blocks.some(b => b.length !== width)) return [];
+            rules.push({ kind: 'blocks', blocks });
+            continue;
+        }
+
+        rules.push({ kind: 'permute', glyphs: [...trimmed] });
+    }
+
+    return rules;
+}
+
+/**
  * 이 볼트를 쓸 수 있는지 봅니다.
  * @param {object} vault - 볼트
  * @param {number} maxSize - 받아들일 수 있는 최대 변 길이(타일)
@@ -205,8 +293,13 @@ function rejectionReason(vault, maxSize) {
     const width = Math.max(...vault.rows.map(r => r.length));
     if (width > maxSize || height > maxSize) return 'size';
 
-    // 아직 옮기지 않은 지시자가 있으면 반쯤만 이해한 채로 찍게 됩니다.
-    if (vault.nsubst.length || vault.shuffle) return 'directive';
+    // 읽을 수 없는 지시자가 있으면 반쯤만 이해한 채로 찍게 됩니다.
+    for (const line of vault.nsubst) {
+        if (parseNsubst(line).length === 0) return 'directive';
+    }
+    for (const line of vault.shuffle ?? []) {
+        if (parseShuffle(line).length === 0) return 'directive';
+    }
 
     // 아직 옮기지 않은 KFEAT 이 있으면 버립니다. 그 글리프가 무엇이 될지
     // 모르는 채로 찍으면 벽이어야 할 자리가 바닥이 되기도 합니다.
@@ -342,6 +435,8 @@ for (const relative of SOURCE_FILES) {
             tags: vault.tags,
             rows,
             subst: vault.subst.map(parseSubst).filter(Boolean),
+            nsubst: vault.nsubst.flatMap(parseNsubst),
+            shuffle: (vault.shuffle ?? []).flatMap(parseShuffle),
             mons: slots,
             kfeat,
         });
