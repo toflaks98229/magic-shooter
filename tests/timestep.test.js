@@ -162,9 +162,15 @@ test('플레이어 상태는 시뮬레이션 스텝 안에서만 변한다', () 
     assert.equal(worldModule.world.player.angle, angleBefore,
         '입력이 게임 루프 밖에서 플레이어 상태를 바꾸면 안 된다');
 
-    // 스텝이 돌면 그동안 쌓인 이동량이 한꺼번에 반영된다.
+    // 이 갈래에서는 마우스로 시점을 돌리지 않습니다.
+    //
+    // 위에서 내려다보는 화면에는 돌릴 시점이 없습니다. 바라보는 쪽은
+    // 움직인 방향이 정합니다. 그래서 스텝이 돌아도 각도는 그대로여야 합니다.
+    //
+    // main 갈래에서는 이 자리가 '쌓인 회전량이 한꺼번에 반영되는가' 였습니다.
+    // 입력이 게임 루프 밖에서 상태를 바꾸지 않는다는 계약을 지키던 검사이고,
+    // 그 계약 자체는 여기서도 위의 검사가 지킵니다.
     advanceSimulation(C.SIMULATION_STEP_MS);
-    const expected = angleBefore + 5 * 20 * C.MOUSE_SENSITIVITY * C.ROTATION_SPEED;
-    assert.ok(Math.abs(worldModule.world.player.angle - expected) < 1e-9,
-        `누적된 회전량이 반영되어야 한다: ${worldModule.world.player.angle} vs ${expected}`);
+    assert.equal(worldModule.world.player.angle, angleBefore,
+        '마우스로 시점이 돌아갔습니다');
 });

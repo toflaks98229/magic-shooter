@@ -12,7 +12,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-import { installBrowserStubs, bindStubDom, seedRandom } from './helpers/browser-stubs.js';
+import { installBrowserStubs, bindStubDom, seedRandom, fireDocumentEvent } from './helpers/browser-stubs.js';
 
 installBrowserStubs();
 
@@ -167,4 +167,52 @@ test('가 본 곳이 층마다 비워진다', () => {
     // 층을 옮겨도 남아 있으면 새 층이 처음부터 드러나 보입니다.
     assert.ok(worldModule.FLOOR_SCOPED_COLLECTIONS.includes('seen'),
         'seen 이 층 단위로 비워지지 않습니다');
+});
+
+// --- 조작 ------------------------------------------------------------------------
+
+test('누른 방향으로 바로 간다', async () => {
+    // 1인칭에서는 시야 방향을 기준으로 앞뒤좌우를 잡았습니다.
+    // 위에서 내려다보는 화면에서 그러면, 위를 눌렀는데 화면에서 옆으로 갑니다.
+    const world = emptyRoom();
+    const input = await import('../Script/input.js');
+    input.setupInputHandlers();
+
+    const move = (code) => {
+        world.player.x = 20 * C.TILE_SIZE;
+        world.player.y = 20 * C.TILE_SIZE;
+        const start = { x: world.player.x, y: world.player.y };
+
+        fireDocumentEvent('keydown', { code });
+        for (let i = 0; i < 40; i++) gameLogic.update(C.SIMULATION_STEP_MS);
+        fireDocumentEvent('keyup', { code });
+
+        return { dx: world.player.x - start.x, dy: world.player.y - start.y };
+    };
+
+    const up = move('KeyW');
+    assert.ok(up.dy < -10, `W 를 눌렀는데 위로 가지 않았습니다: ${JSON.stringify(up)}`);
+    assert.ok(Math.abs(up.dx) < 1, 'W 를 눌렀는데 옆으로도 갔습니다');
+
+    const right = move('KeyD');
+    assert.ok(right.dx > 10, `D 를 눌렀는데 오른쪽으로 가지 않았습니다: ${JSON.stringify(right)}`);
+    assert.ok(Math.abs(right.dy) < 1, 'D 를 눌렀는데 위아래로도 갔습니다');
+});
+
+test('바라보는 쪽이 움직인 방향을 따른다', async () => {
+    // 시야 방향은 버리지 않았습니다. 무엇이 보이는지를 정하는 데 계속 쓰입니다.
+    const world = emptyRoom();
+    const input = await import('../Script/input.js');
+    input.setupInputHandlers();
+
+    world.player.x = 20 * C.TILE_SIZE;
+    world.player.y = 20 * C.TILE_SIZE;
+
+    fireDocumentEvent('keydown', { code: 'KeyD' });
+    for (let i = 0; i < 10; i++) gameLogic.update(C.SIMULATION_STEP_MS);
+    fireDocumentEvent('keyup', { code: 'KeyD' });
+
+    // 오른쪽은 각도 0 입니다.
+    assert.ok(Math.abs(world.player.angle) < 0.1,
+        `오른쪽으로 갔는데 각도가 ${world.player.angle} 입니다`);
 });

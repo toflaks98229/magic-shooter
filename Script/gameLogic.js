@@ -140,8 +140,12 @@ let lastPlayerTile = { x: -1, y: -1 };
  * 시점 회전을 먼저 적용해, 같은 프레임에 들어온 공격이 회전 이후의 방향을 기준으로 판정되게 합니다.
  */
 function processQueuedInput() {
-    const lookDelta = consumePendingLook();
-    if (lookDelta !== 0) world.player.angle += lookDelta;
+    // 마우스로 시점을 돌리지 않습니다.
+    //
+    // 위에서 내려다보는 화면에서는 돌릴 시점이 없습니다. 바라보는 쪽은
+    // 움직인 방향이 정하고, 그것으로 무엇이 보이는지도 정해집니다.
+    // 쌓인 입력은 버립니다. 그러지 않으면 창을 눌렀을 때 방향이 튑니다.
+    consumePendingLook();
 
     drainActionQueue(action => {
         // 소지품 사용은 어느 칸인지가 함께 필요해 객체로 들어옵니다.
@@ -1642,18 +1646,28 @@ function handlePlayerMovement(dtFactor) {
         const slowScale = playerHasDebuff('slow') ? C.SLOW_SPEED_SCALE : 1;
         const moveSpeed = C.MOVE_SPEED * slowScale * dtFactor
             * A.buffModifier('speedMultiplier', 1) * characterModifier('moveSpeed');
-        // 플레이어 시야 방향을 기준으로 한 이동 벡터 계산 (전진/후진, 좌/우)
-        const moveX = (Math.cos(player.angle) * forward - Math.sin(player.angle) * strafe) * moveSpeed;
-        const moveY = (Math.sin(player.angle) * forward + Math.cos(player.angle) * strafe) * moveSpeed;
+        // 누른 방향으로 바로 갑니다.
+        //
+        // 1인칭에서는 시야 방향을 기준으로 앞뒤좌우를 잡았습니다. 위에서
+        // 내려다보는 화면에서는 그러면 방향이 어긋나 보입니다. 위를 눌렀는데
+        // 화면에서 옆으로 가면 곧바로 헷갈립니다.
+        //
+        // 시야 방향은 버리지 않고 바라보는 쪽으로 씁니다. 그림을 어느 쪽으로
+        // 그릴지와, 무엇이 보이는지를 정하는 데 계속 쓰입니다.
+        const moveX = strafe * moveSpeed;
+        const moveY = -forward * moveSpeed;
+
+        // 움직이는 쪽을 바라봅니다.
+        if (moveX !== 0 || moveY !== 0) player.angle = Math.atan2(moveY, moveX);
 
         const nextX = player.x + moveX;
         const nextY = player.y + moveY;
 
         // isPassable 함수를 사용하여 벽과 단단한 오브젝트와의 충돌을 한 번에 처리합니다.
-        if (isPassable(Math.floor(nextX / C.TILE_SIZE), Math.floor(player.y / C.TILE_SIZE))) {
+        if (isPassable(Math.floor(nextX / C.TILE_SIZE), Math.floor(player.y / C.TILE_SIZE), false, true)) {
             player.x = nextX;
         }
-        if (isPassable(Math.floor(player.x / C.TILE_SIZE), Math.floor(nextY / C.TILE_SIZE))) {
+        if (isPassable(Math.floor(player.x / C.TILE_SIZE), Math.floor(nextY / C.TILE_SIZE), false, true)) {
             player.y = nextY;
         }
     }

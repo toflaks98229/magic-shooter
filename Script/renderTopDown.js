@@ -295,3 +295,21 @@ function textureCanvas(texture) {
     textureCanvases.set(texture, canvas);
     return canvas;
 }
+
+/**
+ * 캔버스를 창 크기에 맞춥니다.
+ *
+ * 1인칭 쪽과 달리 저해상도 버퍼를 쓰지 않습니다. 레이캐스터는 픽셀을 하나씩
+ * 찍느라 해상도가 곧 비용이었지만, 여기서는 타일을 통째로 옮겨 그리므로
+ * 화면이 커져도 그리는 횟수가 거의 늘지 않습니다.
+ */
+export function resizeCanvas() {
+    const width = dom.canvas.clientWidth || window.innerWidth;
+    const height = dom.canvas.clientHeight || window.innerHeight;
+
+    dom.canvas.width = width;
+    dom.canvas.height = height;
+
+    // 타일 그림이 뭉개지지 않게 합니다.
+    dom.ctx.imageSmoothingEnabled = false;
+}

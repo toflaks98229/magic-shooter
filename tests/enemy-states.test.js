@@ -699,14 +699,15 @@ test('감속에 걸린 플레이어가 느려진다', () => {
     const world = emptyRoom();
     world.player.angle = 0;
 
+    // 이 갈래에서는 누른 방향으로 바로 갑니다. W 는 위쪽이라 y 가 줄어듭니다.
     const walk = (debuffs) => {
-        world.player.x = 5 * C.TILE_SIZE;
+        world.player.y = 20 * C.TILE_SIZE;
         world.player.debuffs = debuffs;
-        const start = world.player.x;
+        const start = world.player.y;
         fireDocumentEvent('keydown', { code: 'KeyW' });
         for (let i = 0; i < 60; i++) gameLogic.update(C.SIMULATION_STEP_MS);
         fireDocumentEvent('keyup', { code: 'KeyW' });
-        return world.player.x - start;
+        return start - world.player.y;
     };
 
     const normal = walk({});

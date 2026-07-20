@@ -223,7 +223,11 @@
 
         /* --- 무기와 화면 효과 ------------------------------------------------ */
 
-        #weapon-view {
+        /* 손에 든 무기는 1인칭에서만 뜻이 있습니다.
+           위에서 내려다보면 손이 화면에 없습니다. */
+        #weapon-view { display: none; }
+
+        #weapon-view-unused {
             position: absolute;
             bottom: 0;
             left: 50%;

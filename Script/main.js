@@ -18,7 +18,11 @@ import { generateDungeon } from './mapGenerator.js';
 import { getBranch, formatLocation } from './branches.js';
 import { rollItem } from './items.js';
 import { setupInputHandlers, clearInputQueue } from './input.js';
-import { render, resizeCanvas, loadAssets } from './render.js';
+// 이 갈래는 위에서 내려다봅니다. 그리는 것만 갈라지고 나머지는 그대로입니다.
+// 에셋을 읽는 일은 1인칭 쪽 코드가 계속 맡습니다. 시점과 무관한 일이라
+// 두 벌로 두면 한쪽만 고쳐지는 일이 생깁니다.
+import { loadAssets } from './render.js';
+import { render, resizeCanvas } from './renderTopDown.js';
 import { spawnEnemiesForFloor } from './gameLogic.js';
 import { advanceSimulation, resetLoop } from './loop.js';
 import { updateHUD, registerUiHandlers, invalidateSpriteCache, resetUi } from './ui.js';
