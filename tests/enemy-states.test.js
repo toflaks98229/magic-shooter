@@ -12,7 +12,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { installBrowserStubs, bindStubDom, seedRandom } from './helpers/browser-stubs.js';
+import { installBrowserStubs, bindStubDom, seedRandom, fireDocumentEvent } from './helpers/browser-stubs.js';
 
 installBrowserStubs();
 
@@ -24,7 +24,12 @@ const A = await import('../Script/actions.js');
 const gameLogic = await import('../Script/gameLogic.js');
 const M = await import('../Script/monsters.js');
 
+const input = await import('../Script/input.js');
+
 bindStubDom(dom);
+
+// 이것을 부르지 않으면 키 입력이 아무 데도 닿지 않아 이동 검사가 헛돕니다.
+input.setupInputHandlers();
 
 /**
  * 벽으로만 둘러싸인 빈 방을 만들고 플레이어를 가운데 세웁니다.
@@ -634,4 +639,79 @@ test('사라지는 것은 죽는 것과 다르다', () => {
     assert.equal(world.enemies.length, 0, '사라지지 않았습니다');
     assert.equal(world.player.skills.experiencePool ?? 0, before,
         '사라진 적에게서 경험치가 나왔습니다');
+});
+
+// --- 버프가 실제로 무언가를 한다 ---------------------------------------------------
+
+test('가속이 걸린 적이 더 빨리 온다', () => {
+    // 버프를 걸어 두기만 하고 아무도 읽지 않으면, 시전은 성공하는데
+    // 아무 일도 일어나지 않습니다. flies 깃발이 그랬듯 '반영되는 척'이 됩니다.
+    const world = emptyRoom();
+    const now = world.time;
+
+    // 하나씩 따로 잽니다. 나란히 두면 서로 밀어내는 힘이 섞여
+    // 무엇 때문에 차이가 났는지 알 수 없습니다.
+    const distanceAfter = (buffs) => {
+        world.enemies.length = 0;
+        const enemy = placeEnemy(world, {
+            speed: 1.0, state: 'chase', huntUntil: 1e9, buffs,
+            x: world.player.x + 8 * C.TILE_SIZE, y: world.player.y,
+        });
+        run(60);
+        return enemy.x - world.player.x;
+    };
+
+    const start = 8 * C.TILE_SIZE;
+    const plainMoved = start - distanceAfter(undefined);
+    const hastedMoved = start - distanceAfter({ haste: now + 1e9 });
+    assert.ok(hastedMoved > plainMoved * 1.2,
+        `보통 ${plainMoved.toFixed(0)}px, 가속 ${hastedMoved.toFixed(0)}px`);
+});
+
+test('완력이 걸린 적이 더 아프게 때린다', () => {
+    const world = emptyRoom();
+    const now = world.time;
+
+    const hit = (buffs) => {
+        world.player.hp = 100000;
+        const enemy = placeEnemy(world, {
+            speed: 0, hd: 20, damage: 20, cooldown: 0, behavior: 'melee',
+            state: 'chase', huntUntil: 1e9, buffs,
+            x: world.player.x + 20, y: world.player.y,
+        });
+        const before = world.player.hp;
+        run(120);
+        world.enemies.length = 0;
+        return before - world.player.hp;
+    };
+
+    seedRandom(0x81F);
+    const plain = hit(undefined);
+    seedRandom(0x81F);
+    const mighty = hit({ might: now + 1e9 });
+
+    assert.ok(mighty > plain, `보통 ${plain}, 완력 ${mighty}`);
+});
+
+test('감속에 걸린 플레이어가 느려진다', () => {
+    // 원본의 마비·혼란과 달리 조작을 빼앗지 않습니다.
+    // 살아남을 수 있고, 대신 길을 다시 짜게 만듭니다.
+    const world = emptyRoom();
+    world.player.angle = 0;
+
+    const walk = (debuffs) => {
+        world.player.x = 5 * C.TILE_SIZE;
+        world.player.debuffs = debuffs;
+        const start = world.player.x;
+        fireDocumentEvent('keydown', { code: 'KeyW' });
+        for (let i = 0; i < 60; i++) gameLogic.update(C.SIMULATION_STEP_MS);
+        fireDocumentEvent('keyup', { code: 'KeyW' });
+        return world.player.x - start;
+    };
+
+    const normal = walk({});
+    const slowed = walk({ slow: world.time + 1e9 });
+
+    assert.ok(normal > 0, '평소에 움직이지 않았습니다');
+    assert.ok(slowed < normal * 0.8, `보통 ${normal.toFixed(0)}px, 감속 ${slowed.toFixed(0)}px`);
 });

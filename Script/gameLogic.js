@@ -449,8 +449,9 @@ const CAST_BY_KIND = {
         // 원본은 턴마다 한 번 행동하니 부르는 속도가 저절로 눌리지만,
         // 실시간에서는 같은 수치가 금세 화면을 메웁니다. 실제로 악마술사 하나가
         // 60초에 서른세 마리를 불러 층 상한을 쳤습니다.
-        const alive = world.enemies.filter(e => e.summonedBy === enemy.monsterId).length;
-        if (alive >= C.MAX_SUMMONS_PER_CASTER) return false;
+        const livingSummons = () =>
+            world.enemies.filter(e => e.summonedBy === enemy.monsterId).length;
+        if (livingSummons() >= C.MAX_SUMMONS_PER_CASTER) return false;
 
         // 1 + random2(HD/10 + 1) 마리. (mon-cast.cc:7896)
         const count = 1 + random2(Math.trunc(enemy.hd / 10) + 1);
@@ -460,6 +461,11 @@ const CAST_BY_KIND = {
         let summoned = 0;
         for (let i = 0; i < count; i++) {
             if (world.enemies.length >= C.MAX_ENEMIES_ON_FLOOR) break;
+
+            // 상한을 부르는 도중에도 봐야 합니다. 밖에서 한 번만 보면 한 번의
+            // 시전이 여러 마리를 부르므로 그만큼 넘칩니다. 검사가 이것을 잡지 못한 채
+            // 오래 통과했는데, 난수가 우연히 한 마리씩만 부르고 있었기 때문입니다.
+            if (livingSummons() >= C.MAX_SUMMONS_PER_CASTER) break;
 
             const id = pickSummonId(effect, enemy);
             if (!id) break;
@@ -698,6 +704,43 @@ function openSpaceAround(target) {
 }
 
 /**
+ * 그 버프가 지금 걸려 있는지 봅니다.
+ *
+ * 버프를 걸어 두기만 하고 아무도 읽지 않으면, 시전은 성공하는데 아무 일도
+ * 일어나지 않습니다. flies 깃발이 그랬듯 '반영되는 척'이 됩니다.
+ * @param {object} actor - 몬스터
+ * @param {string} name - 버프 이름
+ * @returns {boolean} 걸려 있으면 true
+ */
+function hasBuff(actor, name) {
+    return world.time < (actor.buffs?.[name] ?? 0);
+}
+
+/**
+ * 플레이어에게 그 약화가 걸려 있는지 봅니다.
+ * @param {string} name - 약화 이름
+ * @returns {boolean} 걸려 있으면 true
+ */
+export function playerHasDebuff(name) {
+    return world.time < (world.player.debuffs?.[name] ?? 0);
+}
+
+/**
+ * 버프를 반영한 이동 속도를 구합니다.
+ *
+ * 가속은 원본에서 행동을 두 배 빠르게 만듭니다. 여기서는 이동으로 옮깁니다.
+ * 광포는 그보다 조금 더 빠릅니다.
+ * @param {object} enemy - 몬스터
+ * @returns {number} 이 스텝의 이동 속도
+ */
+function effectiveSpeed(enemy) {
+    let speed = enemy.speed;
+    if (hasBuff(enemy, 'haste')) speed *= C.HASTE_SPEED_SCALE;
+    if (hasBuff(enemy, 'berserk')) speed *= C.BERSERK_SPEED_SCALE;
+    return speed;
+}
+
+/**
  * 몬스터가 플레이어를 한 번 때립니다.
  *
  * 예전에는 사거리 안에 들어오기만 하면 정해진 피해가 그대로 들어갔습니다.
@@ -716,8 +759,15 @@ function strikePlayer(enemy) {
 
     // 맞든 빗나가든 피하려 애쓴 것이므로 회피가 자랍니다. (exercise.cc)
     A.practise('dodging');
+    if (!result.hit) return;
 
-    if (result.hit) A.damagePlayer(result.damage, enemy);
+    // 완력은 피해를 올립니다. 전투의 함성으로 북돋워진 무리가 이걸 씁니다.
+    // 한 마리를 먼저 끊어야 할 이유가 여기서 생깁니다.
+    const damage = hasBuff(enemy, 'might')
+        ? Math.round(result.damage * C.MIGHT_DAMAGE_SCALE)
+        : result.damage;
+
+    A.damagePlayer(damage, enemy);
 }
 
 /**
@@ -1163,7 +1213,7 @@ const ENEMY_STATES = {
         move(enemy, dtFactor) {
             // 정한 방향으로 계속 나아갑니다. 매 스텝 방향을 새로 뽑으면
             // 제자리에서 떠는 것처럼 보입니다.
-            const speed = enemy.speed * dtFactor;
+            const speed = effectiveSpeed(enemy) * dtFactor;
             moveEnemyBy(enemy, Math.cos(enemy.erraticAngle) * speed,
                 Math.sin(enemy.erraticAngle) * speed);
         },
@@ -1359,7 +1409,7 @@ function followFlowField(enemy, dtFactor) {
     const targetX = (bestNode % width) * C.TILE_SIZE + C.TILE_SIZE / 2;
     const targetY = ((bestNode / width) | 0) * C.TILE_SIZE + C.TILE_SIZE / 2;
     const angle = Math.atan2(targetY - enemy.y, targetX - enemy.x);
-    const speed = enemy.speed * dtFactor;
+    const speed = effectiveSpeed(enemy) * dtFactor;
 
     enemy.x += Math.cos(angle) * speed;
     enemy.y += Math.sin(angle) * speed;
@@ -1406,7 +1456,7 @@ function fleeAlongFlowField(enemy, dtFactor) {
     const targetX = (bestNode % width) * C.TILE_SIZE + C.TILE_SIZE / 2;
     const targetY = ((bestNode / width) | 0) * C.TILE_SIZE + C.TILE_SIZE / 2;
     const angle = Math.atan2(targetY - enemy.y, targetX - enemy.x);
-    const speed = enemy.speed * dtFactor;
+    const speed = effectiveSpeed(enemy) * dtFactor;
 
     enemy.x += Math.cos(angle) * speed;
     enemy.y += Math.sin(angle) * speed;
@@ -1527,7 +1577,10 @@ function handlePlayerMovement(dtFactor) {
 
         runtime.bobbingAngle += C.BOB_SPEED * dtFactor; // 화면 흔들림 각도 업데이트
         // 스프리건은 빠르고 나가는 느립니다. 케이브리아도스를 섬기면 더 느려집니다.
-        const moveSpeed = C.MOVE_SPEED * dtFactor
+        // 감속에 걸리면 느려집니다. 원본의 마비와 달리 조작을 빼앗지 않아
+        // 살아남을 수 있고, 대신 길을 다시 짜게 만듭니다.
+        const slowScale = playerHasDebuff('slow') ? C.SLOW_SPEED_SCALE : 1;
+        const moveSpeed = C.MOVE_SPEED * slowScale * dtFactor
             * A.buffModifier('speedMultiplier', 1) * characterModifier('moveSpeed');
         // 플레이어 시야 방향을 기준으로 한 이동 벡터 계산 (전진/후진, 좌/우)
         const moveX = (Math.cos(player.angle) * forward - Math.sin(player.angle) * strafe) * moveSpeed;

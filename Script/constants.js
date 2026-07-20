@@ -518,3 +518,23 @@ export const MAX_ENEMIES_ON_FLOOR = 40;
  * 실시간에서는 같은 수치가 금세 화면을 메웁니다.
  */
 export const MAX_SUMMONS_PER_CASTER = 4;
+
+/**
+ * @description 가속이 이동을 얼마나 빠르게 하는가.
+ * 원본의 가속은 행동을 두 배로 만듭니다. 실시간에서 두 배는 너무 급해서
+ * 이동에만 얹고 폭을 줄였습니다.
+ */
+export const HASTE_SPEED_SCALE = 1.5;
+
+/** @description 광포가 이동을 얼마나 빠르게 하는가. 가속보다 조금 더입니다. */
+export const BERSERK_SPEED_SCALE = 1.7;
+
+/**
+ * @description 감속에 걸린 플레이어의 이동 배율.
+ * 원본의 마비·혼란과 달리 조작을 빼앗지 않습니다. 살아남을 수 있고,
+ * 대신 길을 다시 짜게 만듭니다.
+ */
+export const SLOW_SPEED_SCALE = 0.6;
+
+/** @description 완력이 피해를 얼마나 올리는가. */
+export const MIGHT_DAMAGE_SCALE = 1.4;
