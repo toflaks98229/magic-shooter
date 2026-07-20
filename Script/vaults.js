@@ -30,7 +30,18 @@ const TILE_BY_GLYPH = {
     GLASS: TILE_IDS.GLASS,
     STATUE: TILE_IDS.STATUE,
     FOUNTAIN: TILE_IDS.FLOOR,   // 샘은 아직 없습니다. 바닥으로 둡니다
+    DEEP_WATER: TILE_IDS.DEEP_WATER,
+    SHALLOW_WATER: TILE_IDS.SHALLOW_WATER,
+    LAVA: TILE_IDS.LAVA,
+    TREE: TILE_IDS.TREE,
     DOOR: TILE_IDS.DOOR,
+
+    // 몬스터 자리는 바닥입니다. 무엇이 서는지는 stamp 가 따로 봅니다.
+    MONSTER_ANY: TILE_IDS.FLOOR,
+    MONSTER_TOUGH: TILE_IDS.FLOOR,
+    MONSTER_TOUGHER: TILE_IDS.FLOOR,
+    MONSTER_SLOT: TILE_IDS.FLOOR,
+    GRATE: TILE_IDS.GRATE,
     OUTSIDE: null,
 };
 
@@ -40,9 +51,27 @@ const GLYPH_NAMES = {
     'm': 'GLASS', 'n': 'GLASS', 'o': 'GLASS',
     'G': 'STATUE', 'I': 'STATUE',
     'T': 'FOUNTAIN', 'U': 'FOUNTAIN', 'V': 'FOUNTAIN',
+    'w': 'DEEP_WATER', 'W': 'SHALLOW_WATER', 'l': 'LAVA', 't': 'TREE',
     '+': 'DOOR', '=': 'DOOR',
+
+    // 몬스터가 설 자리. 바닥으로 찍고 그 위에 몬스터를 놓습니다.
+    '0': 'MONSTER_ANY', '9': 'MONSTER_TOUGH', '8': 'MONSTER_TOUGHER',
+    '1': 'MONSTER_SLOT', '2': 'MONSTER_SLOT', '3': 'MONSTER_SLOT',
+    '4': 'MONSTER_SLOT', '5': 'MONSTER_SLOT', '6': 'MONSTER_SLOT',
+    '7': 'MONSTER_SLOT',
+
     ' ': 'OUTSIDE',
 };
+
+/**
+ * @description 깊이에 맡기라는 표시. 실제 몬스터는 부르는 쪽이 뽑습니다.
+ *
+ * 볼트는 어느 층에 찍힐지 모르므로 여기서 종을 정할 수 없습니다.
+ * '이 자리에 이 깊이에 맞는 것을 하나' 라는 뜻만 남깁니다.
+ */
+export const ROLL_FOR_DEPTH = '@depth';
+export const ROLL_FOR_DEPTH_TOUGH = '@depth+5';
+export const ROLL_FOR_DEPTH_TOUGHER = '@depth*2';
 
 /** @description 한 층에 찍어 볼 볼트의 수. 원본도 무작위 미니볼트는 하나입니다. */
 const VAULTS_PER_FLOOR = 1;
@@ -160,14 +189,55 @@ function fitsAt(map, grid, left, top, keepClear) {
  * @param {number} left - 왼쪽 타일 좌표
  * @param {number} top - 위쪽 타일 좌표
  */
-function stamp(map, grid, left, top) {
+function stamp(map, grid, left, top, vault) {
+    const spawns = [];
+
     for (let y = 0; y < grid.length; y++) {
         for (let x = 0; x < grid[y].length; x++) {
-            const tile = TILE_BY_GLYPH[GLYPH_NAMES[grid[y][x]]];
+            const glyph = grid[y][x];
+            const name = GLYPH_NAMES[glyph];
+
+            // KFEAT 이 정한 글리프는 볼트마다 뜻이 다릅니다.
+            const kfeat = vault.kfeat?.[glyph];
+            if (kfeat) {
+                const chosen = kfeat[random2(kfeat.length)];
+                map[top + y][left + x] = TILE_BY_GLYPH[chosen] ?? TILE_IDS.FLOOR;
+                continue;
+            }
+
+            const tile = TILE_BY_GLYPH[name];
             if (tile === null || tile === undefined) continue;   // 볼트 밖입니다
             map[top + y][left + x] = tile;
+
+            const monsterId = monsterFor(glyph, name, vault);
+            if (monsterId) spawns.push({ id: monsterId, tileX: left + x, tileY: top + y });
         }
     }
+
+    return spawns;
+}
+
+/**
+ * 이 글리프에 어떤 몬스터가 서는지 정합니다.
+ *
+ * 1~7 은 볼트의 MONS 슬롯을 가리킵니다. 한 슬롯에 여러 후보가 있으면 그중
+ * 하나를 뽑습니다. 0/8/9 는 깊이에 맞는 아무거나인데, 어느 깊이에서 뽑을지는
+ * 부르는 쪽이 정합니다. 여기서는 표시만 남깁니다.
+ * @param {string} glyph - 원본 글리프
+ * @param {string} name - 옮긴 이름
+ * @param {object} vault - 볼트 정의
+ * @returns {string|null} 몬스터 식별자, 또는 깊이에 맡길 때의 표시
+ */
+function monsterFor(glyph, name, vault) {
+    if (name === 'MONSTER_SLOT') {
+        const slot = vault.mons?.[Number(glyph) - 1];
+        if (!slot || slot.length === 0) return null;
+        return slot[random2(slot.length)];
+    }
+    if (name === 'MONSTER_ANY') return ROLL_FOR_DEPTH;
+    if (name === 'MONSTER_TOUGH') return ROLL_FOR_DEPTH_TOUGH;
+    if (name === 'MONSTER_TOUGHER') return ROLL_FOR_DEPTH_TOUGHER;
+    return null;
 }
 
 /**
@@ -204,8 +274,12 @@ export function placeMinivaults(map, options = {}) {
 
             if (!fitsAt(map, grid, left, top, options.keepClear)) continue;
 
-            stamp(map, grid, left, top);
-            placed.push({ name: vault.name, left, top, width: vaultWidth, height: vaultHeight });
+            const spawns = stamp(map, grid, left, top, vault);
+            placed.push({
+                name: vault.name, left, top,
+                width: vaultWidth, height: vaultHeight,
+                spawns,
+            });
             break;
         }
     }

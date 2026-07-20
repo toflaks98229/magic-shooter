@@ -58,6 +58,10 @@ export function beginFloor(dungeon) {
 
     world.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;
     world.player.y = dungeon.playerStart.y * C.TILE_SIZE + C.TILE_SIZE / 2;
+
+    // 이 층에 찍힌 볼트 기록. 볼트가 지정한 자리에 몬스터를 놓을 때 씁니다.
+    // 비우기(FLOOR_SCOPED_COLLECTIONS)가 위에서 이미 지나갔으므로 여기서 채웁니다.
+    world.vaults.push(...(dungeon.vaults ?? []));
 }
 
 /**

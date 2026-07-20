@@ -9,7 +9,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { installBrowserStubs, seedRandom } from './helpers/browser-stubs.js';
+import { installBrowserStubs, seedRandom, bindStubDom } from './helpers/browser-stubs.js';
 
 installBrowserStubs();
 
@@ -17,6 +17,13 @@ const C = await import('../Script/constants.js');
 const { generateDungeon } = await import('../Script/mapGenerator.js');
 const { placeMinivaults, vaultCount } = await import('../Script/vaults.js');
 const { VAULTS } = await import('../Script/data/vaults.js');
+const { getMonster } = await import('../Script/monsters.js');
+const gameLogic = await import('../Script/gameLogic.js');
+const actions = await import('../Script/actions.js');
+const worldModule = await import('../Script/world.js');
+const { dom } = await import('../Script/dom.js');
+
+bindStubDom(dom);
 
 /**
  * 시작 지점에서 걸어갈 수 있는 칸을 셉니다.
@@ -168,4 +175,68 @@ test('유리벽을 쓰는 볼트가 있다', () => {
     // 막혀 있으면서도 건너편이 보여, 이 장르에서 특히 잘 읽힙니다.
     const glassVaults = VAULTS.filter(v => v.rows.some(r => /[mno]/.test(r)));
     assert.ok(glassVaults.length > 0, '유리벽을 쓰는 볼트가 없습니다');
+});
+
+// --- 볼트가 지정한 몬스터 -------------------------------------------------------
+
+test('몬스터가 배치된 볼트를 가져왔다', () => {
+    // mini_features.des 하나만 가져왔을 때는 기믹도 몬스터도 없는
+    // 순수 장식뿐이었습니다. 그것만으로는 볼트가 '방'이 되지 못합니다.
+    const withMonsters = VAULTS.filter(v => (v.mons?.length ?? 0) > 0);
+    assert.ok(withMonsters.length > 0, '몬스터를 가진 볼트가 하나도 없습니다');
+});
+
+test('볼트의 몬스터 슬롯이 실제 몬스터를 가리킨다', () => {
+    // 원본 이름과 이 게임의 식별자가 다릅니다. (orc warrior / orc-warrior)
+    // 잘못 옮기면 스폰이 조용히 실패해 빈 방이 됩니다.
+    for (const vault of VAULTS) {
+        for (const slot of vault.mons ?? []) {
+            for (const id of slot) {
+                assert.ok(getMonster(id), `${vault.name} 이 모르는 몬스터를 가리킵니다: ${id}`);
+            }
+        }
+    }
+});
+
+test('볼트를 찍으면 몬스터 자리가 나온다', () => {
+    let found = 0;
+    for (let seed = 0; seed < 120 && found === 0; seed++) {
+        seedRandom(seed);
+        const map = Array.from({ length: C.MAP_HEIGHT },
+            () => Array(C.MAP_WIDTH).fill(C.TILE_IDS.FLOOR));
+        for (const vault of placeMinivaults(map, { count: 1 })) {
+            found += vault.spawns?.length ?? 0;
+        }
+    }
+    assert.ok(found > 0, '백스무 번을 찍어도 몬스터 자리가 하나도 안 나왔습니다');
+});
+
+test('볼트 몬스터가 실제로 층에 놓인다', () => {
+    // 자리만 기록되고 스폰까지 이어지지 않으면 설계된 방이 빈 방이 됩니다.
+    let spawnedSomewhere = false;
+
+    for (let seed = 0; seed < 120 && !spawnedSomewhere; seed++) {
+        seedRandom(seed);
+        worldModule.resetWorld();
+        actions.setGameRunning(true);
+
+        const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, {});
+        const planned = (dungeon.vaults ?? []).reduce((n, v) => n + (v.spawns?.length ?? 0), 0);
+        if (planned === 0) continue;
+
+        actions.beginFloor(dungeon);
+        gameLogic.spawnEnemiesForFloor();
+
+        // 볼트가 지정한 자리에 적이 실제로 서 있는지 봅니다.
+        for (const vault of dungeon.vaults) {
+            for (const spawn of vault.spawns ?? []) {
+                const standing = worldModule.world.enemies.some(e =>
+                    Math.floor(e.x / C.TILE_SIZE) === spawn.tileX
+                    && Math.floor(e.y / C.TILE_SIZE) === spawn.tileY);
+                if (standing) spawnedSomewhere = true;
+            }
+        }
+    }
+
+    assert.ok(spawnedSomewhere, '볼트가 지정한 자리에 적이 하나도 서지 않았습니다');
 });

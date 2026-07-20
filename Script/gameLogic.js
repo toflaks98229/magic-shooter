@@ -14,6 +14,7 @@ import { runtime } from './runtime.js';
 import { assets } from './assets.js';
 import { getBranch } from './branches.js';
 import { getMonster, rollMonsterFor, allMonsters } from './monsters.js';
+import { ROLL_FOR_DEPTH, ROLL_FOR_DEPTH_TOUGH, ROLL_FOR_DEPTH_TOUGHER } from './vaults.js';
 import { SPECIES } from './species.js';
 import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
 import { modifier as characterModifier, aptitudeFor } from './character.js';
@@ -758,6 +759,39 @@ function countOpenTiles() {
     return open;
 }
 
+/**
+ * 볼트가 지정한 자리에 몬스터를 놓습니다.
+ *
+ * 볼트에 적힌 종이 있으면 그것을, '깊이에 맡김' 표시면 그 층의 출현표에서 뽑습니다.
+ * 원본은 0 을 이 깊이, 9 를 깊이+5, 8 을 (깊이+2)*2 에서 뽑습니다.
+ */
+function spawnVaultMonsters() {
+    for (const vault of world.vaults ?? []) {
+        for (const spawn of vault.spawns ?? []) {
+            const id = resolveVaultMonster(spawn.id);
+            if (!id) continue;
+
+            spawnMonster(id, {
+                x: spawn.tileX * C.TILE_SIZE + C.TILE_SIZE / 2,
+                y: spawn.tileY * C.TILE_SIZE + C.TILE_SIZE / 2,
+            });
+        }
+    }
+}
+
+/**
+ * 볼트의 몬스터 표시를 실제 종으로 바꿉니다.
+ * @param {string} marker - 종 식별자 또는 깊이 표시
+ * @returns {string|null} 몬스터 식별자
+ */
+function resolveVaultMonster(marker) {
+    if (marker === ROLL_FOR_DEPTH) return rollMonsterFor(world.branch, world.floor);
+    // 깊이보다 센 것. 원본의 9 와 8 에 해당합니다.
+    if (marker === ROLL_FOR_DEPTH_TOUGH) return rollMonsterFor(world.branch, world.floor + 5);
+    if (marker === ROLL_FOR_DEPTH_TOUGHER) return rollMonsterFor(world.branch, (world.floor + 2) * 2);
+    return marker;
+}
+
 export function spawnEnemiesForFloor() {
     const dangerLevel = A.currentDangerLevel();
     const dungeon = getBranch(world.branch);
@@ -787,6 +821,14 @@ export function spawnEnemiesForFloor() {
         const id = rollMonsterFor(world.branch, world.floor);
         if (id) spawnMonster(id, findSpawnPoint());
     }
+
+    // 볼트가 지정한 자리에도 놓습니다.
+    //
+    // 볼트의 몬스터는 '이 방에 이것이 있다'는 설계입니다. 무작위 스폰과 달리
+    // 자리와 종이 함께 정해져 있어, 쥐가 갇힌 금고나 코볼트 소굴 같은 것이 됩니다.
+    // 그래서 층 전체 마릿수 예산과 별개로 놓습니다. 예산에 넣으면 볼트가 큰 층은
+    // 나머지가 텅 비게 됩니다.
+    spawnVaultMonsters();
 
     // 보스가 지정된 던전은 최하층에 한 마리만 배치합니다.
     if (dungeon.boss && world.floor >= dungeon.depth) {

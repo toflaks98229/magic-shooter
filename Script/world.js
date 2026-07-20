@@ -146,6 +146,13 @@ export function createWorld() {
         /** @description 이번 층에 놓인 제단. [{tileX, tileY, god}] */
         altars: [],
 
+        /**
+         * @description 이번 층에 찍힌 볼트들.
+         * 각 항목은 { name, left, top, width, height, spawns } 입니다.
+         * spawns 는 볼트가 지정한 몬스터 자리로, 층을 채울 때 씁니다.
+         */
+        vaults: [],
+
         /** @description 현재 맵에 존재하는 모든 적 */
         enemies: [],
         /** @description 현재 맵에 존재하는 모든 발사체 */
@@ -175,7 +182,7 @@ export function createWorld() {
 export const FLOOR_SCOPED_COLLECTIONS = [
     'enemies', 'projectiles', 'items', 'particles',
     'animatedObjects', 'animatedWalls',
-    'entrances', 'altars', 'portals',
+    'entrances', 'altars', 'portals', 'vaults',
 ];
 
 /**

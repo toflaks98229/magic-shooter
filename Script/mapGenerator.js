@@ -69,7 +69,7 @@ export function generateDungeon(width, height, options = {}) {
     }
 
 
-    placeDoors(map, objectMap);
+    placeDoors(map, objectMap, playerStart);
 
     const exit = pickExit(map, playerStart);
     map[exit.y][exit.x] = TILE_IDS.EXIT;
@@ -266,24 +266,63 @@ function pickExit(map, playerStart) {
  * @param {number[][]} map - 맵
  * @param {number[][]} objectMap - 오브젝트 맵
  */
-function placeDoors(map, objectMap) {
+function placeDoors(map, objectMap, playerStart) {
     const height = map.length, width = map[0].length;
-    const DOOR_CHANCE = 0.06;
+    const DOOR_CHANCE = 0.05;
 
+    // 복도가 좁던 시절에는 '한쪽 축만 벽인 칸'이 곧 통로였습니다.
+    // 복도를 세 칸으로 넓히자 그런 칸이 사라져 문이 층당 두 개로 줄었습니다.
+    // 이제는 통로의 목을 찾아 그 폭 전체를 문으로 막습니다.
+    // 원본에도 여러 칸짜리 문(gate)이 있고, 넓은 복도에는 그쪽이 맞습니다.
     for (let y = 1; y < height - 1; y++) {
         for (let x = 1; x < width - 1; x++) {
             if (map[y][x] !== TILE_IDS.FLOOR) continue;
             if (Math.random() > DOOR_CHANCE) continue;
 
-            const verticalWalls = map[y - 1][x] === TILE_IDS.WALL && map[y + 1][x] === TILE_IDS.WALL;
-            const horizontalWalls = map[y][x - 1] === TILE_IDS.WALL && map[y][x + 1] === TILE_IDS.WALL;
-            // 한쪽 축만 벽이어야 통로입니다. 양쪽 다 벽이면 막다른 칸입니다.
-            if (verticalWalls === horizontalWalls) continue;
+            // 가로로 목이 잡히는가. 즉 좌우가 벽으로 끊긴 짧은 구간인가.
+            const across = runAt(map, x, y, 1, 0);
+            const along = runAt(map, x, y, 0, 1);
 
-            map[y][x] = TILE_IDS.DOOR;
-            objectMap[y][x] = 1;
+            // 지나가는 방향으로는 길게 뻗어 있고, 가로지르는 방향으로는 짧아야
+            // 통로입니다. 방 한가운데는 양쪽 다 길고, 막다른 칸은 양쪽 다 짧습니다.
+            if (across.length > MAX_GATE_WIDTH || along.length <= across.length) continue;
+
+            // 시작 지점을 막으면 문 속에서 시작합니다.
+            const coversStart = playerStart && playerStart.y === y
+                && playerStart.x >= across.start && playerStart.x < across.start + across.length;
+            if (coversStart) continue;
+
+            for (let d = 0; d < across.length; d++) {
+                map[y][across.start + d] = TILE_IDS.DOOR;
+                objectMap[y][across.start + d] = 1;
+            }
         }
     }
+}
+
+/** @description 문으로 막을 수 있는 최대 통로 폭(타일). 이보다 넓으면 방입니다. */
+const MAX_GATE_WIDTH = 4;
+
+/**
+ * 한 칸에서 어느 방향으로 바닥이 몇 칸 이어지는지 잽니다.
+ * @param {number[][]} map - 층
+ * @param {number} x - 타일 X
+ * @param {number} y - 타일 Y
+ * @param {number} dx - 재는 방향
+ * @param {number} dy - 재는 방향
+ * @returns {{start: number, length: number}} 시작 좌표와 길이
+ */
+function runAt(map, x, y, dx, dy) {
+    let back = 0;
+    while (!tileAt(map, x - dx * (back + 1), y - dy * (back + 1)).solid) back++;
+
+    let forward = 0;
+    while (!tileAt(map, x + dx * (forward + 1), y + dy * (forward + 1)).solid) forward++;
+
+    return {
+        start: dx ? x - back : y - back,
+        length: back + forward + 1,
+    };
 }
 
 /**

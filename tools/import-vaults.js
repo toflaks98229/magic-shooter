@@ -27,7 +27,10 @@ const OUTPUT = 'Script/data/vaults.js';
  * 들어가는 순간 눈에 보이는 성과가 나옵니다.
  * 몬스터가 있는 볼트는 배치 밀도를 다시 잡아야 해서 나중으로 미룹니다.
  */
-const SOURCE_FILES = ['dat/des/variable/mini_features.des'];
+const SOURCE_FILES = [
+    'dat/des/variable/mini_features.des',   // 몬스터 없는 순수 구조물
+    'dat/des/variable/mini_monsters.des',   // 몬스터가 배치된 방
+];
 
 /**
  * @description 이 게임이 이해하는 글리프.
@@ -52,8 +55,21 @@ const GLYPHS = {
     'T': 'FOUNTAIN',    // 샘
     'U': 'FOUNTAIN',
     'V': 'FOUNTAIN',
+    'w': 'DEEP_WATER',      // 깊은 물. 나는 것만 건넙니다
+    'W': 'SHALLOW_WATER',   // 얕은 물. 누구나 건넙니다
+    'l': 'LAVA',            // 용암
+    't': 'TREE',            // 나무. 막고 가립니다
     '+': 'DOOR',
     '=': 'DOOR',        // 룬 문. 지금은 보통 문과 같습니다
+
+    // 몬스터 자리. 바닥 위에 몬스터를 하나 놓습니다.
+    '0': 'MONSTER_ANY',     // 이 깊이에 맞는 아무거나
+    '9': 'MONSTER_TOUGH',   // 깊이 + 5 에서 뽑습니다
+    '8': 'MONSTER_TOUGHER', // (깊이 + 2) * 2 에서 뽑습니다
+    '1': 'MONSTER_SLOT_1', '2': 'MONSTER_SLOT_2', '3': 'MONSTER_SLOT_3',
+    '4': 'MONSTER_SLOT_4', '5': 'MONSTER_SLOT_5', '6': 'MONSTER_SLOT_6',
+    '7': 'MONSTER_SLOT_7',
+
     ' ': 'OUTSIDE',     // 빈칸은 볼트에 속하지 않습니다. 아래 지형을 그대로 둡니다
 };
 
@@ -93,7 +109,7 @@ function parseVaults(text) {
         if (!matched) continue;
 
         const [, key, value] = matched;
-        if (key === 'NAME') current = { name: value, tags: [], subst: [], nsubst: [] };
+        if (key === 'NAME') current = { name: value, tags: [], subst: [], nsubst: [], mons: [], kmons: [], kfeat: [] };
         if (!current) continue;
 
         if (key === 'TAGS') current.tags.push(...value.split(/\s+/).filter(Boolean));
@@ -101,12 +117,79 @@ function parseVaults(text) {
         if (key === 'WEIGHT') current.weight = Number.parseInt(value, 10) || 10;
         if (key === 'ORIENT') current.orient = value;
         if (key === 'SUBST') current.subst.push(value);
+        if (key === 'MONS') current.mons.push(...splitSlots(value));
+        if (key === 'KMONS') current.kmons.push(value);
+        if (key === 'KFEAT') current.kfeat.push(value);
         if (key === 'NSUBST') current.nsubst.push(value);
         if (key === 'SHUFFLE') (current.shuffle ??= []).push(value);
     }
 
     return vaults;
 }
+
+/**
+ * MONS 한 줄을 슬롯 목록으로 나눕니다.
+ *
+ * 쉼표가 슬롯을 가릅니다. 한 슬롯 안의 '/' 는 그중 하나를 고르라는 뜻이고,
+ * ';' 뒤는 그 몬스터가 든 물건이라 여기서는 버립니다.
+ * @param {string} value - MONS 값
+ * @returns {Array<Array<string>>} 슬롯마다의 후보 목록
+ */
+function splitSlots(value) {
+    return value.split(
+        /,(?![^(]*\))/,
+    ).map(slot => slot.split('/')
+        .map(choice => choice.trim()
+            .replace(/^w:\d+\s*/, '')
+            .split(';')[0].trim())
+        .filter(Boolean));
+}
+
+/**
+ * KFEAT 한 줄을 규칙으로 바꿉니다. (`O = enter_temple`)
+ *
+ * 원본은 지형·함정·상점·제단을 전부 여기로 묶습니다. 이 게임에 대응물이
+ * 없는 것은 가져오지 않습니다. 없는 것을 있는 척하는 것보다 낫습니다.
+ * @param {string} line - KFEAT 값
+ * @returns {object|null} 규칙
+ */
+function parseKfeat(line) {
+    const matched = /^(\S+)\s*[=:]\s*(.+)$/.exec(line);
+    if (!matched) return null;
+
+    const [, glyphs, rest] = matched;
+    const choices = [];
+
+    for (const part of rest.split('/')) {
+        const feature = part.trim().replace(/^w:\d+\s*/, '');
+        const mapped = KFEAT_FEATURES[feature];
+        if (mapped) choices.push(mapped);
+    }
+
+    if (choices.length === 0) return null;
+    return { glyphs: [...glyphs], choices };
+}
+
+/**
+ * @description KFEAT 이 가리키는 지형 중 이 게임이 아는 것.
+ *
+ * 원본에는 상점·제단·전송문 등이 더 있지만 대응물이 없어 가져오지 않습니다.
+ * 하나라도 모르는 것이 있는 KFEAT 줄은 통째로 버립니다.
+ */
+const KFEAT_FEATURES = {
+    floor: 'FLOOR', '.': 'FLOOR',
+    rock_wall: 'WALL', stone_wall: 'WALL', metal_wall: 'WALL',
+    permarock_wall: 'WALL', crystal_wall: 'WALL',
+    x: 'WALL', c: 'WALL', v: 'WALL', b: 'WALL',
+    clear_rock_wall: 'GLASS', clear_stone_wall: 'GLASS',
+    clear_permarock_wall: 'GLASS', iron_grate: 'GRATE',
+    granite_statue: 'STATUE', orcish_idol: 'STATUE',
+    shallow_water: 'SHALLOW_WATER', W: 'SHALLOW_WATER',
+    deep_water: 'DEEP_WATER', w: 'DEEP_WATER',
+    lava: 'LAVA', l: 'LAVA',
+    tree: 'TREE', t: 'TREE',
+    closed_door: 'DOOR', open_door: 'FLOOR', runed_door: 'DOOR',
+};
 
 /**
  * 이 볼트를 쓸 수 있는지 봅니다.
@@ -125,11 +208,32 @@ function rejectionReason(vault, maxSize) {
     // 아직 옮기지 않은 지시자가 있으면 반쯤만 이해한 채로 찍게 됩니다.
     if (vault.nsubst.length || vault.shuffle) return 'directive';
 
+    // 아직 옮기지 않은 KFEAT 이 있으면 버립니다. 그 글리프가 무엇이 될지
+    // 모르는 채로 찍으면 벽이어야 할 자리가 바닥이 되기도 합니다.
+    for (const line of vault.kfeat) {
+        if (!parseKfeat(line)) return 'kfeat';
+    }
+    // KMONS 는 아직 옮기지 않았습니다.
+    if (vault.kmons.length > 0) return 'kmons';
+
     // 모르는 글리프가 하나라도 있으면 버립니다.
+    const kfeatGlyphs = new Set(vault.kfeat.flatMap(l => parseKfeat(l)?.glyphs ?? []));
     for (const row of vault.rows) {
         for (const glyph of row) {
+            if (kfeatGlyphs.has(glyph)) continue;
             if (!(glyph in GLYPHS)) return `glyph:${glyph}`;
         }
+    }
+
+    // 몬스터 자리를 쓰는데 그 슬롯이 없으면 무엇을 놓을지 알 수 없습니다.
+    const usedSlots = new Set();
+    for (const row of vault.rows) {
+        for (const glyph of row) {
+            if (glyph >= '1' && glyph <= '7') usedSlots.add(Number(glyph));
+        }
+    }
+    for (const slot of usedSlots) {
+        if (!vault.mons[slot - 1]) return 'slot';
     }
 
     return null;
@@ -159,9 +263,39 @@ function parseSubst(line) {
     return { from, once: mode === ':', choices };
 }
 
+/**
+ * 원본의 몬스터 이름을 이 게임의 식별자로 바꿉니다.
+ *
+ * 원본은 'orc warrior' 처럼 띄어쓰기를, 이 게임은 'orc-warrior' 를 씁니다.
+ * 없는 몬스터를 가리키는 볼트는 통째로 버립니다. 이름만 다른 것인지
+ * 정말 없는 것인지 구분할 수 없으므로, 반쯤 채워진 방을 만드는 것보다 낫습니다.
+ * @param {string} name - 원본 이름
+ * @returns {string|null} 식별자
+ */
+function toMonsterId(name, known) {
+    const cleaned = name.trim().toLowerCase().replace(/^(generate_awake|patrolling|band)\s+/, '');
+    if (cleaned === '' || cleaned === 'nothing') return null;
+
+    const id = cleaned.replace(/\s+/g, '-');
+    return known.has(id) ? id : null;
+}
+
+/**
+ * 이 게임이 아는 몬스터 식별자를 모읍니다.
+ * @returns {Set<string>} 식별자들
+ */
+function knownMonsterIds() {
+    const file = 'Script/data/monsters.js';
+    if (!fs.existsSync(file)) return new Set();
+
+    const text = fs.readFileSync(file, 'utf8');
+    return new Set([...text.matchAll(/"id":\s*"([^"]+)"/g)].map(m => m[1]));
+}
+
 const source = process.argv[2] ?? DEFAULT_SOURCE;
 const maxSize = Number(process.argv[3] ?? 12);
 
+const known = knownMonsterIds();
 const kept = [];
 const rejected = {};
 
@@ -181,8 +315,26 @@ for (const relative of SOURCE_FILES) {
         }
 
         // 모든 줄을 가장 긴 줄에 맞춰 늘립니다. 짧은 줄의 나머지는 볼트 밖입니다.
+        // KFEAT 이 정한 글리프를 볼트마다 따로 기록합니다.
+        const kfeat = {};
+        for (const line of vault.kfeat) {
+            const rule = parseKfeat(line);
+            if (!rule) continue;
+            for (const glyph of rule.glyphs) kfeat[glyph] = rule.choices;
+        }
+
         const width = Math.max(...vault.rows.map(r => r.length));
         const rows = vault.rows.map(r => r.padEnd(width, ' '));
+
+        // MONS 슬롯을 식별자로 옮깁니다. 하나라도 모르는 것이 있으면 버립니다.
+        const slots = [];
+        let unknownMonster = false;
+        for (const slot of vault.mons) {
+            const ids = slot.map(name => toMonsterId(name, known)).filter(Boolean);
+            if (ids.length === 0) { unknownMonster = true; break; }
+            slots.push(ids);
+        }
+        if (unknownMonster) { rejected.monster = (rejected.monster ?? 0) + 1; continue; }
 
         kept.push({
             name: vault.name,
@@ -190,6 +342,8 @@ for (const relative of SOURCE_FILES) {
             tags: vault.tags,
             rows,
             subst: vault.subst.map(parseSubst).filter(Boolean),
+            mons: slots,
+            kfeat,
         });
     }
 }
