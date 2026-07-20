@@ -90,3 +90,38 @@ test('소지품 화면에 여닫는 키가 적혀 있다', () => {
     assert.ok(screen.includes('Esc') || screen.includes('i'),
         '닫는 키가 적혀 있지 않습니다');
 });
+
+test('상태창이 원본의 줄 차례를 지킨다', () => {
+    // 원본은 열세 줄이고 차례가 정해져 있습니다. (output.cc:1531)
+    // 1-2 이름과 종족, 3-4 체력과 마력, 5-7 방어와 능력치, 8 수준과 장소.
+    const panel = /<aside id="status-panel">([\s\S]*?)<\/aside>/.exec(html)?.[1] ?? '';
+
+    // 방어와 능력치는 두 열로 나란히 놓여 소스에서는 번갈아 나옵니다.
+    // 원본도 한 줄에 왼쪽과 오른쪽을 함께 그립니다. (output.cc:1681)
+    const order = [
+        'title-line', 'character-line',
+        'player-hp', 'player-ammo',
+        'player-ac', 'player-str',
+        'player-ev', 'player-int',
+        'player-sh', 'player-dex',
+        'player-xl', 'floor-count',
+    ];
+
+    let cursor = -1;
+    for (const id of order) {
+        const at = panel.indexOf(`id="${id}"`);
+        assert.ok(at >= 0, `${id} 가 상태창에 없습니다`);
+        assert.ok(at > cursor, `${id} 의 차례가 원본과 다릅니다`);
+        cursor = at;
+    }
+});
+
+test('아직 없는 것은 빈칸으로 둔다', () => {
+    // 소음과 던지기는 이 게임에 개념이 없습니다. 자리는 원본대로 두되
+    // 없는 것을 있는 척하지 않습니다.
+    const panel = /<aside id="status-panel">([\s\S]*?)<\/aside>/.exec(html)?.[1] ?? '';
+
+    assert.ok(!panel.includes('Noise'), '없는 소음 값을 띄우고 있습니다');
+    assert.match(panel, /id="quiver-line"><\/span>/,
+        '던질 것 자리는 비어 있어야 합니다');
+});

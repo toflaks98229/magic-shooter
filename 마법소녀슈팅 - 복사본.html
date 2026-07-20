@@ -480,6 +480,19 @@
 
         <!-- 상태 패널 -->
         <aside id="status-panel">
+            <!-- 원본의 첫 두 줄입니다. 1행은 이름과 칭호, 2행은 종족과 신.
+                 칭호는 가장 높은 스킬이 정하므로, 무엇을 해 왔는지가 이름에 남습니다. -->
+            <div class="panel-row title-row">
+                <span id="title-line">-</span>
+            </div>
+            <div class="panel-row">
+                <span id="character-line">-</span>
+            </div>
+            <div class="panel-row">
+                <span class="panel-label">God</span><span id="god-line">-</span>
+            </div>
+
+            <div class="panel-divider"></div>
             <div class="panel-row">
                 <div id="status-face">
                     <img id="status-face-img" src="" alt="상태" />
@@ -504,17 +517,6 @@
 
             <div class="panel-divider"></div>
 
-            <!-- 원본의 첫 두 줄입니다. 1행은 이름과 칭호, 2행은 종족과 신.
-                 칭호는 가장 높은 스킬이 정하므로, 무엇을 해 왔는지가 이름에 남습니다. -->
-            <div class="panel-row title-row">
-                <span id="title-line">-</span>
-            </div>
-            <div class="panel-row">
-                <span id="character-line">-</span>
-            </div>
-            <div class="panel-row">
-                <span class="panel-label">God</span><span id="god-line">-</span>
-            </div>
             <!-- 원본의 5~7행. 왼쪽이 방어, 오른쪽이 능력치입니다. (output.cc:1677) -->
             <div class="hud-grid">
                 <span class="panel-label">AC:</span><span id="player-ac">0</span>
@@ -535,14 +537,26 @@
             <div class="panel-row">
                 <span class="panel-label">Runes</span><span id="rune-count">0</span>
             </div>
-            <div class="panel-row">
-                <span class="panel-label">Wielded</span><span id="wielded-weapon">-</span>
+            <!-- 원본의 9행. 왼쪽은 소음 막대인데 이 게임에는 소음이라는 개념이
+                 없어 비워 둡니다. 없는 것을 있는 척하는 것보다 낫습니다. -->
+            <div class="hud-grid">
+                <span class="panel-label"></span><span></span>
+                <span class="panel-label">Turn:</span><span id="game-time">0.0</span>
             </div>
+
+            <!-- 원본의 10행. 지금 든 것입니다. -->
+            <div class="panel-row">
+                <span class="panel-label">-)</span><span id="wielded-weapon">-</span>
+            </div>
+
+            <!-- 원본의 11행은 던질 것 자리입니다. 던지기가 아직 없어 비워 둡니다. -->
+            <div class="panel-row">
+                <span class="panel-label"></span><span id="quiver-line"></span>
+            </div>
+
+            <!-- 원본에는 없지만 이 게임에서 쓰이는 줄입니다. -->
             <div class="panel-row">
                 <span class="panel-label">Enemies</span><span id="enemy-count">0</span>
-            </div>
-            <div class="panel-row">
-                <span class="panel-label">Time</span><span id="game-time">0.0</span>
             </div>
 
             <div class="panel-divider"></div>
