@@ -17,7 +17,11 @@ export const SPRITE_SHEET_URLS = {
     gui: 'Data/tiles/gui_data.json',
     player: 'Data/tiles/player_data.json',
     feat: 'Data/tiles/feat_data.json',
-    icons: 'Data/tiles/icons_data.json'
+    icons: 'Data/tiles/icons_data.json',
+
+    // 몬스터마다의 그림. rltiles/mon 의 개별 PNG 를 모은 것으로,
+    // 다른 시트와 달리 build-monster-atlas.js 가 따로 만듭니다.
+    monsters: 'Data/tiles/monsters_data.json',
 };
 
 // --- 던전 테마 설정 ---

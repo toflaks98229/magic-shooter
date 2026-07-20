@@ -30,55 +30,55 @@
   },
   "enemies": [
     {
-      "sprite": "enemy_goblin",
+      "sprite": "mon_goblin",
       "x": 726.058959961,
       "y": 2130.544795915,
       "hp": 4
     },
     {
-      "sprite": "enemy_snake",
+      "sprite": "mon_ribbon-worm",
       "x": 2249.230853915,
       "y": 1192.061132267,
       "hp": 17
     },
     {
-      "sprite": "enemy_goblin",
+      "sprite": "mon_goblin",
       "x": 1135.213887095,
       "y": 1575.875601545,
       "hp": 4
     },
     {
-      "sprite": "enemy_snake",
+      "sprite": "mon_ribbon-worm",
       "x": 2294.935809374,
       "y": 1413.397305235,
       "hp": 19
     },
     {
-      "sprite": "enemy_snake",
+      "sprite": "mon_ball-python",
       "x": 1671.344752312,
       "y": 1706.733880714,
       "hp": 3
     },
     {
-      "sprite": "enemy_jelly",
+      "sprite": "mon_endoplasm",
       "x": 2074.030274749,
       "y": 1666.497553736,
       "hp": 7
     },
     {
-      "sprite": "enemy_snake",
+      "sprite": "mon_ribbon-worm",
       "x": 2034.617040753,
       "y": 1175.415515974,
       "hp": 18
     },
     {
-      "sprite": "enemy_snake",
+      "sprite": "mon_adder",
       "x": 1856.795423031,
       "y": 1750.892915651,
       "hp": 11
     },
     {
-      "sprite": "enemy_goblin",
+      "sprite": "mon_hobgoblin",
       "x": 2282.562522888,
       "y": 1574.133640677,
       "hp": 6

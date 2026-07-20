@@ -9,6 +9,7 @@
  */
 
 import { test } from 'node:test';
+import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { installBrowserStubs, bindStubDom, seedRandom } from './helpers/browser-stubs.js';
 
@@ -404,5 +405,38 @@ test('가지의 1층에 실제로 적이 스폰된다', () => {
     for (const branch of ['O', 'P', 'E']) {
         const enemies = spawnIn(branch, 1);
         assert.ok(enemies.length > 0, `${branch} 1층이 비었습니다`);
+    }
+});
+
+test('대부분의 몬스터가 제 그림을 갖는다', () => {
+    // 예전에는 그림이 마흔세 개뿐이라 글리프로 골랐습니다.
+    // r 은 전부 쥐 그림, S 는 전부 뱀 그림이 되는 식이라 알아볼 수는 있어도
+    // 정확하지 않았습니다. 원본의 개별 타일을 모아 종마다 붙였습니다.
+    const all = M.allMonsters();
+    const own = all.filter(m => m.spriteKey?.startsWith('mon_'));
+
+    assert.ok(own.length > all.length * 0.7,
+        `제 그림을 가진 것이 ${own.length}/${all.length} 뿐입니다`);
+});
+
+test('그림이 없는 몬스터는 없다', () => {
+    // 그림이 없으면 렌더러가 색 사각형으로 그립니다.
+    // 글리프 대체가 나머지를 덮으므로 빈손으로 남는 것이 없어야 합니다.
+    for (const monster of M.allMonsters()) {
+        assert.ok(monster.spriteKey, `${monster.id} 가 그림 없이 남았습니다`);
+    }
+});
+
+test('아틀라스에 있는 그림만 가리킨다', () => {
+    // 없는 스프라이트를 가리키면 렌더러가 플레이스홀더로 떨어집니다.
+    // 조용히 일어나는 일이라 검사가 없으면 알아채기 어렵습니다.
+    const atlas = JSON.parse(
+        readFileSync(new URL('../Data/tiles/monsters_data.json', import.meta.url), 'utf8'),
+    );
+
+    for (const monster of M.allMonsters()) {
+        if (!monster.spriteKey?.startsWith('mon_')) continue;
+        assert.ok(atlas.sprites[monster.spriteKey],
+            `${monster.id} 가 아틀라스에 없는 ${monster.spriteKey} 를 가리킵니다`);
     }
 });

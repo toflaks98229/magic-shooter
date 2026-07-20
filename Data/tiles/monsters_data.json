@@ -1,0 +1,3862 @@
+{
+  "sheetFile": "monsters.png",
+  "sprites": {
+    "mon_abomination-large": {
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#283828"
+    },
+    "mon_abomination-small": {
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#988838"
+    },
+    "mon_acid-blob": {
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#782818"
+    },
+    "mon_acid-dragon": {
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#e8e808"
+    },
+    "mon_adder": {
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#186808"
+    },
+    "mon_agnes": {
+      "x": 160,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#084828"
+    },
+    "mon_air-elemental": {
+      "x": 192,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#488878"
+    },
+    "mon_aizul": {
+      "x": 224,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#c80808"
+    },
+    "mon_alderking": {
+      "x": 256,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#484858"
+    },
+    "mon_alligator": {
+      "x": 288,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#585818"
+    },
+    "mon_alligator-snapping-turtle": {
+      "x": 320,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#683828"
+    },
+    "mon_amaemon": {
+      "x": 352,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#782858"
+    },
+    "mon_anaconda": {
+      "x": 384,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#787828"
+    },
+    "mon_ancestor": {
+      "x": 416,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#387888"
+    },
+    "mon_ancestor-battlemage": {
+      "x": 448,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#a81838"
+    },
+    "mon_ancestor-hexer": {
+      "x": 480,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#181838"
+    },
+    "mon_ancestor-knight": {
+      "x": 512,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#383848"
+    },
+    "mon_ancient-champion": {
+      "x": 544,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#580808"
+    },
+    "mon_ancient-lich": {
+      "x": 576,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#080868"
+    },
+    "mon_ancient-zyme": {
+      "x": 608,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#585848"
+    },
+    "mon_angel": {
+      "x": 640,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#c8c8c8"
+    },
+    "mon_antique-champion": {
+      "x": 704,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#280858"
+    },
+    "mon_apis": {
+      "x": 736,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#583858"
+    },
+    "mon_apocalypse-crab": {
+      "x": 768,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#e8e8f8"
+    },
+    "mon_arachne": {
+      "x": 800,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#382828"
+    },
+    "mon_arcanist": {
+      "x": 832,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#781828"
+    },
+    "mon_armataur": {
+      "x": 864,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#989888"
+    },
+    "mon_armour-echo": {
+      "x": 896,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#989888"
+    },
+    "mon_aspiring-flesh": {
+      "x": 960,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#58d848"
+    },
+    "mon_asterion": {
+      "x": 992,
+      "y": 0,
+      "w": 32,
+      "h": 32,
+      "color": "#883818"
+    },
+    "mon_azrael": {
+      "x": 0,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#d81818"
+    },
+    "mon_azure-jelly": {
+      "x": 32,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#084898"
+    },
+    "mon_ball-lightning": {
+      "x": 64,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#080888"
+    },
+    "mon_ball-python": {
+      "x": 96,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#a86828"
+    },
+    "mon_ballistomycete": {
+      "x": 128,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#e8f878"
+    },
+    "mon_ballistomycete-spore": {
+      "x": 160,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#d8d848"
+    },
+    "mon_balrug": {
+      "x": 192,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#580838"
+    },
+    "mon_barachi": {
+      "x": 224,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#088848"
+    },
+    "mon_basilisk": {
+      "x": 256,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#586858"
+    },
+    "mon_bat": {
+      "x": 288,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#685858"
+    },
+    "mon_battlesphere": {
+      "x": 320,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_bennu": {
+      "x": 352,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#7888a8"
+    },
+    "mon_black-bear": {
+      "x": 384,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#484848"
+    },
+    "mon_black-mamba": {
+      "x": 416,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#484858"
+    },
+    "mon_blazeheart-core": {
+      "x": 448,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#b81808"
+    },
+    "mon_blazeheart-golem": {
+      "x": 480,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#680808"
+    },
+    "mon_blink-frog": {
+      "x": 512,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#185858"
+    },
+    "mon_blizzard-demon": {
+      "x": 544,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#082848"
+    },
+    "mon_bloated-husk": {
+      "x": 576,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#583868"
+    },
+    "mon_block-of-ice": {
+      "x": 608,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_bog-body": {
+      "x": 640,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#182848"
+    },
+    "mon_boggart": {
+      "x": 672,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#d8d808"
+    },
+    "mon_bombardier-beetle": {
+      "x": 704,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#184868"
+    },
+    "mon_bomblet": {
+      "x": 736,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#282838"
+    },
+    "mon_bone-dragon": {
+      "x": 768,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#a8a898"
+    },
+    "mon_boris": {
+      "x": 800,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#480848"
+    },
+    "mon_boulder": {
+      "x": 832,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#887858"
+    },
+    "mon_boulder-beetle": {
+      "x": 864,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#788898"
+    },
+    "mon_brain-worm": {
+      "x": 896,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#982868"
+    },
+    "mon_briar-patch": {
+      "x": 928,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#385808"
+    },
+    "mon_brimstone-fiend": {
+      "x": 960,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#880828"
+    },
+    "mon_broodmother": {
+      "x": 992,
+      "y": 32,
+      "w": 32,
+      "h": 32,
+      "color": "#886848"
+    },
+    "mon_bullfrog": {
+      "x": 0,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#086808"
+    },
+    "mon_bunyip": {
+      "x": 32,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#884808"
+    },
+    "mon_burial-acolyte": {
+      "x": 64,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#683808"
+    },
+    "mon_burstshroom": {
+      "x": 96,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#684898"
+    },
+    "mon_bush": {
+      "x": 128,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#284828"
+    },
+    "mon_butterfly": {
+      "x": 160,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#680808"
+    },
+    "mon_cacodemon": {
+      "x": 192,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#a89808"
+    },
+    "mon_cactus-giant": {
+      "x": 224,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#387808"
+    },
+    "mon_cane-toad": {
+      "x": 256,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#683818"
+    },
+    "mon_cassandra": {
+      "x": 288,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#484858"
+    },
+    "mon_catoblepas": {
+      "x": 320,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#282828"
+    },
+    "mon_caustic-shrike": {
+      "x": 352,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#98b8c8"
+    },
+    "mon_caustic-sporangium": {
+      "x": 384,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#e8e808"
+    },
+    "mon_centaur": {
+      "x": 416,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#583818"
+    },
+    "mon_centaur-warrior": {
+      "x": 448,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#b81808"
+    },
+    "mon_cerulean-imp": {
+      "x": 512,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#083838"
+    },
+    "mon_chaos-spawn": {
+      "x": 544,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#c80808"
+    },
+    "mon_cherub": {
+      "x": 576,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#d8d8d8"
+    },
+    "mon_chonchon": {
+      "x": 608,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#684848"
+    },
+    "mon_chuck": {
+      "x": 640,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#888868"
+    },
+    "mon_clockroach": {
+      "x": 672,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#583808"
+    },
+    "mon_clockwork-bee": {
+      "x": 704,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#383848"
+    },
+    "mon_cloud-mage": {
+      "x": 736,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#082878"
+    },
+    "mon_cognitogaunt": {
+      "x": 768,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#483848"
+    },
+    "mon_colossal-amoeba": {
+      "x": 800,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#5838d8"
+    },
+    "mon_crawling-flesh-cage": {
+      "x": 832,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#483848"
+    },
+    "mon_crazy-yiuf": {
+      "x": 864,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#683818"
+    },
+    "mon_creeping-inferno": {
+      "x": 896,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#e84838"
+    },
+    "mon_creeping-plasmodium": {
+      "x": 928,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#283828"
+    },
+    "mon_crimson-imp": {
+      "x": 960,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_crocodile": {
+      "x": 992,
+      "y": 64,
+      "w": 32,
+      "h": 32,
+      "color": "#385818"
+    },
+    "mon_crystal-echidna": {
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#086818"
+    },
+    "mon_crystal-guardian": {
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#488898"
+    },
+    "mon_crystal-tome": {
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#481878"
+    },
+    "mon_culicivora": {
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#585878"
+    },
+    "mon_curse-skull": {
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_curse-toe": {
+      "x": 160,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#681818"
+    },
+    "mon_cyclops": {
+      "x": 192,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#f8b898"
+    },
+    "mon_daeva": {
+      "x": 224,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#c86808"
+    },
+    "mon_dart-slug": {
+      "x": 256,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#e86818"
+    },
+    "mon_death-cob": {
+      "x": 288,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#283808"
+    },
+    "mon_death-drake": {
+      "x": 320,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#381828"
+    },
+    "mon_death-knight": {
+      "x": 352,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#282828"
+    },
+    "mon_death-scarab": {
+      "x": 384,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#181838"
+    },
+    "mon_death-yak": {
+      "x": 416,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#483848"
+    },
+    "mon_deathcap": {
+      "x": 448,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#88c808"
+    },
+    "mon_deep-elf-annihilator": {
+      "x": 480,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#580808"
+    },
+    "mon_deep-elf-archer": {
+      "x": 512,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#883808"
+    },
+    "mon_deep-elf-blademaster": {
+      "x": 544,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#680808"
+    },
+    "mon_deep-elf-death-mage": {
+      "x": 576,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#383828"
+    },
+    "mon_deep-elf-demonologist": {
+      "x": 608,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#5808a8"
+    },
+    "mon_deep-elf-elementalist": {
+      "x": 640,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#885808"
+    },
+    "mon_deep-elf-high-priest": {
+      "x": 672,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#0888f8"
+    },
+    "mon_deep-elf-knight": {
+      "x": 704,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#382828"
+    },
+    "mon_deep-elf-master-archer": {
+      "x": 736,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#089808"
+    },
+    "mon_deep-elf-sorcerer": {
+      "x": 768,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#a80808"
+    },
+    "mon_deep-troll": {
+      "x": 800,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#080868"
+    },
+    "mon_deep-troll-earth-mage": {
+      "x": 832,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#e8f868"
+    },
+    "mon_deep-troll-shaman": {
+      "x": 864,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#481828"
+    },
+    "mon_demigod": {
+      "x": 896,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#284878"
+    },
+    "mon_demonic-crawler": {
+      "x": 928,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#282828"
+    },
+    "mon_demonspawn": {
+      "x": 960,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#382818"
+    },
+    "mon_diamond-sawblade": {
+      "x": 992,
+      "y": 96,
+      "w": 32,
+      "h": 32,
+      "color": "#98a8b8"
+    },
+    "mon_dissolution": {
+      "x": 32,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#684898"
+    },
+    "mon_divine-tome": {
+      "x": 64,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#484838"
+    },
+    "mon_donald": {
+      "x": 96,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#989898"
+    },
+    "mon_dowan": {
+      "x": 128,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#880818"
+    },
+    "mon_dread-lich": {
+      "x": 160,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#580838"
+    },
+    "mon_dream-sheep": {
+      "x": 192,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#88a8f8"
+    },
+    "mon_drowned-soul": {
+      "x": 224,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_drude": {
+      "x": 256,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#281858"
+    },
+    "mon_dryad": {
+      "x": 288,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#584818"
+    },
+    "mon_duvessa": {
+      "x": 320,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#585878"
+    },
+    "mon_dwarf": {
+      "x": 352,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#484848"
+    },
+    "mon_earth-elemental": {
+      "x": 384,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#783828"
+    },
+    "mon_earthen-tome": {
+      "x": 416,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#483838"
+    },
+    "mon_edmund": {
+      "x": 448,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#880808"
+    },
+    "mon_efreet": {
+      "x": 480,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#e86808"
+    },
+    "mon_eidolon": {
+      "x": 512,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#381828"
+    },
+    "mon_eldritch-tentacle": {
+      "x": 544,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#880808"
+    },
+    "mon_electric-eel": {
+      "x": 576,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#383838"
+    },
+    "mon_electric-golem": {
+      "x": 608,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#08e8e8"
+    },
+    "mon_eleionoma": {
+      "x": 640,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#185828"
+    },
+    "mon_elephant": {
+      "x": 672,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#584848"
+    },
+    "mon_elephant-slug": {
+      "x": 704,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#686868"
+    },
+    "mon_elf": {
+      "x": 736,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#989898"
+    },
+    "mon_emperor-scorpion": {
+      "x": 768,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#685808"
+    },
+    "mon_enchantress": {
+      "x": 800,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#084818"
+    },
+    "mon_endoplasm": {
+      "x": 832,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#484868"
+    },
+    "mon_entropy-weaver": {
+      "x": 864,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#488888"
+    },
+    "mon_erica": {
+      "x": 928,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#a80898"
+    },
+    "mon_erolcha": {
+      "x": 960,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#c88878"
+    },
+    "mon_erythrospite": {
+      "x": 992,
+      "y": 128,
+      "w": 32,
+      "h": 32,
+      "color": "#480818"
+    },
+    "mon_ettin": {
+      "x": 0,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#e8a888"
+    },
+    "mon_eustachio": {
+      "x": 32,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#780878"
+    },
+    "mon_executioner": {
+      "x": 64,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#780818"
+    },
+    "mon_eye-of-devastation": {
+      "x": 96,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#b8e878"
+    },
+    "mon_eye-of-draining": {
+      "x": 128,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#282818"
+    },
+    "mon_fannar": {
+      "x": 160,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#2898e8"
+    },
+    "mon_faun": {
+      "x": 192,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#884828"
+    },
+    "mon_fenstrider-witch": {
+      "x": 224,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#282828"
+    },
+    "mon_fire-bat": {
+      "x": 256,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#c80808"
+    },
+    "mon_fire-crab": {
+      "x": 288,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#984828"
+    },
+    "mon_fire-dragon": {
+      "x": 320,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#d82848"
+    },
+    "mon_fire-elemental": {
+      "x": 352,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#f86808"
+    },
+    "mon_fire-giant": {
+      "x": 384,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#a80808"
+    },
+    "mon_fire-vortex": {
+      "x": 416,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#f86808"
+    },
+    "mon_flayed-ghost": {
+      "x": 448,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#680808"
+    },
+    "mon_formicid": {
+      "x": 480,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#983808"
+    },
+    "mon_foxfire": {
+      "x": 512,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#f8d818"
+    },
+    "mon_frances": {
+      "x": 544,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#080888"
+    },
+    "mon_fravashi": {
+      "x": 576,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#d8e8e8"
+    },
+    "mon_frederick": {
+      "x": 608,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#a86808"
+    },
+    "mon_freezing-wraith": {
+      "x": 640,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#082878"
+    },
+    "mon_frilled-lizard": {
+      "x": 672,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#885808"
+    },
+    "mon_frost-giant": {
+      "x": 704,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#c8f8f8"
+    },
+    "mon_frostbound-tome": {
+      "x": 736,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#383868"
+    },
+    "mon_fulminant-prism": {
+      "x": 768,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8d8"
+    },
+    "mon_fungus": {
+      "x": 800,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#888868"
+    },
+    "mon_gargoyle": {
+      "x": 832,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#383818"
+    },
+    "mon_gastronok": {
+      "x": 864,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#7888a8"
+    },
+    "mon_geryon": {
+      "x": 896,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#183848"
+    },
+    "mon_ghost": {
+      "x": 928,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#b8b8b8"
+    },
+    "mon_ghost-crab": {
+      "x": 960,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#687868"
+    },
+    "mon_ghost-moth": {
+      "x": 992,
+      "y": 160,
+      "w": 32,
+      "h": 32,
+      "color": "#f808f8"
+    },
+    "mon_ghoul": {
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#282828"
+    },
+    "mon_glass-eye": {
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#38c8c8"
+    },
+    "mon_glowing-orange-brain": {
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#681808"
+    },
+    "mon_glowing-shapeshifter": {
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#98d888"
+    },
+    "mon_gnoll": {
+      "x": 160,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#985818"
+    },
+    "mon_gnoll-sergeant": {
+      "x": 192,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#282848"
+    },
+    "mon_goblin": {
+      "x": 224,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#881818"
+    },
+    "mon_goblin-rider": {
+      "x": 256,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#085828"
+    },
+    "mon_golden-dragon": {
+      "x": 288,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#c85808"
+    },
+    "mon_golden-eye": {
+      "x": 320,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#c89808"
+    },
+    "mon_goliath-frog": {
+      "x": 352,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#681828"
+    },
+    "mon_great-orb-of-eyes": {
+      "x": 384,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#a85868"
+    },
+    "mon_green-death": {
+      "x": 416,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#484858"
+    },
+    "mon_grinder": {
+      "x": 448,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#482868"
+    },
+    "mon_grum": {
+      "x": 480,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#887838"
+    },
+    "mon_grunn": {
+      "x": 512,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#383888"
+    },
+    "mon_guardian-mummy": {
+      "x": 544,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#481818"
+    },
+    "mon_guardian-serpent": {
+      "x": 576,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#086808"
+    },
+    "mon_guardian-sphinx": {
+      "x": 608,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#383838"
+    },
+    "mon_halazid-warlock": {
+      "x": 640,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#485838"
+    },
+    "mon_halfling": {
+      "x": 672,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#188878"
+    },
+    "mon_harold": {
+      "x": 704,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#386808"
+    },
+    "mon_harpy": {
+      "x": 736,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#680808"
+    },
+    "mon_hell-hog": {
+      "x": 768,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#e87818"
+    },
+    "mon_hell-hound": {
+      "x": 800,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#680808"
+    },
+    "mon_hell-knight": {
+      "x": 832,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#880808"
+    },
+    "mon_hell-sentinel": {
+      "x": 864,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#383838"
+    },
+    "mon_hellbinder": {
+      "x": 896,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#881828"
+    },
+    "mon_hellfire-mortar": {
+      "x": 928,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#583818"
+    },
+    "mon_hellion": {
+      "x": 960,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#680818"
+    },
+    "mon_hellwing": {
+      "x": 992,
+      "y": 192,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_hippogriff": {
+      "x": 0,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#5898c8"
+    },
+    "mon_hoarfrost-cannon": {
+      "x": 32,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#48a8d8"
+    },
+    "mon_hobgoblin": {
+      "x": 64,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#581808"
+    },
+    "mon_hog": {
+      "x": 96,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#f8a8a8"
+    },
+    "mon_holy-swine": {
+      "x": 128,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#f8e8d8"
+    },
+    "mon_hornet": {
+      "x": 160,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#680808"
+    },
+    "mon_hound": {
+      "x": 192,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#883838"
+    },
+    "mon_human": {
+      "x": 224,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#585858"
+    },
+    "mon_hydra": {
+      "x": 256,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#185858"
+    },
+    "mon_ice-beast": {
+      "x": 288,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_ice-devil": {
+      "x": 320,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_ice-dragon": {
+      "x": 352,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#98b8d8"
+    },
+    "mon_ice-fiend": {
+      "x": 384,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#2898e8"
+    },
+    "mon_ice-statue": {
+      "x": 416,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#0858a8"
+    },
+    "mon_ignacio": {
+      "x": 448,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#282828"
+    },
+    "mon_iguana": {
+      "x": 480,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#688868"
+    },
+    "mon_ijyb": {
+      "x": 512,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#084878"
+    },
+    "mon_ilsuiw": {
+      "x": 544,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#488808"
+    },
+    "mon_imperial-myrmidon": {
+      "x": 576,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#683838"
+    },
+    "mon_inugami": {
+      "x": 608,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#7898c8"
+    },
+    "mon_iron-dragon": {
+      "x": 640,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#484858"
+    },
+    "mon_iron-elemental": {
+      "x": 672,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#382828"
+    },
+    "mon_iron-giant": {
+      "x": 704,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#585868"
+    },
+    "mon_iron-golem": {
+      "x": 736,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#685868"
+    },
+    "mon_iron-imp": {
+      "x": 768,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#484858"
+    },
+    "mon_iron-troll": {
+      "x": 800,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#383838"
+    },
+    "mon_ironbound-beastmaster": {
+      "x": 832,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#683818"
+    },
+    "mon_ironbound-convoker": {
+      "x": 864,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#581808"
+    },
+    "mon_ironbound-frostheart": {
+      "x": 896,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#383848"
+    },
+    "mon_ironbound-mechanist": {
+      "x": 928,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#585868"
+    },
+    "mon_ironbound-preserver": {
+      "x": 960,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#087818"
+    },
+    "mon_ironbound-thunderhulk": {
+      "x": 992,
+      "y": 224,
+      "w": 32,
+      "h": 32,
+      "color": "#c88878"
+    },
+    "mon_jackal": {
+      "x": 0,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#483828"
+    },
+    "mon_jelly": {
+      "x": 32,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#680808"
+    },
+    "mon_jeremiah": {
+      "x": 64,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#3888d8"
+    },
+    "mon_jessica": {
+      "x": 96,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#98a8b8"
+    },
+    "mon_jiangshi": {
+      "x": 128,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#985828"
+    },
+    "mon_jorgrun": {
+      "x": 160,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#382818"
+    },
+    "mon_jorogumo": {
+      "x": 192,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#787888"
+    },
+    "mon_jory": {
+      "x": 224,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#780808"
+    },
+    "mon_joseph": {
+      "x": 256,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#582818"
+    },
+    "mon_josephina": {
+      "x": 288,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#482828"
+    },
+    "mon_josephine": {
+      "x": 320,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#482828"
+    },
+    "mon_juggernaut": {
+      "x": 352,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#487868"
+    },
+    "mon_jumping-spider": {
+      "x": 384,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#385808"
+    },
+    "mon_khufu": {
+      "x": 416,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#f8e808"
+    },
+    "mon_killer-bee": {
+      "x": 448,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#a8a8a8"
+    },
+    "mon_kirke": {
+      "x": 480,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#583808"
+    },
+    "mon_kobold": {
+      "x": 512,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#384848"
+    },
+    "mon_kobold-blastminer": {
+      "x": 544,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#086848"
+    },
+    "mon_kobold-brigand": {
+      "x": 576,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#384848"
+    },
+    "mon_kobold-demonologist": {
+      "x": 608,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#283888"
+    },
+    "mon_kobold-fleshcrafter": {
+      "x": 640,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#182828"
+    },
+    "mon_kobold-geomancer": {
+      "x": 672,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#384848"
+    },
+    "mon_komodo-dragon": {
+      "x": 704,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#384838"
+    },
+    "mon_kraken-tentacle": {
+      "x": 736,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#c88878"
+    },
+    "mon_laughing-skull": {
+      "x": 768,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#e80848"
+    },
+    "mon_lava-snake": {
+      "x": 800,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#d86818"
+    },
+    "mon_lemure": {
+      "x": 832,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#484818"
+    },
+    "mon_lich": {
+      "x": 896,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#282838"
+    },
+    "mon_lightning-spire": {
+      "x": 928,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#486878"
+    },
+    "mon_lindwurm": {
+      "x": 960,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#780808"
+    },
+    "mon_living-spell": {
+      "x": 992,
+      "y": 256,
+      "w": 32,
+      "h": 32,
+      "color": "#d87888"
+    },
+    "mon_lodul": {
+      "x": 0,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#c88878"
+    },
+    "mon_lost-soul": {
+      "x": 64,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#285828"
+    },
+    "mon_louise": {
+      "x": 96,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#784888"
+    },
+    "mon_lurking-horror": {
+      "x": 128,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#281838"
+    },
+    "mon_maggie": {
+      "x": 160,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#584848"
+    },
+    "mon_mana-viper": {
+      "x": 192,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#481888"
+    },
+    "mon_manticore": {
+      "x": 224,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#986808"
+    },
+    "mon_mara": {
+      "x": 256,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#784808"
+    },
+    "mon_margery": {
+      "x": 288,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#e80808"
+    },
+    "mon_marrowcuda": {
+      "x": 320,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#387898"
+    },
+    "mon_martyred-shade": {
+      "x": 352,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#f8b818"
+    },
+    "mon_maurice": {
+      "x": 384,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#a80808"
+    },
+    "mon_meliai": {
+      "x": 416,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#e8e8e8"
+    },
+    "mon_menkaure": {
+      "x": 448,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#080858"
+    },
+    "mon_mennas": {
+      "x": 480,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#e8e8e8"
+    },
+    "mon_merfolk": {
+      "x": 512,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#286858"
+    },
+    "mon_merfolk-aquamancer": {
+      "x": 544,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#981828"
+    },
+    "mon_merfolk-avatar": {
+      "x": 576,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#186808"
+    },
+    "mon_merfolk-impaler": {
+      "x": 608,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#483808"
+    },
+    "mon_merfolk-javelineer": {
+      "x": 640,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#883808"
+    },
+    "mon_merfolk-siren": {
+      "x": 672,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#186808"
+    },
+    "mon_meteoran": {
+      "x": 704,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#c87808"
+    },
+    "mon_minotaur": {
+      "x": 736,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#c89858"
+    },
+    "mon_mlioglotl": {
+      "x": 768,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#4818a8"
+    },
+    "mon_molten-gargoyle": {
+      "x": 832,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#381818"
+    },
+    "mon_monarch-bomb": {
+      "x": 864,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#585868"
+    },
+    "mon_moon-troll": {
+      "x": 896,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#487878"
+    },
+    "mon_morphogenic-ooze": {
+      "x": 928,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#682828"
+    },
+    "mon_moth-of-wrath": {
+      "x": 960,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#681808"
+    },
+    "mon_mountainshell": {
+      "x": 992,
+      "y": 288,
+      "w": 32,
+      "h": 32,
+      "color": "#386868"
+    },
+    "mon_mummy": {
+      "x": 0,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#787848"
+    },
+    "mon_mummy-priest": {
+      "x": 32,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#e8d808"
+    },
+    "mon_murray": {
+      "x": 64,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#f80808"
+    },
+    "mon_naga": {
+      "x": 96,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#682818"
+    },
+    "mon_naga-mage": {
+      "x": 128,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#682818"
+    },
+    "mon_naga-ritualist": {
+      "x": 160,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#682818"
+    },
+    "mon_naga-sharpshooter": {
+      "x": 192,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#682818"
+    },
+    "mon_naga-warrior": {
+      "x": 224,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#382808"
+    },
+    "mon_nagaraja": {
+      "x": 256,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#682818"
+    },
+    "mon_nargun": {
+      "x": 288,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#382838"
+    },
+    "mon_nascent-plasmodium": {
+      "x": 320,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#286878"
+    },
+    "mon_natasha": {
+      "x": 352,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#281828"
+    },
+    "mon_necromancer": {
+      "x": 384,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#a87868"
+    },
+    "mon_necrophage": {
+      "x": 416,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#484848"
+    },
+    "mon_nekomata": {
+      "x": 448,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#484848"
+    },
+    "mon_nellie": {
+      "x": 480,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#781818"
+    },
+    "mon_neqoxec": {
+      "x": 512,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_nergalle": {
+      "x": 544,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#a87828"
+    },
+    "mon_nessos": {
+      "x": 576,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#585878"
+    },
+    "mon_nikola": {
+      "x": 608,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#b8b8b8"
+    },
+    "mon_norris": {
+      "x": 640,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#a86838"
+    },
+    "mon_oblivion-hound": {
+      "x": 672,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#8878b8"
+    },
+    "mon_obsidian-bat": {
+      "x": 704,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#382828"
+    },
+    "mon_obsidian-statue": {
+      "x": 736,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#281828"
+    },
+    "mon_occultist": {
+      "x": 768,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#283858"
+    },
+    "mon_octopode": {
+      "x": 800,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#682838"
+    },
+    "mon_ogre": {
+      "x": 832,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#c88878"
+    },
+    "mon_ogre-mage": {
+      "x": 864,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#c88878"
+    },
+    "mon_oklob-plant": {
+      "x": 896,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#a8a878"
+    },
+    "mon_oklob-sapling": {
+      "x": 928,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#08a808"
+    },
+    "mon_oni": {
+      "x": 960,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#c80838"
+    },
+    "mon_oni-incarcerator": {
+      "x": 992,
+      "y": 320,
+      "w": 32,
+      "h": 32,
+      "color": "#c80838"
+    },
+    "mon_ophan": {
+      "x": 0,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#687898"
+    },
+    "mon_orange-demon": {
+      "x": 32,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#882858"
+    },
+    "mon_orb-guardian": {
+      "x": 64,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#987898"
+    },
+    "mon_orb-of-destruction": {
+      "x": 96,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#e808f8"
+    },
+    "mon_orb-of-entropy": {
+      "x": 128,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#b8a808"
+    },
+    "mon_orb-of-fire": {
+      "x": 160,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f828"
+    },
+    "mon_orb-of-winter": {
+      "x": 192,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#88a8f8"
+    },
+    "mon_orb-spider": {
+      "x": 224,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#082828"
+    },
+    "mon_orc": {
+      "x": 256,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#a87858"
+    },
+    "mon_orc-high-priest": {
+      "x": 288,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#1818c8"
+    },
+    "mon_orc-knight": {
+      "x": 320,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#385868"
+    },
+    "mon_orc-priest": {
+      "x": 352,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#a87858"
+    },
+    "mon_orc-sorcerer": {
+      "x": 384,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#580808"
+    },
+    "mon_orc-warlord": {
+      "x": 416,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#780808"
+    },
+    "mon_orc-warrior": {
+      "x": 448,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#282828"
+    },
+    "mon_orc-wizard": {
+      "x": 480,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#480848"
+    },
+    "mon_pandemonium-lord": {
+      "x": 512,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#585858"
+    },
+    "mon_pargi": {
+      "x": 576,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#386838"
+    },
+    "mon_peacekeeper": {
+      "x": 608,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#586858"
+    },
+    "mon_pearl-dragon": {
+      "x": 640,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#986868"
+    },
+    "mon_petrified-flower": {
+      "x": 672,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#585858"
+    },
+    "mon_phalanx-beetle": {
+      "x": 704,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#482838"
+    },
+    "mon_phantasmal-warrior": {
+      "x": 736,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#284838"
+    },
+    "mon_phantom": {
+      "x": 768,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#88f8f8"
+    },
+    "mon_pharaoh-ant": {
+      "x": 800,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#a89888"
+    },
+    "mon_pikel": {
+      "x": 832,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#384848"
+    },
+    "mon_pile-of-debris": {
+      "x": 864,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#383838"
+    },
+    "mon_pile-of-flesh": {
+      "x": 896,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#381828"
+    },
+    "mon_pillar-of-salt": {
+      "x": 928,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#e8e8e8"
+    },
+    "mon_plant": {
+      "x": 960,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#385818"
+    },
+    "mon_platinum-paragon": {
+      "x": 992,
+      "y": 352,
+      "w": 32,
+      "h": 32,
+      "color": "#6878b8"
+    },
+    "mon_player-shadow": {
+      "x": 0,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#f8c818"
+    },
+    "mon_polar-bear": {
+      "x": 32,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#a89898"
+    },
+    "mon_poltergeist": {
+      "x": 64,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#98d8b8"
+    },
+    "mon_polterguardian": {
+      "x": 96,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#c8f8b8"
+    },
+    "mon_polyphemus": {
+      "x": 128,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#f8b878"
+    },
+    "mon_prince-ribbit": {
+      "x": 160,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#a88858"
+    },
+    "mon_profane-servitor": {
+      "x": 192,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#281828"
+    },
+    "mon_protean-progenitor": {
+      "x": 224,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#a80858"
+    },
+    "mon_putrid-mouth": {
+      "x": 256,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#484838"
+    },
+    "mon_queen-bee": {
+      "x": 288,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#382828"
+    },
+    "mon_quicksilver-dragon": {
+      "x": 320,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#182838"
+    },
+    "mon_quicksilver-elemental": {
+      "x": 352,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#788898"
+    },
+    "mon_quokka": {
+      "x": 384,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#786818"
+    },
+    "mon_radroach": {
+      "x": 416,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#282818"
+    },
+    "mon_ragged-hierophant": {
+      "x": 448,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#9848a8"
+    },
+    "mon_raiju": {
+      "x": 480,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#084868"
+    },
+    "mon_rakshasa": {
+      "x": 512,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#282838"
+    },
+    "mon_rat": {
+      "x": 544,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#683818"
+    },
+    "mon_raven": {
+      "x": 576,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#282828"
+    },
+    "mon_reaper": {
+      "x": 608,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#282838"
+    },
+    "mon_red-devil": {
+      "x": 640,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#a80808"
+    },
+    "mon_redback": {
+      "x": 672,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#485868"
+    },
+    "mon_rending-blade": {
+      "x": 704,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#e868f8"
+    },
+    "mon_revenant": {
+      "x": 736,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#b8b8b8"
+    },
+    "mon_revenant-soulmonger": {
+      "x": 768,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#18e8e8"
+    },
+    "mon_ribbon-worm": {
+      "x": 800,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#580848"
+    },
+    "mon_rime-drake": {
+      "x": 832,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#082888"
+    },
+    "mon_robin": {
+      "x": 864,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#783808"
+    },
+    "mon_rock-fish": {
+      "x": 896,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#682808"
+    },
+    "mon_rockslime": {
+      "x": 928,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#482828"
+    },
+    "mon_roxanne": {
+      "x": 960,
+      "y": 384,
+      "w": 32,
+      "h": 32,
+      "color": "#584858"
+    },
+    "mon_royal-mummy": {
+      "x": 0,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#980808"
+    },
+    "mon_rupert": {
+      "x": 32,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#b86848"
+    },
+    "mon_rust-devil": {
+      "x": 64,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#383838"
+    },
+    "mon_sacred-lotus": {
+      "x": 96,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#f898d8"
+    },
+    "mon_saint-roka": {
+      "x": 128,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#382808"
+    },
+    "mon_salamander": {
+      "x": 160,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#382818"
+    },
+    "mon_salamander-mystic": {
+      "x": 192,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#583818"
+    },
+    "mon_salamander-tyrant": {
+      "x": 224,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#d81838"
+    },
+    "mon_saltling": {
+      "x": 256,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_satyr": {
+      "x": 288,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#186818"
+    },
+    "mon_scorpion": {
+      "x": 320,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#685828"
+    },
+    "mon_screaming-refraction": {
+      "x": 352,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#88a898"
+    },
+    "mon_scrub-nettle": {
+      "x": 384,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#385878"
+    },
+    "mon_sea-snake": {
+      "x": 416,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#185878"
+    },
+    "mon_searing-wretch": {
+      "x": 448,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#685868"
+    },
+    "mon_seismosaurus": {
+      "x": 480,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#282838"
+    },
+    "mon_servant-of-whispers": {
+      "x": 608,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#4878a8"
+    },
+    "mon_shadow-demon": {
+      "x": 640,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#281848"
+    },
+    "mon_shadow-dragon": {
+      "x": 672,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#585858"
+    },
+    "mon_shadow-imp": {
+      "x": 704,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#7838a8"
+    },
+    "mon_shadow-prism": {
+      "x": 736,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#381858"
+    },
+    "mon_shadow-puppet": {
+      "x": 768,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#3818d8"
+    },
+    "mon_shadow-turret": {
+      "x": 800,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#3818d8"
+    },
+    "mon_shadow-wraith": {
+      "x": 832,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#6808e8"
+    },
+    "mon_shadowghast": {
+      "x": 864,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#380868"
+    },
+    "mon_shapeshifter": {
+      "x": 896,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#f8d898"
+    },
+    "mon_shard-shrike": {
+      "x": 928,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#0818a8"
+    },
+    "mon_shining-eye": {
+      "x": 960,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#680868"
+    },
+    "mon_shock-serpent": {
+      "x": 992,
+      "y": 416,
+      "w": 32,
+      "h": 32,
+      "color": "#085898"
+    },
+    "mon_shooting-star": {
+      "x": 0,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#684888"
+    },
+    "mon_sigmund": {
+      "x": 32,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#780808"
+    },
+    "mon_silent-spectre": {
+      "x": 64,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#383878"
+    },
+    "mon_sin-beast": {
+      "x": 96,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#281828"
+    },
+    "mon_sixfirhy": {
+      "x": 128,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_skeletal-warrior": {
+      "x": 160,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#382878"
+    },
+    "mon_sky-beast": {
+      "x": 192,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#98a8b8"
+    },
+    "mon_skyshark": {
+      "x": 224,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#586898"
+    },
+    "mon_sleepcap": {
+      "x": 256,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#186878"
+    },
+    "mon_slime-creature": {
+      "x": 288,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#489808"
+    },
+    "mon_slymdra": {
+      "x": 320,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#984818"
+    },
+    "mon_smoke-demon": {
+      "x": 352,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#d8d8d8"
+    },
+    "mon_snapping-turtle": {
+      "x": 384,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#886808"
+    },
+    "mon_snorg": {
+      "x": 416,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#487828"
+    },
+    "mon_sojobo": {
+      "x": 448,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#981898"
+    },
+    "mon_solar-ember": {
+      "x": 480,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#580808"
+    },
+    "mon_sonja": {
+      "x": 512,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#084848"
+    },
+    "mon_soul-eater": {
+      "x": 544,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#284848"
+    },
+    "mon_soul-wisp": {
+      "x": 576,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#083828"
+    },
+    "mon_spark-wasp": {
+      "x": 608,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#084878"
+    },
+    "mon_spatial-vortex": {
+      "x": 640,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#080868"
+    },
+    "mon_spellspark-servitor": {
+      "x": 672,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#284858"
+    },
+    "mon_sphinx-marauder": {
+      "x": 704,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#88b8d8"
+    },
+    "mon_splinterfrost-barricade": {
+      "x": 736,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#3878b8"
+    },
+    "mon_spriggan": {
+      "x": 768,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#383838"
+    },
+    "mon_spriggan-air-mage": {
+      "x": 800,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#383838"
+    },
+    "mon_spriggan-berserker": {
+      "x": 832,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#483838"
+    },
+    "mon_spriggan-defender": {
+      "x": 864,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#684808"
+    },
+    "mon_spriggan-druid": {
+      "x": 896,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#680808"
+    },
+    "mon_spriggan-rider": {
+      "x": 928,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#980808"
+    },
+    "mon_sprozz": {
+      "x": 960,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#484858"
+    },
+    "mon_star-jelly": {
+      "x": 992,
+      "y": 448,
+      "w": 32,
+      "h": 32,
+      "color": "#586878"
+    },
+    "mon_starcursed-mass": {
+      "x": 0,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#282848"
+    },
+    "mon_starflower": {
+      "x": 32,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#a838e8"
+    },
+    "mon_steam-dragon": {
+      "x": 64,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#b8c8c8"
+    },
+    "mon_steelbarb-worm": {
+      "x": 96,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#584858"
+    },
+    "mon_stoker": {
+      "x": 128,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#481848"
+    },
+    "mon_stone-giant": {
+      "x": 160,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#888868"
+    },
+    "mon_storm-dragon": {
+      "x": 192,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#2868c8"
+    },
+    "mon_sun-demon": {
+      "x": 224,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#d84818"
+    },
+    "mon_sun-moth": {
+      "x": 256,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#58b828"
+    },
+    "mon_swamp-dragon": {
+      "x": 288,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#685828"
+    },
+    "mon_swamp-drake": {
+      "x": 320,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#383808"
+    },
+    "mon_swamp-worm": {
+      "x": 352,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#487808"
+    },
+    "mon_tainted-leviathan": {
+      "x": 384,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#381818"
+    },
+    "mon_tarantella": {
+      "x": 416,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#580868"
+    },
+    "mon_tengu": {
+      "x": 448,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#682828"
+    },
+    "mon_tengu-conjurer": {
+      "x": 480,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#584808"
+    },
+    "mon_tengu-reaver": {
+      "x": 512,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#484848"
+    },
+    "mon_tengu-warrior": {
+      "x": 544,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#383868"
+    },
+    "mon_tentacled-monstrosity": {
+      "x": 576,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#182828"
+    },
+    "mon_tentacled-starspawn": {
+      "x": 608,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#c80808"
+    },
+    "mon_terence": {
+      "x": 640,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#383818"
+    },
+    "mon_thermic-dynamo": {
+      "x": 672,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#b80828"
+    },
+    "mon_thorn-hunter": {
+      "x": 704,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#384808"
+    },
+    "mon_thrashing-horror": {
+      "x": 736,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#381818"
+    },
+    "mon_titan": {
+      "x": 768,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#e8e8e8"
+    },
+    "mon_toenail-golem": {
+      "x": 800,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#f8d8a8"
+    },
+    "mon_tormentor": {
+      "x": 832,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#6828b8"
+    },
+    "mon_torpor-snail": {
+      "x": 864,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#181858"
+    },
+    "mon_training-dummy": {
+      "x": 896,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#984828"
+    },
+    "mon_troll": {
+      "x": 928,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#185818"
+    },
+    "mon_twister": {
+      "x": 960,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_two-headed-ogre": {
+      "x": 992,
+      "y": 480,
+      "w": 32,
+      "h": 32,
+      "color": "#c88878"
+    },
+    "mon_tyrant-leech": {
+      "x": 0,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#381818"
+    },
+    "mon_tzitzimitl": {
+      "x": 32,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#380848"
+    },
+    "mon_ufetubus": {
+      "x": 64,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#082838"
+    },
+    "mon_ugly-thing": {
+      "x": 96,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#681808"
+    },
+    "mon_undertaker": {
+      "x": 128,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#585878"
+    },
+    "mon_undying-armoury": {
+      "x": 160,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#182848"
+    },
+    "mon_unseen-horror": {
+      "x": 192,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#8838a8"
+    },
+    "mon_urug": {
+      "x": 224,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#484848"
+    },
+    "mon_ushabti": {
+      "x": 256,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#486898"
+    },
+    "mon_vampire": {
+      "x": 288,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#181838"
+    },
+    "mon_vampire-bat": {
+      "x": 320,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#282828"
+    },
+    "mon_vampire-bloodprince": {
+      "x": 352,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#680818"
+    },
+    "mon_vampire-knight": {
+      "x": 384,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#281828"
+    },
+    "mon_vampire-mage": {
+      "x": 416,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#380828"
+    },
+    "mon_vampire-mosquito": {
+      "x": 448,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_vashnia": {
+      "x": 480,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#686878"
+    },
+    "mon_vault-guard": {
+      "x": 512,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#083838"
+    },
+    "mon_vault-sentinel": {
+      "x": 544,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#1808b8"
+    },
+    "mon_vault-warden": {
+      "x": 576,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#585858"
+    },
+    "mon_very-ugly-thing": {
+      "x": 608,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#480828"
+    },
+    "mon_vine-stalker": {
+      "x": 640,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#689848"
+    },
+    "mon_void-ooze": {
+      "x": 672,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#182838"
+    },
+    "mon_vv": {
+      "x": 704,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#485858"
+    },
+    "mon_walking-alembic": {
+      "x": 736,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#281828"
+    },
+    "mon_wandering-mushroom": {
+      "x": 768,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#e87808"
+    },
+    "mon_war-gargoyle": {
+      "x": 800,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#384868"
+    },
+    "mon_warg": {
+      "x": 832,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#383818"
+    },
+    "mon_water-elemental": {
+      "x": 864,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#0828b8"
+    },
+    "mon_water-moccasin": {
+      "x": 896,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#782818"
+    },
+    "mon_water-nymph": {
+      "x": 928,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#1868d8"
+    },
+    "mon_weeping-skull": {
+      "x": 960,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#286858"
+    },
+    "mon_wendigo": {
+      "x": 992,
+      "y": 512,
+      "w": 32,
+      "h": 32,
+      "color": "#584858"
+    },
+    "mon_white-imp": {
+      "x": 0,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#f8f8f8"
+    },
+    "mon_wight": {
+      "x": 32,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#285878"
+    },
+    "mon_wiglaf": {
+      "x": 64,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#484818"
+    },
+    "mon_will-o-the-wisp": {
+      "x": 96,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#78d808"
+    },
+    "mon_wind-drake": {
+      "x": 128,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#5888b8"
+    },
+    "mon_withered-plant": {
+      "x": 160,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#885838"
+    },
+    "mon_wolf": {
+      "x": 192,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#a898a8"
+    },
+    "mon_wolf-spider": {
+      "x": 224,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#382818"
+    },
+    "mon_worldbinder": {
+      "x": 256,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#e8d8d8"
+    },
+    "mon_wraith": {
+      "x": 288,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#282838"
+    },
+    "mon_wretched-star": {
+      "x": 320,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#780878"
+    },
+    "mon_wyrmhole": {
+      "x": 352,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#281838"
+    },
+    "mon_wyvern": {
+      "x": 384,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#085828"
+    },
+    "mon_xakkrixis": {
+      "x": 416,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#984808"
+    },
+    "mon_xtahua": {
+      "x": 448,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#a80848"
+    },
+    "mon_yak": {
+      "x": 480,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#a87848"
+    },
+    "mon_yaktaur": {
+      "x": 512,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#784848"
+    },
+    "mon_yaktaur-captain": {
+      "x": 544,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#382838"
+    },
+    "mon_ynoxinul": {
+      "x": 576,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#089898"
+    },
+    "mon_zenata": {
+      "x": 608,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#885838"
+    },
+    "mon_zykzyl": {
+      "x": 640,
+      "y": 544,
+      "w": 32,
+      "h": 32,
+      "color": "#281828"
+    }
+  }
+}
