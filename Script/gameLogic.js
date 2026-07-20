@@ -12,19 +12,7 @@ import * as A from './actions.js';
 import { world } from './world.js';
 import { runtime } from './runtime.js';
 import { assets } from './assets.js';
-import { getPlayerMovement } from './input.js';
-import { on, EVENTS } from './events.js';
-
-// --- 초기화 ---
-
-/**
- * 입력 의도 이벤트를 구독해 실제 게임 동작으로 연결합니다.
- * main.js의 초기화 시점에 한 번만 호출됩니다.
- */
-export function registerGameplayHandlers() {
-    on(EVENTS.INPUT_ATTACK, attack);
-    on(EVENTS.INPUT_INTERACT, interactWithWorld);
-}
+import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
 
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
 
@@ -35,8 +23,15 @@ export function registerGameplayHandlers() {
 export function update(deltaTime) {
     if (!runtime.isGameRunning) return; // 게임이 실행 중이 아니면 아무 작업도 하지 않음
 
-    const now = Date.now(); // 현재 시간 저장 (여러 번 사용되므로 캐싱)
-    const dtFactor = deltaTime / 16.67; // 60FPS를 기준으로 델타타임 보정 (dtFactor=1이면 60FPS)
+    // 게임 내부 시간을 먼저 전진시킵니다. 이후의 모든 쿨다운·애니메이션은 이 값을 기준으로 합니다.
+    world.time += deltaTime;
+
+    const now = world.time;
+    const dtFactor = deltaTime / C.REFERENCE_FRAME_MS; // 속도 상수의 기준 프레임 대비 배율
+
+    // 0. 프레임 경계에서 입력을 한꺼번에 반영합니다.
+    //    이렇게 해야 플레이어 상태가 시뮬레이션 스텝 안에서만 변합니다.
+    processQueuedInput();
 
     // 동적 광원 효과를 서서히 감소시킵니다.
     if (runtime.dynamicLight.active) {
@@ -60,7 +55,7 @@ export function update(deltaTime) {
     }
 
     // 3. 적 AI 및 로직 처리
-    updateEnemies(now, dtFactor);
+    updateEnemies(now, dtFactor, deltaTime);
 
     // 4. 발사체 이동 및 충돌 처리
     updateProjectiles(dtFactor);
@@ -82,10 +77,24 @@ export function update(deltaTime) {
 // --- 외부 공개 함수 (Public Methods) ---
 
 /**
+ * 프레임 사이에 쌓인 입력을 시뮬레이션에 반영합니다.
+ * 시점 회전을 먼저 적용해, 같은 프레임에 들어온 공격이 회전 이후의 방향을 기준으로 판정되게 합니다.
+ */
+function processQueuedInput() {
+    const lookDelta = consumePendingLook();
+    if (lookDelta !== 0) world.player.angle += lookDelta;
+
+    drainActionQueue(action => {
+        if (action === INPUT_ACTIONS.ATTACK) attack();
+        else if (action === INPUT_ACTIONS.INTERACT) interactWithWorld();
+    });
+}
+
+/**
  * 플레이어의 공격 로직을 처리합니다. 현재 무기에 따라 다른 행동을 합니다.
  */
 export function attack() {
-    const now = Date.now();
+    const now = world.time;
     const player = world.player;
     const weaponData = C.WEAPONS[player.weapon];
     // 공격 쿨다운이거나 무기 교체 중이면 공격할 수 없습니다.
@@ -320,7 +329,7 @@ function handlePlayerMovement(dtFactor) {
  * @param {number} now - 현재 타임스탬프
  * @param {number} dtFactor - 프레임 시간 보정값
  */
-function updateEnemies(now, dtFactor) {
+function updateEnemies(now, dtFactor, deltaTime) {
     const player = world.player;
 
     world.enemies.forEach(enemy => {
@@ -329,7 +338,7 @@ function updateEnemies(now, dtFactor) {
         const dist_player = Math.hypot(dx_player, dy_player);
 
         // --- 경로 탐색 및 이동 (Pathfinding & Movement) ---
-        enemy.pathRecalculationTimer -= dtFactor * 16.67;
+        enemy.pathRecalculationTimer -= deltaTime;
 
         // 경로 재계산 타이머가 다 됐을 때 경로를 다시 찾습니다.
         if (enemy.pathRecalculationTimer <= 0) {
@@ -459,7 +468,8 @@ function spawnEnemy() {
         ...template,
         x, y, z: C.TILE_SIZE / 2,
         maxHp: template.hp,
-        lastAttackTime: 0,
+        // 스폰 직후 쿨다운에 걸리지 않도록 과거 시각으로 둡니다.
+        lastAttackTime: C.PAST_TIME,
         lastHitTime: 0,
         path: [], // 길찾기 관련 속성 초기화
         pathRecalculationTimer: Math.random() * 500, // 초기 계산 시간을 분산시켜 성능 부담 완화

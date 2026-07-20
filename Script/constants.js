@@ -66,9 +66,10 @@ export const PARTICLE_GRAVITY = 0.1;
 // --- 시뮬레이션 안정성 상수 ---
 
 /**
- * @description 한 프레임에서 시뮬레이션에 반영할 수 있는 최대 시간(ms).
+ * @description 한 화면 프레임에서 누산기에 넣을 수 있는 최대 시간(ms).
  * 탭 전환 후 복귀처럼 프레임 간격이 비정상적으로 벌어졌을 때,
- * 플레이어가 한 번에 타일 하나 이상을 이동해 벽을 관통하는 것을 방지합니다.
+ * 수백 스텝을 한 프레임에 몰아 실행해 화면이 멈추는 것을 방지합니다.
+ * loop.js의 advanceSimulation 안에서 적용됩니다.
  */
 export const MAX_FRAME_TIME = 100;
 
@@ -76,6 +77,34 @@ export const MAX_FRAME_TIME = 100;
 export const SPAWN_MAX_ATTEMPTS = 200;
 /** @description 적이 스폰될 때 플레이어와 유지해야 하는 최소 거리 (타일 단위) */
 export const SPAWN_MIN_DISTANCE_TILES = 5;
+
+/**
+ * @description 시뮬레이션 한 스텝의 길이(ms).
+ * 게임 로직은 실제 프레임 간격과 무관하게 항상 이 크기로만 전진합니다.
+ * 덕분에 30FPS든 144FPS든 같은 시간에 같은 결과가 나옵니다.
+ */
+export const SIMULATION_STEP_MS = 1000 / 60;
+
+/**
+ * @description 속도 상수들이 기준으로 삼는 프레임 길이(ms).
+ * MOVE_SPEED 등은 "이 길이의 프레임 하나당" 이동량으로 정의되어 있습니다.
+ * SIMULATION_STEP_MS를 바꿔도 체감 속도가 유지되도록 하는 환산 기준입니다.
+ */
+export const REFERENCE_FRAME_MS = 1000 / 60;
+
+/**
+ * @description 한 화면 프레임에서 실행할 수 있는 최대 시뮬레이션 스텝 수.
+ * 기기가 느려 따라잡지 못할 때 스텝이 계속 밀려 더 느려지는
+ * '죽음의 나선(spiral of death)'을 방지합니다.
+ */
+export const MAX_STEPS_PER_FRAME = 6;
+
+/**
+ * @description 쿨다운이 이미 지난 것으로 취급되는 과거 시각.
+ * 게임 내부 시간은 0에서 시작하므로, 마지막 공격 시각을 0으로 두면
+ * 시작 직후 쿨다운이 안 지난 것으로 판정됩니다. 그것을 피하기 위한 초기값입니다.
+ */
+export const PAST_TIME = -1e9;
 
 /** @description 다음 층으로 진입할 때 회복시켜 주는 체력 */
 export const FLOOR_CLEAR_HEAL = 15;
@@ -163,6 +192,15 @@ export const MUZZLE_FLASH_MS = 60;
 export const WEAPON_SWAP_HALF_MS = 150;
 /** @description 피격 시 화면 혈흔 효과가 유지되는 시간(ms) */
 export const HIT_REACTION_MS = 150;
+/** @description 적이 피격 시 하얗게 번쩍이는 시간(ms) */
+export const HIT_FLASH_MS = 100;
+
+/** @description 마우스 이동 1픽셀당 회전량 계수 */
+export const MOUSE_SENSITIVITY = 0.001;
+/** @description 터치 시점 조작의 감도 배수 (마우스 대비) */
+export const TOUCH_LOOK_MULTIPLIER = 2;
+/** @description 프레임 사이에 쌓아둘 수 있는 입력 동작의 최대 개수 */
+export const MAX_QUEUED_INPUTS = 32;
 
 
 // --- 사운드 정의 ---

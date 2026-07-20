@@ -16,6 +16,8 @@
  * (프레임마다 갱신되는 좌표 등 성능이 중요한 내부 루프는 예외입니다.)
  */
 
+import { PAST_TIME } from './constants.js';
+
 /**
  * 완전히 새로운 세계 상태를 생성해 반환합니다.
  * 모듈 로드 시점의 초기값과 게임 재시작 시의 초기값이 갈라지지 않도록,
@@ -26,6 +28,14 @@ export function createWorld() {
     return {
         /** @description 현재 플레이어가 있는 층(스테이지) */
         floor: 1,
+
+        /**
+         * @description 게임 내부 경과 시간(ms).
+         * 모든 쿨다운과 애니메이션은 Date.now()가 아니라 이 값을 기준으로 계산합니다.
+         * 벽시계 시각과 분리되어 있으므로 세이브를 불러와도 쿨다운이 어긋나지 않고,
+         * 나중에 일시정지나 배속 기능을 넣을 때도 그대로 동작합니다.
+         */
+        time: 0,
 
         /** @description 현재 층의 맵 데이터 (2차원 배열). 0=바닥, 1=벽, 4=출구, 5=문 */
         map: [],
@@ -51,7 +61,7 @@ export function createWorld() {
             ammo: 50,               // 현재 탄약
             maxAmmo: 100,           // 최대 탄약
             weapon: 'gun',          // 현재 사용 중인 무기 키
-            lastAttackTime: 0,      // 마지막으로 공격한 시각 (쿨다운 계산용)
+            lastAttackTime: PAST_TIME, // 마지막으로 공격한 시각. 시작하자마자 공격할 수 있도록 과거로 둡니다.
         },
 
         /** @description 현재 맵에 존재하는 모든 적 */

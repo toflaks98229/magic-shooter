@@ -450,7 +450,7 @@ function renderEntities(targetCtx, width, height) {
                 }
 
                 // 피격 효과: 최근에 맞았다면 하얀색으로 번쩍이는 효과를 줍니다.
-                if (entity.lastHitTime && Date.now() - entity.lastHitTime < 100) {
+                if (entity.lastHitTime && world.time - entity.lastHitTime < C.HIT_FLASH_MS) {
                     targetCtx.globalCompositeOperation = 'lighter'; // 색상 혼합 모드 변경
                     targetCtx.fillStyle = 'rgba(255, 255, 255, 0.7)';
                     targetCtx.fillRect(entityLeftX, entityTopY, entitySize, entitySize);

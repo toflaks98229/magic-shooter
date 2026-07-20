@@ -26,6 +26,8 @@ const FRAME_MS = 1000 / 60;
 const PHASE_FRAMES = 150;
 /** @description 순환시킬 이동 키 */
 const MOVE_KEYS = ['KeyW', 'KeyD', 'KeyS', 'KeyA'];
+/** @description 매 프레임 넣을 마우스 이동량(픽셀). 시점이 계속 돌아가게 한다. */
+const LOOK_DELTA_PX = 10;
 
 /**
  * 시뮬레이션을 처음부터 실행하고 결과 스냅샷을 반환합니다.
@@ -47,11 +49,11 @@ export async function runSimulation() {
     const ui = await import('../../Script/ui.js');
     const audio = await import('../../Script/audio.js');
     const { generateDungeon } = await import('../../Script/mapGenerator.js');
+    const { advanceSimulation, resetLoop } = await import('../../Script/loop.js');
 
     bindStubDom(dom);
 
     // 실제 게임과 동일하게 각 계층을 이벤트에 연결합니다.
-    gameLogic.registerGameplayHandlers();
     ui.registerUiHandlers();
     audio.registerAudioHandlers();
 
@@ -77,6 +79,7 @@ export async function runSimulation() {
         world.floor += 1;
         buildFloor();
     });
+    events.on(E.DOOR_OPENED, () => { stats.doorsOpened++; });
 
     function buildFloor() {
         const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
@@ -90,27 +93,38 @@ export async function runSimulation() {
     }
 
     /**
-     * 문 앞에 플레이어를 세우고 상호작용시킨다.
+     * 문 앞에 플레이어를 세우고 상호작용 입력을 넣는다.
      * 무작위 배회만으로는 문을 만나지 못하는 경우가 많아 명시적으로 통과시킨다.
+     * 실제 문 열림은 다음 시뮬레이션 스텝에서 입력 큐가 소비될 때 일어난다.
      */
-    function openNearestDoor() {
+    function aimAtNearestDoor() {
         for (let y = 0; y < world.objectMap.length; y++) {
             for (let x = 0; x < world.objectMap[y].length; x++) {
                 if (world.objectMap[y][x] !== 1) continue;
                 world.player.x = (x - 1) * C.TILE_SIZE + C.TILE_SIZE / 2; // 문의 서쪽 칸
                 world.player.y = y * C.TILE_SIZE + C.TILE_SIZE / 2;
                 world.player.angle = 0;                                    // 동쪽을 바라봄
-                gameLogic.interactWithWorld();
-                return 1;
+                pressInteract();
+                return;
             }
         }
-        return 0;
+    }
+
+    /** 스페이스바를 눌렀다 뗀다. 실제 input.js 경로를 통과해 큐에 쌓인다. */
+    function pressInteract() {
+        fireDocumentEvent('keydown', { code: 'Space' });
+        fireDocumentEvent('keyup', { code: 'Space' });
     }
 
     input.setupInputHandlers();
+    input.clearInputQueue();
+    resetLoop();
     actions.setGameRunning(true);
     world.floor = 1;
     buildFloor();
+
+    // 마우스 시점 조작이 동작하려면 포인터가 캔버스에 잠겨 있어야 한다.
+    globalThis.document.pointerLockElement = dom.canvas;
 
     let heldKey = null;
     for (let frame = 0; frame < FRAMES; frame++) {
@@ -122,16 +136,18 @@ export async function runSimulation() {
             heldKey = wantKey;
         }
 
-        world.player.angle += 0.013; // 마우스 시점 회전과 동일한 경로
+        // 시점 회전·공격·상호작용을 모두 실제 입력 리스너를 통해 넣는다.
+        // 이 값들은 즉시 반영되지 않고 큐에 쌓였다가 시뮬레이션 스텝에서 소비된다.
+        fireDocumentEvent('mousemove', { movementX: LOOK_DELTA_PX });
 
-        if (frame % 10 === 0) { gameLogic.attack(); stats.attacks++; }
-        if (frame % 97 === 0) { gameLogic.interactWithWorld(); stats.interacts++; }
-        if (frame === 600) stats.doorsOpened += openNearestDoor();
+        if (frame % 10 === 0) { dom.canvas.fire('mousedown'); stats.attacks++; }
+        if (frame % 97 === 0) { pressInteract(); stats.interacts++; }
+        if (frame === 600) aimAtNearestDoor();
         if (frame === 1200) events.emit(E.EXIT_REACHED, { floor: world.floor });
-        if (frame === 1210) stats.doorsOpened += openNearestDoor();
+        if (frame === 1210) aimAtNearestDoor();
 
         advanceClock(FRAME_MS);
-        gameLogic.update(FRAME_MS);
+        advanceSimulation(FRAME_MS); // 고정 타임스텝 루프를 통과시킨다
         ui.updateHUD();
     }
 
@@ -151,6 +167,7 @@ function buildSnapshot({ world, serializeWorld, stats }) {
         frames: FRAMES,
         stats,
         virtualTime: currentTime(),
+        gameTime: Number(world.time.toFixed(6)),
         floor: world.floor,
         weapon: world.player.weapon,
         player: {

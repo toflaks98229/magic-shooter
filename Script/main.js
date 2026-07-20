@@ -15,9 +15,10 @@ import { assets } from './assets.js';
 import { dom, bindDom } from './dom.js';
 import { on, EVENTS } from './events.js';
 import { generateDungeon } from './mapGenerator.js';
-import { setupInputHandlers } from './input.js';
+import { setupInputHandlers, clearInputQueue } from './input.js';
 import { render, resizeCanvas, loadAssets } from './render.js';
-import { update, spawnEnemiesForFloor, registerGameplayHandlers } from './gameLogic.js';
+import { spawnEnemiesForFloor } from './gameLogic.js';
+import { advanceSimulation, resetLoop } from './loop.js';
 import { updateHUD, registerUiHandlers } from './ui.js';
 import { initAudio, registerAudioHandlers } from './audio.js';
 
@@ -42,7 +43,6 @@ function init() {
     // 2. 표현 계층이 게임 이벤트를 구독하도록 등록합니다.
     registerUiHandlers();
     registerAudioHandlers();
-    registerGameplayHandlers();
     registerGameFlowHandlers();
 
     // 3. 브라우저 이벤트 리스너 설정
@@ -111,14 +111,14 @@ function gameLoop(timestamp = 0) {
     const rawDeltaTime = timestamp - lastTime; // 이전 프레임과의 실제 시간 간격
     lastTime = timestamp;
 
-    // 탭 전환 등으로 프레임 간격이 크게 벌어진 경우, 시뮬레이션에 반영할 시간을 제한합니다.
-    // 제한하지 않으면 한 프레임의 이동량이 타일 크기를 넘어서 벽을 통과할 수 있습니다.
-    const deltaTime = Math.min(rawDeltaTime, C.MAX_FRAME_TIME);
-
-    if (runtime.isGameRunning && deltaTime > 0) {
-        update(deltaTime); // 게임 로직 업데이트 (gameLogic.js)
-        render();          // 화면 렌더링 (render.js)
-        updateHUD();       // HUD 갱신 (ui.js)
+    if (runtime.isGameRunning) {
+        // 시뮬레이션은 고정 크기 스텝으로만 전진합니다. 프레임레이트와 무관하게 결과가 같습니다.
+        // 프레임 간격이 지나치게 큰 경우의 상한 처리는 advanceSimulation 안에서 이뤄집니다.
+        advanceSimulation(rawDeltaTime);
+        // 렌더링은 매 화면 프레임마다 수행합니다.
+        // (스텝이 없었더라도 창 크기 변경 등으로 다시 그려야 할 수 있습니다.)
+        render();
+        updateHUD();
     }
 
     requestAnimationFrame(gameLoop); // 다음 프레임에 gameLoop를 재귀적으로 호출
@@ -131,8 +131,10 @@ function gameLoop(timestamp = 0) {
  * 초기화면을 숨기고, 세계 상태를 새로 만들며, 첫 번째 층을 생성합니다.
  */
 function startGame() {
-    resetWorld();    // 월드를 초기 상태로 재생성 (이전 판의 잔재가 남지 않도록)
-    resetRuntime();  // 흔들림 위상, 무기 교체 플래그 등 세션 상태도 초기화
+    resetWorld();       // 월드를 초기 상태로 재생성 (이전 판의 잔재가 남지 않도록)
+    resetRuntime();     // 흔들림 위상, 무기 교체 플래그 등 세션 상태도 초기화
+    resetLoop();        // 누산기에 남아 있던 시간 제거
+    clearInputQueue();  // 이전 판에서 쌓인 입력이 새 판에 반영되지 않도록 비움
     A.setGameRunning(true);
 
     generateNewFloor();

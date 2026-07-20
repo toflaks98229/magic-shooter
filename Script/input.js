@@ -1,17 +1,20 @@
 /**
  * @fileoverview 키보드, 마우스, 터치 등 모든 사용자 입력을 처리합니다.
  *
- * 이 파일은 게임 로직을 직접 부르지 않고 '입력 의도'만 이벤트로 알립니다.
- * 덕분에 input.js와 gameLogic.js 사이에 있던 순환 import가 사라졌습니다.
- * (이전에는 ESM의 함수 호이스팅 덕에 우연히 동작하고 있었을 뿐입니다.)
+ * 이 파일은 게임 로직을 직접 부르지 않고, 입력을 '큐에 쌓기만' 합니다.
+ * gameLogic이 매 시뮬레이션 스텝 시작 시점에 큐를 비우며 한꺼번에 반영합니다.
+ *
+ * 이전에는 mousemove 핸들러가 player.angle을 그 자리에서 바꿨기 때문에,
+ * 플레이어 상태가 게임 루프 바깥에서 프레임 경계와 무관하게 변했습니다.
+ * 그 상태로는 일시정지·리플레이·고정 타임스텝이 성립하지 않습니다.
+ * 이제 모든 상태 변경은 시뮬레이션 스텝 안에서만 일어납니다.
  */
 
 // --- 모듈 임포트 ---
 import * as C from './constants.js';
-import { world } from './world.js';
 import { runtime } from './runtime.js';
 import { dom } from './dom.js';
-import { emit, EVENTS } from './events.js';
+
 
 // --- 모듈 내부 변수 (Private Member Variables) ---
 
@@ -23,6 +26,25 @@ const isTouchDevice = 'ontouchstart' in window;
 
 /** @description (모바일) 가상 조이스틱의 현재 입력값 (-1.0 ~ 1.0). x는 좌우, y는 상하. */
 let moveInput = { x: 0, y: 0 };
+
+/** @description 큐에 쌓을 수 있는 동작의 종류 */
+export const INPUT_ACTIONS = {
+    ATTACK: 'attack',
+    INTERACT: 'interact',
+};
+
+/**
+ * @description 아직 시뮬레이션에 반영되지 않은 단발성 동작들.
+ * 이동처럼 '누르고 있는 상태'는 폴링(getPlayerMovement)으로 읽고,
+ * 공격·상호작용처럼 '순간의 사건'만 이 큐에 쌓습니다.
+ */
+const actionQueue = [];
+
+/**
+ * @description 아직 반영되지 않은 시점 회전량(라디안).
+ * 마우스 이동은 한 프레임에 여러 번 발생할 수 있으므로 누적해 두었다가 한 번에 적용합니다.
+ */
+let pendingLookDelta = 0;
 
 
 // --- 외부 공개 함수 (Public Methods) ---
@@ -38,7 +60,7 @@ export function setupInputHandlers() {
         // --- 새로운 로직: 상호작용 키 (스페이스바) ---
         if (e.code === 'Space' && runtime.isGameRunning) {
             e.preventDefault(); // 브라우저 기본 동작(페이지 스크롤) 방지
-            emit(EVENTS.INPUT_INTERACT);
+            queueAction(INPUT_ACTIONS.INTERACT);
         }
     });
     document.addEventListener('keyup', e => { keys[e.code] = false; });
@@ -52,13 +74,13 @@ export function setupInputHandlers() {
     // 마우스 이동 시 플레이어 시점 회전 (포인터가 잠겨있을 때만 동작)
     document.addEventListener('mousemove', e => {
         if (document.pointerLockElement === dom.canvas && runtime.isGameRunning) {
-            world.player.angle += e.movementX * 0.001 * C.ROTATION_SPEED;
+            pendingLookDelta += e.movementX * C.MOUSE_SENSITIVITY * C.ROTATION_SPEED;
         }
     });
 
     // 마우스 클릭 시 공격
     dom.canvas.addEventListener('mousedown', () => {
-        if (runtime.isGameRunning) emit(EVENTS.INPUT_ATTACK);
+        if (runtime.isGameRunning) queueAction(INPUT_ACTIONS.ATTACK);
     });
 
     // 터치 기기인 경우 모바일 전용 컨트롤러를 설정합니다.
@@ -84,7 +106,44 @@ export function getPlayerMovement() {
     return { forward, strafe };
 }
 
+/**
+ * 쌓여 있는 단발성 동작을 순서대로 넘겨주고 큐를 비웁니다.
+ * @param {(action: string) => void} handler - 각 동작을 처리할 콜백
+ */
+export function drainActionQueue(handler) {
+    for (let i = 0; i < actionQueue.length; i++) handler(actionQueue[i]);
+    actionQueue.length = 0;
+}
+
+/**
+ * 누적된 시점 회전량을 반환하고 0으로 초기화합니다.
+ * @returns {number} 적용해야 할 회전량(라디안)
+ */
+export function consumePendingLook() {
+    const delta = pendingLookDelta;
+    pendingLookDelta = 0;
+    return delta;
+}
+
+/**
+ * 쌓여 있는 입력을 모두 버립니다. (게임 시작·재시작 시 이전 판의 입력이 새 판에 새는 것을 방지)
+ */
+export function clearInputQueue() {
+    actionQueue.length = 0;
+    pendingLookDelta = 0;
+}
+
 // --- 내부 헬퍼 함수 (Private Methods) ---
+
+/**
+ * 단발성 동작을 큐에 쌓습니다.
+ * 루프가 멈춘 사이 입력이 무한히 쌓이지 않도록 상한을 둡니다.
+ * @param {string} action - INPUT_ACTIONS 중 하나
+ */
+function queueAction(action) {
+    if (actionQueue.length >= C.MAX_QUEUED_INPUTS) return;
+    actionQueue.push(action);
+}
 
 /**
  * 모바일 터치 컨트롤(이동 스틱, 시점 조작, 공격 버튼)을 위한 이벤트 리스너를 설정합니다.
@@ -150,7 +209,7 @@ function setupMobileControls() {
                 dom.moveStick.style.transform = `translate(${Math.cos(angle) * clampedDist}px, ${Math.sin(angle) * clampedDist}px)`;
             } else if (touch.identifier === lookTouchId) { // 시점 조작 터치가 움직일 때
                 const dx = touch.clientX - lookStartPos.x;
-                world.player.angle += dx * 0.001 * C.ROTATION_SPEED * 2; // 가로 이동량에 따라 플레이어 회전 (모바일 감도 2배)
+                pendingLookDelta += dx * C.MOUSE_SENSITIVITY * C.ROTATION_SPEED * C.TOUCH_LOOK_MULTIPLIER;
                 lookStartPos = { x: touch.clientX, y: touch.clientY }; // 현재 위치를 새 시작점으로 갱신하여 연속적인 움직임 구현
             }
         }
@@ -161,5 +220,5 @@ function setupMobileControls() {
     document.addEventListener('touchcancel', handleEnd, { passive: false });
 
     // 공격 버튼 터치 이벤트
-    dom.shootBtn.addEventListener('touchstart', (e) => { e.preventDefault(); emit(EVENTS.INPUT_ATTACK); }, { passive: false });
+    dom.shootBtn.addEventListener('touchstart', (e) => { e.preventDefault(); queueAction(INPUT_ACTIONS.ATTACK); }, { passive: false });
 }

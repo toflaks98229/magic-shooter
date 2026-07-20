@@ -183,7 +183,7 @@ export function openDoor(tileX, tileY) {
         mapY: tileY,
         z: 0,               // 시작 Z 좌표 (바닥 기준)
         wallType: 5,        // 맵에 기록된 문 타일 ID
-        startTime: Date.now(),
+        startTime: world.time,
         duration: 500,      // 0.5초 동안 애니메이션
     });
 

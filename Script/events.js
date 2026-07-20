@@ -37,14 +37,6 @@ export const EVENTS = {
     EXIT_REACHED: 'exit:reached',
     /** 층이 바뀜. detail: { floor } */
     FLOOR_CHANGED: 'floor:changed',
-
-    // --- 입력 의도(intent) ---
-    // input.js는 "무엇을 하고 싶은지"만 알립니다. 실제 처리는 gameLogic.js가 구독합니다.
-    // 이 간접화 덕분에 input.js와 gameLogic.js의 순환 import가 사라졌습니다.
-    /** 플레이어가 공격을 시도함 */
-    INPUT_ATTACK: 'input:attack',
-    /** 플레이어가 상호작용을 시도함 */
-    INPUT_INTERACT: 'input:interact',
 };
 
 /** @description 실제 디스패치를 담당하는 내부 버스. 외부에 노출하지 않습니다. */
