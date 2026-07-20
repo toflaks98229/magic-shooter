@@ -87,12 +87,26 @@ export function slowCost(cost) {
  *
  * speed 는 비용이 아니라 '비율'입니다. speed 10 이 기준이고 20 이면 두 배 빠릅니다.
  * 그래서 비용은 반비례합니다. (timed-effects.cc:1138 speed_to_duration 과 같은 관계)
+ *
+ * speed 0 은 '느린 것'이 아니라 '움직이지 않는 것'입니다.
+ * 원본은 에너지를 줄 때 speed > 0 을 확인해(mon-act.cc:1732) 아예 거릅니다.
+ * 식물·조형물·포탑 25종이 여기 해당하며, 기본값으로 되돌리면
+ * 나무가 플레이어를 쫓아옵니다.
  * @param {number} speed - 몬스터의 speed 필드. 없으면 10 이 기본값입니다
- * @returns {number} 행동 하나의 시간(aut)
+ * @returns {number} 행동 하나의 시간(aut). 움직이지 않는 몬스터는 Infinity
  */
 export function monsterActionAuts(speed = BASELINE_DELAY) {
-    if (speed < 1) speed = BASELINE_DELAY;
+    if (speed <= 0) return Infinity;
     return (BASELINE_DELAY * BASELINE_DELAY) / speed;
+}
+
+/**
+ * 스스로 움직이거나 행동할 수 있는 몬스터인지 봅니다.
+ * @param {number} speed - 몬스터의 speed 필드
+ * @returns {boolean} 행동할 수 있으면 true
+ */
+export function canAct(speed = BASELINE_DELAY) {
+    return speed > 0;
 }
 
 /**

@@ -44,9 +44,16 @@ test('speed 를 주지 않으면 기본값 10 으로 본다', () => {
     assert.equal(T.monsterActionMs(), T.monsterActionMs(10));
 });
 
-test('speed 가 망가진 값이어도 멈추지 않는다', () => {
-    assert.equal(T.monsterActionMs(0), T.monsterActionMs(10));
-    assert.equal(T.monsterActionMs(-5), T.monsterActionMs(10));
+test('speed 0 은 느린 것이 아니라 움직이지 않는 것이다', () => {
+    // 식물·조형물·포탑 25종이 speed 0 입니다.
+    // 원본은 에너지를 줄 때 speed > 0 을 확인해 아예 거릅니다. (mon-act.cc:1732)
+    // 이것을 기본값 10 으로 되돌리면 나무가 플레이어를 쫓아옵니다.
+    assert.equal(T.monsterActionAuts(0), Infinity);
+    assert.equal(T.monsterActionMs(0), Infinity);
+    assert.equal(T.canAct(0), false);
+    assert.equal(T.canAct(-1), false);
+    assert.equal(T.canAct(10), true);
+    assert.equal(T.canAct(), true, 'speed 를 생략하면 기본 속도입니다');
 });
 
 test('가속은 시간 비용을 2/3 로 줄인다', () => {
