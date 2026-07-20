@@ -248,6 +248,10 @@ export const TILE_IDS = {
     GRATE: 9,
     GLASS: 10,
     STATUE: 11,
+    SHALLOW_WATER: 12,
+    DEEP_WATER: 13,
+    LAVA: 14,
+    TREE: 15,
 };
 
 /**
@@ -323,6 +327,34 @@ export const TILE_TYPES = {
         // 화강암 상. 원본도 보이지만 지나갈 수 없다고 못박아 둡니다.
         solid: true, opaque: false, spawnable: false,
         wallTexture: 'statue', interaction: null,
+    },
+    [TILE_IDS.SHALLOW_WATER]: {
+        id: TILE_IDS.SHALLOW_WATER, name: 'shallow water',
+        // 누구나 건넙니다. 원본에서도 걸어 들어갈 수 있고, 소리가 납니다.
+        solid: false, opaque: false, spawnable: true,
+        wallTexture: null, interaction: null,
+    },
+    [TILE_IDS.DEEP_WATER]: {
+        id: TILE_IDS.DEEP_WATER, name: 'deep water',
+        // 나는 것만 건넙니다. 이 게임에는 헤엄이 없어서 플레이어는 막힙니다.
+        //
+        // 이 타일이 생기면서 flies 깃발이 비로소 뜻을 갖습니다. 182종이 갖고
+        // 있는데 지금까지 아무 일도 하지 않았습니다. 무시할 지형이 없었기 때문입니다.
+        // 이제 물 건너의 적은 날 수 있는 것만 다가옵니다.
+        solid: true, opaque: false, crossableByFlight: true, spawnable: false,
+        wallTexture: null, interaction: null,
+    },
+    [TILE_IDS.LAVA]: {
+        id: TILE_IDS.LAVA, name: 'lava',
+        // 나는 것만 건넙니다. 건너는 동안 탑니다.
+        solid: true, opaque: false, crossableByFlight: true, burns: true, spawnable: false,
+        wallTexture: null, interaction: null,
+    },
+    [TILE_IDS.TREE]: {
+        id: TILE_IDS.TREE, name: 'tree',
+        // 원본에서 나무는 막고 가립니다. 벽과 같되 나중에 태울 수 있습니다.
+        solid: true, opaque: true, spawnable: false,
+        wallTexture: 'tree', interaction: null,
     },
     [TILE_IDS.PORTAL]: {
         id: TILE_IDS.PORTAL, name: 'portal',

@@ -1163,29 +1163,40 @@ const UNREACHABLE = -1;
 
 /** @description 각 타일에서 플레이어까지의 걸음 수 */
 let flowField = null;
+
+/** @description 나는 것을 위한 격자. 깊은 물과 용암을 지나갈 수 있습니다. */
+let flyingFlowField = null;
 /** @description BFS에 재사용하는 큐. 프레임마다 새로 할당하지 않기 위해 보관합니다. */
 let flowQueue = null;
 /** @description 마지막으로 계산한 시점의 플레이어 타일과 맵 상태 */
 let flowFieldCache = { tileX: -1, tileY: -1, map: null, revision: -1 };
 
+/** @description 나는 것의 격자를 언제 다시 계산할지 판단하는 값들. */
+let flyingFlowFieldCache = { tileX: -1, tileY: -1, map: null, revision: -1 };
+
 /**
  * 플로우 필드가 최신인지 확인하고, 필요하면 다시 계산합니다.
  * 플레이어가 다른 칸으로 옮겼거나, 층이 바뀌었거나, 문이 열려 통행이 달라졌을 때만 계산합니다.
  */
-function ensureFlowField() {
+function ensureFlowField(flying = false) {
     const tileX = Math.floor(world.player.x / C.TILE_SIZE);
     const tileY = Math.floor(world.player.y / C.TILE_SIZE);
+    const cache = flying ? flyingFlowFieldCache : flowFieldCache;
+    const field = flying ? flyingFlowField : flowField;
 
-    const isCurrent = flowField
-        && flowFieldCache.tileX === tileX
-        && flowFieldCache.tileY === tileY
-        && flowFieldCache.map === world.map
-        && flowFieldCache.revision === world.mapRevision;
-    if (isCurrent) return flowField;
+    const isCurrent = field
+        && cache.tileX === tileX
+        && cache.tileY === tileY
+        && cache.map === world.map
+        && cache.revision === world.mapRevision;
+    if (isCurrent) return field;
 
-    computeFlowField(tileX, tileY);
-    flowFieldCache = { tileX, tileY, map: world.map, revision: world.mapRevision };
-    return flowField;
+    computeFlowField(tileX, tileY, flying);
+    const fresh = { tileX, tileY, map: world.map, revision: world.mapRevision };
+    if (flying) flyingFlowFieldCache = fresh;
+    else flowFieldCache = fresh;
+
+    return flying ? flyingFlowField : flowField;
 }
 
 /**
@@ -1193,28 +1204,33 @@ function ensureFlowField() {
  * @param {number} targetX - 플레이어의 타일 X 좌표
  * @param {number} targetY - 플레이어의 타일 Y 좌표
  */
-function computeFlowField(targetX, targetY) {
+function computeFlowField(targetX, targetY, flying = false) {
     const width = C.MAP_WIDTH, height = C.MAP_HEIGHT;
     const size = width * height;
 
     if (!flowField || flowField.length !== size) {
         flowField = new Int32Array(size);
+        flyingFlowField = new Int32Array(size);
         flowQueue = new Int32Array(size);
     }
-    flowField.fill(UNREACHABLE);
+
+    // 걷는 것과 나는 것은 갈 수 있는 곳이 달라 격자를 따로 둡니다.
+    // 하나로 쓰면 나는 적이 물 위로 못 오거나, 걷는 적이 물에 뛰어듭니다.
+    const field = flying ? flyingFlowField : flowField;
+    field.fill(UNREACHABLE);
 
     if (targetX < 0 || targetY < 0 || targetX >= width || targetY >= height) return;
 
     let head = 0, tail = 0;
     const start = targetY * width + targetX;
-    flowField[start] = 0;
+    field[start] = 0;
     flowQueue[tail++] = start;
 
     while (head < tail) {
         const node = flowQueue[head++];
         const x = node % width;
         const y = (node / width) | 0;
-        const nextDistance = flowField[node] + 1;
+        const nextDistance = field[node] + 1;
 
         // 상하좌우 네 방향. 기존 BFS와 동일하게 대각선 이동은 허용하지 않습니다.
         for (let d = 0; d < 4; d++) {
@@ -1223,10 +1239,10 @@ function computeFlowField(targetX, targetY) {
             if (nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
 
             const neighbour = ny * width + nx;
-            if (flowField[neighbour] !== UNREACHABLE) continue;
-            if (!isPassable(nx, ny)) continue;
+            if (field[neighbour] !== UNREACHABLE) continue;
+            if (!isPassable(nx, ny, flying)) continue;
 
-            flowField[neighbour] = nextDistance;
+            field[neighbour] = nextDistance;
             flowQueue[tail++] = neighbour;
         }
     }
@@ -1243,7 +1259,10 @@ function followFlowField(enemy, dtFactor) {
     const tileY = Math.floor(enemy.y / C.TILE_SIZE);
     if (tileX < 0 || tileY < 0 || tileX >= width || tileY >= C.MAP_HEIGHT) return;
 
-    const here = flowField[tileY * width + tileX];
+    // 나는 적은 자기 격자를 봅니다. 물 위로 곧장 올 수 있습니다.
+    const field = ensureFlowField(!!enemy.flies);
+
+    const here = field[tileY * width + tileX];
     if (here === UNREACHABLE || here === 0) return; // 길이 없거나 이미 플레이어 칸
 
     // 걸음 수가 더 작은 이웃 = 플레이어에게 더 가까운 칸
@@ -1255,7 +1274,7 @@ function followFlowField(enemy, dtFactor) {
         if (nx < 0 || ny < 0 || nx >= width || ny >= C.MAP_HEIGHT) continue;
 
         const neighbour = ny * width + nx;
-        const distance = flowField[neighbour];
+        const distance = field[neighbour];
         if (distance !== UNREACHABLE && distance < bestDistance) {
             bestDistance = distance;
             bestNode = neighbour;
@@ -1328,10 +1347,16 @@ function fleeAlongFlowField(enemy, dtFactor) {
  * @param {number} y - 맵 타일 Y 좌표
  * @returns {boolean} 통과 가능하면 true
  */
-function isPassable(x, y) {
+function isPassable(x, y, flying = false) {
     // 1. 지형이 통행을 막는지 확인 (맵 밖은 벽으로 취급됩니다)
-    if (C.tileAt(world.map, x, y).solid) {
-        return false;
+    const tile = C.tileAt(world.map, x, y);
+    if (tile.solid) {
+        // 깊은 물과 용암은 나는 것만 건넙니다.
+        //
+        // 이 규칙이 생기면서 flies 깃발이 처음으로 뜻을 갖습니다. 182종이
+        // 갖고 있는데 지금까지 아무 일도 하지 않았습니다. 무시할 지형이
+        // 없었기 때문입니다. 이제 물 건너의 적은 '날 수 있는가'로 갈립니다.
+        if (!(flying && tile.crossableByFlight)) return false;
     }
 
     // 2. 오브젝트 맵에 'solid' 속성을 가진 오브젝트가 있는지 확인
@@ -1563,12 +1588,12 @@ function separateEnemies(dtFactor) {
  */
 function moveEnemyBy(enemy, dx, dy) {
     const nextX = enemy.x + dx;
-    if (isPassable(Math.floor(nextX / C.TILE_SIZE), Math.floor(enemy.y / C.TILE_SIZE))) {
+    if (isPassable(Math.floor(nextX / C.TILE_SIZE), Math.floor(enemy.y / C.TILE_SIZE), !!enemy.flies)) {
         enemy.x = nextX;
     }
 
     const nextY = enemy.y + dy;
-    if (isPassable(Math.floor(enemy.x / C.TILE_SIZE), Math.floor(nextY / C.TILE_SIZE))) {
+    if (isPassable(Math.floor(enemy.x / C.TILE_SIZE), Math.floor(nextY / C.TILE_SIZE), !!enemy.flies)) {
         enemy.y = nextY;
     }
 }
