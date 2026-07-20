@@ -570,11 +570,14 @@
 
             <div class="menu-list">
                 <button class="menu-item" id="start-game-btn"><span class="menu-key">(a)</span> 새 탐험 시작</button>
+                <!-- 저장된 판이 있을 때만 main.js 가 드러냅니다. -->
+                <button class="menu-item" id="continue-game-btn" style="display:none"><span class="menu-key">(b)</span> <span id="continue-label">이어하기</span></button>
             </div>
 
             <div class="menu-footer" id="start-help">
                 WASD 이동 · 마우스 조준 · 클릭 공격<br>
-                Space 상호작용 · I 소지품 · 1~9 물약 사용
+                Space 상호작용 · I 소지품 · 1~9 물약 사용<br>
+                Ctrl+S 저장하고 나가기
             </div>
             <div class="menu-note">타일은 공개 도메인 타일셋 RLTiles 를 기반으로 한 Dungeon Crawl Stone Soup 의 것입니다.</div>
         </div>

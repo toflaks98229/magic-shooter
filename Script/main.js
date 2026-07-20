@@ -25,10 +25,11 @@ import { updateHUD, registerUiHandlers, invalidateSpriteCache, resetUi } from '.
 import { initAudio, registerAudioHandlers } from './audio.js';
 import { registerMessageHandlers, clearMessages } from './messages.js';
 import { startCharacterCreation } from './chargen.js';
-import { applyCharacter } from './character.js';
+import { applyCharacter, invalidateCharacter } from './character.js';
 import { SPECIES } from './species.js';
 import { GODS, allGods, canWorship } from './gods.js';
 import { addToInventory } from './inventory.js';
+import { hasSave, describeSave, saveGame, loadGame, deleteSave } from './save.js';
 
 // --- 모듈 스코프 변수 (Private Member Variables) ---
 
@@ -60,7 +61,11 @@ function init() {
     // 3. 브라우저 이벤트 리스너 설정
     window.addEventListener('resize', resizeCanvas); // 창 크기가 변경될 때마다 캔버스 크기 조정
     dom.startGameBtn.addEventListener('click', handleStartClick);
+    dom.continueGameBtn.addEventListener('click', handleContinueClick);
     dom.restartGameBtn.addEventListener('click', startGame); // 재시작 버튼
+
+    // 저장된 탐험이 있으면 제목 화면에 이어하기를 드러냅니다.
+    refreshContinueButton();
 
     // 4. 캔버스 초기화 및 입력 핸들러 설정
     resizeCanvas(); // 최초 캔버스 크기 설정
@@ -75,6 +80,7 @@ function init() {
 function registerGameFlowHandlers() {
     on(EVENTS.PLAYER_DIED, gameOver);
     on(EVENTS.EXIT_REACHED, nextFloor);
+    on(EVENTS.SAVE_REQUESTED, saveAndQuit);
     on(EVENTS.BRANCH_ENTERED, enterBranchFloor);
     on(EVENTS.RUNE_COLLECTED, ({ branch, total }) => {
         console.log(`${getBranch(branch).name}의 룬을 획득했습니다. (총 ${total}개)`);
@@ -85,11 +91,7 @@ function registerGameFlowHandlers() {
  * START 버튼 클릭을 처리합니다. 에셋을 로드한 뒤 게임을 시작합니다.
  */
 function handleStartClick() {
-    // 오디오 컨텍스트 초기화 (브라우저 정책상 사용자 상호작용이 있을 때만 가능)
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        initAudio(audioCtx);
-    }
+    prepareAudio();
 
     dom.startGameBtn.disabled = true;
     dom.startGameBtn.textContent = 'LOADING...';
@@ -109,6 +111,93 @@ function handleStartClick() {
         dom.startGameBtn.textContent = 'ERROR - Check Console';
         console.error('에셋 로딩 중 오류 발생:', err);
     });
+}
+
+/**
+ * 저장된 탐험이 있는지 보고 제목 화면의 이어하기 항목을 켜거나 끕니다.
+ */
+function refreshContinueButton() {
+    const save = describeSave();
+    dom.continueGameBtn.style.display = save ? '' : 'none';
+    if (save) dom.continueLabelEl.textContent = `이어하기 (${save.location})`;
+}
+
+/**
+ * 이어하기를 누르면 에셋을 먼저 갖춘 뒤 저장된 판을 되살립니다.
+ * 캐릭터를 고르는 단계는 건너뜁니다. 저장된 판에 이미 종족과 직업이 들어 있습니다.
+ */
+function handleContinueClick() {
+    prepareAudio();
+    dom.continueGameBtn.disabled = true;
+
+    loadAssets(audioCtx).then(() => {
+        dom.continueGameBtn.disabled = false;
+        invalidateSpriteCache();
+
+        if (!loadGame()) {
+            // 되살리지 못했다면 저장 파일은 이미 지워졌습니다. 제목 화면에 남겨 둡니다.
+            refreshContinueButton();
+            console.error('저장된 탐험을 이어갈 수 없습니다.');
+            return;
+        }
+
+        resumeLoadedGame();
+        startLoop();
+    }).catch(err => {
+        dom.continueGameBtn.disabled = false;
+        console.error('에셋 로딩 중 오류 발생:', err);
+    });
+}
+
+/**
+ * 되살린 world 위에서 판을 다시 굴리기 시작합니다.
+ *
+ * 층을 새로 만들지 않는 것이 startGame 과의 차이입니다.
+ * 지형과 적은 저장 파일에서 그대로 돌아왔으므로 다시 만들면 안 됩니다.
+ */
+function resumeLoadedGame() {
+    // world 를 통째로 갈아 끼웠으므로, 그 위에서 캐시로 살던 것들을 모두 버립니다.
+    invalidateCharacter();
+    resetRuntime();
+    resetLoop();
+    clearInputQueue();
+    clearMessages();
+    resetUi();
+    A.setGameRunning(true);
+
+    dom.startScreen.style.display = 'none';
+    dom.gameOverScreen.style.display = 'none';
+    if (!('ontouchstart' in window)) dom.canvas.requestPointerLock();
+    updateHUD();
+}
+
+/**
+ * 지금 판을 저장하고 제목 화면으로 돌아갑니다.
+ *
+ * 저장에 실패하면 판을 끝내지 않습니다. 저장된 줄 알고 나갔는데
+ * 아무것도 남지 않는 것이 가장 나쁜 결과이기 때문입니다.
+ */
+function saveAndQuit() {
+    if (!runtime.isGameRunning) return;
+
+    if (!saveGame()) {
+        console.error('저장에 실패해 탐험을 계속합니다.');
+        return;
+    }
+
+    A.setGameRunning(false);
+    document.exitPointerLock();
+    dom.startScreen.style.display = 'flex';
+    refreshContinueButton();
+}
+
+/**
+ * 오디오 컨텍스트를 준비합니다. 브라우저 정책상 사용자 상호작용이 있을 때만 가능합니다.
+ */
+function prepareAudio() {
+    if (audioCtx) return;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    initAudio(audioCtx);
 }
 
 /**
@@ -186,6 +275,9 @@ function startGame(species = lastSpecies, background = lastBackground) {
  */
 function gameOver() {
     A.setGameRunning(false);
+    // 죽으면 저장 파일이 사라집니다. 되돌아가 다시 시도할 수 없어야 죽음에 무게가 실립니다.
+    deleteSave();
+    refreshContinueButton();
     dom.finalFloorEl.textContent = formatLocation(world.branch, world.floor);
     dom.gameOverScreen.style.display = 'flex';
     document.exitPointerLock(); // 마우스 포인터 잠금 해제

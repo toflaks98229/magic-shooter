@@ -33,6 +33,7 @@ export const INPUT_ACTIONS = {
     ATTACK: 'attack',
     INTERACT: 'interact',
     TOGGLE_INVENTORY: 'toggleInventory',
+    SAVE_AND_QUIT: 'saveAndQuit',
 };
 
 /** @description 소지품 칸을 곧바로 쓰는 키. 숫자 1~9 가 첫 아홉 칸에 대응합니다. */
@@ -76,6 +77,14 @@ export function setupInputHandlers() {
         if (e.code === 'Space') {
             e.preventDefault(); // 브라우저 기본 동작(페이지 스크롤) 방지
             queueAction(INPUT_ACTIONS.INTERACT);
+            return;
+        }
+
+        // 저장하고 나가기. S 는 후진 이동에 쓰이므로 원본 DCSS 처럼 Ctrl 을 함께 누릅니다.
+        // 브라우저의 '페이지 저장'을 막아야 우리 쪽으로 넘어옵니다.
+        if (e.code === 'KeyS' && (e.ctrlKey || e.metaKey)) {
+            e.preventDefault();
+            queueAction(INPUT_ACTIONS.SAVE_AND_QUIT);
             return;
         }
 

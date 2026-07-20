@@ -16,6 +16,7 @@ import { getBranch } from './branches.js';
 import { getMonster, availableMonsters, DEFAULT_SPAWN_TABLE } from './monsters.js';
 import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
 import { modifier as characterModifier } from './character.js';
+import { emit, EVENTS } from './events.js';
 
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
 
@@ -99,6 +100,9 @@ function processQueuedInput() {
         if (action === INPUT_ACTIONS.ATTACK) attack();
         else if (action === INPUT_ACTIONS.INTERACT) interactWithWorld();
         else if (action === INPUT_ACTIONS.TOGGLE_INVENTORY) runtime.isInventoryOpen = !runtime.isInventoryOpen;
+        // 저장은 시뮬레이션이 할 일이 아니므로 '요청이 있었다'는 사실만 알립니다.
+        // 큐를 통해 들어오므로 프레임 한가운데가 아니라 스텝 경계에서만 발행됩니다.
+        else if (action === INPUT_ACTIONS.SAVE_AND_QUIT) emit(EVENTS.SAVE_REQUESTED);
     });
 }
 

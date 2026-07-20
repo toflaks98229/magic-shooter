@@ -165,6 +165,10 @@ export function installBrowserStubs() {
     seedRandom(1);
     installClock();
 
+    // save.js 가 이어하기 칸을 두는 곳입니다. 실제 브라우저 저장소 대신 메모리에 담습니다.
+    // 사생활 보호 모드처럼 접근 자체가 막힌 상황은 setFailingStorage() 로 흉내 냅니다.
+    installMemoryStorage();
+
     globalThis.window = globalThis;
     globalThis.innerWidth = 1280;
     globalThis.innerHeight = 720;
@@ -221,4 +225,30 @@ export function bindStubDom(dom) {
     dom.ctx = createStubContext();
     dom.offscreenCtx = createStubContext();
     dom.offscreenCanvas = globalThis.document.createElement('canvas');
+}
+
+/**
+ * localStorage 를 메모리 구현으로 갈아 끼웁니다.
+ * @returns {Map<string, string>} 실제로 값이 담기는 곳
+ */
+export function installMemoryStorage() {
+    const entries = new Map();
+    globalThis.localStorage = {
+        getItem: (key) => (entries.has(key) ? entries.get(key) : null),
+        setItem: (key, value) => { entries.set(key, String(value)); },
+        removeItem: (key) => { entries.delete(key); },
+        clear: () => entries.clear(),
+    };
+    return entries;
+}
+
+/**
+ * 저장소 접근이 통째로 실패하는 상황을 만듭니다.
+ * 사생활 보호 모드나 저장 공간이 꽉 찬 브라우저에서 실제로 일어납니다.
+ */
+export function installFailingStorage() {
+    const boom = () => { throw new Error('저장소를 쓸 수 없습니다'); };
+    globalThis.localStorage = {
+        getItem: boom, setItem: boom, removeItem: boom, clear: boom,
+    };
 }

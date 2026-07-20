@@ -48,6 +48,8 @@ export const EVENTS = {
     EXIT_REACHED: 'exit:reached',
     /** 층이 바뀜. detail: { floor } */
     FLOOR_CHANGED: 'floor:changed',
+    /** 저장하고 나가기를 요청함. 프레임 경계에서만 발행됩니다. detail: null */
+    SAVE_REQUESTED: 'game:saveRequested',
 
     /** 하위 던전에 진입함. detail: { branch, name, depth } */
     BRANCH_ENTERED: 'branch:entered',
