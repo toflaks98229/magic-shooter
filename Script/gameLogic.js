@@ -21,8 +21,13 @@ import { emit, EVENTS } from './events.js';
 import { aimRadius, rollMonsterHp, monsterAttackRoll, playerEvasion, archerBonusDamage } from './dcss/combat.js';
 import { pickAimedTarget } from './dcss/aim.js';
 import { skillValue } from './dcss/training.js';
-import { random2 } from './dcss/random.js';
+import { random2, randomRange, rollDice } from './dcss/random.js';
+import { autToMs } from './dcss/time.js';
 import { trackingRangeTiles, rollFoeMemoryMs, shoutRadiusTiles, canShout } from './dcss/awareness.js';
+import {
+    SPELL_EFFECTS, pickSpellSlot, pickEmergencySpell,
+    rollSpellDamage, rollBreathCooldownMs, projectileSpeedFor,
+} from './dcss/spells.js';
 
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
 
@@ -262,6 +267,215 @@ function alertNeighbours(shouter, now) {
 function scatterErratic(enemy, now) {
     enemy.erraticAngle = (random2(360) * Math.PI) / 180;
     enemy.erraticUntil = now + C.ERRATIC_LEG_MS * Math.max(1, enemy.dcssSpeed / 10);
+}
+
+// --- 주문 ---------------------------------------------------------------------
+
+/**
+ * 몬스터가 이번 차례에 주문을 쓸지 정하고, 쓴다면 실행합니다.
+ *
+ * 원본은 턴마다 한 번 이백면체를 굴립니다. 아무것도 고르지 못한 턴은 공짜라서
+ * 몬스터는 대신 평소처럼 걸어오거나 때립니다. 이 성질 덕분에 시전자는
+ * 멈춰 서서 주문만 쏘는 포탑이 아니라 '가끔 쏘면서 계속 다가오는 적'이 됩니다.
+ *
+ * 굴리는 간격이 이 이식의 핵심입니다. 원본의 빈도는 턴 기준으로 맞춰져 있어서,
+ * 프레임마다 굴리면 주문 밀도가 예순 배가 됩니다.
+ * @param {object} enemy - 시전자
+ * @param {object} context - { now, distance, dx, dy }
+ * @returns {boolean} 주문을 썼으면 true
+ */
+/**
+ * 그 자리가 막혀 있는지 봅니다. 순간이동과 공기 강타가 씁니다.
+ * @param {number} x - 픽셀 좌표
+ * @param {number} y - 픽셀 좌표
+ * @returns {boolean} 막혀 있으면 true
+ */
+function isSolidAt(x, y) {
+    return C.tileAt(world.map, x, y).solid;
+}
+
+function tryCastSpell(enemy, context) {
+    if (!enemy.spellbook) return false;
+
+    const { now, distance } = context;
+    if (now - (enemy.lastSpellRoll ?? C.PAST_TIME) < enemy.spellCooldown) return false;
+    enemy.lastSpellRoll = now;
+
+    // 벽 너머로는 쏘지 못합니다. 원본도 시야를 요구합니다. (mon-act.cc:1857)
+    if (!hasLineOfSight(enemy.x, enemy.y, world.player.x, world.player.y)) return false;
+
+    const situation = {
+        hpFraction: enemy.hp / enemy.maxHp,
+        distanceTiles: distance / C.TILE_SIZE,
+        breathReady: now >= (enemy.breathReadyAt ?? 0),
+    };
+
+    // 궁지에 몰리면 빈도를 무시하고 아무거나 집습니다.
+    const slot = pickEmergencySpell(enemy.spellbook, situation)
+        ?? pickSpellSlot(enemy.spellbook, situation);
+    if (!slot) return false;
+
+    const effect = SPELL_EFFECTS[slot.spell];
+    if (distance > (effect.range ?? 8) * C.TILE_SIZE) return false;
+
+    const cast = CAST_BY_KIND[effect.kind];
+    if (!cast || !cast(enemy, slot, effect, context)) return false;
+
+    // 숨결은 쓰고 나면 한동안 쉽니다. (mon-cast.cc:5943)
+    if (slot.flags?.includes('BREATH')) {
+        enemy.breathReadyAt = now + rollBreathCooldownMs();
+    }
+
+    emit(EVENTS.MONSTER_CAST, { enemy, spell: slot.spell, flavour: effect.flavour });
+    return true;
+}
+
+/**
+ * @description 원형별 시전 실행.
+ *
+ * 원본의 이백여든두 가지 주문을 다 만들지는 않았습니다. 만들지 않은 것은
+ * spells.js 의 효과표에 없어 애초에 뽑히지 않습니다.
+ * 없는 효과를 있는 척하는 것보다 조용히 넘어가는 편이 낫다고 보았습니다.
+ */
+const CAST_BY_KIND = {
+    /** 곧게 날아가는 광선. 이 장르가 가장 잘 다루는 모양입니다. */
+    bolt: castProjectile,
+    dart: castProjectile,
+    breath: castProjectile,
+
+    /** 닿는 곳에서 터집니다. 옆으로 피하는 것만으로는 부족해집니다. */
+    ball: castProjectile,
+
+    /**
+     * 자기 강화. 이미 걸려 있으면 다시 걸지 않습니다. (mon-cast.cc:224)
+     */
+    selfBuff(enemy, slot, effect, { now }) {
+        if (now < (enemy.buffs?.[effect.buff] ?? 0)) return false;
+
+        enemy.buffs = enemy.buffs ?? {};
+        const [low, high] = effect.durationAuts;
+        enemy.buffs[effect.buff] = now + autToMs(randomRange(low, high));
+        return true;
+    },
+
+    /**
+     * 순간이동. 데이터에서 가장 흔한 주문이고, 이 장르에서 특히 값을 합니다.
+     * 가만히 서 있는 과녁이 되기를 거부하는 적이 되기 때문입니다.
+     */
+    blink(enemy, slot, effect, { now, distance }) {
+        const player = world.player;
+        const away = Math.atan2(enemy.y - player.y, enemy.x - player.x);
+
+        let angle, hop;
+        if (effect.bias === 'toward') { angle = away + Math.PI; hop = distance * 0.6; }
+        else if (effect.bias === 'away') { angle = away; hop = C.BLINK_RANGE_TILES * C.TILE_SIZE; }
+        else if (effect.bias === 'ideal') {
+            const ideal = C.KITE_IDEAL_DISTANCE_TILES * C.TILE_SIZE;
+            angle = distance < ideal ? away : away + Math.PI;
+            hop = Math.abs(distance - ideal);
+        } else {
+            angle = (random2(360) * Math.PI) / 180;
+            hop = C.BLINK_RANGE_TILES * C.TILE_SIZE;
+        }
+
+        const x = enemy.x + Math.cos(angle) * hop;
+        const y = enemy.y + Math.sin(angle) * hop;
+        if (isSolidAt(x, y)) return false;   // 벽 속으로는 못 갑니다
+
+        enemy.x = x;
+        enemy.y = y;
+        return true;
+    },
+
+    /**
+     * 치유. 반쯤 다쳤을 때만 씁니다. '치유하는 놈부터 잡는다'가 생깁니다.
+     */
+    heal(enemy, slot, effect) {
+        const target = effect.target === 'ally' ? weakestAlly(enemy) : enemy;
+        if (!target || target.hp > target.maxHp / 2) return false;
+
+        // 2d(HD/2) 만큼 회복합니다. (mon-cast.cc:1349)
+        const healed = rollDice(2, Math.max(1, Math.trunc(enemy.hd / 2)))
+            * (effect.multiplier ?? 1);
+        target.hp = Math.min(target.maxHp, target.hp + healed);
+        return true;
+    },
+
+    /**
+     * 겨눌 필요가 없는 것. 공기 강타 하나만 남겼습니다.
+     *
+     * 원본에는 이런 주문이 많지만 대부분 이 게임에 맞지 않습니다.
+     * 겨누고 피하는 게임에서 피할 수 없는 피해는 잘 해낸 것을 벌하기 때문입니다.
+     * 공기 강타만은 주변이 트여 있을수록 아파서 '트인 데 서 있지 마라'로 읽힙니다.
+     */
+    smite(enemy, slot, effect) {
+        let damage = rollSpellDamage(slot.spell, enemy.hd);
+        damage += openSpaceAround(world.player) * effect.openSpaceBonus;
+        A.damagePlayer(damage);
+        return true;
+    },
+};
+
+/**
+ * 발사체를 하나 띄웁니다.
+ * @param {object} enemy - 시전자
+ * @param {object} slot - 주문 슬롯
+ * @param {object} effect - 효과 정의
+ * @param {object} context - { dx, dy }
+ * @returns {boolean} 언제나 true
+ */
+function castProjectile(enemy, slot, effect, { dx, dy }) {
+    world.projectiles.push({
+        x: enemy.x, y: enemy.y, z: C.TILE_SIZE / 2,
+        angle: Math.atan2(dy, dx),
+        speed: projectileSpeedFor(slot.spell),
+        damage: rollSpellDamage(slot.spell, enemy.hd),
+        size: C.PROJECTILE_TYPES.ENEMY_FIREBALL.size,
+        from: 'enemy',
+        spriteKey: C.PROJECTILE_TYPES.ENEMY_FIREBALL.spriteKey,
+
+        // 뚫는 광선은 맞은 것을 지나 계속 날아갑니다. (zap-data.h 의 can_beam)
+        pierce: effect.pierce ?? false,
+        blastRadius: effect.blastTiles ? effect.blastTiles * C.TILE_SIZE : 0,
+        flavour: effect.flavour,
+    });
+    return true;
+}
+
+/**
+ * 가장 많이 다친 동료를 찾습니다. 치유 대상으로 씁니다.
+ * @param {object} healer - 치유하는 몬스터
+ * @returns {object|null} 대상
+ */
+function weakestAlly(healer) {
+    let worst = null;
+    for (const other of world.enemies) {
+        if (other === healer || other.hp <= 0) continue;
+        if (Math.hypot(other.x - healer.x, other.y - healer.y) > C.HEAL_ALLY_RANGE_TILES * C.TILE_SIZE) continue;
+        if (!worst || other.hp / other.maxHp < worst.hp / worst.maxHp) worst = other;
+    }
+    return worst;
+}
+
+/**
+ * 대상 주위에 트인 칸이 몇 개인지 셉니다. (mon-cast.cc:7663 공기 강타)
+ *
+ * 원본은 이 수에 비례해 피해를 올립니다. 벽을 등지면 덜 아프다는 뜻이라,
+ * 실시간에서는 '트인 데 서 있지 마라'는 읽기 쉬운 규칙이 됩니다.
+ * @param {object} target - 대상
+ * @returns {number} 트인 칸 수 (0~8)
+ */
+function openSpaceAround(target) {
+    const tx = Math.floor(target.x / C.TILE_SIZE);
+    const ty = Math.floor(target.y / C.TILE_SIZE);
+    let open = 0;
+    for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+            if (dx === 0 && dy === 0) continue;
+            if (!isSolidAt((tx + dx) * C.TILE_SIZE, (ty + dy) * C.TILE_SIZE)) open++;
+        }
+    }
+    return open;
 }
 
 /**
@@ -1055,16 +1269,17 @@ function updateEnemies(now, dtFactor) {
             scatterErratic(enemy, now);
         }
 
-        // 정신없이 나는 적은 방향이 정해져 있지 않으면 새로 뽑습니다.
-        if (enemy.state === 'erratic' && now >= (enemy.erraticUntil ?? 0)) {
-            scatterErratic(enemy, now);
-        }
         const context = { now, dtFactor, player, distance, dx, dy };
 
         // 움직인 뒤 행동하고, 마지막에 다음 상태를 정합니다.
         // 상태 전이를 끝에 두어야 이번 스텝의 행동이 항상 한 상태 안에서 일어납니다.
         state.move(enemy, dtFactor, context);
-        state.act(enemy, context);
+
+        // 주문을 먼저 시도합니다. 성공하면 이번 차례의 평소 행동은 건너뜁니다.
+        // 실패는 공짜라서(원본도 기력을 쓰지 않습니다) 그대로 때리러 갑니다.
+        // 잠들어 있는 동안에는 시전하지 않습니다.
+        const cast = enemy.state !== 'idle' && tryCastSpell(enemy, context);
+        if (!cast) state.act(enemy, context);
         enemy.state = state.next(enemy, context);
     }
 

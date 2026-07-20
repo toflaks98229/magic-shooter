@@ -17,6 +17,7 @@
  */
 
 import { MONSTER_DATA } from './data/monsters.js';
+import { SPELLBOOKS } from './data/spellbooks.js';
 import { SPAWN_TABLES } from './data/spawn-tables.js';
 import { TILE_SIZE, REFERENCE_FRAME_MS } from './constants.js';
 import { monsterActionMs, monsterActionAuts, actionAuts, actionMs, AUT_MS, canAct } from './dcss/time.js';
@@ -244,6 +245,15 @@ function toRuntimeMonster(data) {
         // 공격 주기는 걷기와 따로입니다. energy.attack 이 15 면 느리게 휘두릅니다.
         cooldown: canAct(data.speed) ? actionMs(data.speed, data.energy.attack) : 0,
         energy: data.energy,
+
+        // 주문서와 시전을 시도하는 간격.
+        //
+        // 원본의 빈도는 '턴마다 한 번 굴린다'를 전제로 맞춰져 있습니다.
+        // 프레임마다 굴리면 주문 밀도가 예순 배가 되어 BATTLECRY 100 짜리
+        // 몬스터가 점멸등이 됩니다. 그래서 굴림은 주문 기력에서 나오는
+        // 간격으로만 일어납니다. energy.spell 이 10 이고 속도가 10 이면 초당 한 번입니다.
+        spellbook: SPELLBOOKS[data.spells] ?? null,
+        spellCooldown: canAct(data.speed) ? actionMs(data.speed, data.energy.spell) : 0,
 
         // 표현
         size: data.sizePixels,

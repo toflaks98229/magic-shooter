@@ -400,3 +400,13 @@ export const FACE_SPRITES = {
     HIT_REACTION: 'face_hit_reaction'
 };
 
+
+/**
+ * @description 순간이동으로 뛰는 거리(타일).
+ * 원본은 시야 안 아무 칸이나 고르지만, 실시간에서는 너무 멀리 사라지면
+ * 어디로 갔는지 읽히지 않아 시야 절반쯤으로 줄였습니다.
+ */
+export const BLINK_RANGE_TILES = 4;
+
+/** @description 동료를 치유할 수 있는 거리(타일). */
+export const HEAL_ALLY_RANGE_TILES = 8;

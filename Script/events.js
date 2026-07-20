@@ -28,6 +28,8 @@ export const EVENTS = {
     ENEMY_HIT: 'enemy:hit',
     /** 적이 사망함. detail: { enemy } */
     ENEMY_DIED: 'enemy:died',
+    /** 몬스터가 주문을 시전함. 연출과 소리가 이걸 듣습니다. */
+    MONSTER_CAST: 'monster:cast',
 
     /** 섬기는 신이 바뀜. detail: { god, name } */
     GOD_CHANGED: 'god:changed',
