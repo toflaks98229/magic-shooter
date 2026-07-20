@@ -120,7 +120,9 @@ test('돌로 된 몸이 받는 피해를 실제로 줄인다', () => {
     assert.ok(gargoyleLoss < humanLoss, `인간 ${humanLoss} vs 가고일 ${gargoyleLoss}`);
 });
 
-test('힘센 종족이 근접 공격을 더 아프게 한다', () => {
+// 공포 갈래에서는 싸울 수 없어 이 검사가 성립하지 않습니다.
+// 지우지 않고 건너뜁니다. main 으로 되돌릴 때 다시 살아나야 합니다.
+test.skip('힘센 종족이 근접 공격을 더 아프게 한다', () => {
     /** 좀비를 세우고 한 대 때려 들어간 피해를 잽니다. */
     const hitFor = (speciesId) => {
         startAs(speciesId, 'fighter');

@@ -167,6 +167,16 @@ export function createWorld() {
          */
         vaultTiles: {},
 
+        /**
+         * @description 가 본 적 있는 칸. 타일 색인마다 1.
+         *
+         * 한 번 본 지형은 어둡게라도 남습니다. 그러지 않으면 왔던 길도
+         * 매번 새로 더듬어야 해서, 긴장이 아니라 성가심이 됩니다.
+         * 다만 몬스터는 남기지 않습니다. 어디 있었는지 기억나면
+         * 피해 가기가 너무 쉬워집니다.
+         */
+        seen: [],
+
         /** @description 현재 맵에 존재하는 모든 적 */
         enemies: [],
         /** @description 현재 맵에 존재하는 모든 발사체 */
@@ -196,7 +206,7 @@ export function createWorld() {
 export const FLOOR_SCOPED_COLLECTIONS = [
     'enemies', 'projectiles', 'items', 'particles',
     'animatedObjects', 'animatedWalls',
-    'entrances', 'altars', 'portals', 'vaults', 'triggers',
+    'entrances', 'altars', 'portals', 'vaults', 'triggers', 'seen',
 ];
 
 /**

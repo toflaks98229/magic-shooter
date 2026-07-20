@@ -32,6 +32,14 @@ import {
     rollSpellDamage, rollBreathCooldownMs, projectileSpeedFor,
 } from './dcss/spells.js';
 
+/**
+ * @description 이 갈래에서 전투를 쓰지 않습니다.
+ *
+ * 적을 죽일 수단이 없는 것이 이 게임의 중심입니다.
+ * 무기·탄약·명중·피해는 지우지 않고 두되 쓰지 않습니다.
+ */
+const COMBAT_DISABLED = true;
+
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
 
 /**
@@ -155,6 +163,16 @@ function processQueuedInput() {
  * 플레이어의 공격 로직을 처리합니다. 현재 무기에 따라 다른 행동을 합니다.
  */
 export function attack() {
+    // 이 갈래에서는 싸울 수 없습니다.
+    //
+    // 적을 죽일 수단이 없는 것이 이 게임의 중심입니다. 숨고 달아나는 것이
+    // 유일한 수단이라, 인지 거리와 기억 시간과 우는 소리가 곁가지가 아니라
+    // 규칙 전부가 됩니다.
+    //
+    // 함수를 지우지 않고 두는 것은, 나중에 '반격 한 번' 같은 것이 생기면
+    // 그때 다시 꺼내는 편이 지웠다가 되살리는 것보다 낫기 때문입니다.
+    if (COMBAT_DISABLED) return;
+
     const now = world.time;
     const player = world.player;
     const weaponData = C.WEAPONS[player.weapon];

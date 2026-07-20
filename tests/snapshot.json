@@ -1,94 +1,163 @@
 {
   "frames": 1800,
   "stats": {
-    "sounds": 110,
+    "sounds": 38,
     "gameOvers": 0,
     "floors": 2,
-    "attacks": 234,
+    "attacks": 252,
     "interacts": 19,
-    "doorsOpened": 2,
-    "hits": 35,
-    "kills": 35
+    "doorsOpened": 3,
+    "hits": 0,
+    "kills": 0
   },
   "virtualTime": 1029999.9999999302,
   "gameTime": 30000,
   "floor": 2,
-  "weapon": "fist",
+  "weapon": "gun",
   "player": {
-    "x": 767.386137444,
-    "y": 729.319672701,
-    "angle": -1.233735515,
-    "hp": 72,
-    "ammo": 0
+    "x": 1014.184357024,
+    "y": 292.070986065,
+    "angle": -2.359962489,
+    "hp": 43,
+    "ammo": 50
   },
   "counts": {
-    "enemies": 1,
-    "items": 10,
+    "enemies": 21,
+    "items": 0,
     "projectiles": 0,
     "particles": 0,
     "animatedWalls": 0
   },
   "enemies": [
     {
+      "sprite": "mon_goblin",
+      "x": 979.906971111,
+      "y": 263.078089534,
+      "hp": 4
+    },
+    {
+      "sprite": "mon_frilled-lizard",
+      "x": 996.901294325,
+      "y": 263.007924901,
+      "hp": 2
+    },
+    {
+      "sprite": "mon_goblin",
+      "x": 2097.923979163,
+      "y": 925.612512603,
+      "hp": 4
+    },
+    {
+      "sprite": "mon_dart-slug",
+      "x": 1236.373897195,
+      "y": 1104.735293463,
+      "hp": 10
+    },
+    {
+      "sprite": "mon_kobold",
+      "x": 1321.1392349,
+      "y": 1233.731188029,
+      "hp": 3
+    },
+    {
+      "sprite": "mon_hobgoblin",
+      "x": 1015.613851217,
+      "y": 263.483909445,
+      "hp": 6
+    },
+    {
+      "sprite": "mon_goblin",
+      "x": 1172.526779771,
+      "y": 1701.731438637,
+      "hp": 3
+    },
+    {
+      "sprite": "mon_ball-python",
+      "x": 2457.535638621,
+      "y": 356.982230954,
+      "hp": 3
+    },
+    {
+      "sprite": "mon_bat",
+      "x": 736.108562713,
+      "y": 780.772401962,
+      "hp": 4
+    },
+    {
       "sprite": "mon_adder",
-      "x": 424.852867126,
-      "y": 791.245007068,
+      "x": 599.193012118,
+      "y": 714.877149686,
       "hp": 12
+    },
+    {
+      "sprite": "mon_hobgoblin",
+      "x": 2009.53933835,
+      "y": 1061.137437299,
+      "hp": 6
+    },
+    {
+      "sprite": "mon_ball-python",
+      "x": 1913.647915125,
+      "y": 473.31229277,
+      "hp": 3
+    },
+    {
+      "sprite": "mon_kobold",
+      "x": 2195.363960862,
+      "y": 1509.557215869,
+      "hp": 3
+    },
+    {
+      "sprite": "mon_ball-python",
+      "x": 765.895686746,
+      "y": 787.197949737,
+      "hp": 3
+    },
+    {
+      "sprite": "mon_hobgoblin",
+      "x": 565.481583476,
+      "y": 940.957537964,
+      "hp": 5
+    },
+    {
+      "sprite": "mon_rat",
+      "x": 800.661384463,
+      "y": 1398.970125169,
+      "hp": 2
+    },
+    {
+      "sprite": "mon_rat",
+      "x": 2174.49796617,
+      "y": 410.526140705,
+      "hp": 2
+    },
+    {
+      "sprite": "mon_kobold",
+      "x": 1670.967954397,
+      "y": 686.573643908,
+      "hp": 4
+    },
+    {
+      "sprite": "mon_hobgoblin",
+      "x": 954.359720644,
+      "y": 262.673159595,
+      "hp": 5
+    },
+    {
+      "sprite": "mon_hobgoblin",
+      "x": 2433.854055593,
+      "y": 352,
+      "hp": 5
+    },
+    {
+      "sprite": "mon_hobgoblin",
+      "x": 1493.104230762,
+      "y": 1091.838873252,
+      "hp": 5
     }
   ],
-  "items": [
-    {
-      "itemId": "magic",
-      "x": 1201.97801739,
-      "y": 416.571174842
-    },
-    {
-      "itemId": "healing",
-      "x": 1455.006491849,
-      "y": 539.875503276
-    },
-    {
-      "itemId": "healing",
-      "x": 2236.816263795,
-      "y": 585.240904391
-    },
-    {
-      "itemId": "healing",
-      "x": 2357.892131805,
-      "y": 1301.414110214
-    },
-    {
-      "itemId": "healing",
-      "x": 2269.284006357,
-      "y": 1916.573950797
-    },
-    {
-      "itemId": "magic",
-      "x": 1606.794162393,
-      "y": 1437.355287969
-    },
-    {
-      "itemId": "healing",
-      "x": 1378.299663067,
-      "y": 1437.309731916
-    },
-    {
-      "itemId": "healing",
-      "x": 1386.728314548,
-      "y": 1592.488442544
-    },
-    {
-      "itemId": "magic",
-      "x": 786.047732234,
-      "y": 1064.24126856
-    },
-    {
-      "itemId": "healing",
-      "x": 796.961806417,
-      "y": 712.163800076
-    }
-  ],
-  "mapChecksum": 11236056,
-  "objectMapChecksum": 207150,
+  "items": [],
+  "mapChecksum": 12715880,
+  "objectMapChecksum": 226740,
   "serializable": true
 }
