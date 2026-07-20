@@ -744,6 +744,20 @@ function playerDamage(base) {
 /**
  * 현재 층(floor)에 맞는 수의 적들을 스폰합니다.
  */
+/**
+ * 이 층에 걸어 다닐 수 있는 칸이 몇 개인지 셉니다.
+ * @returns {number} 칸 수
+ */
+function countOpenTiles() {
+    let open = 0;
+    for (let y = 0; y < world.map.length; y++) {
+        for (let x = 0; x < world.map[y].length; x++) {
+            if (!C.tileAt(world.map, x, y).solid) open++;
+        }
+    }
+    return open;
+}
+
 export function spawnEnemiesForFloor() {
     const dangerLevel = A.currentDangerLevel();
     const dungeon = getBranch(world.branch);
@@ -754,7 +768,21 @@ export function spawnEnemiesForFloor() {
     // 오크 광산의 표는 1~4 밖에 없는데 절대 깊이 12 를 넘기면 후보가 하나도 없어,
     // 그 던전에 적이 아예 나오지 않습니다. 실제로 오크 광산·뱀굴·엘프 회관이
     // 텅 비어 있었습니다. 적 수와 아이템 등급은 절대 깊이를 그대로 씁니다.
-    const count = Math.min(C.MAX_ENEMIES_PER_FLOOR, dangerLevel * 2 + 3);
+    // 깊이가 몇 마리인지를 정하고, 넓이가 그것을 보정합니다.
+    //
+    // 둘 중 큰 쪽을 쓰면 넓이가 깊이를 압도해 1층부터 상한까지 차오릅니다.
+    // 실제로 그렇게 해 보니 1층과 12층의 적 수가 똑같이 30 이 되어,
+    // 깊이가 위험도를 정한다는 원칙이 사라졌습니다.
+    //
+    // 그래서 곱합니다. 깊이가 정한 수를 넓이 비율로 늘리되, 늘어나는 폭에
+    // 상한을 둡니다. 맵이 두 배 넓어지면 적도 두 배가 되지만,
+    // 1층이 12층보다 위험해지는 일은 없습니다.
+    const byDepth = dangerLevel * 2 + 3;
+    // 아래로는 1 에서 멈춥니다. 넓이는 적을 늘리기만 하고 줄이지는 않습니다.
+    // 줄이게 두면 좁은 층이 텅 비고, 무엇보다 아주 작은 맵에서 0 마리가 됩니다.
+    const areaScale = Math.max(1, Math.min(C.MAX_AREA_SCALE,
+        countOpenTiles() / (C.BASELINE_FLOOR_TILES || 1)));
+    const count = Math.min(C.MAX_ENEMIES_PER_FLOOR, Math.round(byDepth * areaScale));
     for (let i = 0; i < count; i++) {
         const id = rollMonsterFor(world.branch, world.floor);
         if (id) spawnMonster(id, findSpawnPoint());
@@ -1153,10 +1181,11 @@ function ensureFlowField() {
         && flowFieldCache.tileY === tileY
         && flowFieldCache.map === world.map
         && flowFieldCache.revision === world.mapRevision;
-    if (isCurrent) return;
+    if (isCurrent) return flowField;
 
     computeFlowField(tileX, tileY);
     flowFieldCache = { tileX, tileY, map: world.map, revision: world.mapRevision };
+    return flowField;
 }
 
 /**
@@ -1623,6 +1652,26 @@ function handleEnemyDeaths() {
  * 무작위 탐색이 실패할 수 있는 좁은 맵에서도 반드시 값을 반환하도록 폴백 경로를 갖습니다.
  * @returns {{x: number, y: number}} 스폰할 월드 좌표
  */
+/**
+ * 그 칸까지 플레이어가 걸어갈 수 있는지 봅니다.
+ *
+ * 플로우 필드를 그대로 씁니다. 그것이 이미 플레이어에게서 걸어갈 수 있는 칸을
+ * 전부 표시해 둔 것이라, 따로 탐색을 돌릴 필요가 없습니다.
+ *
+ * 이 검사가 없어서 적의 4%가 갈 수 없는 곳에 스폰되고 있었습니다.
+ * 30x30 에서는 갇힌 구역이 거의 안 생겨 드러나지 않다가,
+ * 맵을 80x70 으로 키우자 나타났습니다. 층을 다 뒤져도 찾을 수 없는 적이
+ * 남으면 마지막 한 마리를 찾아 헤매게 됩니다.
+ * @param {number} mapX - 타일 X
+ * @param {number} mapY - 타일 Y
+ * @returns {boolean} 갈 수 있으면 true
+ */
+function reachableByPlayer(mapX, mapY) {
+    const field = ensureFlowField();
+    if (!field) return true;   // 아직 없으면 막지 않습니다
+    return field[mapY * C.MAP_WIDTH + mapX] !== UNREACHABLE;
+}
+
 function findSpawnPoint() {
     const player = world.player;
     const minDistance = C.TILE_SIZE * C.SPAWN_MIN_DISTANCE_TILES;
@@ -1634,7 +1683,9 @@ function findSpawnPoint() {
         const mapX = Math.floor(x / C.TILE_SIZE);
         const mapY = Math.floor(y / C.TILE_SIZE);
 
-        if (C.tileAt(world.map, mapX, mapY).spawnable && Math.hypot(x - player.x, y - player.y) >= minDistance) {
+        if (C.tileAt(world.map, mapX, mapY).spawnable
+            && reachableByPlayer(mapX, mapY)
+            && Math.hypot(x - player.x, y - player.y) >= minDistance) {
             return { x, y };
         }
     }
@@ -1647,6 +1698,9 @@ function findSpawnPoint() {
     for (let mapY = 0; mapY < world.map.length; mapY++) {
         for (let mapX = 0; mapX < world.map[mapY].length; mapX++) {
             if (!C.tileAt(world.map, mapX, mapY).spawnable) continue;
+            // 폴백에서도 갈 수 있는지 봐야 합니다. 여기를 빼먹어서
+            // 무작위 탐색만 고쳤을 때 갈 수 없는 적이 그대로 남았습니다.
+            if (!reachableByPlayer(mapX, mapY)) continue;
             const x = mapX * C.TILE_SIZE + C.TILE_SIZE / 2;
             const y = mapY * C.TILE_SIZE + C.TILE_SIZE / 2;
             const distance = Math.hypot(x - player.x, y - player.y);

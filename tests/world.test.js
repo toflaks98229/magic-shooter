@@ -153,7 +153,10 @@ test('resetWorld 이후 다른 모듈이 새 월드를 바라본다', () => {
     worldModule.world.floor = 1;
     gameLogic.spawnEnemiesForFloor();
 
-    assert.equal(worldModule.world.enemies.length, 5, 'gameLogic이 교체된 월드에 적을 넣어야 한다');
+    // 몇 마리인지는 이 검사의 관심사가 아닙니다. 적 수 공식은 깊이와 넓이를
+    // 함께 보게 바뀌었고 앞으로도 바뀔 수 있습니다. 여기서 고정하려는 것은
+    // '새 월드에 들어갔는가' 하나뿐입니다.
+    assert.ok(worldModule.world.enemies.length > 0, 'gameLogic이 교체된 월드에 적을 넣어야 한다');
     assert.equal(previousWorld.enemies.length, previousEnemyCount, '옛 월드는 건드리지 않아야 한다');
 });
 

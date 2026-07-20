@@ -68,10 +68,25 @@ export function generateDungeon(width, height, options = {}) {
         for (const vault of vaults) carveOut(map, vault);
     }
 
+
     placeDoors(map, objectMap);
 
     const exit = pickExit(map, playerStart);
     map[exit.y][exit.x] = TILE_IDS.EXIT;
+
+    // 갇힌 바닥을 메웁니다.
+    //
+    // ensureConnected 는 '설 만한 자리' 목록만 봅니다. 그 목록에 없는 바닥이
+    // 갇혀 있으면 그대로 남습니다. 30x30 에서는 갇혀 봐야 몇 칸이라 드러나지
+    // 않다가, 80x70 으로 키우자 diamondMine 에서 바닥의 3분의 2가 갇히는 판이
+    // 나왔습니다. 거기 놓인 적은 층을 다 뒤져도 찾을 수 없습니다.
+    //
+    // 뚫어서 잇지 않고 메웁니다. 뚫으면 원래 없던 통로가 생겨 레이아웃의 모양이
+    // 무너집니다. 갇힌 곳은 애초에 없던 셈 치는 편이 낫습니다.
+    sealUnreachable(map, playerStart);
+
+    // 출구를 놓은 뒤에 메웁니다. 출구는 벽이라, 그 칸을 지나야만 갈 수 있던
+    // 곳이 출구를 놓는 순간 끊깁니다. 먼저 메우면 그 부분이 남습니다.
 
     return { map, objectMap, playerStart, layout: layoutId, vaults };
 }
@@ -159,6 +174,30 @@ function ensureConnected(map, playerStart, spots) {
  * @param {number[][]} map - 층
  * @param {object} vault - 놓인 볼트의 기록
  */
+/**
+ * 시작 지점에서 갈 수 없는 바닥을 벽으로 메웁니다.
+ *
+ * 뚫어서 잇는 방법도 있지만 원래 없던 통로가 생겨 레이아웃의 모양이 무너집니다.
+ * 갇힌 곳은 애초에 없던 셈 치는 편이 낫습니다.
+ * @param {number[][]} map - 층 (제자리에서 고쳐집니다)
+ * @param {{x: number, y: number}} playerStart - 시작 지점
+ * @returns {number} 메운 칸 수
+ */
+function sealUnreachable(map, playerStart) {
+    const reachable = reachableFrom(map, playerStart);
+    let sealed = 0;
+
+    for (let y = 0; y < map.length; y++) {
+        for (let x = 0; x < map[y].length; x++) {
+            if (reachable[y][x] || tileAt(map, x, y).solid) continue;
+            map[y][x] = TILE_IDS.WALL;
+            sealed++;
+        }
+    }
+
+    return sealed;
+}
+
 function carveOut(map, vault) {
     for (let y = vault.top; y < vault.top + vault.height; y++) {
         for (let x = vault.left; x < vault.left + vault.width; x++) {

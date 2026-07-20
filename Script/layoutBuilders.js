@@ -13,6 +13,15 @@
 import { TILE_IDS } from './constants.js';
 
 const FLOOR = TILE_IDS.FLOOR;
+
+/**
+ * @description 복도 반폭. 1 이면 3칸 폭이 됩니다.
+ *
+ * 원본의 복도는 정확히 한 칸입니다. 실시간에서는 좌우로 피할 수 없어
+ * 조준 기반 전투가 작동할 자리가 없습니다. 길의 모양은 원본대로 두고
+ * 폭만 넓혔습니다.
+ */
+const CORRIDOR_HALF_WIDTH = 1;
 const WALL = TILE_IDS.WALL;
 
 // --- 공용 도구 ---------------------------------------------------------------
@@ -52,14 +61,33 @@ export function joinTheDots(map, from, to) {
     const clampX = (x) => Math.max(1, Math.min(width - 2, x));
     const clampY = (y) => Math.max(1, Math.min(height - 2, y));
 
+    /**
+     * 한 칸을 파되 둘레도 함께 팝니다.
+     *
+     * 원본의 복도는 정확히 한 칸 폭입니다. 턴제에서는 그것이 전술 자산입니다.
+     * 한 번에 한 마리만 상대하고, 물러설 수 있고, 시야가 한 줄로 제한됩니다.
+     *
+     * 실시간에서는 같은 복도가 좌우로 피할 수 없는 관이 됩니다.
+     * 에임 보정을 걷어내고 겨눈 선으로 명중을 정하게 만든 것이 작동할 자리가 없고,
+     * 거리를 두는 적과 정신없이 나는 적도 옆으로 움직일 공간을 전제합니다.
+     * 그래서 길의 모양은 원본대로 두되 폭만 넓힙니다.
+     */
+    const carve = (cx, cy) => {
+        for (let dy = -CORRIDOR_HALF_WIDTH; dy <= CORRIDOR_HALF_WIDTH; dy++) {
+            for (let dx = -CORRIDOR_HALF_WIDTH; dx <= CORRIDOR_HALF_WIDTH; dx++) {
+                map[clampY(cy + dy)][clampX(cx + dx)] = FLOOR;
+            }
+        }
+    };
+
     let { x, y } = from;
     // 가로로 먼저 갈지 세로로 먼저 갈지 반씩 섞어 복도가 한쪽으로 쏠리지 않게 합니다.
     const horizontalFirst = Math.random() < 0.5;
 
-    const stepX = () => { while (x !== to.x) { x += x < to.x ? 1 : -1; map[clampY(y)][clampX(x)] = FLOOR; } };
-    const stepY = () => { while (y !== to.y) { y += y < to.y ? 1 : -1; map[clampY(y)][clampX(x)] = FLOOR; } };
+    const stepX = () => { while (x !== to.x) { x += x < to.x ? 1 : -1; carve(x, y); } };
+    const stepY = () => { while (y !== to.y) { y += y < to.y ? 1 : -1; carve(x, y); } };
 
-    map[clampY(y)][clampX(x)] = FLOOR;
+    carve(x, y);
     if (horizontalFirst) { stepX(); stepY(); } else { stepY(); stepX(); }
 }
 

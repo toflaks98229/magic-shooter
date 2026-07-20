@@ -40,10 +40,20 @@ export const DUNGEON_THEMES = {
 
 /** @description 맵 타일 하나의 픽셀 크기 */
 export const TILE_SIZE = 32;
-/** @description 맵의 너비 (타일 기준) */
-export const MAP_WIDTH = 30;
-/** @description 맵의 높이 (타일 기준) */
-export const MAP_HEIGHT = 30;
+/**
+ * @description 맵의 너비 (타일 기준). DCSS 의 GXM 과 같습니다.
+ *
+ * 예전에는 30x30 이었습니다. DCSS 층의 16% 크기라 원본의 레이아웃이 아예
+ * 돌아가지 않았습니다. layout_roguey 는 방을 5x5 로 늘어놓는데 최소 폭이
+ * 47 타일이라 30 칸 안에 들어갈 수가 없습니다. 볼트도 대부분 너무 컸습니다.
+ *
+ * 원본과 같은 치수로 맞추면 볼트와 레이아웃이 손대지 않고 그대로 들어옵니다.
+ * 레이캐스터는 맵 크기와 무관하고(화면 폭과 시야 거리에만 비례),
+ * 플로우 필드도 5600 칸은 1ms 미만이라 기술적 부담은 없습니다.
+ */
+export const MAP_WIDTH = 80;
+/** @description 맵의 높이 (타일 기준). DCSS 의 GYM 과 같습니다. */
+export const MAP_HEIGHT = 70;
 /** @description 시야각 (Field of View), 60도 */
 export const FOV = Math.PI / 3;
 /**
@@ -99,7 +109,26 @@ export const SPAWN_MIN_DISTANCE_TILES = 5;
  * 적 수는 누적 깊이에 비례하는데, 서브 던전이 생기면서 깊이가 25를 넘게 되어
  * 상한이 없으면 30x30 맵에 50마리 넘게 들어차게 됩니다.
  */
-export const MAX_ENEMIES_PER_FLOOR = 30;
+// 30x30 시절의 값은 30 이었습니다. 맵이 여섯 배 넓어졌는데 상한이 그대로면
+// 6층부터 계속 상한에 걸려 깊이가 다시 뜻을 잃습니다.
+export const MAX_ENEMIES_PER_FLOOR = 55;
+
+/**
+ * @description 밀도를 재는 기준이 되는 바닥 칸 수.
+ *
+ * 적 수를 깊이만으로 정하면 맵 크기가 바뀔 때 밀도가 통째로 어긋납니다.
+ * 30x30 에서 80x70 으로 키우자 적 한 마리당 바닥이 203 칸이 되어 층이 텅 비었습니다.
+ * 이 값은 옛 30x30 의 평균 바닥 수로, 그때의 밀도를 기준으로 삼는다는 뜻입니다.
+ */
+export const BASELINE_FLOOR_TILES = 380;
+
+/**
+ * @description 넓이 보정의 상한.
+ *
+ * 이것이 없으면 넓이가 깊이를 압도해 1층부터 상한까지 적이 차오릅니다.
+ * 깊이가 위험도를 정한다는 원칙을 지키려면 늘어나는 폭을 막아야 합니다.
+ */
+export const MAX_AREA_SCALE = 3;
 
 /**
  * @description 적끼리 서로 밀어내는 세기. 겹친 만큼의 몇 배로 떨어뜨릴지 정합니다.
