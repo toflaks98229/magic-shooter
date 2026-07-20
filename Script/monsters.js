@@ -243,6 +243,10 @@ function toRuntimeMonster(data) {
         // 지능이 인지 거리와 기억 시간을, 우는 소리가 동료를 부르는 반경을 정합니다.
         intelligence: data.intelligence,
         shout: data.shout,
+
+        // 문을 열 줄 아는가. 원본은 물건을 다루는 정도로 정합니다.
+        // 짐승과 언데드는 열지 못해 문이 실제로 벽 노릇을 합니다. (mon-util.cc:3836)
+        canOpenDoors: data.uses !== 'nothing',
         exp: data.exp,
         damage: attack ? attack.damage : 0,
         attackType: attack ? attack.type : null,

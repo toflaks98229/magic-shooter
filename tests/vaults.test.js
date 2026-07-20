@@ -356,3 +356,41 @@ test('층 볼트로 만든 층도 걸어서 나갈 수 있다', () => {
 
     assert.ok(checked > 0, '층 볼트가 한 번도 안 나왔습니다');
 });
+
+test('아무도 닫힌 문 안에서 시작하지 않는다', () => {
+    // 문을 열 줄 모르는 짐승이 닫힌 문 안에 서면 영영 나오지 못합니다.
+    // 볼트가 '여기 선다' 고 정한 자리를 나중에 놓는 문이 덮어서 생겼습니다.
+    for (let seed = 0; seed < 150; seed++) {
+        seedRandom(seed);
+        worldModule.resetWorld();
+        actions.setGameRunning(true);
+
+        const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, {});
+        actions.beginFloor(dungeon);
+        gameLogic.spawnEnemiesForFloor();
+
+        for (const enemy of worldModule.world.enemies) {
+            const tileX = Math.floor(enemy.x / C.TILE_SIZE);
+            const tileY = Math.floor(enemy.y / C.TILE_SIZE);
+            assert.ok(!(worldModule.world.objectMap[tileY]?.[tileX] > 0),
+                `씨앗 ${seed}: ${enemy.monsterId} 가 닫힌 문 안에 있습니다`);
+        }
+    }
+});
+
+test('볼트 안에는 문을 놓지 않는다', () => {
+    // 볼트는 손으로 그린 방입니다. 그 위에 문을 얹으면 설계가 무너집니다.
+    // 원본도 볼트를 이런 후처리로부터 보호합니다.
+    for (let seed = 0; seed < 120; seed++) {
+        seedRandom(seed);
+        const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, {});
+
+        for (const vault of dungeon.vaults ?? []) {
+            // 볼트가 스스로 그린 문은 괜찮습니다. 나중에 얹힌 것만 봅니다.
+            for (const spawn of vault.spawns ?? []) {
+                assert.notEqual(dungeon.map[spawn.tileY][spawn.tileX], C.TILE_IDS.DOOR,
+                    `씨앗 ${seed}: ${vault.name} 의 몬스터 자리에 문이 놓였습니다`);
+            }
+        }
+    }
+});

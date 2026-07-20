@@ -51,7 +51,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -99,7 +99,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -153,7 +153,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "acid_spit",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -208,7 +208,7 @@ export const MONSTER_DATA = [
    "corr": 1
   },
   "spells": "acid_dragon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -254,7 +254,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -358,7 +358,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "air_elemental",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -465,7 +465,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "alderking",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -511,7 +511,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -562,7 +562,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -675,7 +675,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -1067,7 +1067,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -1168,7 +1168,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -1332,7 +1332,7 @@ export const MONSTER_DATA = [
    "neg": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -1390,7 +1390,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "apocalypse_crab",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -1705,7 +1705,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -1886,7 +1886,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2068,7 +2068,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2119,7 +2119,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -2171,7 +2171,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2214,7 +2214,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "ballistomycete",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2362,7 +2362,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "basilisk",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2412,7 +2412,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2466,7 +2466,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2510,7 +2510,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2570,7 +2570,7 @@ export const MONSTER_DATA = [
    "miasma": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2622,7 +2622,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "bes_kemwar",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2678,7 +2678,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "bear",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2776,7 +2776,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2825,7 +2825,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -2924,7 +2924,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "blinker",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -3292,7 +3292,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": "bombardier_beetle",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -3338,7 +3338,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -3402,7 +3402,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "bone_dragon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -3511,7 +3511,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": "boulder_beetle",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -3562,7 +3562,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -3616,7 +3616,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -3664,7 +3664,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "boundless_tesseract",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -3711,7 +3711,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "brain_worm",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -3758,7 +3758,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -3869,7 +3869,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "broodmother",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -3915,7 +3915,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -3973,7 +3973,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": "bunyip",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -4065,7 +4065,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -4111,7 +4111,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -4157,7 +4157,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -4312,7 +4312,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -4411,7 +4411,7 @@ export const MONSTER_DATA = [
    "petrify": 1
   },
   "spells": "catoblepas",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -4461,7 +4461,7 @@ export const MONSTER_DATA = [
    "cold": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -4512,7 +4512,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -4888,7 +4888,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "chonchon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -4986,7 +4986,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": "clockroach",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -5032,7 +5032,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -5084,7 +5084,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -5250,7 +5250,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -5294,7 +5294,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -5453,7 +5453,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -5499,7 +5499,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "creeping_plasmodium",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "walls_only"
  },
  {
@@ -5599,7 +5599,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -5650,7 +5650,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "crystal_echidna",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -5752,7 +5752,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "walking_tome",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -5801,7 +5801,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": "culicivora",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -5850,7 +5850,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "curse_skull",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -5899,7 +5899,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "curse_toe",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -6059,7 +6059,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -6107,7 +6107,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": "dart_slug",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -6208,7 +6208,7 @@ export const MONSTER_DATA = [
    "miasma": 1
   },
   "spells": "death_drake",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -6309,7 +6309,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -6356,7 +6356,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -6405,7 +6405,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "deathcap",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -7275,7 +7275,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -7321,7 +7321,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -7700,7 +7700,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "sawblade",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -7751,7 +7751,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -7875,7 +7875,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "dissolution",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -7923,7 +7923,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "walking_tome",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -8462,7 +8462,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -8506,7 +8506,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -8652,7 +8652,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "dream_sheep",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -8808,7 +8808,7 @@ export const MONSTER_DATA = [
    "fire": -1
   },
   "spells": "dryad",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -8959,7 +8959,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "wall"
  },
  {
@@ -9007,7 +9007,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "walking_tome",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -9222,7 +9222,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "eldritch_tentacle"
  },
  {
@@ -9284,7 +9284,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "eldritch_tentacle"
  },
  {
@@ -9327,7 +9327,7 @@ export const MONSTER_DATA = [
    "elec": 3
   },
   "spells": "zapper",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "water"
  },
  {
@@ -9489,7 +9489,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "elemental_wellspring",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "water"
  },
  {
@@ -9533,7 +9533,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -9582,7 +9582,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -9633,7 +9633,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -9740,7 +9740,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -9842,7 +9842,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "endoplasm",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -10121,7 +10121,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -10331,7 +10331,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "eye_of_devastation",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -10376,7 +10376,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "eye_of_draining",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -10631,7 +10631,7 @@ export const MONSTER_DATA = [
    "cold": -1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -10685,7 +10685,7 @@ export const MONSTER_DATA = [
    "fire": 3
   },
   "spells": "fire_crab",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious_lava"
  },
  {
@@ -10746,7 +10746,7 @@ export const MONSTER_DATA = [
    "cold": -1
   },
   "spells": "fire_dragon_breath",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -10793,7 +10793,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious_lava"
  },
  {
@@ -10895,7 +10895,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -10991,7 +10991,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -11098,7 +11098,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "blink_close",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -11149,7 +11149,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -11406,7 +11406,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -11450,7 +11450,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -11551,7 +11551,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "walking_tome",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -11603,7 +11603,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -11649,7 +11649,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -11862,7 +11862,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "ghost_crab",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -11924,7 +11924,7 @@ export const MONSTER_DATA = [
    "cold": 1
   },
   "spells": "ghost_moth",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -12070,7 +12070,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -12114,7 +12114,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -12159,7 +12159,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "glass_eye",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -12213,7 +12213,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -12646,7 +12646,7 @@ export const MONSTER_DATA = [
    "neg": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -12709,7 +12709,7 @@ export const MONSTER_DATA = [
    "cold": 1
   },
   "spells": "golden_dragon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -12754,7 +12754,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "golden_eye",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -12798,7 +12798,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -12844,7 +12844,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -12894,7 +12894,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "great_orb_of_eyes",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -13308,7 +13308,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": "guardian_serpent",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -13573,7 +13573,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -13729,7 +13729,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "hell_hog",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -13781,7 +13781,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "hell_hound",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -13875,7 +13875,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -13924,7 +13924,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -14090,7 +14090,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "hellephant",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -14143,7 +14143,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "hellfire_mortar",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "lava"
  },
  {
@@ -14304,7 +14304,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "hippogriff",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -14355,7 +14355,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "hoarfrost_cannon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -14448,7 +14448,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -14496,7 +14496,7 @@ export const MONSTER_DATA = [
    "neg": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -14545,7 +14545,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -14593,7 +14593,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -14735,7 +14735,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -14785,7 +14785,7 @@ export const MONSTER_DATA = [
    "cold": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -14896,7 +14896,7 @@ export const MONSTER_DATA = [
    "cold": 2
   },
   "spells": "ice_dragon_breath",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -15003,7 +15003,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "ice_statue",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -15121,7 +15121,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -15319,7 +15319,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -15380,7 +15380,7 @@ export const MONSTER_DATA = [
    "cold": 1
   },
   "spells": "iron_dragon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -15431,7 +15431,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "iron_elemental",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -15993,7 +15993,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -16048,7 +16048,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -16201,7 +16201,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -16629,7 +16629,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": "jumping_spider",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -16733,7 +16733,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -17169,7 +17169,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -17215,7 +17215,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -17266,7 +17266,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -17313,7 +17313,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "kraken",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "deep_water"
  },
  {
@@ -17364,7 +17364,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "laughing_skull",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -17413,7 +17413,7 @@ export const MONSTER_DATA = [
    "cold": -1
   },
   "spells": "lava_snake",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "lava"
  },
  {
@@ -17514,7 +17514,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -17615,7 +17615,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "zapper",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -17671,7 +17671,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "lindwurm",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -17717,7 +17717,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -17876,7 +17876,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -17977,7 +17977,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -18118,7 +18118,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -18175,7 +18175,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "manticore",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -18336,7 +18336,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -19051,7 +19051,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "mlioglotl",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -19222,7 +19222,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "monarch_bomb",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -19348,7 +19348,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -19396,7 +19396,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "moth_of_wrath",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -19440,7 +19440,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -19487,7 +19487,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "mountainshell",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -19650,7 +19650,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "murray",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -19697,7 +19697,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -20083,7 +20083,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "nameless",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -20142,7 +20142,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "nargun",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -20188,7 +20188,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "nascent_plasmodium",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "walls_only"
  },
  {
@@ -20458,7 +20458,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "hellephant",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -20769,7 +20769,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "oblivion_hound",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -20824,7 +20824,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -20874,7 +20874,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "obsidian_statue",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -21114,7 +21114,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "acid_spit",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -21158,7 +21158,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "oklob_sapling",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -21304,7 +21304,7 @@ export const MONSTER_DATA = [
    "neg": 3
   },
   "spells": "ophan",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -21406,7 +21406,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "orange_crystal_statue",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -21508,7 +21508,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -21558,7 +21558,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "orb_of_entropy",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -21607,7 +21607,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "orb_of_fire",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -21656,7 +21656,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "orb_of_winter",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -21706,7 +21706,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": "orb_spider",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -22421,7 +22421,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "peacekeeper",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -22476,7 +22476,7 @@ export const MONSTER_DATA = [
    "neg": 3
   },
   "spells": "pearl_dragon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -22525,7 +22525,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -22578,7 +22578,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -22735,7 +22735,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -22834,7 +22834,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -22882,7 +22882,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -23024,7 +23024,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -23286,7 +23286,7 @@ export const MONSTER_DATA = [
    "cold": 1
   },
   "spells": "bear",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -23495,7 +23495,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "blinker",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -23761,7 +23761,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": "queen_bee",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -23814,7 +23814,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "quicksilver_dragon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -23868,7 +23868,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "quicksilver_dragon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -23914,7 +23914,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -23966,7 +23966,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "radroach",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -24062,7 +24062,7 @@ export const MONSTER_DATA = [
    "elec": 3
   },
   "spells": "raiju",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -24158,7 +24158,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -24205,7 +24205,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "raven",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -24410,7 +24410,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -24458,7 +24458,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -24609,7 +24609,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "ribbon_worm",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -24658,7 +24658,7 @@ export const MONSTER_DATA = [
    "cold": 1
   },
   "spells": "rime_drake",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -24704,7 +24704,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -24801,7 +24801,7 @@ export const MONSTER_DATA = [
    "petrify": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "wall"
  },
  {
@@ -24856,7 +24856,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -24970,7 +24970,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -25171,7 +25171,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "water"
  },
  {
@@ -25514,7 +25514,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -25611,7 +25611,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "scrub_nettle",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -25657,7 +25657,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -25762,7 +25762,7 @@ export const MONSTER_DATA = [
    "cold": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -25810,7 +25810,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "seismosaurus",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -25941,7 +25941,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "serpent_of_hell_coc",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -26012,7 +26012,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "serpent_of_hell_dis",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -26083,7 +26083,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "serpent_of_hell_tar",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -26154,7 +26154,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "serpent_of_hell_geh",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -26314,7 +26314,7 @@ export const MONSTER_DATA = [
    "neg": 3
   },
   "spells": "shadow_dragon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -26417,7 +26417,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -26481,7 +26481,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -26529,7 +26529,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "shadow_turret",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -26682,7 +26682,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "shambling_mangrove",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -26776,7 +26776,7 @@ export const MONSTER_DATA = [
    "cold": 2
   },
   "spells": "shard_shrike",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -26821,7 +26821,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": "shining_eye",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -26869,7 +26869,7 @@ export const MONSTER_DATA = [
    "elec": 3
   },
   "spells": "shock_serpent",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -26922,7 +26922,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -27125,7 +27125,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -27327,7 +27327,7 @@ export const MONSTER_DATA = [
    "elec": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -27385,7 +27385,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -27432,7 +27432,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -27484,7 +27484,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -27539,7 +27539,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -27645,7 +27645,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -27692,7 +27692,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -27744,7 +27744,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -27790,7 +27790,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -27965,7 +27965,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -28128,7 +28128,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -28179,7 +28179,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": "spark_wasp",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -28239,7 +28239,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -28295,7 +28295,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -28393,7 +28393,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -28451,7 +28451,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -28499,7 +28499,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -28593,7 +28593,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -28637,7 +28637,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -28685,7 +28685,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -29095,7 +29095,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29146,7 +29146,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29208,7 +29208,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "starflower",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29257,7 +29257,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29311,7 +29311,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29423,7 +29423,7 @@ export const MONSTER_DATA = [
    "steam": 1
   },
   "spells": "steam_dragon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29472,7 +29472,7 @@ export const MONSTER_DATA = [
    "fire": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29523,7 +29523,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "stoker",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious_lava"
  },
  {
@@ -29629,7 +29629,7 @@ export const MONSTER_DATA = [
    "elec": 3
   },
   "spells": "storm_dragon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29678,7 +29678,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "strange_machine",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29781,7 +29781,7 @@ export const MONSTER_DATA = [
    "fire": 2
   },
   "spells": "sun_moth",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29840,7 +29840,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": "swamp_dragon",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29889,7 +29889,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": "swamp_drake",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -29935,7 +29935,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "swamp_worm",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -30045,7 +30045,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -30513,7 +30513,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "thermic_dynamo",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -30568,7 +30568,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "thorn_hunter",
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -30627,7 +30627,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "thrashing_horror",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -30781,7 +30781,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -30936,7 +30936,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -31097,7 +31097,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -31196,7 +31196,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -31526,7 +31526,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -31630,7 +31630,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "ushabti",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -31684,7 +31684,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -31915,7 +31915,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -32342,7 +32342,7 @@ export const MONSTER_DATA = [
    "corr": 3
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -32499,7 +32499,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -32546,7 +32546,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -32652,7 +32652,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -32704,7 +32704,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -32752,7 +32752,7 @@ export const MONSTER_DATA = [
    "poison": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": "amphibious"
  },
  {
@@ -32850,7 +32850,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "weeping_skull",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -32907,7 +32907,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "wendigo",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -33156,7 +33156,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "will_o_the_wisp",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -33203,7 +33203,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": "wind_drake",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -33250,7 +33250,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -33304,7 +33304,7 @@ export const MONSTER_DATA = [
    "poison": -1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -33352,7 +33352,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -33509,7 +33509,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "wretched_star",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -33564,7 +33564,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": "wyrmhole",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -33611,7 +33611,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -33729,7 +33729,7 @@ export const MONSTER_DATA = [
    "cold": -1
   },
   "spells": "xtahua",
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -33776,7 +33776,7 @@ export const MONSTER_DATA = [
   ],
   "resists": {},
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {
@@ -34079,7 +34079,7 @@ export const MONSTER_DATA = [
    "torment": 1
   },
   "spells": null,
-  "uses": null,
+  "uses": "nothing",
   "habitat": null
  },
  {

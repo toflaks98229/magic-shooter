@@ -715,3 +715,77 @@ test('감속에 걸린 플레이어가 느려진다', () => {
     assert.ok(normal > 0, '평소에 움직이지 않았습니다');
     assert.ok(slowed < normal * 0.8, `보통 ${normal.toFixed(0)}px, 감속 ${slowed.toFixed(0)}px`);
 });
+
+// --- 문 ---------------------------------------------------------------------------
+
+/** 플레이어와 적 사이를 벽으로 막고 가운데에 문 하나를 둡니다. */
+function walledWithDoor(world) {
+    const column = Math.floor(world.player.x / C.TILE_SIZE) + 4;
+    const row = Math.floor(world.player.y / C.TILE_SIZE);
+
+    for (let y = 0; y < C.MAP_HEIGHT; y++) world.map[y][column] = C.TILE_IDS.WALL;
+    world.map[row][column] = C.TILE_IDS.DOOR;
+    world.objectMap[row][column] = 1;
+    world.mapRevision = (world.mapRevision ?? 0) + 1;
+
+    return { column, row };
+}
+
+test('문을 열 줄 아는 적이 문을 연다', () => {
+    // 예전에는 문을 여는 곳이 플레이어의 상호작용 하나뿐이었습니다.
+    // 몬스터에게 문은 벽과 같아서, 문 하나로 나뉜 방은 영영 닿지 않았습니다.
+    const world = emptyRoom();
+    const door = walledWithDoor(world);
+
+    const enemy = placeEnemy(world, {
+        canOpenDoors: true, speed: 1.5, state: 'chase', huntUntil: 1e9,
+        x: (door.column + 4) * C.TILE_SIZE, y: world.player.y,
+    });
+
+    run(400);
+    assert.equal(world.objectMap[door.row][door.column], 0, '문이 열리지 않았습니다');
+    assert.ok(enemy.x < door.column * C.TILE_SIZE, '문을 지나오지 못했습니다');
+});
+
+test('문을 열 때 여는 연출이 함께 나간다', () => {
+    // 이것이 없어서 문이 소리 없이 사라졌습니다. 플레이어가 열 때는
+    // 올라가는 연출이 나오는데 몬스터가 열 때는 나오지 않았습니다.
+    const world = emptyRoom();
+    const door = walledWithDoor(world);
+
+    placeEnemy(world, {
+        canOpenDoors: true, speed: 1.5, state: 'chase', huntUntil: 1e9,
+        x: (door.column + 4) * C.TILE_SIZE, y: world.player.y,
+    });
+
+    let peak = 0;
+    for (let i = 0; i < 400; i++) {
+        gameLogic.update(C.SIMULATION_STEP_MS);
+        peak = Math.max(peak, world.animatedWalls.length);
+    }
+
+    assert.ok(peak > 0, '문이 열렸는데 여는 연출이 등록되지 않았습니다');
+});
+
+test('짐승은 문을 열지 못한다', () => {
+    // 원본은 물건을 다룰 줄 아는 몬스터만 문을 엽니다. 짐승과 언데드는
+    // 열지 못해 문이 실제로 벽 노릇을 합니다. 그래야 문을 닫고 도망치는
+    // 선택에 뜻이 생깁니다.
+    const world = emptyRoom();
+    const door = walledWithDoor(world);
+
+    const enemy = placeEnemy(world, {
+        canOpenDoors: false, speed: 1.5, state: 'chase', huntUntil: 1e9,
+        x: (door.column + 4) * C.TILE_SIZE, y: world.player.y,
+    });
+
+    run(400);
+    assert.equal(world.objectMap[door.row][door.column], 1, '짐승이 문을 열었습니다');
+    assert.ok(enemy.x > door.column * C.TILE_SIZE, '짐승이 문을 지나왔습니다');
+});
+
+test('원본이 정한 대로 갈린다', () => {
+    // 쥐와 좀비는 못 열고 오크는 엽니다.
+    assert.equal(M.getMonster('rat').canOpenDoors, false);
+    assert.equal(M.getMonster('orc').canOpenDoors, true);
+});

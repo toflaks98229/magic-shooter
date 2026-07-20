@@ -183,13 +183,16 @@ function convert(raw, file) {
         // 우는 소리. 실제로 중요한 것은 소리의 종류가 아니라 그 반경입니다.
         // 이 소리를 들은 몬스터가 깨어나 몰려옵니다. (mon-util.cc:1207)
         shout: raw.shout ?? 'silent',
+
         holiness,
         genus: raw.genus ?? null,
         species: raw.species ?? null,
         flags: raw.flags ?? [],
         resists: applyHolinessResists(raw.resists ?? {}, holiness),
         spells: raw.spells ?? null,
-        uses: raw.uses ?? null,
+        // 물건을 다룰 줄 아는 정도. 문을 열 수 있는지가 여기서 갈립니다.
+        // 값이 없으면 아무것도 다루지 못하는 것입니다. (mon-enum.h:230)
+        uses: raw.uses || 'nothing',
         habitat: raw.habitat ?? null,
     };
 }

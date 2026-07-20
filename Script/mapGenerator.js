@@ -79,7 +79,9 @@ export function generateDungeon(width, height, options = {}) {
     }
 
 
-    placeDoors(map, objectMap, playerStart);
+if(globalThis.__DBG) console.log("  전 63,20 =", map[20]?.[63], "볼트", JSON.stringify(vaults.map(v=>[v.left,v.top,v.width,v.height])));
+    placeDoors(map, objectMap, playerStart, vaults);
+if(globalThis.__DBG) console.log("  후 63,20 =", map[20]?.[63]);
 
     const exit = pickExit(map, playerStart);
     map[exit.y][exit.x] = TILE_IDS.EXIT;
@@ -276,7 +278,16 @@ function pickExit(map, playerStart) {
  * @param {number[][]} map - 맵
  * @param {number[][]} objectMap - 오브젝트 맵
  */
-function placeDoors(map, objectMap, playerStart) {
+function placeDoors(map, objectMap, playerStart, vaults = []) {
+    // 볼트 안에는 문을 놓지 않습니다.
+    //
+    // 볼트는 손으로 그린 방입니다. 그 위에 문을 얹으면 설계가 무너집니다.
+    // 실제로 볼트가 '여기 몬스터가 선다' 고 정해 둔 칸을 문이 덮어,
+    // 문을 열 줄 모르는 짐승이 닫힌 문 안에 갇혀 있었습니다.
+    // 원본도 볼트를 이런 후처리로부터 보호합니다. (no_wall_fixup 등)
+    const inVault = (x, y) => vaults.some(v =>
+        x >= v.left && x < v.left + v.width && y >= v.top && y < v.top + v.height);
+
     const height = map.length, width = map[0].length;
     const DOOR_CHANCE = 0.05;
 
@@ -287,6 +298,7 @@ function placeDoors(map, objectMap, playerStart) {
     for (let y = 1; y < height - 1; y++) {
         for (let x = 1; x < width - 1; x++) {
             if (map[y][x] !== TILE_IDS.FLOOR) continue;
+            if (inVault(x, y)) continue;
             if (Math.random() > DOOR_CHANCE) continue;
 
             // 가로로 목이 잡히는가. 즉 좌우가 벽으로 끊긴 짧은 구간인가.
@@ -301,6 +313,13 @@ function placeDoors(map, objectMap, playerStart) {
             const coversStart = playerStart && playerStart.y === y
                 && playerStart.x >= across.start && playerStart.x < across.start + across.length;
             if (coversStart) continue;
+
+            // 관문은 여러 칸을 한 번에 칠합니다. 시작 칸만 보고 지나가면
+            // 볼트 밖에서 시작한 관문이 볼트 안까지 칠해 설계를 덮습니다.
+            // 실제로 오두막 볼트의 식물 자리가 그렇게 문이 되어 있었습니다.
+            const reachesVault = Array.from({ length: across.length })
+                .some((_, d) => inVault(across.start + d, y));
+            if (reachesVault) continue;
 
             for (let d = 0; d < across.length; d++) {
                 map[y][across.start + d] = TILE_IDS.DOOR;

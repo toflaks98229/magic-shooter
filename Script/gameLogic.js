@@ -853,6 +853,19 @@ function spawnVaultMonsters() {
             const id = resolveVaultMonster(spawn.id);
             if (!id) continue;
 
+            // 볼트가 여기 선다고 정한 자리입니다. 그 위에 문이 얹혀 있으면
+            // 나중에 얹은 쪽이 잘못이므로 걷어냅니다.
+            //
+            // 그대로 두면 문을 열 줄 모르는 짐승이 닫힌 문 안에 갇힙니다.
+            // 실제로 이천이백 마리 중 다섯이 그런 상태였습니다.
+            if (world.objectMap[spawn.tileY]?.[spawn.tileX] > 0) {
+                world.objectMap[spawn.tileY][spawn.tileX] = 0;
+                if (world.map[spawn.tileY][spawn.tileX] === C.TILE_IDS.DOOR) {
+                    world.map[spawn.tileY][spawn.tileX] = C.TILE_IDS.FLOOR;
+                }
+                world.mapRevision++;
+            }
+
             spawnMonster(id, {
                 x: spawn.tileX * C.TILE_SIZE + C.TILE_SIZE / 2,
                 y: spawn.tileY * C.TILE_SIZE + C.TILE_SIZE / 2,
@@ -1286,41 +1299,60 @@ const ENEMY_STATES = {
 const UNREACHABLE = -1;
 
 /** @description 각 타일에서 플레이어까지의 걸음 수 */
-let flowField = null;
+/**
+ * @description 무엇을 지나갈 수 있는지가 다르면 길도 달라지므로 격자를 따로 둡니다.
+ *
+ * 네 가지입니다. 나는가 × 문을 여는가.
+ * 하나로 쓰면 나는 적이 물 위로 못 오거나, 짐승이 열 수도 없는 문을 향해
+ * 걸어가 벽에 머리를 박습니다.
+ *
+ * 격자 하나가 5600 칸이고 플레이어가 타일을 넘을 때만 다시 계산하므로
+ * 넷을 두어도 부담이 되지 않습니다.
+ */
+const FLOW_VARIANTS = 4;
 
-/** @description 나는 것을 위한 격자. 깊은 물과 용암을 지나갈 수 있습니다. */
-let flyingFlowField = null;
+/**
+ * 변형 번호를 구합니다.
+ * @param {boolean} flying - 나는가
+ * @param {boolean} canOpen - 문을 여는가
+ * @returns {number} 0~3
+ */
+function flowVariant(flying, canOpen) {
+    return (flying ? 1 : 0) | (canOpen ? 2 : 0);
+}
+
+/** @description 변형별 격자. */
+const flowFields = new Array(FLOW_VARIANTS).fill(null);
+
+/** @description 변형별로 언제 다시 계산할지 판단하는 값들. */
+const flowCaches = Array.from({ length: FLOW_VARIANTS },
+    () => ({ tileX: -1, tileY: -1, map: null, revision: -1 }));
+
 /** @description BFS에 재사용하는 큐. 프레임마다 새로 할당하지 않기 위해 보관합니다. */
 let flowQueue = null;
-/** @description 마지막으로 계산한 시점의 플레이어 타일과 맵 상태 */
-let flowFieldCache = { tileX: -1, tileY: -1, map: null, revision: -1 };
-
-/** @description 나는 것의 격자를 언제 다시 계산할지 판단하는 값들. */
-let flyingFlowFieldCache = { tileX: -1, tileY: -1, map: null, revision: -1 };
 
 /**
  * 플로우 필드가 최신인지 확인하고, 필요하면 다시 계산합니다.
  * 플레이어가 다른 칸으로 옮겼거나, 층이 바뀌었거나, 문이 열려 통행이 달라졌을 때만 계산합니다.
  */
-function ensureFlowField(flying = false) {
+function ensureFlowField(flying = false, canOpen = false) {
     const tileX = Math.floor(world.player.x / C.TILE_SIZE);
     const tileY = Math.floor(world.player.y / C.TILE_SIZE);
-    const cache = flying ? flyingFlowFieldCache : flowFieldCache;
-    const field = flying ? flyingFlowField : flowField;
 
-    const isCurrent = field
+    const variant = flowVariant(flying, canOpen);
+    const cache = flowCaches[variant];
+
+    const isCurrent = flowFields[variant]
         && cache.tileX === tileX
         && cache.tileY === tileY
         && cache.map === world.map
         && cache.revision === world.mapRevision;
-    if (isCurrent) return field;
+    if (isCurrent) return flowFields[variant];
 
-    computeFlowField(tileX, tileY, flying);
-    const fresh = { tileX, tileY, map: world.map, revision: world.mapRevision };
-    if (flying) flyingFlowFieldCache = fresh;
-    else flowFieldCache = fresh;
+    computeFlowField(tileX, tileY, flying, canOpen);
+    flowCaches[variant] = { tileX, tileY, map: world.map, revision: world.mapRevision };
 
-    return flying ? flyingFlowField : flowField;
+    return flowFields[variant];
 }
 
 /**
@@ -1328,19 +1360,17 @@ function ensureFlowField(flying = false) {
  * @param {number} targetX - 플레이어의 타일 X 좌표
  * @param {number} targetY - 플레이어의 타일 Y 좌표
  */
-function computeFlowField(targetX, targetY, flying = false) {
+function computeFlowField(targetX, targetY, flying = false, canOpen = false) {
     const width = C.MAP_WIDTH, height = C.MAP_HEIGHT;
     const size = width * height;
 
-    if (!flowField || flowField.length !== size) {
-        flowField = new Int32Array(size);
-        flyingFlowField = new Int32Array(size);
+    const variant = flowVariant(flying, canOpen);
+    if (!flowFields[variant] || flowFields[variant].length !== size) {
+        for (let v = 0; v < FLOW_VARIANTS; v++) flowFields[v] = new Int32Array(size);
         flowQueue = new Int32Array(size);
     }
 
-    // 걷는 것과 나는 것은 갈 수 있는 곳이 달라 격자를 따로 둡니다.
-    // 하나로 쓰면 나는 적이 물 위로 못 오거나, 걷는 적이 물에 뛰어듭니다.
-    const field = flying ? flyingFlowField : flowField;
+    const field = flowFields[variant];
     field.fill(UNREACHABLE);
 
     if (targetX < 0 || targetY < 0 || targetX >= width || targetY >= height) return;
@@ -1364,7 +1394,7 @@ function computeFlowField(targetX, targetY, flying = false) {
 
             const neighbour = ny * width + nx;
             if (field[neighbour] !== UNREACHABLE) continue;
-            if (!isPassable(nx, ny, flying)) continue;
+            if (!isPassable(nx, ny, flying, canOpen)) continue;
 
             field[neighbour] = nextDistance;
             flowQueue[tail++] = neighbour;
@@ -1384,7 +1414,7 @@ function followFlowField(enemy, dtFactor) {
     if (tileX < 0 || tileY < 0 || tileX >= width || tileY >= C.MAP_HEIGHT) return;
 
     // 나는 적은 자기 격자를 봅니다. 물 위로 곧장 올 수 있습니다.
-    const field = ensureFlowField(!!enemy.flies);
+    const field = ensureFlowField(!!enemy.flies, !!enemy.canOpenDoors);
 
     const here = field[tileY * width + tileX];
     if (here === UNREACHABLE || here === 0) return; // 길이 없거나 이미 플레이어 칸
@@ -1411,8 +1441,9 @@ function followFlowField(enemy, dtFactor) {
     const angle = Math.atan2(targetY - enemy.y, targetX - enemy.x);
     const speed = effectiveSpeed(enemy) * dtFactor;
 
-    enemy.x += Math.cos(angle) * speed;
-    enemy.y += Math.sin(angle) * speed;
+    // 좌표를 직접 옮기지 않고 moveEnemyBy 를 거칩니다.
+    // 그래야 문 앞에서 문을 열고, 여는 연출도 함께 나갑니다.
+    moveEnemyBy(enemy, Math.cos(angle) * speed, Math.sin(angle) * speed);
 }
 
 /**
@@ -1433,7 +1464,11 @@ function fleeAlongFlowField(enemy, dtFactor) {
     const tileY = Math.floor(enemy.y / C.TILE_SIZE);
     if (tileX < 0 || tileY < 0 || tileX >= width || tileY >= C.MAP_HEIGHT) return false;
 
-    const here = flowField[tileY * width + tileX];
+    // 도망도 자기 길을 봅니다. 문을 못 여는 짐승이 문 쪽으로 도망가면
+    // 막다른 곳에 몰린 것과 같아집니다.
+    const field = ensureFlowField(!!enemy.flies, !!enemy.canOpenDoors);
+
+    const here = field[tileY * width + tileX];
     if (here === UNREACHABLE) return false;
 
     // 걸음 수가 더 큰 이웃 = 플레이어에게서 더 먼 칸
@@ -1445,7 +1480,7 @@ function fleeAlongFlowField(enemy, dtFactor) {
         if (nx < 0 || ny < 0 || nx >= width || ny >= C.MAP_HEIGHT) continue;
 
         const neighbour = ny * width + nx;
-        const distance = flowField[neighbour];
+        const distance = field[neighbour];
         if (distance !== UNREACHABLE && distance > bestDistance) {
             bestDistance = distance;
             bestNode = neighbour;
@@ -1458,8 +1493,9 @@ function fleeAlongFlowField(enemy, dtFactor) {
     const angle = Math.atan2(targetY - enemy.y, targetX - enemy.x);
     const speed = effectiveSpeed(enemy) * dtFactor;
 
-    enemy.x += Math.cos(angle) * speed;
-    enemy.y += Math.sin(angle) * speed;
+    // 좌표를 직접 옮기지 않고 moveEnemyBy 를 거칩니다.
+    // 그래야 문 앞에서 문을 열고, 여는 연출도 함께 나갑니다.
+    moveEnemyBy(enemy, Math.cos(angle) * speed, Math.sin(angle) * speed);
     return true;
 }
 
@@ -1471,7 +1507,7 @@ function fleeAlongFlowField(enemy, dtFactor) {
  * @param {number} y - 맵 타일 Y 좌표
  * @returns {boolean} 통과 가능하면 true
  */
-function isPassable(x, y, flying = false) {
+function isPassable(x, y, flying = false, canOpen = false) {
     // 1. 지형이 통행을 막는지 확인 (맵 밖은 벽으로 취급됩니다)
     const tile = C.tileAt(world.map, x, y);
     if (tile.solid) {
@@ -1488,6 +1524,13 @@ function isPassable(x, y, flying = false) {
     if (objectId > 0) {
         const objectType = C.OBJECT_TYPES[objectId];
         if (objectType && objectType.solid) {
+            // 닫힌 문은 열 줄 아는 것에게는 길입니다.
+            //
+            // 이것이 없으면 문이 몬스터에게 벽과 같아, 문 하나로 나뉜 방은
+            // 영영 서로 닿지 않습니다. 원본에서는 물건을 다룰 줄 아는
+            // 몬스터가 문을 엽니다. 짐승과 언데드는 열지 못해
+            // 문이 실제로 벽 노릇을 합니다. (mon-util.cc:3836)
+            if (canOpen && objectType.interactive) return true;
             return false;
         }
     }
@@ -1714,15 +1757,43 @@ function separateEnemies(dtFactor) {
  * @param {number} dy - Y 방향 이동량
  */
 function moveEnemyBy(enemy, dx, dy) {
+    const canOpen = !!enemy.canOpenDoors;
+
     const nextX = enemy.x + dx;
-    if (isPassable(Math.floor(nextX / C.TILE_SIZE), Math.floor(enemy.y / C.TILE_SIZE), !!enemy.flies)) {
+    const tileX = Math.floor(nextX / C.TILE_SIZE);
+    if (isPassable(tileX, Math.floor(enemy.y / C.TILE_SIZE), !!enemy.flies, canOpen)) {
+        openDoorIfBlocking(tileX, Math.floor(enemy.y / C.TILE_SIZE), canOpen);
         enemy.x = nextX;
     }
 
     const nextY = enemy.y + dy;
-    if (isPassable(Math.floor(enemy.x / C.TILE_SIZE), Math.floor(nextY / C.TILE_SIZE), !!enemy.flies)) {
+    const tileY = Math.floor(nextY / C.TILE_SIZE);
+    if (isPassable(Math.floor(enemy.x / C.TILE_SIZE), tileY, !!enemy.flies, canOpen)) {
+        openDoorIfBlocking(Math.floor(enemy.x / C.TILE_SIZE), tileY, canOpen);
         enemy.y = nextY;
     }
+}
+
+/**
+ * 들어서려는 칸에 닫힌 문이 있으면 엽니다.
+ *
+ * 플레이어와 같은 경로를 씁니다. 그래야 문이 올라가는 연출도 같이 나갑니다.
+ * 예전에는 문을 여는 곳이 플레이어의 상호작용 하나뿐이라, 몬스터는 문을
+ * 아예 지나지 못했습니다. 문 하나로 나뉜 방은 서로 영영 닿지 않았습니다.
+ * @param {number} tileX - 타일 X
+ * @param {number} tileY - 타일 Y
+ * @param {boolean} canOpen - 이 몬스터가 문을 열 줄 아는가
+ */
+function openDoorIfBlocking(tileX, tileY, canOpen) {
+    if (!canOpen) return;
+
+    const objectId = world.objectMap[tileY]?.[tileX];
+    if (!objectId) return;
+
+    const objectType = C.OBJECT_TYPES[objectId];
+    if (objectType?.name !== 'Door') return;
+
+    A.openDoor(tileX, tileY);
 }
 
 /**
@@ -1819,7 +1890,8 @@ function handleEnemyDeaths() {
  * @returns {boolean} 갈 수 있으면 true
  */
 function reachableByPlayer(mapX, mapY) {
-    const field = ensureFlowField();
+    // 플레이어 기준입니다. 플레이어는 날지 못하고 문은 엽니다.
+    const field = ensureFlowField(false, true);
     if (!field) return true;   // 아직 없으면 막지 않습니다
     return field[mapY * C.MAP_WIDTH + mapX] !== UNREACHABLE;
 }
