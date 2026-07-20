@@ -87,9 +87,6 @@ export function registerUiHandlers() {
     on(EVENTS.WEAPON_CHANGED, ({ to }) => playWeaponSwapAnimation(to));
 
     // 소지품 창은 제목 줄을 눌러서도 접고 펼 수 있습니다.
-    dom.inventoryHeaderEl.addEventListener('click', () => {
-        runtime.isInventoryOpen = !runtime.isInventoryOpen;
-    });
 }
 
 // --- 외부 공개 함수 (Public Methods) ---
@@ -321,8 +318,8 @@ function updateWieldedWeapon() {
  * 그렇지 않으면 초당 수십 번 목록 전체를 다시 만들게 됩니다.
  */
 function updateInventory() {
-    dom.inventoryEl.classList.toggle('collapsed', !runtime.isInventoryOpen);
-    setText(dom.inventoryToggleEl, runtime.isInventoryOpen ? '[-]' : '[+]');
+    // 원본처럼 i 로 여는 전체 화면입니다. 상태 패널에 늘 띄워 두지 않습니다.
+    dom.inventoryScreenEl.style.display = runtime.isInventoryOpen ? 'flex' : 'none';
     setText(dom.inventoryTitleEl, inventorySummary(world.inventory));
 
     const signature = world.inventory.map(slot => `${slot.itemId}:${slot.count}`).join(',');

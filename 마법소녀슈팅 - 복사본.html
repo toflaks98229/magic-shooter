@@ -157,37 +157,15 @@
         }
 
         /* --- 소지품 창 ------------------------------------------------------ */
-
-        #inventory {
-            border: 1px solid var(--border);
-            background: #101012;
-            display: flex;
-            flex-direction: column;
-            min-height: 0;
-            flex: 1;
-        }
-
-        #inventory-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 3px 8px;
-            background: #1c1c20;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            user-select: none;
-        }
-        #inventory-header:hover { background: #26262c; }
-        #inventory-toggle { color: var(--dim); }
+        /* 원본처럼 전체 화면입니다. 상태 패널에 늘 띄워 두지 않습니다. */
 
         #inventory-body {
             overflow-y: auto;
-            padding: 6px 8px;
-            flex: 1;
+            padding: 8px 0;
+            min-width: 420px;
+            max-height: 60vh;
+            text-align: left;
         }
-        /* 접힌 상태에서는 제목 줄만 남습니다. */
-        #inventory.collapsed { flex: 0 0 auto; }
-        #inventory.collapsed #inventory-body { display: none; }
 
         .inv-category {
             color: var(--dim);
@@ -539,17 +517,21 @@
             <div class="panel-divider"></div>
             <div id="buff-list"></div>
 
-            <!-- 소지품: 제목 줄을 눌러 접고 펼칩니다 -->
-            <div id="inventory">
-                <div id="inventory-header">
-                    <span id="inventory-title">소지품 0/20칸</span>
-                    <span id="inventory-toggle">[-]</span>
-                </div>
-                <div id="inventory-body">
-                    <div class="inv-empty">가진 것이 없다.</div>
-                </div>
-            </div>
+
         </aside>
+
+        <!-- 소지품. 원본처럼 i 로 여는 전체 화면 메뉴입니다.
+             상태 패널에 늘 띄워 두지 않는 것이 원본의 방식이고,
+             1인칭 화면에서도 시야를 가리지 않아 그편이 맞습니다. -->
+        <div id="inventory-screen" class="fullscreen-menu" style="display:none">
+            <p class="chargen-prompt" id="inventory-title">소지품</p>
+            <div id="inventory-body">
+                <div class="inv-empty">가진 것이 없다.</div>
+            </div>
+            <div class="menu-footer">
+                <span class="menu-key">a-t</span> 사용 · <span class="menu-key">i</span> 또는 <span class="menu-key">Esc</span> 닫기
+            </div>
+        </div>
 
         <!-- 캐릭터 생성. 종족 -> 직업 순으로, DCSS 와 같은 차례입니다. -->
         <div id="chargen-screen" class="fullscreen-menu" style="display:none">

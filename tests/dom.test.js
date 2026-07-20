@@ -55,13 +55,17 @@ test('HTML 이 게임 스크립트를 모듈로 불러온다', () => {
         'main.js 를 type="module" 로 불러와야 import 가 동작합니다');
 });
 
-test('소지품 창이 접기 위한 구조를 갖추고 있다', () => {
-    // ui.js 가 이 구조를 전제로 클래스를 토글합니다.
-    assert.match(html, /id="inventory"/, '소지품 창 컨테이너가 필요합니다');
-    assert.match(html, /id="inventory-header"/, '눌러서 접을 제목 줄이 필요합니다');
-    assert.match(html, /id="inventory-body"/, '접었을 때 숨길 본문이 필요합니다');
-    assert.match(html, /#inventory\.collapsed\s+#inventory-body\s*\{\s*display:\s*none/,
-        '접힌 상태에서 본문을 숨기는 규칙이 CSS 에 필요합니다');
+test('소지품은 전체 화면으로 열린다', () => {
+    // 원본은 상태 패널에 소지품을 두지 않습니다. i 로 여는 전체 화면 메뉴이고,
+    // 1인칭 화면에서는 늘 띄워 두면 시야를 가려 그편이 더 맞습니다.
+    assert.match(html, /id="inventory-screen"/, '소지품 화면이 필요합니다');
+    assert.match(html, /id="inventory-body"/, '목록을 담을 본문이 필요합니다');
+    assert.ok(!/id="inventory-header"/.test(html),
+        '접었다 펴는 제목 줄은 원본에 없습니다');
+
+    // 상태 패널 안에 남아 있으면 안 됩니다.
+    const panel = /<aside id="status-panel">([\s\S]*?)<\/aside>/.exec(html)?.[1] ?? '';
+    assert.ok(!panel.includes('inventory'), '소지품이 아직 상태 패널 안에 있습니다');
 });
 
 test('게임 화면과 상태 패널이 나란히 놓인다', () => {
@@ -70,4 +74,19 @@ test('게임 화면과 상태 패널이 나란히 놓인다', () => {
     assert.match(html, /id="status-panel"/, '상태 패널이 필요합니다');
     assert.match(html, /#game-container\s*\{[^}]*display:\s*flex/,
         '게임 화면과 패널을 나란히 놓으려면 flex 배치가 필요합니다');
+});
+
+test('소지품 줄에 물건 그림이 붙는다', () => {
+    // 원본은 목록에 물건의 타일을 함께 보여줍니다. 이름만으로는
+    // 한눈에 구분되지 않습니다.
+    const ui = readFileSync(new URL('../Script/ui.js', import.meta.url), 'utf8');
+    assert.match(ui, /spriteImage\(entry\.item\.spriteKey/,
+        '소지품 줄이 물건 그림을 만들지 않습니다');
+});
+
+test('소지품 화면에 여닫는 키가 적혀 있다', () => {
+    // 전체 화면 메뉴는 닫는 법이 보이지 않으면 갇힌 것처럼 느껴집니다.
+    const screen = /<div id="inventory-screen"[\s\S]*?<\/div>\s*<\/div>/.exec(html)?.[0] ?? '';
+    assert.ok(screen.includes('Esc') || screen.includes('i'),
+        '닫는 키가 적혀 있지 않습니다');
 });
