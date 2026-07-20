@@ -1,7 +1,7 @@
 {
   "frames": 1800,
   "stats": {
-    "sounds": 70,
+    "sounds": 69,
     "gameOvers": 1,
     "floors": 2,
     "attacks": 180,
@@ -16,7 +16,7 @@
     "x": 112,
     "y": 144,
     "angle": 8.85,
-    "hp": 70,
+    "hp": 85,
     "ammo": 0
   },
   "counts": {

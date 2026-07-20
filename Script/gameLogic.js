@@ -644,6 +644,79 @@ function updateEnemies(now, dtFactor) {
         const behave = ENEMY_BEHAVIORS[enemy.behavior];
         if (behave) behave(enemy, { now, dtFactor, player, distance, dx, dy });
     }
+
+    // 걸음을 다 옮긴 뒤에 겹친 것을 풉니다.
+    // 이동 중에 풀면 아직 움직이지 않은 적을 기준으로 밀어내게 되어,
+    // 배열 순서에 따라 결과가 달라집니다.
+    separateEnemies(dtFactor);
+}
+
+/**
+ * 겹쳐 선 적들을 서로 밀어냅니다.
+ *
+ * 모든 적이 같은 플로우 필드를 따르고 그 필드가 네 방향만 보므로, 다들 같은 타일 중심을
+ * 향해 걷습니다. 밀어내지 않으면 플레이어 앞에서 여러 마리가 한 점에 겹쳐 한 마리처럼
+ * 보이고, 무엇을 상대하고 있는지 알 수 없게 됩니다.
+ *
+ * 모든 쌍을 보는 O(n²)입니다. 적은 층당 최대 서른 마리이므로 스텝당 435쌍이고,
+ * 이 규모에서는 공간 분할을 두는 것이 오히려 손해입니다.
+ * @param {number} dtFactor - 프레임 시간 보정값
+ */
+function separateEnemies(dtFactor) {
+    const enemies = world.enemies;
+    const strength = C.ENEMY_SEPARATION_STRENGTH * dtFactor;
+
+    for (let i = 0; i < enemies.length; i++) {
+        const a = enemies[i];
+        for (let j = i + 1; j < enemies.length; j++) {
+            const b = enemies[j];
+
+            const dx = b.x - a.x;
+            const dy = b.y - a.y;
+            const minGap = ((a.size + b.size) / 2) * C.ENEMY_SEPARATION_RANGE;
+            const gapSq = dx * dx + dy * dy;
+            if (gapSq >= minGap * minGap) continue;
+
+            // 완전히 같은 자리에 선 경우에는 밀어낼 방향이 없습니다.
+            // 배열 순서로 방향을 정해 좌우로 갈라 세웁니다. 무작위를 쓰면
+            // 같은 세이브를 불러올 때마다 결과가 달라집니다.
+            let gap = Math.sqrt(gapSq);
+            let nx, ny;
+            if (gap < 1e-6) {
+                const angle = (i * 2.399963) + (j * 0.5);   // 황금각으로 고르게 흩뿌립니다
+                nx = Math.cos(angle);
+                ny = Math.sin(angle);
+                gap = 0;
+            } else {
+                nx = dx / gap;
+                ny = dy / gap;
+            }
+
+            // 겹친 만큼을 둘이 절반씩 나눠 물러납니다.
+            const push = ((minGap - gap) / 2) * strength;
+            moveEnemyBy(a, -nx * push, -ny * push);
+            moveEnemyBy(b, nx * push, ny * push);
+        }
+    }
+}
+
+/**
+ * 적을 밀어냅니다. 벽을 뚫지 않도록 축을 나눠 각각 확인합니다.
+ * 한 축이 막혀도 다른 축으로는 미끄러지므로, 벽에 붙은 적끼리도 옆으로 벌어집니다.
+ * @param {object} enemy - 밀어낼 적
+ * @param {number} dx - X 방향 이동량
+ * @param {number} dy - Y 방향 이동량
+ */
+function moveEnemyBy(enemy, dx, dy) {
+    const nextX = enemy.x + dx;
+    if (isPassable(Math.floor(nextX / C.TILE_SIZE), Math.floor(enemy.y / C.TILE_SIZE))) {
+        enemy.x = nextX;
+    }
+
+    const nextY = enemy.y + dy;
+    if (isPassable(Math.floor(enemy.x / C.TILE_SIZE), Math.floor(nextY / C.TILE_SIZE))) {
+        enemy.y = nextY;
+    }
 }
 
 /**
