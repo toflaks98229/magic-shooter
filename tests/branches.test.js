@@ -284,3 +284,46 @@ test('배타 그룹에서 양쪽 모두 선택될 수 있다', () => {
     }
     assert.deepEqual([...seen].sort(), ['A', 'S'], '늪지와 해안이 모두 등장할 수 있어야 합니다');
 });
+
+// --- 알 수 없는 식별자 --------------------------------------------------------
+
+test('알 수 없는 식별자는 메인 던전으로 대신하되 조용히 넘어가지 않는다', () => {
+    // 폴백 자체는 일부러 둔 것입니다. 옛 세이브에 사라진 가지 이름이 들어 있을 때
+    // 예외를 던지면 판을 통째로 잃기 때문입니다.
+    //
+    // 다만 조용하면 안 됩니다. 가지 id 는 'L' 같은 한 글자라 'lair' 처럼 적기 쉬운데,
+    // 그러면 아무 일도 없었다는 듯 시작 던전이 돌아와 원인을 찾기 어렵습니다.
+    // (이 저장소에서 실제로 두 번 걸렸습니다.)
+    const warnings = [];
+    const originalWarn = console.warn;
+    console.warn = (...args) => warnings.push(args.join(' '));
+
+    try {
+        const branch = B.getBranch('lair'); // 'L' 이 맞습니다
+        assert.equal(branch.id, B.STARTING_BRANCH, '메인 던전으로 대신해야 합니다');
+        assert.equal(warnings.length, 1, '경고가 나오지 않았습니다');
+        assert.ok(warnings[0].includes('lair'), `무엇이 잘못됐는지 담아야 합니다: ${warnings[0]}`);
+
+        // 같은 식별자로 계속 부르면 콘솔이 묻힙니다. HUD 갱신 경로에서도 불리기 때문입니다.
+        B.getBranch('lair');
+        B.getBranch('lair');
+        assert.equal(warnings.length, 1, '같은 식별자로 반복해서 경고했습니다');
+    } finally {
+        console.warn = originalWarn;
+    }
+});
+
+test('제대로 된 식별자는 경고 없이 찾는다', () => {
+    const warnings = [];
+    const originalWarn = console.warn;
+    console.warn = (...args) => warnings.push(args.join(' '));
+
+    try {
+        assert.equal(B.getBranch('L').id, 'L', '짐승굴을 찾지 못했습니다');
+        assert.equal(B.getBranch('D').id, 'D', '메인 던전을 찾지 못했습니다');
+        assert.equal(B.getBranch('sewer').id, 'sewer', '포탈 던전도 같은 조회로 찾아야 합니다');
+        assert.deepEqual(warnings, [], '멀쩡한 식별자에 경고가 나왔습니다');
+    } finally {
+        console.warn = originalWarn;
+    }
+});

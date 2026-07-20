@@ -158,15 +158,39 @@ export const BRANCHES = {
 export const STARTING_BRANCH = 'D';
 
 /**
+ * @description 이미 한 번 경고한 식별자. 같은 것으로 매 프레임 콘솔을 채우지 않기 위한 것입니다.
+ * getBranch 는 렌더링과 HUD 갱신 경로에서도 불립니다.
+ */
+const warnedUnknownBranches = new Set();
+
+/**
  * 던전 정보를 조회합니다. 정규 가지와 포탈 던전을 모두 찾습니다.
  *
  * 포탈 던전도 일단 들어가고 나면 '지금 있는 던전'이라는 점에서 가지와 다르지 않습니다.
  * 층 표시, 최하층 판정, 복귀 처리가 모두 같은 코드를 타도록 조회를 하나로 둡니다.
+ *
+ * 알 수 없는 식별자는 메인 던전으로 대신합니다. 이 폴백은 일부러 둔 것입니다.
+ * 옛 세이브에 지금은 사라진 가지 이름이 들어 있을 수 있는데, 그때 예외를 던지면
+ * 판을 통째로 잃습니다. 어디로든 이어서 놀 수 있는 편이 낫습니다.
+ *
+ * 다만 조용히 넘어가지는 않습니다. 식별자를 잘못 적으면(가지 id 는 'L' 같은 한 글자입니다)
+ * 아무 일도 없었다는 듯 시작 던전이 돌아와, 왜 엉뚱한 곳에 있는지 알아내기 어렵습니다.
  * @param {string} id - 던전 식별자
  * @returns {object} 던전 정의. 알 수 없으면 메인 던전.
  */
 export function getBranch(id) {
-    return BRANCHES[id] || PORTAL_DUNGEONS[id] || BRANCHES[STARTING_BRANCH];
+    const branch = BRANCHES[id] || PORTAL_DUNGEONS[id];
+    if (branch) return branch;
+
+    if (!warnedUnknownBranches.has(id)) {
+        warnedUnknownBranches.add(id);
+        console.warn(
+            `알 수 없는 던전 식별자입니다: ${JSON.stringify(id)}. ` +
+            `메인 던전(${STARTING_BRANCH})으로 대신합니다. ` +
+            `가지 id 는 '${STARTING_BRANCH}' 처럼 한 글자입니다. branches.js 의 BRANCHES 를 확인하십시오.`
+        );
+    }
+    return BRANCHES[STARTING_BRANCH];
 }
 
 /**
