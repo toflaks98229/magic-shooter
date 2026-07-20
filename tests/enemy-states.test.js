@@ -12,7 +12,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { installBrowserStubs, bindStubDom } from './helpers/browser-stubs.js';
+import { installBrowserStubs, bindStubDom, seedRandom } from './helpers/browser-stubs.js';
 
 installBrowserStubs();
 
@@ -78,14 +78,18 @@ function distanceToPlayer(e, world) {
 
 // --- 골격 --------------------------------------------------------------------
 
-test('적은 추격 상태로 시작한다', () => {
+test('평범한 적은 추격 상태로 시작한다', () => {
     const world = emptyRoom();
     world.floor = 1;
     gameLogic.spawnEnemiesForFloor();
 
     assert.ok(world.enemies.length > 0, '적이 스폰되지 않았습니다');
     for (const enemy of world.enemies) {
-        assert.equal(enemy.state, 'chase', `${enemy.monsterId} 가 추격으로 시작하지 않았습니다`);
+        // 성향이 있는 것들은 처음부터 그렇게 움직입니다.
+        // 거리를 두는 적은 kite, 정신없이 나는 적은 erratic 으로 태어납니다.
+        const expected = enemy.maintainRange ? 'kite' : (enemy.batty ? 'erratic' : 'chase');
+        assert.equal(enemy.state, expected,
+            `${enemy.monsterId} 가 ${expected} 로 시작하지 않았습니다`);
     }
 });
 
@@ -279,4 +283,79 @@ test('겁을 먹는 몬스터가 실제로 존재한다', () => {
         assert.equal(M.MONSTERS[id].fleeBelow, undefined,
             `${id} 은(는) 겁을 먹지 않아야 합니다`);
     }
+});
+
+// --- 원본이 붙여 둔 움직임 성향 -------------------------------------------------
+
+test('거리를 두는 적은 다가오지 않는다', () => {
+    // 쫓아와 때리는 적만 있으면 전투가 한 가지 모양으로 굳습니다.
+    // 다가오지 않는 적이 섞여야 플레이어가 거리를 좁힐지 말지를 고르게 됩니다.
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, {
+        maintainRange: true, state: 'kite', speed: 1.0, behavior: 'melee',
+        x: world.player.x + C.KITE_IDEAL_DISTANCE_TILES * C.TILE_SIZE * 0.4,
+        y: world.player.y,
+    });
+    const before = distanceToPlayer(enemy, world);
+
+    run(40);
+
+    assert.ok(distanceToPlayer(enemy, world) > before,
+        `가까이 있는데 물러서지 않았습니다 (${before.toFixed(0)} → ${distanceToPlayer(enemy, world).toFixed(0)})`);
+    assert.equal(enemy.state, 'kite', '거리를 두는 성향이 유지되어야 합니다');
+});
+
+test('거리를 두는 적도 너무 멀면 다가온다', () => {
+    // 물러서기만 하면 영영 만날 수 없는 적이 됩니다.
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, {
+        maintainRange: true, state: 'kite', speed: 1.0, behavior: 'melee',
+        // 맵 밖으로 나가지 않게 둡니다. 밖에 서면 플로우 필드가 닿지 않아
+        // 다가오고 싶어도 길을 못 찾습니다.
+        x: world.player.x - C.KITE_IDEAL_DISTANCE_TILES * C.TILE_SIZE * 2,
+        y: world.player.y,
+    });
+    const before = distanceToPlayer(enemy, world);
+
+    run(40);
+    assert.ok(distanceToPlayer(enemy, world) < before, '멀리 있는데 다가오지 않았습니다');
+});
+
+test('정신없이 나는 적은 곧장 오지 않는다', () => {
+    // 겨눈 선으로 명중을 정하는 이 게임에서는 앞을 예측해 쏘아야 하는 적이 됩니다.
+    const world = emptyRoom();
+    const straight = placeEnemy(world, { speed: 1.0, x: world.player.x + 200, y: world.player.y });
+    const erratic = placeEnemy(world, {
+        batty: true, state: 'erratic', speed: 1.0, dcssSpeed: 10,
+        x: world.player.x + 200, y: world.player.y + 100,
+    });
+
+    const straightBefore = distanceToPlayer(straight, world);
+    const erraticBefore = distanceToPlayer(erratic, world);
+    run(60);
+
+    // 곧장 오는 적은 확실히 가까워집니다.
+    assert.ok(distanceToPlayer(straight, world) < straightBefore - 30, '추격하는 적이 다가오지 않았습니다');
+
+    // 헤매는 적은 움직이기는 하되 곧장 오지는 않습니다.
+    const moved = Math.hypot(erratic.x - (world.player.x + 200), erratic.y - (world.player.y + 100));
+    assert.ok(moved > 10, '헤매는 적이 움직이지 않았습니다');
+    const approached = erraticBefore - distanceToPlayer(erratic, world);
+    assert.ok(approached < straightBefore - distanceToPlayer(straight, world),
+        '헤매는 적이 추격하는 적만큼 곧장 다가왔습니다');
+});
+
+test('헤매는 방향이 무작위지만 재생 가능하다', () => {
+    // 세이브를 불러오면 같은 상황에서 같은 결과가 나와야 합니다.
+    const runOnce = () => {
+        seedRandom(0xE44A);
+        const world = emptyRoom();
+        const e = placeEnemy(world, {
+            batty: true, state: 'erratic', speed: 1.0, dcssSpeed: 10,
+            x: world.player.x + 150, y: world.player.y,
+        });
+        run(30);
+        return [Math.round(e.x), Math.round(e.y)];
+    };
+    assert.deepEqual(runOnce(), runOnce(), '같은 씨앗에서 다른 결과가 나왔습니다');
 });

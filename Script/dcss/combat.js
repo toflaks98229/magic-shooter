@@ -414,3 +414,54 @@ export function resistLevel(resists, flavour) {
 
     return resists[collapsed] ?? 0;
 }
+
+/**
+ * 플레이어의 회피를 구합니다. (player.cc:2335 _player_armour_adjusted_dodge_bonus)
+ *
+ * 기본 10 에 회피 스킬과 민첩이 곱해져 더해집니다.
+ * 갑옷 방해는 아직 넣지 않았습니다. 이 게임에 갑옷이 없기 때문입니다.
+ *
+ * 이 값이 있어야 회피 스킬이 뜻을 갖습니다. 예전에는 몬스터가 사거리 안에
+ * 들어오기만 하면 무조건 맞혔고, 그래서 맞는 쪽에는 아무 성장도 반영되지 않았습니다.
+ * @param {number} dodgingSkill - 회피 스킬 (소수 가능)
+ * @param {number} dex - 민첩
+ * @param {number} [sizeFactor] - 몸집 보정. 보통 체구는 0
+ * @returns {number} 회피
+ */
+export function playerEvasion(dodgingSkill, dex, sizeFactor = 0) {
+    const base = 10 + sizeFactor;
+    const dodgeBonus = (800 + dodgingSkill * 10 * dex * 8) / (20 - sizeFactor) / 100;
+    return Math.max(0, base + dodgeBonus);
+}
+
+/**
+ * 몬스터가 플레이어를 때리는 한 번을 굴립니다.
+ *
+ * DCSS 의 순서를 그대로 따릅니다.
+ *   1. 명중값을 굴려 회피와 견줍니다. 이때 회피도 한 번 굴려집니다.
+ *   2. 맞았으면 피해를 굴립니다. [1, damage] 입니다.
+ *   3. 방어도로 감산합니다. GDR 이 작동하는 유일한 자리입니다.
+ * @param {object} attacker - 때리는 몬스터
+ * @param {number} attacker.hd - HD
+ * @param {number} attacker.damage - 공격력
+ * @param {boolean} [attacker.fighter] - 전투 숙련 여부
+ * @param {object} defender - 맞는 쪽
+ * @param {number} defender.ev - 회피
+ * @param {number} [defender.ac] - 방어도
+ * @returns {{hit: boolean, damage: number}} 결과
+ */
+export function monsterAttackRoll(attacker, defender) {
+    const toHitCap = monToHitBase(attacker.hd, attacker.fighter);
+
+    // 몬스터가 때릴 때는 명중값에 1 을 더해 굴리고, 회피도 굴립니다. (attack.cc:305)
+    const rolled = random2(toHitCap + 1);
+    if (testHit(rolled, defender.ev, true) < 0) return { hit: false, damage: 0 };
+
+    const raw = rollMonsterDamage(attacker.damage);
+    const damage = applyAC(raw, defender.ac ?? 0, {
+        maxDamage: attacker.damage,
+        gdr: gdrPercent(defender.ac ?? 0),
+    });
+
+    return { hit: true, damage };
+}

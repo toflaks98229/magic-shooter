@@ -246,6 +246,18 @@ function toRuntimeMonster(data) {
         color: GLYPH_COLOURS[data.colour] ?? GLYPH_COLOURS.lightgrey,
         spriteKey: pickSprite(data),
 
+        // 원본이 붙여 둔 전투 성향. (mon-flags.h)
+        // fighter 는 명중값의 HD 계수를 3/2 에서 5/2 로 올립니다. 94종이 갖습니다.
+        // archer 는 원거리에서 같은 역할을 하며 피해도 얹습니다.
+        fighter: data.flags.includes('fighter'),
+        archer: data.flags.includes('archer'),
+
+        // 움직임 성향. 실시간에서 특히 크게 체감되는 축입니다.
+        flies: data.flags.includes('flies'),
+        batty: data.flags.includes('batty'),
+        maintainRange: data.flags.includes('maintain_range'),
+        preferRanged: data.flags.includes('prefer_ranged'),
+
         // 행동
         behavior: BEHAVIOR_OVERRIDES[data.id] ?? 'melee',
         fleeBelow: FLEE_BELOW[data.id],

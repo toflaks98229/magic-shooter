@@ -360,3 +360,68 @@ test('여러 속성이 같은 저항으로 접힌다', () => {
     assert.equal(C.resistLevel(resists, 'elec'), 0, '없는 저항은 0');
     assert.equal(C.resistLevel(null, 'fire'), 0, '저항표가 없어도 멈추지 않습니다');
 });
+
+// --- 몬스터가 플레이어를 때릴 때 -------------------------------------------------
+
+test('회피가 높으면 덜 맞는다', () => {
+    // 예전에는 사거리 안이면 무조건 맞았습니다. 그래서 회피 스킬이
+    // 뜻을 가질 수 없었고, 맞는 쪽에는 아무 성장도 반영되지 않았습니다.
+    R.resetRandomSource();
+    const rat = { hd: 1, damage: 3, fighter: false };
+    const rate = (ev) => {
+        let hits = 0;
+        for (let i = 0; i < 5000; i++) if (C.monsterAttackRoll(rat, { ev, ac: 0 }).hit) hits++;
+        return hits / 5000;
+    };
+    assert.ok(rate(10) > rate(25) * 2, `EV10 ${rate(10).toFixed(2)} vs EV25 ${rate(25).toFixed(2)}`);
+});
+
+test('전투 숙련 몬스터가 더 잘 맞춘다', () => {
+    // fighter 깃발은 명중값의 HD 계수를 3/2 에서 5/2 로 올립니다. (fight.cc:239)
+    // 94종이 갖고 있으며, 이것을 옮기지 않으면 오크 전사와 오크가 같은 적이 됩니다.
+    R.resetRandomSource();
+    const rate = (fighter) => {
+        let hits = 0;
+        for (let i = 0; i < 5000; i++) {
+            if (C.monsterAttackRoll({ hd: 6, damage: 10, fighter }, { ev: 20, ac: 0 }).hit) hits++;
+        }
+        return hits / 5000;
+    };
+    assert.ok(rate(true) > rate(false),
+        `숙련 ${rate(true).toFixed(3)}, 보통 ${rate(false).toFixed(3)}`);
+});
+
+test('몬스터 피해가 1 부터 공격력까지다', () => {
+    R.resetRandomSource();
+    const results = [];
+    for (let i = 0; i < 8000; i++) {
+        const r = C.monsterAttackRoll({ hd: 20, damage: 6, fighter: true }, { ev: 0, ac: 0 });
+        if (r.hit) results.push(r.damage);
+    }
+    assert.equal(Math.min(...results), 1);
+    assert.equal(Math.max(...results), 6);
+});
+
+test('방어도가 몬스터 피해를 줄인다', () => {
+    R.resetRandomSource();
+    const avg = (ac) => {
+        let total = 0, hits = 0;
+        for (let i = 0; i < 8000; i++) {
+            const r = C.monsterAttackRoll({ hd: 20, damage: 20, fighter: true }, { ev: 0, ac });
+            if (r.hit) { total += r.damage; hits++; }
+        }
+        return total / hits;
+    };
+    assert.ok(avg(10) < avg(0), `AC0 ${avg(0).toFixed(1)}, AC10 ${avg(10).toFixed(1)}`);
+});
+
+test('회피 공식이 스킬과 민첩을 함께 본다', () => {
+    // (player.cc:2335) 기본 10 에 회피 스킬과 민첩이 곱해져 더해집니다.
+    assert.ok(C.playerEvasion(0, 8) > 10, '아무것도 없어도 기본 회피가 있습니다');
+    assert.ok(C.playerEvasion(10, 8) > C.playerEvasion(0, 8), '스킬이 회피를 올려야 합니다');
+    assert.ok(C.playerEvasion(10, 20) > C.playerEvasion(10, 8), '민첩이 회피를 올려야 합니다');
+
+    // 원본 예시: 회피 10, 민첩 15 면 약 16 입니다.
+    assert.ok(Math.abs(C.playerEvasion(10, 15) - 16.4) < 0.5,
+        `기대 약 16.4, 실제 ${C.playerEvasion(10, 15).toFixed(2)}`);
+});

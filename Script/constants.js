@@ -145,6 +145,18 @@ export const FLEE_STOP_DISTANCE_TILES = 10;
 export const CORNERED_FIGHT_MS = 2000;
 
 /**
+ * @description 거리를 두고 싸우는 적이 지키려는 거리(타일). (mon-behv.cc:115)
+ * 원본은 시야의 절반쯤을 이상적인 거리로 잡습니다.
+ */
+export const KITE_IDEAL_DISTANCE_TILES = 5;
+
+/**
+ * @description 정신없이 날아다니는 적이 한 방향으로 나아가는 시간(ms).
+ * 이보다 짧으면 제자리에서 떠는 것처럼 보이고, 길면 그냥 직진하는 적이 됩니다.
+ */
+export const ERRATIC_LEG_MS = 400;
+
+/**
  * @description 플레이어의 기본 명중값.
  *
  * DCSS 는 15 + 민첩/2 에 격투·무기 스킬 굴림을 더해 구합니다. (attack.cc:177)

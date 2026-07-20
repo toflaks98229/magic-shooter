@@ -220,7 +220,11 @@ function buildSnapshot({ world, serializeWorld, stats }) {
             sprite: e.spriteKey,
             x: round(e.x), y: round(e.y), hp: round(e.hp),
         })),
-        items: world.items.map(i => ({ type: i.type, x: round(i.x), y: round(i.y) })),
+        // 아이템의 종류는 itemId 입니다. 오래도록 i.type 을 적어 두었는데
+        // 그런 필드가 없어 언제나 undefined 였고, JSON 을 거치면 키가 사라져
+        // 비교가 어긋났습니다. 바닥에 아이템이 남는 판이 나오기 전까지는
+        // 드러나지 않던 문제입니다.
+        items: world.items.map(i => ({ itemId: i.itemId, x: round(i.x), y: round(i.y) })),
         mapChecksum: checksum(world.map.flat()),
         objectMapChecksum: checksum(world.objectMap.flat()),
         // 월드가 통째로 직렬화되는지도 함께 확인합니다(리팩토링의 핵심 목표).

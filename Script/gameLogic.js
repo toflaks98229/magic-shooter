@@ -18,9 +18,10 @@ import { SPECIES } from './species.js';
 import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
 import { modifier as characterModifier, aptitudeFor } from './character.js';
 import { emit, EVENTS } from './events.js';
-import { aimRadius, rollMonsterHp } from './dcss/combat.js';
+import { aimRadius, rollMonsterHp, monsterAttackRoll, playerEvasion } from './dcss/combat.js';
 import { pickAimedTarget } from './dcss/aim.js';
 import { skillValue } from './dcss/training.js';
+import { random2 } from './dcss/random.js';
 
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
 
@@ -181,6 +182,69 @@ function aimAtEnemies(player, maxRange = Infinity) {
 }
 
 /**
+ * 몬스터가 어떤 상태로 태어날지 정합니다.
+ *
+ * 성향은 원본의 깃발에서 옵니다. 거리를 두는 적과 정신없이 나는 적은
+ * 처음부터 그렇게 움직여야, 쫓아와 때리는 적과 섞였을 때 차이가 읽힙니다.
+ * @param {object} template - 몬스터 정의
+ * @returns {string} 시작 상태
+ */
+function initialState(template) {
+    if (template.maintainRange) return 'kite';
+    if (template.batty) return 'erratic';
+    return 'chase';
+}
+
+/**
+ * 정신없이 나는 적의 방향을 새로 뽑습니다.
+ *
+ * 원본은 속도에 비례한 턴 수만큼 헤맵니다. (mon-act.cc:2652)
+ * 빠른 것일수록 오래 헤매므로 여기서도 속도로 시간을 정합니다.
+ *
+ * 무작위를 dcss/random 을 거쳐 뽑습니다. 나중에 결정론적 재생을 넣을 때
+ * 이 파일 밖에서 Math.random 을 부르는 곳이 있으면 조용히 깨집니다.
+ * @param {object} enemy - 대상
+ * @param {number} now - 게임 내부 시각
+ */
+function scatterErratic(enemy, now) {
+    enemy.erraticAngle = (random2(360) * Math.PI) / 180;
+    enemy.erraticUntil = now + C.ERRATIC_LEG_MS * Math.max(1, enemy.dcssSpeed / 10);
+}
+
+/**
+ * 몬스터가 플레이어를 한 번 때립니다.
+ *
+ * 예전에는 사거리 안에 들어오기만 하면 정해진 피해가 그대로 들어갔습니다.
+ * 맞는 쪽에 아무 판정도 없어서 회피 스킬이 뜻을 가질 수 없었고,
+ * 전투 숙련(fighter) 같은 원본의 성향도 반영할 자리가 없었습니다.
+ *
+ * 이제 DCSS 의 순서를 따릅니다. 명중값을 굴려 회피와 견주고, 맞았으면
+ * 피해를 굴린 뒤 방어도로 감산합니다. 빗나가면 회피 스킬이 자랍니다.
+ * @param {object} enemy - 때리는 몬스터
+ */
+function strikePlayer(enemy) {
+    const result = monsterAttackRoll(enemy, {
+        ev: currentPlayerEvasion(),
+        ac: 0,   // 갑옷이 아직 없습니다. 들어오면 여기에 붙습니다.
+    });
+
+    // 맞든 빗나가든 피하려 애쓴 것이므로 회피가 자랍니다. (exercise.cc)
+    A.practise('dodging');
+
+    if (result.hit) A.damagePlayer(result.damage, enemy);
+}
+
+/**
+ * 지금 플레이어의 회피를 구합니다.
+ * @returns {number} 회피
+ */
+function currentPlayerEvasion() {
+    const player = world.player;
+    const dex = SPECIES[player.species]?.dex ?? 8;
+    return playerEvasion(skillValue(player.skills, 'dodging', aptitudeFor('dodging')), dex);
+}
+
+/**
  * 이 무기가 어느 스킬을 쓰는지 정합니다.
  *
  * 이 게임의 무기는 주먹과 지팡이 둘뿐이라, DCSS 의 열 가지 무기 스킬 중
@@ -272,8 +336,8 @@ export function spawnMonster(id, position) {
         // 스폰 직후 쿨다운에 걸리지 않도록 과거 시각으로 둡니다.
         lastAttackTime: C.PAST_TIME,
         lastHitTime: 0,
-        // 모든 적은 플레이어를 쫓는 것으로 시작합니다. (ENEMY_STATES 참조)
-        state: 'chase',
+        // 성향에 맞는 상태로 시작합니다. (ENEMY_STATES 참조)
+        state: initialState(template),
     };
 
     // 굴린 최대치에서 시작합니다. maxHp 를 쓰는 자리에서 계산해야
@@ -360,7 +424,7 @@ const ENEMY_BEHAVIORS = {
         if (now - enemy.lastAttackTime <= enemy.cooldown) return;
 
         enemy.lastAttackTime = now;
-        A.damagePlayer(enemy.damage, enemy);
+        strikePlayer(enemy);
     },
 
     /** 사거리 안에서 발사체를 쏜다 */
@@ -458,6 +522,64 @@ function isFrightened(enemy, distance, now) {
  * 새 상태를 추가할 때는 move/act/next 셋을 모두 채우면 됩니다.
  */
 const ENEMY_STATES = {
+    /**
+     * 거리를 두고 쏜다. (mon-behv.cc:115 maintain_range)
+     *
+     * 원본은 시야의 절반쯤을 이상적인 거리로 잡고, 그보다 가까워지면 물러섭니다.
+     * 쫓아가 때리는 적만 있으면 전투가 한 가지 모양으로 굳는데,
+     * 다가오지 않는 적이 섞이면 플레이어가 거리를 좁힐지 말지를 고르게 됩니다.
+     */
+    kite: {
+        move(enemy, dtFactor, { distance }) {
+            // 너무 가까우면 물러서고, 너무 멀면 다가갑니다. 알맞으면 멈춥니다.
+            if (distance < C.KITE_IDEAL_DISTANCE_TILES * C.TILE_SIZE) {
+                enemy.cornered = !fleeAlongFlowField(enemy, dtFactor);
+            } else if (distance > C.KITE_IDEAL_DISTANCE_TILES * C.TILE_SIZE * 1.4) {
+                followFlowField(enemy, dtFactor);
+            }
+        },
+        act(enemy, context) {
+            const behave = ENEMY_BEHAVIORS[enemy.behavior];
+            if (behave) behave(enemy, context);
+        },
+        next(enemy, { distance, now }) {
+            // 몰려서 물러설 곳이 없으면 어쩔 수 없이 붙어 싸웁니다.
+            if (enemy.cornered) {
+                enemy.corneredUntil = now + C.CORNERED_FIGHT_MS;
+                return 'chase';
+            }
+            return isFrightened(enemy, distance, now) ? 'flee' : 'kite';
+        },
+    },
+
+    /**
+     * 아무 데로나 정신없이 날아다닌다. (mon-act.cc:2652 BEH_BATTY)
+     *
+     * 박쥐와 나방이 이렇게 움직입니다. 겨눈 선으로 명중을 정하는 이 게임에서는
+     * 특히 성가신 적이 됩니다. 앞을 예측해 쏘아야 하기 때문입니다.
+     *
+     * 원본은 속도에 비례한 턴 수만큼 이 상태에 머뭅니다. 빠른 것일수록 오래
+     * 헤매므로, 여기서도 속도로 시간을 정합니다.
+     */
+    erratic: {
+        move(enemy, dtFactor) {
+            // 정한 방향으로 계속 나아갑니다. 매 스텝 방향을 새로 뽑으면
+            // 제자리에서 떠는 것처럼 보입니다.
+            const speed = enemy.speed * dtFactor;
+            moveEnemyBy(enemy, Math.cos(enemy.erraticAngle) * speed,
+                Math.sin(enemy.erraticAngle) * speed);
+        },
+        act(enemy, context) {
+            // 헤매는 중에도 옆에 있으면 뭅니다.
+            const behave = ENEMY_BEHAVIORS[enemy.behavior];
+            if (behave) behave(enemy, context);
+        },
+        next(enemy, { now, distance }) {
+            if (now < (enemy.erraticUntil ?? 0)) return 'erratic';
+            return isFrightened(enemy, distance, now) ? 'flee' : 'chase';
+        },
+    },
+
     /** 플레이어를 쫓아가 싸운다 */
     chase: {
         move(enemy, dtFactor) {
@@ -821,6 +943,16 @@ function updateEnemies(now, dtFactor) {
 
         // 세이브에 state 가 없던 시절의 적은 추격으로 봅니다.
         const state = ENEMY_STATES[enemy.state] ?? ENEMY_STATES.chase;
+
+        // 정신없이 나는 적은 방향이 정해져 있지 않으면 새로 뽑습니다.
+        if (enemy.state === 'erratic' && now >= (enemy.erraticUntil ?? 0)) {
+            scatterErratic(enemy, now);
+        }
+
+        // 정신없이 나는 적은 방향이 정해져 있지 않으면 새로 뽑습니다.
+        if (enemy.state === 'erratic' && now >= (enemy.erraticUntil ?? 0)) {
+            scatterErratic(enemy, now);
+        }
         const context = { now, dtFactor, player, distance, dx, dy };
 
         // 움직인 뒤 행동하고, 마지막에 다음 상태를 정합니다.
