@@ -216,3 +216,42 @@ test('겨눌 필요 없는 주문은 공기 강타뿐이다', () => {
         .map(([name]) => name);
     assert.deepEqual(smites, ['AIRSTRIKE']);
 });
+
+// --- 새 원형들 -----------------------------------------------------------------
+
+test('소환 주문이 계열별로 갈린다', () => {
+    // 마흔 가지를 낱낱이 옮기는 대신 계열로 묶었습니다.
+    // 정확한 이식은 아니지만 부르는 쪽의 성격은 남습니다.
+    assert.equal(SPELL_EFFECTS.SUMMON_DEMON.family, 'demonic');
+    assert.equal(SPELL_EFFECTS.SUMMON_UNDEAD.family, 'undead');
+    assert.equal(SPELL_EFFECTS.SUMMON_DRAGON.family, 'dragon');
+
+    // 더 센 것을 부르는 주문과 약한 것을 부르는 주문이 갈립니다.
+    assert.equal(SPELL_EFFECTS.SUMMON_GREATER_DEMON.stronger, true);
+    assert.equal(SPELL_EFFECTS.SUMMON_MINOR_DEMON.weaker, true);
+});
+
+test('마비와 혼란은 일부러 넣지 않았다', () => {
+    // 조작을 빼앗거나 뒤집는 것은 실시간 일인칭에서 견디기 어렵습니다.
+    // 대응할 여지가 없는 피해는 잘 해낸 것을 벌합니다.
+    for (const skipped of ['PARALYSE', 'CONFUSE', 'MASS_CONFUSION', 'SYMBOL_OF_TORMENT', 'BANISHMENT']) {
+        assert.equal(isImplemented({ spell: skipped }), false, `${skipped} 가 들어가 있습니다`);
+    }
+    // 느려지는 것은 남겼습니다. 살아남을 수 있고 길을 다시 짜게 만듭니다.
+    assert.equal(SPELL_EFFECTS.SLOW.debuff, 'slow');
+});
+
+test('투명화는 흐려지는 것으로 바꿨다', () => {
+    // 원본은 완전히 안 보이게 만듭니다. 실시간 일인칭에서 어디서 오는지
+    // 알 수 없는 피해는 대응할 여지가 없습니다.
+    assert.equal(SPELL_EFFECTS.INVISIBILITY.kind, 'selfBuff');
+    assert.equal(SPELL_EFFECTS.INVISIBILITY.buff, 'blur');
+});
+
+test('흡혈은 붙어야만 된다', () => {
+    // 원본도 인접일 때만 씁니다. (mon-cast.cc:2273)
+    assert.ok(SPELL_EFFECTS.VAMPIRIC_DRAINING.range <= 2, '흡혈이 멀리서 됩니다');
+    assert.equal(SPELL_EFFECTS.VAMPIRIC_DRAINING.heals, true);
+    // 생명 흡수는 멀리서도 됩니다.
+    assert.ok(SPELL_EFFECTS.DRAIN_LIFE.range > 2);
+});

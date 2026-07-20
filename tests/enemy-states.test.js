@@ -549,3 +549,89 @@ test('활잡이는 같은 화살이라도 더 아프다', () => {
     for (let i = 0; i < 40; i++) { plain += shoot(false, 12); skilled += shoot(true, 12); }
     assert.ok(skilled > plain, `보통 ${plain}, 활잡이 ${skilled}`);
 });
+
+// --- 주문이 게임 안에서 실제로 일어나는가 -----------------------------------------
+
+test('순간이동하는 적은 제자리에 있지 않는다', () => {
+    // 이 검사가 없어서 순간이동이 통째로 조용히 실패하고 있었습니다.
+    // 좌표 단위를 잘못 넘겨 모든 자리가 막힌 것으로 나왔고,
+    // 데이터에서 가장 흔한 주문(30종)이 한 번도 나가지 않았습니다.
+    const world = emptyRoom();
+    const enemy = placeEnemy(world, {
+        speed: 0, hd: 5, state: 'chase', huntUntil: 1e9,
+        spellbook: [{ spell: 'BLINK', freq: 200, flags: ['MAGICAL'] }],
+        spellCooldown: 100,
+        x: world.player.x + 4 * C.TILE_SIZE, y: world.player.y,
+    });
+    const start = { x: enemy.x, y: enemy.y };
+
+    run(60);
+    assert.ok(Math.hypot(enemy.x - start.x, enemy.y - start.y) > C.TILE_SIZE,
+        '순간이동을 가진 적이 제자리에 있습니다');
+});
+
+test('소환하는 적이 실제로 불러낸다', () => {
+    const world = emptyRoom();
+    placeEnemy(world, {
+        speed: 0, hd: 12, state: 'chase', huntUntil: 1e9,
+        spellbook: [{ spell: 'SUMMON_DEMON', freq: 200, flags: ['WIZARD'] }],
+        spellCooldown: 100, monsterId: 'summoner-under-test',
+        x: world.player.x + 4 * C.TILE_SIZE, y: world.player.y,
+    });
+
+    run(40);
+    const summoned = world.enemies.filter(e => e.summonedUntil !== undefined);
+    assert.ok(summoned.length > 0, '소환 주문을 가진 적이 아무것도 부르지 않았습니다');
+});
+
+test('한 마리가 부를 수 있는 수에 상한이 있다', () => {
+    // 원본은 턴마다 한 번 행동하니 부르는 속도가 저절로 눌립니다.
+    // 실시간에서는 같은 수치가 금세 화면을 메웁니다.
+    // 실제로 상한을 두기 전에는 악마술사 하나가 60초에 서른세 마리를 불렀습니다.
+    const world = emptyRoom();
+    placeEnemy(world, {
+        speed: 0, hd: 20, state: 'chase', huntUntil: 1e9,
+        spellbook: [{ spell: 'SUMMON_DEMON', freq: 200, flags: ['WIZARD'] }],
+        spellCooldown: 50, monsterId: 'capped-summoner',
+        x: world.player.x + 4 * C.TILE_SIZE, y: world.player.y,
+    });
+
+    run(400);
+    const mine = world.enemies.filter(e => e.summonedBy === 'capped-summoner');
+    assert.ok(mine.length <= C.MAX_SUMMONS_PER_CASTER,
+        `상한 ${C.MAX_SUMMONS_PER_CASTER} 인데 ${mine.length} 마리가 살아 있습니다`);
+});
+
+test('불려 나온 것은 시간이 다하면 사라진다', () => {
+    // 영원히 남으면 소환자를 무시하고 눈앞의 것부터 치우는 편이 언제나 낫습니다.
+    // 사라져야 '부른 놈을 먼저 잡는다'는 판단이 생깁니다.
+    const world = emptyRoom();
+    const minion = placeEnemy(world, {
+        speed: 0, state: 'chase', huntUntil: 1e9,
+        summonedUntil: world.time + 200, summonedBy: 'someone',
+        x: world.player.x + 3 * C.TILE_SIZE, y: world.player.y,
+    });
+
+    run(4);
+    assert.ok(world.enemies.includes(minion), '너무 일찍 사라졌습니다');
+
+    run(40);
+    assert.ok(!world.enemies.includes(minion), '시간이 다했는데 남아 있습니다');
+});
+
+test('사라지는 것은 죽는 것과 다르다', () => {
+    // 소환물로 경험치를 벌 수 있으면 소환자를 살려 두는 것이 이득이 되어,
+    // '부른 놈을 먼저 잡는다'는 판단이 거꾸로 뒤집힙니다.
+    const world = emptyRoom();
+    placeEnemy(world, {
+        speed: 0, exp: 500, hp: 100, maxHp: 100,
+        summonedUntil: world.time + 100, summonedBy: 'someone',
+        x: world.player.x + 3 * C.TILE_SIZE, y: world.player.y,
+    });
+    const before = world.player.skills.experiencePool ?? 0;
+
+    run(20);
+    assert.equal(world.enemies.length, 0, '사라지지 않았습니다');
+    assert.equal(world.player.skills.experiencePool ?? 0, before,
+        '사라진 적에게서 경험치가 나왔습니다');
+});

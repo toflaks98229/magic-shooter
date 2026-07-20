@@ -355,3 +355,11 @@ export function rollMonsterFor(branchId, depth) {
 
     return chosen ? ID_BY_ENUM[chosen] : null;
 }
+
+/**
+ * 모든 몬스터 정의를 배열로 돌려줍니다. 소환 후보를 고를 때 씁니다.
+ * @returns {Array<object>} 몬스터 정의들
+ */
+export function allMonsters() {
+    return Object.values(MONSTERS);
+}

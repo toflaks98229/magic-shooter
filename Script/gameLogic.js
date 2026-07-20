@@ -13,7 +13,7 @@ import { world } from './world.js';
 import { runtime } from './runtime.js';
 import { assets } from './assets.js';
 import { getBranch } from './branches.js';
-import { getMonster, rollMonsterFor } from './monsters.js';
+import { getMonster, rollMonsterFor, allMonsters } from './monsters.js';
 import { SPECIES } from './species.js';
 import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
 import { modifier as characterModifier, aptitudeFor } from './character.js';
@@ -291,7 +291,9 @@ function scatterErratic(enemy, now) {
  * @returns {boolean} 막혀 있으면 true
  */
 function isSolidAt(x, y) {
-    return C.tileAt(world.map, x, y).solid;
+    // tileAt 은 타일 좌표를 받습니다. 픽셀을 그대로 넘기면 언제나 맵 밖이 되어
+    // 모든 자리가 막힌 것으로 나옵니다. 그러면 순간이동도 소환도 조용히 실패합니다.
+    return C.tileAt(world.map, Math.floor(x / C.TILE_SIZE), Math.floor(y / C.TILE_SIZE)).solid;
 }
 
 function tryCastSpell(enemy, context) {
@@ -402,6 +404,128 @@ const CAST_BY_KIND = {
     },
 
     /**
+     * 소환. 판의 흐름을 바꿉니다. 한산하던 곳이 갑자기 붐빕니다.
+     *
+     * 수와 지속은 원본을 따르되 총량에 상한을 두었습니다. 원본은 한 턴에
+     * 한 번 행동하니 견딜 만하지만, 실시간에서는 같은 수치가 금세 화면을 메웁니다.
+     */
+    summon(enemy, slot, effect, { now }) {
+        if (world.enemies.length >= C.MAX_ENEMIES_ON_FLOOR) return false;
+
+        // 한 마리가 부를 수 있는 총량을 막습니다.
+        // 원본은 턴마다 한 번 행동하니 부르는 속도가 저절로 눌리지만,
+        // 실시간에서는 같은 수치가 금세 화면을 메웁니다. 실제로 악마술사 하나가
+        // 60초에 서른세 마리를 불러 층 상한을 쳤습니다.
+        const alive = world.enemies.filter(e => e.summonedBy === enemy.monsterId).length;
+        if (alive >= C.MAX_SUMMONS_PER_CASTER) return false;
+
+        // 1 + random2(HD/10 + 1) 마리. (mon-cast.cc:7896)
+        const count = 1 + random2(Math.trunc(enemy.hd / 10) + 1);
+        // min(2 + HD/10, 6) 턴 동안 남습니다. (mon-cast.cc:7897)
+        const lifetime = autToMs(Math.min(2 + Math.trunc(enemy.hd / 10), 6) * 10);
+
+        let summoned = 0;
+        for (let i = 0; i < count; i++) {
+            if (world.enemies.length >= C.MAX_ENEMIES_ON_FLOOR) break;
+
+            const id = pickSummonId(effect, enemy);
+            if (!id) break;
+
+            const angle = (random2(360) * Math.PI) / 180;
+            const x = enemy.x + Math.cos(angle) * C.TILE_SIZE;
+            const y = enemy.y + Math.sin(angle) * C.TILE_SIZE;
+            if (isSolidAt(x, y)) continue;
+
+            const minion = spawnMonster(id, { x, y });
+            if (!minion) continue;
+
+            // 부른 것은 시간이 지나면 사라집니다. 부른 놈을 먼저 잡으면
+            // 무리가 늘지 않는다는 판단이 생깁니다.
+            minion.summonedUntil = now + lifetime;
+            minion.summonedBy = enemy.monsterId;
+            // 불려 나온 것은 이미 깨어 있습니다.
+            minion.state = initialState(minion);
+            minion.huntUntil = now + rollFoeMemoryMs(minion.intelligence);
+            summoned++;
+        }
+
+        return summoned > 0;
+    },
+
+    /**
+     * 동료 강화. 한 마리가 무리 전체를 세게 만들어 '먼저 끊어야 할 놈'이 생깁니다.
+     */
+    allyBuff(enemy, slot, effect, { now }) {
+        const radius = C.HEAL_ALLY_RANGE_TILES * C.TILE_SIZE;
+        let buffed = 0;
+
+        for (const other of world.enemies) {
+            if (other === enemy) continue;
+            if (Math.hypot(other.x - enemy.x, other.y - enemy.y) > radius) continue;
+            // 전투의 함성은 같은 종족만 북돋웁니다. (mon-cast.cc BATTLECRY)
+            if (effect.sameKindOnly && other.glyph !== enemy.glyph) continue;
+            if (now < (other.buffs?.[effect.buff] ?? 0)) continue;
+
+            other.buffs = other.buffs ?? {};
+            const [low, high] = effect.durationAuts;
+            other.buffs[effect.buff] = now + autToMs(randomRange(low, high));
+            buffed++;
+        }
+
+        return buffed > 0;
+    },
+
+    /**
+     * 소리로 동료를 부릅니다. 이미 만들어 둔 우는 소리 규칙을 그대로 씁니다.
+     */
+    rouse(enemy, slot, effect, { now }) {
+        const radius = effect.radiusTiles * C.TILE_SIZE;
+        let woken = 0;
+
+        for (const other of world.enemies) {
+            if (other === enemy || other.state !== 'idle') continue;
+            if (Math.hypot(other.x - enemy.x, other.y - enemy.y) > radius) continue;
+
+            rousePlayerHunt(other, now);
+            other.state = initialState(other);
+            woken++;
+        }
+
+        // 아무도 없으면 부를 이유가 없습니다.
+        return woken > 0;
+    },
+
+    /**
+     * 빨아들이기. 때린 만큼 회복하므로 빨리 끊지 않으면 소모전에서 집니다.
+     */
+    drain(enemy, slot, effect, { distance }) {
+        if (distance > effect.range * C.TILE_SIZE) return false;
+        // 멀쩡할 때는 굳이 쓰지 않습니다. (mon-cast.cc:2280)
+        if (enemy.hp >= enemy.maxHp) return false;
+
+        const damage = rollSpellDamage(slot.spell, enemy.hd);
+        A.damagePlayer(damage);
+        if (effect.heals) enemy.hp = Math.min(enemy.maxHp, enemy.hp + damage);
+        return true;
+    },
+
+    /**
+     * 약화. 느려지는 것만 남겼습니다.
+     *
+     * 원본에는 마비와 혼란이 있지만 실시간 일인칭에서는 둘 다 견디기 어렵습니다.
+     * 조작을 빼앗기거나 뒤집히면 대응할 여지가 없기 때문입니다.
+     * 느려지는 것은 살아남을 수 있고, 대신 길을 다시 짜게 만듭니다.
+     */
+    debuff(enemy, slot, effect, { now, distance }) {
+        if (distance > effect.range * C.TILE_SIZE) return false;
+        if (now < (world.player.debuffs?.[effect.debuff] ?? 0)) return false;
+
+        const [low, high] = effect.durationAuts;
+        world.player.debuffs = world.player.debuffs ?? {};
+        world.player.debuffs[effect.debuff] = now + autToMs(randomRange(low, high));
+        return true;
+    },
+    /**
      * 겨눌 필요가 없는 것. 공기 강타 하나만 남겼습니다.
      *
      * 원본에는 이런 주문이 많지만 대부분 이 게임에 맞지 않습니다.
@@ -442,6 +566,68 @@ function castProjectile(enemy, slot, effect, { dx, dy }) {
     return true;
 }
 
+/**
+ * 무엇을 소환할지 고릅니다.
+ *
+ * 원본은 주문마다 부르는 종이 정해져 있습니다. 마흔 가지를 낱낱이 옮기는 대신
+ * 계열로 묶었습니다. 악마를 부르는 주문은 악마를, 언데드를 부르는 주문은
+ * 언데드를 부릅니다. 어느 종이 나오는지는 소환자의 HD 를 기준으로 뽑습니다.
+ *
+ * 정확한 이식은 아닙니다. 다만 부르는 쪽의 성격은 남습니다.
+ * @param {object} effect - 주문 효과
+ * @param {object} summoner - 부르는 몬스터
+ * @returns {string|null} 몬스터 식별자
+ */
+function pickSummonId(effect, summoner) {
+    // 부르는 것은 대개 부른 놈보다 약합니다. 더 센 것을 부르는 주문만 예외입니다.
+    const ceiling = effect.stronger ? summoner.hd + 3
+        : effect.weaker ? Math.max(1, Math.trunc(summoner.hd / 2))
+            : Math.max(1, summoner.hd - 1);
+
+    const candidates = summonCandidates(effect.family, ceiling);
+    if (candidates.length === 0) return null;
+    return candidates[random2(candidates.length)];
+}
+
+/**
+ * @description 계열별 소환 후보를 기억해 둡니다.
+ * 매번 육백여 종을 훑으면 소환 한 번에 그 비용이 듭니다.
+ */
+const summonCache = new Map();
+
+/**
+ * 어느 계열에서 HD 상한 아래의 것들을 모읍니다.
+ * @param {string} family - 계열
+ * @param {number} ceiling - HD 상한
+ * @returns {Array<string>} 몬스터 식별자들
+ */
+function summonCandidates(family, ceiling) {
+    const key = `${family}:${ceiling}`;
+    if (summonCache.has(key)) return summonCache.get(key);
+
+    const list = allMonsters()
+        .filter(m => m.spawnable && m.canAct && m.hd <= ceiling
+            && matchesFamily(m, family))
+        .map(m => m.id);
+
+    summonCache.set(key, list);
+    return list;
+}
+
+/**
+ * 이 몬스터가 그 계열에 속하는지 봅니다.
+ * @param {object} monster - 몬스터 정의
+ * @param {string} family - 계열
+ * @returns {boolean} 속하면 true
+ */
+function matchesFamily(monster, family) {
+    if (family === 'any') return true;
+    if (family === 'dragon') return monster.glyph === 'D' || monster.glyph === 'd';
+    if (family === 'spider') return monster.glyph === 's';
+    if (family === 'eye') return monster.glyph === 'G';
+    if (family === 'beast') return monster.glyph === 'r' || monster.glyph === 'b';
+    return monster.holiness?.includes(family) ?? false;
+}
 /**
  * 가장 많이 다친 동료를 찾습니다. 치유 대상으로 씁니다.
  * @param {object} healer - 치유하는 몬스터
@@ -1407,9 +1593,19 @@ function handleItemPickup() {
  */
 function handleEnemyDeaths() {
     for (let i = world.enemies.length - 1; i >= 0; i--) {
-        if (world.enemies[i].hp <= 0) {
-            A.killEnemyAt(i);
+        const enemy = world.enemies[i];
+
+        // 불려 나온 것은 시간이 다하면 사라집니다.
+        //
+        // 이 규칙이 있어야 '부른 놈을 먼저 잡으면 무리가 줄어든다'는 판단이 생깁니다.
+        // 영원히 남으면 소환자를 무시하고 눈앞의 것부터 치우는 편이 언제나 낫습니다.
+        // 사라지는 것은 죽는 것과 달라서 경험치도 전리품도 남기지 않습니다.
+        if (enemy.summonedUntil !== undefined && world.time >= enemy.summonedUntil) {
+            A.dismissEnemyAt(i);
+            continue;
         }
+
+        if (enemy.hp <= 0) A.killEnemyAt(i);
     }
 }
 

@@ -146,6 +146,13 @@ export const SPELL_EFFECTS = {
     TROGS_HAND: { kind: 'selfBuff', buff: 'might', durationAuts: [200, 400] },
     FLEETFOOT: { kind: 'selfBuff', buff: 'haste', durationAuts: [150, 300] },
 
+    // 원본의 투명화는 완전히 안 보이게 만듭니다. 턴제에서는 견딜 만하지만
+    // 실시간 일인칭에서 보이지 않는 적은 훨씬 가혹합니다. 어디서 오는지
+    // 알 수 없는 피해는 대응할 여지가 없기 때문입니다.
+    // 그래서 '흐릿해지는 것'으로 옮겼습니다. 윤곽은 남고 맞히기만 어려워집니다.
+    INVISIBILITY: { kind: 'selfBuff', buff: 'blur', durationAuts: [200, 400] },
+    DEFLECT_MISSILES: { kind: 'selfBuff', buff: 'deflect', durationAuts: [200, 400] },
+
     // --- 순간이동 ---
     BLINK: { kind: 'blink', bias: 'random' },
     BLINK_CLOSE: { kind: 'blink', bias: 'toward' },
@@ -157,6 +164,91 @@ export const SPELL_EFFECTS = {
     MAJOR_HEALING: { kind: 'heal', target: 'self', multiplier: 2 },
     HEAL_OTHER: { kind: 'heal', target: 'ally' },
     WOODWEAL: { kind: 'heal', target: 'self' },
+
+    // --- 소환 ---
+    //
+    // 원본에는 소환 주문이 마흔 가지 있는데, 무엇이 나오는지가 저마다 다릅니다.
+    // 그것을 낱낱이 옮기는 대신 계열로 묶었습니다. 악마를 부르는 주문은 악마를,
+    // 언데드를 부르는 주문은 언데드를 부릅니다. 실제로 어느 종이 나오는지는
+    // 소환자의 HD 아래에서 그 계열 중 하나를 뽑아 정합니다.
+    //
+    // 수와 지속은 원본을 따릅니다. 1 + random2(HD/10 + 1) 마리가
+    // min(2 + HD/10, 6) 턴 동안 남습니다. (mon-cast.cc:7893)
+    SUMMON_DEMON: { kind: 'summon', family: 'demonic' },
+    SUMMON_MINOR_DEMON: { kind: 'summon', family: 'demonic', weaker: true },
+    SUMMON_GREATER_DEMON: { kind: 'summon', family: 'demonic', stronger: true },
+    CALL_IMP: { kind: 'summon', family: 'demonic', weaker: true },
+    SUMMON_UFETUBUS: { kind: 'summon', family: 'demonic', weaker: true },
+    SUMMON_SIN_BEAST: { kind: 'summon', family: 'demonic' },
+    SUMMON_EXECUTIONERS: { kind: 'summon', family: 'demonic', stronger: true },
+    SUMMON_HELL_SENTINEL: { kind: 'summon', family: 'demonic', stronger: true },
+
+    SUMMON_UNDEAD: { kind: 'summon', family: 'undead' },
+    CALL_LOST_SOULS: { kind: 'summon', family: 'undead' },
+    VANQUISHED_VANGUARD: { kind: 'summon', family: 'undead' },
+    SUMMON_TZITZIMITL: { kind: 'summon', family: 'undead', stronger: true },
+
+    SUMMON_DRAGON: { kind: 'summon', family: 'dragon', stronger: true },
+    SUMMON_HYDRA: { kind: 'summon', family: 'dragon', stronger: true },
+    SUMMON_DRAKES: { kind: 'summon', family: 'dragon' },
+
+    SUMMON_SPIDERS: { kind: 'summon', family: 'spider' },
+    SUMMON_SCORPIONS: { kind: 'summon', family: 'spider' },
+    SUMMON_EMPEROR_SCORPIONS: { kind: 'summon', family: 'spider', stronger: true },
+    BROODMOTHER: { kind: 'summon', family: 'spider' },
+
+    SUMMON_SMALL_MAMMAL: { kind: 'summon', family: 'beast', weaker: true },
+    SUMMON_MUSHROOMS: { kind: 'summon', family: 'plant', weaker: true },
+    SUMMON_EYEBALLS: { kind: 'summon', family: 'eye' },
+    SUMMON_ICE_BEAST: { kind: 'summon', family: 'any' },
+    SUMMON_SCARABS: { kind: 'summon', family: 'any' },
+    SHADOW_CREATURES: { kind: 'summon', family: 'any' },
+    SUMMON_ILLUSION: { kind: 'summon', family: 'any' },
+    MONSTROUS_MENAGERIE: { kind: 'summon', family: 'any', stronger: true },
+    SUMMON_HORRIBLE_THINGS: { kind: 'summon', family: 'any', stronger: true },
+    CREATE_TENTACLES: { kind: 'summon', family: 'any' },
+    FIRE_ELEMENTALS: { kind: 'summon', family: 'any' },
+    WATER_ELEMENTALS: { kind: 'summon', family: 'any' },
+    AIR_ELEMENTALS: { kind: 'summon', family: 'any' },
+    SUMMON_MORTAL_CHAMPION: { kind: 'summon', family: 'any', stronger: true },
+    SUMMON_HOLIES: { kind: 'summon', family: 'any', stronger: true },
+    SUMMON_MANA_VIPER: { kind: 'summon', family: 'any' },
+    CONJURE_LIVING_SPELLS: { kind: 'summon', family: 'any' },
+    DRUIDS_CALL: { kind: 'summon', family: 'beast' },
+    BROTHERS_IN_ARMS: { kind: 'summon', family: 'any', stronger: true },
+
+    // --- 동료 강화 ---
+    //
+    // 한 마리가 무리 전체를 세게 만듭니다. '먼저 끊어야 할 놈'이 생깁니다.
+    BATTLECRY: { kind: 'allyBuff', buff: 'might', durationAuts: [200, 400], sameKindOnly: true },
+    MIGHT_OTHER: { kind: 'allyBuff', buff: 'might', durationAuts: [200, 400] },
+    HASTE_OTHER: { kind: 'allyBuff', buff: 'haste', durationAuts: [200, 400] },
+    BERSERK_OTHER: { kind: 'allyBuff', buff: 'berserk', durationAuts: [150, 300] },
+    PRAYER_OF_BRILLIANCE: { kind: 'allyBuff', buff: 'might', durationAuts: [200, 400] },
+
+    // --- 소리로 부르기 ---
+    //
+    // 이미 만들어 둔 우는 소리 규칙에 그대로 얹힙니다. '옆방을 깨웠는가'가
+    // 몬스터 쪽에서도 일어나게 됩니다. (dcss/awareness.js)
+    WARNING_CRY: { kind: 'rouse', radiusTiles: 12 },
+    HUNTING_CALL: { kind: 'rouse', radiusTiles: 10 },
+    OBLIVION_HOWL: { kind: 'rouse', radiusTiles: 12 },
+
+    // --- 빨아들이기 ---
+    //
+    // 때리면서 회복합니다. 빨리 끊지 않으면 소모전에서 집니다.
+    // 흡혈은 원본에서 붙어 있을 때만 되고, 시전자가 다쳤을 때 주로 씁니다.
+    VAMPIRIC_DRAINING: { kind: 'drain', damage: [3, 3, 1, 10], flavour: 'negative', range: 1.5, heals: true },
+    DRAIN_LIFE: { kind: 'drain', damage: [2, 3, 1, 10], flavour: 'negative', range: 8, heals: true },
+    SIPHON_ESSENCE: { kind: 'drain', damage: [3, 4, 1, 12], flavour: 'negative', range: 8, heals: true },
+
+    // --- 약화 ---
+    //
+    // 원본의 약화 주문은 대부분 이 게임에 맞지 않습니다. 마비는 조작을 통째로
+    // 빼앗고 혼란은 조작을 뒤집는데, 실시간 일인칭에서는 둘 다 견디기 어렵습니다.
+    // 느려지는 것만 남겼습니다. 살아남을 수 있고, 대신 길을 다시 짜게 만듭니다.
+    SLOW: { kind: 'debuff', debuff: 'slow', durationAuts: [100, 200], range: 8 },
+    SLEETSTRIKE: { kind: 'debuff', debuff: 'slow', durationAuts: [80, 150], range: 8 },
 
     // --- 조준이 필요 없는 것 ---
     // 원본에는 이런 주문이 많지만 대부분 이 게임에 맞지 않습니다.

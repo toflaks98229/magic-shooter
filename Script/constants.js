@@ -410,3 +410,19 @@ export const BLINK_RANGE_TILES = 4;
 
 /** @description 동료를 치유할 수 있는 거리(타일). */
 export const HEAL_ALLY_RANGE_TILES = 8;
+
+/**
+ * @description 한 층에 동시에 존재할 수 있는 적의 수.
+ *
+ * 소환 때문에 필요해진 상한입니다. 원본의 소환 수치는 한 턴에 한 번 행동하는
+ * 것을 전제로 맞춰져 있어 견딜 만하지만, 실시간에서는 같은 수치가 금세
+ * 화면을 메웁니다. 부르는 쪽의 성격은 남기되 총량만 막았습니다.
+ */
+export const MAX_ENEMIES_ON_FLOOR = 40;
+
+/**
+ * @description 한 마리가 동시에 거느릴 수 있는 소환물의 수.
+ * 원본은 턴마다 한 번 행동하니 부르는 속도가 저절로 눌리지만,
+ * 실시간에서는 같은 수치가 금세 화면을 메웁니다.
+ */
+export const MAX_SUMMONS_PER_CASTER = 4;

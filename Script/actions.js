@@ -717,3 +717,16 @@ export function currentDangerLevel() {
     }
     return absoluteDepth(world.branch, world.floor);
 }
+
+/**
+ * 불려 나온 적을 사라지게 합니다.
+ *
+ * 죽는 것과 다릅니다. 경험치도 전리품도 신앙심도 남기지 않습니다.
+ * 소환물을 잡아 경험치를 벌 수 있으면 소환자를 살려 두는 것이 이득이 되어,
+ * '부른 놈을 먼저 잡는다'는 판단이 거꾸로 뒤집힙니다.
+ * @param {number} index - world.enemies 안의 자리
+ */
+export function dismissEnemyAt(index) {
+    const gone = world.enemies.splice(index, 1)[0];
+    emit(EVENTS.ENEMY_DISMISSED, { enemy: gone });
+}

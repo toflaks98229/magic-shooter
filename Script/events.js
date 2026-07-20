@@ -30,6 +30,8 @@ export const EVENTS = {
     ENEMY_DIED: 'enemy:died',
     /** 몬스터가 주문을 시전함. 연출과 소리가 이걸 듣습니다. */
     MONSTER_CAST: 'monster:cast',
+    /** 불려 나온 적이 시간이 다해 사라짐. 죽은 것과 다릅니다. */
+    ENEMY_DISMISSED: 'enemy:dismissed',
 
     /** 섬기는 신이 바뀜. detail: { god, name } */
     GOD_CHANGED: 'god:changed',
