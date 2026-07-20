@@ -137,6 +137,7 @@ export const TILE_IDS = {
     WALL: 1,
     EXIT: 4,
     DOOR: 5,
+    BRANCH_ENTRANCE: 6,
 };
 
 /**
@@ -171,6 +172,12 @@ export const TILE_TYPES = {
         id: TILE_IDS.DOOR, name: 'door',
         solid: false, opaque: true, spawnable: false,
         wallTexture: 'door_gate_1', interaction: null,
+    },
+    [TILE_IDS.BRANCH_ENTRANCE]: {
+        id: TILE_IDS.BRANCH_ENTRANCE, name: 'branch entrance',
+        solid: true, opaque: true, spawnable: false,
+        // 출구와 같은 텍스처를 쓰되, 어느 가지로 이어지는지는 world.entrances가 압니다.
+        wallTexture: 'exit', interaction: 'branch',
     },
 };
 

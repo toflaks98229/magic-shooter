@@ -17,6 +17,7 @@
  */
 
 import { PAST_TIME } from './constants.js';
+import { STARTING_BRANCH } from './branches.js';
 
 /**
  * 완전히 새로운 세계 상태를 생성해 반환합니다.
@@ -26,8 +27,33 @@ import { PAST_TIME } from './constants.js';
  */
 export function createWorld() {
     return {
-        /** @description 현재 플레이어가 있는 층(스테이지) */
+        /** @description 현재 있는 던전 가지의 식별 기호 (branches.js 참조) */
+        branch: STARTING_BRANCH,
+
+        /** @description 현재 가지 안에서의 층. 전체 깊이가 아니라 가지 기준입니다. */
         floor: 1,
+
+        /**
+         * @description 돌아갈 상위 던전들. 얕은 곳이 앞, 방금 떠나온 곳이 뒤입니다.
+         *
+         * 서브 던전에 들어갈 때 지금 세계를 통째로 여기에 밀어 넣고, 나올 때 꺼내 복원합니다.
+         * 각 항목은 parentStack을 뺀 월드 객체라, 중첩 없이 평평하게 쌓입니다.
+         * (중첩해서 넣으면 깊이가 깊어질수록 같은 데이터가 반복 직렬화됩니다.)
+         */
+        parentStack: [],
+
+        /**
+         * @description 각 하위 가지의 입구가 상위 가지의 몇 층에 놓이는지.
+         * 게임 시작 시 한 번 뽑아 고정합니다. 층을 만들 때마다 다시 뽑으면
+         * 같은 입구가 여러 층에 생기거나 아예 안 생길 수 있기 때문입니다.
+         */
+        branchEntrances: {},
+
+        /** @description 현재 층에 놓인 하위 가지 입구들 */
+        entrances: [],
+
+        /** @description 지금까지 획득한 룬의 가지 식별 기호 목록 */
+        runes: [],
 
         /**
          * @description 게임 내부 경과 시간(ms).

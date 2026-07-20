@@ -12,6 +12,7 @@ import * as A from './actions.js';
 import { world } from './world.js';
 import { runtime } from './runtime.js';
 import { assets } from './assets.js';
+import { getBranch } from './branches.js';
 import { getPlayerMovement, drainActionQueue, consumePendingLook, INPUT_ACTIONS } from './input.js';
 
 // --- 게임 생명주기 함수 (Unity의 Update와 유사) ---
@@ -165,7 +166,9 @@ export function attack() {
  * 현재 층(floor)에 맞는 수의 적들을 스폰합니다.
  */
 export function spawnEnemiesForFloor() {
-    const numEnemies = world.floor * 2 + 3; // 층이 올라갈수록 더 많은 적 스폰
+    // 가지 안에서의 층이 아니라 누적 깊이를 씁니다.
+    // 짐승굴 3층은 메인 3층이 아니라 메인 12층쯤의 위험도여야 하기 때문입니다.
+    const numEnemies = A.currentDangerLevel() * 2 + 3;
     for (let i = 0; i < numEnemies; i++) spawnEnemy();
 }
 
@@ -184,9 +187,17 @@ export function interactWithWorld() {
     const tileX = Math.floor(checkX / C.TILE_SIZE);
     const tileY = Math.floor(checkY / C.TILE_SIZE);
 
-    // 1. 출구 타일인지 확인합니다.
-    if (C.tileAt(world.map, tileX, tileY).interaction === 'exit') {
-        A.reachExit(); // 다음 층으로 이동하는 처리는 main.js가 구독합니다.
+    // 1. 지형 자체와의 상호작용 (출구, 하위 던전 입구)
+    const interaction = C.tileAt(world.map, tileX, tileY).interaction;
+
+    if (interaction === 'exit') {
+        A.reachExit(); // 다음 층으로 내려가거나, 최하층이면 상위 던전으로 복귀합니다.
+        return;
+    }
+
+    if (interaction === 'branch') {
+        const entrance = world.entrances.find(e => e.tileX === tileX && e.tileY === tileY);
+        if (entrance) A.enterBranch(entrance.branch);
         return;
     }
 

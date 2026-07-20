@@ -8,7 +8,8 @@
  */
 
 import * as C from './constants.js';
-import { world } from './world.js';
+import { world, createWorld, setWorld } from './world.js';
+import { getBranch, childBranchesOf, absoluteDepth, rollBranchSelection } from './branches.js';
 import { runtime, setDynamicLight } from './runtime.js';
 import { emit, EVENTS } from './events.js';
 
@@ -199,4 +200,126 @@ export function openDoor(tileX, tileY) {
  */
 export function reachExit() {
     emit(EVENTS.EXIT_REACHED, { floor: world.floor });
+}
+
+// --- 던전 가지 이동 ---------------------------------------------------------
+
+/**
+ * @description 던전을 옮겨 다녀도 따라다니는 항목들.
+ * 서브 던전에서 다치고 나왔는데 멀쩡해지면 안 되므로 복원 대상이 아닙니다.
+ */
+const CARRIED_FORWARD = ['runes', 'time', 'branchEntrances'];
+
+/**
+ * @description 플레이어 상태 중 '어디에 서 있는가'에 해당하는 항목.
+ * 체력이나 탄약과 달리 이 값들은 던전마다 다르므로, 복귀할 때는 떠났던 자리로 되돌립니다.
+ */
+const PLAYER_POSITION_FIELDS = ['x', 'y', 'angle'];
+
+/**
+ * 현재 세계를 스택에 넣을 수 있는 형태로 만듭니다.
+ * parentStack 자신은 제외해, 스택이 중첩되지 않고 평평하게 유지되도록 합니다.
+ * @returns {object} 보관용 월드 스냅샷
+ */
+function snapshotForStack() {
+    const { parentStack, ...rest } = world;
+    return structuredClone(rest);
+}
+
+/**
+ * 하위 던전으로 들어갑니다. 지금 세계는 스택에 보관되고, 새 세계가 시작됩니다.
+ * @param {string} branchId - 들어갈 가지의 식별 기호
+ * @returns {boolean} 실제로 진입했으면 true
+ */
+export function enterBranch(branchId) {
+    const branch = getBranch(branchId);
+    if (branch.id === world.branch) return false; // 이미 그 가지에 있음
+
+    const stack = [...world.parentStack, snapshotForStack()];
+
+    const next = createWorld();
+    // 진행도와 플레이어 상태는 그대로 따라 들어갑니다.
+    // 위치는 새 던전의 시작 지점으로 다시 잡히므로 여기서는 신경 쓰지 않습니다.
+    for (const key of CARRIED_FORWARD) next[key] = structuredClone(world[key]);
+    next.player = structuredClone(world.player);
+    next.branch = branch.id;
+    next.floor = 1;
+    next.parentStack = stack;
+
+    setWorld(next);
+    emit(EVENTS.BRANCH_ENTERED, { branch: branch.id, name: branch.name, depth: stack.length });
+    return true;
+}
+
+/**
+ * 상위 던전으로 되돌아갑니다. 들어갈 때의 지형과 적이 그대로 복원되고,
+ * 플레이어 상태와 획득한 룬은 서브 던전에서 나온 상태를 유지합니다.
+ * @returns {boolean} 실제로 복귀했으면 true
+ */
+export function returnToParent() {
+    if (world.parentStack.length === 0) return false; // 최상위 던전
+
+    const stack = [...world.parentStack];
+    const restored = stack.pop();
+
+    // 서브 던전에서 얻은 것들을 복원된 세계로 옮겨 담습니다.
+    for (const key of CARRIED_FORWARD) restored[key] = structuredClone(world[key]);
+
+    // 체력·탄약·무기는 서브 던전에서 나온 상태 그대로,
+    // 서 있는 위치는 서브 던전에 들어가기 직전 자리로 되돌립니다.
+    const entrancePosition = {};
+    for (const key of PLAYER_POSITION_FIELDS) entrancePosition[key] = restored.player[key];
+    restored.player = { ...structuredClone(world.player), ...entrancePosition };
+
+    restored.parentStack = stack;
+
+    const leftBranch = world.branch;
+    setWorld(restored);
+    emit(EVENTS.BRANCH_LEFT, { from: leftBranch, to: restored.branch, depth: stack.length });
+    return true;
+}
+
+/**
+ * 현재 층에 놓을 하위 가지 입구 목록을 결정합니다.
+ * 어느 층에 어떤 입구가 나올지는 게임 시작 시 한 번 정해져 world.branchEntrances에 남습니다.
+ * @returns {string[]} 이 층에 놓아야 할 가지 식별 기호들
+ */
+export function branchEntrancesForCurrentFloor() {
+    return childBranchesOf(world.branch)
+        .filter(child => world.branchEntrances[child.id] === world.floor)
+        .map(child => child.id);
+}
+
+/**
+ * 각 하위 가지의 입구가 상위 가지의 몇 층에 놓일지 한 번에 뽑습니다.
+ * 새 게임을 시작할 때 호출합니다.
+ */
+export function rollBranchEntrances() {
+    const entrances = {};
+    // 배타 그룹(늪지/해안 등)은 여기서 하나만 골라지므로, 고르지 못한 가지는
+    // branchEntrances에 아예 들어가지 않아 이번 판에는 입구가 생기지 않습니다.
+    for (const branch of rollBranchSelection()) {
+        if (!branch.parent) continue;
+        const span = branch.entryTo - branch.entryFrom;
+        entrances[branch.id] = branch.entryFrom + Math.floor(Math.random() * (span + 1));
+    }
+    world.branchEntrances = entrances;
+}
+
+/**
+ * 룬을 획득합니다.
+ * @param {string} branchId - 룬이 나온 가지의 식별 기호
+ */
+export function collectRune(branchId) {
+    if (world.runes.includes(branchId)) return;
+    world.runes.push(branchId);
+    emit(EVENTS.RUNE_COLLECTED, { branch: branchId, total: world.runes.length });
+}
+
+/**
+ * 현재 위치의 누적 깊이를 반환합니다. 난이도 계산에 씁니다.
+ * @returns {number} 게임 시작 지점으로부터의 깊이
+ */
+export function currentDangerLevel() {
+    return absoluteDepth(world.branch, world.floor);
 }

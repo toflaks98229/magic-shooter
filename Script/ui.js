@@ -12,6 +12,7 @@ import { world } from './world.js';
 import { runtime } from './runtime.js';
 import { assets } from './assets.js';
 import { dom } from './dom.js';
+import { formatLocation } from './branches.js';
 import { setWeapon } from './actions.js';
 import { on, EVENTS } from './events.js';
 
@@ -37,7 +38,10 @@ export function updateHUD() {
     setText(dom.playerHpEl, Math.ceil(world.player.hp));
     setText(dom.playerAmmoEl, world.player.ammo);
     setText(dom.enemyCountEl, world.enemies.length);
-    setText(dom.floorCountEl, world.floor);
+    // 가지 안에서의 층만 보여주면 짐승굴 2층인지 메인 2층인지 알 수 없으므로
+    // DCSS 관례대로 '가지:층' 형태로 표시합니다.
+    setText(dom.floorCountEl, formatLocation(world.branch, world.floor));
+    setText(dom.runeCountEl, world.runes.length);
     updateStatusFace(); // 상태 얼굴 업데이트
     updateWeaponSprite(); // 무기 스프라이트 업데이트
 }

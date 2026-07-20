@@ -15,6 +15,7 @@ import { assets } from './assets.js';
 import { dom, bindDom } from './dom.js';
 import { on, EVENTS } from './events.js';
 import { generateDungeon } from './mapGenerator.js';
+import { getBranch, formatLocation } from './branches.js';
 import { setupInputHandlers, clearInputQueue } from './input.js';
 import { render, resizeCanvas, loadAssets } from './render.js';
 import { spawnEnemiesForFloor } from './gameLogic.js';
@@ -62,6 +63,10 @@ function init() {
 function registerGameFlowHandlers() {
     on(EVENTS.PLAYER_DIED, gameOver);
     on(EVENTS.EXIT_REACHED, nextFloor);
+    on(EVENTS.BRANCH_ENTERED, enterBranchFloor);
+    on(EVENTS.RUNE_COLLECTED, ({ branch, total }) => {
+        console.log(`${getBranch(branch).name}의 룬을 획득했습니다. (총 ${total}개)`);
+    });
 }
 
 /**
@@ -132,6 +137,7 @@ function gameLoop(timestamp = 0) {
  */
 function startGame() {
     resetWorld();       // 월드를 초기 상태로 재생성 (이전 판의 잔재가 남지 않도록)
+    A.rollBranchEntrances(); // 어느 층에 어떤 하위 던전 입구가 놓일지 이번 판에서 한 번만 정합니다
     resetRuntime();     // 흔들림 위상, 무기 교체 플래그 등 세션 상태도 초기화
     resetLoop();        // 누산기에 남아 있던 시간 제거
     clearInputQueue();  // 이전 판에서 쌓인 입력이 새 판에 반영되지 않도록 비움
@@ -159,14 +165,46 @@ function gameOver() {
 }
 
 /**
- * 다음 층(스테이지)으로 이동합니다. EXIT_REACHED 이벤트에 반응합니다.
+ * 출구에 도달했을 때의 처리. EXIT_REACHED 이벤트에 반응합니다.
+ *
+ * 현재 가지에 더 내려갈 층이 남았으면 내려가고,
+ * 최하층이라면 왔던 상위 던전으로 되돌아갑니다.
  */
 function nextFloor() {
+    const branch = getBranch(world.branch);
+
+    if (world.floor >= branch.depth && world.parentStack.length > 0) {
+        // 이 가지의 끝. 룬이 있는 가지였다면 챙기고 상위 던전으로 복귀합니다.
+        if (branch.rune) A.collectRune(branch.id);
+        A.returnToParent();
+        restoreFloorAfterReturn();
+        return;
+    }
+
     A.setFloor(world.floor + 1);
     // 다음 층으로 갈 때 체력과 탄약을 약간 보상해줍니다.
     A.healPlayer(C.FLOOR_CLEAR_HEAL);
     A.giveAmmo(C.FLOOR_CLEAR_AMMO);
     generateNewFloor();
+    updateHUD();
+}
+
+/**
+ * 하위 던전에 진입했을 때 첫 층을 만듭니다. BRANCH_ENTERED 이벤트에 반응합니다.
+ */
+function enterBranchFloor({ name }) {
+    console.log(`${name}에 진입했습니다. (${formatLocation(world.branch, world.floor)})`);
+    generateNewFloor();
+    updateHUD();
+}
+
+/**
+ * 상위 던전으로 되돌아왔을 때의 처리.
+ * 지형과 적은 스택에서 그대로 복원되었으므로 다시 만들지 않습니다.
+ * 이것이 서브 던전 스택의 핵심입니다. 나갔다 돌아오면 떠날 때 그 자리입니다.
+ */
+function restoreFloorAfterReturn() {
+    console.log(`${getBranch(world.branch).name}으로 돌아왔습니다. (${formatLocation(world.branch, world.floor)})`);
     updateHUD();
 }
 
@@ -180,6 +218,7 @@ function generateNewFloor() {
     const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
     world.map = dungeon.map;
     world.objectMap = dungeon.objectMap;
+    placeBranchEntrances(dungeon);
 
     // 플레이어를 맵의 시작 지점으로 이동
     world.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;
@@ -198,10 +237,58 @@ function generateNewFloor() {
 }
 
 /**
+ * 이 층에 놓여야 할 하위 던전 입구를 맵에 배치합니다.
+ * 어느 층에 무엇이 놓일지는 게임 시작 시 정해져 있으므로 여기서는 자리만 찾습니다.
+ * @param {{map: number[][], playerStart: {x: number, y: number}}} dungeon - 방금 생성된 던전
+ */
+function placeBranchEntrances(dungeon) {
+    world.entrances = [];
+
+    for (const branchId of A.branchEntrancesForCurrentFloor()) {
+        const spot = findEntranceSpot(dungeon);
+        if (!spot) {
+            console.warn(`${getBranch(branchId).name}의 입구를 놓을 자리를 찾지 못했습니다.`);
+            continue;
+        }
+        world.map[spot.y][spot.x] = C.TILE_IDS.BRANCH_ENTRANCE;
+        world.entrances.push({ tileX: spot.x, tileY: spot.y, branch: branchId });
+        console.log(`${getBranch(branchId).name}의 입구가 ${formatLocation(world.branch, world.floor)}에 있습니다.`);
+    }
+}
+
+/**
+ * 입구를 놓을 바닥 칸을 찾습니다. 플레이어 시작 지점과 이미 놓인 입구는 피합니다.
+ * @param {{map: number[][], playerStart: {x: number, y: number}}} dungeon - 대상 던전
+ * @returns {{x: number, y: number}|null} 찾은 좌표
+ */
+function findEntranceSpot(dungeon) {
+    const candidates = [];
+    for (let y = 0; y < world.map.length; y++) {
+        for (let x = 0; x < world.map[y].length; x++) {
+            if (!C.tileAt(world.map, x, y).spawnable) continue;
+            if (x === dungeon.playerStart.x && y === dungeon.playerStart.y) continue;
+            candidates.push({ x, y });
+        }
+    }
+    if (candidates.length === 0) return null;
+    return candidates[Math.floor(Math.random() * candidates.length)];
+}
+
+/**
  * dungeon_progression.json을 참조해 현재 층의 테마를 world에 기록합니다.
  * 텍스처 자체가 아니라 '이름'만 저장하므로 world는 직렬화 가능한 상태로 유지됩니다.
  */
 function applyFloorTheme() {
+    const branch = getBranch(world.branch);
+
+    // 메인 던전이 아닌 가지는 자기 테마를 씁니다.
+    // dungeon_progression.json은 메인 던전의 층별 연출을 위한 것입니다.
+    if (branch.parent) {
+        world.themeName = branch.theme;
+        world.themeVariation = branch.themeVariation;
+        return;
+    }
+
     const progression = assets.dungeonProgression;
     let themeInfo;
 

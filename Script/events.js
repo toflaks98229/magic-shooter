@@ -37,6 +37,13 @@ export const EVENTS = {
     EXIT_REACHED: 'exit:reached',
     /** 층이 바뀜. detail: { floor } */
     FLOOR_CHANGED: 'floor:changed',
+
+    /** 하위 던전에 진입함. detail: { branch, name, depth } */
+    BRANCH_ENTERED: 'branch:entered',
+    /** 상위 던전으로 복귀함. detail: { from, to, depth } */
+    BRANCH_LEFT: 'branch:left',
+    /** 룬을 획득함. detail: { branch, total } */
+    RUNE_COLLECTED: 'rune:collected',
 };
 
 /** @description 실제 디스패치를 담당하는 내부 버스. 외부에 노출하지 않습니다. */
