@@ -157,3 +157,86 @@ test('world는 시뮬레이션 상태만 소유한다', () => {
     assert.ok(!('canvas' in worldModule.world), 'DOM 참조는 dom.js 소유');
     assert.ok(!('isGameRunning' in worldModule.world), '실행 플래그는 runtime.js 소유');
 });
+
+// --- 층 범위 분류 -----------------------------------------------------------
+
+test('createWorld의 모든 배열이 층/판/격자 중 하나로 분류되어 있다', () => {
+    // 이 검사가 이 리팩토링의 핵심입니다.
+    //
+    // 예전에는 main.js가 층을 새로 만들 때 비울 컬렉션을 여섯 줄로 늘어놓았습니다.
+    // 새 컬렉션을 추가하면서 그 목록에 넣는 것을 잊으면 이전 층의 엔티티가 그대로 남는데,
+    // 층을 옮겨야만 드러나는 데다 조용히 어긋나는 종류라 알아채기 어려웠습니다.
+    //
+    // 이제 beginFloor()가 FLOOR_SCOPED_COLLECTIONS를 읽어 비우므로,
+    // 새 배열을 분류해 넣기만 하면 자동으로 처리됩니다.
+    // 분류를 잊었을 때 조용히 넘어가지 않도록 여기서 막습니다.
+    const fresh = worldModule.createWorld();
+    const classified = new Set([
+        ...worldModule.FLOOR_SCOPED_COLLECTIONS,
+        ...worldModule.RUN_SCOPED_COLLECTIONS,
+        ...worldModule.FLOOR_REPLACED_GRIDS,
+    ]);
+
+    const arrayKeys = Object.keys(fresh).filter(key => Array.isArray(fresh[key]));
+    const unclassified = arrayKeys.filter(key => !classified.has(key));
+
+    assert.deepEqual(unclassified, [],
+        `world에 새 배열이 생겼는데 분류되지 않았습니다: ${unclassified.join(', ')}\n` +
+        `world.js의 FLOOR_SCOPED_COLLECTIONS(층마다 비움) / RUN_SCOPED_COLLECTIONS(판 내내 유지) / ` +
+        `FLOOR_REPLACED_GRIDS(층마다 교체) 중 하나에 넣으십시오.`);
+
+    // 반대 방향도 봅니다. 이름이 바뀌거나 사라진 항목이 목록에 남아 있으면
+    // beginFloor()가 없는 속성을 비우려다 터집니다.
+    const stale = [...classified].filter(key => !(key in fresh));
+    assert.deepEqual(stale, [],
+        `분류 목록에 world에 없는 항목이 남아 있습니다: ${stale.join(', ')}`);
+
+    // 한 항목이 두 목록에 동시에 들어가면 의도가 모순됩니다.
+    const all = [
+        ...worldModule.FLOOR_SCOPED_COLLECTIONS,
+        ...worldModule.RUN_SCOPED_COLLECTIONS,
+        ...worldModule.FLOOR_REPLACED_GRIDS,
+    ];
+    assert.equal(all.length, new Set(all).size, '한 항목이 여러 분류에 중복되어 있습니다');
+});
+
+test('beginFloor는 층에 매인 것만 비우고 판에 걸친 것은 남긴다', () => {
+    resetWorld();
+    const world = worldModule.world;
+
+    // 층에 매인 것과 판에 걸친 것을 모두 채워 둡니다.
+    for (const key of worldModule.FLOOR_SCOPED_COLLECTIONS) world[key].push({ marker: key });
+    for (const key of worldModule.RUN_SCOPED_COLLECTIONS) world[key].push({ marker: key });
+
+    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT);
+    actions.beginFloor(dungeon);
+
+    for (const key of worldModule.FLOOR_SCOPED_COLLECTIONS) {
+        assert.equal(world[key].length, 0, `${key}는 새 층에서 비워져야 합니다`);
+    }
+    for (const key of worldModule.RUN_SCOPED_COLLECTIONS) {
+        assert.equal(world[key].length, 1, `${key}는 층이 바뀌어도 남아야 합니다`);
+    }
+
+    assert.equal(world.map, dungeon.map, '지형이 새 층으로 교체되어야 합니다');
+    assert.equal(world.objectMap, dungeon.objectMap, '오브젝트 격자가 교체되어야 합니다');
+    assert.equal(world.player.x, dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2,
+        '플레이어가 새 층 시작 지점에 서야 합니다');
+});
+
+test('서브 던전에 다녀와도 스택에 넣어둔 층이 비워지지 않는다', () => {
+    // beginFloor가 .length = 0 으로 비우므로, 스택 스냅샷이 같은 배열을 참조하고 있다면
+    // 새 층을 만드는 순간 돌아갈 층의 적까지 사라집니다.
+    // snapshotForStack이 structuredClone을 쓰고 있어 괜찮지만, 그 전제가 깨지면 여기서 드러납니다.
+    resetWorld();
+    const world = worldModule.world;
+    world.map = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT).map;
+    world.enemies.push({ marker: 'parent-floor' });
+
+    actions.enterBranch('L'); // 짐승굴
+    actions.beginFloor(generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT));
+
+    const stacked = worldModule.world.parentStack[0];
+    assert.equal(stacked.enemies.length, 1, '스택에 보관된 층의 적이 사라졌습니다');
+    assert.equal(stacked.enemies[0].marker, 'parent-floor');
+});

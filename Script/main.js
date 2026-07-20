@@ -246,23 +246,13 @@ function generateNewFloor() {
         branch: world.branch,
         floor: world.floor,
     });
-    world.map = dungeon.map;
-    world.objectMap = dungeon.objectMap;
+    // 지형 교체, 층에 매인 것들 비우기, 플레이어 배치를 한 번에 처리합니다.
+    // 무엇을 비울지는 world.js의 FLOOR_SCOPED_COLLECTIONS가 정하므로 여기서 셀 필요가 없습니다.
+    A.beginFloor(dungeon);
+
     placeBranchEntrances(dungeon);
     placeAltar(dungeon);
     placePortal(dungeon);
-
-    // 플레이어를 맵의 시작 지점으로 이동
-    world.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;
-    world.player.y = dungeon.playerStart.y * C.TILE_SIZE + C.TILE_SIZE / 2;
-
-    // 기존의 모든 엔티티(적, 발사체, 아이템, 파티클)를 제거
-    world.enemies.length = 0;
-    world.projectiles.length = 0;
-    world.items.length = 0;
-    world.particles.length = 0;
-    world.animatedObjects.length = 0;
-    world.animatedWalls.length = 0;
 
     // 새로운 층에 맞는 적들을 스폰
     spawnEnemiesForFloor();
@@ -301,16 +291,14 @@ function scatterBonusItems(count) {
  * @param {{map: number[][], playerStart: {x: number, y: number}}} dungeon - 방금 생성된 던전
  */
 function placeBranchEntrances(dungeon) {
-    world.entrances = [];
-
+    // 목록 비우기는 A.beginFloor()가 이미 했습니다.
     for (const branchId of A.branchEntrancesForCurrentFloor()) {
         const spot = findEntranceSpot(dungeon);
         if (!spot) {
             console.warn(`${getBranch(branchId).name}의 입구를 놓을 자리를 찾지 못했습니다.`);
             continue;
         }
-        world.map[spot.y][spot.x] = C.TILE_IDS.BRANCH_ENTRANCE;
-        world.entrances.push({ tileX: spot.x, tileY: spot.y, branch: branchId });
+        A.placeBranchEntrance(branchId, spot.x, spot.y);
         console.log(`${getBranch(branchId).name}의 입구가 ${formatLocation(world.branch, world.floor)}에 있습니다.`);
     }
 }
@@ -327,7 +315,7 @@ function placeBranchEntrances(dungeon) {
  * @param {{playerStart: {x: number, y: number}}} dungeon - 방금 생성된 던전
  */
 function placeAltar(dungeon) {
-    world.altars = [];
+    // 목록 비우기는 A.beginFloor()가 이미 했습니다.
     if (Math.random() > 0.25) return;
 
     const species = SPECIES[world.player.species];
@@ -338,8 +326,7 @@ function placeAltar(dungeon) {
     if (!spot) return;
 
     const god = candidates[Math.floor(Math.random() * candidates.length)];
-    world.map[spot.y][spot.x] = C.TILE_IDS.ALTAR;
-    world.altars.push({ tileX: spot.x, tileY: spot.y, god });
+    A.placeAltar(god, spot.x, spot.y);
     console.log(`${GODS[god].name}의 제단이 ${formatLocation(world.branch, world.floor)}에 있습니다.`);
 }
 
@@ -349,15 +336,13 @@ function placeAltar(dungeon) {
  * @param {{playerStart: {x: number, y: number}}} dungeon - 방금 생성된 던전
  */
 function placePortal(dungeon) {
-    world.portals = [];
-
+    // 목록 비우기는 A.beginFloor()가, 타일 칠하기는 A.openPortal()이 합니다.
     const portal = A.rollPortalForCurrentFloor();
     if (!portal) return;
 
     const spot = findEntranceSpot(dungeon);
     if (!spot) return;
 
-    world.map[spot.y][spot.x] = C.TILE_IDS.PORTAL;
     A.openPortal(portal, spot.x, spot.y);
 }
 
@@ -389,8 +374,7 @@ function applyFloorTheme() {
     // 메인 던전이 아닌 가지는 자기 테마를 씁니다.
     // dungeon_progression.json은 메인 던전의 층별 연출을 위한 것입니다.
     if (branch.parent) {
-        world.themeName = branch.theme;
-        world.themeVariation = branch.themeVariation;
+        A.setFloorTheme(branch.theme, branch.themeVariation);
         return;
     }
 
@@ -410,14 +394,12 @@ function applyFloorTheme() {
 
     // 3. themeInfo가 유효하지 않으면 테마 없이(폴백 텍스처로) 렌더링합니다.
     if (!themeInfo || !themeInfo.theme || !themeInfo.variation) {
-        world.themeName = null;
-        world.themeVariation = null;
+        A.setFloorTheme(null, null);
         console.warn(`No theme information found for floor ${world.floor} in dungeon_progression.json. Using fallback textures.`);
         return;
     }
 
-    world.themeName = themeInfo.theme;
-    world.themeVariation = themeInfo.variation;
+    A.setFloorTheme(themeInfo.theme, themeInfo.variation);
     console.log(`Floor ${world.floor} theme set to: ${themeInfo.theme} - variation_${themeInfo.variation}`);
 }
 

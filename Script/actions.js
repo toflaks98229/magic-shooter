@@ -8,7 +8,7 @@
  */
 
 import * as C from './constants.js';
-import { world, createWorld, setWorld } from './world.js';
+import { world, createWorld, setWorld, FLOOR_SCOPED_COLLECTIONS } from './world.js';
 import { getBranch, childBranchesOf, absoluteDepth, rollBranchSelection } from './branches.js';
 import { rollPortalForFloor } from './portals.js';
 import { getItem, rollItem, DROP_CHANCE, BUFF_MODIFIERS } from './items.js';
@@ -36,6 +36,59 @@ export function setGameRunning(isRunning) {
 export function setFloor(floor) {
     world.floor = floor;
     emit(EVENTS.FLOOR_CHANGED, { floor });
+}
+
+/**
+ * 갓 만들어진 층을 세계에 앉힙니다. 지형을 갈아 끼우고, 층에 매인 것들을 모두 비우고,
+ * 플레이어를 시작 지점에 세웁니다.
+ *
+ * 비울 대상을 여기에 손으로 늘어놓지 않고 world.js의 FLOOR_SCOPED_COLLECTIONS를 읽는 것이
+ * 핵심입니다. 새 컬렉션을 추가할 때 이 함수를 고치는 것을 잊어도, 목록에 분류해 넣기만 하면
+ * 자동으로 비워집니다. 분류를 잊으면 world.test.js가 먼저 알려줍니다.
+ * @param {{map: number[][], objectMap: number[][], playerStart: {x: number, y: number}}} dungeon - 새로 만들어진 층
+ */
+export function beginFloor(dungeon) {
+    world.map = dungeon.map;
+    world.objectMap = dungeon.objectMap;
+    // 지형이 통째로 바뀌었으므로 경로 캐시와 렌더 캐시를 무효화합니다.
+    world.mapRevision++;
+
+    for (const key of FLOOR_SCOPED_COLLECTIONS) world[key].length = 0;
+
+    world.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;
+    world.player.y = dungeon.playerStart.y * C.TILE_SIZE + C.TILE_SIZE / 2;
+}
+
+/**
+ * 이번 층에 쓸 테마를 기록합니다. 텍스처 자체가 아니라 이름만 담아 world를 직렬화 가능하게 둡니다.
+ * @param {string|null} themeName - 테마 이름
+ * @param {number|string|null} themeVariation - 변형 번호
+ */
+export function setFloorTheme(themeName, themeVariation) {
+    world.themeName = themeName;
+    world.themeVariation = themeVariation;
+}
+
+/**
+ * 하위 가지로 내려가는 입구를 놓습니다.
+ * @param {string} branchId - 이어질 가지의 식별 기호
+ * @param {number} tileX - 놓을 타일 X 좌표
+ * @param {number} tileY - 놓을 타일 Y 좌표
+ */
+export function placeBranchEntrance(branchId, tileX, tileY) {
+    world.map[tileY][tileX] = C.TILE_IDS.BRANCH_ENTRANCE;
+    world.entrances.push({ tileX, tileY, branch: branchId });
+}
+
+/**
+ * 제단을 놓습니다.
+ * @param {string} godId - 제단의 주인이 될 신의 식별 기호
+ * @param {number} tileX - 놓을 타일 X 좌표
+ * @param {number} tileY - 놓을 타일 Y 좌표
+ */
+export function placeAltar(godId, tileX, tileY) {
+    world.map[tileY][tileX] = C.TILE_IDS.ALTAR;
+    world.altars.push({ tileX, tileY, god: godId });
 }
 
 // --- 플레이어 ---------------------------------------------------------------
@@ -573,12 +626,16 @@ export function rollPortalForCurrentFloor() {
 }
 
 /**
- * 포탈을 현재 층에 등록합니다.
+ * 포탈을 현재 층에 놓고 등록합니다.
+ *
+ * 타일을 칠하는 일까지 여기서 합니다. 닫힐 때 타일을 되돌리는 removePortalTile()이
+ * 이미 이 파일에 있으므로, 놓는 쪽만 호출부에 흩어져 있으면 짝이 맞지 않습니다.
  * @param {object} portal - portals.js의 던전 정의
  * @param {number} tileX - 놓인 타일 X 좌표
  * @param {number} tileY - 놓인 타일 Y 좌표
  */
 export function openPortal(portal, tileX, tileY) {
+    world.map[tileY][tileX] = C.TILE_IDS.PORTAL;
     world.portals.push({
         id: portal.id, tileX, tileY,
         expiresAt: world.time + portal.lifetimeMs,

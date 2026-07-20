@@ -157,6 +157,36 @@ export function createWorld() {
 }
 
 /**
+ * @description 층이 바뀌면 비워야 하는 컬렉션들. actions.js의 beginFloor()가 이 목록을 돌며 비웁니다.
+ *
+ * 예전에는 main.js가 여섯 줄을 손으로 늘어놓고 비웠습니다. 새 컬렉션을 만들 때마다
+ * 일곱 번째 줄을 거기에 더하는 것을 기억해야 했고, 잊으면 이전 층의 엔티티가 그대로 남았습니다.
+ * 층을 옮겼는데 죽은 적이 따라오는 식이라 재현하기도 어려운 종류의 결함입니다.
+ *
+ * 그래서 목록을 스키마 바로 옆에 두고 코드가 읽어 가게 했습니다.
+ * 아래 세 목록은 createWorld()의 모든 배열을 빠짐없이 덮어야 하며,
+ * world.test.js가 그것을 확인합니다. 새 배열을 만들고 분류하지 않으면 테스트가 먼저 알려줍니다.
+ */
+export const FLOOR_SCOPED_COLLECTIONS = [
+    'enemies', 'projectiles', 'items', 'particles',
+    'animatedObjects', 'animatedWalls',
+    'entrances', 'altars', 'portals',
+];
+
+/**
+ * @description 판이 이어지는 동안 유지되는 컬렉션들. 층이 바뀌어도 비우지 않습니다.
+ * 소지품과 룬은 물론이고, 돌아갈 상위 던전 목록도 여기 속합니다.
+ */
+export const RUN_SCOPED_COLLECTIONS = [
+    'parentStack', 'runes', 'inventory', 'buffs',
+];
+
+/**
+ * @description 층마다 통째로 새것으로 갈아 끼우는 격자들. 비우는 것이 아니라 교체합니다.
+ */
+export const FLOOR_REPLACED_GRIDS = ['map', 'objectMap'];
+
+/**
  * @description 현재 세계 상태.
  * ESM의 live binding 덕분에, setWorld()로 교체해도 이 값을 import한 모든 모듈이
  * 자동으로 새 객체를 바라보게 됩니다.
