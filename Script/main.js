@@ -241,7 +241,11 @@ function generateNewFloor() {
     applyFloorTheme();
 
     // 새로운 던전 맵 생성
-    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
+    // 어느 가지 몇 층인지에 따라 층의 모양이 달라집니다. (원본 layout.des 의 표를 따릅니다)
+    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, {
+        branch: world.branch,
+        floor: world.floor,
+    });
     world.map = dungeon.map;
     world.objectMap = dungeon.objectMap;
     placeBranchEntrances(dungeon);

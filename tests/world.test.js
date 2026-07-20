@@ -26,7 +26,7 @@ bindStubDom(dom);
 
 /** 새 층을 만들고 적을 배치한다. */
 function buildFloor() {
-    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
+    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT);
     worldModule.world.map = dungeon.map;
     worldModule.world.objectMap = dungeon.objectMap;
     worldModule.world.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;

@@ -82,7 +82,9 @@ export async function runSimulation() {
     events.on(E.DOOR_OPENED, () => { stats.doorsOpened++; });
 
     function buildFloor() {
-        const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
+        // 레이아웃을 고정합니다. 굴리게 두면 layouts.js 의 가중치를 손볼 때마다
+        // 회귀 스냅샷이 통째로 달라져, 정작 무엇이 바뀌었는지 알 수 없게 됩니다.
+        const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, { layout: 'rooms' });
         world.map = dungeon.map;
         world.objectMap = dungeon.objectMap;
         world.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;

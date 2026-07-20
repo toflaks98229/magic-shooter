@@ -80,7 +80,7 @@ test('바닥이 하나도 없는 맵에서도 멈추지 않는다', () => {
 
 test('generateDungeon이 항상 유효한 맵을 만든다', () => {
     for (let i = 0; i < 300; i++) {
-        const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
+        const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT);
 
         assert.equal(dungeon.map.length, C.MAP_HEIGHT);
         assert.equal(dungeon.map[0].length, C.MAP_WIDTH);

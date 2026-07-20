@@ -33,7 +33,7 @@ function spawnIn(branchId, floor) {
     worldModule.world.branch = branchId;
     worldModule.world.floor = floor;
 
-    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
+    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT);
     worldModule.world.map = dungeon.map;
     worldModule.world.objectMap = dungeon.objectMap;
     worldModule.world.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;
@@ -168,7 +168,7 @@ test('보스가 지정된 포탈은 최하층에 보스를 한 마리 배치한�
     worldModule.world.floor = 1;                 // 건틀릿은 단층이므로 1층이 곧 최하층
     worldModule.world.portalDangerLevel = 12;
 
-    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
+    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT);
     worldModule.world.map = dungeon.map;
     worldModule.world.objectMap = dungeon.objectMap;
     gameLogic.spawnEnemiesForFloor();
@@ -257,7 +257,7 @@ test('적 수에 상한이 있다', () => {
     worldModule.world.branch = 'Z';   // 조트의 왕국. 가장 깊은 축입니다.
     worldModule.world.floor = 5;
 
-    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
+    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT);
     worldModule.world.map = dungeon.map;
     worldModule.world.objectMap = dungeon.objectMap;
     gameLogic.spawnEnemiesForFloor();

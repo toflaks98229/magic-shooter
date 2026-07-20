@@ -1,7 +1,7 @@
 {
   "frames": 1800,
   "stats": {
-    "sounds": 76,
+    "sounds": 70,
     "gameOvers": 1,
     "floors": 2,
     "attacks": 180,
@@ -13,53 +13,53 @@
   "floor": 2,
   "weapon": "fist",
   "player": {
-    "x": 496,
-    "y": 464,
+    "x": 112,
+    "y": 144,
     "angle": 8.85,
-    "hp": 21,
+    "hp": 70,
     "ammo": 0
   },
   "counts": {
     "enemies": 5,
     "items": 0,
-    "projectiles": 1,
+    "projectiles": 0,
     "particles": 0,
     "animatedWalls": 0
   },
   "enemies": [
     {
-      "sprite": "enemy_imp",
-      "x": 343.249833495,
-      "y": 464.015004512,
-      "hp": 30
+      "sprite": "enemy_orc",
+      "x": 428.293184117,
+      "y": 112.000006902,
+      "hp": 48
     },
     {
-      "sprite": "enemy_snake",
-      "x": 480.686019565,
-      "y": 464.027066381,
-      "hp": 26
+      "sprite": "enemy_skeleton",
+      "x": 303.999999986,
+      "y": 147.443798068,
+      "hp": 32
     },
     {
-      "sprite": "enemy_imp",
-      "x": 511.21752144,
-      "y": 471.289089367,
-      "hp": 30
+      "sprite": "enemy_rat",
+      "x": 245.734514132,
+      "y": 113.900043412,
+      "hp": 14
     },
     {
-      "sprite": "enemy_zombie",
-      "x": 526.220737752,
-      "y": 365.855778326,
-      "hp": 40
+      "sprite": "enemy_orc",
+      "x": 127.489948886,
+      "y": 137.939373507,
+      "hp": 48
     },
     {
-      "sprite": "enemy_zombie",
-      "x": 649.661267097,
-      "y": 604.552665143,
-      "hp": 40
+      "sprite": "enemy_orc",
+      "x": 144.000000643,
+      "y": 261.973870748,
+      "hp": 48
     }
   ],
   "items": [],
-  "mapChecksum": 163062,
-  "objectMapChecksum": 0,
+  "mapChecksum": 265676,
+  "objectMapChecksum": 664,
   "serializable": true
 }

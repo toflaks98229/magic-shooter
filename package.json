@@ -11,6 +11,7 @@
     "preview": "node tools/preview.js",
     "bench": "node tools/bench.js",
     "locate:tiles": "node tools/locate-tiles.js",
-    "verify:chargen": "node tools/verify-chargen.js"
+    "verify:chargen": "node tools/verify-chargen.js",
+    "preview:maps": "node tools/preview-maps.js"
   }
 }

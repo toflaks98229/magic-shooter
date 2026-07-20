@@ -29,7 +29,7 @@ bindStubDom(dom);
 /** 현재 월드에 층 하나를 만들어 넣습니다. */
 function buildFloor() {
     const world = worldModule.world;
-    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
+    const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT);
     world.map = dungeon.map;
     world.objectMap = dungeon.objectMap;
     world.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;

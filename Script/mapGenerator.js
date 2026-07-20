@@ -1,176 +1,240 @@
 /**
- * @fileoverview 로그라이크 스타일의 무작위 던전 맵을 생성하는 유틸리티 함수입니다.
+ * @fileoverview 층 하나를 만듭니다.
+ *
+ * 예전에는 어떤 층이든 '방 열다섯 개를 흩어 놓고 복도로 잇는' 한 가지 방식이었습니다.
+ * 짐승굴이든 오크 광산이든 지옥이든 똑같이 생겼다는 뜻이라, 어디에 있는지가 지형으로는
+ * 전혀 드러나지 않았습니다.
+ *
+ * DCSS 는 층을 만들기 전에 먼저 '이 층을 어떤 모양으로 만들 것인가'를 굴립니다.
+ * dat/des/builder/layout.des 에 열한 가지가 있고 가지와 깊이마다 나오는 것이 다릅니다.
+ * 그 표를 layouts.js 로 옮겼고, 실제로 그리는 일은 layoutBuilders.js 가 합니다.
+ * 이 파일은 그 둘을 이어 붙이고, 어떤 모양이 나오든 반드시 지켜져야 하는 것들을 챙깁니다.
+ *
+ * 반드시 지켜져야 하는 것은 두 가지입니다.
+ *   - 시작 지점에서 출구까지 걸어갈 수 있을 것
+ *   - 걸어갈 수 없는 자리에는 아무것도 놓지 않을 것
+ * 동굴이나 도시처럼 파내는 방식이 방-복도가 아닌 레이아웃은 이것이 저절로 지켜지지 않습니다.
+ * 그래서 다 만든 뒤에 ensureConnected 로 확인하고 고칩니다.
  */
 
-import { TILE_IDS } from './constants.js';
-
-// --- 외부 공개 함수 (Public Methods) ---
+import { TILE_IDS, tileAt } from './constants.js';
+import { rollLayout, LAYOUTS } from './layouts.js';
+import {
+    buildRooms, buildRoguey, buildCorridors, buildCity,
+    buildCaves, buildNarrowCaves, buildDivisions, buildOpen,
+    joinTheDots, centerOf,
+} from './layoutBuilders.js';
 
 /**
- * 로그라이크 스타일의 던전 맵을 생성합니다.
- * 이 알고리즘은 무작위 방을 생성하고 복도로 연결하는 방식으로 동작합니다.
- * @param {number} width - 맵의 가로 크기 (타일 단위)
- * @param {number} height - 맵의 세로 크기 (타일 단위)
- * @param {number} maxRooms - 생성할 최대 방의 개수
- * @param {number} minRoomSize - 방의 최소 크기
- * @param {number} maxRoomSize - 방의 최대 크기
- * @returns {{map: number[][], objectMap: number[][], playerStart: {x: number, y: number}}} - 생성된 맵, 오브젝트 맵, 플레이어 시작 좌표
+ * 층 하나를 만듭니다.
+ *
+ * @param {number} width - 맵 가로 (타일)
+ * @param {number} height - 맵 세로 (타일)
+ * @param {object} [options] - 어느 가지 몇 층인지. 없으면 메인 던전 1층으로 봅니다.
+ * @param {string} [options.branch] - 가지 글자
+ * @param {number} [options.floor] - 그 가지 안에서의 층
+ * @param {string} [options.layout] - 레이아웃을 직접 지정할 때 (테스트와 미리보기용)
+ * @returns {{map: number[][], objectMap: number[][], playerStart: {x: number, y: number}, layout: string}} 만들어진 층
  */
-export function generateDungeon(width, height, maxRooms, minRoomSize, maxRoomSize) {
-    // 1. 맵을 모두 벽(1)으로, 오브젝트 맵은 비어있음(0)으로 초기화합니다.
-    const map = Array(height).fill(0).map(() => Array(width).fill(TILE_IDS.WALL));
-    const objectMap = Array(height).fill(0).map(() => Array(width).fill(0));
-    const rooms = []; // 생성된 방의 정보를 저장할 배열
+export function generateDungeon(width, height, options = {}) {
+    const { branch = 'D', floor = 1 } = options;
+    const layoutId = options.layout ?? rollLayout(branch, floor);
 
-    // 2. 무작위 크기와 위치의 방을 생성합니다.
-    // 시도 횟수(maxRooms * 5)를 늘려 방 생성 확률을 높입니다.
-    for (let i = 0; i < maxRooms * 5 && rooms.length < maxRooms; i++) {
-        const roomW = Math.floor(Math.random() * (maxRoomSize - minRoomSize + 1)) + minRoomSize;
-        const roomH = Math.floor(Math.random() * (maxRoomSize - minRoomSize + 1)) + minRoomSize;
-        // 맵 가장자리에 방이 생성되지 않도록 좌표를 조정합니다.
-        const roomX = Math.floor(Math.random() * (width - roomW - 1)) + 1;
-        const roomY = Math.floor(Math.random() * (height - roomH - 1)) + 1;
-        const newRoom = { x: roomX, y: roomY, w: roomW, h: roomH };
+    const map = Array.from({ length: height }, () => Array(width).fill(TILE_IDS.WALL));
+    const objectMap = Array.from({ length: height }, () => Array(width).fill(0));
 
-        // 다른 방과 겹치는지 확인합니다.
-        const overlaps = rooms.some(other => (
-            newRoom.x < other.x + other.w && newRoom.x + newRoom.w > other.x &&
-            newRoom.y < other.y + other.h && newRoom.y + newRoom.h > other.y
-        ));
+    let spots = buildLayout(map, layoutId);
 
-        if (!overlaps) {
-            // 겹치지 않으면 맵에 방을 그리고(벽을 바닥(0)으로 변경) 배열에 추가합니다.
-            createRoom(map, newRoom);
-            rooms.push(newRoom);
-        }
+    // 어떤 레이아웃이든 설 자리가 하나도 안 나오는 경우가 있습니다. (난수가 나쁘게 걸릴 때)
+    // 그럴 때는 가장 무난한 방-복도로 다시 만듭니다. 빈 맵을 내보내는 것보다 낫습니다.
+    if (spots.length < 2) {
+        for (let y = 0; y < height; y++) map[y].fill(TILE_IDS.WALL);
+        spots = buildRooms(map);
     }
+    if (spots.length < 2) return createFallbackDungeon(width, height);
 
-    // 방 생성에 실패했을 경우, 무작위 패턴의 비상용 맵을 생성합니다.
-    if (rooms.length === 0) {
-        console.warn("Dungeon generation failed, creating a random fallback map.");
-        return createFallbackDungeon(width, height);
-    }
+    const playerStart = clampToFloor(map, centerOf(spots[0]));
+    ensureConnected(map, playerStart, spots);
+    placeDoors(map, objectMap);
 
-    // 3. 생성된 방들을 복도로 연결합니다. (생성된 순서대로)
-    for (let i = 1; i < rooms.length; i++) {
-        const prevCenter = { x: rooms[i - 1].x + Math.floor(rooms[i - 1].w / 2), y: rooms[i - 1].y + Math.floor(rooms[i - 1].h / 2) };
-        const newCenter = { x: rooms[i].x + Math.floor(rooms[i].w / 2), y: rooms[i].y + Math.floor(rooms[i].h / 2) };
+    const exit = pickExit(map, playerStart);
+    map[exit.y][exit.x] = TILE_IDS.EXIT;
 
-        // 무작위로 수평->수직 또는 수직->수평 복도를 생성하여 단조로움을 피합니다.
-        if (Math.random() > 0.5) {
-            createHTunnel(map, objectMap, prevCenter.x, newCenter.x, prevCenter.y);
-            createVTunnel(map, objectMap, prevCenter.y, newCenter.y, newCenter.x);
-        } else {
-            createVTunnel(map, objectMap, prevCenter.y, newCenter.y, prevCenter.x);
-            createHTunnel(map, objectMap, prevCenter.x, newCenter.x, newCenter.y);
-        }
-    }
-
-    // 4. 플레이어 시작 지점을 첫 번째 방의 중심으로 설정합니다.
-    const firstRoom = rooms[0];
-    const playerStart = {
-        x: firstRoom.x + Math.floor(firstRoom.w / 2),
-        y: firstRoom.y + Math.floor(firstRoom.h / 2)
-    };
-    
-    // 5. 다음 층으로 가는 출구를 마지막 방에 설정합니다.
-    const lastRoom = rooms[rooms.length - 1];
-    // 출구 타일(4)은 기존 타일 값과 무관하게 덮어쓰므로 별도의 초기화가 필요 없습니다.
-    const exitY = lastRoom.y + Math.floor(lastRoom.h / 2);
-    const exitX = lastRoom.x + Math.floor(lastRoom.w / 2);
-    map[exitY][exitX] = TILE_IDS.EXIT;
-
-    return { map, objectMap, playerStart };
+    return { map, objectMap, playerStart, layout: layoutId };
 }
 
+/**
+ * 레이아웃 키에 맞는 그리기 함수를 부릅니다.
+ * @param {number[][]} map - 벽으로 찬 맵
+ * @param {string} layoutId - 레이아웃 키
+ * @returns {object[]} 설 만한 자리 목록
+ */
+function buildLayout(map, layoutId) {
+    switch (layoutId) {
+        case 'roguey': return buildRoguey(map);
+        case 'miscCorridors': return buildCorridors(map);
+        case 'regularCity': return buildCity(map);
+        case 'caves': return buildCaves(map);
+        case 'diamondMine': return buildNarrowCaves(map);
+        case 'subdivisions':
+        case 'jigsaw': return buildDivisions(map);
+        case 'bigOctagon': return buildOpen(map, 'octagon');
+        case 'cross': return buildOpen(map, 'cross');
+        case 'forbiddenDonut': return buildOpen(map, 'donut');
+        default: return buildRooms(map);
+    }
+}
 
-// --- 내부 헬퍼 함수 (Private Methods) ---
+// --- 반드시 지켜져야 하는 것들 ------------------------------------------------
 
 /**
- * 맵 배열에 직사각형 방을 그립니다 (벽을 바닥으로 만듭니다).
- * @param {number[][]} map - 수정할 맵 배열
- * @param {{x: number, y: number, w: number, h: number}} room - 방의 정보 (x, y, 너비, 높이)
+ * 시작 지점에서 걸어갈 수 있는 칸을 모두 표시합니다.
+ * @param {number[][]} map - 맵
+ * @param {{x: number, y: number}} from - 시작 지점
+ * @returns {boolean[][]} 갈 수 있으면 true
  */
-function createRoom(map, room) {
-    for (let y = room.y; y < room.y + room.h; y++) {
-        for (let x = room.x; x < room.x + room.w; x++) {
-            // 맵 경계를 벗어나지 않는지 확인
-            if (y > 0 && y < map.length -1 && x > 0 && x < map[0].length - 1) {
-                map[y][x] = TILE_IDS.FLOOR; // 방 내부를 모두 바닥으로
+function reachableFrom(map, from) {
+    const height = map.length, width = map[0].length;
+    const seen = Array.from({ length: height }, () => Array(width).fill(false));
+    const queue = [from];
+    seen[from.y][from.x] = true;
+
+    for (let head = 0; head < queue.length; head++) {
+        const { x, y } = queue[head];
+        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+            const nx = x + dx, ny = y + dy;
+            if (nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
+            if (seen[ny][nx] || tileAt(map, nx, ny).solid) continue;
+            seen[ny][nx] = true;
+            queue.push({ x: nx, y: ny });
+        }
+    }
+    return seen;
+}
+
+/**
+ * 따로 떨어진 구역을 시작 지점 쪽으로 이어 줍니다.
+ *
+ * 동굴이나 도시는 파내는 방식 자체가 연결을 보장하지 않습니다. 그대로 두면 적이나
+ * 아이템이 갈 수 없는 곳에 놓여, 층을 다 뒤져도 찾지 못하는 일이 생깁니다.
+ * @param {number[][]} map - 맵
+ * @param {{x: number, y: number}} playerStart - 시작 지점
+ * @param {object[]} spots - 설 만한 자리 목록
+ */
+function ensureConnected(map, playerStart, spots) {
+    // 최대 여덟 번까지만 시도합니다. 그 이상 걸리는 맵은 어차피 성한 맵이 아닙니다.
+    for (let pass = 0; pass < 8; pass++) {
+        const reachable = reachableFrom(map, playerStart);
+        const stranded = spots.find(spot => {
+            const center = clampToFloor(map, centerOf(spot));
+            return !reachable[center.y][center.x];
+        });
+        if (!stranded) return;
+
+        joinTheDots(map, playerStart, clampToFloor(map, centerOf(stranded)));
+    }
+}
+
+/**
+ * 좌표가 벽이면 가장 가까운 바닥으로 옮깁니다.
+ *
+ * 도시나 트인 층에서는 '방의 한가운데'가 벽 속일 수 있습니다.
+ * @param {number[][]} map - 맵
+ * @param {{x: number, y: number}} point - 옮길 좌표
+ * @returns {{x: number, y: number}} 바닥인 좌표
+ */
+function clampToFloor(map, point) {
+    const height = map.length, width = map[0].length;
+    const x = Math.max(1, Math.min(width - 2, point.x));
+    const y = Math.max(1, Math.min(height - 2, point.y));
+    if (!tileAt(map, x, y).solid) return { x, y };
+
+    // 나선형으로 넓혀 가며 가장 가까운 바닥을 찾습니다.
+    for (let radius = 1; radius < Math.max(width, height); radius++) {
+        for (let dy = -radius; dy <= radius; dy++) {
+            for (let dx = -radius; dx <= radius; dx++) {
+                const nx = x + dx, ny = y + dy;
+                if (nx < 1 || ny < 1 || nx >= width - 1 || ny >= height - 1) continue;
+                if (!tileAt(map, nx, ny).solid) return { x: nx, y: ny };
             }
         }
     }
+    // 바닥이 하나도 없으면 그 자리를 파냅니다.
+    map[y][x] = TILE_IDS.FLOOR;
+    return { x, y };
 }
 
 /**
- * 맵 배열에 수평 복도를 그립니다.
- * @param {number[][]} map - 수정할 맵 배열
- * @param {number[][]} objectMap - 수정할 오브젝트 맵 배열
- * @param {number} x1 - 시작 x 좌표
- * @param {number} x2 - 끝 x 좌표
- * @param {number} y - 복도가 그려질 y 좌표
+ * 출구를 놓을 자리를 고릅니다.
+ *
+ * 걸어갈 수 있는 칸 중에서 시작 지점으로부터 가장 먼 곳입니다.
+ * 가까운 데 두면 층을 둘러보지 않고 곧바로 내려가게 됩니다.
+ * @param {number[][]} map - 맵
+ * @param {{x: number, y: number}} playerStart - 시작 지점
+ * @returns {{x: number, y: number}} 출구 자리
  */
-function createHTunnel(map, objectMap, x1, x2, y) {
-    const startX = Math.min(x1, x2);
-    const endX = Math.max(x1, x2);
-    for (let x = startX; x <= endX; x++) {
-        if (map[y] && map[y][x] !== undefined) map[y][x] = TILE_IDS.FLOOR;
-    }
+function pickExit(map, playerStart) {
+    const reachable = reachableFrom(map, playerStart);
+    let best = playerStart, bestDistance = -1;
 
-    // 복도 길이가 3 이상이고 30% 확률로 중앙에 문을 배치합니다.
-    if (endX - startX > 2 && Math.random() < 0.3) {
-        const doorX = startX + Math.floor((endX - startX) / 2);
-        // 문 양 옆이 벽인지 확인하여 올바른 위치인지 검사합니다.
-        if (map[y - 1]?.[doorX] === TILE_IDS.WALL && map[y + 1]?.[doorX] === TILE_IDS.WALL) {
-            objectMap[y][doorX] = 1; // 오브젝트 맵에 문(ID: 1)을 기록합니다.
-            map[y][doorX] = TILE_IDS.DOOR;
+    for (let y = 1; y < map.length - 1; y++) {
+        for (let x = 1; x < map[0].length - 1; x++) {
+            if (!reachable[y][x]) continue;
+            const distance = Math.hypot(x - playerStart.x, y - playerStart.y);
+            if (distance > bestDistance) { bestDistance = distance; best = { x, y }; }
         }
     }
+    return best;
 }
 
 /**
- * 맵 배열에 수직 복도를 그립니다.
- * @param {number[][]} map - 수정할 맵 배열
- * @param {number[][]} objectMap - 수정할 오브젝트 맵 배열
- * @param {number} y1 - 시작 y 좌표
- * @param {number} y2 - 끝 y 좌표
- * @param {number} x - 복도가 그려질 x 좌표
+ * 복도 한가운데에 문을 놓습니다.
+ *
+ * 양옆이 벽인 폭 1의 자리만 문이 될 수 있습니다. 트인 층이나 동굴에는 그런 자리가
+ * 거의 없어 문도 거의 생기지 않는데, 원본에서도 마찬가지입니다.
+ * @param {number[][]} map - 맵
+ * @param {number[][]} objectMap - 오브젝트 맵
  */
-function createVTunnel(map, objectMap, y1, y2, x) {
-    const startY = Math.min(y1, y2);
-    const endY = Math.max(y1, y2);
-    for (let y = startY; y <= endY; y++) {
-        if (map[y] && map[y][x] !== undefined) map[y][x] = TILE_IDS.FLOOR;
-    }
+function placeDoors(map, objectMap) {
+    const height = map.length, width = map[0].length;
+    const DOOR_CHANCE = 0.06;
 
-    // 복도 길이가 3 이상이고 30% 확률로 중앙에 문을 배치합니다.
-    if (endY - startY > 2 && Math.random() < 0.3) {
-        const doorY = startY + Math.floor((endY - startY) / 2);
-        // 문 양 옆이 벽인지 확인하여 올바른 위치인지 검사합니다.
-        if (map[doorY]?.[x - 1] === TILE_IDS.WALL && map[doorY]?.[x + 1] === TILE_IDS.WALL) {
-            objectMap[doorY][x] = 1; // 오브젝트 맵에 문(ID: 1)을 기록합니다.
-            map[doorY][x] = TILE_IDS.DOOR;
-        }
-    }
-}
-
-/**
- * 방 생성에 실패했을 경우, 무작위 노이즈 패턴의 비상용 맵을 생성합니다.
- * @param {number} width - 맵 너비
- * @param {number} height - 맵 높이
- * @returns {{map: number[][], objectMap: number[][], playerStart: {x: number, y: number}}} - 생성된 맵, 오브젝트 맵, 플레이어 시작 좌표
- */
-function createFallbackDungeon(width, height) {
-    const fallbackMap = Array(height).fill(0).map(() => Array(width).fill(TILE_IDS.WALL));
     for (let y = 1; y < height - 1; y++) {
         for (let x = 1; x < width - 1; x++) {
-            fallbackMap[y][x] = Math.random() > 0.4 ? TILE_IDS.FLOOR : TILE_IDS.WALL; // 60% 확률로 바닥
+            if (map[y][x] !== TILE_IDS.FLOOR) continue;
+            if (Math.random() > DOOR_CHANCE) continue;
+
+            const verticalWalls = map[y - 1][x] === TILE_IDS.WALL && map[y + 1][x] === TILE_IDS.WALL;
+            const horizontalWalls = map[y][x - 1] === TILE_IDS.WALL && map[y][x + 1] === TILE_IDS.WALL;
+            // 한쪽 축만 벽이어야 통로입니다. 양쪽 다 벽이면 막다른 칸입니다.
+            if (verticalWalls === horizontalWalls) continue;
+
+            map[y][x] = TILE_IDS.DOOR;
+            objectMap[y][x] = 1;
         }
     }
+}
+
+/**
+ * 무엇을 해도 층이 만들어지지 않을 때 쓰는 비상용 맵입니다.
+ * @param {number} width - 맵 너비
+ * @param {number} height - 맵 높이
+ * @returns {object} 만들어진 층
+ */
+function createFallbackDungeon(width, height) {
+    console.warn('층을 만들지 못해 비상용 맵을 씁니다.');
+    const map = Array.from({ length: height }, () => Array(width).fill(TILE_IDS.WALL));
+    for (let y = 1; y < height - 1; y++) {
+        for (let x = 1; x < width - 1; x++) map[y][x] = TILE_IDS.FLOOR;
+    }
+
     const playerStart = { x: Math.floor(width / 2), y: Math.floor(height / 2) };
-    fallbackMap[playerStart.y][playerStart.x] = TILE_IDS.FLOOR; // 시작 지점은 항상 바닥
-    // 비상용 맵에도 출구를 추가합니다.
-    fallbackMap[height - 2][width - 2] = TILE_IDS.EXIT;
-    const objectMap = Array(height).fill(0).map(() => Array(width).fill(0)); // 빈 오브젝트 맵
-    return { map: fallbackMap, objectMap, playerStart };
+    map[height - 2][width - 2] = TILE_IDS.EXIT;
+    const objectMap = Array.from({ length: height }, () => Array(width).fill(0));
+    return { map, objectMap, playerStart, layout: 'fallback' };
+}
+
+/** @returns {string[]} 쓸 수 있는 레이아웃 키 목록. 미리보기와 테스트가 씁니다. */
+export function allLayouts() {
+    return Object.keys(LAYOUTS);
 }
