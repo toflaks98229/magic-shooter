@@ -130,49 +130,35 @@ const SPRITES = {
         door_gate_1: { name: 'door_closed' },             // DCSS 의 닫힌 문
     },
     player: {
-        // 종족별 전신 도트를 몬스터 스프라이트로 씁니다.
-        // 색으로 구분되므로 레이캐스트 화면에서 멀리서도 어떤 적인지 알아볼 수 있습니다.
-
-        // 초반 잡몹
-        enemy_rat: { rect: [92, 188, 32, 39] },           // 회색
-        enemy_kobold: { rect: [0, 188, 31, 40] },         // 주황
-        enemy_snake: { rect: [969, 96, 32, 39] },         // 녹색
-        enemy_frog: { rect: [905, 96, 32, 40] },          // 청록
-
-        // 짐승굴 계열
-        enemy_beast: { rect: [281, 188, 32, 39] },        // 검정
-        enemy_spider: { rect: [747, 142, 31, 39] },       // 보라
-        enemy_hydra: { rect: [320, 1446, 32, 36] },       // 창백한 비늘 몸통
-        enemy_slime: { rect: [341, 142, 32, 40] },        // 연두
-
-        // 오크·성채 계열
-        enemy_goblin: { rect: [216, 142, 32, 39] },       // 황록
-        enemy_orc: { rect: [0, 142, 32, 40] },            // 짙은 녹색
-        enemy_orc_warrior: { rect: [437, 96, 31, 39] },   // 적색
-        enemy_centaur: { rect: [874, 142, 32, 40] },      // 갈색
-
-        // 언데드
-        enemy_zombie: { rect: [623, 188, 31, 39] },       // 창백
-        enemy_skeleton: { rect: [967, 142, 31, 38] },     // 회백
-        enemy_mummy: { rect: [343, 326, 32, 39] },        // 누런빛
-        enemy_spectre: { rect: [534, 1078, 32, 43] },     // 빛나는 구체
-
-        // 얼음
-        enemy_ice_beast: { rect: [532, 96, 32, 39] },     // 하늘색
-        enemy_simulacrum: { rect: [564, 96, 32, 40] },    // 창백한 푸른빛
-        enemy_ice_giant: { rect: [874, 96, 31, 39] },     // 짙은 파랑
-
-        // 화염·악마
-        enemy_gargoyle: { rect: [842, 142, 32, 39] },     // 석상 회색
-        enemy_fire_demon: { rect: [468, 96, 32, 40] },    // 주황빛 적색
-        enemy_imp: { rect: [437, 142, 32, 40] },          // 보라
-        enemy_hell_knight: { rect: [343, 96, 32, 39] },   // 검붉은색
-        enemy_demon: { rect: [405, 142, 32, 39] },        // 짙은 보라
-
-        // 네임드 (같은 도트를 쓰되 크기가 커서 한눈에 구분됩니다)
-        enemy_menkaure: { rect: [375, 326, 32, 40] },     // 미라 우두머리
-        enemy_purgy: { rect: [698, 48, 32, 40] },         // 거대 개구리
-        enemy_minotaur: { rect: [529, 188, 32, 39] },     // 검은 거구
+        // 몬스터는 dc-player.txt 가 dc-mon.txt 를 포함하는 탓에 player.png 에 들어 있습니다.
+        // 좌표는 locate-tiles.js 가 원본과 픽셀 대조로 확정한 것입니다.
+        enemy_rat: { name: 'mon_rat' },
+        enemy_kobold: { name: 'mon_kobold' },
+        enemy_snake: { name: 'mon_snake' },
+        enemy_frog: { name: 'mon_frog' },
+        enemy_beast: { name: 'mon_beast' },
+        enemy_spider: { name: 'mon_spider' },
+        enemy_hydra: { name: 'mon_hydra' },
+        enemy_slime: { name: 'mon_slime' },
+        enemy_goblin: { name: 'mon_goblin' },
+        enemy_orc: { name: 'mon_orc' },
+        enemy_orc_warrior: { name: 'mon_orc_warrior' },
+        enemy_centaur: { name: 'mon_centaur' },
+        enemy_zombie: { name: 'mon_zombie' },
+        enemy_skeleton: { name: 'mon_skeleton' },
+        enemy_mummy: { name: 'mon_mummy' },
+        enemy_spectre: { name: 'mon_spectre' },
+        enemy_ice_beast: { name: 'mon_ice_beast' },
+        enemy_simulacrum: { name: 'mon_simulacrum' },
+        enemy_ice_giant: { name: 'mon_ice_giant' },
+        enemy_gargoyle: { name: 'mon_gargoyle' },
+        enemy_imp: { name: 'mon_imp' },
+        enemy_fire_demon: { name: 'mon_fire_demon' },
+        enemy_hell_knight: { name: 'mon_hell_knight' },
+        enemy_demon: { name: 'mon_demon' },
+        enemy_menkaure: { name: 'mon_menkaure' },
+        enemy_purgy: { name: 'mon_purgy' },
+        enemy_minotaur: { name: 'mon_minotaur' },
     },
     main: {
         item_health: { rect: [526, 816, 27, 23] },        // 녹색 보석

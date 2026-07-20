@@ -1233,6 +1233,222 @@
       "y": 96,
       "w": 32,
       "h": 32
+    },
+    "mon_rat": {
+      "sheet": "player",
+      "source": "mon/animals/rat",
+      "x": 413,
+      "y": 758,
+      "w": 31,
+      "h": 21
+    },
+    "mon_kobold": {
+      "sheet": "player",
+      "source": "mon/humanoids/kobold",
+      "x": 902,
+      "y": 1510,
+      "w": 31,
+      "h": 29
+    },
+    "mon_snake": {
+      "sheet": "player",
+      "source": "mon/animals/adder",
+      "x": 974,
+      "y": 1014,
+      "w": 32,
+      "h": 24
+    },
+    "mon_frog": {
+      "sheet": "player",
+      "source": "mon/animals/bullfrog",
+      "x": 701,
+      "y": 1014,
+      "w": 31,
+      "h": 27
+    },
+    "mon_beast": {
+      "sheet": "player",
+      "source": "mon/animals/jackal",
+      "x": 349,
+      "y": 726,
+      "w": 31,
+      "h": 24
+    },
+    "mon_spider": {
+      "sheet": "player",
+      "source": "mon/animals/jumping_spider",
+      "x": 686,
+      "y": 758,
+      "w": 29,
+      "h": 30
+    },
+    "mon_hydra": {
+      "sheet": "player",
+      "source": "mon/dragons/swamp_dragon",
+      "x": 64,
+      "y": 1446,
+      "w": 32,
+      "h": 32
+    },
+    "mon_slime": {
+      "sheet": "player",
+      "source": "mon/amorphous/slime_creature",
+      "x": 982,
+      "y": 1478,
+      "w": 28,
+      "h": 16
+    },
+    "mon_goblin": {
+      "sheet": "player",
+      "source": "mon/humanoids/goblin",
+      "x": 722,
+      "y": 1670,
+      "w": 28,
+      "h": 25
+    },
+    "mon_orc": {
+      "sheet": "player",
+      "source": "mon/humanoids/orcs/orc",
+      "x": 31,
+      "y": 1734,
+      "w": 31,
+      "h": 32
+    },
+    "mon_orc_warrior": {
+      "sheet": "player",
+      "source": "mon/humanoids/orcs/orc_warrior",
+      "x": 120,
+      "y": 1734,
+      "w": 31,
+      "h": 32
+    },
+    "mon_centaur": {
+      "sheet": "player",
+      "source": "mon/demihumanoids/taurs/centaur",
+      "x": 95,
+      "y": 1638,
+      "w": 30,
+      "h": 32
+    },
+    "mon_zombie": {
+      "sheet": "player",
+      "source": "mon/undead/zombies/zombie_human",
+      "x": 0,
+      "y": 1830,
+      "w": 31,
+      "h": 32
+    },
+    "mon_skeleton": {
+      "sheet": "player",
+      "source": "mon/undead/skeletal_warrior",
+      "x": 808,
+      "y": 1734,
+      "w": 28,
+      "h": 32
+    },
+    "mon_mummy": {
+      "sheet": "player",
+      "source": "mon/undead/mummy",
+      "x": 363,
+      "y": 1542,
+      "w": 30,
+      "h": 31
+    },
+    "mon_spectre": {
+      "sheet": "player",
+      "source": "mon/undead/phantom",
+      "x": 413,
+      "y": 1734,
+      "w": 31,
+      "h": 32
+    },
+    "mon_ice_beast": {
+      "sheet": "player",
+      "source": "mon/animals/sky_beast",
+      "x": 522,
+      "y": 1046,
+      "w": 30,
+      "h": 29
+    },
+    "mon_simulacrum": {
+      "sheet": "player",
+      "source": "mon/undead/zombies/zombie_small",
+      "x": 326,
+      "y": 1766,
+      "w": 27,
+      "h": 26
+    },
+    "mon_ice_giant": {
+      "sheet": "player",
+      "source": "mon/humanoids/giants/frost_giant",
+      "x": 190,
+      "y": 1414,
+      "w": 31,
+      "h": 32
+    },
+    "mon_gargoyle": {
+      "sheet": "player",
+      "source": "mon/nonliving/molten_gargoyle",
+      "x": 939,
+      "y": 1270,
+      "w": 31,
+      "h": 32
+    },
+    "mon_imp": {
+      "sheet": "player",
+      "source": "mon/demons/shadow_imp",
+      "x": 325,
+      "y": 1174,
+      "w": 20,
+      "h": 19
+    },
+    "mon_fire_demon": {
+      "sheet": "player",
+      "source": "mon/demons/sun_demon",
+      "x": 661,
+      "y": 1142,
+      "w": 30,
+      "h": 30
+    },
+    "mon_hell_knight": {
+      "sheet": "player",
+      "source": "mon/humanoids/humans/hell_knight",
+      "x": 101,
+      "y": 1382,
+      "w": 26,
+      "h": 32
+    },
+    "mon_demon": {
+      "sheet": "player",
+      "source": "mon/demons/executioner",
+      "x": 250,
+      "y": 1142,
+      "w": 32,
+      "h": 32
+    },
+    "mon_menkaure": {
+      "sheet": "player",
+      "source": "mon/unique/menkaure",
+      "x": 301,
+      "y": 1542,
+      "w": 31,
+      "h": 32
+    },
+    "mon_minotaur": {
+      "sheet": "player",
+      "source": "mon/demihumanoids/minotaur",
+      "x": 774,
+      "y": 1446,
+      "w": 30,
+      "h": 31
+    },
+    "mon_purgy": {
+      "sheet": "player",
+      "source": "mon/unique/blorkula",
+      "x": 915,
+      "y": 1702,
+      "w": 32,
+      "h": 32
     }
   }
 }

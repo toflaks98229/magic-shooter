@@ -437,6 +437,13 @@ function renderEntities(targetCtx, width, height) {
                     assets.spriteAtlases[sheetKey].sprites[spriteKey];
 
                 if (sourceImage && sourceCoords) {
+                    // 스프라이트는 내용이 있는 부분만 잘려 아틀라스에 들어가 있어 가로세로비가 제각각입니다.
+                    // (쥐는 납작하고 지옥 기사는 길쭉합니다.)
+                    // 정사각형에 욱여넣으면 늘어나 보이므로, 폭을 기준으로 높이를 비율대로 잡고
+                    // 발이 바닥에 닿은 위치는 그대로 두어 공중에 뜨지 않게 합니다.
+                    const spriteHeight = entitySize * (sourceCoords.h / sourceCoords.w);
+                    const spriteTopY = entityTopY + entitySize - spriteHeight;
+
                     const startX = Math.max(0, Math.floor(entityLeftX));
                     const endX = Math.min(width, Math.ceil(entityLeftX + entitySize));
 
@@ -452,7 +459,7 @@ function renderEntities(targetCtx, width, height) {
                             runStart = stripe;              // 보이는 구간 시작
                         } else if (!visible && runStart >= 0) {
                             drawSpriteRun(targetCtx, sourceImage, sourceCoords,
-                                runStart, stripe, entityLeftX, entitySize, entityTopY);
+                                runStart, stripe, entityLeftX, entitySize, spriteTopY, spriteHeight);
                             runStart = -1;                  // 구간 종료
                         }
                     }
@@ -479,10 +486,11 @@ function renderEntities(targetCtx, width, height) {
  * @param {number} fromStripe - 구간 시작 화면 X (포함)
  * @param {number} toStripe - 구간 끝 화면 X (제외)
  * @param {number} entityLeftX - 스프라이트가 시작되는 화면 X (소수 포함)
- * @param {number} entitySize - 화면에 그려질 스프라이트의 크기
- * @param {number} entityTopY - 그려질 화면 Y
+ * @param {number} entitySize - 화면에 그려질 스프라이트의 폭
+ * @param {number} topY - 그려질 화면 Y
+ * @param {number} drawHeight - 그려질 높이 (가로세로비를 반영한 값)
  */
-function drawSpriteRun(ctx, sourceImage, coords, fromStripe, toStripe, entityLeftX, entitySize, entityTopY) {
+function drawSpriteRun(ctx, sourceImage, coords, fromStripe, toStripe, entityLeftX, entitySize, topY, drawHeight) {
     // 화면 구간을 원본 텍스처 구간으로 되돌립니다.
     const texFrom = Math.floor(((fromStripe - entityLeftX) / entitySize) * coords.w);
     const texTo = Math.ceil(((toStripe - entityLeftX) / entitySize) * coords.w);
@@ -494,8 +502,8 @@ function drawSpriteRun(ctx, sourceImage, coords, fromStripe, toStripe, entityLef
         sourceImage,
         coords.x + clampedFrom, coords.y,
         clampedTo - clampedFrom, coords.h,
-        fromStripe, entityTopY,
-        toStripe - fromStripe, entitySize
+        fromStripe, topY,
+        toStripe - fromStripe, drawHeight
     );
 }
 

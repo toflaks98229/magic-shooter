@@ -139,14 +139,14 @@ test('모든 던전의 테마가 실제 텍스처를 갖는다', async () => {
     }
 });
 
-test('테마 텍스처가 crawl 저장소에서 확인된 좌표를 쓴다', () => {
+test('테마와 몬스터가 crawl 저장소에서 확인된 좌표를 쓴다', () => {
     // 눈으로 고른 좌표는 조용히 틀립니다. locate-tiles.js 가 원본과 픽셀 대조로
     // 확정한 결과만 아틀라스에 들어가야 합니다.
     const locations = JSON.parse(readFileSync(projectRoot + 'Data/tiles/tile-locations.json', 'utf8'));
     const verified = new Set(Object.values(locations.tiles).map(t => `${t.sheet}:${t.x},${t.y}`));
 
     for (const [name, { atlas, rect }] of sprites) {
-        if (!/^(wall|floor|ceiling)_/.test(name)) continue;
+        if (!/^(wall|floor|ceiling|enemy)_/.test(name)) continue;
         assert.ok(verified.has(`${atlas.key}:${rect.x},${rect.y}`),
             `${name}의 좌표 (${rect.x},${rect.y})가 확인된 목록에 없습니다`);
     }

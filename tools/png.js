@@ -8,7 +8,7 @@
  * 지원 범위는 이 저장소가 다루는 PNG로 한정합니다.
  *   - 비트 심도 1/2/4/8 (4비트 이하는 팔레트 이미지에서 쓰입니다)
  *   - 컬러 타입 0(그레이) 2(RGB) 3(팔레트) 4(그레이+알파) 6(RGBA)
- *   - 비인터레이스
+ *   - 비인터레이스 및 Adam7 인터레이스
  * 그 외 형식은 명시적으로 오류를 냅니다. 조용히 잘못된 픽셀을 내놓는 것보다 낫습니다.
  *
  * DCSS 원본 타일 중 일부가 4비트 팔레트 PNG라 낮은 비트 심도까지 다룹니다.
@@ -61,7 +61,7 @@ export function readPng(path) {
     }
 
     if (![1, 2, 4, 8].includes(bitDepth)) throw new Error(`비트 심도 ${bitDepth}는 지원하지 않습니다: ${path}`);
-    if (interlace !== 0) throw new Error(`인터레이스 PNG는 지원하지 않습니다: ${path}`);
+    if (interlace !== 0 && interlace !== 1) throw new Error(`알 수 없는 인터레이스 방식: ${path}`);
     if (!(colorType in CHANNELS)) throw new Error(`컬러 타입 ${colorType}는 지원하지 않습니다: ${path}`);
     if (bitDepth < 8 && colorType !== 0 && colorType !== 3) {
         throw new Error(`비트 심도 ${bitDepth}는 팔레트/그레이스케일에서만 지원합니다: ${path}`);
@@ -70,15 +70,78 @@ export function readPng(path) {
     const channels = CHANNELS[colorType];
     const raw = inflateSync(Buffer.concat(idatParts));
 
+    const pixels = interlace === 1
+        ? deinterlace(raw, width, height, channels, bitDepth)
+        : decodePass(raw, 0, width, height, channels, bitDepth).samples;
+
+    return { width, height, data: toRgba(pixels, width, height, colorType, channels, palette, transparency, bitDepth) };
+}
+
+/**
+ * @description Adam7 인터레이스의 7개 패스. [시작 x, 시작 y, x 간격, y 간격]
+ * 각 패스는 원본에서 듬성듬성 뽑은 작은 이미지이며, 스스로 완결된 스캔라인을 갖습니다.
+ */
+const ADAM7_PASSES = [
+    [0, 0, 8, 8], [4, 0, 8, 8], [0, 4, 4, 8],
+    [2, 0, 4, 4], [0, 2, 2, 4], [1, 0, 2, 2], [0, 1, 1, 2],
+];
+
+/**
+ * 한 패스(또는 비인터레이스 이미지 전체)를 필터 해제하고 샘플로 펼칩니다.
+ * @param {Buffer} raw - 압축 해제된 전체 데이터
+ * @param {number} offset - 이 패스가 시작하는 바이트 위치
+ * @param {number} width - 이 패스의 너비
+ * @param {number} height - 이 패스의 높이
+ * @param {number} channels - 픽셀당 채널 수
+ * @param {number} bitDepth - 비트 심도
+ * @returns {{samples: Buffer, consumed: number}} 펼친 샘플과 소비한 바이트 수
+ */
+function decodePass(raw, offset, width, height, channels, bitDepth) {
     // 한 행의 바이트 수. 비트 심도가 8 미만이면 한 바이트에 여러 픽셀이 들어갑니다.
     const stride = Math.ceil((width * channels * bitDepth) / 8);
     // 필터가 '왼쪽 픽셀'로 참조하는 거리. 1바이트 미만이면 1바이트로 취급합니다.
     const filterBytes = Math.max(1, (channels * bitDepth) >> 3);
+    const consumed = height * (stride + 1);
 
-    const filtered = unfilter(raw, height, filterBytes, stride);
-    const pixels = bitDepth === 8 ? filtered : unpackSamples(filtered, width, height, channels, bitDepth, stride);
+    const filtered = unfilter(raw.subarray(offset, offset + consumed), height, filterBytes, stride);
+    const samples = bitDepth === 8
+        ? filtered
+        : unpackSamples(filtered, width, height, channels, bitDepth, stride);
 
-    return { width, height, data: toRgba(pixels, width, height, colorType, channels, palette, transparency, bitDepth) };
+    return { samples, consumed };
+}
+
+/**
+ * Adam7 인터레이스 이미지를 원래 배열로 되돌립니다.
+ * @param {Buffer} raw - 압축 해제된 전체 데이터
+ * @param {number} width - 최종 이미지 너비
+ * @param {number} height - 최종 이미지 높이
+ * @param {number} channels - 픽셀당 채널 수
+ * @param {number} bitDepth - 비트 심도
+ * @returns {Buffer} 샘플당 한 바이트로 펼친 전체 이미지
+ */
+function deinterlace(raw, width, height, channels, bitDepth) {
+    const out = Buffer.alloc(width * height * channels);
+    let offset = 0;
+
+    for (const [startX, startY, stepX, stepY] of ADAM7_PASSES) {
+        const passWidth = Math.ceil((width - startX) / stepX);
+        const passHeight = Math.ceil((height - startY) / stepY);
+        if (passWidth <= 0 || passHeight <= 0) continue; // 이 패스에 담긴 픽셀이 없음
+
+        const { samples, consumed } = decodePass(raw, offset, passWidth, passHeight, channels, bitDepth);
+        offset += consumed;
+
+        // 듬성듬성 뽑혀 있던 픽셀을 제자리에 돌려놓습니다.
+        for (let y = 0; y < passHeight; y++) {
+            for (let x = 0; x < passWidth; x++) {
+                const source = (y * passWidth + x) * channels;
+                const target = ((startY + y * stepY) * width + (startX + x * stepX)) * channels;
+                for (let c = 0; c < channels; c++) out[target + c] = samples[source + c];
+            }
+        }
+    }
+    return out;
 }
 
 /**
