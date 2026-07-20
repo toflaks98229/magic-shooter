@@ -161,13 +161,15 @@ const SPRITES = {
         enemy_minotaur: { name: 'mon_minotaur' },
     },
     main: {
-        item_health: { rect: [526, 816, 27, 23] },        // 녹색 보석
-        item_ammo: { rect: [591, 1060, 21, 23] },         // 푸른 결정
-        projectile_fireball: { rect: [226, 1092, 17, 15] },// 보랏빛 섬광
-        projectile_bullet: { rect: [632, 816, 27, 23] },  // 청록 보석
-        fist: { rect: [631, 415, 31, 31] },               // 황금 건틀릿
-        gun: { rect: [592, 447, 28, 28] },                // 보석 지팡이
-        gun_fire: { rect: [620, 447, 30, 30] },           // 빛나는 지팡이
+        // 아이템·무기·발사체도 locate-tiles.js 가 원본과 대조해 확정한 좌표를 씁니다.
+        // 이 게임은 '마법소녀 슈팅'이라 총 자리에 지팡이가, 주먹 자리에 장갑이 들어갑니다.
+        item_health: { name: 'item_potion_heal' },        // 치유의 물약
+        item_ammo: { name: 'item_potion_magic' },         // 마력의 물약
+        projectile_fireball: { name: 'bolt_magenta' },    // 자홍색 마법 광선
+        projectile_bullet: { name: 'bolt_cyan' },         // 청록색 마법 광선
+        fist: { name: 'weapon_glove' },                   // 장갑
+        gun: { name: 'weapon_wand' },                     // 지팡이
+        gun_fire: { name: 'weapon_wand_fire' },           // 발사 중인 지팡이
     },
     gui: {},
 };

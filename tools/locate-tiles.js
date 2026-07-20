@@ -111,6 +111,23 @@ const WANTED = {
     mon_menkaure: 'mon/unique/menkaure',
     mon_minotaur: 'mon/demihumanoids/minotaur',
     mon_purgy: 'mon/unique/blorkula',
+
+    // --- 아이템과 무기 ---
+    // dc-item.txt 가 dc-main.txt 에 포함되어 main.png 에 들어갑니다.
+    // 이 게임은 '마법소녀 슈팅'이라 총 대신 지팡이를 듭니다.
+    //
+    // 'i-' 로 시작하는 파일은 식별된 아이템 위에 덧그리는 작은 기호이지 물건 그림이 아닙니다.
+    // 실제 생김새는 물약이면 색 이름(ruby, sky_blue), 지팡이면 재질 이름(gem_*)입니다.
+    item_potion_heal: ['item/potion/ruby', 'item/potion/pink', 'item/potion/magenta'],
+    item_potion_magic: ['item/potion/sky_blue', 'item/potion/brilliant_blue', 'item/potion/cyan'],
+    weapon_wand: ['item/wand/gem_gold', 'item/wand/gem_brass', 'item/wand/gem_ivory'],
+    weapon_wand_fire: ['item/wand/gem_glass', 'item/wand/gem_silver', 'item/wand/gem_copper'],
+    weapon_glove: ['item/armour/glove1', 'item/armour/glove2'],
+
+    // --- 발사체 ---
+    // effect/ 의 마법 광선입니다. dc-misc.txt 를 거쳐 역시 main.png 에 들어갑니다.
+    bolt_magenta: ['effect/bolt05', 'effect/bolt5'],
+    bolt_cyan: ['effect/bolt03', 'effect/bolt3'],
 };
 
 /**
@@ -231,10 +248,14 @@ if (!existsSync(CACHE_DIR)) mkdirSync(CACHE_DIR, { recursive: true });
 
 /** @description 원본 경로의 첫 구간으로 어느 시트를 뒤질지 정합니다. */
 const SHEET_FOR = {
+    // effect/ 는 하위 디렉터리가 없어 경로의 첫 구간이 그대로 분류가 됩니다.
+    effect: 'main',
     wall: 'wall', floor: 'floor', doors: 'feat', gateways: 'feat',
     // 몬스터는 dc-player.txt 가 dc-mon.txt 를 포함하는 탓에 player.png 에 들어갑니다.
     animals: 'player', humanoids: 'player', demihumanoids: 'player', demons: 'player',
     undead: 'player', nonliving: 'player', amorphous: 'player', dragons: 'player', unique: 'player',
+    // 아이템과 효과는 dc-main.txt 를 거쳐 main.png 로 갑니다.
+    potion: 'main', wand: 'main', armour: 'main', weapon: 'main', scroll: 'main',
 };
 
 const sheets = {};

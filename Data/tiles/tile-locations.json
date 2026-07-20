@@ -1449,6 +1449,62 @@
       "y": 1702,
       "w": 32,
       "h": 32
+    },
+    "item_potion_heal": {
+      "sheet": "main",
+      "source": "item/potion/ruby",
+      "x": 434,
+      "y": 602,
+      "w": 25,
+      "h": 27
+    },
+    "item_potion_magic": {
+      "sheet": "main",
+      "source": "item/potion/sky_blue",
+      "x": 784,
+      "y": 602,
+      "w": 25,
+      "h": 27
+    },
+    "weapon_wand": {
+      "sheet": "main",
+      "source": "item/wand/gem_gold",
+      "x": 732,
+      "y": 447,
+      "w": 27,
+      "h": 27
+    },
+    "weapon_wand_fire": {
+      "sheet": "main",
+      "source": "item/wand/gem_glass",
+      "x": 841,
+      "y": 447,
+      "w": 27,
+      "h": 27
+    },
+    "weapon_glove": {
+      "sheet": "main",
+      "source": "item/armour/glove1",
+      "x": 569,
+      "y": 415,
+      "w": 31,
+      "h": 29
+    },
+    "bolt_magenta": {
+      "sheet": "main",
+      "source": "effect/bolt05",
+      "x": 802,
+      "y": 1028,
+      "w": 24,
+      "h": 26
+    },
+    "bolt_cyan": {
+      "sheet": "main",
+      "source": "effect/bolt03",
+      "x": 740,
+      "y": 1028,
+      "w": 31,
+      "h": 24
     }
   }
 }
