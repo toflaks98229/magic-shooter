@@ -131,7 +131,30 @@
             margin: 2px 0;
         }
 
-        #buff-list { color: var(--highlight); min-height: 1.2em; }
+        /* 상태 표시: DCSS 처럼 기호를 나열하고 남은 시간을 곁들입니다 */
+        #buff-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            min-height: 26px;
+            color: var(--highlight);
+        }
+        .status-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .status-time { font-size: 18px; }
+
+        /* 시트에서 잘라낸 그림은 확대해도 흐려지지 않아야 합니다 */
+        .sprite-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            image-rendering: pixelated;
+            vertical-align: middle;
+        }
 
         /* --- 소지품 창 ------------------------------------------------------ */
 
@@ -174,10 +197,13 @@
 
         .inv-item {
             display: flex;
+            align-items: center;
             gap: 6px;
-            padding-left: 4px;
+            padding: 1px 0 1px 4px;
         }
-        .inv-letter { color: var(--highlight); width: 1.6em; }
+        .inv-item .sprite-icon { width: 26px; height: 26px; flex: 0 0 26px; }
+        .inv-letter { color: var(--highlight); width: 1.8em; flex: 0 0 1.8em; }
+        .inv-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .inv-empty { color: var(--dim); }
 
         /* --- 알림 ----------------------------------------------------------- */
@@ -331,6 +357,16 @@
             margin: 22px 0 26px;
         }
 
+        /* DCSS 처럼 들어갈 때마다 다른 삽화를 띄웁니다. 그림이 아직 안 왔으면 자리만 비워 둡니다. */
+        .menu-splash {
+            max-width: min(420px, 46vw);
+            max-height: 34vh;
+            object-fit: contain;
+            image-rendering: pixelated;
+            margin-bottom: 18px;
+        }
+        .menu-splash:not([src]) { display: none; }
+
         /* DCSS 의 (a) 항목 나열식 메뉴 */
         .menu-list {
             display: flex;
@@ -428,6 +464,9 @@
                 <span class="panel-label">Runes</span><span id="rune-count">0</span>
             </div>
             <div class="panel-row">
+                <span class="panel-label">Wielded</span><span id="wielded-weapon">-</span>
+            </div>
+            <div class="panel-row">
                 <span class="panel-label">Enemies</span><span id="enemy-count">0</span>
             </div>
             <div class="panel-row">
@@ -455,6 +494,8 @@
             <p class="menu-subtitle">DUNGEON EXPEDITION</p>
             <div class="menu-rule"></div>
 
+            <img class="menu-splash" id="title-splash" alt="">
+
             <div class="menu-list">
                 <button class="menu-item" id="start-game-btn"><span class="menu-key">(a)</span> 새 탐험 시작</button>
             </div>
@@ -463,7 +504,7 @@
                 WASD 이동 · 마우스 조준 · 클릭 공격<br>
                 Space 상호작용 · I 소지품 · 1~9 물약 사용
             </div>
-            <div class="menu-note">타일은 공개 도메인 타일셋 RLTiles 를 기반으로 한 Dungeon Crawl Stone Soup 의 것입니다.</div>
+            <div class="menu-note">타일과 삽화는 공개 도메인 타일셋 RLTiles 를 기반으로 한 Dungeon Crawl Stone Soup 의 것입니다.</div>
         </div>
 
         <!-- 게임 오버 -->

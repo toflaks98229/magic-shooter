@@ -1,0 +1,26 @@
+{
+  "sheetFile": "icons.png",
+  "sprites": {
+    "status_might": {
+      "x": 603,
+      "y": 0,
+      "w": 7,
+      "h": 11,
+      "color": "#725521"
+    },
+    "status_haste": {
+      "x": 596,
+      "y": 11,
+      "w": 7,
+      "h": 11,
+      "color": "#1f475b"
+    },
+    "status_resistance": {
+      "x": 761,
+      "y": 0,
+      "w": 9,
+      "h": 10,
+      "color": "#543a59"
+    }
+  }
+}

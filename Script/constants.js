@@ -16,8 +16,24 @@ export const SPRITE_SHEET_URLS = {
     floor: 'Data/tiles/floor_data.json',
     gui: 'Data/tiles/gui_data.json',
     player: 'Data/tiles/player_data.json',
-    feat: 'Data/tiles/feat_data.json'
+    feat: 'Data/tiles/feat_data.json',
+    icons: 'Data/tiles/icons_data.json'
 };
+
+/**
+ * @description 타이틀 화면 삽화. DCSS 처럼 들어갈 때마다 하나를 골라 띄웁니다.
+ *
+ * 원본에는 제목 글자가 박혀 있어, 저장소에 들일 때 그 부분을 잘라내고 저장했습니다.
+ * (Dungeon Crawl Stone Soup 의 제목을 이 게임 제목처럼 내걸 수는 없기 때문입니다)
+ */
+export const TITLE_SPLASH_URLS = [
+    'Image/title/title_denzi_dragon.png',
+    'Image/title/title_denzi_evil_mage.png',
+    'Image/title/title_denzi_summoner.png',
+    'Image/title/title_froggy_jiyva_felid.png',
+    'Image/title/title_froggy_natasha_and_boris.png',
+    'Image/title/title_psiweapon_roxanne.png',
+];
 
 // --- 던전 테마 설정 ---
 /** @description 층별 테마 진행 정보를 담은 JSON 파일 경로 */
@@ -254,6 +270,8 @@ export const PROJECTILE_TYPES = {
  */
 export const WEAPONS = {
     fist: {
+        /** @description 상태 패널에 들고 있는 것으로 표시할 이름 */
+        name: '마법 장갑',
         sprite: 'fist',
         cooldown: 400,
         range: TILE_SIZE * 1.2,
@@ -264,6 +282,7 @@ export const WEAPONS = {
         sound: null
     },
     gun: {
+        name: '마법 지팡이',
         sprite: 'gun',
         fireSprite: 'gun_fire',
         cooldown: 200,

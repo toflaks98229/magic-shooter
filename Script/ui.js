@@ -54,9 +54,10 @@ export function updateHUD() {
     // 가지 안에서의 층만 보여주면 짐승굴 2층인지 메인 2층인지 알 수 없으므로
     // DCSS 관례대로 '가지:층' 형태로 표시합니다.
     setText(dom.floorCountEl, formatLocation(world.branch, world.floor));
-    setText(dom.runeCountEl, world.runes.length);
     setText(dom.gameTimeEl, (world.time / 1000).toFixed(1));
 
+    updateRuneCount();
+    updateWieldedWeapon();
     updateBuffList();
     updateInventory();
     updateStatusFace(); // 상태 얼굴 업데이트
@@ -73,18 +74,146 @@ function setBarWidth(element, ratio) {
     if (element.style.width !== percent) element.style.width = percent;
 }
 
-/** @description 지속 효과의 표시 이름 */
-const BUFF_LABELS = { might: '힘', haste: '가속', resistance: '보호' };
+/**
+ * @description 지속 효과의 표시 이름과 기호.
+ * 기호는 DCSS 가 상태 이상에 쓰는 것을 그대로 가져왔습니다.
+ */
+const BUFF_DISPLAY = {
+    might: { label: '힘', sprite: 'status_might' },
+    haste: { label: '가속', sprite: 'status_haste' },
+    resistance: { label: '보호', sprite: 'status_resistance' },
+};
+
+/** @description 마지막으로 그린 지속 효과 구성. 종류가 바뀔 때만 다시 만듭니다. */
+let lastBuffSignature = null;
 
 /**
- * 걸려 있는 지속 효과와 남은 시간을 보여줍니다.
- * DCSS 가 상태 이상을 패널에 나열하는 자리를 대신합니다.
+ * 걸려 있는 지속 효과를 기호와 남은 시간으로 보여줍니다.
+ * DCSS 가 상태 이상을 패널에 나열하는 자리입니다.
  */
 function updateBuffList() {
-    const text = world.buffs
-        .map(buff => `${BUFF_LABELS[buff.effect] || buff.effect} ${Math.ceil((buff.expiresAt - world.time) / 1000)}s`)
-        .join('  ');
-    setText(dom.buffListEl, text);
+    // 남은 시간은 매 프레임 바뀌지만 기호는 그대로이므로, 목록 자체는 종류가 바뀔 때만 다시 만듭니다.
+    const signature = world.buffs.map(buff => buff.effect).join(',');
+    if (signature !== lastBuffSignature) {
+        lastBuffSignature = signature;
+        dom.buffListEl.replaceChildren(...world.buffs.map(buff => buildBuffChip(buff)));
+    }
+
+    // 남은 시간만 갱신합니다.
+    world.buffs.forEach((buff, index) => {
+        const chip = dom.buffListEl.children[index];
+        const seconds = chip?.querySelector?.('.status-time');
+        if (seconds) setText(seconds, `${Math.ceil((buff.expiresAt - world.time) / 1000)}s`);
+    });
+}
+
+/**
+ * 지속 효과 하나를 나타내는 칩을 만듭니다.
+ * @param {{effect: string}} buff - 지속 효과
+ * @returns {HTMLElement} 표시 요소
+ */
+function buildBuffChip(buff) {
+    const display = BUFF_DISPLAY[buff.effect] || { label: buff.effect };
+
+    const chip = document.createElement('span');
+    chip.className = 'status-chip';
+    chip.title = display.label;
+
+    const icon = spriteImage(display.sprite, display.label);
+    if (icon) chip.appendChild(icon);
+
+    const time = document.createElement('span');
+    time.className = 'status-time';
+    chip.appendChild(time);
+
+    return chip;
+}
+
+/**
+ * 스프라이트를 HTML 이미지 요소로 만듭니다.
+ * 아직 에셋이 로드되지 않았거나 없는 스프라이트면 null 을 돌려줍니다.
+ * @param {string} spriteKey - 스프라이트 키
+ * @param {string} alt - 대체 문구
+ * @returns {HTMLImageElement|null} 이미지 요소
+ */
+function spriteImage(spriteKey, alt) {
+    const texture = assets.textures[spriteKey];
+    if (!texture?.img?.src) return null;
+
+    const image = document.createElement('img');
+    image.className = 'sprite-icon';
+    image.src = texture.img.src;
+    image.alt = alt || spriteKey;
+    return image;
+}
+
+/** @description 룬 칸에 마지막으로 그린 개수. 매 프레임 그림을 새로 만들지 않기 위한 것입니다. */
+let drawnRuneCount = -1;
+
+/**
+ * 룬 개수를 그림과 함께 보여줍니다.
+ *
+ * DCSS 는 모은 룬을 개수가 아니라 그림으로 늘어놓습니다. 여기서도 같은 방식으로 하되,
+ * 다 모으면 열다섯 개가 되어 줄이 넘치므로 다섯 개까지만 그리고 나머지는 숫자로 덧붙입니다.
+ */
+function updateRuneCount() {
+    const count = world.runes.length;
+    if (count === drawnRuneCount) return;
+    drawnRuneCount = count;
+
+    if (count === 0) {
+        dom.runeCountEl.replaceChildren();
+        setText(dom.runeCountEl, '0');
+        return;
+    }
+
+    const SHOWN = 5;
+    const icons = [];
+    for (let i = 0; i < Math.min(count, SHOWN); i++) {
+        const icon = spriteImage('status_rune', '룬');
+        if (icon) icons.push(icon);
+    }
+
+    // 그림이 아직 없으면(에셋 로딩 전) 숫자만이라도 보여야 합니다.
+    if (icons.length === 0) {
+        setText(dom.runeCountEl, String(count));
+        return;
+    }
+
+    if (count > SHOWN) {
+        const rest = document.createElement('span');
+        rest.textContent = ` +${count - SHOWN}`;
+        icons.push(rest);
+    }
+    dom.runeCountEl.replaceChildren(...icons);
+}
+
+/** @description 무기 칸에 마지막으로 그린 무기. 같은 무기면 다시 만들지 않습니다. */
+let drawnWeapon = null;
+
+/**
+ * 들고 있는 무기를 그림과 이름으로 보여줍니다.
+ *
+ * 화면 아래 무기 그림은 1인칭 시점이라 무엇을 들었는지 한눈에 들어오지 않습니다.
+ * DCSS 가 상태창에 들고 있는 것을 따로 적어 주는 것과 같은 이유로 여기에도 둡니다.
+ */
+function updateWieldedWeapon() {
+    const key = world.player.weapon;
+    if (key === drawnWeapon) return;
+    drawnWeapon = key;
+
+    const weapon = C.WEAPONS[key];
+    if (!weapon) {
+        dom.wieldedWeaponEl.replaceChildren();
+        setText(dom.wieldedWeaponEl, '-');
+        return;
+    }
+
+    const label = document.createElement('span');
+    label.textContent = weapon.name || key;
+
+    const icon = spriteImage(weapon.sprite, weapon.name);
+    dom.wieldedWeaponEl.replaceChildren(...(icon ? [icon, label] : [label]));
 }
 
 /**
@@ -107,6 +236,18 @@ function updateInventory() {
 
 /** @description 마지막으로 그린 소지품 내용. 달라졌을 때만 다시 그립니다. */
 let lastInventorySignature = null;
+
+/**
+ * 다음 갱신에서 소지품과 상태 표시를 강제로 다시 그리게 합니다.
+ * 에셋 로딩이 끝나 그림이 준비된 시점에 호출합니다.
+ */
+export function invalidateSpriteCache() {
+    lastInventorySignature = null;
+    lastBuffSignature = null;
+    // 그림이 없던 동안 숫자와 글자로만 그려 두었으므로, 그림이 준비되면 다시 그려야 합니다.
+    drawnRuneCount = -1;
+    drawnWeapon = null;
+}
 
 /**
  * 소지품 목록의 DOM 요소들을 만듭니다.
@@ -135,11 +276,17 @@ function buildInventoryRows() {
             letter.className = 'inv-letter';
             // 첫 아홉 칸은 숫자키로 곧바로 쓸 수 있어 그 숫자를 함께 보여줍니다.
             letter.textContent = entry.index < 9 ? `${entry.index + 1})` : `${entry.letter})`;
+            row.appendChild(letter);
+
+            // DCSS 처럼 물건의 그림을 함께 보여줍니다. 이름만으로는 한눈에 구분되지 않습니다.
+            const icon = spriteImage(entry.item.spriteKey, entry.item.name);
+            if (icon) row.appendChild(icon);
 
             const label = document.createElement('span');
+            label.className = 'inv-name';
             label.textContent = describeStack(entry.itemId, entry.count);
+            row.appendChild(label);
 
-            row.append(letter, label);
             rows.push(row);
         }
     }

@@ -594,6 +594,12 @@ function loadSpriteSheets() {
 }
 
 /**
+ * @description HTML 요소에 직접 붙일 이미지가 필요한 스프라이트.
+ * 무기와 얼굴, 소지품에 나열되는 아이템, 상태 패널의 상태 기호가 해당합니다.
+ */
+const HTML_SPRITE_PATTERN = /^(face_|gun|fist|item_|status_)/;
+
+/**
  * 로드된 스프라이트 시트 이미지와 아틀라스 데이터를 기반으로 각 스프라이트를
  * ImageData(벽/바닥용) 또는 Image(UI용) 객체로 만들어 assets.textures에 저장합니다.
  * @param {string} sheetKey - 이 스프라이트 시트의 키 (e.g., 'main', 'walls')
@@ -644,8 +650,9 @@ function prepareSprites(sheetKey, sheetImage, atlas) {
             // 개별 텍스처도 assets.textures에 저장해둬서, 테마 없이 직접 참조할 수도 있게 합니다.
             assets.textures[key] = textureData;
 
-        } else if (key.startsWith('face_') || key.startsWith('gun') || key.startsWith('fist')) {
-            // UI/무기는 HTML <img> 요소에 바로 사용하기 위해 Image 객체로 저장
+        } else if (HTML_SPRITE_PATTERN.test(key)) {
+            // 상태 패널과 소지품 창은 HTML 이라 <img> 에 넣을 수 있는 형태가 필요합니다.
+            // 레이캐스터가 쓰는 ImageData 로는 화면에 붙일 수 없습니다.
             const img = new Image();
             img.src = tempCanvas.toDataURL();
             assets.textures[key] = { img: img };

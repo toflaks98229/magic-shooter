@@ -57,6 +57,13 @@
       "h": 27,
       "color": "#676b6e"
     },
+    "status_rune": {
+      "x": 619,
+      "y": 784,
+      "w": 25,
+      "h": 25,
+      "color": "#61656b"
+    },
     "projectile_fireball": {
       "x": 802,
       "y": 1028,

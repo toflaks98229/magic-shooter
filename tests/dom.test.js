@@ -8,7 +8,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = fileURLToPath(new URL('..', import.meta.url));
@@ -62,6 +62,24 @@ test('소지품 창이 접기 위한 구조를 갖추고 있다', () => {
     assert.match(html, /id="inventory-body"/, '접었을 때 숨길 본문이 필요합니다');
     assert.match(html, /#inventory\.collapsed\s+#inventory-body\s*\{\s*display:\s*none/,
         '접힌 상태에서 본문을 숨기는 규칙이 CSS 에 필요합니다');
+});
+
+test('타이틀 삽화를 띄울 자리가 있다', () => {
+    assert.match(html, /id="title-splash"/, '삽화를 넣을 요소가 필요합니다');
+    // 그림이 없을 때 빈 칸이 자리를 차지하면 메뉴가 아래로 밀립니다.
+    assert.match(html, /\.menu-splash:not\(\[src\]\)\s*\{\s*display:\s*none/,
+        'src 가 없을 때 숨기는 규칙이 필요합니다');
+});
+
+test('삽화 파일이 실제로 있다', () => {
+    // constants.js 의 목록과 Image/title/ 이 어긋나면 타이틀에 깨진 그림이 뜹니다.
+    const constants = readFileSync(projectRoot + 'Script/constants.js', 'utf8');
+    const block = constants.slice(constants.indexOf('TITLE_SPLASH_URLS'), constants.indexOf('];', constants.indexOf('TITLE_SPLASH_URLS')));
+    const paths = [...block.matchAll(/'([^']+\.png)'/g)].map(([, p]) => p);
+
+    assert.ok(paths.length > 0, '삽화 목록을 읽어내지 못했습니다');
+    const absent = paths.filter(p => !existsSync(projectRoot + p));
+    assert.deepEqual(absent, [], '목록에 있는데 파일이 없는 삽화가 있습니다');
 });
 
 test('게임 화면과 상태 패널이 나란히 놓인다', () => {

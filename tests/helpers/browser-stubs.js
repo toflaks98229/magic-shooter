@@ -103,8 +103,25 @@ export function createStubElement(id = '?') {
             },
         },
         children: [],
+        className: '',
+        title: '',
         append(...nodes) { this.children.push(...nodes); },
+        appendChild(node) { this.children.push(node); return node; },
         replaceChildren(...nodes) { this.children = nodes; },
+        remove() { },
+        /** 자식 중 클래스가 맞는 첫 요소를 찾습니다. (ui.js 가 남은 시간 칸을 찾을 때 씁니다) */
+        querySelector(selector) {
+            const wanted = selector.replace('.', '');
+            const search = (nodes) => {
+                for (const node of nodes) {
+                    if (node.className === wanted) return node;
+                    const found = node.children ? search(node.children) : null;
+                    if (found) return found;
+                }
+                return null;
+            };
+            return search(this.children);
+        },
         addEventListener(type, fn) { (handlers[type] ||= []).push(fn); },
         removeEventListener(type, fn) {
             const list = handlers[type];

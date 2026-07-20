@@ -1,6 +1,7 @@
 {
   "note": "npm run locate:tiles 로 생성됩니다. 직접 고치지 마십시오.",
-  "source": "https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/",
+  "tilesetVersion": "0.34.0",
+  "source": "https://raw.githubusercontent.com/crawl/crawl/0.34.0/crawl-ref/source/rltiles/",
   "tiles": {
     "wall_main_1": {
       "sheet": "wall",
@@ -1388,10 +1389,10 @@
     },
     "mon_gargoyle": {
       "sheet": "player",
-      "source": "mon/nonliving/molten_gargoyle",
-      "x": 939,
+      "source": "mon/nonliving/war_gargoyle",
+      "x": 907,
       "y": 1270,
-      "w": 31,
+      "w": 32,
       "h": 32
     },
     "mon_imp": {
@@ -1665,6 +1666,38 @@
       "y": 415,
       "w": 31,
       "h": 29
+    },
+    "icon_might": {
+      "sheet": "icons",
+      "source": "misc/icons/might",
+      "x": 603,
+      "y": 0,
+      "w": 7,
+      "h": 11
+    },
+    "icon_haste": {
+      "sheet": "icons",
+      "source": "misc/icons/hasted",
+      "x": 596,
+      "y": 11,
+      "w": 7,
+      "h": 11
+    },
+    "icon_resistance": {
+      "sheet": "icons",
+      "source": "misc/icons/resist",
+      "x": 761,
+      "y": 0,
+      "w": 9,
+      "h": 10
+    },
+    "icon_rune": {
+      "sheet": "main",
+      "source": "item/misc/runes/generic",
+      "x": 619,
+      "y": 784,
+      "w": 25,
+      "h": 25
     },
     "bolt_magenta": {
       "sheet": "main",

@@ -23,8 +23,20 @@ const projectRoot = fileURLToPath(new URL('..', import.meta.url));
 const TILES_DIR = projectRoot + 'Data/tiles/';
 const CACHE_DIR = projectRoot + 'Data/tiles/.source-cache/';
 
-/** @description 원본 타일을 받아올 곳 */
-const SOURCE_BASE = 'https://raw.githubusercontent.com/crawl/crawl/master/crawl-ref/source/rltiles/';
+/**
+ * @description 원본 타일을 받아올 곳.
+ *
+ * 반드시 시트와 같은 버전을 봐야 합니다. Data/tiles 의 시트는 0.34 배포판에서 온 것이라,
+ * master 와 대조하면 그동안 다시 그려진 그림들이 전부 '시트에 없음' 으로 나옵니다.
+ * 처음에 딥 엘프와 나가 계열이 통째로 없다고 판단했던 것이 그 때문이었습니다.
+ *
+ * 다만 버전을 맞춰도 끝까지 안 맞는 계열이 남습니다. wolf 를 예로 들면 0.34.0 · 0.34.1 · master
+ * 어느 쪽에서 받아도, 테두리를 두르든 안 두르든, 투명한 곳을 빼고 알맹이만 대조해도 시트에 없습니다.
+ * 배포판 시트가 저장소의 rltiles 만으로 만들어진 것이 아니라는 뜻이라 여기서 더 좁힐 수 없습니다.
+ * 그런 것들은 아래 WANTED 에서 비슷한 생김새의 대안을 뒤에 붙여 두었습니다. (실행하면 '+' 로 표시됩니다)
+ */
+const TILESET_VERSION = '0.34.0';
+const SOURCE_BASE = `https://raw.githubusercontent.com/crawl/crawl/${TILESET_VERSION}/crawl-ref/source/rltiles/`;
 
 /**
  * @description 찾아낼 타일들.
@@ -152,6 +164,14 @@ const WANTED = {
     weapon_wand_fire: ['item/wand/gem_glass', 'item/wand/gem_silver', 'item/wand/gem_copper'],
     weapon_glove: ['item/armour/glove1', 'item/armour/glove2'],
 
+    // --- 상태 아이콘 ---
+    // DCSS 가 상태 이상을 표시할 때 쓰는 작은 기호입니다. icons.png 에 들어 있습니다.
+    icon_might: 'misc/icons/might',
+    icon_haste: 'misc/icons/hasted',
+    icon_resistance: ['misc/icons/resist', 'misc/icons/strong_willed'],
+    // 룬 개수 옆에 붙일 그림입니다. 서브 던전마다 다른 룬이 있지만 개수만 세므로 공용 룬을 씁니다.
+    icon_rune: 'item/misc/runes/generic',
+
     // --- 발사체 ---
     // effect/ 의 마법 광선입니다. dc-misc.txt 를 거쳐 역시 main.png 에 들어갑니다.
     bolt_magenta: ['effect/bolt05', 'effect/bolt5'],
@@ -235,6 +255,39 @@ function cropImage(image, bounds) {
 }
 
 /**
+ * 불투명한 부분 둘레에 검은 테두리를 두릅니다. (tilegen 의 %rim 1)
+ *
+ * dc-mon.txt 는 늑대·벌·거미·얼음괴물처럼 배경에 묻히기 쉬운 것들을 %rim 1 구간에 묶어 두었고,
+ * tilegen 이 시트에 넣기 전에 이 테두리를 둘러 줍니다. 원본 PNG 에는 없는 픽셀이라
+ * 원본 그대로 대조하면 이 계열이 통째로 '시트에 없음' 이 됩니다.
+ * (딥 엘프와 나가가 없다고 판단해 엉뚱한 몬스터로 대체했던 것이 이 때문이었습니다.)
+ *
+ * tile::add_rim 과 같게, 불투명 픽셀의 상하좌우 중 투명한 칸만 불투명한 검정으로 채웁니다.
+ * @param {object} image - 원본
+ * @returns {object} 테두리를 두른 새 이미지
+ */
+function addRim(image) {
+    const { width, height, data } = image;
+    const out = { width, height, data: new Uint8ClampedArray(data) };
+    const opaque = (x, y) => data[(y * width + x) * 4 + 3] !== 0;
+
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            if (opaque(x, y)) continue;
+            const touchesContent = (x > 0 && opaque(x - 1, y))
+                || (x < width - 1 && opaque(x + 1, y))
+                || (y > 0 && opaque(x, y - 1))
+                || (y < height - 1 && opaque(x, y + 1));
+            if (!touchesContent) continue;
+
+            const at = (y * width + x) * 4;
+            out.data[at] = 0; out.data[at + 1] = 0; out.data[at + 2] = 0; out.data[at + 3] = 255;
+        }
+    }
+    return out;
+}
+
+/**
  * 시트 안에서 타일과 픽셀이 완전히 일치하는 위치를 찾습니다.
  *
  * 시트는 폭 1024의 셸프 패킹으로 만들어져 대부분의 타일이 32의 배수 좌표에 놓입니다.
@@ -278,6 +331,8 @@ if (!existsSync(CACHE_DIR)) mkdirSync(CACHE_DIR, { recursive: true });
 const SHEET_FOR = {
     // effect/ 는 하위 디렉터리가 없어 경로의 첫 구간이 그대로 분류가 됩니다.
     effect: 'main',
+    // 상태 아이콘은 별도 시트입니다.
+    icons: 'icons',
     wall: 'wall', floor: 'floor', doors: 'feat', gateways: 'feat',
     // 몬스터는 dc-player.txt 가 dc-mon.txt 를 포함하는 탓에 player.png 에 들어갑니다.
     animals: 'player', humanoids: 'player', demihumanoids: 'player', demons: 'player',
@@ -304,13 +359,20 @@ for (const [name, spec] of Object.entries(WANTED)) {
         const cached = await fetchTile(sourcePath);
         if (!cached) { tried.push(`${sourcePath}: 원본 없음`); continue; }
 
-        // tilegen 과 같은 방식으로 투명 여백을 잘라낸 뒤 찾습니다.
+        // tilegen 과 같은 방식으로 손질한 뒤 찾습니다.
+        // %rim 여부는 dc-*.txt 를 해석해야 알 수 있으므로, 두 가지를 모두 대 봅니다.
         const source = readPng(cached);
-        const tile = cropImage(source, contentBounds(source));
-        const found = findInSheet(sheets[sheetName], tile);
+        let tile = cropImage(source, contentBounds(source));
+        let found = findInSheet(sheets[sheetName], tile);
+
+        if (!found) {
+            const rimmed = addRim(source);
+            tile = cropImage(rimmed, contentBounds(rimmed));
+            found = findInSheet(sheets[sheetName], tile);
+        }
         if (!found) { tried.push(`${sourcePath}: 시트에 없음`); continue; }
 
-        // 시트에는 잘라낸 크기로 들어가 있으므로 그 크기를 기록합니다.
+        // 시트에는 손질한 크기로 들어가 있으므로 그 크기를 기록합니다.
         resolved = { sheet: sheetName, source: sourcePath, ...found, w: tile.width, h: tile.height };
         break;
     }
@@ -332,6 +394,7 @@ const previous = existsSync(outputPath) ? JSON.parse(readFileSync(outputPath, 'u
 
 writeFileSync(outputPath, JSON.stringify({
     note: 'npm run locate:tiles 로 생성됩니다. 직접 고치지 마십시오.',
+    tilesetVersion: TILESET_VERSION,
     source: SOURCE_BASE,
     tiles: located,
 }, null, 2) + '\n', 'utf8');

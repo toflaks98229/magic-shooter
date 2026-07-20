@@ -189,6 +189,7 @@ const SPRITES = {
         item_resistance: { name: 'item_potion_resistance' },
         item_vitality: { name: 'item_potion_vitality' },
         item_capacity: { name: 'item_potion_capacity' },
+        status_rune: { name: 'icon_rune' },               // 룬 개수 옆에 붙는 그림
         projectile_fireball: { name: 'bolt_magenta' },    // 자홍색 마법 광선
         projectile_bullet: { name: 'bolt_cyan' },         // 청록색 마법 광선
         fist: { name: 'weapon_glove' },                   // 장갑
@@ -196,6 +197,12 @@ const SPRITES = {
         gun_fire: { name: 'weapon_wand_fire' },           // 발사 중인 지팡이
     },
     gui: {},
+    icons: {
+        // DCSS 가 상태 이상을 표시할 때 쓰는 기호. 상태 패널에 그대로 씁니다.
+        status_might: { name: 'icon_might' },
+        status_haste: { name: 'icon_haste' },
+        status_resistance: { name: 'icon_resistance' },
+    },
 };
 
 /**
@@ -238,7 +245,7 @@ function assertInBounds(sheet, image, key, rect) {
 
 // --- 아틀라스 조립 ---
 
-const sheetNames = ['main', 'wall', 'floor', 'gui', 'player', 'feat'];
+const sheetNames = ['main', 'wall', 'floor', 'gui', 'player', 'feat', 'icons'];
 const images = Object.fromEntries(
     sheetNames.map(name => [name, readPng(new URL(`${name}.png`, TILES_DIR))])
 );
