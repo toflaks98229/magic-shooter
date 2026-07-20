@@ -73,10 +73,9 @@ export function generateDungeon(width, height, maxRooms, minRoomSize, maxRoomSiz
     
     // 5. 다음 층으로 가는 출구를 마지막 방에 설정합니다.
     const lastRoom = rooms[rooms.length - 1];
-    // 방의 중앙이 벽(1)일 경우를 대비해, 바닥(0)으로 먼저 설정한 뒤 출구(4)를 놓습니다.
+    // 출구 타일(4)은 기존 타일 값과 무관하게 덮어쓰므로 별도의 초기화가 필요 없습니다.
     const exitY = lastRoom.y + Math.floor(lastRoom.h / 2);
     const exitX = lastRoom.x + Math.floor(lastRoom.w / 2);
-    map[exitY][exitX] = 0;
     map[exitY][exitX] = 4; // 4는 출구 타일
 
     return { map, objectMap, playerStart };

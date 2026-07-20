@@ -62,6 +62,21 @@ export const BOB_AMOUNT_X = 10;
 /** @description 파티클에 적용되는 중력 값 */
 export const PARTICLE_GRAVITY = 0.1;
 
+
+// --- 시뮬레이션 안정성 상수 ---
+
+/**
+ * @description 한 프레임에서 시뮬레이션에 반영할 수 있는 최대 시간(ms).
+ * 탭 전환 후 복귀처럼 프레임 간격이 비정상적으로 벌어졌을 때,
+ * 플레이어가 한 번에 타일 하나 이상을 이동해 벽을 관통하는 것을 방지합니다.
+ */
+export const MAX_FRAME_TIME = 100;
+
+/** @description 적 스폰 위치를 무작위로 탐색할 최대 시도 횟수 */
+export const SPAWN_MAX_ATTEMPTS = 200;
+/** @description 적이 스폰될 때 플레이어와 유지해야 하는 최소 거리 (타일 단위) */
+export const SPAWN_MIN_DISTANCE_TILES = 5;
+
 /**
  * @description 맵 오브젝트 유형별 속성을 정의한 객체.
  * 키 값은 objectMap에 기록될 ID입니다.

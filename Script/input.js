@@ -68,8 +68,13 @@ export function setupInputHandlers() {
 export function getPlayerMovement() {
     // 키보드 입력과 모바일 조이스틱 입력을 합산하여 최종 움직임을 결정합니다.
     // 이렇게 하면 키보드와 모바일 컨트롤을 동시에 사용할 수 있습니다.
-    const forward = (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0) - (isTouchDevice ? moveInput.y : 0);
-    const strafe = (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0) - (isTouchDevice ? -moveInput.x : 0);
+    const stickX = isTouchDevice ? moveInput.x : 0;
+    const stickY = isTouchDevice ? moveInput.y : 0;
+
+    // 조이스틱의 y는 화면 좌표계(아래쪽이 +)이므로, 전진(+)으로 변환하려면 부호를 뒤집습니다.
+    // 반면 x는 오른쪽이 +로 이미 strafe와 방향이 같으므로 그대로 더합니다.
+    const forward = (keys.KeyW ? 1 : 0) - (keys.KeyS ? 1 : 0) - stickY;
+    const strafe = (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0) + stickX;
     return { forward, strafe };
 }
 

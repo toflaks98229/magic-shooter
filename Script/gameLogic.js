@@ -103,8 +103,10 @@ export function attack() {
             })
             // 조준 보정 범위(FOV의 1/8) 내에 있는 적만 필터링합니다.
             .filter(({ angleDiff }) => Math.abs(angleDiff) < C.FOV / 8)
-            // 가장 가까운 적을 선택합니다.
-            .sort((a, b) => a.dist - b.dist)[0];
+            // 가까운 순으로 정렬한 뒤, 벽에 가리지 않은 첫 번째 적을 명중 대상으로 삼습니다.
+            // find를 사용하므로 시야 검사는 명중 대상을 찾을 때까지만 수행됩니다.
+            .sort((a, b) => a.dist - b.dist)
+            .find(({ enemy }) => hasLineOfSight(S.player.x, S.player.y, enemy.x, enemy.y));
 
         if (hitEnemy) {
             hitEnemy.enemy.hp -= weaponData.damage;
@@ -128,8 +130,9 @@ export function attack() {
                 while (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
                 while (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
 
-                // 전방 부채꼴(FOV의 1/4) 범위 내에 있는지 확인
-                if (Math.abs(angleDiff) < C.FOV / 4) {
+                // 전방 부채꼴(FOV의 1/4) 범위 안에 있고, 벽에 가리지 않았는지 확인
+                if (Math.abs(angleDiff) < C.FOV / 4 &&
+                    hasLineOfSight(S.player.x, S.player.y, enemy.x, enemy.y)) {
                     enemy.hp -= weaponData.damage;
                     enemy.lastHitTime = now;
                     window.playSound('ENEMY_HIT');
@@ -225,6 +228,54 @@ function isPassable(x, y) {
 }
 
 /**
+ * 두 월드 좌표 사이에 시야가 통하는지(벽에 가리지 않는지) 검사합니다.
+ * render.js의 castRay와 동일한 DDA 방식으로 타일 격자를 훑되, 렌더러에 의존하지 않도록
+ * 게임 로직 쪽에 독립적으로 구현했습니다. 벽 판정 기준(map 값이 0보다 큼)도 castRay와 동일하게 맞춰,
+ * "화면에 벽으로 보이는 것은 총알도 막는다"는 규칙이 성립하도록 합니다.
+ * @param {number} x1 - 시작 월드 X 좌표
+ * @param {number} y1 - 시작 월드 Y 좌표
+ * @param {number} x2 - 목표 월드 X 좌표
+ * @param {number} y2 - 목표 월드 Y 좌표
+ * @returns {boolean} 시야가 통하면 true
+ */
+function hasLineOfSight(x1, y1, x2, y2) {
+    const posX = x1 / C.TILE_SIZE, posY = y1 / C.TILE_SIZE;
+    const dx = x2 - x1, dy = y2 - y1;
+    const dist = Math.hypot(dx, dy);
+    if (dist === 0) return true;
+
+    const dirX = dx / dist, dirY = dy / dist;
+    let mapX = Math.floor(posX), mapY = Math.floor(posY);
+    const targetX = Math.floor(x2 / C.TILE_SIZE), targetY = Math.floor(y2 / C.TILE_SIZE);
+
+    // 광선이 X축/Y축 격자선을 하나 넘을 때마다 이동하는 거리
+    const deltaDistX = dirX === 0 ? Infinity : Math.abs(1 / dirX);
+    const deltaDistY = dirY === 0 ? Infinity : Math.abs(1 / dirY);
+
+    let stepX, sideDistX, stepY, sideDistY;
+    if (dirX < 0) { stepX = -1; sideDistX = (posX - mapX) * deltaDistX; }
+    else { stepX = 1; sideDistX = (mapX + 1 - posX) * deltaDistX; }
+    if (dirY < 0) { stepY = -1; sideDistY = (posY - mapY) * deltaDistY; }
+    else { stepY = 1; sideDistY = (mapY + 1 - posY) * deltaDistY; }
+
+    // 목표 타일에 도달하면 반드시 종료되지만, 부동소수점 오차로 인한 무한 루프를 막기 위해
+    // 맵 대각선 길이를 넘어서는 탐색은 강제로 중단합니다.
+    const maxSteps = C.MAP_WIDTH + C.MAP_HEIGHT;
+    for (let i = 0; i < maxSteps; i++) {
+        if (sideDistX < sideDistY) { sideDistX += deltaDistX; mapX += stepX; }
+        else { sideDistY += deltaDistY; mapY += stepY; }
+
+        // 목표 타일에 도착했다면 도중에 막힌 벽이 없었다는 뜻입니다.
+        if (mapX === targetX && mapY === targetY) return true;
+
+        const tile = S.map[mapY]?.[mapX];
+        if (tile === undefined) return false; // 맵 밖으로 나감
+        if (tile > 0) return false;           // 벽/문/출구에 막힘
+    }
+    return false;
+}
+
+/**
  * 플레이어의 이동 입력을 받아 실제 위치를 업데이트하고 벽/오브젝트 충돌을 처리합니다.
  * @param {number} dtFactor - 프레임 시간 보정값
  */
@@ -306,7 +357,7 @@ function updateEnemies(now, dtFactor) {
 
             const dx_node = targetX - enemy.x;
             const dy_node = targetY - enemy.y;
-            const dist_node = Math.hypot(dx_node, dx_node);
+            const dist_node = Math.hypot(dx_node, dy_node);
             
             // 다음 경로 지점에 충분히 가까워지면 경로에서 해당 지점을 제거합니다.
             if (dist_node < enemy.speed * dtFactor * 1.5) {
@@ -435,21 +486,50 @@ function spawnEnemy() {
 
 /**
  * 플레이어와 충분히 떨어져 있고 벽이 아닌 타일을 찾아 스폰 지점으로 반환합니다.
+ * 무작위 탐색이 실패할 수 있는 좁은 맵에서도 반드시 값을 반환하도록 폴백 경로를 갖습니다.
  * @returns {{x: number, y: number}} 스폰할 월드 좌표
  */
 function findSpawnPoint() {
-    let x, y, mapX, mapY;
-    do {
-        // 맵 안에서 무작위 좌표 생성
-        x = Math.random() * C.MAP_WIDTH * C.TILE_SIZE;
-        y = Math.random() * C.MAP_HEIGHT * C.TILE_SIZE;
-        mapX = Math.floor(x / C.TILE_SIZE);
-        mapY = Math.floor(y / C.TILE_SIZE);
-    } while (
-        S.map[mapY]?.[mapX] !== 0 || // 해당 위치가 벽이 아니고,
-        Math.hypot(x - S.player.x, y - S.player.y) < C.TILE_SIZE * 5 // 플레이어와 너무 가깝지 않을 때까지 반복
-    );
-    return { x, y };
+    const minDistance = C.TILE_SIZE * C.SPAWN_MIN_DISTANCE_TILES;
+
+    // 1. 조건을 만족하는 지점을 무작위로 탐색합니다. (대부분의 경우 몇 번 안에 성공)
+    for (let attempt = 0; attempt < C.SPAWN_MAX_ATTEMPTS; attempt++) {
+        const x = Math.random() * C.MAP_WIDTH * C.TILE_SIZE;
+        const y = Math.random() * C.MAP_HEIGHT * C.TILE_SIZE;
+        const mapX = Math.floor(x / C.TILE_SIZE);
+        const mapY = Math.floor(y / C.TILE_SIZE);
+
+        if (S.map[mapY]?.[mapX] === 0 && Math.hypot(x - S.player.x, y - S.player.y) >= minDistance) {
+            return { x, y };
+        }
+    }
+
+    // 2. 폴백: 조건을 만족하는 칸이 거의 없는 좁은 맵일 수 있으므로,
+    //    바닥 타일을 전수 조사해 플레이어에게서 가장 먼 칸을 선택합니다.
+    //    (기존의 do...while 방식은 이 상황에서 브라우저를 멈추게 했습니다.)
+    let bestPoint = null;
+    let bestDistance = -1;
+    for (let mapY = 0; mapY < S.map.length; mapY++) {
+        for (let mapX = 0; mapX < S.map[mapY].length; mapX++) {
+            if (S.map[mapY][mapX] !== 0) continue;
+            const x = mapX * C.TILE_SIZE + C.TILE_SIZE / 2;
+            const y = mapY * C.TILE_SIZE + C.TILE_SIZE / 2;
+            const distance = Math.hypot(x - S.player.x, y - S.player.y);
+            if (distance > bestDistance) {
+                bestDistance = distance;
+                bestPoint = { x, y };
+            }
+        }
+    }
+
+    if (bestPoint) {
+        console.warn('Failed to find a random spawn point. Falling back to the farthest floor tile.');
+        return bestPoint;
+    }
+
+    // 3. 바닥 타일이 하나도 없는 비정상적인 맵. 최후의 수단으로 플레이어 위치를 반환합니다.
+    console.error('No valid spawn point exists on this map. Spawning at the player position.');
+    return { x: S.player.x, y: S.player.y };
 }
 
 /**

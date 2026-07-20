@@ -88,8 +88,16 @@ function init() {
  * @param {number} timestamp - requestAnimationFrame이 제공하는 현재 시간
  */
 function gameLoop(timestamp = 0) {
-    const deltaTime = timestamp - lastTime; // 이전 프레임과의 시간 간격
+    // 첫 프레임에는 lastTime이 0이므로 deltaTime이 타임스탬프 전체(수천 ms)가 되어버립니다.
+    // 기준 시간을 현재 타임스탬프로 맞춰 첫 프레임의 deltaTime을 0으로 만듭니다.
+    if (lastTime === 0) lastTime = timestamp;
+
+    const rawDeltaTime = timestamp - lastTime; // 이전 프레임과의 실제 시간 간격
     lastTime = timestamp;
+
+    // 탭 전환 등으로 프레임 간격이 크게 벌어진 경우, 시뮬레이션에 반영할 시간을 제한합니다.
+    // 제한하지 않으면 한 프레임의 이동량이 타일 크기를 넘어서 벽을 통과할 수 있습니다.
+    const deltaTime = Math.min(rawDeltaTime, C.MAX_FRAME_TIME);
 
     if (S.isGameRunning && deltaTime > 0) {
         update(deltaTime); // 게임 로직 업데이트 (gameLogic.js)

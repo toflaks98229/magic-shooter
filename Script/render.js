@@ -127,6 +127,18 @@ function loadDungeonProgression() {
 }
 
 /**
+ * 텍스처 좌표를 텍스처 크기 안으로 감싸(wrap) 반환합니다.
+ * 월드 좌표는 음수가 될 수 있으므로 JS의 나머지 연산 결과가 음수가 되는 경우를 보정합니다.
+ * @param {number} value - 감쌀 정수 좌표
+ * @param {number} size - 텍스처의 한 변 크기
+ * @returns {number} 0 이상 size 미만의 좌표
+ */
+function wrapTexCoord(value, size) {
+    const wrapped = value % size;
+    return wrapped < 0 ? wrapped + size : wrapped;
+}
+
+/**
  * 레이캐스팅을 사용하여 벽, 바닥, 천장을 렌더링하고 screenBuffer에 픽셀 데이터를 씁니다.
  * @param {number} width - 렌더링할 너비
  * @param {number} height - 렌더링할 높이
@@ -280,11 +292,13 @@ function renderWorld(width, height) {
             const ceilingTexIndex = Math.abs(tileHash) % ceilingTextures.length;
             const ceilingTextureInfo = ceilingTextures[ceilingTexIndex];
             const ceilingTexData = ceilingTextureInfo.data;
+            const ceilingTexSize = ceilingTextureInfo.w;
 
-            const floorTexX = (currentFloorX | 0) & (floorTexSize - 1);
-            const floorTexY = (currentFloorY | 0) & (floorTexSize - 1);
-            
             if (floorTexData) {
+                // 기존의 비트 마스크(& size-1) 방식은 텍스처 크기가 2의 거듭제곱일 때만 동작했습니다.
+                // 나머지 연산으로 바꿔 48x48 같은 크기의 텍스처도 안전하게 반복되도록 합니다.
+                const floorTexX = wrapTexCoord(currentFloorX | 0, floorTexSize);
+                const floorTexY = wrapTexCoord(currentFloorY | 0, floorTexSize);
                 const texIndex = (floorTexY * floorTexSize + floorTexX) << 2;
                 const r = Math.min(255, floorTexData[texIndex] * baseBrightness);
                 const g = Math.min(255, floorTexData[texIndex + 1] * baseBrightness);
@@ -294,7 +308,11 @@ function renderWorld(width, height) {
 
             if (ceilingTexData) {
                 const ceilY = height - 1 - y;
-                const texIndex = (floorTexY * floorTexSize + floorTexX) << 2;
+                // 천장 텍스처는 바닥과 크기가 다를 수 있으므로, 반드시 자신의 크기로 좌표를 계산해야 합니다.
+                // (기존에는 바닥의 크기/좌표로 천장 데이터를 인덱싱해 텍스처가 어긋나거나 범위를 벗어났습니다.)
+                const ceilingTexX = wrapTexCoord(currentFloorX | 0, ceilingTexSize);
+                const ceilingTexY = wrapTexCoord(currentFloorY | 0, ceilingTexSize);
+                const texIndex = (ceilingTexY * ceilingTexSize + ceilingTexX) << 2;
                 const r_c = Math.min(255, ceilingTexData[texIndex] * baseBrightness);
                 const g_c = Math.min(255, ceilingTexData[texIndex + 1] * baseBrightness);
                 const b_c = Math.min(255, ceilingTexData[texIndex + 2] * baseBrightness);
