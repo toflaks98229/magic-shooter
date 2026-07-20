@@ -30,6 +30,10 @@ export const SPRITE_SHEET_URLS = {
     // 볼트가 지정한 전용 타일. 밀랍 벽, 이끼 낀 바닥, 특정 자리의 석상 같은
     // 것들입니다. 이것이 있어야 볼트가 그 볼트답게 보입니다.
     vaultTiles: 'Data/tiles/vault-tiles_data.json',
+
+    // 종족마다의 플레이어 그림. 1인칭에서는 자기 모습이 화면에 없어 쓸 일이
+    // 없었는데, 위에서 내려다보는 갈래에서 처음으로 쓰입니다.
+    playerBase: 'Data/tiles/player-base_data.json',
 };
 
 // --- 던전 테마 설정 ---

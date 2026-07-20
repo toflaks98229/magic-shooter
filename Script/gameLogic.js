@@ -1377,6 +1377,45 @@ function ensureFlowField(flying = false, canOpen = false) {
 }
 
 /**
+ * @description 한 칸에서 갈 수 있는 여덟 방향.
+ *
+ * 원본은 몬스터를 여덟 방향으로 움직입니다. 여기서는 오랫동안 네 방향만
+ * 썼습니다. 1인칭에서는 그 차이가 보이지 않았습니다. 앞에서 다가오는
+ * 몬스터는 어느 쪽으로 왔든 그냥 다가오는 것으로 보였습니다.
+ *
+ * 위에서 내려다보면 드러납니다. 네 방향으로만 길을 찾으면 비스듬한 거리를
+ * 계단처럼 꺾어 오게 되고, 그것이 곧 엉성해 보이는 이유였습니다.
+ */
+const STEPS = [
+    [0, 1], [0, -1], [1, 0], [-1, 0],
+    [1, 1], [1, -1], [-1, 1], [-1, -1],
+];
+
+/**
+ * 비스듬한 걸음이 가능한지 봅니다.
+ *
+ * 원본은 벽 두 장 사이의 틈으로도 비스듬히 지나갑니다. 여기서는 막습니다.
+ * 원본의 몬스터는 칸에서 칸으로 뛰지만 이 게임의 몬스터는 좌표 위를 미끄러져
+ * 가고, 부딪힘은 가로세로를 따로 봅니다. 그래서 틈으로 비스듬히 들어가면
+ * 양쪽 다 막혀 그 자리에 붙어 버립니다.
+ *
+ * 길을 찾는 쪽과 실제로 움직이는 쪽이 다른 규칙을 쓰면, 길은 있는데 갈 수
+ * 없는 자리가 생깁니다. 원본을 따르는 것보다 이쪽이 낫습니다.
+ * @param {number} x - 출발 칸 X
+ * @param {number} y - 출발 칸 Y
+ * @param {number} nx - 도착 칸 X
+ * @param {number} ny - 도착 칸 Y
+ * @param {boolean} flying - 나는지
+ * @param {boolean} canOpen - 문을 열 수 있는지
+ * @returns {boolean} 갈 수 있으면 true
+ */
+function canStepDiagonally(x, y, nx, ny, flying, canOpen) {
+    if (nx === x || ny === y) return true; // 가로세로 걸음입니다.
+
+    return isPassable(nx, y, flying, canOpen) || isPassable(x, ny, flying, canOpen);
+}
+
+/**
  * 플레이어 위치에서 시작하는 너비 우선 탐색으로 모든 칸의 걸음 수를 채웁니다.
  * @param {number} targetX - 플레이어의 타일 X 좌표
  * @param {number} targetY - 플레이어의 타일 Y 좌표
@@ -1407,15 +1446,15 @@ function computeFlowField(targetX, targetY, flying = false, canOpen = false) {
         const y = (node / width) | 0;
         const nextDistance = field[node] + 1;
 
-        // 상하좌우 네 방향. 기존 BFS와 동일하게 대각선 이동은 허용하지 않습니다.
-        for (let d = 0; d < 4; d++) {
-            const nx = x + (d === 2 ? 1 : d === 3 ? -1 : 0);
-            const ny = y + (d === 0 ? 1 : d === 1 ? -1 : 0);
+        for (let d = 0; d < STEPS.length; d++) {
+            const nx = x + STEPS[d][0];
+            const ny = y + STEPS[d][1];
             if (nx < 0 || ny < 0 || nx >= width || ny >= height) continue;
 
             const neighbour = ny * width + nx;
             if (field[neighbour] !== UNREACHABLE) continue;
             if (!isPassable(nx, ny, flying, canOpen)) continue;
+            if (!canStepDiagonally(x, y, nx, ny, flying, canOpen)) continue;
 
             field[neighbour] = nextDistance;
             flowQueue[tail++] = neighbour;
@@ -1443,9 +1482,9 @@ function followFlowField(enemy, dtFactor) {
     // 걸음 수가 더 작은 이웃 = 플레이어에게 더 가까운 칸
     let bestNode = -1;
     let bestDistance = here;
-    for (let d = 0; d < 4; d++) {
-        const nx = tileX + (d === 2 ? 1 : d === 3 ? -1 : 0);
-        const ny = tileY + (d === 0 ? 1 : d === 1 ? -1 : 0);
+    for (let d = 0; d < STEPS.length; d++) {
+        const nx = tileX + STEPS[d][0];
+        const ny = tileY + STEPS[d][1];
         if (nx < 0 || ny < 0 || nx >= width || ny >= C.MAP_HEIGHT) continue;
 
         const neighbour = ny * width + nx;
@@ -1495,9 +1534,9 @@ function fleeAlongFlowField(enemy, dtFactor) {
     // 걸음 수가 더 큰 이웃 = 플레이어에게서 더 먼 칸
     let bestNode = -1;
     let bestDistance = here;
-    for (let d = 0; d < 4; d++) {
-        const nx = tileX + (d === 2 ? 1 : d === 3 ? -1 : 0);
-        const ny = tileY + (d === 0 ? 1 : d === 1 ? -1 : 0);
+    for (let d = 0; d < STEPS.length; d++) {
+        const nx = tileX + STEPS[d][0];
+        const ny = tileY + STEPS[d][1];
         if (nx < 0 || ny < 0 || nx >= width || ny >= C.MAP_HEIGHT) continue;
 
         const neighbour = ny * width + nx;

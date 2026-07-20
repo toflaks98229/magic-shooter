@@ -169,6 +169,134 @@ test('가 본 곳이 층마다 비워진다', () => {
         'seen 이 층 단위로 비워지지 않습니다');
 });
 
+test('플레이어를 고른 종족의 그림으로 그린다', () => {
+    // 1인칭에서는 자기 모습이 화면에 없었습니다. 위에서 보면 자기가 어디
+    // 있는지 보이지 않으면 움직일 수가 없습니다.
+    const source = readFileSync(new URL('../Script/renderTopDown.js', import.meta.url), 'utf8');
+    assert.match(source, /function drawPlayer[\s\S]*?player_\$\{species\}/,
+        '플레이어를 그리지 않거나 종족을 보지 않습니다');
+
+    // 그림이 실제로 있어야 합니다. 이름만 맞추고 아틀라스에 없으면
+    // drawSprite 가 조용히 아무것도 하지 않아, 고쳐진 것처럼만 보입니다.
+    const atlas = JSON.parse(readFileSync(
+        new URL('../Data/tiles/player-base_data.json', import.meta.url), 'utf8'));
+    const species = [...readFileSync(new URL('../Script/data/species.js', import.meta.url), 'utf8')
+        .matchAll(/"id":\s*"([^"]+)"/g)].map(m => m[1]);
+
+    const missing = species.filter(id => !(`player_${id}` in atlas.sprites));
+    assert.deepEqual(missing, [], `그림이 없는 종족: ${missing.join(', ')}`);
+
+    // 아틀라스가 실려야 fetch 대상이 됩니다.
+    assert.ok(Object.values(C.SPRITE_SHEET_URLS).includes('Data/tiles/player-base_data.json'),
+        '플레이어 아틀라스를 읽지 않습니다');
+});
+
+test('모퉁이 벽도 보이는 것으로 친다', async () => {
+    // 벽 한가운데로 선을 그으면 그 벽 자신에게 막혀 언제나 가려진 것으로
+    // 나옵니다. 모퉁이가 특히 그래서, 벽 줄에 구멍이 뚫린 것처럼 보였습니다.
+    const world = emptyRoom();
+    const { isVisible } = await import('../Script/renderTopDown.js');
+
+    const px = Math.floor(world.player.x / C.TILE_SIZE);
+    const py = Math.floor(world.player.y / C.TILE_SIZE);
+
+    // 플레이어 앞에 ㄱ 자로 꺾인 벽을 세웁니다. 꺾이는 자리가 모퉁이입니다.
+    //
+    //     . . . .
+    //     . # # #      ← 가로줄
+    //     . #  . .     ← 세로줄. 둘이 만나는 (cx, cy) 가 모퉁이
+    //     . @ . .
+    const cornerX = px + 1;
+    const cornerY = py - 2;
+    for (let x = cornerX; x <= cornerX + 2; x++) world.map[cornerY][x] = C.TILE_IDS.WALL;
+    for (let y = cornerY; y <= cornerY + 1; y++) world.map[y][cornerX] = C.TILE_IDS.WALL;
+    world.mapRevision = (world.mapRevision ?? 0) + 1;
+
+    assert.ok(isVisible(cornerX, cornerY),
+        '모퉁이 벽이 보이지 않습니다. 벽 줄에 구멍이 뚫려 보입니다');
+
+    // 그렇다고 아무 벽이나 보이면 안 됩니다. 벽 뒤에 가려진 벽은 여전히
+    // 보이지 않아야 합니다. 그러지 않으면 층 전체가 드러납니다.
+    world.map[cornerY - 1][cornerX + 1] = C.TILE_IDS.WALL;
+    assert.ok(!isVisible(cornerX + 1, cornerY - 1),
+        '벽 뒤에 가려진 벽까지 보입니다');
+});
+
+test('화면 전체를 붉게 물들이지 않는다', () => {
+    // 1인칭에서는 화면이 곧 눈이라 화면에 피가 튀는 것이 뜻을 가졌습니다.
+    // 위에서 내려다보는 화면은 눈이 아니라 지도입니다.
+    const ui = readFileSync(new URL('../Script/ui.js', import.meta.url), 'utf8');
+    assert.ok(!/bloodSplatterEl\.style\.opacity\s*=\s*0\.\d/.test(ui),
+        '피격 때 화면 전체를 붉게 물들이고 있습니다');
+
+    const source = readFileSync(new URL('../Script/renderTopDown.js', import.meta.url), 'utf8');
+    assert.match(source, /PLAYER_DAMAGED/, '맞았다는 소식을 그리는 쪽이 받지 않습니다');
+});
+
+// --- 길찾기 ----------------------------------------------------------------------
+
+test('비스듬한 길을 계단으로 꺾지 않는다', () => {
+    // 오랫동안 네 방향으로만 길을 찾았습니다. 1인칭에서는 그 차이가 보이지
+    // 않았습니다. 앞에서 다가오는 몬스터는 어느 쪽으로 왔든 다가오는 것으로만
+    // 보였습니다. 위에서 보면 계단처럼 꺾여 오는 것이 그대로 드러납니다.
+    const world = emptyRoom();
+
+    // 플레이어에게서 대각선으로 여섯 칸 떨어진 곳에 세웁니다.
+    const enemy = gameLogic.spawnMonster('rat', {
+        x: world.player.x + 6 * C.TILE_SIZE,
+        y: world.player.y + 6 * C.TILE_SIZE,
+    });
+    enemy.state = 'chase';
+    enemy.huntUntil = 1e9;
+
+    const startX = enemy.x - world.player.x;
+    const startY = enemy.y - world.player.y;
+
+    for (let i = 0; i < 60; i++) gameLogic.update(C.SIMULATION_STEP_MS);
+
+    const movedX = startX - (enemy.x - world.player.x);
+    const movedY = startY - (enemy.y - world.player.y);
+
+    assert.ok(movedX > 1 && movedY > 1,
+        `한쪽 축으로만 다가왔습니다: x ${movedX.toFixed(1)}, y ${movedY.toFixed(1)}`);
+
+    // 두 축이 비슷하게 줄어야 비스듬히 온 것입니다. 네 방향뿐이면 한 축을
+    // 먼저 다 줄이고 나서 다른 축을 줄이므로 크게 어긋납니다.
+    const ratio = Math.min(movedX, movedY) / Math.max(movedX, movedY);
+    assert.ok(ratio > 0.7, `비스듬히 오지 않았습니다: 비율 ${ratio.toFixed(2)}`);
+});
+
+test('벽 두 장 사이 틈으로 비스듬히 들어가지 않는다', () => {
+    // 원본은 그 틈으로 지나갑니다. 여기서는 막습니다. 부딪힘을 가로세로 따로
+    // 보기 때문에, 틈으로 들어가면 양쪽 다 막혀 그 자리에 붙어 버립니다.
+    // 길을 찾는 쪽과 움직이는 쪽이 다른 규칙을 쓰면 그런 자리가 생깁니다.
+    const world = emptyRoom();
+
+    const px = Math.floor(world.player.x / C.TILE_SIZE);
+    const py = Math.floor(world.player.y / C.TILE_SIZE);
+
+    // 플레이어 오른쪽 위 대각선 칸으로만 이어지도록 벽 두 장을 놓습니다.
+    world.map[py - 1][px] = C.TILE_IDS.WALL;
+    world.map[py][px + 1] = C.TILE_IDS.WALL;
+    world.mapRevision = (world.mapRevision ?? 0) + 1;
+
+    const enemy = gameLogic.spawnMonster('rat', {
+        x: (px + 1) * C.TILE_SIZE + C.TILE_SIZE / 2,
+        y: (py - 1) * C.TILE_SIZE + C.TILE_SIZE / 2,
+    });
+    enemy.state = 'chase';
+    enemy.huntUntil = 1e9;
+
+    const startDistance = Math.hypot(enemy.x - world.player.x, enemy.y - world.player.y);
+    for (let i = 0; i < 40; i++) gameLogic.update(C.SIMULATION_STEP_MS);
+    const endDistance = Math.hypot(enemy.x - world.player.x, enemy.y - world.player.y);
+
+    // 틈으로 곧장 오려 했다면 벽에 붙어 거리가 그대로였을 것입니다.
+    // 돌아가든 제자리에 있든, 벽에 끼어 진동하지만 않으면 됩니다.
+    assert.ok(Math.abs(endDistance - startDistance) > 1 || endDistance >= startDistance,
+        '벽 사이에 끼었습니다');
+});
+
 // --- 조작 ------------------------------------------------------------------------
 
 test('누른 방향으로 바로 간다', async () => {

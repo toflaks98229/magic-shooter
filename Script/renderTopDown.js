@@ -24,6 +24,7 @@ import { runtime } from './runtime.js';
 import { assets } from './assets.js';
 import { dom } from './dom.js';
 import { hasLineOfSight } from './gameLogic.js';
+import { on, EVENTS } from './events.js';
 
 /**
  * @description 한 칸을 화면에 몇 픽셀로 그릴지.
@@ -111,11 +112,14 @@ function rememberVisible(view) {
 
 /**
  * 그 칸이 지금 보이는지 봅니다.
+ *
+ * 검사에서 직접 부를 수 있게 내보냅니다. 화면에 그려진 것을 눈으로 확인할
+ * 수는 없으므로, 무엇이 보인다고 판단하는지를 물어보는 것이 유일한 길입니다.
  * @param {number} tileX - 타일 X
  * @param {number} tileY - 타일 Y
  * @returns {boolean} 보이면 true
  */
-function isVisible(tileX, tileY) {
+export function isVisible(tileX, tileY) {
     const playerTileX = Math.floor(world.player.x / C.TILE_SIZE);
     const playerTileY = Math.floor(world.player.y / C.TILE_SIZE);
 
@@ -123,6 +127,40 @@ function isVisible(tileX, tileY) {
     const dy = tileY - playerTileY;
     if (dx * dx + dy * dy > SIGHT_RADIUS * SIGHT_RADIUS) return false;
 
+    if (hasSight(tileX, tileY)) return true;
+
+    // 벽은 옆 바닥이 보이면 함께 보입니다.
+    //
+    // 벽 한가운데로 선을 그으면 그 벽 자신에게 막혀 언제나 가려진 것으로
+    // 나옵니다. 특히 모퉁이가 그렇습니다. 두 벽이 만나는 자리는 어느 쪽
+    // 이웃으로도 선이 닿지 않아, 벽 줄에 구멍이 뚫린 것처럼 보입니다.
+    //
+    // 그래서 벽은 자기 자신이 아니라 둘레를 봅니다. 옆이나 대각선에 보이는
+    // 바닥이 하나라도 있으면 그 벽도 보이는 것으로 칩니다.
+    // 원본의 시야 계산도 벽을 이렇게 따로 다룹니다.
+    if (!C.tileAt(world.map, tileX, tileY).solid) return false;
+
+    for (let ny = -1; ny <= 1; ny++) {
+        for (let nx = -1; nx <= 1; nx++) {
+            if (nx === 0 && ny === 0) continue;
+
+            const neighbourX = tileX + nx;
+            const neighbourY = tileY + ny;
+            if (C.tileAt(world.map, neighbourX, neighbourY).solid) continue;
+            if (hasSight(neighbourX, neighbourY)) return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * 그 칸 한가운데까지 선이 닿는지 봅니다.
+ * @param {number} tileX - 타일 X
+ * @param {number} tileY - 타일 Y
+ * @returns {boolean} 닿으면 true
+ */
+function hasSight(tileX, tileY) {
     return hasLineOfSight(
         world.player.x, world.player.y,
         tileX * C.TILE_SIZE + C.TILE_SIZE / 2,
@@ -228,8 +266,45 @@ function drawEnemies(ctx, originX, originY) {
  * @param {number} centerY - 화면 한가운데
  */
 function drawPlayer(ctx, centerX, centerY) {
-    drawSprite(ctx, 'player_base', centerX - CELL / 2, centerY - CELL / 2);
+    // 1인칭에서는 그릴 일이 없었습니다. 화면이 곧 눈이라 자기 모습이 보일
+    // 자리가 없었습니다. 위에서 보면 자기가 어디 있는지 보이지 않으면
+    // 움직일 수가 없습니다.
+    //
+    // 종족마다 그림이 다릅니다. 지금까지 고른 종족이 화면에 드러난 적이
+    // 없었는데, 이제 자기 모습으로 드러납니다.
+    const species = world.player.species;
+    const left = centerX - CELL / 2;
+    const top = centerY - CELL / 2;
+
+    drawSprite(ctx, `player_${species}`, left, top);
+
+    if (hitFramesLeft > 0) {
+        hitFramesLeft--;
+
+        // 맞은 사람 위에 표시합니다. 화면이 아니라 저 아래 있는 사람이
+        // 맞았기 때문입니다. 1인칭 쪽 혈흔 효과를 대신합니다.
+        ctx.save();
+        ctx.globalCompositeOperation = 'source-atop';
+        ctx.fillStyle = 'rgba(200, 30, 30, 0.55)';
+        ctx.fillRect(left | 0, top | 0, CELL, CELL);
+        ctx.restore();
+    }
 }
+
+/** @description 피격 표시를 몇 프레임 더 그릴지. */
+let hitFramesLeft = 0;
+
+/**
+ * @description 피격 표시를 몇 프레임 동안 그릴지.
+ *
+ * 시간이 아니라 프레임으로 셉니다. 그리는 쪽에서 재는 것이라 프레임이
+ * 곧 이 표시의 수명입니다.
+ */
+const HIT_FRAMES = 6;
+
+// 맞았다는 소식을 받아 둡니다. 그리는 쪽이 상태를 직접 들여다보지 않고
+// 알림으로 받는 것은, 두 갈래가 같은 전투 코드를 쓰기 때문입니다.
+on(EVENTS.PLAYER_DAMAGED, () => { hitFramesLeft = HIT_FRAMES; });
 
 /**
  * 스프라이트 하나를 그립니다.
