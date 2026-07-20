@@ -1,16 +1,25 @@
 /**
  * @fileoverview 이 파일은 게임의 메인 진입점(Entry Point)입니다.
  * 모든 모듈을 가져와 초기화하고 게임 루프를 시작하며, 게임의 전반적인 흐름을 제어합니다.
+ *
+ * 이전에는 gameOver/playSound/nextFloor를 window에 붙여 다른 모듈이 역방향으로
+ * 호출했지만, 이제는 게임 이벤트를 구독하는 방식으로 바뀌어 전역 오염이 사라졌습니다.
  */
 
 // --- 모듈 임포트 ---
 import * as C from './constants.js';
-import * as S from './state.js';
+import * as A from './actions.js';
+import { world, resetWorld } from './world.js';
+import { runtime, resetRuntime } from './runtime.js';
+import { assets } from './assets.js';
+import { dom, bindDom } from './dom.js';
+import { on, EVENTS } from './events.js';
 import { generateDungeon } from './mapGenerator.js';
 import { setupInputHandlers } from './input.js';
 import { render, resizeCanvas, loadAssets } from './render.js';
-import { update, spawnEnemiesForFloor } from './gameLogic.js';
-import { updateHUD } from './ui.js';
+import { update, spawnEnemiesForFloor, registerGameplayHandlers } from './gameLogic.js';
+import { updateHUD, registerUiHandlers } from './ui.js';
+import { initAudio, registerAudioHandlers } from './audio.js';
 
 // --- 모듈 스코프 변수 (Private Member Variables) ---
 
@@ -18,6 +27,8 @@ import { updateHUD } from './ui.js';
 let lastTime = 0;
 /** @description 웹 오디오 API를 사용하기 위한 오디오 컨텍스트. 사용자의 첫 상호작용 시 생성됩니다. */
 let audioCtx = null;
+/** @description 게임 루프가 이미 돌고 있는지 여부. 재시작 시 루프가 중복 실행되는 것을 막습니다. */
+let isLoopRunning = false;
 
 // --- 게임 생명주기 함수 ---
 
@@ -25,62 +36,67 @@ let audioCtx = null;
  * HTML 문서가 로드된 후 가장 먼저 호출되어 게임의 모든 요소를 초기화하고 이벤트 리스너를 설정합니다.
  */
 function init() {
-    // 1. DOM 요소들을 State 객체에 할당하여 모든 모듈에서 쉽게 참조할 수 있게 합니다.
-    S.dom.canvas = document.getElementById('game-canvas');
-    S.dom.ctx = S.dom.canvas.getContext('2d');
-    S.dom.offscreenCanvas = document.createElement('canvas');
-    S.dom.offscreenCtx = S.dom.offscreenCanvas.getContext('2d', { willReadFrequently: true });
-    S.dom.playerHpEl = document.getElementById('player-hp');
-    S.dom.playerAmmoEl = document.getElementById('player-ammo');
-    S.dom.floorCountEl = document.getElementById('floor-count');
-    S.dom.enemyCountEl = document.getElementById('enemy-count');
-    S.dom.statusFaceEl = document.getElementById('status-face');
-    S.dom.statusFaceImgEl = document.getElementById('status-face-img');
-    S.dom.weaponSpriteEl = document.getElementById('weapon-sprite');
-    S.dom.bloodSplatterEl = document.querySelector('.blood-splatter');
-    S.dom.startScreen = document.getElementById('start-screen');
-    S.dom.gameOverScreen = document.getElementById('game-over-screen');
-    S.dom.startGameBtn = document.getElementById('start-game-btn');
-    S.dom.restartGameBtn = document.getElementById('restart-game-btn');
-    S.dom.finalFloorEl = document.getElementById('final-floor');
-    S.dom.lookZone = document.getElementById('look-zone');
-    S.dom.moveStickZone = document.getElementById('move-stick-zone');
-    S.dom.moveStick = document.getElementById('move-stick');
-    S.dom.shootBtn = document.getElementById('shoot-btn');
-    S.dom.mobileControls = document.getElementById('mobile-controls');
+    // 1. DOM 요소를 찾아 바인딩합니다. 누락된 요소가 있으면 여기서 명확한 오류로 중단됩니다.
+    bindDom();
 
-    // 2. 이벤트 리스너 설정
+    // 2. 표현 계층이 게임 이벤트를 구독하도록 등록합니다.
+    registerUiHandlers();
+    registerAudioHandlers();
+    registerGameplayHandlers();
+    registerGameFlowHandlers();
+
+    // 3. 브라우저 이벤트 리스너 설정
     window.addEventListener('resize', resizeCanvas); // 창 크기가 변경될 때마다 캔버스 크기 조정
-    S.dom.startGameBtn.addEventListener('click', () => { // 시작 버튼 클릭 이벤트
-        // 오디오 컨텍스트 초기화 (브라우저 정책상 사용자 상호작용이 있을 때만 가능)
-        if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
+    dom.startGameBtn.addEventListener('click', handleStartClick);
+    dom.restartGameBtn.addEventListener('click', startGame); // 재시작 버튼
 
-        S.dom.startGameBtn.disabled = true;
-        S.dom.startGameBtn.textContent = "LOADING...";
-
-        // 모든 에셋(이미지, 사운드)을 로드한 후 게임을 시작합니다.
-        loadAssets(audioCtx).then(() => {
-            S.dom.startGameBtn.disabled = false;
-            S.dom.startGameBtn.textContent = "START";
-            startGame();
-            requestAnimationFrame(gameLoop); // 게임 루프 시작
-        }).catch(err => {
-            S.dom.startGameBtn.textContent = "ERROR - Check Console";
-            console.error("에셋 로딩 중 오류 발생:", err);
-        });
-    });
-    S.dom.restartGameBtn.addEventListener('click', startGame); // 재시작 버튼 클릭 이벤트
-
-    // 3. 캔버스 초기화 및 입력 핸들러 설정
+    // 4. 캔버스 초기화 및 입력 핸들러 설정
     resizeCanvas(); // 최초 캔버스 크기 설정
     setupInputHandlers(); // 키보드, 마우스, 터치 입력 설정
+}
 
-    // 4. 다른 모듈에서 전역적으로 호출할 수 있도록 주요 함수들을 window 객체에 할당합니다.
-    window.gameOver = gameOver;
-    window.playSound = playSound;
-    window.nextFloor = nextFloor;
+/**
+ * 게임 흐름(사망, 출구 도달)에 반응하는 핸들러를 등록합니다.
+ * 이전의 window.gameOver / window.nextFloor를 대체합니다.
+ */
+function registerGameFlowHandlers() {
+    on(EVENTS.PLAYER_DIED, gameOver);
+    on(EVENTS.EXIT_REACHED, nextFloor);
+}
+
+/**
+ * START 버튼 클릭을 처리합니다. 에셋을 로드한 뒤 게임을 시작합니다.
+ */
+function handleStartClick() {
+    // 오디오 컨텍스트 초기화 (브라우저 정책상 사용자 상호작용이 있을 때만 가능)
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        initAudio(audioCtx);
+    }
+
+    dom.startGameBtn.disabled = true;
+    dom.startGameBtn.textContent = 'LOADING...';
+
+    // 모든 에셋(이미지, 사운드)을 로드한 후 게임을 시작합니다.
+    loadAssets(audioCtx).then(() => {
+        dom.startGameBtn.disabled = false;
+        dom.startGameBtn.textContent = 'START';
+        startGame();
+        startLoop();
+    }).catch(err => {
+        dom.startGameBtn.textContent = 'ERROR - Check Console';
+        console.error('에셋 로딩 중 오류 발생:', err);
+    });
+}
+
+/**
+ * 게임 루프를 시작합니다. 이미 돌고 있다면 아무것도 하지 않습니다.
+ */
+function startLoop() {
+    if (isLoopRunning) return;
+    isLoopRunning = true;
+    lastTime = 0; // 다음 프레임에서 현재 타임스탬프로 다시 맞춰집니다.
+    requestAnimationFrame(gameLoop);
 }
 
 /**
@@ -99,144 +115,118 @@ function gameLoop(timestamp = 0) {
     // 제한하지 않으면 한 프레임의 이동량이 타일 크기를 넘어서 벽을 통과할 수 있습니다.
     const deltaTime = Math.min(rawDeltaTime, C.MAX_FRAME_TIME);
 
-    if (S.isGameRunning && deltaTime > 0) {
+    if (runtime.isGameRunning && deltaTime > 0) {
         update(deltaTime); // 게임 로직 업데이트 (gameLogic.js)
         render();          // 화면 렌더링 (render.js)
+        updateHUD();       // HUD 갱신 (ui.js)
     }
 
     requestAnimationFrame(gameLoop); // 다음 프레임에 gameLoop를 재귀적으로 호출
-}
-
-// --- 외부 공개 함수 (Public Methods, window 객체를 통해 노출) ---
-
-/**
- * 지정된 키에 해당하는 사운드를 재생합니다.
- * @param {string} key - constants.js의 SOUNDS 객체에 정의된 사운드 키
- */
-export function playSound(key) {
-    if (!audioCtx || !S.sounds[key]) return; // 오디오 컨텍스트나 사운드 버퍼가 없으면 중단
-
-    const source = audioCtx.createBufferSource(); // 사운드 소스 생성
-    source.buffer = S.sounds[key];              // 재생할 오디오 데이터(버퍼) 할당
-    source.connect(audioCtx.destination);       // 스피커에 연결
-    source.start(0);                            // 즉시 재생
 }
 
 // --- 내부 헬퍼 함수 (Private Methods) ---
 
 /**
  * 게임을 시작하는 함수.
- * 초기화면을 숨기고, 플레이어 상태를 리셋하며, 첫 번째 층을 생성합니다.
+ * 초기화면을 숨기고, 세계 상태를 새로 만들며, 첫 번째 층을 생성합니다.
  */
 function startGame() {
-    S.setGameRunning(true);
-    S.setFloor(1);
-    resetPlayer();
+    resetWorld();    // 월드를 초기 상태로 재생성 (이전 판의 잔재가 남지 않도록)
+    resetRuntime();  // 흔들림 위상, 무기 교체 플래그 등 세션 상태도 초기화
+    A.setGameRunning(true);
+
     generateNewFloor();
 
-    S.dom.startScreen.style.display = 'none';
-    S.dom.gameOverScreen.style.display = 'none';
+    dom.startScreen.style.display = 'none';
+    dom.gameOverScreen.style.display = 'none';
     // 터치스크린이 아닌 데스크톱 환경에서만 마우스 포인터를 잠급니다.
     if (!('ontouchstart' in window)) {
-        S.dom.canvas.requestPointerLock();
+        dom.canvas.requestPointerLock();
     }
     updateHUD();
 }
 
 /**
- * 게임 오버 처리를 담당하는 함수.
- * 게임 루프를 멈추고 게임 오버 화면을 표시합니다.
+ * 게임 오버 처리를 담당합니다. PLAYER_DIED 이벤트에 반응합니다.
  */
 function gameOver() {
-    S.setGameRunning(false);
-    S.dom.finalFloorEl.textContent = S.floor;
-    S.dom.gameOverScreen.style.display = 'flex';
+    A.setGameRunning(false);
+    dom.finalFloorEl.textContent = world.floor;
+    dom.gameOverScreen.style.display = 'flex';
     document.exitPointerLock(); // 마우스 포인터 잠금 해제
 }
 
 /**
- * 다음 층(스테이지)으로 이동하는 함수.
- * 출구에 도달했을 때 호출됩니다.
+ * 다음 층(스테이지)으로 이동합니다. EXIT_REACHED 이벤트에 반응합니다.
  */
 function nextFloor() {
-    S.setFloor(S.floor + 1);
+    A.setFloor(world.floor + 1);
     // 다음 층으로 갈 때 체력과 탄약을 약간 보상해줍니다.
-    S.player.hp = Math.min(S.player.maxHp, S.player.hp + 15);
-    S.player.ammo = Math.min(S.player.maxAmmo, S.player.ammo + 10);
+    A.healPlayer(C.FLOOR_CLEAR_HEAL);
+    A.giveAmmo(C.FLOOR_CLEAR_AMMO);
     generateNewFloor();
     updateHUD();
 }
 
 /**
- * 새로운 층을 생성하고 맵과 엔티티를 재설정하는 함수.
+ * 새로운 층을 생성하고 맵과 엔티티를 재설정합니다.
  */
 function generateNewFloor() {
-    // --- 테마 시스템 수정: dungeon_progression.json 기반으로 변경 ---
-    let themeInfo;
-    
-    // 1. S.dungeonProgression 데이터에서 현재 층(S.floor)에 해당하는 설정을 찾습니다.
-    if (S.dungeonProgression && S.dungeonProgression.floors) {
-        themeInfo = S.dungeonProgression.floors.find(f => f.floor === S.floor);
-    }
-
-    // 2. 현재 층에 대한 설정이 없으면, default 설정을 사용합니다.
-    if (!themeInfo && S.dungeonProgression && S.dungeonProgression.default) {
-        themeInfo = S.dungeonProgression.default;
-        console.log(`No specific theme for floor ${S.floor}. Using default theme.`);
-    }
-
-    // 3. themeInfo가 유효한지 확인하고 테마를 설정합니다.
-    if (themeInfo && themeInfo.theme && themeInfo.variation) {
-        const themeName = themeInfo.theme;
-        const variationName = `variation_${themeInfo.variation}`;
-        const themeObject = S.dungeonThemes[themeName];
-
-        if (themeObject && themeObject[variationName]) {
-            // 최종 선택된 테마 유형을 현재 층의 테마로 설정
-            S.setCurrentDungeonTheme(themeObject[variationName]);
-            console.log(`Floor ${S.floor} theme set to: ${themeName} - ${variationName}`);
-        } else {
-            S.setCurrentDungeonTheme(null);
-            console.warn(`Theme or variation not found in loaded themes: ${themeName} - ${variationName}. Using fallback.`);
-        }
-    } else {
-        S.setCurrentDungeonTheme(null); // 테마가 없으면 null로 설정
-        console.warn(`No theme information found for floor ${S.floor} in dungeon_progression.json. Using fallback textures.`);
-    }
-    // --- 테마 시스템 끝 ---
+    applyFloorTheme();
 
     // 새로운 던전 맵 생성
     const dungeon = generateDungeon(C.MAP_WIDTH, C.MAP_HEIGHT, 15, 4, 8);
-    S.setMap(dungeon.map);
-    S.setObjectMap(dungeon.objectMap); // 새로 생성된 objectMap을 state에 설정합니다.
+    world.map = dungeon.map;
+    world.objectMap = dungeon.objectMap;
 
     // 플레이어를 맵의 시작 지점으로 이동
-    S.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;
-    S.player.y = dungeon.playerStart.y * C.TILE_SIZE + C.TILE_SIZE / 2;
+    world.player.x = dungeon.playerStart.x * C.TILE_SIZE + C.TILE_SIZE / 2;
+    world.player.y = dungeon.playerStart.y * C.TILE_SIZE + C.TILE_SIZE / 2;
 
     // 기존의 모든 엔티티(적, 발사체, 아이템, 파티클)를 제거
-    S.enemies.length = 0;
-    S.projectiles.length = 0;
-    S.items.length = 0;
-    S.particles.length = 0;
-    S.animatedObjects.length = 0;
-    S.animatedWalls.length = 0; // 새로운 층으로 이동 시 애니메이션 벽 배열 초기화
-    
+    world.enemies.length = 0;
+    world.projectiles.length = 0;
+    world.items.length = 0;
+    world.particles.length = 0;
+    world.animatedObjects.length = 0;
+    world.animatedWalls.length = 0;
+
     // 새로운 층에 맞는 적들을 스폰
     spawnEnemiesForFloor();
 }
 
 /**
- * 플레이어의 상태(체력, 탄약 등)를 게임 시작 상태로 초기화하는 함수.
+ * dungeon_progression.json을 참조해 현재 층의 테마를 world에 기록합니다.
+ * 텍스처 자체가 아니라 '이름'만 저장하므로 world는 직렬화 가능한 상태로 유지됩니다.
  */
-function resetPlayer() {
-    S.player.angle = Math.PI / 2;
-    S.player.hp = S.player.maxHp;
-    S.player.ammo = 50;
-    S.setCurrentWeapon('gun');
+function applyFloorTheme() {
+    const progression = assets.dungeonProgression;
+    let themeInfo;
+
+    // 1. 현재 층(world.floor)에 해당하는 설정을 찾습니다.
+    if (progression && progression.floors) {
+        themeInfo = progression.floors.find(f => f.floor === world.floor);
+    }
+
+    // 2. 현재 층에 대한 설정이 없으면, default 설정을 사용합니다.
+    if (!themeInfo && progression && progression.default) {
+        themeInfo = progression.default;
+        console.log(`No specific theme for floor ${world.floor}. Using default theme.`);
+    }
+
+    // 3. themeInfo가 유효하지 않으면 테마 없이(폴백 텍스처로) 렌더링합니다.
+    if (!themeInfo || !themeInfo.theme || !themeInfo.variation) {
+        world.themeName = null;
+        world.themeVariation = null;
+        console.warn(`No theme information found for floor ${world.floor} in dungeon_progression.json. Using fallback textures.`);
+        return;
+    }
+
+    world.themeName = themeInfo.theme;
+    world.themeVariation = themeInfo.variation;
+    console.log(`Floor ${world.floor} theme set to: ${themeInfo.theme} - variation_${themeInfo.variation}`);
 }
 
 // --- 스크립트 실행 ---
-// HTML 문서의 모든 요소가 로드된 후 init 함수를 호출하여 게임을 준비합니다.
+// type="module" 스크립트는 문서 파싱이 끝난 뒤 실행되므로 DOM이 준비되어 있습니다.
 init();
-

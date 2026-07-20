@@ -77,6 +77,11 @@ export const SPAWN_MAX_ATTEMPTS = 200;
 /** @description 적이 스폰될 때 플레이어와 유지해야 하는 최소 거리 (타일 단위) */
 export const SPAWN_MIN_DISTANCE_TILES = 5;
 
+/** @description 다음 층으로 진입할 때 회복시켜 주는 체력 */
+export const FLOOR_CLEAR_HEAL = 15;
+/** @description 다음 층으로 진입할 때 보충해 주는 탄약 */
+export const FLOOR_CLEAR_AMMO = 10;
+
 /**
  * @description 맵 오브젝트 유형별 속성을 정의한 객체.
  * 키 값은 objectMap에 기록될 ID입니다.
@@ -132,7 +137,11 @@ export const WEAPONS = {
         sprite: 'fist',
         cooldown: 400,
         range: TILE_SIZE * 1.2,
-        damage: 35
+        damage: 35,
+        /** @description 공격 시 무기 스프라이트에 붙일 CSS 클래스. 없으면 연출 없음. */
+        attackAnimation: 'attacking',
+        /** @description 공격 시 재생할 효과음 키. null이면 무음. */
+        sound: null
     },
     gun: {
         sprite: 'gun',
@@ -140,9 +149,20 @@ export const WEAPONS = {
         cooldown: 200,
         damage: 50,
         lightIntensity: 1.5,
-        lightFalloff: 0.0005
+        lightFalloff: 0.0005,
+        attackAnimation: null,
+        sound: 'GUN_SHOT'
     }
 };
+
+/** @description 무기 공격 연출용 CSS 클래스가 유지되는 시간(ms) */
+export const WEAPON_ATTACK_ANIM_MS = 100;
+/** @description 총구 섬광 스프라이트가 표시되는 시간(ms) */
+export const MUZZLE_FLASH_MS = 60;
+/** @description 무기 교체 애니메이션의 한 방향(내려가기 또는 올라오기) 소요 시간(ms). CSS의 swap-out/in 길이와 맞춰야 합니다. */
+export const WEAPON_SWAP_HALF_MS = 150;
+/** @description 피격 시 화면 혈흔 효과가 유지되는 시간(ms) */
+export const HIT_REACTION_MS = 150;
 
 
 // --- 사운드 정의 ---

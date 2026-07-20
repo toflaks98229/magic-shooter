@@ -6,7 +6,23 @@
 
 // --- 모듈 임포트 ---
 import * as C from './constants.js';
-import * as S from './state.js';
+import { world } from './world.js';
+import { runtime } from './runtime.js';
+import { assets, resolveTheme } from './assets.js';
+import { dom } from './dom.js';
+
+// --- 렌더러 내부 상태 (Private Member Variables) ---
+// 이 버퍼들은 렌더링에만 쓰이고 저장 대상도 아니므로, 공용 상태가 아니라 이 모듈이 소유합니다.
+
+/** @description 렌더링에 사용될 화면 픽셀 데이터 (ImageData 객체) */
+let screenImageData = null;
+/** @description screenImageData의 32비트 버퍼 뷰 (빠른 픽셀 조작용) */
+let screenBuffer = null;
+/** @description 각 화면 컬럼(수직선)별 벽까지의 거리 (스프라이트 가림 판정용) */
+let zBuffer = [];
+/** @description 바닥/천장 렌더링 시 y좌표에 따른 거리를 미리 계산해둔 룩업 테이블 */
+let yDistLookup = [];
+
 
 // --- 외부 공개 함수 (Public Methods) ---
 
@@ -22,7 +38,6 @@ export function loadAssets(audioCtx) {
         loadDungeonProgression(), // 던전 진행도 파일 로드 추가
         ...Object.entries(C.SOUNDS).map(([key, src]) => loadSound(key, src, audioCtx))
     ]);
-    S.setAssetsPromise(promise); // 로딩 Promise를 state에 저장
     return promise;
 }
 
@@ -31,21 +46,21 @@ export function loadAssets(audioCtx) {
  * 이 함수는 매 프레임마다 gameLoop에 의해 호출됩니다.
  */
 export function render() {
-    if (!S.isGameRunning) return;
+    if (!runtime.isGameRunning) return;
 
     // 실제 화면에 그리기 전에, 성능을 위해 저해상도 오프스크린 캔버스에 먼저 그립니다.
-    const targetCtx = S.dom.offscreenCtx;
-    const { width, height } = S.dom.offscreenCanvas;
+    const targetCtx = dom.offscreenCtx;
+    const { width, height } = dom.offscreenCanvas;
 
     // 캔버스 크기가 변경되었으면 렌더링에 필요한 버퍼들을 다시 생성합니다.
-    if (!S.screenImageData || S.screenImageData.width !== width || S.screenImageData.height !== height) {
+    if (!screenImageData || screenImageData.width !== width || screenImageData.height !== height) {
         resizeCanvas();
     }
 
     // 1. 화면 흔들림(Bobbing) 효과 계산 및 무기 DOM 요소에 적용
-    const bobY = S.bobbingOffset * (S.dom.canvas.height / 480); // 화면 해상도에 비례하여 흔들림 강도 조절
-    const bobX = S.bobbingOffsetX * (S.dom.canvas.width / 640); // 좌우 흔들림 추가
-    const weaponEl = S.dom.weaponSpriteEl;
+    const bobY = runtime.bobbingOffset * (dom.canvas.height / 480); // 화면 해상도에 비례하여 흔들림 강도 조절
+    const bobX = runtime.bobbingOffsetX * (dom.canvas.width / 640); // 좌우 흔들림 추가
+    const weaponEl = dom.weaponSpriteEl;
     let weaponTransform = `translateX(calc(-50% + ${bobX}px)) translateY(${bobY * 1.5}px)`;
     // 공격 애니메이션 중일 경우 추가적인 변형을 적용
     if (weaponEl.classList.contains('attacking')) {
@@ -56,49 +71,49 @@ export function render() {
     // 2. Raycasting으로 벽, 바닥, 천장을 픽셀 단위로 오프스크린 버퍼에 렌더링
     renderWorld(width, height);
     // 버퍼의 픽셀 데이터를 오프스크린 캔버스에 그립니다.
-    targetCtx.putImageData(S.screenImageData, 0, 0);
+    targetCtx.putImageData(screenImageData, 0, 0);
 
     // 3. 적, 아이템 등 모든 스프라이트와 파티클을 오프스크린 캔버스 위에 렌더링
     renderEntities(targetCtx, width, height);
 
     // 4. 최종 결과물(오프스크린 캔버스)을 메인 캔버스에 확대하여 그립니다.
-    S.dom.ctx.clearRect(0, 0, S.dom.canvas.width, S.dom.canvas.height);
-    S.dom.ctx.save();
+    dom.ctx.clearRect(0, 0, dom.canvas.width, dom.canvas.height);
+    dom.ctx.save();
     // 화면 흔들림 효과를 전체 화면에 적용 (수직만 적용하여 멀미 방지)
-    S.dom.ctx.translate(0, bobY);
-    S.dom.ctx.drawImage(S.dom.offscreenCanvas, 0, 0, width, height, 0, 0, S.dom.canvas.width, S.dom.canvas.height);
-    S.dom.ctx.restore();
+    dom.ctx.translate(0, bobY);
+    dom.ctx.drawImage(dom.offscreenCanvas, 0, 0, width, height, 0, 0, dom.canvas.width, dom.canvas.height);
+    dom.ctx.restore();
 }
 
 /**
  * 캔버스 크기를 창 크기에 맞게 조절하고 렌더링 버퍼를 재생성합니다.
  */
 export function resizeCanvas() {
-    S.dom.canvas.width = window.innerWidth;
-    S.dom.canvas.height = window.innerHeight;
+    dom.canvas.width = window.innerWidth;
+    dom.canvas.height = window.innerHeight;
     // 성능을 위해 실제 렌더링은 낮은 해상도로 수행
-    S.dom.offscreenCanvas.width = window.innerWidth / C.RENDER_RESOLUTION_SCALE | 0;
-    S.dom.offscreenCanvas.height = window.innerHeight / C.RENDER_RESOLUTION_SCALE | 0;
+    dom.offscreenCanvas.width = window.innerWidth / C.RENDER_RESOLUTION_SCALE | 0;
+    dom.offscreenCanvas.height = window.innerHeight / C.RENDER_RESOLUTION_SCALE | 0;
 
     // 픽셀 아트 스타일을 유지하기 위해 이미지 스무딩을 비활성화합니다.
-    S.dom.ctx.imageSmoothingEnabled = false;
-    S.dom.offscreenCtx.imageSmoothingEnabled = false;
+    dom.ctx.imageSmoothingEnabled = false;
+    dom.offscreenCtx.imageSmoothingEnabled = false;
 
     // 렌더링에 필요한 버퍼들을 새로 생성합니다.
-    S.setScreenData(S.dom.offscreenCtx.createImageData(S.dom.offscreenCanvas.width, S.dom.offscreenCanvas.height));
-    S.setScreenBuffer(new Uint32Array(S.screenImageData.data.buffer));
-    S.setZBuffer(new Array(S.dom.offscreenCanvas.width));
+    screenImageData = dom.offscreenCtx.createImageData(dom.offscreenCanvas.width, dom.offscreenCanvas.height);
+    screenBuffer = new Uint32Array(screenImageData.data.buffer);
+    zBuffer = new Array(dom.offscreenCanvas.width);
 
     // 바닥/천장 렌더링을 위한 거리 룩업 테이블을 재생성합니다.
     // 이는 매 프레임마다 거리를 계산하는 것을 피하여 성능을 향상시킵니다.
-    const lookupSize = Math.ceil(S.dom.offscreenCanvas.height / 2);
+    const lookupSize = Math.ceil(dom.offscreenCanvas.height / 2);
     const newYDistLookup = new Array(lookupSize);
     const playerHeight = 0.5 * C.TILE_SIZE;
-    const projectionDist = (S.dom.offscreenCanvas.width / 2) / Math.tan(C.FOV / 2);
+    const projectionDist = (dom.offscreenCanvas.width / 2) / Math.tan(C.FOV / 2);
     for (let j = 0; j < lookupSize; j++) {
         newYDistLookup[j] = j === 0 ? C.TILE_SIZE * 10000 : (playerHeight * projectionDist) / j;
     }
-    S.setYDistLookup(newYDistLookup);
+    yDistLookup = newYDistLookup;
 }
 
 // --- 내부 헬퍼 함수 (Private Methods) ---
@@ -114,15 +129,15 @@ function loadDungeonProgression() {
             return response.json();
         })
         .then(data => {
-            S.setDungeonProgression(data);
+            assets.dungeonProgression = data;
         })
         .catch(error => {
             console.error(`Failed to load dungeon progression data: ${C.DUNGEON_PROGRESSION_URL}`, error);
             // 파일 로드 실패 시, 게임이 멈추지 않도록 기본값으로 대체합니다.
-            S.setDungeonProgression({
+            assets.dungeonProgression = {
                 floors: [],
                 default: { theme: "main", variation: 1 }
-            });
+            };
         });
 }
 
@@ -151,13 +166,13 @@ function renderWorld(width, height) {
     // 렌더링 루프 전에 미리 애니메이션 중인 벽의 정보를 맵 좌표를 키로 하는 객체에 저장해두어,
     // 루프 내에서 빠르게 접근할 수 있도록 합니다.
     const animatedWallLookup = {};
-    S.animatedWalls.forEach(wall => {
+    world.animatedWalls.forEach(wall => {
         animatedWallLookup[`${wall.mapX},${wall.mapY}`] = wall;
     });
     
     // --- 테마 시스템 적용 ---
-    const placeholderTex = S.textures.placeholder;
-    const currentTheme = S.currentDungeonTheme;
+    const placeholderTex = assets.textures.placeholder;
+    const currentTheme = resolveTheme(world.themeName, world.themeVariation);
     let floorTextures, ceilingTextures, wallTextures; 
 
     if (currentTheme) {
@@ -167,21 +182,21 @@ function renderWorld(width, height) {
         
     } else {
         // 테마가 없는 경우, 이전 방식(fallback)으로 렌더링
-        wallTextures = [S.textures.wall_main_1_1 || placeholderTex];
-        floorTextures = [S.textures.floor_main_1_1 || placeholderTex];
-        ceilingTextures = [S.textures.ceiling_main_1_1 || placeholderTex];
+        wallTextures = [assets.textures.wall_main_1_1 || placeholderTex];
+        floorTextures = [assets.textures.floor_main_1_1 || placeholderTex];
+        ceilingTextures = [assets.textures.ceiling_main_1_1 || placeholderTex];
     }
     // --- 테마 시스템 적용 끝 ---
 
-    const light = S.dynamicLight;
+    const light = runtime.dynamicLight;
 
     // 화면의 모든 수직선(column)에 대해 레이캐스팅을 수행합니다.
     for (let i = 0; i < width; i++) {
-        const angle = S.player.angle - C.FOV / 2 + (i / width) * C.FOV;
+        const angle = world.player.angle - C.FOV / 2 + (i / width) * C.FOV;
         const ray = castRay(angle); // 해당 각도로 광선을 쏴서 벽과 충돌 정보를 얻음
         // 어안 렌즈 효과를 보정하고, zBuffer에 거리를 저장합니다.
-        let correctedDist = Math.max(ray.distance * Math.cos(angle - S.player.angle), C.MIN_RENDER_DISTANCE);
-        S.zBuffer[i] = correctedDist;
+        let correctedDist = Math.max(ray.distance * Math.cos(angle - world.player.angle), C.MIN_RENDER_DISTANCE);
+        zBuffer[i] = correctedDist;
 
         // 벽 높이 계산
         const wallHeight = (C.TILE_SIZE / correctedDist) * projectionDist;
@@ -216,9 +231,9 @@ function renderWorld(width, height) {
                 wallTextureInfo = placeholderTex;
             }
         } else if (wallType === 4) { // 출구
-            wallTextureInfo = S.textures.exit || placeholderTex;
+            wallTextureInfo = assets.textures.exit || placeholderTex;
         } else if (wallType === 5) { // 문
-            wallTextureInfo = S.textures.door_gate_1 || placeholderTex;
+            wallTextureInfo = assets.textures.door_gate_1 || placeholderTex;
         } else {
             wallTextureInfo = placeholderTex;
         }
@@ -239,8 +254,8 @@ function renderWorld(width, height) {
         let finalBrightness = brightness * shade;
 
         if (light.active) {
-            const wallWorldX = S.player.x + ray.distance * Math.cos(angle);
-            const wallWorldY = S.player.y + ray.distance * Math.sin(angle);
+            const wallWorldX = world.player.x + ray.distance * Math.cos(angle);
+            const wallWorldY = world.player.y + ray.distance * Math.sin(angle);
             const distToLightSq = (wallWorldX - light.x) ** 2 + (wallWorldY - light.y) ** 2;
             finalBrightness += light.intensity / (1 + distToLightSq * light.falloff);
         }
@@ -254,7 +269,7 @@ function renderWorld(width, height) {
                 const r = Math.min(255, wallTexture[texIndex] * finalBrightness);
                 const g = Math.min(255, wallTexture[texIndex + 1] * finalBrightness);
                 const b = Math.min(255, wallTexture[texIndex + 2] * finalBrightness);
-                S.screenBuffer[y * width + i] = (255 << 24) | (b << 16) | (g << 8) | r;
+                screenBuffer[y * width + i] = (255 << 24) | (b << 16) | (g << 8) | r;
             }
         }
 
@@ -269,11 +284,11 @@ function renderWorld(width, height) {
         // 벽 아래(애니메이션으로 올라간 공간 포함)부터 바닥/천장 픽셀을 채웁니다.
         for (let y = y1; y < height; y++) {
             const pixelsFromHorizon = y - halfHeight;
-            const currentDist = S.yDistLookup[pixelsFromHorizon];
+            const currentDist = yDistLookup[pixelsFromHorizon];
             const weight = currentDist / correctedDist;
             let baseBrightness = Math.max(0, 1 - Math.min(currentDist / (C.TILE_SIZE * 12), 1));
-            const currentFloorX = weight * floorXWall + (1.0 - weight) * S.player.x;
-            const currentFloorY = weight * floorYWall + (1.0 - weight) * S.player.y;
+            const currentFloorX = weight * floorXWall + (1.0 - weight) * world.player.x;
+            const currentFloorY = weight * floorYWall + (1.0 - weight) * world.player.y;
 
             if (light.active) {
                 const distToLightSq = (currentFloorX - light.x) ** 2 + (currentFloorY - light.y) ** 2;
@@ -303,7 +318,7 @@ function renderWorld(width, height) {
                 const r = Math.min(255, floorTexData[texIndex] * baseBrightness);
                 const g = Math.min(255, floorTexData[texIndex + 1] * baseBrightness);
                 const b = Math.min(255, floorTexData[texIndex + 2] * baseBrightness);
-                S.screenBuffer[y * width + i] = (255 << 24) | (b << 16) | (g << 8) | r;
+                screenBuffer[y * width + i] = (255 << 24) | (b << 16) | (g << 8) | r;
             }
 
             if (ceilingTexData) {
@@ -316,7 +331,7 @@ function renderWorld(width, height) {
                 const r_c = Math.min(255, ceilingTexData[texIndex] * baseBrightness);
                 const g_c = Math.min(255, ceilingTexData[texIndex + 1] * baseBrightness);
                 const b_c = Math.min(255, ceilingTexData[texIndex + 2] * baseBrightness);
-                S.screenBuffer[ceilY * width + i] = (255 << 24) | (b_c << 16) | (g_c << 8) | r_c;
+                screenBuffer[ceilY * width + i] = (255 << 24) | (b_c << 16) | (g_c << 8) | r_c;
              }
         }
     }
@@ -332,11 +347,11 @@ function renderEntities(targetCtx, width, height) {
     const projectionDist = (width / 2) / Math.tan(C.FOV / 2);
     const halfHeight = height / 2 | 0;
 
-     // S.objectMap을 순회하며 렌더링할 오브젝트를 추출합니다.
+     // world.objectMap을 순회하며 렌더링할 오브젝트를 추출합니다.
     const objectsToRender = [];
-    for (let y = 0; y < S.objectMap.length; y++) {
-        for (let x = 0; x < S.objectMap[y].length; x++) {
-            const objectId = S.objectMap[y][x];
+    for (let y = 0; y < world.objectMap.length; y++) {
+        for (let x = 0; x < world.objectMap[y].length; x++) {
+            const objectId = world.objectMap[y][x];
             if (objectId > 0) {
                 const objectType = C.OBJECT_TYPES[objectId];
                 // renderAsWall 플래그가 없는 오브젝트만 스프라이트로 렌더링합니다.
@@ -358,10 +373,10 @@ function renderEntities(targetCtx, width, height) {
 
     // 렌더링할 모든 엔티티를 하나의 배열로 합칩니다.
     // animatedWalls에 있는 문은 renderWorld에서 벽으로 처리되므로 여기서는 제외합니다.
-    const entitiesToRender = [...S.enemies, ...S.items, ...S.projectiles, ...S.particles, ...objectsToRender, ...S.animatedObjects]
+    const entitiesToRender = [...world.enemies, ...world.items, ...world.projectiles, ...world.particles, ...objectsToRender, ...world.animatedObjects]
         .map(e => {
-            const dx = e.x - S.player.x;
-            const dy = e.y - S.player.y;
+            const dx = e.x - world.player.x;
+            const dy = e.y - world.player.y;
             e.dist = Math.hypot(dx, dy);
             e.isParticle = !e.spriteKey; // spriteKey가 없으면 파티클로 간주
             return e;
@@ -371,8 +386,8 @@ function renderEntities(targetCtx, width, height) {
     entitiesToRender.sort((a, b) => b.dist - a.dist);
 
     entitiesToRender.forEach(entity => {
-        const dx = entity.x - S.player.x, dy = entity.y - S.player.y;
-        let angleToEntity = Math.atan2(dy, dx) - S.player.angle;
+        const dx = entity.x - world.player.x, dy = entity.y - world.player.y;
+        let angleToEntity = Math.atan2(dy, dx) - world.player.angle;
         // 각도를 -PI ~ PI 범위로 정규화
         while (angleToEntity > Math.PI) angleToEntity -= 2 * Math.PI;
         while (angleToEntity < -Math.PI) angleToEntity += 2 * Math.PI;
@@ -396,21 +411,21 @@ function renderEntities(targetCtx, width, height) {
                 // 파티클은 간단한 사각형으로 그립니다.
                 const screen_x_int = entityLeftX | 0;
                 // zBuffer를 확인하여 파티클이 벽 뒤에 있으면 그리지 않습니다.
-                if (screen_x_int >= 0 && screen_x_int < width && S.zBuffer[screen_x_int] > correctedDist) {
+                if (screen_x_int >= 0 && screen_x_int < width && zBuffer[screen_x_int] > correctedDist) {
                     targetCtx.fillStyle = entity.color || '#fff';
                     targetCtx.fillRect(entityLeftX, entityTopY, entitySize, entitySize);
                 }
             } else {
                 // 스프라이트 렌더링
                 const spriteKey = entity.spriteKey;
-                const sheetKey = S.spriteKeyToSheet[spriteKey];
+                const sheetKey = assets.spriteKeyToSheet[spriteKey];
 
-                const usePlaceholder = !sheetKey || !S.spriteAtlases[sheetKey] || !S.spriteSheets[sheetKey] || !S.spriteAtlases[sheetKey].sprites[spriteKey];
+                const usePlaceholder = !sheetKey || !assets.spriteAtlases[sheetKey] || !assets.spriteSheets[sheetKey] || !assets.spriteAtlases[sheetKey].sprites[spriteKey];
 
-                const sourceImage = usePlaceholder ? S.textures.placeholder.img : S.spriteSheets[sheetKey];
+                const sourceImage = usePlaceholder ? assets.textures.placeholder.img : assets.spriteSheets[sheetKey];
                 const sourceCoords = usePlaceholder ?
-                    { x: 0, y: 0, w: S.textures.placeholder.w, h: S.textures.placeholder.h } :
-                    S.spriteAtlases[sheetKey].sprites[spriteKey];
+                    { x: 0, y: 0, w: assets.textures.placeholder.w, h: assets.textures.placeholder.h } :
+                    assets.spriteAtlases[sheetKey].sprites[spriteKey];
 
                 if (sourceImage && sourceCoords) {
                     const startX = Math.max(0, Math.floor(entityLeftX));
@@ -418,7 +433,7 @@ function renderEntities(targetCtx, width, height) {
 
                     // zBuffer를 사용하여 각 수직선(stripe)이 벽 뒤에 가려지는지 확인합니다.
                     for (let stripe = startX; stripe < endX; stripe++) {
-                        if (S.zBuffer[stripe] > correctedDist) {
+                        if (zBuffer[stripe] > correctedDist) {
                             const texX = Math.floor(((stripe - entityLeftX) / entitySize) * sourceCoords.w);
                             if (texX >= 0 && texX < sourceCoords.w) {
                                 // 1픽셀 너비의 수직선을 잘라서 그립니다.
@@ -454,27 +469,27 @@ function renderEntities(targetCtx, width, height) {
  */
 function castRay(angle) {
     const rayDirX = Math.cos(angle), rayDirY = Math.sin(angle);
-    let mapX = S.player.x / C.TILE_SIZE | 0, mapY = S.player.y / C.TILE_SIZE | 0;
+    let mapX = world.player.x / C.TILE_SIZE | 0, mapY = world.player.y / C.TILE_SIZE | 0;
     const deltaDistX = Math.abs(1 / rayDirX), deltaDistY = Math.abs(1 / rayDirY);
 
     let stepX, sideDistX, stepY, sideDistY;
-    if (rayDirX < 0) { stepX = -1; sideDistX = (S.player.x / C.TILE_SIZE - mapX) * deltaDistX; }
-    else { stepX = 1; sideDistX = (mapX + 1 - S.player.x / C.TILE_SIZE) * deltaDistX; }
-    if (rayDirY < 0) { stepY = -1; sideDistY = (S.player.y / C.TILE_SIZE - mapY) * deltaDistY; }
-    else { stepY = 1; sideDistY = (mapY + 1 - S.player.y / C.TILE_SIZE) * deltaDistY; }
+    if (rayDirX < 0) { stepX = -1; sideDistX = (world.player.x / C.TILE_SIZE - mapX) * deltaDistX; }
+    else { stepX = 1; sideDistX = (mapX + 1 - world.player.x / C.TILE_SIZE) * deltaDistX; }
+    if (rayDirY < 0) { stepY = -1; sideDistY = (world.player.y / C.TILE_SIZE - mapY) * deltaDistY; }
+    else { stepY = 1; sideDistY = (mapY + 1 - world.player.y / C.TILE_SIZE) * deltaDistY; }
 
     let hit = 0, side = 0;
     while (hit === 0) {
         if (sideDistX < sideDistY) { sideDistX += deltaDistX; mapX += stepX; side = 0; } // X축 방향으로 한 칸 이동
         else { sideDistY += deltaDistY; mapY += stepY; side = 1; } // Y축 방향으로 한 칸 이동
-        if (S.map[mapY]?.[mapX] > 0) hit = 1; // 벽에 부딪힘
+        if (world.map[mapY]?.[mapX] > 0) hit = 1; // 벽에 부딪힘
     }
 
     const perpWallDist = (side === 0) ? (sideDistX - deltaDistX) : (sideDistY - deltaDistY);
-    let wallX = (side === 0) ? S.player.y / C.TILE_SIZE + perpWallDist * rayDirY : S.player.x / C.TILE_SIZE + perpWallDist * rayDirX;
+    let wallX = (side === 0) ? world.player.y / C.TILE_SIZE + perpWallDist * rayDirY : world.player.x / C.TILE_SIZE + perpWallDist * rayDirX;
     wallX -= (wallX | 0); // 텍스처 좌표 계산을 위해 소수점 부분만 남김
     
-    return { distance: perpWallDist * C.TILE_SIZE, texture: S.map[mapY][mapX], side, wallX, rayDirX, rayDirY, mapX, mapY };
+    return { distance: perpWallDist * C.TILE_SIZE, texture: world.map[mapY][mapX], side, wallX, rayDirX, rayDirY, mapX, mapY };
 }
 
 /**
@@ -490,22 +505,22 @@ function loadSpriteSheets() {
                     return response.json();
                 })
                 .then(atlas => {
-                    S.spriteAtlases[key] = atlas;
+                    assets.spriteAtlases[key] = atlas;
                     for (const spriteName in atlas.sprites) {
-                        S.spriteKeyToSheet[spriteName] = key;
+                        assets.spriteKeyToSheet[spriteName] = key;
                     }
                     const img = new Image();
                     const basePath = jsonUrl.substring(0, jsonUrl.lastIndexOf('/') + 1);
                     img.src = basePath + atlas.sheetFile;
                     img.onload = () => {
-                        S.spriteSheets[key] = img;
+                        assets.spriteSheets[key] = img;
                         prepareSprites(key, img, atlas);
                         resolve();
                     };
                     img.onerror = () => {
                         console.error(`Sprite sheet image load failed: ${atlas.sheetFile}`);
                         const placeholder = createPlaceholderTexture(64, 64);
-                        S.spriteSheets[key] = placeholder.img;
+                        assets.spriteSheets[key] = placeholder.img;
                         prepareSprites(key, placeholder.img, { sprites: {} });
                         resolve();
                     };
@@ -519,7 +534,7 @@ function loadSpriteSheets() {
 
     return Promise.all(sheetPromises).then(() => {
         const placeholder = createPlaceholderTexture();
-        S.textures['placeholder'] = {
+        assets.textures['placeholder'] = {
             img: placeholder.img,
             data: placeholder.data,
             w: placeholder.w,
@@ -530,7 +545,7 @@ function loadSpriteSheets() {
 
 /**
  * 로드된 스프라이트 시트 이미지와 아틀라스 데이터를 기반으로 각 스프라이트를
- * ImageData(벽/바닥용) 또는 Image(UI용) 객체로 만들어 S.textures에 저장합니다.
+ * ImageData(벽/바닥용) 또는 Image(UI용) 객체로 만들어 assets.textures에 저장합니다.
  * @param {string} sheetKey - 이 스프라이트 시트의 키 (e.g., 'main', 'walls')
  * @param {HTMLImageElement} sheetImage - 로드된 스프라이트 시트 이미지
  * @param {object} atlas - 파싱된 스프라이트 시트 JSON 데이터
@@ -566,27 +581,27 @@ function prepareSprites(sheetKey, sheetImage, atlas) {
             };
             
             // 테마 객체가 없으면 새로 생성
-            if (!S.dungeonThemes[theme]) {
-                S.dungeonThemes[theme] = {};
+            if (!assets.dungeonThemes[theme]) {
+                assets.dungeonThemes[theme] = {};
             }
             // 테마 안에 유형(variation) 객체가 없으면 새로 생성
-            if (!S.dungeonThemes[theme][variationKey]) {
-                S.dungeonThemes[theme][variationKey] = { wall: [], floor: [], ceiling: [] };
+            if (!assets.dungeonThemes[theme][variationKey]) {
+                assets.dungeonThemes[theme][variationKey] = { wall: [], floor: [], ceiling: [] };
             }
             // 해당 유형의 배열에 텍스처 추가
-            S.dungeonThemes[theme][variationKey][type].push(textureData);
+            assets.dungeonThemes[theme][variationKey][type].push(textureData);
             
-            // 개별 텍스처도 S.textures에 저장해둬서, 테마 없이 직접 참조할 수도 있게 합니다.
-            S.textures[key] = textureData;
+            // 개별 텍스처도 assets.textures에 저장해둬서, 테마 없이 직접 참조할 수도 있게 합니다.
+            assets.textures[key] = textureData;
 
         } else if (key.startsWith('face_') || key.startsWith('gun') || key.startsWith('fist')) {
             // UI/무기는 HTML <img> 요소에 바로 사용하기 위해 Image 객체로 저장
             const img = new Image();
             img.src = tempCanvas.toDataURL();
-            S.textures[key] = { img: img };
+            assets.textures[key] = { img: img };
         } else {
             // 테마 시스템에 해당하지 않는 나머지 스프라이트(e.g. exit, door_gate_1)는 ImageData로 저장
-             S.textures[key] = {
+             assets.textures[key] = {
                 data: tempCtx.getImageData(0, 0, coords.w, coords.h).data,
                 w: coords.w,
                 h: coords.h
@@ -608,8 +623,8 @@ function loadSound(key, src, audioCtx) {
         fetch(src)
             .then(response => response.arrayBuffer())
             .then(arrayBuffer => audioCtx.decodeAudioData(arrayBuffer))
-            .then(audioBuffer => { S.sounds[key] = audioBuffer; resolve(); })
-            .catch(error => { console.warn(`Sound load failed: ${src}`, error); S.sounds[key] = null; resolve(); });
+            .then(audioBuffer => { assets.sounds[key] = audioBuffer; resolve(); })
+            .catch(error => { console.warn(`Sound load failed: ${src}`, error); assets.sounds[key] = null; resolve(); });
     });
 }
 

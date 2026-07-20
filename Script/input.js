@@ -1,11 +1,17 @@
 /**
  * @fileoverview 키보드, 마우스, 터치 등 모든 사용자 입력을 처리합니다.
+ *
+ * 이 파일은 게임 로직을 직접 부르지 않고 '입력 의도'만 이벤트로 알립니다.
+ * 덕분에 input.js와 gameLogic.js 사이에 있던 순환 import가 사라졌습니다.
+ * (이전에는 ESM의 함수 호이스팅 덕에 우연히 동작하고 있었을 뿐입니다.)
  */
 
 // --- 모듈 임포트 ---
-import * as S from './state.js';
 import * as C from './constants.js';
-import { attack, interactWithWorld } from './gameLogic.js';
+import { world } from './world.js';
+import { runtime } from './runtime.js';
+import { dom } from './dom.js';
+import { emit, EVENTS } from './events.js';
 
 // --- 모듈 내부 변수 (Private Member Variables) ---
 
@@ -30,29 +36,29 @@ export function setupInputHandlers() {
     document.addEventListener('keydown', e => {
         keys[e.code] = true;
         // --- 새로운 로직: 상호작용 키 (스페이스바) ---
-        if (e.code === 'Space' && S.isGameRunning) {
+        if (e.code === 'Space' && runtime.isGameRunning) {
             e.preventDefault(); // 브라우저 기본 동작(페이지 스크롤) 방지
-            interactWithWorld();
+            emit(EVENTS.INPUT_INTERACT);
         }
     });
     document.addEventListener('keyup', e => { keys[e.code] = false; });
 
     // 캔버스 클릭 시 마우스 포인터 잠금 (데스크톱 전용 기능)
     // 포인터 잠금은 게임 화면 밖으로 마우스가 나가는 것을 방지하여 1인칭 시점 조작을 편리하게 합니다.
-    S.dom.canvas.addEventListener('click', () => {
-        if (S.isGameRunning && !isTouchDevice) S.dom.canvas.requestPointerLock();
+    dom.canvas.addEventListener('click', () => {
+        if (runtime.isGameRunning && !isTouchDevice) dom.canvas.requestPointerLock();
     });
 
     // 마우스 이동 시 플레이어 시점 회전 (포인터가 잠겨있을 때만 동작)
     document.addEventListener('mousemove', e => {
-        if (document.pointerLockElement === S.dom.canvas && S.isGameRunning) {
-            S.player.angle += e.movementX * 0.001 * C.ROTATION_SPEED;
+        if (document.pointerLockElement === dom.canvas && runtime.isGameRunning) {
+            world.player.angle += e.movementX * 0.001 * C.ROTATION_SPEED;
         }
     });
 
     // 마우스 클릭 시 공격
-    S.dom.canvas.addEventListener('mousedown', () => {
-        if (S.isGameRunning) attack();
+    dom.canvas.addEventListener('mousedown', () => {
+        if (runtime.isGameRunning) emit(EVENTS.INPUT_ATTACK);
     });
 
     // 터치 기기인 경우 모바일 전용 컨트롤러를 설정합니다.
@@ -84,8 +90,8 @@ export function getPlayerMovement() {
  * 모바일 터치 컨트롤(이동 스틱, 시점 조작, 공격 버튼)을 위한 이벤트 리스너를 설정합니다.
  */
 function setupMobileControls() {
-    S.dom.mobileControls.style.display = 'flex';
-    S.dom.lookZone.style.display = 'block';
+    dom.mobileControls.style.display = 'flex';
+    dom.lookZone.style.display = 'block';
 
     let moveTouchId = null, lookTouchId = null; // 이동과 시점 조작 터치를 구분하기 위한 ID
     let moveStartPos = { x: 0, y: 0 }, lookStartPos = { x: 0, y: 0 }; // 터치 시작점 좌표
@@ -98,7 +104,7 @@ function setupMobileControls() {
             if (touch.identifier === moveTouchId) { // 이동 터치가 끝났을 경우
                 moveTouchId = null;
                 moveInput = { x: 0, y: 0 }; // 이동 입력 초기화
-                S.dom.moveStick.style.transform = `translate(0px, 0px)`; // 조이스틱 핸들을 중앙으로 복귀
+                dom.moveStick.style.transform = `translate(0px, 0px)`; // 조이스틱 핸들을 중앙으로 복귀
             } else if (touch.identifier === lookTouchId) { // 시점 조작 터치가 끝났을 경우
                 lookTouchId = null;
             }
@@ -106,17 +112,17 @@ function setupMobileControls() {
     };
 
     // 이동 스틱 영역 터치 시작
-    S.dom.moveStickZone.addEventListener('touchstart', (e) => {
+    dom.moveStickZone.addEventListener('touchstart', (e) => {
         e.preventDefault();
         if (moveTouchId === null) { // 다른 손가락이 이미 이동 스틱을 조작하고 있지 않을 때만
             moveTouchId = e.changedTouches[0].identifier;
-            const rect = S.dom.moveStickZone.getBoundingClientRect(); // 스틱 존의 화면상 위치 계산
+            const rect = dom.moveStickZone.getBoundingClientRect(); // 스틱 존의 화면상 위치 계산
             moveStartPos = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
         }
     }, { passive: false });
 
     // 시점 조작 영역 터치 시작
-    S.dom.lookZone.addEventListener('touchstart', (e) => {
+    dom.lookZone.addEventListener('touchstart', (e) => {
         e.preventDefault();
         if (lookTouchId === null) {
             const touch = e.changedTouches[0];
@@ -134,17 +140,17 @@ function setupMobileControls() {
                 const dx = touch.clientX - moveStartPos.x;
                 const dy = touch.clientY - moveStartPos.y;
                 const dist = Math.hypot(dx, dy);
-                const maxDist = S.dom.moveStickZone.clientWidth / 2;
+                const maxDist = dom.moveStickZone.clientWidth / 2;
                 const clampedDist = Math.min(dist, maxDist); // 조이스틱이 영역 밖으로 나가지 않도록 제한
                 const angle = Math.atan2(dy, dx);
                 // 최종 입력값 계산 (-1.0 ~ 1.0)
                 moveInput.x = (Math.cos(angle) * clampedDist) / maxDist;
                 moveInput.y = (Math.sin(angle) * clampedDist) / maxDist;
                 // 조이스틱 핸들을 시각적으로 이동
-                S.dom.moveStick.style.transform = `translate(${Math.cos(angle) * clampedDist}px, ${Math.sin(angle) * clampedDist}px)`;
+                dom.moveStick.style.transform = `translate(${Math.cos(angle) * clampedDist}px, ${Math.sin(angle) * clampedDist}px)`;
             } else if (touch.identifier === lookTouchId) { // 시점 조작 터치가 움직일 때
                 const dx = touch.clientX - lookStartPos.x;
-                S.player.angle += dx * 0.001 * C.ROTATION_SPEED * 2; // 가로 이동량에 따라 플레이어 회전 (모바일 감도 2배)
+                world.player.angle += dx * 0.001 * C.ROTATION_SPEED * 2; // 가로 이동량에 따라 플레이어 회전 (모바일 감도 2배)
                 lookStartPos = { x: touch.clientX, y: touch.clientY }; // 현재 위치를 새 시작점으로 갱신하여 연속적인 움직임 구현
             }
         }
@@ -155,5 +161,5 @@ function setupMobileControls() {
     document.addEventListener('touchcancel', handleEnd, { passive: false });
 
     // 공격 버튼 터치 이벤트
-    S.dom.shootBtn.addEventListener('touchstart', (e) => { e.preventDefault(); attack(); }, { passive: false });
+    dom.shootBtn.addEventListener('touchstart', (e) => { e.preventDefault(); emit(EVENTS.INPUT_ATTACK); }, { passive: false });
 }
