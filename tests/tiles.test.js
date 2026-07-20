@@ -110,9 +110,9 @@ test('창살 너머의 적이 플레이어를 알아챈다', () => {
 
 // --- 무엇이 막히는가 -------------------------------------------------------------
 
-test('발사체가 창살에 막힌다', () => {
-    // 예전에는 발사체가 '보이지 않는가'로 충돌을 판정했습니다.
-    // 그대로 두었으면 화살이 창살을 그냥 지나갔을 것입니다.
+test('창살 사이로는 쏠 수 있다', () => {
+    // 막는 것과 쏘는 것을 막는 것은 다릅니다. 쇠창살은 사이로 쏠 수 있고
+    // 유리벽은 못 쏩니다. 둘 다 보이지만 대응이 갈려서, 같은 그림인데 다른 방이 됩니다.
     const world = emptyRoom();
     wallColumnAt(world, C.TILE_IDS.GRATE, 3);
 
@@ -136,8 +136,7 @@ test('발사체가 창살에 막힌다', () => {
         if (shot.x < grateColumn * C.TILE_SIZE) crossed = true;
     }
 
-    assert.equal(crossed, false, '발사체가 창살을 지나갔습니다');
-    assert.ok(!world.projectiles.includes(shot), '발사체가 창살에 부딪히지 않았습니다');
+    assert.equal(crossed, true, '창살 사이로 쏘지 못했습니다');
 });
 
 test('플레이어가 창살을 지나갈 수 없다', () => {
@@ -167,4 +166,32 @@ test('적이 창살을 지나갈 수 없다', () => {
     for (let i = 0; i < 200; i++) gameLogic.update(C.SIMULATION_STEP_MS);
     assert.ok(enemy.x > column * C.TILE_SIZE,
         `적이 창살(타일 ${column})을 넘어왔습니다: x=${enemy.x}`);
+});
+
+test('유리벽은 보이지만 쏠 수 없다', () => {
+    // 창살과 짝을 이룹니다. 둘 다 보이는데 하나는 쏠 수 있고 하나는 못 쏩니다.
+    const world = emptyRoom();
+    const glassColumn = wallColumnAt(world, C.TILE_IDS.GLASS, 3);
+
+    // 보이기는 합니다.
+    assert.equal(
+        gameLogic.hasLineOfSight(world.player.x, world.player.y,
+            world.player.x + 6 * C.TILE_SIZE, world.player.y),
+        true, '유리벽 너머가 보이지 않습니다',
+    );
+
+    world.projectiles.push({
+        x: (glassColumn + 4) * C.TILE_SIZE, y: world.player.y, z: C.TILE_SIZE / 2,
+        angle: Math.PI, speed: 4, damage: 5, size: 8,
+        from: 'enemy', spriteKey: 'projectile_fireball',
+    });
+    const shot = world.projectiles[0];
+
+    let crossed = false;
+    for (let i = 0; i < 120 && world.projectiles.includes(shot); i++) {
+        gameLogic.update(C.SIMULATION_STEP_MS);
+        if (shot.x < glassColumn * C.TILE_SIZE) crossed = true;
+    }
+
+    assert.equal(crossed, false, '유리벽을 뚫고 쏘았습니다');
 });

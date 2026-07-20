@@ -1559,10 +1559,14 @@ function updateProjectiles(dtFactor) {
 
         // 막힌 곳에 부딪히면 발사체가 터집니다.
         //
+        // 막는 것이 곧 쏘는 것을 막는 것은 아닙니다. 쇠창살은 사이로 쏠 수 있고
+        // 유리벽은 못 쏩니다. 둘 다 보이지만 대응이 갈립니다.
+        //
         // 예전에는 '보이지 않는 것'(opaque)에 부딪혔습니다. 벽이 둘 다이던 때는
         // 같은 뜻이었지만, 보이면서 막는 타일(쇠창살)이 생기면 화살이 창살을
         // 그대로 지나갑니다. 막는가와 보이는가는 다른 축입니다.
-        if (C.tileAt(world.map, Math.floor(proj.x / C.TILE_SIZE), Math.floor(proj.y / C.TILE_SIZE)).solid) {
+        if (C.tileAt(world.map, Math.floor(proj.x / C.TILE_SIZE), Math.floor(proj.y / C.TILE_SIZE)).blocksShots !== false
+            && C.tileAt(world.map, Math.floor(proj.x / C.TILE_SIZE), Math.floor(proj.y / C.TILE_SIZE)).solid) {
             const sheetKey = assets.spriteKeyToSheet[proj.spriteKey];
             const atlas = assets.spriteAtlases[sheetKey];
             const color = atlas?.sprites[proj.spriteKey]?.color || '#fff';

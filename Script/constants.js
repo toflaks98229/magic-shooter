@@ -217,6 +217,8 @@ export const TILE_IDS = {
     PORTAL: 7,
     ALTAR: 8,
     GRATE: 9,
+    GLASS: 10,
+    STATUE: 11,
 };
 
 /**
@@ -273,8 +275,25 @@ export const TILE_TYPES = {
         // 언제나 같아서 둘을 섞어 써도 드러나지 않았습니다.
         // 갇힌 몬스터를 보면서 다가갈 수 없게 만들거나, 건너편이 보이는 방을
         // 만들 수 있습니다. 소리는 벽을 넘어가므로 창살 너머의 것도 깨어납니다.
-        solid: true, opaque: false, spawnable: false,
+        // 창살 사이로는 쏠 수 있습니다. 이것이 유리벽과 갈리는 점입니다.
+        // 보면서 쏠 수는 있되 다가갈 수 없는 자리가 만들어집니다.
+        solid: true, opaque: false, blocksShots: false, spawnable: false,
         wallTexture: 'grate', interaction: null,
+    },
+    [TILE_IDS.GLASS]: {
+        id: TILE_IDS.GLASS, name: 'clear wall',
+        // 유리벽. 막고, 보이고, 발사체도 막습니다.
+        //
+        // 쇠창살과 짝을 이룹니다. 창살은 쏠 수 있고 유리벽은 못 쏩니다.
+        // 둘 다 보이지만 대응이 갈려서, 같은 그림인데 다른 방이 됩니다.
+        solid: true, opaque: false, spawnable: false,
+        wallTexture: 'glass', interaction: null,
+    },
+    [TILE_IDS.STATUE]: {
+        id: TILE_IDS.STATUE, name: 'granite statue',
+        // 화강암 상. 원본도 보이지만 지나갈 수 없다고 못박아 둡니다.
+        solid: true, opaque: false, spawnable: false,
+        wallTexture: 'statue', interaction: null,
     },
     [TILE_IDS.PORTAL]: {
         id: TILE_IDS.PORTAL, name: 'portal',

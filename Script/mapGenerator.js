@@ -19,6 +19,7 @@
 
 import { TILE_IDS, tileAt } from './constants.js';
 import { rollLayout, LAYOUTS } from './layouts.js';
+import { placeMinivaults } from './vaults.js';
 import {
     buildRooms, buildRoguey, buildCorridors, buildCity,
     buildCaves, buildNarrowCaves, buildDivisions, buildOpen,
@@ -55,12 +56,24 @@ export function generateDungeon(width, height, options = {}) {
 
     const playerStart = clampToFloor(map, centerOf(spots[0]));
     ensureConnected(map, playerStart, spots);
+
+    // 손으로 그린 방을 찍어 넣습니다.
+    //
+    // 잇고 난 뒤에 찍습니다. 먼저 찍으면 잇는 과정이 볼트 한가운데를 뚫고 지나가
+    // 애써 그린 모양이 망가집니다. 나중에 찍으면 볼트가 통로를 덮을 수 있으므로,
+    // 찍은 뒤에 길이 끊기지 않았는지 다시 확인합니다.
+    const vaults = placeMinivaults(map, { keepClear: playerStart });
+    if (vaults.length > 0 && !ensureConnected(map, playerStart, spots)) {
+        // 볼트가 층을 두 동강 냈습니다. 볼트 없는 층이 갈 수 없는 층보다 낫습니다.
+        for (const vault of vaults) carveOut(map, vault);
+    }
+
     placeDoors(map, objectMap);
 
     const exit = pickExit(map, playerStart);
     map[exit.y][exit.x] = TILE_IDS.EXIT;
 
-    return { map, objectMap, playerStart, layout: layoutId };
+    return { map, objectMap, playerStart, layout: layoutId, vaults };
 }
 
 /**
@@ -129,9 +142,28 @@ function ensureConnected(map, playerStart, spots) {
             const center = clampToFloor(map, centerOf(spot));
             return !reachable[center.y][center.x];
         });
-        if (!stranded) return;
+        if (!stranded) return true;
 
         joinTheDots(map, playerStart, clampToFloor(map, centerOf(stranded)));
+    }
+
+    // 여덟 번을 뚫고도 못 이었습니다. 부르는 쪽이 판단하게 알립니다.
+    return false;
+}
+
+/**
+ * 찍어 넣은 볼트 자리를 도로 트인 바닥으로 되돌립니다.
+ *
+ * 볼트가 층을 두 동강 냈을 때 씁니다. 볼트 없는 평범한 층이
+ * 갈 수 없는 구역이 있는 층보다 낫습니다.
+ * @param {number[][]} map - 층
+ * @param {object} vault - 놓인 볼트의 기록
+ */
+function carveOut(map, vault) {
+    for (let y = vault.top; y < vault.top + vault.height; y++) {
+        for (let x = vault.left; x < vault.left + vault.width; x++) {
+            if (map[y]?.[x] !== undefined) map[y][x] = TILE_IDS.FLOOR;
+        }
     }
 }
 
