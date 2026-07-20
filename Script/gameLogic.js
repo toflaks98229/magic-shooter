@@ -1363,7 +1363,8 @@ export function hasLineOfSight(x1, y1, x2, y2) {
         // 목표 타일에 도착했다면 도중에 막힌 벽이 없었다는 뜻입니다.
         if (mapX === targetX && mapY === targetY) return true;
 
-        // 벽·문·출구는 시야를 막습니다. 맵 밖도 벽으로 취급되므로 함께 걸러집니다.
+        // 시야를 막는가만 봅니다. 막혀 있어도 보이는 타일(쇠창살)은 여기를 지나갑니다.
+        // 맵 밖도 벽으로 취급되므로 함께 걸러집니다.
         if (C.tileAt(world.map, mapX, mapY).opaque) return false;
     }
     return false;
@@ -1556,8 +1557,12 @@ function updateProjectiles(dtFactor) {
         proj.x += Math.cos(proj.angle) * proj.speed * dtFactor;
         proj.y += Math.sin(proj.angle) * proj.speed * dtFactor;
 
-        // 벽과 충돌하면 발사체를 제거하고 파티클 효과를 생성합니다.
-        if (C.tileAt(world.map, Math.floor(proj.x / C.TILE_SIZE), Math.floor(proj.y / C.TILE_SIZE)).opaque) {
+        // 막힌 곳에 부딪히면 발사체가 터집니다.
+        //
+        // 예전에는 '보이지 않는 것'(opaque)에 부딪혔습니다. 벽이 둘 다이던 때는
+        // 같은 뜻이었지만, 보이면서 막는 타일(쇠창살)이 생기면 화살이 창살을
+        // 그대로 지나갑니다. 막는가와 보이는가는 다른 축입니다.
+        if (C.tileAt(world.map, Math.floor(proj.x / C.TILE_SIZE), Math.floor(proj.y / C.TILE_SIZE)).solid) {
             const sheetKey = assets.spriteKeyToSheet[proj.spriteKey];
             const atlas = assets.spriteAtlases[sheetKey];
             const color = atlas?.sprites[proj.spriteKey]?.color || '#fff';
@@ -1671,8 +1676,8 @@ function updateParticles(dtFactor) {
         p.vz -= C.PARTICLE_GRAVITY * dtFactor; // 중력 적용
         p.lifespan -= dtFactor;
 
-        // 간단한 충돌 처리: 벽과 충돌 시 속도 반감 및 방향 반전
-        if (C.tileAt(world.map, Math.floor(p.x / C.TILE_SIZE), Math.floor(p.y / C.TILE_SIZE)).opaque) {
+        // 막힌 곳에 부딪히면 튕깁니다. 보이는가가 아니라 막는가를 봅니다.
+        if (C.tileAt(world.map, Math.floor(p.x / C.TILE_SIZE), Math.floor(p.y / C.TILE_SIZE)).solid) {
             p.vx *= -0.5;
             p.vy *= -0.5;
         }

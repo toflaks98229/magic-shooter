@@ -263,6 +263,32 @@ function renderColumn(scene, i) {
 
     drawWallStripe(scene, i, ray, angle, correctedDist, wallTopY, wallHeight, y0, y1);
     drawFloorAndCeiling(scene, i, ray, correctedDist, y1);
+
+    // 지나쳐 온 투시 타일을 그 위에 덮습니다.
+    // 먼 것부터 그려야 창살이 겹쳤을 때 앞의 것이 위로 옵니다.
+    for (let k = seenThroughCount - 1; k >= 0; k--) {
+        drawSeenThroughStripe(scene, i, seenThrough[k], angle);
+    }
+}
+
+/**
+ * 막지만 보이는 타일 하나를 컬럼에 덧그립니다.
+ *
+ * 벽과 같은 방식으로 그리되 뒤가 이미 그려져 있다는 점만 다릅니다.
+ * 텍스처에 투명한 부분이 있으면 그 사이로 뒤가 비칩니다.
+ * @param {object} scene - 프레임 값 묶음
+ * @param {number} i - 화면 컬럼
+ * @param {object} slot - 지나친 타일 정보
+ * @param {number} angle - 광선 각도
+ */
+function drawSeenThroughStripe(scene, i, slot, angle) {
+    const dist = Math.max(slot.distance * Math.cos(angle - world.player.angle), C.MIN_RENDER_DISTANCE);
+    const height = (C.TILE_SIZE / dist) * scene.projectionDist;
+    const topY = scene.halfHeight - height / 2;
+    const y0 = Math.max(0, topY | 0);
+    const y1 = Math.min(scene.height, (topY + height) | 0);
+
+    drawWallStripe(scene, i, slot, angle, dist, topY, height, y0, y1);
 }
 
 /**
@@ -660,6 +686,59 @@ function drawSpriteRun(ctx, sourceImage, coords, fromStripe, toStripe, entityLef
  * 호출부가 결과를 보관하거나 배열에 쌓기 시작하면 그 순간 조용히 깨집니다.
  * 그런 필요가 생기면 반드시 값을 복사해 두십시오.
  */
+/**
+ * @description 한 컬럼에서 지나칠 수 있는 투시 타일의 수.
+ *
+ * 창살 너머로 또 창살이 보이는 일은 드물어 셋으로 끊었습니다.
+ * 넘어가는 것은 그리지 않습니다. 무제한으로 두면 창살로 이루어진 방에서
+ * 컬럼 하나가 수십 겹을 그리게 됩니다.
+ */
+const MAX_SEEN_THROUGH_PER_COLUMN = 3;
+
+/**
+ * @description 이번 컬럼에서 지나친 투시 타일들.
+ *
+ * 광선이 지나가는 순서대로, 곧 가까운 것부터 쌓입니다.
+ * 그릴 때는 거꾸로 훑어 먼 것부터 덮어야 겹친 창살이 제대로 보입니다.
+ */
+const seenThrough = Array.from({ length: MAX_SEEN_THROUGH_PER_COLUMN }, () => ({
+    distance: 0, texture: 0, side: 0, wallX: 0, mapX: 0, mapY: 0,
+}));
+let seenThroughCount = 0;
+
+/**
+ * 지나친 투시 타일 하나를 적어 둡니다.
+ *
+ * 벽까지의 거리와 텍스처 가로 좌표를 구하는 계산은 castRay 끝부분과 같습니다.
+ * 다만 그쪽은 광선이 멈춘 뒤라 sideDist 가 이미 한 칸 넘어가 있고,
+ * 여기서는 지나가는 중이라 같은 상태입니다. 그래서 식을 그대로 씁니다.
+ * @param {number} mapX - 타일 X
+ * @param {number} mapY - 타일 Y
+ * @param {number} side - 어느 면에 부딪혔는가
+ * @param {number} sideDistX - DDA 누적 거리
+ * @param {number} sideDistY - DDA 누적 거리
+ * @param {number} deltaDistX - 한 칸당 거리
+ * @param {number} deltaDistY - 한 칸당 거리
+ * @param {number} rayDirX - 광선 방향
+ * @param {number} rayDirY - 광선 방향
+ */
+function recordSeenThrough(mapX, mapY, side, sideDistX, sideDistY, deltaDistX, deltaDistY, rayDirX, rayDirY) {
+    const slot = seenThrough[seenThroughCount++];
+    const perp = (side === 0) ? (sideDistX - deltaDistX) : (sideDistY - deltaDistY);
+
+    let wallX = (side === 0)
+        ? world.player.y / C.TILE_SIZE + perp * rayDirY
+        : world.player.x / C.TILE_SIZE + perp * rayDirX;
+    wallX -= (wallX | 0);
+
+    slot.distance = perp * C.TILE_SIZE;
+    slot.texture = world.map[mapY][mapX];
+    slot.side = side;
+    slot.wallX = wallX;
+    slot.mapX = mapX;
+    slot.mapY = mapY;
+}
+
 const rayHit = {
     distance: 0, texture: 0, side: 0, wallX: 0,
     rayDirX: 0, rayDirY: 0, mapX: 0, mapY: 0,
@@ -682,10 +761,20 @@ function castRay(angle) {
     else { stepY = 1; sideDistY = (mapY + 1 - world.player.y / C.TILE_SIZE) * deltaDistY; }
 
     let hit = 0, side = 0;
+    seenThroughCount = 0;
     while (hit === 0) {
         if (sideDistX < sideDistY) { sideDistX += deltaDistX; mapX += stepX; side = 0; } // X축 방향으로 한 칸 이동
         else { sideDistY += deltaDistY; mapY += stepY; side = 1; } // Y축 방향으로 한 칸 이동
-        if (C.tileAt(world.map, mapX, mapY).opaque) hit = 1; // 벽·문·출구에 부딪힘
+
+        const tile = C.tileAt(world.map, mapX, mapY);
+        if (tile.opaque) { hit = 1; break; }   // 시야를 막는 것에서 멈춥니다
+
+        // 막지만 보이는 것(쇠창살 등)은 적어 두고 지나갑니다.
+        // 광선을 여기서 멈추면 창살 뒤가 통째로 사라지고,
+        // 그냥 지나치면 창살이 아예 그려지지 않아 보이지 않는 벽이 됩니다.
+        if (tile.solid && seenThroughCount < MAX_SEEN_THROUGH_PER_COLUMN) {
+            recordSeenThrough(mapX, mapY, side, sideDistX, sideDistY, deltaDistX, deltaDistY, rayDirX, rayDirY);
+        }
     }
 
     const perpWallDist = (side === 0) ? (sideDistX - deltaDistX) : (sideDistY - deltaDistY);

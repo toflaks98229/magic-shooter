@@ -216,6 +216,7 @@ export const TILE_IDS = {
     BRANCH_ENTRANCE: 6,
     PORTAL: 7,
     ALTAR: 8,
+    GRATE: 9,
 };
 
 /**
@@ -263,6 +264,17 @@ export const TILE_TYPES = {
         // 어느 신의 제단인지는 world.altars 가 압니다. 밟아서 지나가는 것이 아니라
         // 앞에 서서 스페이스로 개종하는 것이라 벽처럼 막혀 있는 편이 자연스럽습니다.
         wallTexture: 'exit', interaction: 'altar',
+    },
+    [TILE_IDS.GRATE]: {
+        id: TILE_IDS.GRATE, name: 'iron grate',
+        // 막지만 보입니다. DCSS 의 쇠창살(DNGN_GRATE)에 해당합니다.
+        //
+        // 두 축이 갈라지는 첫 타일입니다. 지금까지는 막는 것과 보이지 않는 것이
+        // 언제나 같아서 둘을 섞어 써도 드러나지 않았습니다.
+        // 갇힌 몬스터를 보면서 다가갈 수 없게 만들거나, 건너편이 보이는 방을
+        // 만들 수 있습니다. 소리는 벽을 넘어가므로 창살 너머의 것도 깨어납니다.
+        solid: true, opaque: false, spawnable: false,
+        wallTexture: 'grate', interaction: null,
     },
     [TILE_IDS.PORTAL]: {
         id: TILE_IDS.PORTAL, name: 'portal',
